@@ -1,0 +1,18 @@
+{
+    "db" : {
+        "host": "DB_SERVER_HOST_IP",
+        "username" : "DRUPAL_MYSQL_USER",
+        "password" : "USER_PASSWORD",
+        "port": 3306,
+        "database" : "DATABASE NAME",
+        "root_username": "ROOT_USERNAME",
+        "root_password": "ROOT_PASSWORD"
+    },
+    "admin" : {
+        "username": "ADMIN_USERNAME",
+        "password": "ADMIN_PASSWORD",
+        "email": "ADMIN.EMAIL@ORG.RO"
+    },
+    "uri": "http://osha.org.ro",
+    "site_mail": "SITE.EMAIL@ORG.RO"
+}
