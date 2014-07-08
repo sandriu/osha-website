@@ -261,3 +261,39 @@ if(file_exists($json_path)) {
 		'site-mail' => $cfg->site_mail
 	);
 }
+
+
+$options['init-modules'] = array(
+	'ctools', 'entity',
+
+	'locale',
+	'entity_translation',
+	'i18n',
+	'variable',
+
+	'views',
+	'view_ui',
+	'views_bulk_operations',
+
+	'taxonomy_access_fix',
+	'date',
+	'migrate',
+	'features',
+
+	'entityreference',
+	'link',
+	'title',
+	'wysiwyg',
+	'pathauto',
+	'uuid',
+
+	'search_api',
+	'search_api_facetapi',
+	'apachesolr facetapi',
+	'search_api_solr',
+	'facetapi',
+
+	'imce_wysiwyg',
+
+	'osha'
+);

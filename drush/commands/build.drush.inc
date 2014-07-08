@@ -17,6 +17,12 @@ function build_drush_command() {
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
   );
 
+  $items['init'] = array(
+    'description' => 'Initialize the Drupal project instance in the current docroot/',
+    'callback' => '_drush_init',
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
+  );
+
   $items['devify'] = array(
     'description' => 'Configures the current database for development.',
     'callback' => '_drush_devify',
@@ -108,4 +114,17 @@ function _drush_devify() {
   drush_sql_sanitize();
 
   drush_log(dt('Devified!'), 'success');
+}
+
+function _drush_init() {
+	drush_log(dt('Enabling the required modules'), 'success');
+	// Enable modules.
+	$modules = drush_get_option('init-modules', array());
+	if (is_string($modules)) {
+		$modules = explode(',', $modules);
+	}
+	if(!module_enable($modules, FALSE)) {
+		drush_log(dt('Failed to enable the required modules'), 'error');
+	}
+
 }
