@@ -3,9 +3,8 @@
 # Ignore configuration files that may contain sensitive information.
 docroot/sites/*/settings*.php
 *.local.php
-aliases.drushrc.php
+drush/aliases/aliases.drushrc.php
 conf/apache.conf
-conf/config.json
 
 # User Generated Content #
 ##########################
