@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 OSHA
 
 Build scripts and source code for the Osha project
