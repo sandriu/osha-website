@@ -3,7 +3,7 @@ OSHA
 
 Build scripts and source code for the Osha project
 
-[![Build Status](http://ci.edw.ro/buildStatus/icon?job=osha_test)](http://ci.edw.ro/job/osha_test/)
+[![Build Status](http://ci.edw.ro/buildStatus/icon?job=osha_test&dummy=1)](http://ci.edw.ro/job/osha_test/)
 
 ##Getting started##
 
