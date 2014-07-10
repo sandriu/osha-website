@@ -1,0 +1,18 @@
+{
+    "db" : {
+        "host": "localhost",
+        "username" : "osha",
+        "password" : "osha",
+        "port": 3306,
+        "database" : "osha_test",
+        "root_username": "osha",
+        "root_password": "osha"
+    },
+    "admin" : {
+        "username": "admin",
+        "password": "admin",
+        "email": "cristian.romanescu@eaudeweb.ro"
+    },
+    "uri": "http://osha-test.edw.ro",
+    "site_mail": "cristian.romanescu@eaudeweb.ro"
+}
