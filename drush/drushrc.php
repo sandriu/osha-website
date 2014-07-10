@@ -248,3 +248,10 @@
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
   include_once dirname(__FILE__) . '/drushrc.local.php';
 }
+
+// Modules enabled when you devify the instance on local machine
+$options['enable-modules'] = array(
+       'devel',
+       'diff',
+       'ftools'
+);
