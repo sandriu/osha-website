@@ -1,13 +1,15 @@
 #OSHA#
--
 
 [![Build Status](http://ci.edw.ro/buildStatus/icon?job=osha_test)](http://ci.edw.ro/job/osha_test/)
 
 ##Getting started##
 
-Here's a breakdown for what each directory/file is used for. If you want to know more please
-read the readme inside the specific directory.
 
+##Repository Layout##
+Breakdown for what each directory/file is used for. See also readme inside directories.
+
+* [conf](https://github.com/eaudeweb/osha/tree/master/conf)
+ * Project specific configuration files
 * [docroot](https://github.com/eaudeweb/osha/tree/master/docroot)
  * Drupal root directory
 * [drush](https://github.com/eaudeweb/osha/tree/master/drush)
@@ -24,4 +26,4 @@ read the readme inside the specific directory.
 * [.gitignore](https://github.com/eaudeweb/osha/blob/master/.gitignore)
  * Contains the a list of the most common excluded files.
 
-Built by Robots&trade;
+-- edw
