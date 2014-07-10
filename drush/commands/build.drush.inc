@@ -21,6 +21,9 @@ function build_drush_command() {
     'description' => 'Initialize the Drupal project instance in the current docroot/',
     'callback' => '_drush_init',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
+    'options' => array(
+        'debug' => 'If enabled, modules are enabled one by one'
+    )
   );
 
   $items['devify'] = array(
@@ -123,8 +126,16 @@ function _drush_init() {
 	if (is_string($modules)) {
 		$modules = explode(',', $modules);
 	}
-	if(!module_enable($modules, TRUE)) {
-		drush_log(dt('Failed to enable the required modules'), 'error');
+	$debug = drush_get_option('debug', FALSE);
+	if(!$debug) {
+		if(!module_enable($modules)) {
+			drush_log(dt('Failed to enable one ore more modules'), 'error');
+		}
+	} else {
+		foreach($modules as $module) {
+			if(!module_enable(array($module))) {
+				drush_log(dt('Failed to enable @module', array('@module' => $module)), 'error');
+			}
+		}
 	}
-
 }

@@ -271,7 +271,7 @@ $options['init-modules'] = array(
 	'variable',
 
 	'views',
-	'view_ui',
+	'views_ui',
 	'views_bulk_operations',
 
 	'taxonomy_access_fix',
@@ -287,12 +287,11 @@ $options['init-modules'] = array(
 	'uuid',
 
 	'search_api',
-	'search_api_facetapi',
-	'apachesolr facetapi',
-	'search_api_solr',
 	'facetapi',
+	'search_api_facetapi',
+	'apachesolr',
+	'search_api_solr',
 
 	'imce_wysiwyg',
-
 	'osha'
 );
