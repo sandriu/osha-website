@@ -22,7 +22,7 @@ function build_drush_command() {
     'callback' => '_drush_init',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
     'options' => array(
-        'debug' => 'If enabled, modules are enabled one by one'
+        'debug-modules' => 'If enabled, modules are enabled one by one'
     )
   );
 
@@ -126,7 +126,7 @@ function _drush_init() {
 	if (is_string($modules)) {
 		$modules = explode(',', $modules);
 	}
-	$debug = drush_get_option('debug', FALSE);
+	$debug = drush_get_option('debug-modules', FALSE);
 	if(!$debug) {
 		if(!module_enable($modules)) {
 			drush_log(dt('Failed to enable one ore more modules'), 'error');
