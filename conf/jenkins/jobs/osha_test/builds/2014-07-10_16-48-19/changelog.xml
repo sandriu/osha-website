@@ -1,0 +1,514 @@
+Changes in branch origin/HEAD, between ac69cc4bf32b307f442f6d4b2f1de390e182e8d9 and 502326828675c6de991c0c4ca633cc9ce32f1b35
+commit 7444996c15078a3a4fe6b70e499b20a6547e23b8
+tree b2df296e323d9363c5c1acc49f5bcd2e20d7744f
+parent 73d57cbe6d3c6b1c45c9fbb7fc6eb428627a69b5
+author Cristian Romanescu <cristian@romanescu.ro> 1405000327 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1405000327 +0300
+
+    Added functional test for languages
+
+:100644 100644 ab50337e3d169a4f634388af29aef99a8888d5fc c954655d9e2f8bc992ad55bf3da3420757e4cb3b M	docroot/sites/all/modules/osha/osha.info
+:000000 100644 0000000000000000000000000000000000000000 5989a5957eb5f0880c44dfeb9f357708e5737dcb A	docroot/sites/all/modules/osha/osha.test
+
+commit 73d57cbe6d3c6b1c45c9fbb7fc6eb428627a69b5
+tree 151e35229349d6aedc7ee1c38ef1587f4b70a652
+parent 81011bda8bf8e9010a5937e972fa825dbfba0ce1
+author Cristian Romanescu <cristian@romanescu.ro> 1405000280 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1405000280 +0300
+
+    By default enable dependent modules
+
+:100644 100644 89d5e4dd432cf75c0803297e98e0cbb3970ea443 a8bcfb3c1c270f608b279d0bb022030ce198c9a4 M	drush/commands/build.drush.inc
+
+commit 81011bda8bf8e9010a5937e972fa825dbfba0ce1
+tree 2b07067a40932e46398ebae9dd986e8de19b319a
+parent 90cda13101980c82d74658314ad2cee8a1c1cd2f
+author Cristian Romanescu <cristian@romanescu.ro> 1404998675 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404998675 +0300
+
+    Added devel modules into the repo
+
+:000000 100755 0000000000000000000000000000000000000000 d159169d1050894d3ea3b98e1c965c4058208fe1 A	docroot/sites/all/modules/contrib/devel/LICENSE.txt
+:000000 100644 0000000000000000000000000000000000000000 194fcbf57f0c4128c203c40dc25ff2b97b76e28b A	docroot/sites/all/modules/contrib/devel/README.txt
+:000000 100644 0000000000000000000000000000000000000000 1d9362f377dd06b22f612995d984a7808dedb158 A	docroot/sites/all/modules/contrib/devel/README_devel_node_access.txt
+:000000 100644 0000000000000000000000000000000000000000 fe784a8da7a7637fd37b640c9176396ae2b86cba A	docroot/sites/all/modules/contrib/devel/devel-rtl.css
+:000000 100644 0000000000000000000000000000000000000000 6fec2ca59308b5cb3106b547b00a04db23e484df A	docroot/sites/all/modules/contrib/devel/devel.admin.inc
+:000000 100644 0000000000000000000000000000000000000000 7049059028eed37eb03502ab8bcd6e6cba1b66e0 A	docroot/sites/all/modules/contrib/devel/devel.css
+:000000 100644 0000000000000000000000000000000000000000 b4d85054ca1a0c206e36c2dacea2b6da36e5d790 A	docroot/sites/all/modules/contrib/devel/devel.drush.inc
+:000000 100644 0000000000000000000000000000000000000000 f53d43d6b11d0834a1de75eeb21ad2e9af24f694 A	docroot/sites/all/modules/contrib/devel/devel.info
+:000000 100644 0000000000000000000000000000000000000000 f0828574a98c5ae4691de5ed4a51ea47a4a923a3 A	docroot/sites/all/modules/contrib/devel/devel.install
+:000000 100644 0000000000000000000000000000000000000000 c23cc943791f37e31b9a4a9fe8a1e1d547304a64 A	docroot/sites/all/modules/contrib/devel/devel.js
+:000000 100644 0000000000000000000000000000000000000000 d6f9ad537a756f44f92889e7d800482319b23947 A	docroot/sites/all/modules/contrib/devel/devel.mail.inc
+:000000 100644 0000000000000000000000000000000000000000 624ac7d3796616aea4d12afe08eacbce2c15acc2 A	docroot/sites/all/modules/contrib/devel/devel.module
+:000000 100644 0000000000000000000000000000000000000000 7a137da3cd7a4b2a3bdb9b17b09e276c40661997 A	docroot/sites/all/modules/contrib/devel/devel.pages.inc
+:000000 100644 0000000000000000000000000000000000000000 0a7a078085980147474f261f9b4921cdfda93eed A	docroot/sites/all/modules/contrib/devel/devel.rules.inc
+:000000 100644 0000000000000000000000000000000000000000 50defcf6e19bbf03c74b604ceb94dddd37d3dfbe A	docroot/sites/all/modules/contrib/devel/devel.test
+:000000 100644 0000000000000000000000000000000000000000 11e54ca51a4591d5635f4b1471ade9bb8a88a0be A	docroot/sites/all/modules/contrib/devel/develDrushTest.php
+:000000 100644 0000000000000000000000000000000000000000 65ae382255212ddd2b7b2a98e679c43b2857340b A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.drush.inc
+:000000 100644 0000000000000000000000000000000000000000 b98c0685c8719b4109c4251111d689e3eb9c0d0d A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.fields.inc
+:000000 100644 0000000000000000000000000000000000000000 072dafe12b10af711a654b9d83ffbb3ddeafb1ee A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 b45159f577e7b98f8c29a6013203c2b644f93440 A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.info
+:000000 100644 0000000000000000000000000000000000000000 11bc2916cc7e9887b6e6643d6f6acca1370effbc A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.module
+:000000 100644 0000000000000000000000000000000000000000 c649f0247e27f42675076bfe63aba3e719bd8acc A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.test
+:000000 100644 0000000000000000000000000000000000000000 2e903570b27abe2689fc1b9a01aeef6ade611f4a A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate_batch.inc
+:000000 100644 0000000000000000000000000000000000000000 c4e76eac376a8fd91730a9d95415179da6844ba4 A	docroot/sites/all/modules/contrib/devel/devel_generate/file.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 df4ff5888f0bdd808a076821e8565aac426a9a97 A	docroot/sites/all/modules/contrib/devel/devel_generate/image.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 d8101c7f2e31af6ce51ced966697581e845f5e32 A	docroot/sites/all/modules/contrib/devel/devel_generate/list.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 372942ccb2ed164b316a588e3e1c451c8a31f523 A	docroot/sites/all/modules/contrib/devel/devel_generate/number.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 70c41629539f0c2b983d4b59a7bf12f07c08af1c A	docroot/sites/all/modules/contrib/devel/devel_generate/taxonomy.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 c63a92edcacd3f174114baa7c01713d63789beff A	docroot/sites/all/modules/contrib/devel/devel_generate/text.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 d4a578dd23d14f5cfed05aef0dc16302952eb07e A	docroot/sites/all/modules/contrib/devel/devel_krumo_path.js
+:000000 100644 0000000000000000000000000000000000000000 aacf9a639c7049b62806aa77f6808f3bf352c0a5 A	docroot/sites/all/modules/contrib/devel/devel_node_access.api.php
+:000000 100644 0000000000000000000000000000000000000000 22b82bcf76671041843142e54953bbef9560ed60 A	docroot/sites/all/modules/contrib/devel/devel_node_access.info
+:000000 100644 0000000000000000000000000000000000000000 0088d78c7a473acda578d8d19d1d83e31aa3d625 A	docroot/sites/all/modules/contrib/devel/devel_node_access.install
+:000000 100644 0000000000000000000000000000000000000000 b79094291a4b823e8c12a28a752d5d988a68373c A	docroot/sites/all/modules/contrib/devel/devel_node_access.js
+:000000 100644 0000000000000000000000000000000000000000 74e927e9bf6d404303b13b74a53a3969c6637078 A	docroot/sites/all/modules/contrib/devel/devel_node_access.module
+:000000 100644 0000000000000000000000000000000000000000 2ddcf9936e8ddda877131f8133c051dbab057020 A	docroot/sites/all/modules/contrib/devel/jquery-1.4.4-uncompressed.js
+:000000 100755 0000000000000000000000000000000000000000 a9e030445d7b49496f82469b6ffa6b45e220a322 A	docroot/sites/all/modules/contrib/devel/krumo/INSTALL
+:000000 100755 0000000000000000000000000000000000000000 f3f1b3b65e1b3cdc30dccf92d961ad1381464ce1 A	docroot/sites/all/modules/contrib/devel/krumo/LICENSE
+:000000 100755 0000000000000000000000000000000000000000 99513ea35146b5272d22fdd9eb483b5f4126ded9 A	docroot/sites/all/modules/contrib/devel/krumo/README
+:000000 100755 0000000000000000000000000000000000000000 cb166bd88632573e24bca6848609560c7b3d7eba A	docroot/sites/all/modules/contrib/devel/krumo/TODO
+:000000 100755 0000000000000000000000000000000000000000 8d940129e823b560d27e3f7d6b1012906014737c A	docroot/sites/all/modules/contrib/devel/krumo/VERSION
+:000000 100755 0000000000000000000000000000000000000000 25dd1e5368a0229cba93e0bcc2abf6b7fb610957 A	docroot/sites/all/modules/contrib/devel/krumo/class.krumo.php
+:000000 100644 0000000000000000000000000000000000000000 6b3fcf400a6d13b589da2389be9092984ba5c084 A	docroot/sites/all/modules/contrib/devel/krumo/docs/Krumo/_class.krumo.php.html
+:000000 100755 0000000000000000000000000000000000000000 ce4d33b8977eb4fd10c5058b0e9e41c7401039ec A	docroot/sites/all/modules/contrib/devel/krumo/docs/Krumo/krumo.html
+:000000 100755 0000000000000000000000000000000000000000 f0f802476f0a3cd4f58c416928308e59c828f7c6 A	docroot/sites/all/modules/contrib/devel/krumo/docs/blank.html
+:000000 100755 0000000000000000000000000000000000000000 8123084b98469a6013a76e080c3cde04a65bb432 A	docroot/sites/all/modules/contrib/devel/krumo/docs/classtrees_Krumo.html
+:000000 100755 0000000000000000000000000000000000000000 bc89b7a342d194f26b85c6431ded872d8d2260de A	docroot/sites/all/modules/contrib/devel/krumo/docs/elementindex.html
+:000000 100755 0000000000000000000000000000000000000000 39e7477217d34fb478db01483e0145d12ad63983 A	docroot/sites/all/modules/contrib/devel/krumo/docs/elementindex_Krumo.html
+:000000 100755 0000000000000000000000000000000000000000 cf21fd4278eb20685d67bb5f2fac8c6a21850fa7 A	docroot/sites/all/modules/contrib/devel/krumo/docs/errors.html
+:000000 100755 0000000000000000000000000000000000000000 8276a705fb1a1b1418afa9e16ff094db3e8795f2 A	docroot/sites/all/modules/contrib/devel/krumo/docs/index.html
+:000000 100755 0000000000000000000000000000000000000000 f353e8db69e7b2174c8da4bc3bcc759c365e19a3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/li_Krumo.html
+:000000 100755 0000000000000000000000000000000000000000 19a383c3935352317f42c0bbef0fd70e6adaa05a A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/banner.css
+:000000 100755 0000000000000000000000000000000000000000 afa9d1d9261500c57ec37cff1de8cf43b31dbf25 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractClass.png
+:000000 100755 0000000000000000000000000000000000000000 8f65c390e37b548578390c0bdbe4a4bc469c4d19 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractClass_logo.png
+:000000 100755 0000000000000000000000000000000000000000 605ccbe58e04d8f1462227f08369ef6d8e5d4fe0 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractMethod.png
+:000000 100755 0000000000000000000000000000000000000000 53d76c636c92b06d0ca5176caa87183d702a3f44 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractPrivateClass.png
+:000000 100755 0000000000000000000000000000000000000000 4e68f570dcb38ee67756ce2231bb5c38e77cce71 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractPrivateClass_logo.png
+:000000 100755 0000000000000000000000000000000000000000 41cc9f021734b6f99a723a687827190f2ae645e2 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractPrivateMethod.png
+:000000 100755 0000000000000000000000000000000000000000 cf548d274e834f3d2d67b2784a1316e8e759da2e A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Class.png
+:000000 100755 0000000000000000000000000000000000000000 6f223c479a6c6fefab504deb84ab824d2e744713 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Class_logo.png
+:000000 100755 0000000000000000000000000000000000000000 a9c6f28b3591824c0732239096324984401092e5 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Constant.png
+:000000 100755 0000000000000000000000000000000000000000 3f16222b46222ac73a8a3443fc29249c1c72781d A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Constructor.png
+:000000 100755 0000000000000000000000000000000000000000 f28528f084362ec02752846c310c0262b5f2a680 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Destructor.png
+:000000 100755 0000000000000000000000000000000000000000 902fe25805b3375653cf015cb319977318d5c080 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Function.png
+:000000 100755 0000000000000000000000000000000000000000 7281bd2aaf8523dddb7a5c99b786734f943c9c03 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Global.png
+:000000 100755 0000000000000000000000000000000000000000 e8512fb911f40ec90e7cbf057ace91404573df37 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/I.png
+:000000 100755 0000000000000000000000000000000000000000 6558ec393a6e0b35fb7776a52b4ca9c10da0d5c3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Index.png
+:000000 100644 0000000000000000000000000000000000000000 e6cd51edf52c7bf532060fe4dca4fa6d9666f609 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Interface.PNG
+:000000 100644 0000000000000000000000000000000000000000 6f223c479a6c6fefab504deb84ab824d2e744713 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Interface_logo.png
+:000000 100755 0000000000000000000000000000000000000000 eb334edaeac52e2f473ffd92a49b025fb6148ec3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/L.png
+:000000 100755 0000000000000000000000000000000000000000 f7c43c0aa3bebb499e86eb744b1e47b9a9445ba7 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Lminus.png
+:000000 100755 0000000000000000000000000000000000000000 848ec2fc3bbaab6345864c303684ff8a86559cfb A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Lplus.png
+:000000 100755 0000000000000000000000000000000000000000 9b2157845f1c9ba93820dbc1a165f6a87b892034 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Method.png
+:000000 100755 0000000000000000000000000000000000000000 ffe7986ee2e78f7079d6de1a13ef29bff125f7a8 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Page.png
+:000000 100755 0000000000000000000000000000000000000000 44ce0b3c68c4b9b7765e6b1051a810932778dbb1 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Page_logo.png
+:000000 100755 0000000000000000000000000000000000000000 470e6d5684f29e52abb36ee6036a4d0b717f92e4 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/PrivateClass.png
+:000000 100755 0000000000000000000000000000000000000000 590e00640baeca2f541347cc1c5067c255030bba A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/PrivateClass_logo.png
+:000000 100755 0000000000000000000000000000000000000000 d01f2b314b973da7318cdb98a71a326f383e5864 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/PrivateMethod.png
+:000000 100755 0000000000000000000000000000000000000000 d76b21d4e9e8656a68989f007945ab14507ae23c A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/PrivateVariable.png
+:000000 100644 0000000000000000000000000000000000000000 9b2157845f1c9ba93820dbc1a165f6a87b892034 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/StaticMethod.png
+:000000 100644 0000000000000000000000000000000000000000 8e820193cf930c4147eba542a1b50626933d1f42 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/StaticVariable.png
+:000000 100755 0000000000000000000000000000000000000000 30173254061a6fc4f1488a0133b2704b0e5eea18 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/T.png
+:000000 100755 0000000000000000000000000000000000000000 2260e4248cef23f97d59b9c3defa571564debca3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Tminus.png
+:000000 100755 0000000000000000000000000000000000000000 2c8d8f4fd38259b2ef70fc63fad505fb0a0f55a4 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Tplus.png
+:000000 100755 0000000000000000000000000000000000000000 8e820193cf930c4147eba542a1b50626933d1f42 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Variable.png
+:000000 100755 0000000000000000000000000000000000000000 cee9cd37a10ebe8d7fe6a6ed0d8d74a2889f6e9f A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/blank.png
+:000000 100755 0000000000000000000000000000000000000000 84e9587af979e70708ae9944da3ab94f9e0066ca A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/class_folder.png
+:000000 100755 0000000000000000000000000000000000000000 d56838651efa45a3c52548e003a16b656b5d0cb3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/empty.png
+:000000 100755 0000000000000000000000000000000000000000 0bb2427f8afe94b50835b0a6fb2f7fc4b6624bb9 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/file.png
+:000000 100755 0000000000000000000000000000000000000000 a2d79f8de0a8abffa046b9699daf562b92b65a59 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/folder.png
+:000000 100755 0000000000000000000000000000000000000000 8b3d6e3b12902fd6de044496082464dbc7639d42 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/function_folder.png
+:000000 100755 0000000000000000000000000000000000000000 f502662bccc750fa7163df74d83beb34041d8509 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/minus.gif
+:000000 100755 0000000000000000000000000000000000000000 cdbc615d994890b8d3b5ebe89d442ea1d0bdcf33 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/next_button.png
+:000000 100755 0000000000000000000000000000000000000000 4a11780fc0ec50dd27cdb6a52f863c511e32b61a A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/next_button_disabled.png
+:000000 100755 0000000000000000000000000000000000000000 b04cf566d4ac41fa95f87664cf65325cc51e8a64 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/package.png
+:000000 100755 0000000000000000000000000000000000000000 6162bafd97a09b69387bc65f1243922537fef284 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/package_folder.png
+:000000 100755 0000000000000000000000000000000000000000 eeca02ce004470d15d2ff3f46581ec2f36e84c76 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/plus.gif
+:000000 100755 0000000000000000000000000000000000000000 327fdbc23dfad1bf34a9cf01e62ab6dfa62b457c A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/previous_button.png
+:000000 100755 0000000000000000000000000000000000000000 c02ff64bf12d028db769a755026226442f0f81fc A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/previous_button_disabled.png
+:000000 100755 0000000000000000000000000000000000000000 590e00640baeca2f541347cc1c5067c255030bba A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/private_class_logo.png
+:000000 100755 0000000000000000000000000000000000000000 bc19737521daf3fdf8ba84693a6c1db275587a5c A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/tutorial.png
+:000000 100755 0000000000000000000000000000000000000000 2a468b2a06fa3424ba94773373637d424f91f7e0 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/tutorial_folder.png
+:000000 100755 0000000000000000000000000000000000000000 ff36c59356d1d67cf8c4d12cef7b5aff7bf4dbc1 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/up_button.png
+:000000 100755 0000000000000000000000000000000000000000 ebb3fb4a775fea438634743421dcf06a31e596d4 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/lib/classTree.js
+:000000 100755 0000000000000000000000000000000000000000 5b025a935e60b3f8bd45132254e64a3e67e21289 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/stylesheet.css
+:000000 100755 0000000000000000000000000000000000000000 a4852e3d067a7666e35ce3299516f040c8c7f31e A	docroot/sites/all/modules/contrib/devel/krumo/docs/packages.html
+:000000 100755 0000000000000000000000000000000000000000 8851703f1100bec231d420833cd32540fed83cbf A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_INSTALL.html
+:000000 100755 0000000000000000000000000000000000000000 aa2cad1e9c71e1c4be9048ccbbde09ca167aed19 A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_LICENSE.html
+:000000 100755 0000000000000000000000000000000000000000 02a45c8f37d8b93608646b14e51dcd1ea798d303 A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_README.html
+:000000 100755 0000000000000000000000000000000000000000 82b751e8b16264f6931c16fca6c2fe24cd56963f A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_TODO.html
+:000000 100755 0000000000000000000000000000000000000000 45904040eeead20db97ab71f29196af82647be32 A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_VERSION.html
+:000000 100755 0000000000000000000000000000000000000000 f96c7d7015284f03180ad830cbad32195db216cd A	docroot/sites/all/modules/contrib/devel/krumo/krumo.ini
+:000000 100755 0000000000000000000000000000000000000000 73328202c49e06991d791398096ff0804d38df78 A	docroot/sites/all/modules/contrib/devel/krumo/krumo.js
+:000000 100755 0000000000000000000000000000000000000000 23afd1120ae9be49788a6c757db27cc238577b9c A	docroot/sites/all/modules/contrib/devel/krumo/skins/blue/bg.gif
+:000000 100755 0000000000000000000000000000000000000000 b35c15c2cdeda55671177c3a4a44f3c57ec4509e A	docroot/sites/all/modules/contrib/devel/krumo/skins/blue/skin.css
+:000000 100755 0000000000000000000000000000000000000000 fee4763e77bb256fa39a512338ff9dbd05385ec8 A	docroot/sites/all/modules/contrib/devel/krumo/skins/default/bg.gif
+:000000 100755 0000000000000000000000000000000000000000 fab0d660b3ff9da26be6cde5b531950ac2e618a7 A	docroot/sites/all/modules/contrib/devel/krumo/skins/default/skin.css
+:000000 100755 0000000000000000000000000000000000000000 aa4e75ec1636ec9332fe79436b641ac71b89604c A	docroot/sites/all/modules/contrib/devel/krumo/skins/green/bg.gif
+:000000 100755 0000000000000000000000000000000000000000 2acff0624e6a182d4f98089a84f5fc2cca520e5d A	docroot/sites/all/modules/contrib/devel/krumo/skins/green/skin.css
+:000000 100755 0000000000000000000000000000000000000000 3c71bc9209545a1cca8caed84caac180ac84ce36 A	docroot/sites/all/modules/contrib/devel/krumo/skins/orange/bg.gif
+:000000 100755 0000000000000000000000000000000000000000 79316844dcb005ed891a969bc0cd0a21634872e0 A	docroot/sites/all/modules/contrib/devel/krumo/skins/orange/skin.css
+:000000 100755 0000000000000000000000000000000000000000 c1a4e7d5f7254b0cde1c912aad7a114305432b14 A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/collapsed.gif
+:000000 100755 0000000000000000000000000000000000000000 e009cf1ead6fdd6bf974f4173b9bc2d30ee2675e A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/dotted.gif
+:000000 100755 0000000000000000000000000000000000000000 51aa91d0898814f7501162613a21a88e8c24192b A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/empty.gif
+:000000 100755 0000000000000000000000000000000000000000 a0ecb026f05d1af5b6af3cf2ed8fc21b37afec01 A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/expanded.gif
+:000000 100755 0000000000000000000000000000000000000000 c3258a82addc771483f62001e40b9d1b25074e0a A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/skin.css
+:000000 100755 0000000000000000000000000000000000000000 4eb200a1c07e8bdab9a68fa973de3fb14c372e73 A	docroot/sites/all/modules/contrib/devel/runtests.sh
+:000000 100644 0000000000000000000000000000000000000000 386964320d56e114299e7bb3aab1766d69f1463e A	docroot/sites/all/modules/contrib/diff/CHANGELOG.txt
+:000000 100644 0000000000000000000000000000000000000000 1236610721918a8be4d64d7a7139869fdb3a8c99 A	docroot/sites/all/modules/contrib/diff/DiffEngine.php
+:000000 100644 0000000000000000000000000000000000000000 d159169d1050894d3ea3b98e1c965c4058208fe1 A	docroot/sites/all/modules/contrib/diff/LICENSE.txt
+:000000 100644 0000000000000000000000000000000000000000 ee1b3116208004944a3891e0cb0875793f4d31eb A	docroot/sites/all/modules/contrib/diff/css/diff.boxes.css
+:000000 100644 0000000000000000000000000000000000000000 a7ab7ffd256906b81f08a77046305ae20a5e922d A	docroot/sites/all/modules/contrib/diff/css/diff.default.css
+:000000 100644 0000000000000000000000000000000000000000 a9df19ed563c440f063d258eb4be5d67c527ef24 A	docroot/sites/all/modules/contrib/diff/diff.admin.inc
+:000000 100644 0000000000000000000000000000000000000000 507293a1cd3cc950e62b68736010ffb2467f018f A	docroot/sites/all/modules/contrib/diff/diff.api.php
+:000000 100644 0000000000000000000000000000000000000000 a09147c1175a4b01d9f8932479ad0c289bded07e A	docroot/sites/all/modules/contrib/diff/diff.css
+:000000 100644 0000000000000000000000000000000000000000 63c01b44e8de8db71b93f1b941bb9ca2ac41ed5b A	docroot/sites/all/modules/contrib/diff/diff.diff.inc
+:000000 100644 0000000000000000000000000000000000000000 5ae077e80ea0ad38745e13e2f04bfe3806c27f22 A	docroot/sites/all/modules/contrib/diff/diff.info
+:000000 100644 0000000000000000000000000000000000000000 16f1d27c51a852b7756f873977907d5d8c459b78 A	docroot/sites/all/modules/contrib/diff/diff.install
+:000000 100644 0000000000000000000000000000000000000000 f58e1d721c078b64aea53c8056de02c1f863607f A	docroot/sites/all/modules/contrib/diff/diff.module
+:000000 100644 0000000000000000000000000000000000000000 1cd14419e0bcf6da1cdd93139c66a2881ee140a1 A	docroot/sites/all/modules/contrib/diff/diff.pages.inc
+:000000 100644 0000000000000000000000000000000000000000 96d20b3af9d6c96aa979d262d706c597b262e74a A	docroot/sites/all/modules/contrib/diff/diff.theme.inc
+:000000 100644 0000000000000000000000000000000000000000 96dbd80aca3f4893bd51ac210831964ed6b1b0a1 A	docroot/sites/all/modules/contrib/diff/diff.tokens.inc
+:000000 100644 0000000000000000000000000000000000000000 678ff46666fb465eb35f814ada7cfaf71b6f2100 A	docroot/sites/all/modules/contrib/diff/includes/file.inc
+:000000 100644 0000000000000000000000000000000000000000 cb93616d7f24bf2deafb7ce37d39aaba2e52bde5 A	docroot/sites/all/modules/contrib/diff/includes/image.inc
+:000000 100644 0000000000000000000000000000000000000000 d1f62e33c15d758244eda9f509a43903fe362658 A	docroot/sites/all/modules/contrib/diff/includes/list.inc
+:000000 100644 0000000000000000000000000000000000000000 3f0bca33d92377607682b7648a425e985d811ed7 A	docroot/sites/all/modules/contrib/diff/includes/node.inc
+:000000 100644 0000000000000000000000000000000000000000 45e05133a47eb9075acf63493786fa3f5424e418 A	docroot/sites/all/modules/contrib/diff/includes/number.inc
+:000000 100644 0000000000000000000000000000000000000000 5765c9c2ec698ac836d0b9511751b03bfd5984b5 A	docroot/sites/all/modules/contrib/diff/includes/taxonomy.inc
+:000000 100644 0000000000000000000000000000000000000000 b27e55ff28cd884863b3becb9616f23b155d3270 A	docroot/sites/all/modules/contrib/diff/includes/text.inc
+:000000 100644 0000000000000000000000000000000000000000 2c873e9fbacec2e124083450fcdddcd2a5618e29 A	docroot/sites/all/modules/contrib/diff/js/diff.js
+:000000 100644 0000000000000000000000000000000000000000 f82db821f25dbf0d923c99b5f1c244de282b23bd A	docroot/sites/all/modules/contrib/diff/readme.txt
+:000000 100644 0000000000000000000000000000000000000000 d159169d1050894d3ea3b98e1c965c4058208fe1 A	docroot/sites/all/modules/contrib/ftools/LICENSE.txt
+:000000 100644 0000000000000000000000000000000000000000 bffb1ad01a9a53f7abf48f7aa56e8f8707f54c2e A	docroot/sites/all/modules/contrib/ftools/README.txt
+:000000 100644 0000000000000000000000000000000000000000 fb4015d1d7b617215bdcad282e89d12a506d2b1f A	docroot/sites/all/modules/contrib/ftools/ftools.info
+:000000 100644 0000000000000000000000000000000000000000 d76b5259006655057cb95a3574554b2647e35d00 A	docroot/sites/all/modules/contrib/ftools/ftools.module
+
+commit 6dbd2aff44c4e348e1aeef95f51b8cff250e84ae
+tree cf4aa99e9200114d3a965f25c2efbd521bf1db29
+parent d45ec03faa60547b299349536737860fe3acf8e4
+author Cristian Romanescu <cristian@romanescu.ro> 1404998295 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404998295 +0300
+
+    Removed enable-modules as it doesn't work
+
+:100644 100644 23851568f530dbe58d7b003dec118e58e623fd37 c52e869c3323ff26b0e271338fce6e43b3e94d0a M	drush/drushrc.php
+
+commit d45ec03faa60547b299349536737860fe3acf8e4
+tree db65624bcb7d4b2440e0baa2c60af8004afdfd78
+parent c6cd4c58da957203e0d684d301e2c1c3cc5a0d45
+author Cristian Romanescu <cristian@romanescu.ro> 1404997744 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404997744 +0300
+
+    Default modules for devify
+
+:100644 100644 e9c84610a37020419ebe9f15a9fa5f1d5bd8b832 23851568f530dbe58d7b003dec118e58e623fd37 M	drush/drushrc.php
+
+commit dc9d27c4ea2200c3ef5b8d84cc8f5a3009e0429c
+tree fce45d9f95d05b06db6eeddc3d92ae9803a9b28a
+parent bb542cd6f5412fd50d88f1aba24be82dc2027f22
+author Cristian Romanescu <cristian@romanescu.ro> 1404997498 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404997498 +0300
+
+    Merged the 26 languages for OSHA into the features
+
+:100644 100644 55329e050638fe7ce1e6fd63a0497e9835f644b8 edaa910e57cc4567e90acf1e3e1c1dcce99d1c06 M	docroot/sites/all/modules/osha/osha.features.language.inc
+:100644 100644 02e31e85cc42ccd59e1579605e8ae3a28c945b22 ab50337e3d169a4f634388af29aef99a8888d5fc M	docroot/sites/all/modules/osha/osha.info
+
+commit 25c1b5f3868b3b07a79e69240ddae59dd04e7bd3
+tree aa98848999bac144a4847452ad1d6fa2cd1bbf71
+parent 2cca4904a081b4debd14b0ac2af83fff3012620b
+author Cristian Romanescu <cristian@romanescu.ro> 1404989340 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404989340 +0300
+
+    Fixed project title in the readme
+
+:100644 100644 7bb3dc76504c4370e68d5ce3deb83d66d447f31a 8569df83387bb32000a68e7055bb9ad8c8dff114 M	readme.md
+
+commit 2cca4904a081b4debd14b0ac2af83fff3012620b
+tree 413ae12b1fbddf1b88bc93cc40863d35e573e3e1
+parent 9e37acdba7f9a3e7eb18f030d17e4503339dfcf0
+author Cristian Romanescu <cristian@romanescu.ro> 1404989301 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404989301 +0300
+
+    Removed conflict leftover from readme
+
+:100644 100644 c38bb7c602fd9565a5cdabd48f2a07d15de99b48 7bb3dc76504c4370e68d5ce3deb83d66d447f31a M	readme.md
+
+commit bb542cd6f5412fd50d88f1aba24be82dc2027f22
+tree 3f7b0f47b6fc07cbcca6d433022c2b3f8e20f566
+parent 5d0f586f327e8ae05d3c73104c1d8c300e12921c
+author Cristian Romanescu <cristian@romanescu.ro> 1404988971 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404988971 +0300
+
+    Fixes/completions to the Readme. Apache.conf set-up for test server
+
+:100644 100644 84134d284fec87e99deb239a2ab1c14bab1754b1 8b186c3106fb94405023b194a4e86098e7f0025b M	conf/apache.conf
+:100644 100644 17d1e9093caeac5c5b85da07da70e4a18efab8b4 df16625146477a09fc8975c721b5a1a1e1f6f51e M	readme.md
+
+commit 5d0f586f327e8ae05d3c73104c1d8c300e12921c
+tree 3c040e1d8d4c206a04b82cf24279bf88a1ae3baf
+parent ab8b7d020dcac34eefedbc60e8d456316ebfb282
+author Cristian Romanescu <cristian@romanescu.ro> 1404988314 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404988314 +0300
+
+    Removed boilerplate and fixed links inside readme. Added Jenkins build status
+
+:100644 100644 fa176dae6412dbb871d659e35b953d959b566864 17d1e9093caeac5c5b85da07da70e4a18efab8b4 M	readme.md
+Changes in branch origin/master, between ac69cc4bf32b307f442f6d4b2f1de390e182e8d9 and 502326828675c6de991c0c4ca633cc9ce32f1b35
+commit 7444996c15078a3a4fe6b70e499b20a6547e23b8
+tree b2df296e323d9363c5c1acc49f5bcd2e20d7744f
+parent 73d57cbe6d3c6b1c45c9fbb7fc6eb428627a69b5
+author Cristian Romanescu <cristian@romanescu.ro> 1405000327 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1405000327 +0300
+
+    Added functional test for languages
+
+:100644 100644 ab50337e3d169a4f634388af29aef99a8888d5fc c954655d9e2f8bc992ad55bf3da3420757e4cb3b M	docroot/sites/all/modules/osha/osha.info
+:000000 100644 0000000000000000000000000000000000000000 5989a5957eb5f0880c44dfeb9f357708e5737dcb A	docroot/sites/all/modules/osha/osha.test
+
+commit 73d57cbe6d3c6b1c45c9fbb7fc6eb428627a69b5
+tree 151e35229349d6aedc7ee1c38ef1587f4b70a652
+parent 81011bda8bf8e9010a5937e972fa825dbfba0ce1
+author Cristian Romanescu <cristian@romanescu.ro> 1405000280 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1405000280 +0300
+
+    By default enable dependent modules
+
+:100644 100644 89d5e4dd432cf75c0803297e98e0cbb3970ea443 a8bcfb3c1c270f608b279d0bb022030ce198c9a4 M	drush/commands/build.drush.inc
+
+commit 81011bda8bf8e9010a5937e972fa825dbfba0ce1
+tree 2b07067a40932e46398ebae9dd986e8de19b319a
+parent 90cda13101980c82d74658314ad2cee8a1c1cd2f
+author Cristian Romanescu <cristian@romanescu.ro> 1404998675 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404998675 +0300
+
+    Added devel modules into the repo
+
+:000000 100755 0000000000000000000000000000000000000000 d159169d1050894d3ea3b98e1c965c4058208fe1 A	docroot/sites/all/modules/contrib/devel/LICENSE.txt
+:000000 100644 0000000000000000000000000000000000000000 194fcbf57f0c4128c203c40dc25ff2b97b76e28b A	docroot/sites/all/modules/contrib/devel/README.txt
+:000000 100644 0000000000000000000000000000000000000000 1d9362f377dd06b22f612995d984a7808dedb158 A	docroot/sites/all/modules/contrib/devel/README_devel_node_access.txt
+:000000 100644 0000000000000000000000000000000000000000 fe784a8da7a7637fd37b640c9176396ae2b86cba A	docroot/sites/all/modules/contrib/devel/devel-rtl.css
+:000000 100644 0000000000000000000000000000000000000000 6fec2ca59308b5cb3106b547b00a04db23e484df A	docroot/sites/all/modules/contrib/devel/devel.admin.inc
+:000000 100644 0000000000000000000000000000000000000000 7049059028eed37eb03502ab8bcd6e6cba1b66e0 A	docroot/sites/all/modules/contrib/devel/devel.css
+:000000 100644 0000000000000000000000000000000000000000 b4d85054ca1a0c206e36c2dacea2b6da36e5d790 A	docroot/sites/all/modules/contrib/devel/devel.drush.inc
+:000000 100644 0000000000000000000000000000000000000000 f53d43d6b11d0834a1de75eeb21ad2e9af24f694 A	docroot/sites/all/modules/contrib/devel/devel.info
+:000000 100644 0000000000000000000000000000000000000000 f0828574a98c5ae4691de5ed4a51ea47a4a923a3 A	docroot/sites/all/modules/contrib/devel/devel.install
+:000000 100644 0000000000000000000000000000000000000000 c23cc943791f37e31b9a4a9fe8a1e1d547304a64 A	docroot/sites/all/modules/contrib/devel/devel.js
+:000000 100644 0000000000000000000000000000000000000000 d6f9ad537a756f44f92889e7d800482319b23947 A	docroot/sites/all/modules/contrib/devel/devel.mail.inc
+:000000 100644 0000000000000000000000000000000000000000 624ac7d3796616aea4d12afe08eacbce2c15acc2 A	docroot/sites/all/modules/contrib/devel/devel.module
+:000000 100644 0000000000000000000000000000000000000000 7a137da3cd7a4b2a3bdb9b17b09e276c40661997 A	docroot/sites/all/modules/contrib/devel/devel.pages.inc
+:000000 100644 0000000000000000000000000000000000000000 0a7a078085980147474f261f9b4921cdfda93eed A	docroot/sites/all/modules/contrib/devel/devel.rules.inc
+:000000 100644 0000000000000000000000000000000000000000 50defcf6e19bbf03c74b604ceb94dddd37d3dfbe A	docroot/sites/all/modules/contrib/devel/devel.test
+:000000 100644 0000000000000000000000000000000000000000 11e54ca51a4591d5635f4b1471ade9bb8a88a0be A	docroot/sites/all/modules/contrib/devel/develDrushTest.php
+:000000 100644 0000000000000000000000000000000000000000 65ae382255212ddd2b7b2a98e679c43b2857340b A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.drush.inc
+:000000 100644 0000000000000000000000000000000000000000 b98c0685c8719b4109c4251111d689e3eb9c0d0d A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.fields.inc
+:000000 100644 0000000000000000000000000000000000000000 072dafe12b10af711a654b9d83ffbb3ddeafb1ee A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 b45159f577e7b98f8c29a6013203c2b644f93440 A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.info
+:000000 100644 0000000000000000000000000000000000000000 11bc2916cc7e9887b6e6643d6f6acca1370effbc A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.module
+:000000 100644 0000000000000000000000000000000000000000 c649f0247e27f42675076bfe63aba3e719bd8acc A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate.test
+:000000 100644 0000000000000000000000000000000000000000 2e903570b27abe2689fc1b9a01aeef6ade611f4a A	docroot/sites/all/modules/contrib/devel/devel_generate/devel_generate_batch.inc
+:000000 100644 0000000000000000000000000000000000000000 c4e76eac376a8fd91730a9d95415179da6844ba4 A	docroot/sites/all/modules/contrib/devel/devel_generate/file.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 df4ff5888f0bdd808a076821e8565aac426a9a97 A	docroot/sites/all/modules/contrib/devel/devel_generate/image.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 d8101c7f2e31af6ce51ced966697581e845f5e32 A	docroot/sites/all/modules/contrib/devel/devel_generate/list.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 372942ccb2ed164b316a588e3e1c451c8a31f523 A	docroot/sites/all/modules/contrib/devel/devel_generate/number.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 70c41629539f0c2b983d4b59a7bf12f07c08af1c A	docroot/sites/all/modules/contrib/devel/devel_generate/taxonomy.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 c63a92edcacd3f174114baa7c01713d63789beff A	docroot/sites/all/modules/contrib/devel/devel_generate/text.devel_generate.inc
+:000000 100644 0000000000000000000000000000000000000000 d4a578dd23d14f5cfed05aef0dc16302952eb07e A	docroot/sites/all/modules/contrib/devel/devel_krumo_path.js
+:000000 100644 0000000000000000000000000000000000000000 aacf9a639c7049b62806aa77f6808f3bf352c0a5 A	docroot/sites/all/modules/contrib/devel/devel_node_access.api.php
+:000000 100644 0000000000000000000000000000000000000000 22b82bcf76671041843142e54953bbef9560ed60 A	docroot/sites/all/modules/contrib/devel/devel_node_access.info
+:000000 100644 0000000000000000000000000000000000000000 0088d78c7a473acda578d8d19d1d83e31aa3d625 A	docroot/sites/all/modules/contrib/devel/devel_node_access.install
+:000000 100644 0000000000000000000000000000000000000000 b79094291a4b823e8c12a28a752d5d988a68373c A	docroot/sites/all/modules/contrib/devel/devel_node_access.js
+:000000 100644 0000000000000000000000000000000000000000 74e927e9bf6d404303b13b74a53a3969c6637078 A	docroot/sites/all/modules/contrib/devel/devel_node_access.module
+:000000 100644 0000000000000000000000000000000000000000 2ddcf9936e8ddda877131f8133c051dbab057020 A	docroot/sites/all/modules/contrib/devel/jquery-1.4.4-uncompressed.js
+:000000 100755 0000000000000000000000000000000000000000 a9e030445d7b49496f82469b6ffa6b45e220a322 A	docroot/sites/all/modules/contrib/devel/krumo/INSTALL
+:000000 100755 0000000000000000000000000000000000000000 f3f1b3b65e1b3cdc30dccf92d961ad1381464ce1 A	docroot/sites/all/modules/contrib/devel/krumo/LICENSE
+:000000 100755 0000000000000000000000000000000000000000 99513ea35146b5272d22fdd9eb483b5f4126ded9 A	docroot/sites/all/modules/contrib/devel/krumo/README
+:000000 100755 0000000000000000000000000000000000000000 cb166bd88632573e24bca6848609560c7b3d7eba A	docroot/sites/all/modules/contrib/devel/krumo/TODO
+:000000 100755 0000000000000000000000000000000000000000 8d940129e823b560d27e3f7d6b1012906014737c A	docroot/sites/all/modules/contrib/devel/krumo/VERSION
+:000000 100755 0000000000000000000000000000000000000000 25dd1e5368a0229cba93e0bcc2abf6b7fb610957 A	docroot/sites/all/modules/contrib/devel/krumo/class.krumo.php
+:000000 100644 0000000000000000000000000000000000000000 6b3fcf400a6d13b589da2389be9092984ba5c084 A	docroot/sites/all/modules/contrib/devel/krumo/docs/Krumo/_class.krumo.php.html
+:000000 100755 0000000000000000000000000000000000000000 ce4d33b8977eb4fd10c5058b0e9e41c7401039ec A	docroot/sites/all/modules/contrib/devel/krumo/docs/Krumo/krumo.html
+:000000 100755 0000000000000000000000000000000000000000 f0f802476f0a3cd4f58c416928308e59c828f7c6 A	docroot/sites/all/modules/contrib/devel/krumo/docs/blank.html
+:000000 100755 0000000000000000000000000000000000000000 8123084b98469a6013a76e080c3cde04a65bb432 A	docroot/sites/all/modules/contrib/devel/krumo/docs/classtrees_Krumo.html
+:000000 100755 0000000000000000000000000000000000000000 bc89b7a342d194f26b85c6431ded872d8d2260de A	docroot/sites/all/modules/contrib/devel/krumo/docs/elementindex.html
+:000000 100755 0000000000000000000000000000000000000000 39e7477217d34fb478db01483e0145d12ad63983 A	docroot/sites/all/modules/contrib/devel/krumo/docs/elementindex_Krumo.html
+:000000 100755 0000000000000000000000000000000000000000 cf21fd4278eb20685d67bb5f2fac8c6a21850fa7 A	docroot/sites/all/modules/contrib/devel/krumo/docs/errors.html
+:000000 100755 0000000000000000000000000000000000000000 8276a705fb1a1b1418afa9e16ff094db3e8795f2 A	docroot/sites/all/modules/contrib/devel/krumo/docs/index.html
+:000000 100755 0000000000000000000000000000000000000000 f353e8db69e7b2174c8da4bc3bcc759c365e19a3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/li_Krumo.html
+:000000 100755 0000000000000000000000000000000000000000 19a383c3935352317f42c0bbef0fd70e6adaa05a A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/banner.css
+:000000 100755 0000000000000000000000000000000000000000 afa9d1d9261500c57ec37cff1de8cf43b31dbf25 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractClass.png
+:000000 100755 0000000000000000000000000000000000000000 8f65c390e37b548578390c0bdbe4a4bc469c4d19 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractClass_logo.png
+:000000 100755 0000000000000000000000000000000000000000 605ccbe58e04d8f1462227f08369ef6d8e5d4fe0 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractMethod.png
+:000000 100755 0000000000000000000000000000000000000000 53d76c636c92b06d0ca5176caa87183d702a3f44 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractPrivateClass.png
+:000000 100755 0000000000000000000000000000000000000000 4e68f570dcb38ee67756ce2231bb5c38e77cce71 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractPrivateClass_logo.png
+:000000 100755 0000000000000000000000000000000000000000 41cc9f021734b6f99a723a687827190f2ae645e2 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/AbstractPrivateMethod.png
+:000000 100755 0000000000000000000000000000000000000000 cf548d274e834f3d2d67b2784a1316e8e759da2e A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Class.png
+:000000 100755 0000000000000000000000000000000000000000 6f223c479a6c6fefab504deb84ab824d2e744713 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Class_logo.png
+:000000 100755 0000000000000000000000000000000000000000 a9c6f28b3591824c0732239096324984401092e5 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Constant.png
+:000000 100755 0000000000000000000000000000000000000000 3f16222b46222ac73a8a3443fc29249c1c72781d A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Constructor.png
+:000000 100755 0000000000000000000000000000000000000000 f28528f084362ec02752846c310c0262b5f2a680 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Destructor.png
+:000000 100755 0000000000000000000000000000000000000000 902fe25805b3375653cf015cb319977318d5c080 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Function.png
+:000000 100755 0000000000000000000000000000000000000000 7281bd2aaf8523dddb7a5c99b786734f943c9c03 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Global.png
+:000000 100755 0000000000000000000000000000000000000000 e8512fb911f40ec90e7cbf057ace91404573df37 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/I.png
+:000000 100755 0000000000000000000000000000000000000000 6558ec393a6e0b35fb7776a52b4ca9c10da0d5c3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Index.png
+:000000 100644 0000000000000000000000000000000000000000 e6cd51edf52c7bf532060fe4dca4fa6d9666f609 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Interface.PNG
+:000000 100644 0000000000000000000000000000000000000000 6f223c479a6c6fefab504deb84ab824d2e744713 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Interface_logo.png
+:000000 100755 0000000000000000000000000000000000000000 eb334edaeac52e2f473ffd92a49b025fb6148ec3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/L.png
+:000000 100755 0000000000000000000000000000000000000000 f7c43c0aa3bebb499e86eb744b1e47b9a9445ba7 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Lminus.png
+:000000 100755 0000000000000000000000000000000000000000 848ec2fc3bbaab6345864c303684ff8a86559cfb A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Lplus.png
+:000000 100755 0000000000000000000000000000000000000000 9b2157845f1c9ba93820dbc1a165f6a87b892034 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Method.png
+:000000 100755 0000000000000000000000000000000000000000 ffe7986ee2e78f7079d6de1a13ef29bff125f7a8 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Page.png
+:000000 100755 0000000000000000000000000000000000000000 44ce0b3c68c4b9b7765e6b1051a810932778dbb1 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Page_logo.png
+:000000 100755 0000000000000000000000000000000000000000 470e6d5684f29e52abb36ee6036a4d0b717f92e4 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/PrivateClass.png
+:000000 100755 0000000000000000000000000000000000000000 590e00640baeca2f541347cc1c5067c255030bba A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/PrivateClass_logo.png
+:000000 100755 0000000000000000000000000000000000000000 d01f2b314b973da7318cdb98a71a326f383e5864 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/PrivateMethod.png
+:000000 100755 0000000000000000000000000000000000000000 d76b21d4e9e8656a68989f007945ab14507ae23c A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/PrivateVariable.png
+:000000 100644 0000000000000000000000000000000000000000 9b2157845f1c9ba93820dbc1a165f6a87b892034 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/StaticMethod.png
+:000000 100644 0000000000000000000000000000000000000000 8e820193cf930c4147eba542a1b50626933d1f42 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/StaticVariable.png
+:000000 100755 0000000000000000000000000000000000000000 30173254061a6fc4f1488a0133b2704b0e5eea18 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/T.png
+:000000 100755 0000000000000000000000000000000000000000 2260e4248cef23f97d59b9c3defa571564debca3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Tminus.png
+:000000 100755 0000000000000000000000000000000000000000 2c8d8f4fd38259b2ef70fc63fad505fb0a0f55a4 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Tplus.png
+:000000 100755 0000000000000000000000000000000000000000 8e820193cf930c4147eba542a1b50626933d1f42 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/Variable.png
+:000000 100755 0000000000000000000000000000000000000000 cee9cd37a10ebe8d7fe6a6ed0d8d74a2889f6e9f A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/blank.png
+:000000 100755 0000000000000000000000000000000000000000 84e9587af979e70708ae9944da3ab94f9e0066ca A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/class_folder.png
+:000000 100755 0000000000000000000000000000000000000000 d56838651efa45a3c52548e003a16b656b5d0cb3 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/empty.png
+:000000 100755 0000000000000000000000000000000000000000 0bb2427f8afe94b50835b0a6fb2f7fc4b6624bb9 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/file.png
+:000000 100755 0000000000000000000000000000000000000000 a2d79f8de0a8abffa046b9699daf562b92b65a59 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/folder.png
+:000000 100755 0000000000000000000000000000000000000000 8b3d6e3b12902fd6de044496082464dbc7639d42 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/function_folder.png
+:000000 100755 0000000000000000000000000000000000000000 f502662bccc750fa7163df74d83beb34041d8509 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/minus.gif
+:000000 100755 0000000000000000000000000000000000000000 cdbc615d994890b8d3b5ebe89d442ea1d0bdcf33 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/next_button.png
+:000000 100755 0000000000000000000000000000000000000000 4a11780fc0ec50dd27cdb6a52f863c511e32b61a A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/next_button_disabled.png
+:000000 100755 0000000000000000000000000000000000000000 b04cf566d4ac41fa95f87664cf65325cc51e8a64 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/package.png
+:000000 100755 0000000000000000000000000000000000000000 6162bafd97a09b69387bc65f1243922537fef284 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/package_folder.png
+:000000 100755 0000000000000000000000000000000000000000 eeca02ce004470d15d2ff3f46581ec2f36e84c76 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/plus.gif
+:000000 100755 0000000000000000000000000000000000000000 327fdbc23dfad1bf34a9cf01e62ab6dfa62b457c A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/previous_button.png
+:000000 100755 0000000000000000000000000000000000000000 c02ff64bf12d028db769a755026226442f0f81fc A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/previous_button_disabled.png
+:000000 100755 0000000000000000000000000000000000000000 590e00640baeca2f541347cc1c5067c255030bba A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/private_class_logo.png
+:000000 100755 0000000000000000000000000000000000000000 bc19737521daf3fdf8ba84693a6c1db275587a5c A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/tutorial.png
+:000000 100755 0000000000000000000000000000000000000000 2a468b2a06fa3424ba94773373637d424f91f7e0 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/tutorial_folder.png
+:000000 100755 0000000000000000000000000000000000000000 ff36c59356d1d67cf8c4d12cef7b5aff7bf4dbc1 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/images/up_button.png
+:000000 100755 0000000000000000000000000000000000000000 ebb3fb4a775fea438634743421dcf06a31e596d4 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/lib/classTree.js
+:000000 100755 0000000000000000000000000000000000000000 5b025a935e60b3f8bd45132254e64a3e67e21289 A	docroot/sites/all/modules/contrib/devel/krumo/docs/media/stylesheet.css
+:000000 100755 0000000000000000000000000000000000000000 a4852e3d067a7666e35ce3299516f040c8c7f31e A	docroot/sites/all/modules/contrib/devel/krumo/docs/packages.html
+:000000 100755 0000000000000000000000000000000000000000 8851703f1100bec231d420833cd32540fed83cbf A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_INSTALL.html
+:000000 100755 0000000000000000000000000000000000000000 aa2cad1e9c71e1c4be9048ccbbde09ca167aed19 A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_LICENSE.html
+:000000 100755 0000000000000000000000000000000000000000 02a45c8f37d8b93608646b14e51dcd1ea798d303 A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_README.html
+:000000 100755 0000000000000000000000000000000000000000 82b751e8b16264f6931c16fca6c2fe24cd56963f A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_TODO.html
+:000000 100755 0000000000000000000000000000000000000000 45904040eeead20db97ab71f29196af82647be32 A	docroot/sites/all/modules/contrib/devel/krumo/docs/ric_VERSION.html
+:000000 100755 0000000000000000000000000000000000000000 f96c7d7015284f03180ad830cbad32195db216cd A	docroot/sites/all/modules/contrib/devel/krumo/krumo.ini
+:000000 100755 0000000000000000000000000000000000000000 73328202c49e06991d791398096ff0804d38df78 A	docroot/sites/all/modules/contrib/devel/krumo/krumo.js
+:000000 100755 0000000000000000000000000000000000000000 23afd1120ae9be49788a6c757db27cc238577b9c A	docroot/sites/all/modules/contrib/devel/krumo/skins/blue/bg.gif
+:000000 100755 0000000000000000000000000000000000000000 b35c15c2cdeda55671177c3a4a44f3c57ec4509e A	docroot/sites/all/modules/contrib/devel/krumo/skins/blue/skin.css
+:000000 100755 0000000000000000000000000000000000000000 fee4763e77bb256fa39a512338ff9dbd05385ec8 A	docroot/sites/all/modules/contrib/devel/krumo/skins/default/bg.gif
+:000000 100755 0000000000000000000000000000000000000000 fab0d660b3ff9da26be6cde5b531950ac2e618a7 A	docroot/sites/all/modules/contrib/devel/krumo/skins/default/skin.css
+:000000 100755 0000000000000000000000000000000000000000 aa4e75ec1636ec9332fe79436b641ac71b89604c A	docroot/sites/all/modules/contrib/devel/krumo/skins/green/bg.gif
+:000000 100755 0000000000000000000000000000000000000000 2acff0624e6a182d4f98089a84f5fc2cca520e5d A	docroot/sites/all/modules/contrib/devel/krumo/skins/green/skin.css
+:000000 100755 0000000000000000000000000000000000000000 3c71bc9209545a1cca8caed84caac180ac84ce36 A	docroot/sites/all/modules/contrib/devel/krumo/skins/orange/bg.gif
+:000000 100755 0000000000000000000000000000000000000000 79316844dcb005ed891a969bc0cd0a21634872e0 A	docroot/sites/all/modules/contrib/devel/krumo/skins/orange/skin.css
+:000000 100755 0000000000000000000000000000000000000000 c1a4e7d5f7254b0cde1c912aad7a114305432b14 A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/collapsed.gif
+:000000 100755 0000000000000000000000000000000000000000 e009cf1ead6fdd6bf974f4173b9bc2d30ee2675e A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/dotted.gif
+:000000 100755 0000000000000000000000000000000000000000 51aa91d0898814f7501162613a21a88e8c24192b A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/empty.gif
+:000000 100755 0000000000000000000000000000000000000000 a0ecb026f05d1af5b6af3cf2ed8fc21b37afec01 A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/expanded.gif
+:000000 100755 0000000000000000000000000000000000000000 c3258a82addc771483f62001e40b9d1b25074e0a A	docroot/sites/all/modules/contrib/devel/krumo/skins/white/skin.css
+:000000 100755 0000000000000000000000000000000000000000 4eb200a1c07e8bdab9a68fa973de3fb14c372e73 A	docroot/sites/all/modules/contrib/devel/runtests.sh
+:000000 100644 0000000000000000000000000000000000000000 386964320d56e114299e7bb3aab1766d69f1463e A	docroot/sites/all/modules/contrib/diff/CHANGELOG.txt
+:000000 100644 0000000000000000000000000000000000000000 1236610721918a8be4d64d7a7139869fdb3a8c99 A	docroot/sites/all/modules/contrib/diff/DiffEngine.php
+:000000 100644 0000000000000000000000000000000000000000 d159169d1050894d3ea3b98e1c965c4058208fe1 A	docroot/sites/all/modules/contrib/diff/LICENSE.txt
+:000000 100644 0000000000000000000000000000000000000000 ee1b3116208004944a3891e0cb0875793f4d31eb A	docroot/sites/all/modules/contrib/diff/css/diff.boxes.css
+:000000 100644 0000000000000000000000000000000000000000 a7ab7ffd256906b81f08a77046305ae20a5e922d A	docroot/sites/all/modules/contrib/diff/css/diff.default.css
+:000000 100644 0000000000000000000000000000000000000000 a9df19ed563c440f063d258eb4be5d67c527ef24 A	docroot/sites/all/modules/contrib/diff/diff.admin.inc
+:000000 100644 0000000000000000000000000000000000000000 507293a1cd3cc950e62b68736010ffb2467f018f A	docroot/sites/all/modules/contrib/diff/diff.api.php
+:000000 100644 0000000000000000000000000000000000000000 a09147c1175a4b01d9f8932479ad0c289bded07e A	docroot/sites/all/modules/contrib/diff/diff.css
+:000000 100644 0000000000000000000000000000000000000000 63c01b44e8de8db71b93f1b941bb9ca2ac41ed5b A	docroot/sites/all/modules/contrib/diff/diff.diff.inc
+:000000 100644 0000000000000000000000000000000000000000 5ae077e80ea0ad38745e13e2f04bfe3806c27f22 A	docroot/sites/all/modules/contrib/diff/diff.info
+:000000 100644 0000000000000000000000000000000000000000 16f1d27c51a852b7756f873977907d5d8c459b78 A	docroot/sites/all/modules/contrib/diff/diff.install
+:000000 100644 0000000000000000000000000000000000000000 f58e1d721c078b64aea53c8056de02c1f863607f A	docroot/sites/all/modules/contrib/diff/diff.module
+:000000 100644 0000000000000000000000000000000000000000 1cd14419e0bcf6da1cdd93139c66a2881ee140a1 A	docroot/sites/all/modules/contrib/diff/diff.pages.inc
+:000000 100644 0000000000000000000000000000000000000000 96d20b3af9d6c96aa979d262d706c597b262e74a A	docroot/sites/all/modules/contrib/diff/diff.theme.inc
+:000000 100644 0000000000000000000000000000000000000000 96dbd80aca3f4893bd51ac210831964ed6b1b0a1 A	docroot/sites/all/modules/contrib/diff/diff.tokens.inc
+:000000 100644 0000000000000000000000000000000000000000 678ff46666fb465eb35f814ada7cfaf71b6f2100 A	docroot/sites/all/modules/contrib/diff/includes/file.inc
+:000000 100644 0000000000000000000000000000000000000000 cb93616d7f24bf2deafb7ce37d39aaba2e52bde5 A	docroot/sites/all/modules/contrib/diff/includes/image.inc
+:000000 100644 0000000000000000000000000000000000000000 d1f62e33c15d758244eda9f509a43903fe362658 A	docroot/sites/all/modules/contrib/diff/includes/list.inc
+:000000 100644 0000000000000000000000000000000000000000 3f0bca33d92377607682b7648a425e985d811ed7 A	docroot/sites/all/modules/contrib/diff/includes/node.inc
+:000000 100644 0000000000000000000000000000000000000000 45e05133a47eb9075acf63493786fa3f5424e418 A	docroot/sites/all/modules/contrib/diff/includes/number.inc
+:000000 100644 0000000000000000000000000000000000000000 5765c9c2ec698ac836d0b9511751b03bfd5984b5 A	docroot/sites/all/modules/contrib/diff/includes/taxonomy.inc
+:000000 100644 0000000000000000000000000000000000000000 b27e55ff28cd884863b3becb9616f23b155d3270 A	docroot/sites/all/modules/contrib/diff/includes/text.inc
+:000000 100644 0000000000000000000000000000000000000000 2c873e9fbacec2e124083450fcdddcd2a5618e29 A	docroot/sites/all/modules/contrib/diff/js/diff.js
+:000000 100644 0000000000000000000000000000000000000000 f82db821f25dbf0d923c99b5f1c244de282b23bd A	docroot/sites/all/modules/contrib/diff/readme.txt
+:000000 100644 0000000000000000000000000000000000000000 d159169d1050894d3ea3b98e1c965c4058208fe1 A	docroot/sites/all/modules/contrib/ftools/LICENSE.txt
+:000000 100644 0000000000000000000000000000000000000000 bffb1ad01a9a53f7abf48f7aa56e8f8707f54c2e A	docroot/sites/all/modules/contrib/ftools/README.txt
+:000000 100644 0000000000000000000000000000000000000000 fb4015d1d7b617215bdcad282e89d12a506d2b1f A	docroot/sites/all/modules/contrib/ftools/ftools.info
+:000000 100644 0000000000000000000000000000000000000000 d76b5259006655057cb95a3574554b2647e35d00 A	docroot/sites/all/modules/contrib/ftools/ftools.module
+
+commit 6dbd2aff44c4e348e1aeef95f51b8cff250e84ae
+tree cf4aa99e9200114d3a965f25c2efbd521bf1db29
+parent d45ec03faa60547b299349536737860fe3acf8e4
+author Cristian Romanescu <cristian@romanescu.ro> 1404998295 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404998295 +0300
+
+    Removed enable-modules as it doesn't work
+
+:100644 100644 23851568f530dbe58d7b003dec118e58e623fd37 c52e869c3323ff26b0e271338fce6e43b3e94d0a M	drush/drushrc.php
+
+commit d45ec03faa60547b299349536737860fe3acf8e4
+tree db65624bcb7d4b2440e0baa2c60af8004afdfd78
+parent c6cd4c58da957203e0d684d301e2c1c3cc5a0d45
+author Cristian Romanescu <cristian@romanescu.ro> 1404997744 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404997744 +0300
+
+    Default modules for devify
+
+:100644 100644 e9c84610a37020419ebe9f15a9fa5f1d5bd8b832 23851568f530dbe58d7b003dec118e58e623fd37 M	drush/drushrc.php
+
+commit dc9d27c4ea2200c3ef5b8d84cc8f5a3009e0429c
+tree fce45d9f95d05b06db6eeddc3d92ae9803a9b28a
+parent bb542cd6f5412fd50d88f1aba24be82dc2027f22
+author Cristian Romanescu <cristian@romanescu.ro> 1404997498 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404997498 +0300
+
+    Merged the 26 languages for OSHA into the features
+
+:100644 100644 55329e050638fe7ce1e6fd63a0497e9835f644b8 edaa910e57cc4567e90acf1e3e1c1dcce99d1c06 M	docroot/sites/all/modules/osha/osha.features.language.inc
+:100644 100644 02e31e85cc42ccd59e1579605e8ae3a28c945b22 ab50337e3d169a4f634388af29aef99a8888d5fc M	docroot/sites/all/modules/osha/osha.info
+
+commit 25c1b5f3868b3b07a79e69240ddae59dd04e7bd3
+tree aa98848999bac144a4847452ad1d6fa2cd1bbf71
+parent 2cca4904a081b4debd14b0ac2af83fff3012620b
+author Cristian Romanescu <cristian@romanescu.ro> 1404989340 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404989340 +0300
+
+    Fixed project title in the readme
+
+:100644 100644 7bb3dc76504c4370e68d5ce3deb83d66d447f31a 8569df83387bb32000a68e7055bb9ad8c8dff114 M	readme.md
+
+commit 2cca4904a081b4debd14b0ac2af83fff3012620b
+tree 413ae12b1fbddf1b88bc93cc40863d35e573e3e1
+parent 9e37acdba7f9a3e7eb18f030d17e4503339dfcf0
+author Cristian Romanescu <cristian@romanescu.ro> 1404989301 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404989301 +0300
+
+    Removed conflict leftover from readme
+
+:100644 100644 c38bb7c602fd9565a5cdabd48f2a07d15de99b48 7bb3dc76504c4370e68d5ce3deb83d66d447f31a M	readme.md
+
+commit bb542cd6f5412fd50d88f1aba24be82dc2027f22
+tree 3f7b0f47b6fc07cbcca6d433022c2b3f8e20f566
+parent 5d0f586f327e8ae05d3c73104c1d8c300e12921c
+author Cristian Romanescu <cristian@romanescu.ro> 1404988971 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404988971 +0300
+
+    Fixes/completions to the Readme. Apache.conf set-up for test server
+
+:100644 100644 84134d284fec87e99deb239a2ab1c14bab1754b1 8b186c3106fb94405023b194a4e86098e7f0025b M	conf/apache.conf
+:100644 100644 17d1e9093caeac5c5b85da07da70e4a18efab8b4 df16625146477a09fc8975c721b5a1a1e1f6f51e M	readme.md
+
+commit 5d0f586f327e8ae05d3c73104c1d8c300e12921c
+tree 3c040e1d8d4c206a04b82cf24279bf88a1ae3baf
+parent ab8b7d020dcac34eefedbc60e8d456316ebfb282
+author Cristian Romanescu <cristian@romanescu.ro> 1404988314 +0300
+committer Cristian Romanescu <cristian@romanescu.ro> 1404988314 +0300
+
+    Removed boilerplate and fixed links inside readme. Added Jenkins build status
+
+:100644 100644 fa176dae6412dbb871d659e35b953d959b566864 17d1e9093caeac5c5b85da07da70e4a18efab8b4 M	readme.md
