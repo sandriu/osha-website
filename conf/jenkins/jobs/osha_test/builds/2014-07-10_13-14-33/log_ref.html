@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="http://ci.edw.ro/css/style.css"></link>
+		<link type="text/css" rel="stylesheet" href="http://ci.edw.ro/css/color.css"></link>
+	</head>
+	<body>
+<base target="content">
+<script language="JavaScript" type="text/javascript">
+	function toggleList(list){
+		element = document.getElementById(list).style;
+		element.display == 'none' ? element.display='block' : element.display='none';
+	}
+</script>
+<img src="http://ci.edw.ro///plugin/log-parser/images/red.gif" style="margin: 2px;" width="24" alt="" height="24"></img>
+<a href="javascript:toggleList('Error')" target="_self"><STRONG>Error (0)</STRONG></a><br/>
+<ul id="Error" type="disc" style="display:none">
+</ul>
+<img src="http://ci.edw.ro///plugin/log-parser/images/yellow.gif" style="margin: 2px;" width="24" alt="" height="24"></img>
+<a href="javascript:toggleList('Warning')" target="_self"><STRONG>Warning (0)</STRONG></a><br/>
+<ul id="Warning" type="disc" style="display:none">
+</ul>
+<img src="http://ci.edw.ro///plugin/log-parser/images/blue.gif" style="margin: 2px;" width="24" alt="" height="24"></img>
+<a href="javascript:toggleList('Info')" target="_self"><STRONG>Info (6)</STRONG></a><br/>
+<ul id="Info" type="disc" style="display:none">
+<li>1 <a target="content" href="log_content.html#INFO1"><font color="blue">Starting Drupal installation. This takes a few seconds ...           [ok]</font></a></li><br/>
+<li>2 <a target="content" href="log_content.html#INFO2"><font color="blue">Installation complete.  User name: admin  User password: admin       [ok]</font></a></li><br/>
+<li>3 <a target="content" href="log_content.html#INFO3"><font color="blue">Enabling the required modules                                        [success]</font></a></li><br/>
+<li>4 <a target="content" href="log_content.html#INFO4"><font color="blue">simpletest was enabled successfully.                                 [ok]</font></a></li><br/>
+<li>5 <a target="content" href="log_content.html#INFO5"><font color="blue">Starting test AddFeedTestCase.                                       [ok]</font></a></li><br/>
+<li>6 <a target="content" href="log_content.html#INFO6"><font color="blue">Add feed functionality 69 passes, 0 fails, 0 exceptions, and 20 debug[ok]</font></a></li><br/>
+</ul>
+	</body>
+</html>

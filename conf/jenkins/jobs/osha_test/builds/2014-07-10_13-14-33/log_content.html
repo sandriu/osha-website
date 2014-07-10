@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="http://ci.edw.ro/css/style.css"></link>
+		<link type="text/css" rel="stylesheet" href="http://ci.edw.ro/css/color.css"></link>
+	</head>
+	<body>
+Started by user Cristian Romanescu<br/>
+
+[EnvInject] - Loading node environment variables.<br/>
+
+Building in workspace /var/lib/jenkins/workspace/osha_test<br/>
+
+Checkout:osha_test / /var/lib/jenkins/workspace/osha_test - hudson.remoting.LocalChannel@2fa4a715<br/>
+
+Using strategy: Default<br/>
+
+Last Built Revision: Revision ac69cc4bf32b307f442f6d4b2f1de390e182e8d9 (origin/master, origin/HEAD)<br/>
+
+Fetching changes from 1 remote Git repository<br/>
+
+Fetching upstream changes from origin<br/>
+
+Seen branch in repository origin/HEAD<br/>
+
+Seen branch in repository origin/master<br/>
+
+Seen 2 remote branches<br/>
+
+Commencing build of Revision ac69cc4bf32b307f442f6d4b2f1de390e182e8d9 (origin/master, origin/HEAD)<br/>
+
+Checking out Revision ac69cc4bf32b307f442f6d4b2f1de390e182e8d9 (origin/master, origin/HEAD)<br/>
+
+Warning : There are multiple branch changesets here<br/>
+
+[osha_test] $ /bin/sh -xe /tmp/hudson7019838569768720727.sh<br/>
+
++ cd /var/lib/jenkins/workspace/osha_test/docroot<br/>
+
++ drush site-install -y<br/>
+
+You are about to DROP all tables in your 'osha_test' database. Do you want to continue? (y/n): y<br/>
+
+<a name="INFO1"></a><font color="blue">Starting Drupal installation. This takes a few seconds ...           [ok]</font><br/>
+
+<a name="INFO2"></a><font color="blue">Installation complete.  User name: admin  User password: admin       [ok]</font><br/>
+
++ drush init<br/>
+
+<a name="INFO3"></a><font color="blue">Enabling the required modules                                        [success]</font><br/>
+
+The Search API module was installed. A new default node index was    [status]<br/>
+
+created.<br/>
+
++ drush en -y simpletest<br/>
+
+The following extensions will be enabled: simpletest<br/>
+
+Do you really want to continue? (y/n): y<br/>
+
+<a name="INFO4"></a><font color="blue">simpletest was enabled successfully.                                 [ok]</font><br/>
+
+simpletest defines the following permissions: administer unit tests<br/>
+
++ drush test-run --uri=http://osha-test.edw.ro AddFeedTestCase<br/>
+
+<a name="INFO5"></a><font color="blue">Starting test AddFeedTestCase.                                       [ok]</font><br/>
+
+<a name="INFO6"></a><font color="blue">Add feed functionality 69 passes, 0 fails, 0 exceptions, and 20 debug[ok]</font><br/>
+
+messages<br/>
+
+No leftover tables to remove.                                        [status]<br/>
+
+No temporary directories to remove.                                  [status]<br/>
+
+Removed 1 test result.                                               [status]<br/>
+
+ Group  Class  Name <br/>
+
+                    <br/>
+
+<br/>
+
+	</body>
+</html>
