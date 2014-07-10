@@ -34,3 +34,4 @@ features[language][] = sk
 features[language][] = sl
 features[language][] = sv
 features[language][] = tr
+files[] = osha.test

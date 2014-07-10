@@ -123,7 +123,7 @@ function _drush_init() {
 	if (is_string($modules)) {
 		$modules = explode(',', $modules);
 	}
-	if(!module_enable($modules, FALSE)) {
+	if(!module_enable($modules, TRUE)) {
 		drush_log(dt('Failed to enable the required modules'), 'error');
 	}
 

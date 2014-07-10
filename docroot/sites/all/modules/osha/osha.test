@@ -1,0 +1,42 @@
+<?php
+/**
+ * Author: Cristian Romanescu <cristi _at_ eaudeweb dot ro>
+ * Created: 201407101633
+ */
+
+class OshaTest extends DrupalWebTestCase {
+
+
+	public static function getInfo() {
+		return array(
+			'name' => 'OSHA base tests',
+			'description' => 'Tests functionalities provided by this module',
+			'group' => 'OSHA',
+		);
+	}
+
+
+	public function setUp() {
+		parent::setUp('osha');
+	}
+
+
+	/**
+	 * Tests that all required languages have been enabled
+	 */
+	public function testLanguages() {
+		$languages = array(
+			'en', 'bg', 'cs', 'da', 'el',
+			'et', 'es', 'fi', 'hr', 'hu',
+			'fr', 'is', 'it', 'lt', 'lv',
+			'mt', 'nl', 'no', 'pl', 'pt',
+			'ro', 'ru', 'sv', 'sl', 'sk',
+			'tr', 'de'
+		);
+		$actual = array_keys(language_list());
+		$this->assertEqual(count($languages), count($actual));
+		foreach($languages as $iso_code) {
+			$this->assertTrue(in_array($iso_code, $actual), "Language $iso_code is enabled");
+		}
+	}
+}
