@@ -1,7 +1,14 @@
 osha_migration
 ============
 
-Scripts to migrate data from old website. For a list of available migrations:
+Scripts to migrate data from the old website.
+This module is optional and can be safely enabled/disabled separately from other OSHA modules.
+
+Notes:
+
+1. This module is not automatically enabled by other build scripts.
+2. This module relies on setting ```osha_data_dir``` Drupal global variable that points to your root data directory
+
 
 Installation
 ============
