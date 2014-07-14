@@ -35,18 +35,20 @@ Build scripts and source code for the Osha project
     }
     ```
 2. Copy the following code into ~/.drush/drushrc.php (create if doesn't exist)
-   ```
-       <?php
-       $repo_dir = drush_get_option('root') ? drush_get_option('root') : getcwd();
-       $success = drush_shell_exec('cd %s && git rev-parse --show-toplevel 2> ' . drush_bit_bucket(), $repo_dir);
-       if ($success) {
-         $output = drush_shell_exec_output();
-         $repo = $output[0];
-         $options['config'] = $repo . '/drush/drushrc.php';
-         $options['include'] = $repo . '/drush/commands';
-         $options['alias-path'] = $repo . '/drush/aliases';
-       }
-   ```
+
+    ```php
+        <?php
+            $repo_dir = drush_get_option('root') ? drush_get_option('root') : getcwd();
+            $success = drush_shell_exec('cd %s && git rev-parse --show-toplevel 2> ' . drush_bit_bucket(), $repo_dir);
+            if ($success) {
+                $output = drush_shell_exec_output();
+                $repo = $output[0];
+                $options['config'] = $repo . '/drush/drushrc.php';
+                $options['include'] = $repo . '/drush/commands';
+                $options['alias-path'] = $repo . '/drush/aliases';
+            }
+    ```
+    
 3. Run [install.sh](https://github.com/eaudeweb/osha/blob/master/install.sh) (wrapper around few drush commands)
 
 4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/eaudeweb/osha/tree/master/docroot/sites/all/modules/osha_migration) module
