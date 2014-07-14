@@ -5,9 +5,40 @@ Build scripts and source code for the Osha project
 
 [![Build Status](http://ci.edw.ro/buildStatus/icon?job=osha_test&dummy=1)](http://ci.edw.ro/job/osha_test/)
 
-##Getting started##
+##Pre-requisites
 
-@todo: Add link/document installation
+1. Drush
+2. Virtual host for your Drupal instance that points to the docroot/ directory from this repo
+
+##Quick start##
+
+1. Edit [conf/config.json](https://github.com/eaudeweb/osha/blob/master/conf/config.json) to customize to your local settings
+
+```json
+{
+    "db" : {
+        "host": "database server ip or name, ex: localhost",
+        "username" : "database username, ex. user1",
+        "password" : "database password, ex. password1",
+        "port": 3306,
+        "database" : "database name, ex. osha_test",
+        "root_username": "root",
+        "root_password": "s3cr3t"
+    },
+    "admin" : {
+        "username": "admin",
+        "password": "admin",
+        "email": "your.email@domain.org"
+    },
+    "uri": "http://you-vh.localhost",
+    "site_mail": "your.email@domain.org"
+}
+```
+
+2. Run [install.sh](https://github.com/eaudeweb/osha/blob/master/install.sh) (wrapper around few drush commands)
+
+3. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/eaudeweb/osha/tree/master/docroot/sites/all/modules/osha_migration) module
+
 
 ##Repository Layout##
 Breakdown for what each directory/file is used for. See also readme inside directories.

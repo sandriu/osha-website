@@ -1,0 +1,14 @@
+name = "OSHA data migration"
+description = "Module to migrate data from the old website"
+package = "OSHA"
+core = 7.x
+dependencies[] = migrate
+dependencies[] = field
+dependencies[] = file
+dependencies[] = image
+dependencies[] = number
+dependencies[] = text
+dependenceis[] = osha_taxonomies
+
+files[] = nace_codes.migrate.inc
+files[] = news.migrate.inc

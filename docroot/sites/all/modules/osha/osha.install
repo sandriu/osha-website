@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function osha_install() {
+	osha_configure_entity_translation_types();
+	osha_configure_language_detection();
+}
