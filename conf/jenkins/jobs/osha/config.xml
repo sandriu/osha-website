@@ -60,6 +60,7 @@
       <command>cd $WORKSPACE/docroot
 drush site-install -y
 drush init
+drush build
 drush en -y simpletest
 drush test-run --uri=http://osha-test.edw.ro OSHA
 </command>
@@ -105,6 +106,7 @@ drush test-run --uri=http://osha-test.edw.ro OSHA
       <replyTo>$DEFAULT_REPLYTO</replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <com.cloudbees.jenkins.GitHubCommitNotifier plugin="github@1.7"/>
   </publishers>
   <buildWrappers>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
