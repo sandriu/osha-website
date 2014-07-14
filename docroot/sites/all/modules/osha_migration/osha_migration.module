@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * You must implement hook_migrate_api(), setting the API level to 2, for
+ * your migration classes to be recognized by the Migrate module.
+ */
+function osha_migration_migrate_api() {
+	$api = array(
+		'api' => 2,
+		'migrations' => array(
+			'News' => array('class_name' => 'MigrateOshaNews'),
+			'NaceCodes' => array('class_name' => 'MigrateOshaNaceCodes')
+		)
+	);
+	return $api;
+}
+
+/**
+ * @return null
+ * @throws MigrateException
+ */
+function osha_migration_get_data_dir() {
+	$ret = variable_get('osha_data_dir', NULL);
+	if(empty($ret)) {
+		throw new MigrateException('Please configure the "osha_data_dir" variable to point to your data storage');
+	}
+	return $ret;
+}
