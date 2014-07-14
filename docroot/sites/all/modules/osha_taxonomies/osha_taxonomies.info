@@ -1,4 +1,4 @@
-name = osha.taxonomies
+name = osha_taxonomies
 description = Taxonomies specific to OSHA project
 core = 7.x
 package = OSHA
@@ -7,6 +7,8 @@ project = osha_taxonomies
 dependencies[] = entity_translation
 dependencies[] = features
 dependencies[] = i18n_field
+dependencies[] = i18n_taxonomy
+dependencies[] = i18n_translation
 dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = title
