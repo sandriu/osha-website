@@ -293,5 +293,6 @@ $options['init-modules'] = array(
 	'search_api_solr',
 
 	'imce_wysiwyg',
-	'osha'
+	'osha',
+	'osha_migration'
 );

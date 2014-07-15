@@ -12,8 +12,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 		$this->description = 'Import "Nace Codes" taxonomy from JSON file';
 		$this->vocabulary = 'nace_codes';
 
-		$import_root = osha_migration_get_data_dir();
-		$source_file = sprintf('%s/nace_codes/nace_codes.json', $import_root);
+		$source_file = sprintf('%s/data/nace_codes.json', drupal_get_path('module', 'osha_migration'));
 
 		$this->generateCacheFromFile($source_file);
 
