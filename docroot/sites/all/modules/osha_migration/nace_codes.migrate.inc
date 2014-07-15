@@ -8,7 +8,6 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 	public function __construct($arguments) {
 		parent::__construct();
 
-		// TODO: Abstractization
 		$this->description = 'Import "Nace Codes" taxonomy from JSON file';
 		$this->vocabulary = 'nace_codes';
 
@@ -42,6 +41,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 		$this->addFieldMapping('name', 'NACE_REV_2_DESCRIPTION');
 		$this->addFieldMapping('description_field:format')->defaultValue('plain_text');
 		$this->addFieldMapping('field_nace_changes', 'Change');
+        $this->addFieldMapping('weight', 'weight');
 	}
 
 	protected function createStub($migration, array $source) {
@@ -60,10 +60,27 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 		return array($term->tid);
 	}
 
+    public function getWeightByCode($row) {
+        $weight = 0;
+        if ($row->Level > 2) {
+            $weightAsString = substr($row->NACE_REV_2_CODE, -1);
+            $weight = intval($weightAsString);
+        } else if ($row->Level == 2) {
+            $weightAsString = substr($row->NACE_REV_2_CODE, -2, 1);
+            $weight = intval($weightAsString);
+        } else {
+            $weight = ord($row->NACE_REV_2_CODE) - ord('A');
+        }
+
+        return $weight;
+    }
+
 	public function prepareRow($row) {
 		$row->parent = 0;
 		$row->language = 'en';
 		$row->parent = $this->getParent($row);
+        $row->weight = $this->getWeightByCode($row);
+
 		return TRUE;
 	}
 
@@ -154,6 +171,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 			'Change' => 'The last changes made to the nace code',
 			'parent' => 'The tid of the parent',
 			'NACE_REV_2_DESCRIPTION' => 'The name of the NACE Code',
+            'weight' => 'The generated weight of the taxonomy term'
 		);
 	}
 
