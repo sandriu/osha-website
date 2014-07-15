@@ -13,3 +13,5 @@ drush migrate-auto-register
 
 echo "Importing taxonomies"
 drush migrate-import NaceCodes
+
+drush cc all
