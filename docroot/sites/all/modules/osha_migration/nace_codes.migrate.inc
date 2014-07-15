@@ -3,18 +3,14 @@
 class MigrateOshaNaceCodes extends DynamicMigration {
 
 	protected $vocabulary = NULL;
-	protected $cache = NULL;
 
 	public function __construct($arguments) {
 		parent::__construct();
 
-		// TODO: Abstractization
 		$this->description = 'Import "Nace Codes" taxonomy from JSON file';
 		$this->vocabulary = 'nace_codes';
 
 		$source_file = sprintf('%s/data/nace_codes.json', drupal_get_path('module', 'osha_migration'));
-
-		$this->generateCacheFromFile($source_file);
 
 		$this->map = new MigrateSQLMap($this->machineName,
 			array(
@@ -28,9 +24,9 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 			MigrateDestinationTerm::getKeySchema()
 		);
 
-		$this->source = new MigrateSourceJSON (
-			$source_file, 'NACE_REV_2_CODE', $this->fields()
-		);
+        $this->source = new MigrateSourceList(new NaceCodesMigrationListJSON($source_file),
+            new NaceCodesMigrationItemJSON($source_file, array()), $this->fields());
+
 
 		$term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
 		$this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
@@ -41,6 +37,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 		$this->addFieldMapping('name', 'NACE_REV_2_DESCRIPTION');
 		$this->addFieldMapping('description_field:format')->defaultValue('plain_text');
 		$this->addFieldMapping('field_nace_changes', 'Change');
+        $this->addFieldMapping('weight', 'weight');
 	}
 
 	protected function createStub($migration, array $source) {
@@ -59,15 +56,32 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 		return array($term->tid);
 	}
 
+    public function getWeightByCode($row) {
+        $weight = NULL;
+        if ($row->Level > 2) {
+            $weightAsString = substr($row->NACE_REV_2_CODE, -1);
+            $weight = intval($weightAsString);
+        } else if ($row->Level == 2) {
+            $weightAsString = substr($row->NACE_REV_2_CODE, -2, 1);
+            $weight = intval($weightAsString);
+        } else {
+            $weight = ord($row->NACE_REV_2_CODE) - ord('A');
+        }
+
+        return $weight;
+    }
+
 	public function prepareRow($row) {
 		$row->parent = 0;
 		$row->language = 'en';
 		$row->parent = $this->getParent($row);
+        $row->weight = $this->getWeightByCode($row);
+
 		return TRUE;
 	}
 
 	function prepare($entity, stdClass $row) {
-		$correspondingRowAssocArray = $this->cache[$row->ID];
+		$correspondingRowAssocArray = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
 		$entity->language = 'en';
 		$translationsData = array();
 		$languages = $this->generateLanguagesWithFieldsMap();
@@ -90,13 +104,6 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 			'original' => 'en',
 			'data' => $translationsData
 		);
-	}
-
-	protected function generateCacheFromFile($source_file) {
-		$rows = json_decode(file_get_contents($source_file), TRUE);
-		foreach ($rows as $row) {
-			$this->cache[$row['ID']] = $row;
-		}
 	}
 
 	protected function generateMachineName($class_name = NULL) {
@@ -129,7 +136,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 
 	private function getParentCode($row) {
 		$parent_code = NULL;
-		$cached = $this->cache[$row->ID];
+		$cached = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
 		if ($cached['Level'] > 3) {
 			$parent_code = substr($cached['NACE_REV_2_CODE'], 0, -1);
 		} else {
@@ -153,6 +160,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 			'Change' => 'The last changes made to the nace code',
 			'parent' => 'The tid of the parent',
 			'NACE_REV_2_DESCRIPTION' => 'The name of the NACE Code',
+            'weight' => 'The generated weight of the taxonomy term'
 		);
 	}
 
@@ -218,4 +226,48 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 			$entity->field_nace_excludes[$language][0]['value'] = $row[$fields['excludes']];
 		}
 	}
+}
+
+class NaceCodesMigrationListJSON extends MigrateListJSON {
+    /**
+     * The default implementation assumes the IDs are top-level array elements,
+     * but the array elements are the data items - we need to look inside them
+     * for the IDs.
+     */
+    protected function getIDsFromJSON(array $data) {
+        $ids = array();
+        foreach ($data as $item) {
+            $ids[] = $item['NACE_REV_2_CODE'];
+        }
+        return $ids;
+    }
+}
+
+class NaceCodesMigrationItemJSON extends MigrateItemJSON {
+    protected $data = array();
+    public static $cache;
+
+    public function getItem($id) {
+        // Object caching
+        if (empty($this->data)) {
+            $cache = $this->loadJSONUrl($this->itemUrl);
+            foreach ($cache as $item) {
+                self::$cache[$item['NACE_REV_2_CODE']] = $item;
+                $this->data[$item['NACE_REV_2_CODE']] = json_decode(json_encode($item), FALSE);
+            }
+        }
+
+        return isset($this->data[$id]) ? $this->data[$id] : NULL;
+    }
+
+    protected function loadJSONUrl($item_url) {
+        if (empty($this->httpOptions)) {
+            $json = file_get_contents($item_url);
+        }
+        else {
+            $response = drupal_http_request($item_url, $this->httpOptions);
+            $json = $response->data;
+        }
+        return json_decode($json, TRUE);
+    }
 }
