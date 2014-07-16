@@ -5,7 +5,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.7">
-      <projectUrl>http://github.com/eaudeweb/osha/</projectUrl>
+      <projectUrl>http://github.com/eu-osha/osha-website/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@1.4.0">
@@ -14,7 +14,7 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name></name>
         <refspec></refspec>
-        <url>https://github.com/eaudeweb/osha</url>
+        <url>https://github.com/eu-osha/osha-website</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
