@@ -290,6 +290,7 @@ $options['init-modules'] = array(
 	'facetapi',
 	'search_api_facetapi',
 	'apachesolr',
+	'apachesolr_search',
 	'search_api_solr',
 
 	'imce_wysiwyg',
