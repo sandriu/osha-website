@@ -35,3 +35,20 @@ function osha_configure_language_detection() {
 
 	drupal_form_submit('locale_languages_configure_form', $form_state);
 }
+
+/**
+ * Function to retrive the size of a MySQL varchar column from a table
+ * @param string $table Table name
+ * @param string $column Target column
+ * @return int
+ */
+function osha_get_mysql_column_size($table, $column) {
+	$result = db_query("
+		SELECT CHARACTER_MAXIMUM_LENGTH
+		FROM information_schema.columns
+		WHERE table_schema = DATABASE()
+			AND table_name = :table AND COLUMN_NAME = :column",
+		array(':table' => $table, ':column' => $column)
+	);
+	return $result->fetchField(0);
+}
