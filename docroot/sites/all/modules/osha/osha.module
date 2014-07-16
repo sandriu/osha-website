@@ -1,8 +1,10 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the osha feature.
  */
+
+include_once 'osha.features.inc';
 
 
 function osha_configure_entity_translation_types() {
