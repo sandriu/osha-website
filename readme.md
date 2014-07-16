@@ -7,7 +7,7 @@ Build scripts and source code for the Osha project
 
 ##Pre-requisites
 
-1. Drush (tested with 7.0-dev)
+1. Drush
 2. Virtual host for your Drupal instance that points to the docroot/ directory from this repo
 
 ##Quick start##
