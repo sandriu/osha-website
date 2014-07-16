@@ -2004,7 +2004,7 @@ class OshaTaxomiesTestCase extends DrupalWebTestCase {
     public function testNaceCodesTaxonomy() {
         $vocName = 'nace_codes';
         $vid = $this->getVocabularyIDByMachineName($vocName);
-        $this->assertTrue($vid, 'Vocabulary found in database.');
+        $this->assertTrue($vid, "$vocName vocabulary found in database");
 
         $vocabularySize = $this->getVocabularySize($vid);
         $this->assertEqual(996, $vocabularySize, "The number of terms in $vocName, matches 996");
@@ -2032,6 +2032,36 @@ class OshaTaxomiesTestCase extends DrupalWebTestCase {
                 matches the supposed number('$count')");
         }
 
+    }
+
+    /**
+    * Tests that all fields have required length and the taxonomy is created corectly
+    */
+    public function testEsenerTaxonomy() {
+        // Check size
+        $size = 768;
+        $this->assertEqual(osha_get_mysql_column_size("taxonomy_term_data", "name"), $size, "taxonomy_term_data column has maximum length of $size");
+        $this->assertEqual(osha_get_mysql_column_size("field_data_name_field", "name_field_value"), $size, "field_data_name_field column has maximum length of $size");
+        $this->assertEqual(osha_get_mysql_column_size("field_revision_name_field", "name_field_value"), $size, "field_revision_name_field column has maximum length of $size");
+
+        $vocName = 'esener';
+        $vid = $this->getVocabularyIDByMachineName($vocName);
+        $this->assertTrue($vid, "$vocName vocabulary found in database");
+
+        $termName = "For each of the following issues, please tell me whether it is of major concern, some concern or no concern at all in your establishment. Work-related stress";
+        $tid = $this->getTermIDByNameAndVocabulary($termName, $vid);
+        $this->assertTrue($tid, "Term '$termName' exists in vocabulary '$vocName' .");
+
+        $termTranslationsCountOnField = array(
+            "field_data_name_field" => 23,
+        );
+
+        foreach($termTranslationsCountOnField as $field => $count) {
+            $countFromDBOnField = $this->getTranslationsCountOnFieldByTid($field, $tid);
+            $this->assertEqual($count, $countFromDBOnField,
+                "The number of translations for term '$tid'('$countFromDBOnField'),
+                matches the supposed number('$count')");
+        }
     }
 
     // TODO: Make a class for taxonomy utils independent of the test enviroment
