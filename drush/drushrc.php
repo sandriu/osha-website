@@ -292,6 +292,7 @@ $options['init-modules'] = array(
 	'apachesolr',
 	'apachesolr_search',
 	'search_api_solr',
+	'strongarm',
 
 	'imce_wysiwyg',
 	'osha',
