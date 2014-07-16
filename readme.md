@@ -12,7 +12,7 @@ Build scripts and source code for the Osha project
 
 ##Quick start##
 
-1. Edit [conf/config.json](https://github.com/eaudeweb/osha/blob/master/conf/config.json) to customize to your local settings
+1. Edit [conf/config.json](https://github.com/EU-OSHA/osha-website/blob/master/conf/config.json) to customize to your local settings
 
     ```json
     {
@@ -49,31 +49,29 @@ Build scripts and source code for the Osha project
             }
     ```
     
-3. Run [install.sh](https://github.com/eaudeweb/osha/blob/master/install.sh) (wrapper around few drush commands)
+3. Run [install.sh](https://github.com/EU-OSHA/osha-website/blob/master/install.sh) (wrapper around few drush commands)
 
-4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/eaudeweb/osha/tree/master/docroot/sites/all/modules/osha_migration) module
-
+4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
 
 ##Repository Layout##
 Breakdown for what each directory/file is used for. See also readme inside directories.
 
-* [conf](https://github.com/eaudeweb/osha/tree/master/conf)
+* [conf](https://github.com/EU-OSHA/osha-website/tree/master/conf)
  * Project specific configuration files
-* [docroot](https://github.com/eaudeweb/osha/tree/master/docroot)
+* [docroot](https://github.com/EU-OSHA/osha-website/tree/master/docroot)
  * Drupal root directory
-* [drush](https://github.com/eaudeweb/osha/tree/master/drush)
+* [drush](https://github.com/EU-OSHA/osha-website/tree/master/drush)
  * Contains project specific drush commands, aliases, and configurations.
-* [results](https://github.com/eaudeweb/osha/tree/master/results)
+* [results](https://github.com/EU-OSHA/osha-website/tree/master/results)
  * This directory is just used to export test results to. A good example of this
    is when running drush test-run with the --xml option. You can export the xml
    to this directory for parsing by external tools.
-* [scripts](https://github.com/eaudeweb/osha/tree/master/scripts)
+* [scripts](https://github.com/EU-OSHA/osha-website/tree/master/scripts)
  * A directory for project-specific scripts.
-* [test](https://github.com/eaudeweb/osha/tree/master/test)
+* [test](https://github.com/EU-OSHA/osha-website/tree/master/tests)
  * A directory for external tests. This is great for non drupal specific tests
  such as selenium, qunit, casperjs.
-* [.gitignore](https://github.com/eaudeweb/osha/blob/master/.gitignore)
+* [.gitignore](https://github.com/EU-OSHA/osha-website/blob/master/.gitignore)
  * Contains the a list of the most common excluded files.
 
 -- edw
-
