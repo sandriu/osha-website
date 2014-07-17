@@ -1,27 +1,27 @@
 {
     "db" : {
-        "host": "localhost",
-        "username" : "osha",
-        "password" : "osha",
+        "host": "db",
+        "username" : "root",
+        "password" : "root",
         "port": 3306,
-        "database" : "osha_test",
-        "root_username": "osha",
-        "root_password": "osha"
+        "database" : "osha",
+        "root_username": "root",
+        "root_password": "root"
     },
     "admin" : {
         "username": "admin",
         "password": "admin",
         "email": "account@example.com"
     },
-    "uri": "http://osha-test.edw.ro",
+    "uri": "http://osha.localhost",
     "site_mail": "account@example.com",
     "solr_server": {
         "name": "Apache Solr server",
         "enabled": 1,
         "description": "",
         "scheme": "http",
-        "host": "rom.edw.ro",
-        "port": 8082,
+        "host": "127.0.0.1",
+        "port": 8080,
         "path": "/solr/osha",
         "http_user": "",
         "http_password": "",
