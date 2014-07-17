@@ -25,4 +25,7 @@ if [ "$1" != "--skip-migrations" ]; then
 
 fi
 
+echo "Importing Publication types taxonomy"
+drush migrate-import PublicationTypesTaxonomy
+
 drush cc all

@@ -10,7 +10,8 @@ function osha_migration_migrate_api() {
 		'migrations' => array(
 			'News' => array('class_name' => 'MigrateOshaNews'),
 			'NaceCodes' => array('class_name' => 'MigrateOshaNaceCodes'),
-			'EsenerTaxonomy' => array('class_name' => 'MigrateOshaEsenerTaxonomy')
+			'EsenerTaxonomy' => array('class_name' => 'MigrateOshaEsenerTaxonomy'),
+			'PublicationTypesTaxonomy' => array('class_name' => 'MigrateOshaPublicationTypesTaxonomy')
 		)
 	);
 	return $api;

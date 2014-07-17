@@ -13,3 +13,4 @@ dependenceis[] = osha_taxonomies
 files[] = nace_codes.migrate.inc
 files[] = news.migrate.inc
 files[] = esener.migrate.inc
+files[] = publication_types.migrate.inc
