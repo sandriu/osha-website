@@ -9,7 +9,7 @@ osha_configure_solr();
 
 function osha_configure_solr() {
 	module_load_include('inc', 'search_api', 'search_api.admin');
-	// Configure Search API: submit search_api_admin_server_edit form
+	// Configure Search API: submit search_api_admin_add_server form
 	$cfg = variable_get(OSHA_CONFIG_VARIABLE, NULL);
 	if(!empty($cfg)) {
 		$cfg = unserialize($cfg);
