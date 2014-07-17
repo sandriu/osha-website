@@ -1,0 +1,40 @@
+<?php
+
+class OshaTaxonomiesTest extends DrupalWebTestCase {
+
+	public static function getInfo() {
+		return array(
+			'name' => 'OSHA taxonomies tests',
+			'description' => 'Tests functionalities provided by this module',
+			'group' => 'OSHA',
+		);
+	}
+
+
+	public function setUp() {
+		parent::setUp('features', 'osha');
+	}
+
+
+	/**
+	 * TODO test for Naces Codes Taxonomy
+	 */
+	public function testNaceCodesTaxonomy() {
+		// TODO
+		$vocabulary = taxonomy_vocabulary_machine_name_load(NACE_CODES_TAXONOMY);
+		$this->assertNotEqual($vocabulary, FALSE, NACE_CODES_TAXONOMY . ' taxonomy exists');
+	}
+
+	/**
+	 * Tests that all fields have required length and the taxonomy is created corectly
+	 */
+	public function testEsenerTaxonomy() {
+		$size = 768;
+		$this->assertEqual(osha_get_mysql_column_size("taxonomy_term_data", "name"), $size, "taxonomy_term_data column has maximum length of $size");
+		$this->assertEqual(osha_get_mysql_column_size("field_data_name_field", "name_field_value"), $size, "field_data_name_field column has maximum length of $size");
+		$this->assertEqual(osha_get_mysql_column_size("field_revision_name_field", "name_field_value"), $size, "field_revision_name_field column has maximum length of $size");
+
+		$vocabulary = taxonomy_vocabulary_machine_name_load(ESENER_TAXONOMY);
+		$this->assertNotEqual($vocabulary, FALSE, ESENER_TAXONOMY . ' taxonomy exists');
+	}
+}

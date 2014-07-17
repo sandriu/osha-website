@@ -3,3 +3,7 @@
  * @file
  * Drupal needs this blank file.
  */
+
+// Taxonomies names
+define('ESENER_TAXONOMY', 'esener');
+define('NACE_CODES_TAXONOMY', 'nace_codes');
