@@ -6,6 +6,8 @@
 
 include_once 'osha.features.inc';
 
+// You can find it using drush vget, saved by install.sh script
+define('OSHA_CONFIG_VARIABLE', 'osha_config');
 
 function osha_configure_entity_translation_types() {
 	variable_set(

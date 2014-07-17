@@ -12,6 +12,10 @@ fi
 # Setup a clean site
 cd docroot/
 drush site-install -y
+
+# Save configuration to database for later usage
+drush php-script ../scripts/drupal_save_config.php
+
 drush init
 drush build
 
