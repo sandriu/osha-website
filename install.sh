@@ -23,9 +23,9 @@ if [ "$1" != "--skip-migrations" ]; then
 	echo "Importing ESENER taxonomy"
 	drush migrate-import EsenerTaxonomy
 
-fi
+	echo "Importing Publication types taxonomy"
+	drush migrate-import PublicationTypesTaxonomy
 
-echo "Importing Publication types taxonomy"
-drush migrate-import PublicationTypesTaxonomy
+fi
 
 drush cc all
