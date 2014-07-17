@@ -11,8 +11,26 @@
     "admin" : {
         "username": "admin",
         "password": "admin",
-        "email": "cristian.romanescu@eaudeweb.ro"
+        "email": "account@example.com"
     },
     "uri": "http://osha-test.edw.ro",
-    "site_mail": "cristian.romanescu@eaudeweb.ro"
+    "site_mail": "account@example.com",
+    "osha_data_dir": "/var/local/osha/data",
+    "solr_server": {
+        "name": "Apache Solr server",
+        "enabled": 1,
+        "description": "",
+        "scheme": "http",
+        "host": "rom.edw.ro",
+        "port": 8082,
+        "path": "/solr/osha",
+        "http_user": "",
+        "http_password": "",
+        "excerpt": 1,
+        "retrieve_data": 1,
+        "highlight_data": 1,
+        "skip_schema_check": null,
+        "solr_version": "",
+        "http_method": "AUTO"
+    }
 }
