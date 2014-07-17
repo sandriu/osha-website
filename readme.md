@@ -32,8 +32,29 @@ Build scripts and source code for the Osha project
         },
         "uri": "http://you-vh.localhost",
         "site_mail": "your.email@domain.org"
+        "osha_data_dir": "/Work/osha",
+        "solr_server": {
+            "name": "Apache Solr server",
+            "enabled": 1,
+            "description": "",
+            "scheme": "http",
+            "host": "localhost",
+            "port": 8080,
+            "path": "/solr",
+            "http_user": "",
+            "http_password": "",
+            "excerpt": 1,
+            "retrieve_data": 1,
+            "highlight_data": 1,
+            "skip_schema_check": null,
+            "solr_version": "",
+            "http_method": "AUTO",
+            "apachesolr_read_only": null,
+            "apachesolr_direct_commit": 1,
+            "apachesolr_soft_commit": 1
     }
     ```
+
 2. Copy the following code into ~/.drush/drushrc.php (create if doesn't exist)
 
     ```php
