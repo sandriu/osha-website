@@ -17,4 +17,7 @@ drush migrate-import NaceCodes
 echo "Importing ESENER taxonomy"
 drush migrate-import EsenerTaxonomy
 
+echo "Importing Publication types taxonomy"
+drush migrate-import PublicationTypesTaxonomy
+
 drush cc all
