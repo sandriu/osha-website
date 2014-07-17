@@ -12,7 +12,8 @@ Build scripts and source code for the Osha project
 
 ##Quick start##
 
-1. Edit [conf/config.json](https://github.com/EU-OSHA/osha-website/blob/master/conf/config.json) to customize to your local settings
+1. Copy [conf/config.template.json](https://github.com/EU-OSHA/osha-website/blob/master/conf/config.template.json)
+to `config.json` and customize to suit your environment
 
     ```json
     {
@@ -32,7 +33,6 @@ Build scripts and source code for the Osha project
         },
         "uri": "http://you-vh.localhost",
         "site_mail": "your.email@domain.org"
-        "osha_data_dir": "/Work/osha",
         "solr_server": {
             "name": "Apache Solr server",
             "enabled": 1,
@@ -52,10 +52,14 @@ Build scripts and source code for the Osha project
             "apachesolr_read_only": null,
             "apachesolr_direct_commit": 1,
             "apachesolr_soft_commit": 1
+        },
+        "variables": {
+            "osha_data_dir": "/var/local/osha/data"
+        }
     }
     ```
 
-2. Copy the following code into ~/.drush/drushrc.php (create if doesn't exist)
+2. Copy the following code into `~/.drush/drushrc.php` (create if necessary)
 
     ```php
         <?php
@@ -71,6 +75,8 @@ Build scripts and source code for the Osha project
     ```
     
 3. Run [install.sh](https://github.com/EU-OSHA/osha-website/blob/master/install.sh) (wrapper around few drush commands)
+
+*Note:* You can pass `--skip-migrations` to not install the migrations for you.
 
 4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
 
