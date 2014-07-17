@@ -22,13 +22,17 @@ drush build
 # Configuring migrations
 drush vset osha_data_dir ${migration_data_dir}
 
-echo "Registering migrations ..."
-drush migrate-auto-register
+if [ "$1" != "--skip-migrations" ]; then
 
-echo "Importing NACE codes taxonomy"
-drush migrate-import NaceCodes
+	echo "Registering migrations ..."
+	drush migrate-auto-register
 
-echo "Importing ESENER taxonomy"
-drush migrate-import EsenerTaxonomy
+	echo "Importing NACE codes taxonomy"
+	drush migrate-import NaceCodes
+
+	echo "Importing ESENER taxonomy"
+	drush migrate-import EsenerTaxonomy
+
+fi
 
 drush cc all
