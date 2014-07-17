@@ -33,3 +33,4 @@ features[field_instance][] = taxonomy_term-nace_codes-field_nace_includes_also
 features[field_instance][] = taxonomy_term-nace_codes-name_field
 features[taxonomy][] = esener
 features[taxonomy][] = nace_codes
+files[] = osha_taxonomies.test
