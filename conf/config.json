@@ -15,7 +15,6 @@
     },
     "uri": "http://osha-test.edw.ro",
     "site_mail": "account@example.com",
-    "osha_data_dir": "/var/local/osha/data",
     "solr_server": {
         "name": "Apache Solr server",
         "enabled": 1,
@@ -35,5 +34,8 @@
         "apachesolr_read_only": null,
         "apachesolr_direct_commit": 1,
         "apachesolr_soft_commit": 1
+    },
+    "variables": {
+        "osha_data_dir": "/var/local/osha/data"
     }
 }
