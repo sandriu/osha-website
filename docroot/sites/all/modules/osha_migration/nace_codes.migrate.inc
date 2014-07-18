@@ -67,7 +67,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
             $weightAsString = substr($row->NACE_REV_2_CODE, -1);
             $weight = intval($weightAsString);
         } else if ($row->Level == 2) {
-            $weightAsString = substr($row->NACE_REV_2_CODE, -2, 1);
+            $weightAsString = substr($row->NACE_REV_2_CODE, -2);
             $weight = intval($weightAsString);
         } else {
             $weight = ord($row->NACE_REV_2_CODE) - ord('A');
