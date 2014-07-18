@@ -1,0 +1,37 @@
+[
+	{
+		"en": "Indicator",
+		"code": "indicator"
+	},
+	{
+		"bg": "УПРАВЛЕНИЕ НА ТРУДОВАТА БЕЗОПАСНОСТ И ЗДРАВЕТО НА РАБОТНОТО МЯСТО В ПРЕДПРИЯТИЕТО",
+		"cs": "OBECNĚ MANAGEMENT O OTÁZKÁCH ZDRAVÍ A BEZPEČNOSTI PŘI PRÁCI V PODNIKU",
+		"da": "GENEREL FORVALTNING AF ARBEJDSMILJØ I VIRKSOMHEDEN",
+		"de": "Allgemeines Gesundheitsschutz- und Sicherheits-Management in diesem Betrieb",
+		"el": "ΓΕΝΙΚΗ ΔΙΑΧΕΙΡΙΣΗ ΥΓΕΙΑΣ ΚΑΙ ΑΣΦΑΛΕΙΑΣ ΣΤΗΝ ΕΠΙΧΕΙΡΗΣΗ",
+		"en": "General health and safety management in the establishment",
+		"es": "GESTIÓN GENERAL DE LA SEGURIDAD Y LA SALUD EN EL ESTABLECIMIENTO",
+		"et": "Tervishoiu ja ohutuse üldine korraldus ettevõttes",
+		"fi": "TOIMIPAIKAN YLEISET TERVEYS- JA TURVALLISUUSJÄRJESTELYT",
+		"fr": "GESTION GENERALE DE LA SANTE ET DE LA SECURITE DANS L'ETABLISSEMENT",
+		"hr": "Opća uprava za sigurnost i zdravlje unutar poduzeća",
+		"hu": "A MUNKAVÉDELEM ÁLTALÁNOS IRÁNYÍTÁSA AZ INTÉZMÉNYNÉL",
+		"it": "GESTIONE GENERALE DELLA SALUTE E LA SICUREZZA NELLA AZIENDA",
+		"lb": "",
+		"lt": "BENDRAS SVEIKATOS IR SAUGOS VALDYMAS ĮMONĖJE",
+		"lv": "VISPĀRĪGĀ DARBA DROŠĪBAS UN VESELĪBAS AIZSARDZĪBAS PĀRVALDĪBA UZŅĒMUMA VIENĪBĀ",
+		"mt": "Ġestjoni tas-saħħa u s-sigurtà ġenerali fl-istabbiliment",
+		"nl": "ALGEMEEN ARBOBELEID (ARBEIDSOMSTANDIGHEDEN, VEILIGHEID EN GEZONDHEIDSBELEID) IN DE VESTIGING",
+		"no": "Generell håndtering av helse og sikkerhet i foretaket",
+		"pl": "OGÓLNE ZAGADNIENIA ZWIĄZANE Z ZARZĄDZANIEM ZDROWIEM I BEZPIECZEŃSTWEM W ODDZIALE",
+		"pt": "GESTÃO GERAL DA SEGURANÇA E SAÚDE NO ESTABELECIMENTO",
+		"ro": "MANAGEMENTUL SĂNĂTĂŢII ŞI A SIGURANŢEI ÎN ÎNTREPRINDERE",
+		"ru": "ОБЩЕЕ УПРАВЛЕНИЕ ПО ОБЕСПЕЧЕНИЮ ОХРАНЫ ЗДОРОВЬЯ И ПОВЫШЕНИЯ БЕЗОПАСНОСТИ НА ЕДИНИЦЕ ПРЕДПРИЯТИЯ",
+		"sk": "CELKOVÉ RIADENIE BEZPEČNOSTI A OCHRANY ZDRAVIA PRI PRÁCI V PODNIKU",
+		"sl": "SPLOŠNO UPRAVLJANJE VARNOSTI IN ZDRAVJA PRI DELU V POSLOVNI ENOTI",
+		"sv": "ALLMÄN ARBETSMILJÖHANTERING PÅ ARBETSPLATSEN",
+		"tr": "İşletmedeki genel sağlık ve güvenlik yönetimi",
+		"parent_code": "indicator",
+		"code": "ghsme"
+	}
+]
