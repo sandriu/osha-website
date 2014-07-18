@@ -7,7 +7,7 @@ Build scripts and source code for the Osha project
 
 ##Pre-requisites
 
-1. Drush
+1. Drush (7.0-dev)
 2. Virtual host for your Drupal instance that points to the docroot/ directory from this repo
 
 ##Quick start##
@@ -32,7 +32,7 @@ to `config.json` and customize to suit your environment
             "email": "your.email@domain.org"
         },
         "uri": "http://you-vh.localhost",
-        "site_mail": "your.email@domain.org"
+        "site_mail": "your.email@domain.org",
         "solr_server": {
             "name": "Apache Solr server",
             "enabled": 1,
