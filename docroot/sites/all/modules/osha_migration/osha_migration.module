@@ -1,7 +1,9 @@
 <?php
 
 define('MIGRATION_NACE_CODES', 'NaceCodesTest');
+define('MIGRATION_ESENER', 'EsenerTest');
 define('CLASS_NACE_CODES', 'MigrateOshaNaceCodes');
+define('CLASS_ESENER', 'MigrateOshaEsenerTaxonomy');
 
 /**
  * You must implement hook_migrate_api(), setting the API level to 2, for
@@ -17,7 +19,11 @@ function osha_migration_migrate_api() {
                 'file_name' => 'data/nace_codes.json',
                 'group_name' => 'OSHA MIGRATIONS'
             ),
-			'EsenerTaxonomy' => array('class_name' => 'MigrateOshaEsenerTaxonomy'),
+            'EsenerTaxonomy' => array(
+                'class_name' => 'MigrateOshaEsenerTaxonomy',
+                'file_name' => 'data/esener.json',
+                'group_name' => 'OSHA MIGRATIONS'
+            ),
 			'PublicationTypesTaxonomy' => array('class_name' => 'MigrateOshaPublicationTypesTaxonomy')
 		)
 	);

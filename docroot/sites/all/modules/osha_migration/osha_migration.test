@@ -16,7 +16,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     /**
      * Tests the NaceCodesTaxonomy
      */
-    public function testNaceCodesTaxonomy() {
+    public function testNaceCodesMigration() {
         $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_NACE_CODES);
 
         $sourceFile = 'data/test/nace_codes.json';
@@ -73,6 +73,53 @@ class OshaMigrationsTest extends DrupalWebTestCase {
         Migration::deregisterMigration(MIGRATION_NACE_CODES);
     }
 
+    /**
+     * Tests the Esener Migration
+     */
+    public function testEsenerMigration() {
+        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
+
+        $sourceFile = 'data/test/esener.json';
+        $result = $this->runMigration(MIGRATION_ESENER, CLASS_ESENER, $sourceFile);
+        $this->assertEqual($result, Migration::RESULT_COMPLETED,
+            t('EsenerTest returned RESULT_COMPLETED'));
+
+        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+        $this->assertEqual(2, count($terms));
+
+        $translations = array(
+            "General health and safety management in the establishment" => array(
+                "name_field" => 23, "description_field" => 23, "field_esener_code" => 1
+            ),
+            "Indicator" => array(
+                "name_field" => 1, "description_field" => 1, "field_esener_code" => 1
+            )
+        );
+
+        $parentRelations = array(
+            "General health and safety management in the establishment" => "Indicator",
+            "Indicator" => null
+        );
+
+        foreach($terms as $term) {
+            $this->assertTranslations($translations, $term);
+
+            $parents = taxonomy_get_parents($term->tid);
+            switch($term->name) {
+                case 'Indicator':
+                    $this->assertEqual(0, count($parents));
+                    break;
+                default:
+                    $this->assertEqual(1, count($parents));
+                    $p = array_pop($parents);
+                    $this->assertEqual($parentRelations[$term->name], $p->name);
+                    break;
+            }
+        }
+
+        Migration::deregisterMigration(MIGRATION_ESENER);
+    }
+
     private function assertTranslations($translations, $term) {
         $items = $translations[$term->name];
         foreach($items as $field => $count) {
@@ -95,4 +142,5 @@ class OshaMigrationsTest extends DrupalWebTestCase {
         $migration = Migration::getInstance($machineName);
         return $migration->processImport();
     }
+
 }
