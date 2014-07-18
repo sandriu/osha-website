@@ -10,9 +10,6 @@ if(!is_readable($config_file)) {
 }
 $json = json_decode(file_get_contents($config_file), TRUE);
 
-// OSHA_CONFIG_VARIABLE not available yet
-variable_set('osha_config', @serialize($json));
-
 if(!empty($json['variables']) && is_array($json['variables'])) {
 	foreach($json['variables'] as $k => $v) {
 		variable_set($k, $v);
