@@ -120,6 +120,58 @@ class OshaMigrationsTest extends DrupalWebTestCase {
         Migration::deregisterMigration(MIGRATION_ESENER);
     }
 
+
+    /**
+     * Tests the PublicationTypes Migration
+     */
+    public function testPublicationTypesMigration() {
+        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_PUBLICATION_TYPES);
+
+        $sourceFile = 'data/test/esener.json';
+        $result = $this->runMigration(MIGRATION_PUBLICATION_TYPES, CLASS_PUBLICATION_TYPES, $sourceFile);
+        $this->assertEqual($result, Migration::RESULT_COMPLETED,
+            t('PublicationTypesTest returned RESULT_COMPLETED'));
+
+        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+        $this->assertEqual(9, count($terms));
+
+        $translations = array(
+            "Corporate publications" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            ),
+            "Reports" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            ),
+            "Literature reviews" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            ),
+            "E-facts" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            ),
+            "Articles" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            ),
+            "Promotional Material" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            ),
+            "Factsheets" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            ),
+            "Magazine" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            ),
+            "Evaluation reports" => array(
+                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
+            )
+        );
+
+        foreach($terms as $term) {
+            $this->assertTranslations($translations, $term);
+        }
+
+        Migration::deregisterMigration(MIGRATION_ESENER);
+    }
+
     private function assertTranslations($translations, $term) {
         $items = $translations[$term->name];
         foreach($items as $field => $count) {
