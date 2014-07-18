@@ -1,0 +1,98 @@
+<?php
+
+class OshaMigrationsTest extends DrupalWebTestCase {
+    public static function getInfo() {
+        return array(
+            'name' => 'OSHA migrations tests',
+            'description' => 'Tests functionalities provided by this module',
+            'group' => 'OSHA',
+        );
+    }
+
+    public function setUp() {
+        parent::setUp('features', 'osha', 'taxonomy', 'migrate', 'osha_migration');
+    }
+
+    /**
+     * Tests the NaceCodesTaxonomy
+     */
+    public function testNaceCodesTaxonomy() {
+        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_NACE_CODES);
+
+        $sourceFile = 'data/test/nace_codes.json';
+        $result = $this->runMigration(MIGRATION_NACE_CODES, CLASS_NACE_CODES, $sourceFile);
+        $this->assertEqual($result, Migration::RESULT_COMPLETED,
+            t('NaceCodesTest returned RESULT_COMPLETED'));
+
+        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+        $this->assertEqual(3, count($terms));
+
+        $translations = array(
+            "Crop and animal production, hunting and related service activities" => array(
+                "name_field" => 26, "description_field" => 26,
+                "field_nace_excludes" => 13, "field_nace_includes" => 13, "field_nace_includes_also" => 8
+            ),
+            "Growing of non-perennial crops" => array(
+                "name_field" => 26, "description_field" => 26,
+                "field_nace_excludes" => 1, "field_nace_includes" => 13, "field_nace_includes_also" => 1
+            ),
+            "AGRICULTURE, FORESTRY AND FISHING" => array(
+                "name_field" => 26, "description_field" => 26,
+                "field_nace_excludes" => 1, "field_nace_includes" => 13, "field_nace_includes_also" => 1
+            )
+        );
+
+        $weights = array(
+            "Crop and animal production, hunting and related service activities" => 1,
+            "Growing of non-perennial crops" => 1,
+            "AGRICULTURE, FORESTRY AND FISHING" => 0
+        );
+
+        $parentRelations = array(
+            "Crop and animal production, hunting and related service activities" => "AGRICULTURE, FORESTRY AND FISHING",
+            "Growing of non-perennial crops" => "Crop and animal production, hunting and related service activities",
+            "AGRICULTURE, FORESTRY AND FISHING" => null
+        );
+
+        foreach($terms as $term) {
+            $this->assertTranslations($translations, $term);
+            $this->assertEqual($weights[$term->name], $term->weight, "Wrong weight for term {$term->name}");
+
+            $parents = taxonomy_get_parents($term->tid);
+            switch($term->name) {
+                case 'AGRICULTURE, FORESTRY AND FISHING':
+                    $this->assertEqual(0, count($parents));
+                    break;
+                default:
+                    $this->assertEqual(1, count($parents));
+                    $p = array_pop($parents);
+                    $this->assertEqual($parentRelations[$term->name], $p->name);
+                    break;
+            }
+        }
+        Migration::deregisterMigration(MIGRATION_NACE_CODES);
+    }
+
+    private function assertTranslations($translations, $term) {
+        $items = $translations[$term->name];
+        foreach($items as $field => $count) {
+            $c = count($term->$field);
+            $this->assertEqual($count, $c,
+                sprintf('Translations for %s.%s are invalid (%s != %s)', $term->name, $field, $count, $c)
+            );
+        }
+    }
+
+    private function runMigration($machineName, $className, $fileName) {
+        Migration::registerMigration(
+            $className,
+            $machineName,
+            array(
+                'group_name' => 'OSHA TEST MIGRATIONS',
+                'file_name' => $fileName
+            )
+        );
+        $migration = Migration::getInstance($machineName);
+        return $migration->processImport();
+    }
+}
