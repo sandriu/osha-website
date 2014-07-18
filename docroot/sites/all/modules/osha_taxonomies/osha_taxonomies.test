@@ -10,31 +10,26 @@ class OshaTaxonomiesTest extends DrupalWebTestCase {
 		);
 	}
 
-
 	public function setUp() {
-		parent::setUp('features', 'osha');
+		parent::setUp('features', 'osha', 'taxonomy');
 	}
 
+    /**
+     * Checks if vocabularies are created
+     */
+    public function testTaxonomies() {
+        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_NACE_CODES);
+        $this->assertTrue(!empty($vocabulary), TAXONOMY_NACE_CODES . ' taxonomy exists');
 
-	/**
-	 * TODO test for Naces Codes Taxonomy
-	 */
-	public function testNaceCodesTaxonomy() {
-		// TODO
-		$vocabulary = taxonomy_vocabulary_machine_name_load(NACE_CODES_TAXONOMY);
-		$this->assertNotEqual($vocabulary, FALSE, NACE_CODES_TAXONOMY . ' taxonomy exists');
-	}
+        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
+        $this->assertTrue(!empty($vocabulary), TAXONOMY_ESENER . ' taxonomy exists');
 
-	/**
-	 * Tests that all fields have required length and the taxonomy is created corectly
-	 */
-	public function testEsenerTaxonomy() {
-		$size = 768;
-		$this->assertEqual(osha_get_mysql_column_size("taxonomy_term_data", "name"), $size, "taxonomy_term_data column has maximum length of $size");
-		$this->assertEqual(osha_get_mysql_column_size("field_data_name_field", "name_field_value"), $size, "field_data_name_field column has maximum length of $size");
-		$this->assertEqual(osha_get_mysql_column_size("field_revision_name_field", "name_field_value"), $size, "field_revision_name_field column has maximum length of $size");
+        $size = 768;
+        $this->assertEqual(osha_get_mysql_column_size("taxonomy_term_data", "name"), $size, "taxonomy_term_data column has maximum length of $size");
+        $this->assertEqual(osha_get_mysql_column_size("field_data_name_field", "name_field_value"), $size, "field_data_name_field column has maximum length of $size");
+        $this->assertEqual(osha_get_mysql_column_size("field_revision_name_field", "name_field_value"), $size, "field_revision_name_field column has maximum length of $size");
 
-		$vocabulary = taxonomy_vocabulary_machine_name_load(ESENER_TAXONOMY);
-		$this->assertNotEqual($vocabulary, FALSE, ESENER_TAXONOMY . ' taxonomy exists');
+        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_PUBLICATION_TYPES);
+        $this->assertTrue(!empty($vocabulary), TAXONOMY_PUBLICATION_TYPES . ' taxonomy exists');
 	}
 }
