@@ -109,6 +109,111 @@
             }
         ],
             "@type": "@skos:Concept"
+        },
+        {
+            "@id": "@OSHA:06641B",
+            "@skos:broaderTransitive": {
+                "@id": null
+            },
+            "@skos:prefLabel": [
+                {
+                    "@language": "nl",
+                    "@value": "Europese organisaties"
+                },
+                {
+                    "@language": "sl",
+                    "@value": "Evropske organizacije"
+                },
+                {
+                    "@language": "it",
+                    "@value": "organizzazioni europee"
+                },
+                {
+                    "@language": "lv",
+                    "@value": "Eiropas organiz\u0101cijas"
+                },
+                {
+                    "@language": "es",
+                    "@value": "organizaciones europeas"
+                },
+                {
+                    "@language": "cs",
+                    "@value": "Evropsk\u00e9 organizace"
+                },
+                {
+                    "@language": "pt",
+                    "@value": "Organiza\u00e7\u00f5es europeias"
+                },
+                {
+                    "@language": "el",
+                    "@value": "\u0395\u03c5\u03c1\u03c9\u03c0\u03b1\u03ca\u03ba\u03bf\u03af \u039f\u03c1\u03b3\u03b1\u03bd\u03b9\u03c3\u03bc\u03bf\u03af"
+                },
+                {
+                    "@language": "lt",
+                    "@value": "Europos organizacijos"
+                },
+                {
+                    "@language": "da",
+                    "@value": "europ\u00e6iske organisationer"
+                },
+                {
+                    "@language": "mt",
+                    "@value": "European organisations"
+                },
+                {
+                    "@language": "pl",
+                    "@value": "Organizacje europejskie"
+                },
+                {
+                    "@language": "hu",
+                    "@value": "Eur\u00f3pai szervezetek"
+                },
+                {
+                    "@language": "sk",
+                    "@value": "Eur\u00f3pske organiz\u00e1cie"
+                },
+                {
+                    "@language": "et",
+                    "@value": "Euroopa organisatsioonid"
+                },
+                {
+                    "@language": "de",
+                    "@value": "Europ\u00e4ische Organisationen"
+                },
+                {
+                    "@language": "ro",
+                    "@value": "Organiza\u0163ii Europene"
+                },
+                {
+                    "@language": "fr",
+                    "@value": "organisations europ\u00e9ennes"
+                },
+                {
+                    "@language": "sh",
+                    "@value": "European organisations"
+                },
+                {
+                    "@language": "bg",
+                    "@value": "\u0415\u0432\u0440\u043e\u043f\u0435\u0439\u0441\u043a\u0438 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438"
+                },
+                {
+                    "@language": "sv",
+                    "@value": "europeiska organisationer"
+                },
+                {
+                    "@language": "fi",
+                    "@value": "EU:n organisaatiot"
+                },
+                {
+                    "@language": "tr",
+                    "@value": "European organisations"
+                },
+                {
+                    "@language": "en",
+                    "@value": "European organisations"
+                }
+            ],
+            "@type": "@skos:Concept"
         }
     ]
 }

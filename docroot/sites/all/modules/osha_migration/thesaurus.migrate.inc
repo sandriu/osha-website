@@ -14,11 +14,11 @@ class MigrateOshaThesaurus extends DynamicMigration {
         $this->map =  new MigrateSQLMap(
             $this->machineName,
             array(
-                'id' => array(
+                'code' => array(
                     'type' => 'varchar',
-                    'length' => '30',
+                    'length' => 30,
                     'not null' => TRUE,
-                    'description' => 'Nace code'
+                    'description' => 'Thesaurus code'
                 )
             ),
             MigrateDestinationTerm::getKeySchema()
@@ -34,16 +34,66 @@ class MigrateOshaThesaurus extends DynamicMigration {
         $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
 
         $this->addFieldMapping('field_thesaurus_code', 'code');
-//        $this->addFieldMapping('parent', 'parent');
+        $this->addFieldMapping('parent', 'parent');
         $this->addFieldMapping('format')->defaultValue('plain_text');
         $this->addFieldMapping('name', 'en');
         $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
     }
 
+    protected function createStub($migration, array $source) {
+        static $voc = NULL;
+        if($voc == NULL) {
+            $voc = taxonomy_vocabulary_machine_name_load($this->vocabulary);
+        }
+        $term = new stdClass();
+        $term->parent = 0;
+        $term->language = 'en';
+        $term->name = t('Stub for @code', array('@code' => $source[0]));
+        $term->vid = $voc->vid;
+        $term->field_thesaurus_code[LANGUAGE_NONE][]['value'] = $source[0];
+        taxonomy_term_save($term);
+
+        return array($term->tid);
+    }
+
+    public function prepareRow($row) {
+        $row->parent = 0;
+        $row->language = 'en';
+
+        $row->parent = $this->getParent($row);
+
+        return TRUE;
+    }
+
+    private function getParent($row) {
+        $parent_code = $row->parent_code;
+        if (!empty($parent_code)) {
+            $parent_id = self::_getTidByCode($parent_code);
+            if (empty($parent_id)) {
+                $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
+            }
+            return $parent_id;
+        }
+        return 0;
+    }
+
+    private static function _getTidByCode($code) {
+        $query = new EntityFieldQuery();
+        $result = $query
+            ->entityCondition('entity_type', 'taxonomy_term')
+            ->fieldCondition('field_thesaurus_code', 'value', $code, '=')
+            ->execute();
+        if (!empty($result['taxonomy_term'])) {
+            return current(array_keys($result['taxonomy_term']));
+        }
+        return array();
+    }
+
     private function fields() {
         return array(
             'code' => 'The unique identifier',
-            'en' => 'The description/name of the item'
+            'en' => 'The description/name of the item',
+            'parent' => 'The tid of the parent'
         );
     }
 
@@ -56,7 +106,7 @@ class ThesaurusMigrationListJSON extends MigrateListJSON {
     protected function getIDsFromJSON(array $data) {
         $ids = array();
         foreach ($data['@graph'] as $item) {
-            $ids[] = $item['@id'];
+            $ids[] = substr($item['@id'], 6);
         }
         return $ids;
     }
@@ -85,8 +135,8 @@ class ThesaurusMigrationItemJSON extends MigrateItemJSON {
             $dataArray = $this->loadJSONUrl($this->itemUrl);
             foreach($dataArray['@graph'] as $rawItem) {
                 $item = array();
-                $item['code'] = $rawItem['@id'];
-                $item['parent_code'] = $rawItem['@skos:broaderTransitive']['@id'];
+                $item['code'] = substr($rawItem['@id'], 6);
+                $item['parent_code'] = substr($rawItem['@skos:broaderTransitive']['@id'], 6);
                 foreach($rawItem["@skos:prefLabel"] as $label) {
                     $item[$label['@language']] = $label['@value'];
                 }
