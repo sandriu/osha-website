@@ -29,6 +29,11 @@ function osha_migration_migrate_api() {
 			'PublicationTypesTaxonomy' => array(
                 'class_name' => 'MigrateOshaPublicationTypesTaxonomy',
                 'group_name' => 'OSHA MIGRATIONS'
+            ),
+            'ThesaurusTaxonomy' => array(
+                'class_name' => 'MigrateOshaThesaurus',
+                'file_name' => 'data/test/thesaurus2.json',
+                'group_name' => 'OSHA MIGRATION'
             )
 		)
 	);
