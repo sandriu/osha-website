@@ -65,6 +65,39 @@ class MigrateOshaThesaurus extends DynamicMigration {
         return TRUE;
     }
 
+    public function prepare($entity, stdClass $row) {
+        $entity->language = 'en';
+        $translationsData = array();
+        $languages = array(
+            'nl', 'sl', 'it', 'lv', 'es',
+            'cs', 'pt', 'el', 'lt', 'da',
+            'mt', 'pl', 'hu', 'sk', 'et',
+            'de', 'ro', 'fr', 'sh', 'bg',
+            'sv', 'fi', 'tr', 'en'
+        );
+
+        foreach($languages as $language) {
+            if(!empty($row->$language)) {
+                $entity->name_field[$language][0]['value'] = $row->$language;
+                $entity->description_field[$language][0]['value'] = $row->$language;
+                $sourceLanguage = ($language == 'en' ? '' : 'en');
+                $translationsData[$language] = array(
+                    'entity_type' => 'term',
+                    'entity_id' => $entity->tid,
+                    'language' => $language,
+                    'source' => $sourceLanguage,
+                    'uid' => '1',
+                    'status' => '1',
+                    'translate' => '0',
+                );
+            }
+            $entity->translations = (object)array(
+                'original' => 'en',
+                'data' => $translationsData
+            );
+        }
+    }
+
     private function getParent($row) {
         $parent_code = $row->parent_code;
         if (!empty($parent_code)) {
