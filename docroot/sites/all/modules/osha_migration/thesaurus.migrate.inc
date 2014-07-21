@@ -169,7 +169,8 @@ class ThesaurusMigrationItemJSON extends MigrateItemJSON {
             foreach($dataArray['@graph'] as $rawItem) {
                 $item = array();
                 $item['code'] = substr($rawItem['@id'], 6);
-                $item['parent_code'] = substr($rawItem['@skos:broaderTransitive']['@id'], 6);
+                $item['parent_code'] = (isset($rawItem['@skos:broaderTransitive'])
+                    ? substr($rawItem['@skos:broaderTransitive']['@id'], 6) : null);
                 foreach($rawItem["@skos:prefLabel"] as $label) {
                     $item[$label['@language']] = $label['@value'];
                 }
