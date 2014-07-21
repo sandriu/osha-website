@@ -101,4 +101,14 @@ Breakdown for what each directory/file is used for. See also readme inside direc
 * [.gitignore](https://github.com/EU-OSHA/osha-website/blob/master/.gitignore)
  * Contains the a list of the most common excluded files.
 
+##Branches##
+
+This repo branching model follows the article ["A successful Git branching model"](http://nvie.com/posts/a-successful-git-branching-model)
+
+Summary:
+
+* _master_ - The production branch, updated with each release.
+* _develop_ - Main development branch. Tests are performed on this branch
+* _release-_* - Release branches
+
 -- edw
