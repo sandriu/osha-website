@@ -294,7 +294,8 @@ $options['init-modules'] = array(
     'imce_wysiwyg',
     'osha',
     'osha_migration',
-    'osha_news'
+    'osha_news',
+    'osha_publication'
 );
 
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
