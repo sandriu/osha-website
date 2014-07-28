@@ -164,4 +164,9 @@ Summary:
 * _develop_ - Main development branch. Tests are performed on this branch
 * _release-_* - Release branches
 
+##Translation workflow##
+
+* Module page - https://www.drupal.org/project/tmgmt
+* FAQs: https://www.drupal.org/node/1547632
+
 -- edw
