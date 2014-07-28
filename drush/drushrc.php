@@ -295,6 +295,12 @@ $options['init-modules'] = array(
   #'apachesolr',
   #'apachesolr_search',
   #'search_api_solr',
+
+  'tmgmt_entity',
+  'tmgmt_ui',
+  'tmgmt_file',
+  'tmgmt_node',
+
   'strongarm',
 
   'pdf_to_image',
