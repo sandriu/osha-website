@@ -298,6 +298,7 @@ $options['init-modules'] = array(
 
   'tmgmt_local',
   'tmgmt_entity',
+  'tmgmt_entity_ui',
   'tmgmt_ui',
   'tmgmt_file',
   'tmgmt_node',
