@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class MigrateOshaTaxonomyTags migrates categories.json taxonomy. The data
+ * Class MigrateOshaTaxonomyTags migrates tags.json taxonomy. The data
  * is stored inside the <em>Tags</em> taxonomy.
  *
  * Part of the <em>OSHA Taxonomies</em> translation group

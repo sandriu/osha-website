@@ -42,7 +42,7 @@ function osha_migration_migrate_api() {
       ),
       'TagsTaxonomy' => array(
         'class_name' => 'MigrateOshaTaxonomyTags',
-        'file_name' => $migration_module_dir . '/data/categories.json',
+        'file_name' => $migration_module_dir . '/data/tags.json',
         'group_name' => 'OSHA MIGRATION'
       )
     )
