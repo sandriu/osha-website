@@ -1,6 +1,6 @@
 <?php
 
-define('MIGRATION_TAXONOMY_TAGS', 'TagsTest');
+define('MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
 define('MIGRATION_ESENER', 'EsenerTest');
 define('MIGRATION_NACE_CODES', 'NaceCodesTest');
 define('MIGRATION_PUBLICATION_TYPES', 'PublicationTypesTest');
@@ -40,7 +40,7 @@ function osha_migration_migrate_api() {
         'file_name' => $migration_module_dir . '/data/OSHA-MultilingualThesaurus.json',
         'group_name' => 'OSHA MIGRATION'
       ),
-      'TagsTaxonomy' => array(
+      MIGRATION_TAXONOMY_TAGS => array(
         'class_name' => 'MigrateOshaTaxonomyTags',
         'file_name' => $migration_module_dir . '/data/tags.json',
         'group_name' => 'OSHA MIGRATION'

@@ -91,7 +91,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
   }
 
   protected function generateMachineName() {
-    return 'TagsTaxonomy';
+    return MIGRATION_TAXONOMY_TAGS;
   }
 }
 
