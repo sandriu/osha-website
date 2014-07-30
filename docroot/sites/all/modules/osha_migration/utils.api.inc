@@ -84,10 +84,10 @@ class MigrationUtil {
   }
 
 
-  static function decode_tags_terms($categories_str, $term_field = 'field_tags_code') {
-    $categories = explode(',', $categories_str);
-    $categories = array_unique($categories);
-    $categories = array_map('trim', $categories);
+  static function decode_tags_terms($terms_str, $term_field = 'field_tags_code') {
+    $terms = explode(',', $terms_str);
+    $terms = array_unique($terms);
+    $terms = array_map('trim', $terms);
 
     $ret = array();
     $replace = array(
@@ -115,15 +115,15 @@ class MigrationUtil {
       'young_people' => 'osh_and_young_people',
       'young_people::educators_mainstreaming' => 'mainstream-ing_osh_into_education',
     );
-    foreach ($categories as $category) {
-      if(array_key_exists($category, $replace)) {
-        $ret[] = $replace[$category];
+    foreach ($terms as $term) {
+      if(array_key_exists($term, $replace)) {
+        $ret[] = $replace[$term];
       } else {
-        $exp = explode('::', $category);
+        $exp = explode('::', $term);
         if(count($exp) == 2) {
-          $category = $exp[0];
-          if(array_key_exists($category, $replace)) {
-            $ret[] = $replace[$category];
+          $cat = $exp[0];
+          if(array_key_exists($cat, $replace)) {
+            $ret[] = $replace[$cat];
           }
         }
       }
