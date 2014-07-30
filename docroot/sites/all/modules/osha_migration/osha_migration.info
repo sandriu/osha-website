@@ -15,6 +15,6 @@ files[] = news.migrate.inc
 files[] = esener.migrate.inc
 files[] = publication_types.migrate.inc
 files[] = thesaurus.migrate.inc
-files[] = categories.migrate.inc
+files[] = taxonomy.tags.migrate.inc
 files[] = osha_migration.test
 files[] = util.inc

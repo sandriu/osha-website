@@ -20,15 +20,15 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
           'type' => 'varchar',
           'length' => 100,
           'not null' => TRUE,
-          'description' => 'Categories code'
+          'description' => 'Tag code'
         )
       ),
       MigrateDestinationTerm::getKeySchema()
     );
 
     $this->source = new MigrateSourceList(
-      new CategoriesTaxonomyMigrationListJSON($source_file),
-      new CategoriesTaxonomyMigrationItemJSON($source_file, array()),
+      new TagsTaxonomyMigrationListJSON($source_file),
+      new TagsTaxonomyMigrationItemJSON($source_file, array()),
       $this->fields()
     );
 
@@ -95,7 +95,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
   }
 }
 
-class CategoriesTaxonomyMigrationListJSON extends MigrateListJSON {
+class TagsTaxonomyMigrationListJSON extends MigrateListJSON {
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {
@@ -105,7 +105,7 @@ class CategoriesTaxonomyMigrationListJSON extends MigrateListJSON {
   }
 }
 
-class CategoriesTaxonomyMigrationItemJSON extends MigrateItemJSON {
+class TagsTaxonomyMigrationItemJSON extends MigrateItemJSON {
   protected $data = array();
 
   public function getItem($item_id) {
