@@ -14,7 +14,7 @@ function osha_configure_date_settings() {
   /* Set default country, first day of the month and date format */
   variable_set('date_first_day', '1');
   variable_set('site_default_country', 'ES');
-  variable_set('date_default_timezone', 'Europe/Madrid');
+  variable_set('date_default_timezone', 'UTC');
   variable_set('configurable_timezones', '0');
   variable_set('user_default_timezone', '0');
 }
