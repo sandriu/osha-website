@@ -8,9 +8,6 @@
  */
 class MigrateOshaTaxonomyTags extends DynamicMigration {
 
-  /** @var string Target vocabulary */
-  protected $vocabulary = TAXONOMY_CATEGORIES;
-
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
     $this->description = 'Import "Tags" taxonomy from JSON file';
@@ -36,7 +33,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
+    $this->destination = new MigrateDestinationTerm(TAXONOMY_TAGS, $term_options);
 
     $this->addFieldMapping('field_tags_code', 'code');
     $this->addFieldMapping('parent', 'parent');

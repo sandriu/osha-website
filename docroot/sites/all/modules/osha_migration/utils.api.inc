@@ -128,7 +128,7 @@ class MigrationUtil {
         }
       }
     }
-    return self::find_tid_by_taxonomy_field(TAXONOMY_CATEGORIES, $term_field, $ret, LANGUAGE_NONE);
+    return self::find_tid_by_taxonomy_field(TAXONOMY_TAGS, $term_field, $ret, LANGUAGE_NONE);
   }
 
   /**
