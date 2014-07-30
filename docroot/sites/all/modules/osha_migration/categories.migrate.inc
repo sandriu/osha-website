@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Class MigrateOshaCategories migrates categories.json taxonomy. The data
+ * Class MigrateOshaTaxonomyTags migrates categories.json taxonomy. The data
  * is stored inside the <em>Tags</em> taxonomy.
  *
  * Part of the <em>OSHA Taxonomies</em> translation group
  */
-class MigrateOshaCategories extends DynamicMigration {
+class MigrateOshaTaxonomyTags extends DynamicMigration {
 
   /** @var string Target vocabulary */
   protected $vocabulary = TAXONOMY_CATEGORIES;

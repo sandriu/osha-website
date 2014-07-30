@@ -253,9 +253,8 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_CATEGORIES);
 
     $source = 'data/categories.json';
-    $result = $this->runMigration(MIGRATION_CATEGORIES, CLASS_CATEGORIES, $source);
-    $this->assertEqual($result, Migration::RESULT_COMPLETED,
-      t(MIGRATION_CATEGORIES . ' returned RESULT_COMPLETED'));
+    $result = $this->runMigration(MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source);
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
 
     $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
     $this->assertEqual(16, count($terms));
@@ -279,7 +278,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
           $term->name, 'name_field', $witness[$code], count($term->name_field))
       );
     }
-    Migration::deregisterMigration(MIGRATION_CATEGORIES);
+    Migration::deregisterMigration(MIGRATION_TAXONOMY_TAGS);
   }
 
   private function assertTranslations($translations, $term) {
