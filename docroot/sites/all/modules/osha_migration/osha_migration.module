@@ -16,32 +16,34 @@ define('CLASS_THESAURUS', 'MigrateOshaThesaurus');
  * your migration classes to be recognized by the Migrate module.
  */
 function osha_migration_migrate_api() {
+  $migration_module_dir = drupal_get_path('module', 'osha_migration');
   $api = array(
     'api' => 2,
     'migrations' => array(
       'News' => array('class_name' => 'MigrateOshaNews'),
       'NaceCodes' => array(
         'class_name' => 'MigrateOshaNaceCodes',
-        'file_name' => 'data/nace_codes.json',
+        'file_name' => $migration_module_dir . '/data/nace_codes.json',
         'group_name' => 'OSHA MIGRATIONS'
       ),
       'EsenerTaxonomy' => array(
         'class_name' => 'MigrateOshaEsenerTaxonomy',
-        'file_name' => 'data/esener.json',
+        'file_name' => $migration_module_dir . '/data/esener.json',
         'group_name' => 'OSHA MIGRATIONS'
       ),
       'PublicationTypesTaxonomy' => array(
         'class_name' => 'MigrateOshaPublicationTypesTaxonomy',
+        'file_name' => $migration_module_dir . '/data/publication_types.json',
         'group_name' => 'OSHA MIGRATIONS'
       ),
       'ThesaurusTaxonomy' => array(
         'class_name' => 'MigrateOshaThesaurus',
-        'file_name' => 'data/OSHA-MultilingualThesaurus.json',
+        'file_name' => $migration_module_dir . '/data/OSHA-MultilingualThesaurus.json',
         'group_name' => 'OSHA MIGRATION'
       ),
       'TagsTaxonomy' => array(
         'class_name' => 'MigrateOshaCategories',
-        'file_name' => 'data/categories.json',
+        'file_name' => $migration_module_dir . '/data/categories.json',
         'group_name' => 'OSHA MIGRATION'
       )
     )

@@ -10,7 +10,7 @@ class MigrateOshaPublicationTypesTaxonomy extends DynamicMigration {
 
     $this->description = 'Import the "Publication Types" taxonomy';
 
-    $source_file = sprintf('%s/data/publication_types.json', drupal_get_path('module', 'osha_migration'));
+    $source_file = MigrationUtil::get_source_file($arguments);
     $this->generateCacheFromFile($source_file);
 
     $this->map = new MigrateSQLMap($this->machineName,

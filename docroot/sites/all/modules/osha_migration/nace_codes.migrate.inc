@@ -6,17 +6,9 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
-
     $this->description = 'Import "Nace Codes" taxonomy from JSON file';
 
-    if (isset($arguments['file_name'])) {
-      $file_name = $arguments['file_name'];
-    }
-    else {
-      $file_name = 'data/nace_codes.json';
-    }
-    $source_file = sprintf('%s/%s', drupal_get_path('module', 'osha_migration'), $file_name);
-
+    $source_file = MigrationUtil::get_source_file($arguments);
     $this->map = new MigrateSQLMap($this->machineName,
       array(
         'NACE_REV_2_CODE' => array(

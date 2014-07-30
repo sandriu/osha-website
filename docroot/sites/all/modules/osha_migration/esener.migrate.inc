@@ -7,19 +7,10 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
-
     $this->description = 'Import the "Esener" taxonomy into Esener';
 
-    if (isset($arguments['file_name'])) {
-      $file_name = $arguments['file_name'];
-    }
-    else {
-      $file_name = 'data/esener.json';
-    }
-    $source_file = sprintf('%s/%s', drupal_get_path('module', 'osha_migration'), $file_name);
-
+    $source_file = MigrationUtil::get_source_file($arguments);
     $this->generateCacheFromFile($source_file);
-
     $this->map = new MigrateSQLMap($this->machineName,
       array(
         'code' => array(

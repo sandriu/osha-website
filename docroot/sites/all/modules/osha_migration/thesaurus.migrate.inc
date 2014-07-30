@@ -8,8 +8,7 @@ class MigrateOshaThesaurus extends DynamicMigration {
 
     $this->description = 'Import "Thesaurus" taxonomy from JSON file';
     $this->vocabulary = 'thesaurus';
-    $file_name = $arguments['file_name'];
-    $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
+    $source_file = MigrationUtil::get_source_file($arguments);
 
     $this->map = new MigrateSQLMap(
       $this->machineName,

@@ -13,12 +13,9 @@ class MigrateOshaCategories extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
-
     $this->description = 'Import "Tags" taxonomy from JSON file';
 
-    $file_name = $arguments['file_name'];
-    $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
-
+    $source_file = MigrationUtil::get_source_file($arguments);
     $this->map = new MigrateSQLMap(
       $this->machineName,
       array(
