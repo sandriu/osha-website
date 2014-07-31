@@ -7,7 +7,7 @@
 class MigrateOshaNews extends DynamicMigration {
 
   public function __construct($arguments) {
-    parent::__construct();
+    parent::__construct(MigrateGroup::getInstance('OSHA News'));
 
     $this->description = 'Import "News" contents from CSV file';
     $this->dependencies = array(MIGRATION_TAXONOMY_THESAURUS, MIGRATION_TAXONOMY_TAGS);

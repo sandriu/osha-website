@@ -19,32 +19,26 @@ function osha_migration_migrate_api() {
       MIGRATION_TAXONOMY_NACE_CODES => array(
         'class_name' => 'MigrateOshaTaxonomyNaceCodes',
         'file_name' => $migration_module_dir . '/data/nace_codes.json',
-        'group_name' => 'OSHA MIGRATIONS'
       ),
       MIGRATION_TAXONOMY_ESENER => array(
         'class_name' => 'MigrateOshaTaxonomyEsener',
         'file_name' => $migration_module_dir . '/data/esener.json',
-        'group_name' => 'OSHA MIGRATIONS'
       ),
       MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
         'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
         'file_name' => $migration_module_dir . '/data/publication_types.json',
-        'group_name' => 'OSHA MIGRATIONS'
       ),
       MIGRATION_TAXONOMY_THESAURUS => array(
         'class_name' => 'MigrateOshaTaxonomyThesaurus',
         'file_name' => $migration_module_dir . '/data/OSHA-MultilingualThesaurus.json',
-        'group_name' => 'OSHA MIGRATION'
       ),
       MIGRATION_TAXONOMY_TAGS => array(
         'class_name' => 'MigrateOshaTaxonomyTags',
         'file_name' => $migration_module_dir . '/data/tags.json',
-        'group_name' => 'OSHA MIGRATION'
       ),
       MIGRATION_CONTENT_TYPE_NEWS => array(
         'class_name' => 'MigrateOshaNews',
         'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
-        'group_name' => 'OSHA MIGRATION'
       )
     )
   );
