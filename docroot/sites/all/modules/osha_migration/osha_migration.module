@@ -5,6 +5,7 @@ define('MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
 define('MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
 define('MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
 define('MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
+define('MIGRATION_CONTENT_TYPE_NEWS', 'News');
 
 /**
  * You must implement hook_migrate_api(), setting the API level to 2, for
@@ -18,27 +19,26 @@ function osha_migration_migrate_api() {
       MIGRATION_TAXONOMY_NACE_CODES => array(
         'class_name' => 'MigrateOshaTaxonomyNaceCodes',
         'file_name' => $migration_module_dir . '/data/nace_codes.json',
-        'group_name' => 'OSHA MIGRATIONS'
       ),
       MIGRATION_TAXONOMY_ESENER => array(
         'class_name' => 'MigrateOshaTaxonomyEsener',
         'file_name' => $migration_module_dir . '/data/esener.json',
-        'group_name' => 'OSHA MIGRATIONS'
       ),
       MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
         'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
         'file_name' => $migration_module_dir . '/data/publication_types.json',
-        'group_name' => 'OSHA MIGRATIONS'
       ),
       MIGRATION_TAXONOMY_THESAURUS => array(
         'class_name' => 'MigrateOshaTaxonomyThesaurus',
         'file_name' => $migration_module_dir . '/data/OSHA-MultilingualThesaurus.json',
-        'group_name' => 'OSHA MIGRATION'
       ),
       MIGRATION_TAXONOMY_TAGS => array(
         'class_name' => 'MigrateOshaTaxonomyTags',
         'file_name' => $migration_module_dir . '/data/tags.json',
-        'group_name' => 'OSHA MIGRATION'
+      ),
+      MIGRATION_CONTENT_TYPE_NEWS => array(
+        'class_name' => 'MigrateOshaNews',
+        'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
       )
     )
   );
@@ -85,7 +85,7 @@ function osha_migration_schema_alter(&$schema) {
 function osha_migration_get_data_dir() {
   $ret = variable_get('osha_data_dir', NULL);
   if (empty($ret)) {
-    throw new MigrateException('Please configure the "osha_data_dir" variable to point to your data storage');
+    drupal_set_message('Please configure the "osha_data_dir" variable to point to your data storage', 'error');
   }
   return $ret;
 }

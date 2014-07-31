@@ -6,6 +6,7 @@ dependencies[] = migrate
 dependencies[] = osha
 dependencies[] = osha_taxonomies
 
+files[] = content.news.migrate.inc
 files[] = utils.api.inc
 files[] = nace_codes.migrate.inc
 files[] = news.migrate.inc
