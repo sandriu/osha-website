@@ -119,66 +119,40 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   public function testPublicationTypesMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_PUBLICATION_TYPES);
 
-    $sourceFile = 'data/test/esener.json';
-    $result = $this->runMigration(MIGRATION_PUBLICATION_TYPES, CLASS_PUBLICATION_TYPES, $sourceFile);
-    $this->assertEqual($result, Migration::RESULT_COMPLETED,
-      t('PublicationTypesTest returned RESULT_COMPLETED'));
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+    $result = $this->runMigration(
+      MIGRATION_TAXONOMY_PUBLICATION_TYPES,
+      'MigrateOshaTaxonomyPublicationTypes',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
 
     $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-    $this->assertEqual(9, count($terms));
+    $this->assertEqual(count($json), count($terms));
 
-    $translations = array(
-      "Corporate publications" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      ),
-      "Reports" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      ),
-      "Literature reviews" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      ),
-      "E-facts" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      ),
-      "Articles" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      ),
-      "Promotional Material" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      ),
-      "Factsheets" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      ),
-      "Magazine" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      ),
-      "Evaluation reports" => array(
-        "name_field" => 21,
-        "description_field" => 21,
-        "field_publication_type_code" => 1
-      )
-    );
-
-    foreach ($terms as $term) {
-      $this->assertTranslations($translations, $term);
+    $witnesses = array();
+    foreach ($json as $arr) {
+      $code = $arr['code'];
+      $witnesses[$code] = $arr;
     }
-    Migration::deregisterMigration(MIGRATION_ESENER);
+
+    // Test node name_field value in all languages
+    $languages = array_keys(language_list());
+    foreach ($terms as $term) {
+      $code = $term->field_publication_type_code[LANGUAGE_NONE][0]['value'];
+      $source = $witnesses[$code];
+      foreach($languages as $language) {
+        if(!empty($source[$language])) {
+          $this->assertEqual(
+            $source[$language],
+            $term->name_field[$language][0]['value'],
+            sprintf('Invalid "%s" translation for "%s.name_field"', $language, $code)
+          );
+        }
+      }
+    }
+    Migration::deregisterMigration(MIGRATION_TAXONOMY_PUBLICATION_TYPES);
   }
 
   /**
