@@ -1,6 +1,6 @@
 <?php
 
-class MigrateOshaNaceCodesTaxonomy extends DynamicMigration {
+class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
 
   protected $vocabulary = 'nace_codes';
 
