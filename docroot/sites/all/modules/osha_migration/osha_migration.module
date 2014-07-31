@@ -30,7 +30,7 @@ function osha_migration_migrate_api() {
       ),
       MIGRATION_TAXONOMY_THESAURUS => array(
         'class_name' => 'MigrateOshaTaxonomyThesaurus',
-        'file_name' => $migration_module_dir . '/data/OSHA-MultilingualThesaurus.json',
+        'file_name' => $migration_module_dir . '/data/thesaurus.json',
       ),
       MIGRATION_TAXONOMY_TAGS => array(
         'class_name' => 'MigrateOshaTaxonomyTags',

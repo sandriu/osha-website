@@ -160,7 +160,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   public function testThesaurusMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus2.json';
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
     $result = MigrationUtil::runMigration(
       MIGRATION_TAXONOMY_THESAURUS,
       'MigrateOshaTaxonomyThesaurus',
@@ -270,7 +270,7 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
   }
 
   function testMigration() {
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus2.json';
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
     MigrationUtil::runMigration(MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
