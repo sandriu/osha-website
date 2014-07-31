@@ -129,18 +129,12 @@ class ThesaurusMigrationListJSON extends MigrateListJSON {
   }
 
   public function computeCount() {
-    $count = 0;
-    $json = NULL;
-    if (empty($this->httpOptions)) {
-      $json = file_get_contents($this->listUrl);
+    $ret = 0;
+    $data = drupal_json_decode(file_get_contents($this->listUrl));
+    if ($data) {
+      $ret = count($data['@graph']);
     }
-    if ($json) {
-      $data = drupal_json_decode($json);
-      if ($data) {
-        $count = count($data['@graph']);
-      }
-    }
-    return $count;
+    return $ret;
   }
 }
 
