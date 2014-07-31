@@ -102,7 +102,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
    * {@inheritdoc}
    */
   protected function generateMachineName() {
-    return MIGRATION_TAXONOMY_ESENER;
+    return OSHA_MIGRATION_TAXONOMY_ESENER;
   }
 
   private function getParent($row) {

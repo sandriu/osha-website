@@ -130,7 +130,7 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
    * {@inheritdoc}
    */
   protected function generateMachineName() {
-    return MIGRATION_TAXONOMY_NACE_CODES;
+    return OSHA_MIGRATION_TAXONOMY_NACE_CODES;
   }
 
   private function getParent($row) {

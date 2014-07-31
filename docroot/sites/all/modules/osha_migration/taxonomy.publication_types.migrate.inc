@@ -74,7 +74,7 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
    * {@inheritdoc}
    */
   protected function generateMachineName() {
-    return MIGRATION_TAXONOMY_PUBLICATION_TYPES;
+    return OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES;
   }
 }
 

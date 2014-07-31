@@ -1,11 +1,11 @@
 <?php
 
-define('MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
-define('MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
-define('MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
-define('MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
-define('MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
-define('MIGRATION_CONTENT_TYPE_NEWS', 'News');
+define('OSHA_MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
+define('OSHA_MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
+define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
+define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
+define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
+define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 
 /**
  * Implements hook_migrate_api().
@@ -17,27 +17,27 @@ function osha_migration_migrate_api() {
   $api = array(
     'api' => 2,
     'migrations' => array(
-      MIGRATION_TAXONOMY_NACE_CODES => array(
+      OSHA_MIGRATION_TAXONOMY_TAGS => array(
         'class_name' => 'MigrateOshaTaxonomyNaceCodes',
         'file_name' => $migration_module_dir . '/data/nace_codes.json',
       ),
-      MIGRATION_TAXONOMY_ESENER => array(
+      OSHA_MIGRATION_TAXONOMY_ESENER => array(
         'class_name' => 'MigrateOshaTaxonomyEsener',
         'file_name' => $migration_module_dir . '/data/esener.json',
       ),
-      MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
+      OSHA_MIGRATION_TAXONOMY_NACE_CODES => array(
         'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
         'file_name' => $migration_module_dir . '/data/publication_types.json',
       ),
-      MIGRATION_TAXONOMY_THESAURUS => array(
+      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
         'class_name' => 'MigrateOshaTaxonomyThesaurus',
         'file_name' => $migration_module_dir . '/data/thesaurus.json',
       ),
-      MIGRATION_TAXONOMY_TAGS => array(
+      OSHA_MIGRATION_TAXONOMY_THESAURUS => array(
         'class_name' => 'MigrateOshaTaxonomyTags',
         'file_name' => $migration_module_dir . '/data/tags.json',
       ),
-      MIGRATION_CONTENT_TYPE_NEWS => array(
+      OSHA_MIGRATION_CONTENT_TYPE_NEWS => array(
         'class_name' => 'MigrateOshaNews',
         'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
       ),

@@ -107,7 +107,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
    * {@inheritdoc}
    */
   protected function generateMachineName() {
-    return MIGRATION_TAXONOMY_TAGS;
+    return OSHA_MIGRATION_TAXONOMY_TAGS;
   }
 }
 

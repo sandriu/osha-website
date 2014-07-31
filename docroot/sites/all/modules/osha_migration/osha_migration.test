@@ -36,7 +36,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/nace_codes.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
     $result = MigrationUtil::runMigration(
-      MIGRATION_TAXONOMY_NACE_CODES,
+      OSHA_MIGRATION_TAXONOMY_NACE_CODES,
       'MigrateOshaTaxonomyNaceCodes',
       $source_file
     );
@@ -77,7 +77,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
       $actual_parents = taxonomy_get_parents($term->tid);
       $this->assertEqual($parents[$code], count($actual_parents));
     }
-    Migration::deregisterMigration(MIGRATION_TAXONOMY_NACE_CODES);
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_NACE_CODES);
   }
 
   /**
@@ -89,7 +89,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/esener.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
     $result = MigrationUtil::runMigration(
-      MIGRATION_TAXONOMY_ESENER,
+      OSHA_MIGRATION_TAXONOMY_ESENER,
       'MigrateOshaTaxonomyEsener',
       $source_file
     );
@@ -122,7 +122,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
       $actual_parents = taxonomy_get_parents($term->tid);
       $this->assertEqual($parents[$code], count($actual_parents));
     }
-    Migration::deregisterMigration(MIGRATION_TAXONOMY_ESENER);
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_ESENER);
   }
 
 
@@ -135,7 +135,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
     $result = MigrationUtil::runMigration(
-      MIGRATION_TAXONOMY_PUBLICATION_TYPES,
+      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
       'MigrateOshaTaxonomyPublicationTypes',
       $source_file
     );
@@ -165,7 +165,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
         }
       }
     }
-    Migration::deregisterMigration(MIGRATION_TAXONOMY_PUBLICATION_TYPES);
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES);
   }
 
   /**
@@ -176,7 +176,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
     $result = MigrationUtil::runMigration(
-      MIGRATION_TAXONOMY_THESAURUS,
+      OSHA_MIGRATION_TAXONOMY_THESAURUS,
       'MigrateOshaTaxonomyThesaurus',
       $source_file
     );
@@ -208,7 +208,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
       $actual_parents = taxonomy_get_parents($term->tid);
       $this->assertEqual($parents[$code], count($actual_parents));
     }
-    Migration::deregisterMigration(MIGRATION_TAXONOMY_THESAURUS);
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS);
   }
 
   /**
@@ -220,7 +220,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
     $json = json_decode(file_get_contents($source_file), TRUE);
 
     $result = MigrationUtil::runMigration(
-      MIGRATION_TAXONOMY_TAGS,
+      OSHA_MIGRATION_TAXONOMY_TAGS,
       'MigrateOshaTaxonomyTags',
       $source_file
     );
@@ -243,7 +243,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
           $term->name, 'name_field', $witness[$code], count($term->name_field))
       );
     }
-    Migration::deregisterMigration(MIGRATION_TAXONOMY_TAGS);
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_TAGS);
   }
 }
 
@@ -281,13 +281,13 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
    */
   public function testMigration() {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
-    MigrationUtil::runMigration(MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
-    MigrationUtil::runMigration(MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/news.txt';
-    $result = MigrationUtil::runMigration(MIGRATION_CONTENT_TYPE_NEWS, 'MigrateOshaNews', $source_file);
+    $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_NEWS, 'MigrateOshaNews', $source_file);
 
     $this->assertEqual($result, Migration::RESULT_COMPLETED);
 
