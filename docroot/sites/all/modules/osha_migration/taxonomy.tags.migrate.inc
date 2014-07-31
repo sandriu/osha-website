@@ -20,8 +20,8 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
           'type' => 'varchar',
           'length' => 100,
           'not null' => TRUE,
-          'description' => 'Tag code'
-        )
+          'description' => 'Term code',
+        ),
       ),
       MigrateDestinationTerm::getKeySchema()
     );
@@ -29,7 +29,11 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
     $this->source = new MigrateSourceList(
       new TagsTaxonomyMigrationListJSON($source_file),
       new TagsTaxonomyMigrationItemJSON($source_file, array()),
-      $this->fields()
+      array(
+        'code' => 'Term code',
+        'en' => 'Term name in english',
+        'parent' => 'Parent term',
+      )
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
@@ -95,14 +99,6 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
         }
       }
     }
-  }
-
-  private function fields() {
-    return array(
-      'code' => 'Identifier',
-      'en' => 'Term name in english',
-      'parent' => 'Parent term',
-    );
   }
 
   /**

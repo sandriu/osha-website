@@ -13,7 +13,7 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
           'type' => 'varchar',
           'length' => 30,
           'not null' => TRUE,
-          'description' => 'Publication type code'
+          'description' => 'Publication type code',
         ),
       ),
       MigrateDestinationTerm::getKeySchema()
@@ -22,7 +22,10 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
     $this->source = new MigrateSourceList(
       new PublicationTypesTaxonomyMigrationListJSON($source_file),
       new PublicationTypesTaxonomyMigrationItemJSON($source_file, array()),
-      $this->fields()
+      array(
+        'en' => 'Term text in english',
+        'code' => 'Term code',
+      )
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
@@ -72,13 +75,6 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
    */
   protected function generateMachineName() {
     return MIGRATION_TAXONOMY_PUBLICATION_TYPES;
-  }
-
-  function fields() {
-    return array(
-      'en' => 'TerText of field',
-      'code' => 'Item code (PK)',
-    );
   }
 }
 

@@ -14,8 +14,8 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
           'type' => 'varchar',
           'length' => 30,
           'not null' => TRUE,
-          'description' => 'Thesaurus code'
-        )
+          'description' => 'Thesaurus code',
+        ),
       ),
       MigrateDestinationTerm::getKeySchema()
     );
@@ -23,7 +23,11 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     $this->source = new MigrateSourceList(
       new ThesaurusMigrationListJSON($source_file),
       new ThesaurusMigrationItemJSON($source_file, array()),
-      $this->fields()
+      array(
+        'code' => 'The unique identifier',
+        'en' => 'The description/name of the item',
+        'parent' => 'The tid of the parent',
+      )
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
@@ -119,14 +123,6 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
       return current(array_keys($result['taxonomy_term']));
     }
     return array();
-  }
-
-  private function fields() {
-    return array(
-      'code' => 'The unique identifier',
-      'en' => 'The description/name of the item',
-      'parent' => 'The tid of the parent'
-    );
   }
 
   /**

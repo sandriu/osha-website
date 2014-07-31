@@ -176,7 +176,13 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     return $parent_code;
   }
 
-  function fields() {
+  /**
+   * Return the list of available source fields.
+   *
+   * @return array
+   *   An array o fields with their description
+   */
+  public function fields() {
     return array(
       'ID' => "id",
       'NACE_REV_2_CODE' => 'The corresponding NACE Code',
@@ -185,7 +191,7 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
       'Change' => 'The last changes made to the nace code',
       'parent' => 'The tid of the parent',
       'NACE_REV_2_DESCRIPTION' => 'The name of the NACE Code',
-      'weight' => 'The generated weight of the taxonomy term'
+      'weight' => 'The generated weight of the taxonomy term',
     );
   }
 

@@ -6,6 +6,9 @@
  */
 class MigrateOshaNews extends DynamicMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA News'));
     $this->description = 'Import "News" contents from CSV file';
@@ -155,8 +158,13 @@ class MigrateOshaNews extends DynamicMigration {
     }
   }
 
-
-  function fields() {
+  /**
+   * Return the list of available source fields.
+   *
+   * @return array
+   *   An array o fields with their description
+   */
+  public function fields() {
     return array(
       'id' => 'Primary Key (URL pattern)',
       'path' => 'URL pattern without language',

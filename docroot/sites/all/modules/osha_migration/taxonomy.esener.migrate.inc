@@ -22,7 +22,11 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
     $this->source = new MigrateSourceList(
       new EsenerTaxonomyMigrationListJSON($source_file),
       new EsenerTaxonomyMigrationItemJSON($source_file, array()),
-      $this->fields()
+      array(
+        'parent' => 'Parent tid',
+        'en' => 'Term name in english',
+        'code' => 'Term code (PK)',
+      )
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
@@ -84,7 +88,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
               'language' => $language,
-              'source' => $row->language
+              'source' => $row->language,
             ));
           }
         }
@@ -128,14 +132,6 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
 
   private function getParentCode($row) {
     return !empty($row->parent_code) ? $row->parent_code : 0;
-  }
-
-  function fields() {
-    return array(
-      'parent' => 'Parent tid',
-      'en' => 'Term name in english',
-      'code' => 'Term code (PK)',
-    );
   }
 }
 
