@@ -69,7 +69,7 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     foreach ($supported_languages as $lang_code) {
       if (!empty($row->$lang_code)) {
         $entity->name_field[$lang_code][0]['value'] = $row->$lang_code;
-        if($lang_code != $row->language) { // Don't translate default language (en)
+        if ($lang_code != $row->language) { // Don't translate default language (en)
           if (!isset($entity->translations->data[$lang_code])) {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
@@ -119,6 +119,7 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
 }
 
 class ThesaurusMigrationListJSON extends MigrateListJSON {
+
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data['@graph'] as $item) {
