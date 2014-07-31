@@ -52,7 +52,12 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     return array($term->tid);
   }
 
-  function prepareRow($row) {
+  /**
+   * Prepare raw data pulled from source.
+   *
+   * {@inheritdoc }
+   */
+  public function prepareRow($row) {
     $row->parent = 0;
     $row->language = 'en';
     $row->parent = $this->getParent($row);
@@ -60,7 +65,15 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     return TRUE;
   }
 
-  function prepare($entity, stdClass $row) {
+  /**
+   * Called by destination right before saving.
+   *
+   * @param object $entity
+   *   Entity to save
+   * @param object $row
+   *   Source row
+   */
+  public function prepare($entity, $row) {
     $migration = Migration::currentMigration();
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
@@ -116,6 +129,11 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     );
   }
 
+  /**
+   * Migration machine name.
+   *
+   * {@inheritdoc}
+   */
   protected function generateMachineName() {
     return MIGRATION_TAXONOMY_THESAURUS;
   }

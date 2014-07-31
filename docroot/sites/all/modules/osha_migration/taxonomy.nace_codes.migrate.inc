@@ -74,6 +74,11 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     return $weight;
   }
 
+  /**
+   * Prepare raw data pulled from source.
+   *
+   * {@inheritdoc }
+   */
   public function prepareRow($row) {
     $row->parent = 0;
     $row->language = 'en';
@@ -83,7 +88,15 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     return TRUE;
   }
 
-  function prepare($entity, stdClass $row) {
+  /**
+   * Called by destination right before saving.
+   *
+   * @param object $entity
+   *   Entity to save
+   * @param object $row
+   *   Source row
+   */
+  public function prepare($entity, $row) {
     $assoc = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
 
     $migration = Migration::currentMigration();
@@ -111,6 +124,11 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     }
   }
 
+  /**
+   * Migration machine name.
+   *
+   * {@inheritdoc}
+   */
   protected function generateMachineName() {
     return MIGRATION_TAXONOMY_NACE_CODES;
   }
