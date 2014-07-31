@@ -1,6 +1,15 @@
 <?php
 
-class OshaMigrationsTest extends DrupalWebTestCase {
+/**
+ * Class MigrateOshaTaxonomyTest test taxonomies migrations
+ */
+class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'OSHA migrations tests',
@@ -9,12 +18,17 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     );
   }
 
+  /**
+   * Set environment.
+   *
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp('osha', 'osha_migration');
   }
 
   /**
-   * Tests TaxonomyNaceCodes
+   * Tests NACE codes migration.
    */
   public function testNaceCodesMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_NACE_CODES);
@@ -41,13 +55,13 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     $parents = array("01" => 1, "01.1" => 1, "A" => 0);
 
     $field_mappings = MigrateOshaTaxonomyNaceCodes::getSourceDestinationFieldMappings();
-    // Test each node field value in all languages
+    /* Test each node field value in all languages */
     foreach ($terms as $term) {
       $code = $term->field_nace_code[LANGUAGE_NONE][0]['value'];
       $source = $witnesses[$code];
       foreach ($field_mappings as $language => $mapping) {
         foreach ($mapping as $dest_field => $source_field) {
-          if(!empty($source[$source_field])) {
+          if (!empty($source[$source_field])) {
             $subject = $term->{$dest_field}[$language][0]['value'];
             $this->assertEqual(
               $source[$source_field],
@@ -67,7 +81,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   }
 
   /**
-   * Tests the Esener Migration
+   * Test the ESENER migration.
    */
   public function testEsenerMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
@@ -91,13 +105,13 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     }
 
     $parents = array("indicator" => 0, "ghsme" => 1, 'mm154' => 1);
-    // Test node name_field value in all languages
+    /* Test node name_field value in all languages */
     $languages = array_keys(language_list());
     foreach ($terms as $term) {
       $code = $term->field_esener_code[LANGUAGE_NONE][0]['value'];
       $source = $witnesses[$code];
-      foreach($languages as $language) {
-        if(!empty($source[$language])) {
+      foreach ($languages as $language) {
+        if (!empty($source[$language])) {
           $this->assertEqual(
             $source[$language],
             $term->name_field[$language][0]['value'],
@@ -113,7 +127,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
 
 
   /**
-   * Tests the PublicationTypes Migration
+   * Test publication types migration.
    */
   public function testPublicationTypesMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_PUBLICATION_TYPES);
@@ -136,13 +150,13 @@ class OshaMigrationsTest extends DrupalWebTestCase {
       $witnesses[$code] = $arr;
     }
 
-    // Test node name_field value in all languages
+    /* Test node name_field value in all languages */
     $languages = array_keys(language_list());
     foreach ($terms as $term) {
       $code = $term->field_publication_type_code[LANGUAGE_NONE][0]['value'];
       $source = $witnesses[$code];
-      foreach($languages as $language) {
-        if(!empty($source[$language])) {
+      foreach ($languages as $language) {
+        if (!empty($source[$language])) {
           $this->assertEqual(
             $source[$language],
             $term->name_field[$language][0]['value'],
@@ -155,7 +169,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   }
 
   /**
-   * Tests for the Thesaurus Migration
+   * Tests thesaurus migration.
    */
   public function testThesaurusMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
@@ -177,13 +191,13 @@ class OshaMigrationsTest extends DrupalWebTestCase {
 
     $parents = array("06641B" => 0, "07401C" => 1);
 
-    // Test node name_field value in all languages
+    /* Test node name_field value in all languages */
     $languages = array_keys(language_list());
     foreach ($terms as $term) {
       $code = $term->field_thesaurus_code[LANGUAGE_NONE][0]['value'];
       $source = $witnesses[$code];
-      foreach($languages as $language) {
-        if(!empty($source->{$language})) {
+      foreach ($languages as $language) {
+        if (!empty($source->{$language})) {
           $this->assertEqual(
             $source->$language,
             $term->name_field[$language][0]['value'],
@@ -197,6 +211,9 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     Migration::deregisterMigration(MIGRATION_TAXONOMY_THESAURUS);
   }
 
+  /**
+   * Test tags migration.
+   */
   public function testTagsMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_TAGS);
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
@@ -213,12 +230,12 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     $this->assertEqual(count($json), count($terms));
 
     $witness = array();
-    foreach($json as $arr) {
+    foreach ($json as $arr) {
       $code = $arr['code'];
       $witness[$code] = count(array_filter($arr)) - 1;
     }
 
-    foreach($terms as $term) {
+    foreach ($terms as $term) {
       $code = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
       $this->assertEqual(
         $witness[$code], count($term->name_field),
@@ -230,10 +247,17 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   }
 }
 
-
+/**
+ * Class MigrateOshaNewsTest tests news content type migration
+ */
 class MigrateOshaNewsTest extends DrupalWebTestCase {
 
-  static function getInfo() {
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
     return array(
       'name' => 'OSHA news migration testing',
       'description' => 'Tests the News migration',
@@ -241,13 +265,21 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
     );
   }
 
-  function setUp() {
+  /**
+   * Set environment.
+   *
+   * {@inheritdoc}
+   */
+  public function setUp() {
     parent::setUp('path', 'pathauto', 'views', 'osha', 'osha_taxonomies', 'osha_publication', 'osha_migration');
     $cfg = MigrationUtil::getProjectConfig();
     variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
   }
 
-  function testMigration() {
+  /**
+   * Test the migration.
+   */
+  public function testMigration() {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
     MigrationUtil::runMigration(MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
 
@@ -270,12 +302,15 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
       $nodes = entity_load('node', $nodes_nids);
     }
 
-    $class = new NewsContentListCSV($source_file, array('title', 'description', 'text'));
+    $class = new NewsContentListCSV(
+      $source_file,
+      array('title', 'description', 'text')
+    );
     $class->getIdList();
     $data = $class::$data;
     $this->assertEqual(count($data), count($nodes));
 
-    foreach($nodes as $node) {
+    foreach ($nodes as $node) {
       $path = path_load('node/' . $node->nid)['alias'];
       $witness = $data[$path];
 
@@ -287,7 +322,7 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
       );
       foreach ($witness['title'] as $lang => $title) {
         $this->assertEqual($title, $node->title_field[$lang][0]['value']);
-        //TODO: Test body and tags
+        /* TODO: Test body and tags */
         $this->assertEqual(
           str_replace('<@#&>', '"', $witness['description'][$lang]),
           $node->field_news_summary[$lang][0]['value']
