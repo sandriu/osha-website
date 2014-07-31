@@ -91,7 +91,7 @@ function osha_migration_schema_alter(&$schema) {
 function osha_migration_get_data_dir() {
   $ret = variable_get('osha_data_dir', NULL);
   if (empty($ret)) {
-    throw new MigrateException('Please configure the "osha_data_dir" variable to point to your data storage');
+    drupal_set_message('Please configure the "osha_data_dir" variable to point to your data storage', 'error');
   }
   return $ret;
 }
