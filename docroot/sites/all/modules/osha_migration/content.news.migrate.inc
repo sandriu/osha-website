@@ -8,16 +8,16 @@ class MigrateOshaNews extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA News'));
-
     $this->description = 'Import "News" contents from CSV file';
+
     $this->dependencies = array(MIGRATION_TAXONOMY_THESAURUS, MIGRATION_TAXONOMY_TAGS);
 
     $source_file = MigrationUtil::get_source_file($arguments);
-
     $this->source = new MigrateSourceList(
       new NewsContentListCSV($source_file, array('title', 'description', 'text')),
       new NewsContentItemCSV(),
-      $this->fields());
+      $this->fields()
+    );
 
     $this->map = new MigrateSQLMap($this->machineName,
       array(
@@ -111,24 +111,24 @@ class MigrateOshaNews extends DynamicMigration {
 
   public function prepare($entity, stdClass $row) {
     $migration = Migration::currentMigration();
-    $supported_languages = array_keys(language_list());
+    $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
 
     $entity->translations = $translation_handler->getTranslations();
     $entity->title = $row->title['en'];
-    foreach ($supported_languages as $lang_code) {
-      if (!empty($row->title[$lang_code])) {
-        $entity->title_field[$lang_code][0]['value'] = $row->title[$lang_code];
-        $entity->field_news_summary[$lang_code][0]['value'] = str_replace('<@#&>', '"', $row->description[$lang_code]);
-        $entity->field_news_summary[$lang_code][0]['format'] = 'full_html';
-        $entity->body[$lang_code][0]['value'] = str_replace('<@#&>', '"', $row->text[$lang_code]);
-        $entity->body[$lang_code][0]['format'] = 'full_html';
-        if ($lang_code != $row->language) { // Don't translate default language (en)
-          if (!isset($entity->translations->data[$lang_code])) {
+    foreach ($languages as $language) {
+      if (!empty($row->title[$language])) {
+        $entity->title_field[$language][0]['value'] = $row->title[$language];
+        $entity->field_news_summary[$language][0]['value'] = str_replace('<@#&>', '"', $row->description[$language]);
+        $entity->field_news_summary[$language][0]['format'] = 'full_html';
+        $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $row->text[$language]);
+        $entity->body[$language][0]['format'] = 'full_html';
+        if ($language != $row->language) { // Don't translate default language (en)
+          if (!isset($entity->translations->data[$language])) {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
-              'language' => $lang_code, 'source' => $row->language
+              'language' => $language, 'source' => $row->language
             ));
           }
         }
@@ -167,11 +167,11 @@ class MigrateOshaNews extends DynamicMigration {
    */
   function complete($entity, stdClass $row) {
     $languages = array_keys(language_list());
-    foreach ($languages as $lang_code) {
+    foreach ($languages as $language) {
       $args = array(
         'source' => 'node/'. $entity->nid,
         'alias' => $row->id, // Same alias for all languages (see mappings)
-        'language' => $lang_code,
+        'language' => $language,
       );
       path_save($args);
     }
@@ -236,9 +236,9 @@ class NewsContentListCSV extends MigrateList {
 
 class NewsContentItemCSV extends MigrateItem {
 
-  public function getItem($id) {
-    if(array_key_exists($id, NewsContentListCSV::$data)) {
-      return (object)NewsContentListCSV::$data[$id];
+  public function getItem($item_id) {
+    if (array_key_exists($item_id, NewsContentListCSV::$data)) {
+      return (object)NewsContentListCSV::$data[$item_id];
     }
     return NULL;
   }

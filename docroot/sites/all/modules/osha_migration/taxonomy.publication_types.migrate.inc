@@ -7,7 +7,6 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
     $this->description = 'Populate the "Publication types" taxonomy from JSON file in osha_migration module';
 
     $source_file = MigrationUtil::get_source_file($arguments);
-
     $this->map = new MigrateSQLMap($this->machineName,
       array(
         'code' => array(
@@ -22,7 +21,8 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
     $this->source = new MigrateSourceList(
       new PublicationTypesTaxonomyMigrationListJSON($source_file),
-      new PublicationTypesTaxonomyMigrationItemJSON($source_file, array()), $this->fields()
+      new PublicationTypesTaxonomyMigrationItemJSON($source_file, array()),
+      $this->fields()
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
@@ -63,8 +63,8 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
   function fields() {
     return array(
-      'en' => 'Text of field',
-      'code' => 'Item code (PK)',
+      'en' => 'Term name in english',
+      'code' => 'Term code (PK)',
     );
   }
 }
@@ -81,6 +81,7 @@ class PublicationTypesTaxonomyMigrationListJSON extends MigrateListJSON {
 }
 
 class PublicationTypesTaxonomyMigrationItemJSON extends MigrateItemJSON {
+
   protected $data = array();
 
   public function getItem($item_id) {

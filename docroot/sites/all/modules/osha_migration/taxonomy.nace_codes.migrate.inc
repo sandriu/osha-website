@@ -6,7 +6,6 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
-
     $this->description = 'Populate the "NACE Codes" taxonomy from JSON file in osha_migration module';
 
     $source_file = MigrationUtil::get_source_file($arguments);
@@ -22,9 +21,11 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
       MigrateDestinationTerm::getKeySchema()
     );
 
-    $this->source = new MigrateSourceList(new NaceCodesMigrationListJSON($source_file),
-      new NaceCodesMigrationItemJSON($source_file, array()), $this->fields());
-
+    $this->source = new MigrateSourceList(
+      new NaceCodesMigrationListJSON($source_file),
+      new NaceCodesMigrationItemJSON($source_file, array()),
+      $this->fields()
+    );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
     $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
@@ -216,11 +217,7 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
 }
 
 class NaceCodesMigrationListJSON extends MigrateListJSON {
-  /**
-   * The default implementation assumes the IDs are top-level array elements,
-   * but the array elements are the data items - we need to look inside them
-   * for the IDs.
-   */
+
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {

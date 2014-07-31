@@ -73,8 +73,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
           if (!isset($entity->translations->data[$lang_code])) {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
-              'language' => $lang_code, 'source' => $row->language,
-              'created' => time()
+              'language' => $lang_code, 'source' => $row->language
             ));
           }
         }
@@ -96,6 +95,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
 }
 
 class TagsTaxonomyMigrationListJSON extends MigrateListJSON {
+
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {

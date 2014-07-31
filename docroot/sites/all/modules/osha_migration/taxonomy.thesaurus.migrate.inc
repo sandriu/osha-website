@@ -5,8 +5,8 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
     $this->description = 'Populate the "Thesaurus" taxonomy from JSON file in osha_migration module';
-    $source_file = MigrationUtil::get_source_file($arguments);
 
+    $source_file = MigrationUtil::get_source_file($arguments);
     $this->map = new MigrateSQLMap(
       $this->machineName,
       array(
@@ -174,6 +174,7 @@ class ThesaurusMigrationListJSON extends MigrateListJSON {
 }
 
 class ThesaurusMigrationItemJSON extends MigrateItemJSON {
+
   protected $data = array();
 
   public function getItem($item_id) {
