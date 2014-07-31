@@ -21,7 +21,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/nace_codes.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
-    $result = $this->runMigration(
+    $result = MigrationUtil::runMigration(
       MIGRATION_TAXONOMY_NACE_CODES,
       'MigrateOshaNaceCodesTaxonomy',
       $source_file
@@ -74,7 +74,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/esener.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
-    $result = $this->runMigration(
+    $result = MigrationUtil::runMigration(
       MIGRATION_TAXONOMY_ESENER,
       'MigrateOshaTaxonomyEsener',
       $source_file
@@ -120,7 +120,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
-    $result = $this->runMigration(
+    $result = MigrationUtil::runMigration(
       MIGRATION_TAXONOMY_PUBLICATION_TYPES,
       'MigrateOshaTaxonomyPublicationTypes',
       $source_file
@@ -161,7 +161,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus2.json';
-    $result = $this->runMigration(
+    $result = MigrationUtil::runMigration(
       MIGRATION_TAXONOMY_THESAURUS,
       'MigrateOshaTaxonomyThesaurus',
       $source_file
@@ -210,7 +210,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
 
-    $result = $this->runMigration(
+    $result = MigrationUtil::runMigration(
       MIGRATION_TAXONOMY_TAGS,
       'MigrateOshaTaxonomyTags',
       $source_file
@@ -250,17 +250,71 @@ class OshaMigrationsTest extends DrupalWebTestCase {
       var_dump(debug_backtrace());
     }
   }
+}
 
-  private function runMigration($machineName, $className, $fileName) {
-    Migration::registerMigration(
-      $className,
-      $machineName,
-      array(
-        'group_name' => 'OSHA TEST MIGRATIONS',
-        'file_name' => $fileName
-      )
+
+class MigrateOshaNewsTest extends DrupalWebTestCase {
+
+  static function getInfo() {
+    return array(
+      'name' => 'OSHA news migration testing',
+      'description' => 'Tests the News migration',
+      'group' => 'OSHA',
     );
-    $migration = Migration::getInstance($machineName);
-    return $migration->processImport();
+  }
+
+  function setUp() {
+    parent::setUp('path', 'pathauto', 'views', 'osha', 'osha_taxonomies', 'osha_publication', 'osha_migration');
+    $cfg = MigrationUtil::get_project_config();
+    variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
+  }
+
+  function testMigration() {
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus2.json';
+    MigrationUtil::runMigration(MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+    MigrationUtil::runMigration(MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/news.txt';
+    $result = MigrationUtil::runMigration(MIGRATION_CONTENT_TYPE_NEWS, 'MigrateOshaNews', $source_file);
+
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', CONTENT_TYPE_NEWS)
+      ->propertyCondition('status', 1);
+    $result = $query->execute();
+    $nodes = array();
+    if (isset($result['node'])) {
+      $nodes_nids = array_keys($result['node']);
+      $nodes = entity_load('node', $nodes_nids);
+    }
+
+    $class = new NewsContentListCSV($source_file, array('title', 'description', 'text'));
+    $class->getIdList();
+    $data = $class::$data;
+    $this->assertEqual(count($data), count($nodes));
+
+    foreach($nodes as $node) {
+      $path = path_load('node/' . $node->nid)['alias'];
+      $witness = $data[$path];
+
+      $this->assertEqual(strtotime($witness['creation_date']), $node->created);
+      $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
+      $this->assertEqual(
+        strtotime($witness['publication_date']),
+        strtotime($node->field_news_publication_date['und'][0]['value'])
+      );
+      foreach ($witness['title'] as $lang => $title) {
+        $this->assertEqual($title, $node->title_field[$lang][0]['value']);
+        //TODO: Test body and tags
+        $this->assertEqual(
+          str_replace('<@#&>', '"', $witness['description'][$lang]),
+          $node->field_news_summary[$lang][0]['value']
+        );
+      }
+    }
   }
 }
