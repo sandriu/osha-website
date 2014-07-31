@@ -15,7 +15,7 @@ class MigrateOshaNews extends DynamicMigration {
 
     $this->dependencies = array(MIGRATION_TAXONOMY_THESAURUS, MIGRATION_TAXONOMY_TAGS);
 
-    $source_file = MigrationUtil::get_source_file($arguments);
+    $source_file = MigrationUtil::getSourceFile($arguments);
     $this->source = new MigrateSourceList(
       new NewsContentListCSV($source_file, array('title', 'description', 'text')),
       new NewsContentItemCSV(),
@@ -113,7 +113,7 @@ class MigrateOshaNews extends DynamicMigration {
     $row->language = 'en';
     $tags = $row->subject . ', ' . $row->subcategory;
     $row->subject = MigrationUtil::decode_tags_terms($tags);
-    $row->multilingual_thesaurus = MigrationUtil::find_tid_by_taxonomy_field(
+    $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
       TAXONOMY_THESAURUS,
       'field_thesaurus_code',
       explode(',', $row->multilingual_thesaurus)
