@@ -1,14 +1,10 @@
 <?php
 
 define('MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
-define('MIGRATION_ESENER', 'EsenerTest');
-define('MIGRATION_NACE_CODES', 'NaceCodesTest');
-define('MIGRATION_PUBLICATION_TYPES', 'PublicationTypesTest');
-define('MIGRATION_THESAURUS', 'ThesaurusTest');
-define('CLASS_ESENER', 'MigrateOshaEsenerTaxonomy');
-define('CLASS_NACE_CODES', 'MigrateOshaNaceCodes');
-define('CLASS_PUBLICATION_TYPES', 'MigrateOshaPublicationTypesTaxonomy');
-define('CLASS_THESAURUS', 'MigrateOshaThesaurus');
+define('MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
+define('MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
+define('MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
+define('MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
 
 /**
  * You must implement hook_migrate_api(), setting the API level to 2, for
@@ -19,24 +15,23 @@ function osha_migration_migrate_api() {
   $api = array(
     'api' => 2,
     'migrations' => array(
-      'News' => array('class_name' => 'MigrateOshaNews'),
-      'NaceCodes' => array(
-        'class_name' => 'MigrateOshaNaceCodes',
+      MIGRATION_TAXONOMY_NACE_CODES => array(
+        'class_name' => 'MigrateOshaTaxonomyNaceCodes',
         'file_name' => $migration_module_dir . '/data/nace_codes.json',
         'group_name' => 'OSHA MIGRATIONS'
       ),
-      'EsenerTaxonomy' => array(
-        'class_name' => 'MigrateOshaEsenerTaxonomy',
+      MIGRATION_TAXONOMY_ESENER => array(
+        'class_name' => 'MigrateOshaTaxonomyEsener',
         'file_name' => $migration_module_dir . '/data/esener.json',
         'group_name' => 'OSHA MIGRATIONS'
       ),
-      'PublicationTypesTaxonomy' => array(
-        'class_name' => 'MigrateOshaPublicationTypesTaxonomy',
+      MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
+        'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
         'file_name' => $migration_module_dir . '/data/publication_types.json',
         'group_name' => 'OSHA MIGRATIONS'
       ),
-      'ThesaurusTaxonomy' => array(
-        'class_name' => 'MigrateOshaThesaurus',
+      MIGRATION_TAXONOMY_THESAURUS => array(
+        'class_name' => 'MigrateOshaTaxonomyThesaurus',
         'file_name' => $migration_module_dir . '/data/OSHA-MultilingualThesaurus.json',
         'group_name' => 'OSHA MIGRATION'
       ),

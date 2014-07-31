@@ -27,13 +27,11 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
     $this->destination = new MigrateDestinationTerm(TAXONOMY_ESENER, $term_options);
 
+    $this->addFieldMapping('name', 'en');
     $this->addFieldMapping('parent', 'parent');
     $this->addFieldMapping('field_esener_code', 'code');
     $this->addFieldMapping('format')->defaultValue('plain_text');
-    $this->addFieldMapping('name', 'en');
-    $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
   }
-
 
 
   protected function createStub($migration, array $source) {
@@ -53,14 +51,13 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
   public function prepareRow($row) {
     $row->language = 'en';
     $row->parent = $this->getParent($row);
-    $row->ID = $row->code;
     return TRUE;
   }
 
   function prepare($entity, stdClass $row) {
     $entity->language = 'en';
-    $translationsData = array();
     $languages = array_keys(language_list());
+    $translationsData = array();
     foreach ($languages as $language) {
       if (!empty($row->{$language})) {
         $entity->name_field[$language][0]['value'] = $row->{$language};

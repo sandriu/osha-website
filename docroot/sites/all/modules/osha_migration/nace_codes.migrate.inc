@@ -1,12 +1,13 @@
 <?php
 
-class MigrateOshaNaceCodes extends DynamicMigration {
+class MigrateOshaNaceCodesTaxonomy extends DynamicMigration {
 
   protected $vocabulary = 'nace_codes';
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
-    $this->description = 'Import "Nace Codes" taxonomy from JSON file';
+
+    $this->description = 'Populate the "NACE Codes" taxonomy from JSON file in osha_migration module';
 
     $source_file = MigrationUtil::get_source_file($arguments);
     $this->map = new MigrateSQLMap($this->machineName,
@@ -37,7 +38,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
     $this->addFieldMapping('weight', 'weight');
   }
 
-  protected function createStub(/** @noinspection PhpUnusedParameterInspection */ $migration, array $source) {
+  protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
       $voc = taxonomy_vocabulary_machine_name_load($this->vocabulary);
@@ -109,8 +110,8 @@ class MigrateOshaNaceCodes extends DynamicMigration {
     );
   }
 
-  protected function generateMachineName($machine=NULL) {
-    return 'NaceCodes';
+  protected function generateMachineName() {
+    return MIGRATION_TAXONOMY_NACE_CODES;
   }
 
   private function getParent($row) {
@@ -169,7 +170,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
     );
   }
 
-  public static function getSourceDestinationFieldMappings() {
+  static function getSourceDestinationFieldMappings() {
     $languages = array_keys(language_list());
     $special = array(
       'et' => 'est',
@@ -231,7 +232,7 @@ class NaceCodesMigrationListJSON extends MigrateListJSON {
 
 class NaceCodesMigrationItemJSON extends MigrateItemJSON {
 
-  public static $cache;
+  static $cache;
 
   public function getItem($item_id) {
     if (empty(self::$cache)) {

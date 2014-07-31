@@ -63,7 +63,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
       $actual_parents = taxonomy_get_parents($term->tid);
       $this->assertEqual($parents[$code], count($actual_parents));
     }
-    Migration::deregisterMigration(MIGRATION_NACE_CODES);
+    Migration::deregisterMigration(MIGRATION_TAXONOMY_NACE_CODES);
   }
 
   /**
@@ -108,8 +108,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
       $actual_parents = taxonomy_get_parents($term->tid);
       $this->assertEqual($parents[$code], count($actual_parents));
     }
-
-    Migration::deregisterMigration(MIGRATION_ESENER);
+    Migration::deregisterMigration(MIGRATION_TAXONOMY_ESENER);
   }
 
 
@@ -161,10 +160,13 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   public function testThesaurusMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
 
-    $sourceFile = 'data/test/thesaurus2.json';
-    $result = $this->runMigration(MIGRATION_THESAURUS, CLASS_THESAURUS, $sourceFile);
-    $this->assertEqual($result, Migration::RESULT_COMPLETED,
-      t(MIGRATION_THESAURUS . ' returned RESULT_COMPLETED'));
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus2.json';
+    $result = $this->runMigration(
+      MIGRATION_TAXONOMY_THESAURUS,
+      'MigrateOshaTaxonomyThesaurus',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
 
     $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
     $this->assertEqual(2, count($terms));
@@ -200,22 +202,22 @@ class OshaMigrationsTest extends DrupalWebTestCase {
           break;
       }
     }
-    Migration::deregisterMigration(MIGRATION_THESAURUS);
+    Migration::deregisterMigration(MIGRATION_TAXONOMY_THESAURUS);
   }
 
   public function testTagsMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_TAGS);
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
 
-    $source = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
-    $result = $this->runMigration(MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source);
+    $result = $this->runMigration(
+      MIGRATION_TAXONOMY_TAGS,
+      'MigrateOshaTaxonomyTags',
+      $source_file
+    );
     $this->assertEqual($result, Migration::RESULT_COMPLETED);
 
     $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-    $this->assertEqual(16, count($terms));
-
-    $source_abs = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $source);
-    $json = json_decode(file_get_contents($source_abs), TRUE);
-
     $this->assertEqual(count($json), count($terms));
 
     $witness = array();
@@ -236,12 +238,16 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   }
 
   private function assertTranslations($translations, $term) {
+    try {
     $items = $translations[$term->name];
     foreach ($items as $field => $count) {
       $c = count($term->$field);
       $this->assertEqual($count, $c,
         sprintf('Translations for %s.%s are invalid (%s != %s)', $term->name, $field, $count, $c)
       );
+    }
+    } catch(Exception $e) {
+      var_dump(debug_backtrace());
     }
   }
 

@@ -1,9 +1,6 @@
 <?php
 
-class MigrateOshaPublicationTypesTaxonomy extends DynamicMigration {
-
-  protected $vocabulary = 'publication_types';
-  protected $cache = NULL;
+class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
