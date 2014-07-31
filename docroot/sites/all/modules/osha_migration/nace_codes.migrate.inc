@@ -1,22 +1,15 @@
 <?php
 
-class MigrateOshaNaceCodes extends DynamicMigration {
+class MigrateOshaNaceCodesTaxonomy extends DynamicMigration {
 
   protected $vocabulary = 'nace_codes';
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
 
-    $this->description = 'Import "Nace Codes" taxonomy from JSON file';
+    $this->description = 'Populate the "NACE Codes" taxonomy from JSON file in osha_migration module';
 
-    if (isset($arguments['file_name'])) {
-      $file_name = $arguments['file_name'];
-    }
-    else {
-      $file_name = 'data/nace_codes.json';
-    }
-    $source_file = sprintf('%s/%s', drupal_get_path('module', 'osha_migration'), $file_name);
-
+    $source_file = MigrationUtil::get_source_file($arguments);
     $this->map = new MigrateSQLMap($this->machineName,
       array(
         'NACE_REV_2_CODE' => array(
@@ -45,7 +38,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
     $this->addFieldMapping('weight', 'weight');
   }
 
-  protected function createStub(/** @noinspection PhpUnusedParameterInspection */ $migration, array $source) {
+  protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
       $voc = taxonomy_vocabulary_machine_name_load($this->vocabulary);
@@ -93,29 +86,32 @@ class MigrateOshaNaceCodes extends DynamicMigration {
     $assoc = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
     $entity->language = 'en';
     $translationsData = array();
-    $languages = $this->generateLanguagesWithFieldsMap();
-
+    $languages = $this->getSourceDestinationFieldMappings();
     foreach ($languages as $language => $fields) {
-      $this->addTranslationToEntityFromRow($entity, $assoc, $language, $fields);
-      $sourceLanguage = ($language == 'en' ? '' : 'en');
-      $translationsData[$language] = array(
-        'entity_type' => 'term',
-        'language' => $language,
-        'source' => $sourceLanguage,
-        'uid' => '1',
-        'status' => '1',
-        'translate' => '0',
-      );
+      foreach($fields as $target => $source) {
+        if(!empty($assoc[$source])) {
+          $entity->{$target}[$language][0]['value'] = $assoc[$source];
+        }
+      }
+      if($language != 'en') {
+        $translationsData[$language] = array(
+          'entity_type' => 'term',
+          'language' => $language,
+          'source' => 'en',
+          'uid' => '1',
+          'status' => '1',
+          'translate' => '0',
+        );
+      }
     }
-
     $entity->translations = (object) array(
       'original' => 'en',
       'data' => $translationsData
     );
   }
 
-  protected function generateMachineName($machine=NULL) {
-    return 'NaceCodes';
+  protected function generateMachineName() {
+    return MIGRATION_TAXONOMY_NACE_CODES;
   }
 
   private function getParent($row) {
@@ -174,87 +170,48 @@ class MigrateOshaNaceCodes extends DynamicMigration {
     );
   }
 
-  private function generateLanguagesWithFieldsMap() {
-    $languages = array(
-      'en' => 'en',
-      'bg' => 'bg',
-      'cs' => 'cs',
-      'da' => 'da',
-      'el' => 'el',
+  static function getSourceDestinationFieldMappings() {
+    $languages = array_keys(language_list());
+    $special = array(
       'et' => 'est',
-      'es' => 'es',
-      'fi' => 'fi',
-      'hr' => 'hr',
-      'hu' => 'hu',
-      'fr' => 'fr',
-      'it' => 'it',
-      'lt' => 'lt',
-      'lv' => 'lv',
-      'mt' => 'mt',
-      'nl' => 'nl',
-      'no' => 'no',
-      'pl' => 'pl',
-      'pt' => 'pt',
-      'ro' => 'ro',
-      'ru' => 'ru',
       'sv' => 'se',
       'sl' => 'si',
-      'sk' => 'sk',
-      'tr' => 'tr',
-      'de' => 'de'
     );
 
-    $specialLanguages = array('de', 'fr');
-    $defaultLanguage = 'en';
-
-    $languageFieldsMap = array();
-    foreach ($languages as $language => $field_language_code) {
-      if ($language == $defaultLanguage) {
-        $languageFieldsMap[$language] = array(
-          'description' => 'NACE_REV_2_DESCRIPTION',
-          'excludes' => 'excludes',
-          'includes' => 'includes',
-          'includes_also' => 'includes also'
+    $mappings = array();
+    foreach ($languages as $language) {
+      $code = $language;
+      if (array_key_exists($language, $special)) {
+        $code = $special[$language];
+      }
+      $mappings[$language] = array(
+        'name_field' => strtoupper($code) . "_DESC",
+        'description_field' => strtoupper($code) . "_DESC",
+        'field_nace_excludes' => strtoupper($code) . "_EXCL",
+        'field_nace_includes' => strtoupper($code) . "_INCL",
+        'field_nace_includes_also' => strtoupper($code) . "_INCL_ALSO"
+      );
+      // The fields below have different naming convention in JSON
+      if ($language == 'en') {
+        $mappings[$language] = array(
+          'name_field' => 'NACE_REV_2_DESCRIPTION',
+          'description_field' => 'NACE_REV_2_DESCRIPTION',
+          'field_nace_excludes' => 'excludes',
+          'field_nace_includes' => 'includes',
+          'field_nace_includes_also' => 'includes also'
         );
       }
-      else {
-        if (in_array($language, $specialLanguages)) {
-          $languageFieldsMap[$language] = array(
-            'description' => $field_language_code . "_Description",
-            'excludes' => $field_language_code . "_Excludes",
-            'includes' => $field_language_code . "_Includes",
-            'includes_also' => $field_language_code . "_Includes also"
+      else if ($language == 'de' || $language == 'fr') {
+        $mappings[$language] = array(
+            'name_field' => $code . "_Description",
+            'description_field' => $code . "_Description",
+            'field_nace_excludes' => $code . "_Excludes",
+            'field_nace_includes' => $code . "_Includes",
+            'field_nace_includes_also' => $code . "_Includes also"
           );
-        }
-        else {
-          $languageFieldsMap[$language] = array(
-            'description' => strtoupper($field_language_code) . "_DESC",
-            'excludes' => strtoupper($field_language_code) . "_EXCL",
-            'includes' => strtoupper($field_language_code) . "_INCL",
-            'includes_also' => strtoupper($field_language_code) . "_INCL_ALSO"
-          );
-        }
       }
     }
-    return $languageFieldsMap;
-  }
-
-  private function addTranslationToEntityFromRow(&$entity, $row, $language, $fields) {
-    if (!empty($row[$fields['description']])) {
-      $entity->name_field[$language][0]['value'] = $row[$fields['description']];
-    }
-    if (!empty($row[$fields['description']])) {
-      $entity->description_field[$language][0]['value'] = $row[$fields['description']];
-    }
-    if (!empty($row[$fields['includes']])) {
-      $entity->field_nace_includes[$language][0]['value'] = $row[$fields['includes']];
-    }
-    if (!empty($row[$fields['includes_also']])) {
-      $entity->field_nace_includes_also[$language][0]['value'] = $row[$fields['includes_also']];
-    }
-    if (!empty($row[$fields['excludes']])) {
-      $entity->field_nace_excludes[$language][0]['value'] = $row[$fields['excludes']];
-    }
+    return $mappings;
   }
 }
 
@@ -274,29 +231,16 @@ class NaceCodesMigrationListJSON extends MigrateListJSON {
 }
 
 class NaceCodesMigrationItemJSON extends MigrateItemJSON {
-  protected $data = array();
-  public static $cache;
+
+  static $cache;
 
   public function getItem($item_id) {
-    if (empty($this->data)) {
-      $cache = $this->loadJSONUrl($this->itemUrl);
-      foreach ($cache as $item) {
-        self::$cache[$item['NACE_REV_2_CODE']] = $item;
-        $this->data[$item['NACE_REV_2_CODE']] = json_decode(json_encode($item), FALSE);
+    if (empty(self::$cache)) {
+      $rows = json_decode(file_get_contents($this->itemUrl), TRUE);
+      foreach($rows as $row) {
+        self::$cache[$row['NACE_REV_2_CODE']] = $row;
       }
     }
-
-    return isset($this->data[$item_id]) ? $this->data[$item_id] : NULL;
-  }
-
-  protected function loadJSONUrl($item_url) {
-    if (empty($this->httpOptions)) {
-      $json = file_get_contents($item_url);
-    }
-    else {
-      $response = drupal_http_request($item_url, $this->httpOptions);
-      $json = $response->data;
-    }
-    return json_decode($json, TRUE);
+    return isset(self::$cache[$item_id]) ? (object)self::$cache[$item_id] : NULL;
   }
 }

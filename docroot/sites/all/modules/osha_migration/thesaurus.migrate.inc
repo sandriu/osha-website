@@ -1,15 +1,11 @@
 <?php
 
-class MigrateOshaThesaurus extends DynamicMigration {
-  protected $vocabulary = NULL;
+class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
-
-    $this->description = 'Import "Thesaurus" taxonomy from JSON file';
-    $this->vocabulary = 'thesaurus';
-    $file_name = $arguments['file_name'];
-    $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
+    $this->description = 'Populate the "Thesaurus" taxonomy from JSON file in osha_migration module';
+    $source_file = MigrationUtil::get_source_file($arguments);
 
     $this->map = new MigrateSQLMap(
       $this->machineName,
@@ -31,7 +27,7 @@ class MigrateOshaThesaurus extends DynamicMigration {
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
+    $this->destination = new MigrateDestinationTerm(TAXONOMY_THESAURUS, $term_options);
 
     $this->addFieldMapping('field_thesaurus_code', 'code');
     $this->addFieldMapping('parent', 'parent');
@@ -43,7 +39,7 @@ class MigrateOshaThesaurus extends DynamicMigration {
   protected function createStub(/** @noinspection PhpUnusedParameterInspection */ $migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
-      $voc = taxonomy_vocabulary_machine_name_load($this->vocabulary);
+      $voc = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
     }
     $term = new stdClass();
     $term->parent = 0;
@@ -148,7 +144,7 @@ class MigrateOshaThesaurus extends DynamicMigration {
   }
 
   protected function generateMachineName() {
-    return 'ThesaurusTaxonomy';
+    return MIGRATION_TAXONOMY_THESAURUS;
   }
 }
 

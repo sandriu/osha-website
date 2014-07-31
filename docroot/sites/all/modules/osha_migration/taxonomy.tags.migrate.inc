@@ -1,24 +1,18 @@
 <?php
 
 /**
- * Class MigrateOshaCategories migrates categories.json taxonomy. The data
+ * Class MigrateOshaTaxonomyTags migrates tags.json taxonomy. The data
  * is stored inside the <em>Tags</em> taxonomy.
  *
  * Part of the <em>OSHA Taxonomies</em> translation group
  */
-class MigrateOshaCategories extends DynamicMigration {
-
-  /** @var string Target vocabulary */
-  protected $vocabulary = TAXONOMY_CATEGORIES;
+class MigrateOshaTaxonomyTags extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
+    $this->description = 'Populate the "Tags" taxonomy from JSON file in osha_migration module';
 
-    $this->description = 'Import "Tags" taxonomy from JSON file';
-
-    $file_name = $arguments['file_name'];
-    $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
-
+    $source_file = MigrationUtil::get_source_file($arguments);
     $this->map = new MigrateSQLMap(
       $this->machineName,
       array(
@@ -26,20 +20,20 @@ class MigrateOshaCategories extends DynamicMigration {
           'type' => 'varchar',
           'length' => 100,
           'not null' => TRUE,
-          'description' => 'Categories code'
+          'description' => 'Tag code'
         )
       ),
       MigrateDestinationTerm::getKeySchema()
     );
 
     $this->source = new MigrateSourceList(
-      new CategoriesTaxonomyMigrationListJSON($source_file),
-      new CategoriesTaxonomyMigrationItemJSON($source_file, array()),
+      new TagsTaxonomyMigrationListJSON($source_file),
+      new TagsTaxonomyMigrationItemJSON($source_file, array()),
       $this->fields()
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
+    $this->destination = new MigrateDestinationTerm(TAXONOMY_TAGS, $term_options);
 
     $this->addFieldMapping('field_tags_code', 'code');
     $this->addFieldMapping('parent', 'parent');
@@ -97,11 +91,11 @@ class MigrateOshaCategories extends DynamicMigration {
   }
 
   protected function generateMachineName() {
-    return 'TagsTaxonomy';
+    return MIGRATION_TAXONOMY_TAGS;
   }
 }
 
-class CategoriesTaxonomyMigrationListJSON extends MigrateListJSON {
+class TagsTaxonomyMigrationListJSON extends MigrateListJSON {
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {
@@ -111,7 +105,7 @@ class CategoriesTaxonomyMigrationListJSON extends MigrateListJSON {
   }
 }
 
-class CategoriesTaxonomyMigrationItemJSON extends MigrateItemJSON {
+class TagsTaxonomyMigrationItemJSON extends MigrateItemJSON {
   protected $data = array();
 
   public function getItem($item_id) {

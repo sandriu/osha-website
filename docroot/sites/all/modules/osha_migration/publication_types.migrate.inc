@@ -1,17 +1,12 @@
 <?php
 
-class MigrateOshaPublicationTypesTaxonomy extends DynamicMigration {
-
-  protected $vocabulary = 'publication_types';
-  protected $cache = NULL;
+class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
+    $this->description = 'Populate the "Publication types" taxonomy from JSON file in osha_migration module';
 
-    $this->description = 'Import the "Publication Types" taxonomy';
-
-    $source_file = sprintf('%s/data/publication_types.json', drupal_get_path('module', 'osha_migration'));
-    $this->generateCacheFromFile($source_file);
+    $source_file = MigrationUtil::get_source_file($arguments);
 
     $this->map = new MigrateSQLMap($this->machineName,
       array(
@@ -31,45 +26,21 @@ class MigrateOshaPublicationTypesTaxonomy extends DynamicMigration {
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
+    $this->destination = new MigrateDestinationTerm(TAXONOMY_PUBLICATION_TYPES, $term_options);
 
-    $this->addFieldMapping('parent', 'parent');
     $this->addFieldMapping('field_publication_type_code', 'code');
     $this->addFieldMapping('format')->defaultValue('plain_text');
     $this->addFieldMapping('name', 'en');
-    $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
-  }
-
-  protected function createStub(/** @noinspection PhpUnusedParameterInspection */ $migration, array $source) {
-    static $voc = NULL;
-    if ($voc == NULL) {
-      $voc = taxonomy_vocabulary_machine_name_load($this->vocabulary);
-    }
-    $term = new stdClass();
-    $term->parent = 0;
-    $term->language = 'en';
-    $term->name = t('Stub for @code', array('@code' => $source[0]));
-    $term->vid = $voc->vid;
-    taxonomy_term_save($term);
-    return array($term->tid);
-  }
-
-  public function prepareRow($row) {
-    $row->parent = 0;
-    $row->language = 'en';
-    $row->parent = $this->getParent($row);
-    $row->ID = $row->code;
-    return TRUE;
   }
 
   function prepare($entity, stdClass $row) {
-    $assoc = $this->cache[$row->ID];
     $entity->language = 'en';
+    $languages = array_keys(language_list());
     $translationsData = array();
-    $languages = $this->generateLanguagesWithFieldsMap();
-
-    foreach ($languages as $language => $fields) {
-      $this->addTranslationToEntityFromRow($entity, $assoc, $language, $fields);
+    foreach ($languages as $language) {
+      if (!empty($row->{$language})) {
+        $entity->name_field[$language][0]['value'] = $row->{$language};
+      }
       $sourceLanguage = ($language == 'en') ? '' : 'en';
       $translationsData[$language] = array(
         'entity_type' => 'term',
@@ -80,115 +51,26 @@ class MigrateOshaPublicationTypesTaxonomy extends DynamicMigration {
         'translate' => '0',
       );
     }
-
     $entity->translations = (object) array(
       'original' => 'en',
       'data' => $translationsData
     );
   }
 
-  protected function generateCacheFromFile($source_file) {
-    $rows = json_decode(file_get_contents($source_file), TRUE);
-    foreach ($rows as $row) {
-      $this->cache[$row['code']] = $row;
-    }
-  }
-
   protected function generateMachineName() {
-    return 'PublicationTypesTaxonomy';
-  }
-
-  private function getParent($row) {
-    $parent_code = $this->getParentCode($row);
-    if (!empty($parent_code)) {
-      $parent_id = self::_getTidByCode($parent_code);
-      if (empty($parent_id)) {
-        $parent_id = $this->handleSourceMigration('PublicationTypesTaxonomy', $parent_code);
-      }
-      return $parent_id;
-    }
-    return 0;
-  }
-
-  private static function _getTidByCode($code) {
-    $query = new EntityFieldQuery();
-    $result = $query
-      ->entityCondition('entity_type', 'taxonomy_term')
-      ->fieldCondition('field_publication_type_code', 'value', $code, '=')
-      ->execute();
-    if (!empty($result['taxonomy_term'])) {
-      return current(array_keys($result['taxonomy_term']));
-    }
-    return array();
-  }
-
-
-  private function getParentCode($row) {
-    return $row->parent_code;
+    return MIGRATION_TAXONOMY_PUBLICATION_TYPES;
   }
 
   function fields() {
     return array(
-      'parent' => 'Parent tid',
       'en' => 'Text of field',
       'code' => 'Item code (PK)',
     );
   }
-
-  private function generateLanguagesWithFieldsMap() {
-    $languages = array(
-      'en' => 'en',
-      'bg' => 'bg',
-      'cs' => 'cs',
-      'da' => 'da',
-      'el' => 'el',
-      'et' => 'est',
-      'es' => 'es',
-      'fi' => 'fi',
-      'hr' => 'hr',
-      'hu' => 'hu',
-      'fr' => 'fr',
-      'it' => 'it',
-      'lt' => 'lt',
-      'lv' => 'lv',
-      'mt' => 'mt',
-      'nl' => 'nl',
-      'no' => 'no',
-      'pl' => 'pl',
-      'pt' => 'pt',
-      'ro' => 'ro',
-      'ru' => 'ru',
-      'sv' => 'se',
-      'sl' => 'si',
-      'sk' => 'sk',
-      'tr' => 'tr',
-      'de' => 'de'
-    );
-    $languageFieldsMap = array();
-    foreach ($languages as $language => $field_language_code) {
-      $languageFieldsMap[$language] = array(
-        'description' => $field_language_code
-      );
-    }
-    return $languageFieldsMap;
-  }
-
-  private function addTranslationToEntityFromRow(&$entity, $row, $language, $fields) {
-    if (!empty($row[$fields['description']])) {
-      $entity->name_field[$language][0]['value'] = $row[$fields['description']];
-    }
-    if (!empty($row[$fields['description']])) {
-      $entity->description_field[$language][0]['value'] = $row[$fields['description']];
-    }
-  }
 }
 
 class PublicationTypesTaxonomyMigrationListJSON extends MigrateListJSON {
-  /**
-   * The default implementation assumes the IDs are top-level array elements,
-   * but the array elements are the data items - we need to look inside them
-   * for the IDs.
-   */
+
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {
@@ -201,13 +83,7 @@ class PublicationTypesTaxonomyMigrationListJSON extends MigrateListJSON {
 class PublicationTypesTaxonomyMigrationItemJSON extends MigrateItemJSON {
   protected $data = array();
 
-  /**
-   * Two problems with the default getItem() - it reads and parses the JSON on
-   * each call, which we don't want to do for multiple items in the file; and,
-   * we need to retrieve a given item from the file according to its 'id' element.
-   */
   public function getItem($item_id) {
-    // Object caching
     if (empty($this->data)) {
       $data = $this->loadJSONUrl($this->itemUrl);
       if ($data) {

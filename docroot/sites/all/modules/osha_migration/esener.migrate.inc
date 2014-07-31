@@ -1,25 +1,12 @@
 <?php
 
-class MigrateOshaEsenerTaxonomy extends DynamicMigration {
-
-  protected $vocabulary = 'Esener';
-  protected $cache = NULL;
+class MigrateOshaTaxonomyEsener extends DynamicMigration {
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
+    $this->description = 'Populate the "Esener" taxonomy from JSON file in osha_migration module';
 
-    $this->description = 'Import the "Esener" taxonomy into Esener';
-
-    if (isset($arguments['file_name'])) {
-      $file_name = $arguments['file_name'];
-    }
-    else {
-      $file_name = 'data/esener.json';
-    }
-    $source_file = sprintf('%s/%s', drupal_get_path('module', 'osha_migration'), $file_name);
-
-    $this->generateCacheFromFile($source_file);
-
+    $source_file = MigrationUtil::get_source_file($arguments);
     $this->map = new MigrateSQLMap($this->machineName,
       array(
         'code' => array(
@@ -38,21 +25,19 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
+    $this->destination = new MigrateDestinationTerm(TAXONOMY_ESENER, $term_options);
 
+    $this->addFieldMapping('name', 'en');
     $this->addFieldMapping('parent', 'parent');
     $this->addFieldMapping('field_esener_code', 'code');
     $this->addFieldMapping('format')->defaultValue('plain_text');
-    $this->addFieldMapping('name', 'en');
-    $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
   }
 
 
-
-  protected function createStub(/** @noinspection PhpUnusedParameterInspection */ $migration, array $source) {
+  protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
-      $voc = taxonomy_vocabulary_machine_name_load($this->vocabulary);
+      $voc = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
     }
     $term = new stdClass();
     $term->parent = 0;
@@ -64,47 +49,38 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
   }
 
   public function prepareRow($row) {
-    $row->parent = 0;
     $row->language = 'en';
     $row->parent = $this->getParent($row);
-    $row->ID = $row->code;
     return TRUE;
   }
 
   function prepare($entity, stdClass $row) {
-    $assoc = $this->cache[$row->ID];
     $entity->language = 'en';
+    $languages = array_keys(language_list());
     $translationsData = array();
-    $languages = $this->generateLanguagesWithFieldsMap();
-
-    foreach ($languages as $language => $fields) {
-      $this->addTranslationToEntityFromRow($entity, $assoc, $language, $fields);
-      $sourceLanguage = ($language == 'en') ? '' : 'en';
-      $translationsData[$language] = array(
-        'entity_type' => 'term',
-        'language' => $language,
-        'source' => $sourceLanguage,
-        'uid' => '1',
-        'status' => '1',
-        'translate' => '0',
-      );
+    foreach ($languages as $language) {
+      if (!empty($row->{$language})) {
+        $entity->name_field[$language][0]['value'] = $row->{$language};
+      }
+      if ($language != 'en') {
+        $translationsData[$language] = array(
+          'entity_type' => 'term',
+          'language' => $language,
+          'source' => 'en',
+          'uid' => '1',
+          'status' => '1',
+          'translate' => '0',
+        );
+      }
     }
-
     $entity->translations = (object) array(
       'original' => 'en',
       'data' => $translationsData
     );
   }
 
-  protected function generateCacheFromFile($source_file) {
-    $rows = json_decode(file_get_contents($source_file), TRUE);
-    foreach ($rows as $row) {
-      $this->cache[$row['code']] = $row;
-    }
-  }
-
   protected function generateMachineName() {
-    return 'EsenerTaxonomy';
+    return MIGRATION_TAXONOMY_ESENER;
   }
 
   private function getParent($row) {
@@ -112,7 +88,7 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
     if (!empty($parent_code)) {
       $parent_id = self::_getTidByCode($parent_code);
       if (empty($parent_id)) {
-        $parent_id = $this->handleSourceMigration('EsenerTaxonomy', $parent_code);
+        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
       }
       return $parent_id;
     }
@@ -133,7 +109,7 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
 
 
   private function getParentCode($row) {
-    return $row->parent_code;
+    return !empty($row->parent_code) ? $row->parent_code : 0;
   }
 
   function fields() {
@@ -143,61 +119,10 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
       'code' => 'Item code (PK)',
     );
   }
-
-  private function generateLanguagesWithFieldsMap() {
-    $languages = array(
-      'en' => 'en',
-      'bg' => 'bg',
-      'cs' => 'cs',
-      'da' => 'da',
-      'el' => 'el',
-      'et' => 'est',
-      'es' => 'es',
-      'fi' => 'fi',
-      'hr' => 'hr',
-      'hu' => 'hu',
-      'fr' => 'fr',
-      'it' => 'it',
-      'lt' => 'lt',
-      'lv' => 'lv',
-      'mt' => 'mt',
-      'nl' => 'nl',
-      'no' => 'no',
-      'pl' => 'pl',
-      'pt' => 'pt',
-      'ro' => 'ro',
-      'ru' => 'ru',
-      'sv' => 'se',
-      'sl' => 'si',
-      'sk' => 'sk',
-      'tr' => 'tr',
-      'de' => 'de'
-    );
-    $languageFieldsMap = array();
-    foreach ($languages as $language => $field_language_code) {
-      $languageFieldsMap[$language] = array(
-        'description' => $field_language_code
-      );
-    }
-    return $languageFieldsMap;
-  }
-
-  private function addTranslationToEntityFromRow(&$entity, $row, $language, $fields) {
-    if (!empty($row[$fields['description']])) {
-      $entity->name_field[$language][0]['value'] = $row[$fields['description']];
-    }
-    if (!empty($row[$fields['description']])) {
-      $entity->description_field[$language][0]['value'] = $row[$fields['description']];
-    }
-  }
 }
 
 class EsenerTaxonomyMigrationListJSON extends MigrateListJSON {
-  /**
-   * The default implementation assumes the IDs are top-level array elements,
-   * but the array elements are the data items - we need to look inside them
-   * for the IDs.
-   */
+
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {
@@ -208,23 +133,16 @@ class EsenerTaxonomyMigrationListJSON extends MigrateListJSON {
 }
 
 class EsenerTaxonomyMigrationItemJSON extends MigrateItemJSON {
-  protected $data = array();
 
-  /**
-   * Two problems with the default getItem() - it reads and parses the JSON on
-   * each call, which we don't want to do for multiple items in the file; and,
-   * we need to retrieve a given item from the file according to its 'id' element.
-   */
+  private $cache = array();
+
   public function getItem($item_id) {
-    // Object caching
-    if (empty($this->data)) {
-      $data = $this->loadJSONUrl($this->itemUrl);
-      if ($data) {
-        foreach ($data as $item) {
-          $this->data[$item->code] = $item;
-        }
+    if (empty($this->cache)) {
+      $rows = $this->loadJSONUrl($this->itemUrl);
+      foreach ($rows as $row) {
+        $this->cache[$row->code] = $row;
       }
     }
-    return isset($this->data[$item_id]) ? $this->data[$item_id] : NULL;
+    return isset($this->cache[$item_id]) ? $this->cache[$item_id] : NULL;
   }
 }
