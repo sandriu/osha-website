@@ -214,17 +214,26 @@ class NewsContentListCSV extends MigrateList {
   protected $multilingualFields;
   public static $data = array();
 
-  public function __construct($file, $multilingualFields = array()) {
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct($file, $multilingual_fields = array()) {
     parent::__construct();
     $this->file = $file;
-    $this->multilingualFields = $multilingualFields;
+    $this->multilingualFields = $multilingual_fields;
   }
 
-  public function  __toString() {
+  /**
+   * {@inheritdoc}
+   */
+  public function __toString() {
     return $this->file;
   }
 
-  protected function parse_multilingual_csv() {
+  /**
+   * Parse the CSV file and populate the local cache.
+   */
+  protected function parseMultilingualCSV() {
     $handle = fopen($this->file, 'r');
     $fields = $data = fgetcsv($handle, 1000, ';');
     $final = [];
@@ -242,9 +251,10 @@ class NewsContentListCSV extends MigrateList {
     }
 
     foreach ($final as $id => $row) {
-      if(isset($row['title']['en'])) {
+      if (isset($row['title']['en'])) {
         self::$data[$id] = $final[$id];
-      } else {
+      }
+      else {
         drupal_set_message(
           sprintf('No english translation for row:%s', $id),
           'warning'
@@ -253,13 +263,19 @@ class NewsContentListCSV extends MigrateList {
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getIdList() {
     if (empty(self::$data)) {
-      $this->parse_multilingual_csv();
+      $this->parseMultilingualCSV();
     }
     return array_keys(self::$data);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function computeCount() {
     return count(self::$data);
   }
@@ -267,9 +283,18 @@ class NewsContentListCSV extends MigrateList {
 
 class NewsContentItemCSV extends MigrateItem {
 
+  /**
+   * Retrieve one item from the source.
+   *
+   * @param string $item_id
+   *   Item identifier
+   *
+   * @return object
+   *   Source object
+   */
   public function getItem($item_id) {
     if (array_key_exists($item_id, NewsContentListCSV::$data)) {
-      return (object)NewsContentListCSV::$data[$item_id];
+      return (object) NewsContentListCSV::$data[$item_id];
     }
     return NULL;
   }

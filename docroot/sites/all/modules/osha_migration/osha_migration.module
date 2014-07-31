@@ -8,8 +8,9 @@ define('MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
 define('MIGRATION_CONTENT_TYPE_NEWS', 'News');
 
 /**
- * You must implement hook_migrate_api(), setting the API level to 2, for
- * your migration classes to be recognized by the Migrate module.
+ * Implements hook_migrate_api().
+ *
+ * Set the API level to 2, for migration classes to be recognized by Migrate.
  */
 function osha_migration_migrate_api() {
   $migration_module_dir = drupal_get_path('module', 'osha_migration');
@@ -39,14 +40,14 @@ function osha_migration_migrate_api() {
       MIGRATION_CONTENT_TYPE_NEWS => array(
         'class_name' => 'MigrateOshaNews',
         'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
-      )
-    )
+      ),
+    ),
   );
   return $api;
 }
 
 /**
- * Implements hook_schema_alter()
+ * Implements hook_schema_alter().
  */
 function osha_migration_schema_alter(&$schema) {
   if (isset($schema['taxonomy_term_data'])) {
@@ -78,9 +79,10 @@ function osha_migration_schema_alter(&$schema) {
 }
 
 /**
- * Retrieve the root directory for the migration data folder
- * @return string|null Path on local disk
- * @throws MigrateException When the variable is empty
+ * Retrieve the root directory for the migration data folder.
+ *
+ * @return string|null
+ *   Path on local disk
  */
 function osha_migration_get_data_dir() {
   $ret = variable_get('osha_data_dir', NULL);
