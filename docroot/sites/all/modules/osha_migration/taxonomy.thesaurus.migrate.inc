@@ -61,53 +61,23 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
   }
 
   public function prepare($entity, stdClass $row) {
-    $entity->language = 'en';
-    $translationsData = array();
-    $languages = array(
-      'nl',
-      'sl',
-      'it',
-      'lv',
-      'es',
-      'cs',
-      'pt',
-      'el',
-      'lt',
-      'da',
-      'mt',
-      'pl',
-      'hu',
-      'sk',
-      'et',
-      'de',
-      'ro',
-      'fr',
-      'sh',
-      'bg',
-      'sv',
-      'fi',
-      'tr',
-      'en'
-    );
-
-    foreach ($languages as $language) {
-      if (!empty($row->$language)) {
-        $entity->name_field[$language][0]['value'] = $row->$language;
-        $entity->description_field[$language][0]['value'] = $row->$language;
-        $sourceLanguage = ($language == 'en' ? '' : 'en');
-        $translationsData[$language] = array(
-          'entity_type' => 'term',
-          'language' => $language,
-          'source' => $sourceLanguage,
-          'uid' => '1',
-          'status' => '1',
-          'translate' => '0',
-        );
+    $migration = Migration::currentMigration();
+    $entity_type = $migration->getDestination()->getEntityType();
+    $translation_handler = entity_translation_get_handler($entity_type, $entity);
+    $entity->translations = $translation_handler->getTranslations();
+    $supported_languages = array_keys(language_list());
+    foreach ($supported_languages as $lang_code) {
+      if (!empty($row->$lang_code)) {
+        $entity->name_field[$lang_code][0]['value'] = $row->$lang_code;
+        if($lang_code != $row->language) { // Don't translate default language (en)
+          if (!isset($entity->translations->data[$lang_code])) {
+            $translation_handler->setTranslation(array(
+              'translate' => 0, 'status' => 1, 'uid' => 1,
+              'language' => $lang_code, 'source' => $row->language
+            ));
+          }
+        }
       }
-      $entity->translations = (object) array(
-        'original' => 'en',
-        'data' => $translationsData
-      );
     }
   }
 
@@ -189,21 +159,17 @@ class ThesaurusMigrationItemJSON extends MigrateItemJSON {
           $item[$label['@language']] = $label['@value'];
         }
         $item['type'] = $rawItem['@type'];
-        $this->data[$item['code']] = json_decode(json_encode($item), FALSE);
+        $this->data[$item['code']] = (object)$item;
       }
     }
-
     return isset($this->data[$item_id]) ? $this->data[$item_id] : NULL;
   }
 
   protected function loadJSONUrl($item_url) {
-    if (empty($this->httpOptions)) {
-      $json = file_get_contents($item_url);
-    }
-    else {
-      $response = drupal_http_request($item_url, $this->httpOptions);
-      $json = $response->data;
-    }
-    return json_decode($json, TRUE);
+    return json_decode(file_get_contents($item_url), TRUE);
+  }
+
+  function getData() {
+    return $this->data;
   }
 }

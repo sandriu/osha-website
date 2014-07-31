@@ -168,39 +168,31 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     );
     $this->assertEqual($result, Migration::RESULT_COMPLETED);
 
+    $tmp = new ThesaurusMigrationItemJSON($source_file, array());
+    $tmp->getItem(0);
+    $witnesses = $tmp->getData();
+
     $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-    $this->assertEqual(2, count($terms));
+    $this->assertEqual(count($witnesses), count($terms));
 
-    $translations = array(
-      "European organisations" => array(
-        "name_field" => 23,
-        "description_field" => 23
-      ),
-      "Senior Labour Inspectors Committee" => array(
-        "name_field" => 23,
-        "description_field" => 23
-      )
-    );
+    $parents = array("06641B" => 0, "07401C" => 1);
 
-    $parentRelations = array(
-      "Senior Labour Inspectors Committee" => "European organisations",
-      "European organisations" => NULL
-    );
-
+    // Test node name_field value in all languages
+    $languages = array_keys(language_list());
     foreach ($terms as $term) {
-      $this->assertTranslations($translations, $term);
-
-      $parents = taxonomy_get_parents($term->tid);
-      switch ($term->name) {
-        case 'European organisations':
-          $this->assertEqual(0, count($parents));
-          break;
-        default:
-          $this->assertEqual(1, count($parents));
-          $p = array_pop($parents);
-          $this->assertEqual($parentRelations[$term->name], $p->name);
-          break;
+      $code = $term->field_thesaurus_code[LANGUAGE_NONE][0]['value'];
+      $source = $witnesses[$code];
+      foreach($languages as $language) {
+        if(!empty($source->{$language})) {
+          $this->assertEqual(
+            $source->$language,
+            $term->name_field[$language][0]['value'],
+            sprintf('Invalid "%s" translation for "%s.name_field"', $language, $code)
+          );
+        }
       }
+      $actual_parents = taxonomy_get_parents($term->tid);
+      $this->assertEqual($parents[$code], count($actual_parents));
     }
     Migration::deregisterMigration(MIGRATION_TAXONOMY_THESAURUS);
   }
@@ -235,20 +227,6 @@ class OshaMigrationsTest extends DrupalWebTestCase {
       );
     }
     Migration::deregisterMigration(MIGRATION_TAXONOMY_TAGS);
-  }
-
-  private function assertTranslations($translations, $term) {
-    try {
-    $items = $translations[$term->name];
-    foreach ($items as $field => $count) {
-      $c = count($term->$field);
-      $this->assertEqual($count, $c,
-        sprintf('Translations for %s.%s are invalid (%s != %s)', $term->name, $field, $count, $c)
-      );
-    }
-    } catch(Exception $e) {
-      var_dump(debug_backtrace());
-    }
   }
 }
 

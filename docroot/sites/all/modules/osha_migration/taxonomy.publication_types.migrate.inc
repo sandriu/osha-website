@@ -63,8 +63,8 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
   function fields() {
     return array(
-      'en' => 'Term name in english',
-      'code' => 'Term code (PK)',
+      'en' => 'TerText of field',
+      'code' => 'Item code (PK)',
     );
   }
 }
@@ -81,7 +81,6 @@ class PublicationTypesTaxonomyMigrationListJSON extends MigrateListJSON {
 }
 
 class PublicationTypesTaxonomyMigrationItemJSON extends MigrateItemJSON {
-
   protected $data = array();
 
   public function getItem($item_id) {
