@@ -32,7 +32,7 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm(TAXONOMY_PUBLICATION_TYPES, $term_options);
+    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_PUBLICATION_TYPES, $term_options);
 
     $this->addFieldMapping('field_publication_type_code', 'code');
     $this->addFieldMapping('format')->defaultValue('plain_text');

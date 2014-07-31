@@ -114,7 +114,7 @@ class MigrateOshaNews extends DynamicMigration {
     $tags = $row->subject . ', ' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
-      TAXONOMY_THESAURUS,
+      OSHA_TAXONOMIES_THESAURUS,
       'field_thesaurus_code',
       explode(',', $row->multilingual_thesaurus)
     );

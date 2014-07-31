@@ -40,7 +40,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm(TAXONOMY_TAGS, $term_options);
+    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_TAGS, $term_options);
 
     $this->addFieldMapping('field_tags_code', 'code');
     $this->addFieldMapping('parent', 'parent');

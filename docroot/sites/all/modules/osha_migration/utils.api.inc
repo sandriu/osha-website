@@ -164,7 +164,7 @@ class MigrationUtil {
         }
       }
     }
-    return self::findTidByTaxonomyField(TAXONOMY_TAGS, $term_field, $ret, LANGUAGE_NONE);
+    return self::findTidByTaxonomyField(OSHA_TAXONOMIES_TAGS, $term_field, $ret, LANGUAGE_NONE);
   }
 
   /**

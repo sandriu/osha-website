@@ -31,7 +31,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
    * Tests NACE codes migration.
    */
   public function testNaceCodesMigration() {
-    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_NACE_CODES);
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_NACE_CODES);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/nace_codes.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
@@ -84,7 +84,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
    * Test the ESENER migration.
    */
   public function testEsenerMigration() {
-    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_ESENER);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/esener.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
@@ -130,7 +130,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
    * Test publication types migration.
    */
   public function testPublicationTypesMigration() {
-    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_PUBLICATION_TYPES);
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_PUBLICATION_TYPES);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
@@ -172,7 +172,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
    * Tests thesaurus migration.
    */
   public function testThesaurusMigration() {
-    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_THESAURUS);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
     $result = MigrationUtil::runMigration(
@@ -215,7 +215,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
    * Test tags migration.
    */
   public function testTagsMigration() {
-    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_TAGS);
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_TAGS);
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
 

@@ -33,7 +33,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm(TAXONOMY_ESENER, $term_options);
+    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_ESENER, $term_options);
 
     $this->addFieldMapping('name', 'en');
     $this->addFieldMapping('parent', 'parent');
@@ -55,7 +55,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
   protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
-      $voc = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
+      $voc = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_ESENER);
     }
     $term = new stdClass();
     $term->parent = 0;

@@ -34,7 +34,7 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm(TAXONOMY_THESAURUS, $term_options);
+    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_THESAURUS, $term_options);
 
     $this->addFieldMapping('field_thesaurus_code', 'code');
     $this->addFieldMapping('parent', 'parent');
@@ -57,7 +57,7 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
   protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
-      $voc = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
+      $voc = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_THESAURUS);
     }
     $term = new stdClass();
     $term->parent = 0;
