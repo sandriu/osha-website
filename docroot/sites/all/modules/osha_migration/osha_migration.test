@@ -72,46 +72,41 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   public function testEsenerMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
 
-    $sourceFile = 'data/test/esener.json';
-    $result = $this->runMigration(MIGRATION_ESENER, CLASS_ESENER, $sourceFile);
-    $this->assertEqual($result, Migration::RESULT_COMPLETED,
-      t('EsenerTest returned RESULT_COMPLETED'));
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/esener.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+    $result = $this->runMigration(
+      MIGRATION_TAXONOMY_ESENER,
+      'MigrateOshaTaxonomyEsener',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
 
     $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-    $this->assertEqual(2, count($terms));
+    $this->assertEqual(count($json), count($terms));
 
-    $translations = array(
-      "General health and safety management in the establishment" => array(
-        "name_field" => 23,
-        "description_field" => 23,
-        "field_esener_code" => 1
-      ),
-      "Indicator" => array(
-        "name_field" => 1,
-        "description_field" => 1,
-        "field_esener_code" => 1
-      )
-    );
+    $witnesses = array();
+    foreach ($json as $arr) {
+      $code = $arr['code'];
+      $witnesses[$code] = $arr;
+    }
 
-    $parentRelations = array(
-      "General health and safety management in the establishment" => "Indicator",
-      "Indicator" => NULL
-    );
-
+    $parents = array("indicator" => 0, "ghsme" => 1, 'mm154' => 1);
+    // Test node name_field value in all languages
+    $languages = array_keys(language_list());
     foreach ($terms as $term) {
-      $this->assertTranslations($translations, $term);
-
-      $parents = taxonomy_get_parents($term->tid);
-      switch ($term->name) {
-        case 'Indicator':
-          $this->assertEqual(0, count($parents));
-          break;
-        default:
-          $this->assertEqual(1, count($parents));
-          $p = array_pop($parents);
-          $this->assertEqual($parentRelations[$term->name], $p->name);
-          break;
+      $code = $term->field_esener_code[LANGUAGE_NONE][0]['value'];
+      $source = $witnesses[$code];
+      foreach($languages as $language) {
+        if(!empty($source[$language])) {
+          $this->assertEqual(
+            $source[$language],
+            $term->name_field[$language][0]['value'],
+            sprintf('Invalid "%s" translation for "%s.name_field"', $language, $code)
+          );
+        }
       }
+      $actual_parents = taxonomy_get_parents($term->tid);
+      $this->assertEqual($parents[$code], count($actual_parents));
     }
 
     Migration::deregisterMigration(MIGRATION_ESENER);
