@@ -5,3 +5,5 @@
  */
 
 include_once 'osha_news.features.inc';
+
+define('CONTENT_TYPE_NEWS', 'news');

@@ -5,6 +5,7 @@ define('MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
 define('MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
 define('MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
 define('MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
+define('MIGRATION_CONTENT_TYPE_NEWS', 'News');
 
 /**
  * You must implement hook_migrate_api(), setting the API level to 2, for
@@ -38,6 +39,11 @@ function osha_migration_migrate_api() {
       MIGRATION_TAXONOMY_TAGS => array(
         'class_name' => 'MigrateOshaTaxonomyTags',
         'file_name' => $migration_module_dir . '/data/tags.json',
+        'group_name' => 'OSHA MIGRATION'
+      ),
+      MIGRATION_CONTENT_TYPE_NEWS => array(
+        'class_name' => 'MigrateOshaNews',
+        'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
         'group_name' => 'OSHA MIGRATION'
       )
     )
