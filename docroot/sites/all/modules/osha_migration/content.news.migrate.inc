@@ -112,7 +112,7 @@ class MigrateOshaNews extends DynamicMigration {
   public function prepareRow($row) {
     $row->language = 'en';
     $tags = $row->subject . ', ' . $row->subcategory;
-    $row->subject = MigrationUtil::decode_tags_terms($tags);
+    $row->subject = MigrationUtil::decodeTagsTerms($tags);
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
       TAXONOMY_THESAURUS,
       'field_thesaurus_code',
@@ -284,13 +284,7 @@ class NewsContentListCSV extends MigrateList {
 class NewsContentItemCSV extends MigrateItem {
 
   /**
-   * Retrieve one item from the source.
-   *
-   * @param string $item_id
-   *   Item identifier
-   *
-   * @return object
-   *   Source object
+   * {@inheritdoc}
    */
   public function getItem($item_id) {
     if (array_key_exists($item_id, NewsContentListCSV::$data)) {

@@ -2,6 +2,9 @@
 
 class MigrateOshaTaxonomyEsener extends DynamicMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
     $this->description = 'Populate the "Esener" taxonomy from JSON file in osha_migration module';
@@ -38,7 +41,17 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
     $this->addFieldMapping('format')->defaultValue('plain_text');
   }
 
-
+  /**
+   * Create a stub object that will be later migrated.
+   *
+   * @param object $migration
+   *   Migration object
+   * @param array $source
+   *   Source object
+   *
+   * @return array
+   *   Array with new tid
+   */
   protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
@@ -137,6 +150,9 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
 
 class EsenerTaxonomyMigrationListJSON extends MigrateListJSON {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {
@@ -150,6 +166,9 @@ class EsenerTaxonomyMigrationItemJSON extends MigrateItemJSON {
 
   private $cache = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public function getItem($item_id) {
     if (empty($this->cache)) {
       $rows = $this->loadJSONUrl($this->itemUrl);

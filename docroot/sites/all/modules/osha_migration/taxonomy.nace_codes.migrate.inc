@@ -4,6 +4,9 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
 
   protected $vocabulary = 'nace_codes';
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
     $this->description = 'Populate the "NACE Codes" taxonomy from JSON file in osha_migration module';
@@ -39,6 +42,17 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     $this->addFieldMapping('weight', 'weight');
   }
 
+  /**
+   * Create a stub object that will be later migrated.
+   *
+   * @param object $migration
+   *   Migration object
+   * @param array $source
+   *   Source object
+   *
+   * @return array
+   *   Array with new tid
+   */
   protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
@@ -55,22 +69,30 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     return array($term->tid);
   }
 
+  /**
+   * Compute term weight.
+   *
+   * @param object $row
+   *   Source row
+   *
+   * @return int|null
+   *   Generated weight.
+   */
   public function getWeightByCode($row) {
     $weight = NULL;
     if ($row->Level > 2) {
-      $weightAsString = substr($row->NACE_REV_2_CODE, -1);
-      $weight = intval($weightAsString);
+      $weight_str = substr($row->NACE_REV_2_CODE, -1);
+      $weight = intval($weight_str);
     }
     else {
       if ($row->Level == 2) {
-        $weightAsString = substr($row->NACE_REV_2_CODE, -2);
-        $weight = intval($weightAsString);
+        $weight_str = substr($row->NACE_REV_2_CODE, -2);
+        $weight = intval($weight_str);
       }
       else {
         $weight = ord($row->NACE_REV_2_CODE) - ord('A');
       }
     }
-
     return $weight;
   }
 
@@ -195,7 +217,13 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     );
   }
 
-  static function getSourceDestinationFieldMappings() {
+  /**
+   * Prepare a mapping between source field and destination files. Multilingual.
+   *
+   * @return array
+   *   Field mappings
+   */
+  public static function getSourceDestinationFieldMappings() {
     $languages = array_keys(language_list());
     $special = array(
       'et' => 'est',
@@ -214,26 +242,26 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
         'description_field' => strtoupper($code) . "_DESC",
         'field_nace_excludes' => strtoupper($code) . "_EXCL",
         'field_nace_includes' => strtoupper($code) . "_INCL",
-        'field_nace_includes_also' => strtoupper($code) . "_INCL_ALSO"
+        'field_nace_includes_also' => strtoupper($code) . "_INCL_ALSO",
       );
-      // The fields below have different naming convention in JSON
+      /* These fields have different naming convention in JSON */
       if ($language == 'en') {
         $mappings[$language] = array(
           'name_field' => 'NACE_REV_2_DESCRIPTION',
           'description_field' => 'NACE_REV_2_DESCRIPTION',
           'field_nace_excludes' => 'excludes',
           'field_nace_includes' => 'includes',
-          'field_nace_includes_also' => 'includes also'
+          'field_nace_includes_also' => 'includes also',
         );
       }
-      else if ($language == 'de' || $language == 'fr') {
+      elseif ($language == 'de' || $language == 'fr') {
         $mappings[$language] = array(
-            'name_field' => $code . "_Description",
-            'description_field' => $code . "_Description",
-            'field_nace_excludes' => $code . "_Excludes",
-            'field_nace_includes' => $code . "_Includes",
-            'field_nace_includes_also' => $code . "_Includes also"
-          );
+          'name_field' => $code . "_Description",
+          'description_field' => $code . "_Description",
+          'field_nace_excludes' => $code . "_Excludes",
+          'field_nace_includes' => $code . "_Includes",
+          'field_nace_includes_also' => $code . "_Includes also",
+        );
       }
     }
     return $mappings;
@@ -242,6 +270,9 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
 
 class NaceCodesMigrationListJSON extends MigrateListJSON {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {
@@ -252,16 +283,18 @@ class NaceCodesMigrationListJSON extends MigrateListJSON {
 }
 
 class NaceCodesMigrationItemJSON extends MigrateItemJSON {
+  public static $cache;
 
-  static $cache;
-
+  /**
+   * {@inheritdoc}
+   */
   public function getItem($item_id) {
     if (empty(self::$cache)) {
       $rows = json_decode(file_get_contents($this->itemUrl), TRUE);
-      foreach($rows as $row) {
+      foreach ($rows as $row) {
         self::$cache[$row['NACE_REV_2_CODE']] = $row;
       }
     }
-    return isset(self::$cache[$item_id]) ? (object)self::$cache[$item_id] : NULL;
+    return isset(self::$cache[$item_id]) ? (object) self::$cache[$item_id] : NULL;
   }
 }

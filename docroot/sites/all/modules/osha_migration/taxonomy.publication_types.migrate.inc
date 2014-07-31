@@ -2,6 +2,9 @@
 
 class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
     $this->description = 'Populate the "Publication types" taxonomy from JSON file in osha_migration module';
@@ -80,6 +83,9 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
 class PublicationTypesTaxonomyMigrationListJSON extends MigrateListJSON {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {
@@ -92,6 +98,9 @@ class PublicationTypesTaxonomyMigrationListJSON extends MigrateListJSON {
 class PublicationTypesTaxonomyMigrationItemJSON extends MigrateItemJSON {
   protected $data = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public function getItem($item_id) {
     if (empty($this->data)) {
       $data = $this->loadJSONUrl($this->itemUrl);

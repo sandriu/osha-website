@@ -2,6 +2,9 @@
 
 class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
     $this->description = 'Populate the "Thesaurus" taxonomy from JSON file in osha_migration module';
@@ -40,6 +43,17 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
   }
 
+  /**
+   * Create a stub object that will be later migrated.
+   *
+   * @param object $migration
+   *   Migration object
+   * @param array $source
+   *   Source object
+   *
+   * @return array
+   *   Array with new tid
+   */
   protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
@@ -137,6 +151,9 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
 
 class ThesaurusMigrationListJSON extends MigrateListJSON {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data['@graph'] as $item) {
@@ -145,6 +162,9 @@ class ThesaurusMigrationListJSON extends MigrateListJSON {
     return $ids;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function computeCount() {
     $ret = 0;
     $data = drupal_json_decode(file_get_contents($this->listUrl));
@@ -159,29 +179,42 @@ class ThesaurusMigrationItemJSON extends MigrateItemJSON {
 
   protected $data = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public function getItem($item_id) {
     if (empty($this->data)) {
-      $dataArray = $this->loadJSONUrl($this->itemUrl);
-      foreach ($dataArray['@graph'] as $rawItem) {
+      $data = $this->loadJSONUrl($this->itemUrl);
+      foreach ($data['@graph'] as $src) {
         $item = array();
-        $item['code'] = substr($rawItem['@id'], 6);
-        $item['parent_code'] = (isset($rawItem['@skos:broaderTransitive'])
-          ? substr($rawItem['@skos:broaderTransitive']['@id'], 6) : NULL);
-        foreach ($rawItem["@skos:prefLabel"] as $label) {
+        $item['code'] = substr($src['@id'], 6);
+        $item['parent_code'] = (
+          isset($src['@skos:broaderTransitive']) ?
+            substr($src['@skos:broaderTransitive']['@id'], 6) : NULL
+        );
+        foreach ($src["@skos:prefLabel"] as $label) {
           $item[$label['@language']] = $label['@value'];
         }
-        $item['type'] = $rawItem['@type'];
-        $this->data[$item['code']] = (object)$item;
+        $item['type'] = $src['@type'];
+        $this->data[$item['code']] = (object) $item;
       }
     }
     return isset($this->data[$item_id]) ? $this->data[$item_id] : NULL;
   }
 
+  /**
+   * Override to parse JSON as associative array.
+   *
+   * {@inheritdoc}
+   */
   protected function loadJSONUrl($item_url) {
     return json_decode(file_get_contents($item_url), TRUE);
   }
 
-  function getData() {
+  /**
+   * Access internal cache.
+   */
+  public function getData() {
     return $this->data;
   }
 }

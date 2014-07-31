@@ -53,12 +53,13 @@ class MigrationUtil {
     $ret = array();
     $terms = array_filter($terms, 'strlen');
     $terms = array_map('trim', $terms);
-    $field_values = self::cache_vocabulary_terms_fields($vocabulary_name, $field_match, $language);
+    $field_values = self::cacheVocabularyTermsFields($vocabulary_name, $field_match, $language);
     $misses = array();
     foreach ($terms as $t) {
       if (array_key_exists($t, $field_values)) {
         $ret[] = $field_values[$t];
-      } else {
+      }
+      else {
         $misses[] = $t;
       }
     }
@@ -76,31 +77,49 @@ class MigrationUtil {
 
   /**
    * Cache vocabulary terms mapped to tid. Use to find tid.
-   * @param string $vocabulary_name Vocabulary name
-   * @param string $field_name Field name (to inspect the term's field)
-   * @param string $language (Optional) Language, default Language none.
-   * @return array Array of tids or empty if no term was found in that language
+   *
+   * @param string $vocabulary_name
+   *   Vocabulary name
+   * @param string $field_name
+   *   Field name (to inspect the term's field)
+   * @param string $language
+   *   (Optional) Language, default Language none.
+   *
+   * @return array
+   *   Array of tids. Empty if no term was found in that language
    */
-  protected static function cache_vocabulary_terms_fields($vocabulary_name, $field_name, $language = LANGUAGE_NONE) {
+  protected static function cacheVocabularyTermsFields($vocabulary_name, $field_name, $language = LANGUAGE_NONE) {
     static $cache = array();
     if (empty($cache[$vocabulary_name][$field_name][$language])) {
       $voc = taxonomy_vocabulary_machine_name_load($vocabulary_name);
       $terms = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
       foreach ($terms as $term) {
-        if(!empty($term->{$field_name}[$language][0]['value'])) {
+        if (!empty($term->{$field_name}[$language][0]['value'])) {
           $value = $term->{$field_name}[$language][0]['value'];
           $cache[$vocabulary_name][$field_name][$language][$value] = $term->tid;
         }
       }
     }
-    if(isset($cache[$vocabulary_name][$field_name][$language])) {
+    if (isset($cache[$vocabulary_name][$field_name][$language])) {
       return $cache[$vocabulary_name][$field_name][$language];
     }
     return array();
   }
 
-
-  static function decode_tags_terms($terms_str, $term_field = 'field_tags_code') {
+  /**
+   * Transform given term names in tids using hard-coded OSHA mappings.
+   *
+   * Read the tech specs to see how mappings are handled.
+   *
+   * @param string $terms_str
+   *   Comma-separated string containing terms
+   * @param string $term_field
+   *   (Optional) Arbitrary term field to match. Default field_tags_code
+   *
+   * @return array
+   *   Array of tids
+   */
+  public static function decodeTagsTerms($terms_str, $term_field = 'field_tags_code') {
     $terms = explode(',', $terms_str);
     $terms = array_unique($terms);
     $terms = array_map('trim', $terms);
@@ -174,7 +193,13 @@ class MigrationUtil {
     return $migration->processImport();
   }
 
-  static function getProjectConfig() {
+  /**
+   * Retrieve the project's config from JSON file.
+   *
+   * @return array
+   *   JSON array with project configuration
+   */
+  public static function getProjectConfig() {
     return json_decode(file_get_contents(DRUPAL_ROOT . '/../conf/config.json'), TRUE);
   }
 }
