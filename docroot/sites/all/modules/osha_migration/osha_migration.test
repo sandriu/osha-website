@@ -23,7 +23,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     $json = json_decode(file_get_contents($source_file), TRUE);
     $result = MigrationUtil::runMigration(
       MIGRATION_TAXONOMY_NACE_CODES,
-      'MigrateOshaNaceCodesTaxonomy',
+      'MigrateOshaTaxonomyNaceCodes',
       $source_file
     );
     $this->assertEqual($result, Migration::RESULT_COMPLETED);
@@ -40,7 +40,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
     $weights = array("01" => 1, "01.1" => 1, "A" => 0);
     $parents = array("01" => 1, "01.1" => 1, "A" => 0);
 
-    $field_mappings = MigrateOshaNaceCodesTaxonomy::getSourceDestinationFieldMappings();
+    $field_mappings = MigrateOshaTaxonomyNaceCodes::getSourceDestinationFieldMappings();
     // Test each node field value in all languages
     foreach ($terms as $term) {
       $code = $term->field_nace_code[LANGUAGE_NONE][0]['value'];
