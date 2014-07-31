@@ -36,7 +36,7 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
   }
 
-  protected function createStub(/** @noinspection PhpUnusedParameterInspection */ $migration, array $source) {
+  protected function createStub($migration, array $source) {
     static $voc = NULL;
     if ($voc == NULL) {
       $voc = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
@@ -52,7 +52,7 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     return array($term->tid);
   }
 
-  public function prepareRow($row) {
+  function prepareRow($row) {
     $row->parent = 0;
     $row->language = 'en';
     $row->parent = $this->getParent($row);
@@ -60,20 +60,23 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     return TRUE;
   }
 
-  public function prepare($entity, stdClass $row) {
+  function prepare($entity, stdClass $row) {
     $migration = Migration::currentMigration();
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
+    $languages = array_keys(language_list());
+
     $entity->translations = $translation_handler->getTranslations();
-    $supported_languages = array_keys(language_list());
-    foreach ($supported_languages as $lang_code) {
-      if (!empty($row->$lang_code)) {
-        $entity->name_field[$lang_code][0]['value'] = $row->$lang_code;
-        if ($lang_code != $row->language) { // Don't translate default language (en)
-          if (!isset($entity->translations->data[$lang_code])) {
+    foreach ($languages as $language) {
+      if (!empty($row->{$language})) {
+        $entity->name_field[$language][0]['value'] = $row->$language;
+        /* Don't translate en (default) */
+        if ($language != $row->language) {
+          if (!isset($entity->translations->data[$language])) {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
-              'language' => $lang_code, 'source' => $row->language
+              'language' => $language,
+              'source' => $row->language,
             ));
           }
         }

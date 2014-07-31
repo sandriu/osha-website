@@ -85,30 +85,30 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
 
   function prepare($entity, stdClass $row) {
     $assoc = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
-    $entity->language = 'en';
-    $translationsData = array();
+
+    $migration = Migration::currentMigration();
+    $entity_type = $migration->getDestination()->getEntityType();
+    $translation_handler = entity_translation_get_handler($entity_type, $entity);
     $languages = $this->getSourceDestinationFieldMappings();
+
+    $entity->translations = $translation_handler->getTranslations();
     foreach ($languages as $language => $fields) {
-      foreach($fields as $target => $source) {
-        if(!empty($assoc[$source])) {
+      foreach ($fields as $target => $source) {
+        if (!empty($assoc[$source])) {
           $entity->{$target}[$language][0]['value'] = $assoc[$source];
         }
       }
-      if($language != 'en') {
-        $translationsData[$language] = array(
-          'entity_type' => 'term',
-          'language' => $language,
-          'source' => 'en',
-          'uid' => '1',
-          'status' => '1',
-          'translate' => '0',
-        );
+      /* Don't translate en (default) */
+      if ($language != $row->language) {
+        if (!isset($entity->translations->data[$language])) {
+          $translation_handler->setTranslation(array(
+            'translate' => 0, 'status' => 1, 'uid' => 1,
+            'language' => $language,
+            'source' => $row->language,
+          ));
+        }
       }
     }
-    $entity->translations = (object) array(
-      'original' => 'en',
-      'data' => $translationsData
-    );
   }
 
   protected function generateMachineName() {

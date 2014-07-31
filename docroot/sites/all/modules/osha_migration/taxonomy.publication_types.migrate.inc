@@ -34,27 +34,27 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
   }
 
   function prepare($entity, stdClass $row) {
-    $entity->language = 'en';
+    $migration = Migration::currentMigration();
+    $entity_type = $migration->getDestination()->getEntityType();
+    $translation_handler = entity_translation_get_handler($entity_type, $entity);
     $languages = array_keys(language_list());
-    $translationsData = array();
+
+    $entity->translations = $translation_handler->getTranslations();
     foreach ($languages as $language) {
       if (!empty($row->{$language})) {
         $entity->name_field[$language][0]['value'] = $row->{$language};
+        /* Don't translate en (default) */
+        if ($language != $row->language) {
+          if (!isset($entity->translations->data[$language])) {
+            $translation_handler->setTranslation(array(
+              'translate' => 0, 'status' => 1, 'uid' => 1,
+              'language' => $language,
+              'source' => 'en',
+            ));
+          }
+        }
       }
-      $sourceLanguage = ($language == 'en') ? '' : 'en';
-      $translationsData[$language] = array(
-        'entity_type' => 'term',
-        'language' => $language,
-        'source' => $sourceLanguage,
-        'uid' => '1',
-        'status' => '1',
-        'translate' => '0',
-      );
     }
-    $entity->translations = (object) array(
-      'original' => 'en',
-      'data' => $translationsData
-    );
   }
 
   protected function generateMachineName() {

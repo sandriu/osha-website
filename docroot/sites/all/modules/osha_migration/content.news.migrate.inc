@@ -98,7 +98,6 @@ class MigrateOshaNews extends DynamicMigration {
 
   public function prepareRow($row) {
     $row->language = 'en';
-
     $tags = $row->subject . ', ' . $row->subcategory;
     $row->subject = MigrationUtil::decode_tags_terms($tags);
     $row->multilingual_thesaurus = MigrationUtil::find_tid_by_taxonomy_field(

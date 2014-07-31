@@ -50,7 +50,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
       'name_field:language',
       'parent_name',
       'description',
-      'path'
+      'path',
     ));
   }
 
@@ -64,16 +64,19 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
     $migration = Migration::currentMigration();
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
+    $languages = array_keys(language_list());
+
     $entity->translations = $translation_handler->getTranslations();
-    $supported_languages = array_keys(language_list());
-    foreach ($supported_languages as $lang_code) {
-      if (!empty($row->$lang_code)) {
-        $entity->name_field[$lang_code][0]['value'] = $row->$lang_code;
-        if ($lang_code != $row->language) { // Don't translate default language (en)
-          if (!isset($entity->translations->data[$lang_code])) {
+    foreach ($languages as $language) {
+      if (!empty($row->{$language})) {
+        $entity->name_field[$language][0]['value'] = $row->$language;
+        /* Don't translate en (default) */
+        if ($language != $row->language) {
+          if (!isset($entity->translations->data[$language])) {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
-              'language' => $lang_code, 'source' => $row->language
+              'language' => $language,
+              'source' => $row->language,
             ));
           }
         }
