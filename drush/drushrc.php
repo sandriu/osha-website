@@ -305,6 +305,10 @@ $options['init-modules'] = array(
   'tmgmt_ui',
   'tmgmt_file',
   'tmgmt_node',
+  'tmgmt_i18n_string',
+  'tmgmt_locale',
+  'i18n_menu',
+  'i18n_block',
 
   'strongarm',
 
