@@ -8,11 +8,14 @@
  */
 class MigrateOshaTaxonomyTags extends DynamicMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
     $this->description = 'Populate the "Tags" taxonomy from JSON file in osha_migration module';
 
-    $source_file = MigrationUtil::get_source_file($arguments);
+    $source_file = MigrationUtil::getSourceFile($arguments);
     $this->map = new MigrateSQLMap(
       $this->machineName,
       array(
@@ -20,8 +23,8 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
           'type' => 'varchar',
           'length' => 100,
           'not null' => TRUE,
-          'description' => 'Tag code'
-        )
+          'description' => 'Term code',
+        ),
       ),
       MigrateDestinationTerm::getKeySchema()
     );
@@ -29,11 +32,15 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
     $this->source = new MigrateSourceList(
       new TagsTaxonomyMigrationListJSON($source_file),
       new TagsTaxonomyMigrationItemJSON($source_file, array()),
-      $this->fields()
+      array(
+        'code' => 'Term code',
+        'en' => 'Term name in english',
+        'parent' => 'Parent term',
+      )
     );
 
     $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm(TAXONOMY_TAGS, $term_options);
+    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_TAGS, $term_options);
 
     $this->addFieldMapping('field_tags_code', 'code');
     $this->addFieldMapping('parent', 'parent');
@@ -50,31 +57,46 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
       'name_field:language',
       'parent_name',
       'description',
-      'path'
+      'path',
     ));
   }
 
+  /**
+   * Prepare raw data pulled from source.
+   *
+   * {@inheritdoc }
+   */
   public function prepareRow($row) {
     $row->parent = 0;
     $row->language = 'en';
     return TRUE;
   }
 
-  public function prepare($entity, stdClass $row) {
+  /**
+   * Called by destination right before saving.
+   *
+   * @param object $entity
+   *   Entity to save
+   * @param object $row
+   *   Source row
+   */
+  public function prepare($entity, $row) {
     $migration = Migration::currentMigration();
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
+    $languages = array_keys(language_list());
+
     $entity->translations = $translation_handler->getTranslations();
-    $supported_languages = array_keys(language_list());
-    foreach ($supported_languages as $lang_code) {
-      if (!empty($row->$lang_code)) {
-        $entity->name_field[$lang_code][0]['value'] = $row->$lang_code;
-        if($lang_code != $row->language) { // Don't translate default language (en)
-          if (!isset($entity->translations->data[$lang_code])) {
+    foreach ($languages as $language) {
+      if (!empty($row->{$language})) {
+        $entity->name_field[$language][0]['value'] = $row->$language;
+        /* Don't translate en (default) */
+        if ($language != $row->language) {
+          if (!isset($entity->translations->data[$language])) {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
-              'language' => $lang_code, 'source' => $row->language,
-              'created' => time()
+              'language' => $language,
+              'source' => $row->language,
             ));
           }
         }
@@ -82,20 +104,21 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
     }
   }
 
-  private function fields() {
-    return array(
-      'code' => 'Identifier',
-      'en' => 'Term name in english',
-      'parent' => 'Parent term',
-    );
-  }
-
+  /**
+   * Migration machine name.
+   *
+   * {@inheritdoc}
+   */
   protected function generateMachineName() {
-    return MIGRATION_TAXONOMY_TAGS;
+    return OSHA_MIGRATION_TAXONOMY_TAGS;
   }
 }
 
 class TagsTaxonomyMigrationListJSON extends MigrateListJSON {
+
+  /**
+   * {@inheritdoc}
+   */
   protected function getIDsFromJSON(array $data) {
     $ids = array();
     foreach ($data as $item) {
@@ -108,6 +131,9 @@ class TagsTaxonomyMigrationListJSON extends MigrateListJSON {
 class TagsTaxonomyMigrationItemJSON extends MigrateItemJSON {
   protected $data = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public function getItem($item_id) {
     if (empty($this->data)) {
       $data = $this->loadJSONUrl($this->itemUrl);

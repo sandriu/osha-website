@@ -6,18 +6,21 @@
  */
 class MigrateOshaNews extends DynamicMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA News'));
-
     $this->description = 'Import "News" contents from CSV file';
-    $this->dependencies = array(MIGRATION_TAXONOMY_THESAURUS, MIGRATION_TAXONOMY_TAGS);
 
-    $source_file = MigrationUtil::get_source_file($arguments);
+    $this->dependencies = array(OSHA_MIGRATION_TAXONOMY_THESAURUS, OSHA_MIGRATION_TAXONOMY_TAGS);
 
+    $source_file = MigrationUtil::getSourceFile($arguments);
     $this->source = new MigrateSourceList(
       new NewsContentListCSV($source_file, array('title', 'description', 'text')),
       new NewsContentItemCSV(),
-      $this->fields());
+      $this->fields()
+    );
 
     $this->map = new MigrateSQLMap($this->machineName,
       array(
@@ -25,7 +28,7 @@ class MigrateOshaNews extends DynamicMigration {
           'type' => 'varchar',
           'length' => 200,
           'not null' => TRUE,
-          'description' => 'News code'
+          'description' => 'Item code',
         ),
       ),
       MigrateDestinationNode::getKeySchema()
@@ -55,7 +58,7 @@ class MigrateOshaNews extends DynamicMigration {
       'language',
       'workflow_state',
       'creator',
-      'country'
+      'country',
     ));
 
     $this->addUnmigratedDestinations(array(
@@ -88,47 +91,66 @@ class MigrateOshaNews extends DynamicMigration {
       'field_thesaurus:ignore_case',
       'title_field',
       'title_field:language',
-      'comment'
+      'comment',
     ));
   }
 
+  /**
+   * Migration machine name.
+   *
+   * {@inheritdoc}
+   */
   protected function generateMachineName() {
-    return MIGRATION_CONTENT_TYPE_NEWS;
+    return OSHA_MIGRATION_CONTENT_TYPE_NEWS;
   }
 
+  /**
+   * Prepare raw data pulled from source.
+   *
+   * {@inheritdoc}
+   */
   public function prepareRow($row) {
     $row->language = 'en';
-
     $tags = $row->subject . ', ' . $row->subcategory;
-    $row->subject = MigrationUtil::decode_tags_terms($tags);
-    $row->multilingual_thesaurus = MigrationUtil::find_tid_by_taxonomy_field(
-      TAXONOMY_THESAURUS,
+    $row->subject = MigrationUtil::decodeTagsTerms($tags);
+    $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
+      OSHA_TAXONOMIES_THESAURUS,
       'field_thesaurus_code',
       explode(',', $row->multilingual_thesaurus)
     );
     return TRUE;
   }
 
-  public function prepare($entity, stdClass $row) {
+  /**
+   * Called by destination right before saving.
+   *
+   * @param object $entity
+   *   Entity to save
+   * @param object $row
+   *   Source row
+   */
+  public function prepare($entity, $row) {
     $migration = Migration::currentMigration();
-    $supported_languages = array_keys(language_list());
+    $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
 
     $entity->translations = $translation_handler->getTranslations();
     $entity->title = $row->title['en'];
-    foreach ($supported_languages as $lang_code) {
-      if (!empty($row->title[$lang_code])) {
-        $entity->title_field[$lang_code][0]['value'] = $row->title[$lang_code];
-        $entity->field_news_summary[$lang_code][0]['value'] = str_replace('<@#&>', '"', $row->description[$lang_code]);
-        $entity->field_news_summary[$lang_code][0]['format'] = 'full_html';
-        $entity->body[$lang_code][0]['value'] = str_replace('<@#&>', '"', $row->text[$lang_code]);
-        $entity->body[$lang_code][0]['format'] = 'full_html';
-        if ($lang_code != $row->language) { // Don't translate default language (en)
-          if (!isset($entity->translations->data[$lang_code])) {
+    foreach ($languages as $language) {
+      if (!empty($row->title[$language])) {
+        $entity->title_field[$language][0]['value'] = $row->title[$language];
+        $entity->field_news_summary[$language][0]['value'] = str_replace('<@#&>', '"', $row->description[$language]);
+        $entity->field_news_summary[$language][0]['format'] = 'full_html';
+        $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $row->text[$language]);
+        $entity->body[$language][0]['format'] = 'full_html';
+        /* Don't translate en (default) */
+        if ($language != $row->language) {
+          if (!isset($entity->translations->data[$language])) {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
-              'language' => $lang_code, 'source' => $row->language
+              'language' => $language,
+              'source' => $row->language,
             ));
           }
         }
@@ -136,8 +158,13 @@ class MigrateOshaNews extends DynamicMigration {
     }
   }
 
-
-  function fields() {
+  /**
+   * Return the list of available source fields.
+   *
+   * @return array
+   *   An array o fields with their description
+   */
+  public function fields() {
     return array(
       'id' => 'Primary Key (URL pattern)',
       'path' => 'URL pattern without language',
@@ -161,17 +188,21 @@ class MigrateOshaNews extends DynamicMigration {
   }
 
   /**
-   * This function sets the node aliases after the migration, when node nid is available
-   * @param $entity
-   * @param stdClass $row
+   * Sets the node aliases after the migration, nid is available.
+   *
+   * @param object $entity
+   *   Entity to be saved
+   * @param object $row
+   *   Source row
    */
-  function complete($entity, stdClass $row) {
+  public function complete($entity, $row) {
     $languages = array_keys(language_list());
-    foreach ($languages as $lang_code) {
+    foreach ($languages as $language) {
+      /* Same alias for all languages (see mappings) */
       $args = array(
-        'source' => 'node/'. $entity->nid,
-        'alias' => $row->id, // Same alias for all languages (see mappings)
-        'language' => $lang_code,
+        'source' => 'node/' . $entity->nid,
+        'alias' => $row->id,
+        'language' => $language,
       );
       path_save($args);
     }
@@ -183,17 +214,26 @@ class NewsContentListCSV extends MigrateList {
   protected $multilingualFields;
   public static $data = array();
 
-  public function __construct($file, $multilingualFields = array()) {
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct($file, $multilingual_fields = array()) {
     parent::__construct();
     $this->file = $file;
-    $this->multilingualFields = $multilingualFields;
+    $this->multilingualFields = $multilingual_fields;
   }
 
-  public function  __toString() {
+  /**
+   * {@inheritdoc}
+   */
+  public function __toString() {
     return $this->file;
   }
 
-  protected function parse_multilingual_csv() {
+  /**
+   * Parse the CSV file and populate the local cache.
+   */
+  protected function parseMultilingualCSV() {
     $handle = fopen($this->file, 'r');
     $fields = $data = fgetcsv($handle, 1000, ';');
     $final = [];
@@ -211,9 +251,10 @@ class NewsContentListCSV extends MigrateList {
     }
 
     foreach ($final as $id => $row) {
-      if(isset($row['title']['en'])) {
+      if (isset($row['title']['en'])) {
         self::$data[$id] = $final[$id];
-      } else {
+      }
+      else {
         drupal_set_message(
           sprintf('No english translation for row:%s', $id),
           'warning'
@@ -222,13 +263,19 @@ class NewsContentListCSV extends MigrateList {
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getIdList() {
     if (empty(self::$data)) {
-      $this->parse_multilingual_csv();
+      $this->parseMultilingualCSV();
     }
     return array_keys(self::$data);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function computeCount() {
     return count(self::$data);
   }
@@ -236,9 +283,12 @@ class NewsContentListCSV extends MigrateList {
 
 class NewsContentItemCSV extends MigrateItem {
 
-  public function getItem($id) {
-    if(array_key_exists($id, NewsContentListCSV::$data)) {
-      return (object)NewsContentListCSV::$data[$id];
+  /**
+   * {@inheritdoc}
+   */
+  public function getItem($item_id) {
+    if (array_key_exists($item_id, NewsContentListCSV::$data)) {
+      return (object) NewsContentListCSV::$data[$item_id];
     }
     return NULL;
   }
