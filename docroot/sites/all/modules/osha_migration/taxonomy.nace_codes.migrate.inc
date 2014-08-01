@@ -40,6 +40,16 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
     $this->addFieldMapping('field_nace_changes', 'Change');
     $this->addFieldMapping('weight', 'weight');
+
+    $this->addUnmigratedDestinations(array(
+      'description',
+      'parent_name',
+      'description_field:summary',
+      'field_nace_changes:language',
+      'field_nace_code:language',
+      'name_field:language',
+      'path',
+    ));
   }
 
   /**
