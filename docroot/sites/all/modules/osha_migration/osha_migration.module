@@ -47,38 +47,6 @@ function osha_migration_migrate_api() {
 }
 
 /**
- * Implements hook_schema_alter().
- */
-function osha_migration_schema_alter(&$schema) {
-  if (isset($schema['taxonomy_term_data'])) {
-    $schema['taxonomy_term_data']['fields']['name'] = array(
-      'type' => 'varchar',
-      'length' => 768,
-      'not null' => TRUE,
-      'default' => '',
-    );
-  }
-
-  if (isset($schema['field_data_name_field'])) {
-    $schema['field_data_name_field']['fields']['name_field_value'] = array(
-      'type' => 'varchar',
-      'length' => 768,
-      'not null' => TRUE,
-      'default' => '',
-    );
-  }
-
-  if (isset($schema['field_revision_name_field'])) {
-    $schema['field_revision_name_field']['fields']['name_field_value'] = array(
-      'type' => 'varchar',
-      'length' => 768,
-      'not null' => TRUE,
-      'default' => '',
-    );
-  }
-}
-
-/**
  * Retrieve the root directory for the migration data folder.
  *
  * @return string|null
