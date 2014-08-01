@@ -239,8 +239,11 @@ class NewsContentListCSV extends MigrateList {
     $final = array();
     while (($data = fgetcsv($handle, 100000, ';')) !== FALSE) {
       $country = $data[1];
-      $path = explode('/', $data[0], 3);
-      $path = $path[2];
+      $path = $data[2];
+      if (empty($path)) {
+        $path = $data[0];
+      }
+      $path = preg_replace('/^\/en\//', '', $path);
       foreach ($fields as $key => $field) {
         if (in_array($field, $this->multilingualFields)) {
           $final[$path][$field][$country] = $data[$key];
