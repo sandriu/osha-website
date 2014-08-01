@@ -47,8 +47,6 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
       'description_field:format',
       'description_field:language',
       'field_publication_type_code:language',
-      'name_field',
-      'name_field:language',
       'path',
     ));
   }

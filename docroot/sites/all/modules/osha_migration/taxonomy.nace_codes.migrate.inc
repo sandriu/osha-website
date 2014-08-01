@@ -45,12 +45,8 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
       'description',
       'parent_name',
       'description_field:summary',
-      'description_field:language',
       'field_nace_changes:language',
       'field_nace_code:language',
-      'field_nace_excludes:language',
-      'field_nace_includes:language',
-      'field_nace_includes_also:language',
       'name_field:language',
       'path',
     ));

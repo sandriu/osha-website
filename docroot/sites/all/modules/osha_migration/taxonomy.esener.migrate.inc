@@ -49,8 +49,6 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
       'description_field:format',
       'description_field:language',
       'field_esener_code:language',
-      'name_field',
-      'name_field:language',
       'path',
     ));
   }

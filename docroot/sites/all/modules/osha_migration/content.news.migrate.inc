@@ -74,7 +74,6 @@ class MigrateOshaNews extends DynamicMigration {
       'translate',
       'revision_uid',
       'is_new',
-      'body:language',
       'body:summary',
       'field_news_image:file_class',
       'field_news_image:language',
@@ -86,13 +85,10 @@ class MigrateOshaNews extends DynamicMigration {
       'field_news_publication_date:to',
       'field_news_summary',
       'field_news_summary:format',
-      'field_news_summary:language',
       'field_tags:create_term',
       'field_tags:ignore_case',
       'field_thesaurus:create_term',
       'field_thesaurus:ignore_case',
-      'title_field',
-      'title_field:language',
       'comment',
     ));
   }

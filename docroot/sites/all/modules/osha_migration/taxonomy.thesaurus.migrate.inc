@@ -50,8 +50,6 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
       'description_field:summary',
       'description_field:language',
       'field_thesaurus_code:language',
-      'name_field',
-      'name_field:language',
       'path',
     ));
   }
