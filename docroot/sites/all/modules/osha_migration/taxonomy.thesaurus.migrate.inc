@@ -41,6 +41,19 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     $this->addFieldMapping('format')->defaultValue('plain_text');
     $this->addFieldMapping('name', 'en');
     $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
+
+    $this->addUnmigratedDestinations(array(
+      'description',
+      'parent_name',
+      'weight',
+      'description_field',
+      'description_field:summary',
+      'description_field:language',
+      'field_thesaurus_code:language',
+      'name_field',
+      'name_field:language',
+      'path',
+    ));
   }
 
   /**

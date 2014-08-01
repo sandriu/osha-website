@@ -59,6 +59,7 @@ class MigrateOshaNews extends DynamicMigration {
       'workflow_state',
       'creator',
       'country',
+      'nace',
     ));
 
     $this->addUnmigratedDestinations(array(
@@ -74,6 +75,7 @@ class MigrateOshaNews extends DynamicMigration {
       'revision_uid',
       'is_new',
       'body:language',
+      'body:summary',
       'field_news_image:file_class',
       'field_news_image:language',
       'field_news_image:destination_dir',

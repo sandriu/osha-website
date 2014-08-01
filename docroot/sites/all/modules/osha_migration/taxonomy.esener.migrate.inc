@@ -39,6 +39,20 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
     $this->addFieldMapping('parent', 'parent');
     $this->addFieldMapping('field_esener_code', 'code');
     $this->addFieldMapping('format')->defaultValue('plain_text');
+
+    $this->addUnmigratedDestinations(array(
+      'description',
+      'parent_name',
+      'weight',
+      'description_field',
+      'description_field:summary',
+      'description_field:format',
+      'description_field:language',
+      'field_esener_code:language',
+      'name_field',
+      'name_field:language',
+      'path',
+    ));
   }
 
   /**
