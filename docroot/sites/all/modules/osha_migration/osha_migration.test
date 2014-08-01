@@ -311,7 +311,8 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
     $this->assertEqual(count($data), count($nodes));
 
     foreach ($nodes as $node) {
-      $path = path_load('node/' . $node->nid)['alias'];
+      $path = path_load('node/' . $node->nid);
+      $path = $path['alias'];
       $witness = $data[$path];
 
       $this->assertEqual(strtotime($witness['creation_date']), $node->created);
