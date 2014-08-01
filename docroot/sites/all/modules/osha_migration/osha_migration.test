@@ -293,7 +293,7 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
 
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', CONTENT_TYPE_NEWS)
+      ->entityCondition('bundle', OSHA_NEWS_CONTENT_TYPE_NEWS)
       ->propertyCondition('status', 1);
     $result = $query->execute();
     $nodes = array();

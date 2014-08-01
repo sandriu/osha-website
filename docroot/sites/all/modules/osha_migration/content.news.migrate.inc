@@ -35,7 +35,7 @@ class MigrateOshaNews extends DynamicMigration {
     );
 
     $node_options = MigrateDestinationNode::options('en', 'text');
-    $this->destination = new MigrateDestinationNode(CONTENT_TYPE_NEWS, $node_options);
+    $this->destination = new MigrateDestinationNode(OSHA_NEWS_CONTENT_TYPE_NEWS, $node_options);
 
     $this->addFieldMapping('field_news_image', 'image');
     $this->addFieldMapping('field_news_image:title', 'imageCaption');
