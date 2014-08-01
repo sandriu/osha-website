@@ -50,6 +50,9 @@ class MigrationUtil {
    * thus is recommended to use when taxonomy does not change during migration.
    */
   public static function findTidByTaxonomyField($vocabulary_name, $field_match, $terms, $language = LANGUAGE_NONE) {
+    if(empty($terms)) {
+      return array();
+    }
     $ret = array();
     $terms = array_filter($terms, 'strlen');
     $terms = array_map('trim', $terms);
@@ -120,6 +123,9 @@ class MigrationUtil {
    *   Array of tids
    */
   public static function decodeTagsTerms($terms_str, $term_field = 'field_tags_code') {
+    if (empty($terms_str)) {
+      return array();
+    }
     $terms = explode(',', $terms_str);
     $terms = array_unique($terms);
     $terms = array_map('trim', $terms);
