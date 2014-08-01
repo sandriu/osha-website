@@ -236,7 +236,7 @@ class NewsContentListCSV extends MigrateList {
   protected function parseMultilingualCSV() {
     $handle = fopen($this->file, 'r');
     $fields = $data = fgetcsv($handle, 1000, ';');
-    $final = [];
+    $final = array();
     while (($data = fgetcsv($handle, 100000, ';')) !== FALSE) {
       $country = $data[1];
       $path = explode('/', $data[0], 3)[2];
