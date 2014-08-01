@@ -37,7 +37,7 @@ class OshaMigratePublications extends DynamicMigration {
     $this->destination = new MigrateDestinationNode(OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION, $node_options);
 
     $this->addFieldMapping('body:format')->defaultValue('plain_text');
-    $this->addFieldMapping('field_tags', 'subjectTids')->separator(',');
+    $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_thesaurus', 'thesaurusTids')->separator(',');
     $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
@@ -71,10 +71,10 @@ class OshaMigratePublications extends DynamicMigration {
    */
   public function prepareRow($row) {
     $row->language = 'en';
-    $row->subjectTids = MigrationUtil::decodeTagsTerms($row->subject);
-    $row->thesaurusTids = MigrationUtil::findTidByTaxonomyField(OSHA_TAXONOMIES_THESAURUS, 'field_thesaurus_code', $row->multilingual_thesaurus);
-    $row->naceTids = MigrationUtil::findTidByTaxonomyField(OSHA_TAXONOMIES_NACE_CODES, 'field_nace_code', $row->nace);
-    $row->pubTypeTid = MigrationUtil::findTidByTaxonomyField(OSHA_TAXONOMIES_PUBLICATION_TYPES, 'field_publication_type_code', $row->publication_type);
+    $row->subject = MigrationUtil::decodeTagsTerms($row->subject);
+    #$row->thesaurusTids = MigrationUtil::findTidByTaxonomyField(OSHA_TAXONOMIES_THESAURUS, 'field_thesaurus_code', $row->multilingual_thesaurus);
+    #$row->naceTids = MigrationUtil::findTidByTaxonomyField(OSHA_TAXONOMIES_NACE_CODES, 'field_nace_code', $row->nace);
+    #$row->pubTypeTid = MigrationUtil::findTidByTaxonomyField(OSHA_TAXONOMIES_PUBLICATION_TYPES, 'field_publication_type_code', $row->publication_type);
 
     $row->relatedPublications = array();
     if (!empty($row->relPub)) {
@@ -125,7 +125,7 @@ class OshaMigratePublications extends DynamicMigration {
   private static function getPublicationNid($source_id) {
     $result = db_query('
       SELECT m.destid1
-      FROM {migrate_map_publicationscontenttype} m
+      FROM {migrate_map_publication} m
       WHERE m.sourceid1 = :source',
       array(':source' => $source_id));
     foreach ($result as $r) {
