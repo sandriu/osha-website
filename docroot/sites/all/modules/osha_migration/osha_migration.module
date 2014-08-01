@@ -19,7 +19,7 @@ function osha_migration_migrate_api() {
     'migrations' => array(
       OSHA_MIGRATION_TAXONOMY_TAGS => array(
         'class_name' => 'MigrateOshaTaxonomyTags',
-        'file_name' => $migration_module_dir . '/data/nace_codes.json',
+        'file_name' => $migration_module_dir . '/data/tags.json',
       ),
       OSHA_MIGRATION_TAXONOMY_ESENER => array(
         'class_name' => 'MigrateOshaTaxonomyEsener',
@@ -27,15 +27,15 @@ function osha_migration_migrate_api() {
       ),
       OSHA_MIGRATION_TAXONOMY_NACE_CODES => array(
         'class_name' => 'MigrateOshaTaxonomyNaceCodes',
-        'file_name' => $migration_module_dir . '/data/publication_types.json',
+        'file_name' => $migration_module_dir . '/data/nace_codes.json',
       ),
       OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
         'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
-        'file_name' => $migration_module_dir . '/data/thesaurus.json',
+        'file_name' => $migration_module_dir . '/data/publication_types.json',
       ),
       OSHA_MIGRATION_TAXONOMY_THESAURUS => array(
         'class_name' => 'MigrateOshaTaxonomyThesaurus',
-        'file_name' => $migration_module_dir . '/data/tags.json',
+        'file_name' => $migration_module_dir . '/data/thesaurus.json',
       ),
       OSHA_MIGRATION_CONTENT_TYPE_NEWS => array(
         'class_name' => 'MigrateOshaNews',
