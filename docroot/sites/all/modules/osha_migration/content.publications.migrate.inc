@@ -17,23 +17,25 @@ class OshaMigratePublications extends DynamicMigration {
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
       OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
     );
-
+    $data_path = osha_migration_get_data_dir();
     $source_file = MigrationUtil::getSourceFile($arguments);
 
     $this->source = new MigrateSourceList(
       new PublicationMigrateListCSV($source_file),
       new PublicationMigrateItemCSV(),
       array(
-        'id' => 'id',
-        'path' => 'URL',
+        'id' => 'Unique entity path, language independent',
         'creation_date' => 'Node creation date',
+        'modification_date' => 'Last modification date',
         'publication_date' => 'Node publication date',
         'title' => 'Node title',
         'description' => 'Node body',
+        'author' => 'Publication author',
         'order_id' => 'Publication Order ID',
         'subject' => 'Item tags',
         'file' => 'Publication document file',
         'relatedItems' => 'Related publications',
+        'related_resources' => 'Comes from relatedItems - Files with extensions',
         'multilingual_thesaurus' => 'Item Tesaurus tags merged into tags',
         'nace' => 'Item NACE Codes',
         'publication_type' => 'Publication type taxonomy',
@@ -55,9 +57,10 @@ class OshaMigratePublications extends DynamicMigration {
     $node_options = MigrateDestinationNode::options('en', 'text');
     $this->destination = new MigrateDestinationNode(OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION, $node_options);
 
-    $this->addFieldMapping('body:format')->defaultValue('plain_text');
     $this->addFieldMapping('field_tags', 'subject');
+    $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_publication_bookshop_id', 'order_id');
     $this->addFieldMapping('field_thesaurus', 'multilingual_thesaurus');
     $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_nace_codes', 'nace');
@@ -66,11 +69,24 @@ class OshaMigratePublications extends DynamicMigration {
     $this->addFieldMapping('field_publication_type:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_author', 'author');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+
+    $this->addFieldMapping('field_publication_file', 'file');
+    $this->addFieldMapping('field_publication_file:source_dir')->defaultValue($data_path . '/export/');
+    $this->addFieldMapping('field_publication_file:destination_file', 'file');
+    $this->addFieldMapping('field_publication_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+
+    /*
+    $this->addFieldMapping('field_publication_related_res', 'related_resources');
+    $this->addFieldMapping('field_publication_related_res:source_dir')->defaultValue($data_path . '/export/');
+    $this->addFieldMapping('field_publication_related_res:destination_file', 'related_resources');
+    $this->addFieldMapping('field_publication_related_res:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    */
+
+    $this->addFieldMapping('body', 'description');
+    $this->addFieldMapping('body:format')->defaultValue('plain_text');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
-    $this->addFieldMapping('field_publication_file', 'file');
-    $this->addFieldMapping('field_publication_file:preserve_files')->defaultValue(FALSE);
   }
 
   /**
@@ -78,6 +94,28 @@ class OshaMigratePublications extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION;
+  }
+
+  /**
+   * Handle migration of publication_type field.
+   */
+  protected static function handlePublicationType($row) {
+    $migration = Migration::currentMigration();
+    if (!empty($row->publication_type)) {
+      $types = MigrationUtil::findTidByTaxonomyField(
+        array($row->publication_type),
+        'field_publication_type_code',
+        OSHA_TAXONOMIES_PUBLICATION_TYPES
+      );
+      if (!empty($types)) {
+        return $types[0];
+      }
+      else {
+        $migration->saveMessage("Cannot decode publication type with identifier: {$row->publication_type}", MigrationBase::MESSAGE_WARNING);
+        $row->publication_type = NULL;
+      }
+    }
+    return NULL;
   }
 
   /**
@@ -90,27 +128,20 @@ class OshaMigratePublications extends DynamicMigration {
    *   TRUE if row is valid
    */
   public function prepareRow($row) {
+    $migration = Migration::currentMigration();
+    if (empty($row->title)) {
+      $migration->saveMessage("Skipping record without english title {$row->id}", MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
     $row->language = 'en';
     $row->subject = MigrationUtil::decodeTagsTerms($row->subject);
+    $row->publication_type = self::handlePublicationType($row);
+    $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
+      explode(',', $row->multilingual_thesaurus),
+      'field_thesaurus_code',
+      OSHA_TAXONOMIES_THESAURUS
+    );
 
-    if (!empty($row->publication_type)) {
-      $types = MigrationUtil::findTidByTaxonomyField(
-        array($row->publication_type),
-        'field_publication_type_code',
-        OSHA_TAXONOMIES_PUBLICATION_TYPES
-      );
-      if (!empty($types)) {
-        $row->publication_type = $types[0];
-      }
-    }
-    if (!empty($row->multilingual_thesaurus)) {
-      $row->multilingual_thesaurus = explode(',', $row->multilingual_thesaurus);
-      $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
-        $row->multilingual_thesaurus,
-        'field_thesaurus_code',
-        OSHA_TAXONOMIES_THESAURUS
-      );
-    }
     if (!empty($row->nace)) {
       $row->nace = explode(',', $row->nace);
       $row->nace = MigrationUtil::findTidByTaxonomyField(
@@ -119,21 +150,23 @@ class OshaMigratePublications extends DynamicMigration {
         OSHA_TAXONOMIES_NACE_CODES);
     }
 
-    $row->field_publication_file = $row->file;
-
     $row->related_publications = array();
-    if (!empty($row->related_publications)) {
-      foreach ($row->related_publications as $id) {
-        $related_pub_id = $this->getPublicationNid($id);
-        if (empty($related_pub_id)) {
-          if (empty($related_pub_id)) {
-            $related_pub_id = $this->handleSourceMigration($this->generateMachineName(), $id);
-          }
+    if (!empty($row->related_publications_path)) {
+      foreach ($row->related_publications_path as $path) {
+        $related_item_nid = $this->getPublicationNid($path);
+        if (empty($related_item_nid)) {
+          $related_item_nid = $this->handleSourceMigration($this->generateMachineName(), $path);
         }
-        $row->related_publications[] = $related_pub_id;
+        if (!empty($related_item_nid)) {
+          $row->related_publications[] = $related_item_nid;
+        }
+        else {
+          $migration->saveMessage("Failed to migrate related publication: {$path}", MigrationBase::MESSAGE_WARNING);
+        }
       }
     }
-
+    MigrationUtil::cleanMigratedFileField($row, 'file', 'public://publications/documents');
+    // MigrationUtil::cleanMigratedFileField($row, 'related_resources', 'public://publications/related_resources');
     return TRUE;
   }
 
@@ -194,18 +227,14 @@ class OshaMigratePublications extends DynamicMigration {
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
 
     $entity->translations = $translation_handler->getTranslations();
-    $entity->title = $row->title['en'];
     foreach ($languages as $language) {
-      if (!empty($row->title->{$language})) {
-        $entity->title_field[$language][0]['value'] = $row->title[$language];
-      }
       if (!empty($row->description[$language])) {
         $entity->body[$language][0]['value'] = $row->description[$language];
       }
       if (!empty($row->order_id[$language])) {
         $entity->field_publication_bookshop_id[$language][0]['value'] = $row->order_id[$language];
       }
-      if (!empty($row->file[$language]) && $language != 'en') {
+      if (!empty($row->field_publication_file[$language]) && $language != 'en') {
         $entity->field_publication_file[$language][0]['value'] = $row->file[$language];
       }
       /* Don't translate en (default) */
@@ -279,42 +308,59 @@ class PublicationMigrateListCSV extends MigrateList {
   }
 
   /**
+   * Retrieve unique ID from path. Removes language.
+   */
+  protected static function getIDFromSourceRow($row) {
+    $url = !empty($row[2]) ? $row[2] : $row[0];
+    return preg_replace('/^\/en\//', '', $url);
+  }
+
+  /**
    * Parse the source file and populate the local cache.
    */
   protected function parseSourceFile() {
     $handle = fopen($this->fileURL, 'r');
     $fields = $data = fgetcsv($handle, NULL, ';');
-    $data_path = osha_migration_get_data_dir();
 
     $final = array();
     while (($data = fgetcsv($handle, NULL, ';')) !== FALSE) {
-      $col0 = explode('/', $data[0], 3);
-      $language = $col0[1];
-      $path = $col0[2];
+      $path = self::getIDFromSourceRow($data);
+      $language = !empty($data[1]) ? $data[1] : 'en';
       $path_parts = explode('/', $path);
 
-      $final[$path] = array(
-        'id' => $path,
-        'path' => array($language => $path),
-        'publication_type' => !empty($path_parts[1]) ? $path_parts[1] : NULL,
-      );
+      $final[$path]['id'] = $path;
+      $final[$path]['publication_type'] = !empty($path_parts[1]) ? $path_parts[1] : NULL;
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
+            if ($language == 'en') {
+              $final[$path]['title'] = $data[$key];
+            }
+            $final[$path]['title_field'][$language][0]['value'] = $data[$key];
+            break;
+
           case 'description':
           case 'order_id':
+          case 'file':
             $final[$path][$field][$language] = $data[$key];
             break;
 
-          case 'file':
-            $final[$path][$field][$language] = $data_path . '/export/' . $data[$key];
-            break;
+          case 'path':
+            $path_language = explode('/', $data[$key], 3);
+            $final[$path][$field][$language] = $path_language[2];
+            continue;
 
           case 'relatedItems':
             /* Related files and publications */
             $items = MigrationUtil::parseRelatedItemsString($data[$key]);
-            $final[$path]['related_publications'] = $items['items'];
-            $final[$path]['relFiles'] = $items['files'];
+            if (!empty($items['items'])) {
+              $final[$path]['related_publications_path'] = $items['items'];
+            }
+            if (!empty($items['files'])) {
+              /* @todo: cannot migrate this multi-valued field
+               $final[$path]['related_resources'] = $items['files'];
+               */
+            }
             break;
 
           default:
@@ -355,7 +401,9 @@ class PublicationMigrateItemCSV extends MigrateItem {
    * {@inheritdoc}
    */
   public function getItem($item_id) {
-    return isset(PublicationMigrateListCSV::$csvData[$item_id]) ?
-      PublicationMigrateListCSV::$csvData[$item_id] : NULL;
+    if (!empty(PublicationMigrateListCSV::$csvData[$item_id])) {
+      return (object) PublicationMigrateListCSV::$csvData[$item_id];
+    }
+    return NULL;
   }
 }
