@@ -21,8 +21,8 @@ class OshaMigratePublications extends DynamicMigration {
     $source_file = MigrationUtil::getSourceFile($arguments);
 
     $this->source = new MigrateSourceList(
-      new PublicationMigrateListCSV($source_file),
-      new PublicationMigrateItemCSV(),
+      new PublicationMigrateList($source_file),
+      new PublicationMigrateItem(),
       array(
         'id' => 'Unique entity path, language independent',
         'creation_date' => 'Node creation date',
@@ -134,7 +134,8 @@ class OshaMigratePublications extends DynamicMigration {
       return FALSE;
     }
     $row->language = 'en';
-    $row->subject = MigrationUtil::decodeTagsTerms($row->subject);
+    $tags = $row->subject . ',' . $row->subcategory;
+    $row->subject = MigrationUtil::decodeTagsTerms($tags);
     $row->publication_type = self::handlePublicationType($row);
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
       explode(',', $row->multilingual_thesaurus),
@@ -272,16 +273,16 @@ class OshaMigratePublications extends DynamicMigration {
 }
 
 /**
- * Class PublicationMigrateListCSV
+ * Class PublicationMigrateList
  */
-class PublicationMigrateListCSV extends MigrateList {
+class PublicationMigrateList extends MigrateList {
 
   private $fileURL;
   protected $multilingualFields;
-  public static $csvData;
+  public static $data;
 
   /**
-   * Populates csvData with parsed information from the given file.
+   * {@inheritdoc}
    *
    * @param string $file_url
    *   The location of the file with source raw data
@@ -336,12 +337,13 @@ class PublicationMigrateListCSV extends MigrateList {
             if ($language == 'en') {
               $final[$path]['title'] = $data[$key];
             }
-            $final[$path]['title_field'][$language][0]['value'] = $data[$key];
+            $final[$path]['title_field'][$language] = $data[$key];
             break;
 
           case 'description':
           case 'order_id':
           case 'file':
+          case 'cover_image':
             $final[$path][$field][$language] = $data[$key];
             break;
 
@@ -368,15 +370,15 @@ class PublicationMigrateListCSV extends MigrateList {
         }
       }
     }
-    self::$csvData = $final;
+    self::$data = $final;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getIdList() {
-    if (self::$csvData) {
-      return array_keys(self::$csvData);
+    if (self::$data) {
+      return array_keys(self::$data);
     }
     return array();
   }
@@ -388,21 +390,21 @@ class PublicationMigrateListCSV extends MigrateList {
    *   Number of rows to be migrated from source
    */
   public function computeCount() {
-    return count(self::$csvData);
+    return count(self::$data);
   }
 }
 
 /**
- * Class PublicationMigrateItemCSV
+ * Class PublicationMigrateItem
  */
-class PublicationMigrateItemCSV extends MigrateItem {
+class PublicationMigrateItem extends MigrateItem {
 
   /**
    * {@inheritdoc}
    */
   public function getItem($item_id) {
-    if (!empty(PublicationMigrateListCSV::$csvData[$item_id])) {
-      return (object) PublicationMigrateListCSV::$csvData[$item_id];
+    if (!empty(PublicationMigrateList::$data[$item_id])) {
+      return (object) PublicationMigrateList::$data[$item_id];
     }
     return NULL;
   }

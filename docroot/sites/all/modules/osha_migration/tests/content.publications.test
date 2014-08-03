@@ -1,6 +1,27 @@
 <?php
 
 /**
+ * Class PublicationMigrateListMock mocks PublicationMigrateList
+ */
+class PublicationMigrateListMock extends PublicationMigrateList {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct() {
+    parent::__construct(drupal_get_path('module', 'osha_migration') . '/data/test/publications.txt');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function parseSourceFile() {
+    parent::parseSourceFile();
+  }
+}
+
+
+/**
  * Class MigrateOshaPublicationTest tests publication content type migration.
  */
 class MigrateOshaPublicationTest extends DrupalWebTestCase {
@@ -58,12 +79,12 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
       $nodes = entity_load('node', $nodes_nids);
     }
 
-    $class = new PublicationMigrateListCSV(
+    $class = new PublicationMigrateList(
       $source_file,
       array('title', 'description', 'order_id', 'file')
     );
     $class->getIdList();
-    $data = $class::$csvData;
+    $data = $class::$data;
     $this->assertEqual(count($data), count($nodes));
 
     foreach ($nodes as $node) {
@@ -93,5 +114,56 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
         /* TODO: Test body and tags */
       }
     }
+  }
+
+  /**
+   * Test parseSourceFile().
+   */
+  public function testParseSourceFile() {
+    $class = new PublicationMigrateListMock();
+    $class->parseSourceFile();
+    $subject = PublicationMigrateListMock::$data;
+    $this->assertEqual(2, count($subject));
+
+    $this->assertTrue(array_key_exists('publications/corporate/annual-report-2013-summary', $subject));
+    $this->assertTrue(array_key_exists('publications/e-facts/efact40', $subject));
+
+
+    $first = $subject['publications/corporate/annual-report-2013-summary'];
+    $this->assertEqual('private', $first['workflow_state']);
+    $this->assertEqual('19/5/14 12:29', $first['creation_date']);
+    $this->assertEqual('12/06/14 05:03 PM', $first['modification_date']);
+    $this->assertEqual('16/6/14 0:00', $first['publication_date']);
+    $this->assertEqual('moral_osha_europa_eu', $first['creator']);
+
+    $this->assertEqual('Bulgarian title', $first['title_field']['bg']);
+    $this->assertEqual('Spanish title', $first['title_field']['es']);
+    $this->assertEqual('English title', $first['title_field']['en']);
+    $this->assertEqual('English title', $first['title']);
+
+    $this->assertEqual('Description bg', $first['description']['bg']);
+    $this->assertEqual('Description es', $first['description']['es']);
+    $this->assertEqual('Description en', $first['description']['en']);
+
+    $this->assertEqual('European Agency for Safety and Health at Work', $first['author']);
+
+    $this->assertEqual('ORD1', $first['order_id']['bg']);
+    $this->assertEqual('ORD2', $first['order_id']['es']);
+    $this->assertEqual('ORD3', $first['order_id']['en']);
+
+    $this->assertEqual('/bg/publications/corporate/annual-report-2013-summary/cover_image.gif', $first['cover_image']['bg']);
+    $this->assertEqual('/es/publications/corporate/annual-report-2013-summary/cover_image.gif', $first['cover_image']['es']);
+    $this->assertEqual('/en/publications/corporate/annual-report-2013-summary/cover_image.gif', $first['cover_image']['en']);
+
+    $this->assertEqual('/bg/publications/corporate/annual-report-2013-summary/AR2013-summary_bg.pdf', $first['file']['bg']);
+    $this->assertEqual('/es/publications/corporate/annual-report-2013-summary/AR2013-summary_es.pdf', $first['file']['es']);
+    $this->assertEqual('/en/publications/corporate/annual-report-2013-summary/Annual Report 2013.pdf', $first['file']['en']);
+
+    $second = $subject['publications/e-facts/efact40'];
+    $this->assertEqual(array('publications/corporate/annual-report-2013-summary'), $second['related_publications_path']);
+    $this->assertEqual('gender, accident_prevention, risk_assessment, healthcare', $second['subject']);
+    $this->assertEqual('AT, BE, BG, CY, CZ, DK, EE, EU, FI, FR, DE, GR, HU, IE, IT, LV, LT, LU, MT, NL, PL, PT, RO, SK, SI, ES, SE, UK, EUMS', $second['country']);
+    $this->assertEqual('08801A, 11201B, 12521C, 18521C, 19641D, 28521A, 28561B, 29161C, 29201D, 46401A, 49441B, 50921C, 50961D', $second['multilingual_thesaurus']);
+    $this->assertEqual('81.2, 86, 87, 88', $second['nace']);
   }
 }
