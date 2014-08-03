@@ -95,9 +95,9 @@ class OshaMigratePublications extends DynamicMigration {
 
     if (!empty($row->publication_type)) {
       $types = MigrationUtil::findTidByTaxonomyField(
-        OSHA_TAXONOMIES_PUBLICATION_TYPES,
+        array($row->publication_type),
         'field_publication_type_code',
-        array($row->publication_type)
+        OSHA_TAXONOMIES_PUBLICATION_TYPES
       );
       if (!empty($types)) {
         $row->publication_type = $types[0];
