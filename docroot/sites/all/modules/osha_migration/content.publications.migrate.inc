@@ -247,99 +247,74 @@ class OshaMigratePublications extends DynamicMigration {
  */
 class PublicationMigrateListCSV extends MigrateList {
 
-  private $file_url;
+  private $fileURL;
   protected $multilingualFields;
   public static $csvData;
 
   /**
-   * Populates csvData with parsed information from $file_url.
+   * Populates csvData with parsed information from the given file.
    *
    * @param string $file_url
    *   The location of the file with source raw data
    */
   public function __construct($file_url) {
     parent::__construct();
-    $this->file_url = $file_url;
-    self::$csvData = $this->parseMultilingualCSV($file_url);
+    $this->fileURL = $file_url;
+    $this->parseSourceFile();
   }
 
   /**
    * {@inheritdoc}
    */
   public function __toString() {
-    return $this->file_url;
+    return $this->fileURL;
   }
 
   /**
-   * Parse CSV $file and pull the data into the cache.
-   *
-   * @param string $file
-   *   The csv file url
-   *
-   * @return array
-   *   Returns assoc array of assoc arrays which represents one source row
-   *   array[id][field] -- row
+   * Parse the source file and populate the local cache.
    */
-  protected function parseMultilingualCSV($file) {
-    $handle = fopen($file, 'r');
-    $fields = $data = fgetcsv($handle, 1000, ';');
+  protected function parseSourceFile() {
+    $handle = fopen($this->fileURL, 'r');
+    $fields = $data = fgetcsv($handle, NULL, ';');
     $data_path = osha_migration_get_data_dir();
 
     $final = array();
-    while (($data = fgetcsv($handle, 100000, ';')) !== FALSE) {
-      $language = explode('/', $data[0], 3);
-      $language = $language[1];
-      $id = $data[2];
-      if (empty($id)) {
-        $id = $data[0];
-      }
-      $id = preg_replace('/^\/en\//', '', $id);
-      $final[$id]['id'] = $id;
-      $publication_type = explode('/', $data[0]);
-      $publication_type = $publication_type[3];
-      if (!empty($publication_type)) {
-        $final[$id]['publication_type'] = $publication_type;
-      }
+    while (($data = fgetcsv($handle, NULL, ';')) !== FALSE) {
+      $col0 = explode('/', $data[0], 3);
+      $language = $col0[1];
+      $path = $col0[2];
+      $path_parts = explode('/', $path);
+
+      $final[$path] = array(
+        'id' => $path,
+        'path' => array($language => $path),
+        'publication_type' => !empty($path_parts[1]) ? $path_parts[1] : NULL,
+      );
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
           case 'description':
           case 'order_id':
-            $final[$id][$field][$language] = $data[$key];
+            $final[$path][$field][$language] = $data[$key];
             break;
 
           case 'file':
-            $final[$id][$field][$language] = $data_path . '/export/' . $data[$key];
-            break;
-
-          case 'path':
-            $tmp = explode('/', $data[$key], 3);
-            $final[$id]['path'][$language] = $tmp[2];
+            $final[$path][$field][$language] = $data_path . '/export/' . $data[$key];
             break;
 
           case 'relatedItems':
             /* Related files and publications */
-            if (!empty($data[$key])) {
-              $related_items = array_map('trim', explode(",", $data[$key]));
-              $final[$id]['related_publications'] = preg_replace('/^\/en\//', '', preg_grep('/^([^.]+)$/', $related_items));
-              $final[$id]['relFiles'] = preg_grep('/^.*\.(pdf|doc|docx|ppt|pptx)$/i', $related_items);
-              if (count($final[$id]['related_publications']) + count($final[$id]['relFiles']) != count($related_items)) {
-                drupal_set_message(sprintf(
-                  "Supported extensions : %s . Add your extension in migration.
-                  Error at item: %s",
-                  "pdf|doc|docx|ppt|pptx", $final[$id]['path'][$language]
-                ), 'warning');
-              }
-            }
+            $items = MigrationUtil::parseRelatedItemsString($data[$key]);
+            $final[$path]['related_publications'] = $items['items'];
+            $final[$path]['relFiles'] = $items['files'];
             break;
 
           default:
-            $final[$id][$field] = $data[$key];
+            $final[$path][$field] = $data[$key];
         }
       }
-      /* if (strlen($final[$id]['title'][$language]) > 255) { unset($final[$id]['title'][$language]); }*/
     }
-    return $final;
+    self::$csvData = $final;
   }
 
   /**
@@ -350,7 +325,7 @@ class PublicationMigrateListCSV extends MigrateList {
       return array_keys(self::$csvData);
     }
     Migration::displayMessage(
-      t('Loading of !fileUrl failed:', array('!listurl' => $this->file_url))
+      t('Loading of !fileUrl failed:', array('!listurl' => $this->fileURL))
     );
     return NULL;
   }
