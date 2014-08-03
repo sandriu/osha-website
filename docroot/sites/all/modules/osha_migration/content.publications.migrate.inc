@@ -351,20 +351,11 @@ class PublicationMigrateListCSV extends MigrateList {
  */
 class PublicationMigrateItemCSV extends MigrateItem {
 
-  protected $data;
-
   /**
    * {@inheritdoc}
    */
   public function getItem($item_id) {
-    // Object caching.
-    if (empty($this->data)) {
-      $csv_data = PublicationMigrateListCSV::$csvData;
-      foreach ($csv_data as $source_id => $item) {
-        $this->data[$source_id] = (object) $item;
-      }
-    }
-    return isset($this->data[$item_id]) ? $this->data[$item_id] : NULL;
+    return isset(PublicationMigrateListCSV::$csvData[$item_id]) ?
+      PublicationMigrateListCSV::$csvData[$item_id] : NULL;
   }
 }
-
