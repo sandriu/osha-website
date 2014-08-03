@@ -245,6 +245,54 @@ class MigrationUtil {
   }
 
   /**
+   * Check and remove invalid files to be migrated from the given field.
+   *
+   * @param object $row
+   *   Migrated source row
+   * @param string $field
+   *   File field from the object
+   * @param string $path_prefix
+   *   Additional path added to 'sites/default/files' ...
+   */
+  public static function cleanMigratedFileField(&$row, $field, $path_prefix = 'public://') {
+    if (empty($row->{$field})) {
+      return;
+    }
+    $migration = Migration::currentMigration();
+    /* Validate file path length */
+    $valid = array();
+    foreach ($row->{$field} as $language => $path) {
+      if (is_string($path)) {
+        if (strlen($path_prefix) + strlen($path) > 255) {
+          $migration->saveMessage(
+            "File path cannot be larger than 255 characters, ignoring {$row->file}",
+            MigrationBase::MESSAGE_WARNING
+          );
+        }
+        else {
+          $valid[$language] = $path;
+        }
+      }
+      else {
+        $valid_inner = array();
+        foreach ($path as $file) {
+          if (strlen($path_prefix) + strlen($file) > 255) {
+            $migration->saveMessage(
+              "File path cannot be larger than 255 characters, ignoring {$file}",
+              MigrationBase::MESSAGE_WARNING
+            );
+          }
+          else {
+            $valid_inner[] = $file;
+          }
+        }
+        $valid[$language] = $valid_inner;
+      }
+    }
+    $row->{$field} = $valid;
+  }
+
+  /**
    * Retrieve the project's config from JSON file.
    *
    * @return array
