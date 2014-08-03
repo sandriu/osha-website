@@ -112,10 +112,17 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
    * {@inheritdoc }
    */
   public function prepareRow($row) {
-    $row->parent = 0;
     $row->language = 'en';
-    $row->parent = $this->getParent($row);
     $row->weight = $this->getWeightByCode($row);
+
+    $row->parent = 0;
+    if (!empty($row->parent_code)) {
+      $parent_code = $this->getParentCode($row);
+      $parent_id = MigrationUtil::findTermByFieldValue($parent_code, 'field_nace_code');
+      if (empty($parent_id)) {
+        $row->parent = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
+      }
+    }
 
     return TRUE;
   }
@@ -165,18 +172,16 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     return OSHA_MIGRATION_TAXONOMY_NACE_CODES;
   }
 
-  private function getParent($row) {
-    $parent_code = $this->getParentCode($row);
-    if (!empty($parent_code)) {
-      $parent_id = MigrationUtil::findTermByFieldValue($parent_code, 'field_nace_code');
-      if (empty($parent_id)) {
-        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
-      }
-      return $parent_id;
-    }
-    return 0;
-  }
 
+  /**
+   * Extract NACE parent code from a record depending on level and code.
+   *
+   * @param object $row
+   *   Row object
+   *
+   * @return null|string
+   *   Code or NULL if not found
+   */
   private function getParentCode($row) {
     $parent_code = NULL;
     $cached = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
