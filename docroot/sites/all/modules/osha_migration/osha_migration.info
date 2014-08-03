@@ -15,3 +15,4 @@ files[] = taxonomy.publication_types.migrate.inc
 files[] = taxonomy.tags.migrate.inc
 files[] = taxonomy.thesaurus.migrate.inc
 files[] = osha_migration.test
+files[] = tests/content.publications.test
