@@ -37,12 +37,12 @@ class MigrationUtil {
   /**
    * Find terms in the given vocabulary by matching on its fields (i.e. name).
    *
-   * @param string $vocabulary_name
-   *   Vocabulary machine name
-   * @param string $field_match
-   *   Name of the field to match against (i.e. name)
    * @param array $terms
    *   Array of field values to match
+   * @param string $field_match
+   *   Name of the field to match against (i.e. name)
+   * @param string $vocabulary_name
+   *   Vocabulary machine name
    * @param string $language
    *   Field will be inspected on this language
    *
@@ -79,6 +79,36 @@ class MigrationUtil {
       );
     }
     return $ret;
+  }
+
+  /**
+   * Find terms by inspecting field value. Not multilingual.
+   *
+   * @param array $term_name
+   *   Field value to match
+   * @param string $field_match
+   *   Name of the field to match against (i.e. name)
+   *
+   * @return array
+   *   Term ID or NULL.
+   *
+   * Note: This method does not cache results, queries the vocabularies
+   */
+  public static function findTermByFieldValue($term_name, $field_match) {
+    $query = new EntityFieldQuery();
+    try {
+      $result = $query
+        ->entityCondition('entity_type', 'taxonomy_term')
+        ->fieldCondition($field_match, 'value', $term_name, '=')
+        ->execute();
+    }
+    catch(Exception $e) {
+      drupal_set_message(
+        sprintf('Cannot find term due to error: %s', $e->getMessage()),
+        'warning'
+      );
+    }
+    return !empty($result['taxonomy_term']) ? current(array_keys($result['taxonomy_term'])) : NULL;
   }
 
   /**
@@ -300,5 +330,33 @@ class MigrationUtil {
    */
   public static function getProjectConfig() {
     return json_decode(file_get_contents(DRUPAL_ROOT . '/../conf/config.json'), TRUE);
+  }
+}
+
+class OSHAMigrationListJSON extends MigrateListJSON {
+
+  protected $codeFieldName;
+
+  /**
+   * {@inheritdoc}
+   *
+   * @param string $code_field_name
+   *   Key field that identifies unique items in the given data
+   */
+  public function __construct($list_url, $code_field_name) {
+    parent::__construct($list_url);
+    $this->codeFieldName = $code_field_name;
+  }
+
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getIDsFromJSON(array $data) {
+    $ids = array();
+    foreach ($data as $item) {
+      $ids[] = $item[$this->codeFieldName];
+    }
+    return $ids;
   }
 }

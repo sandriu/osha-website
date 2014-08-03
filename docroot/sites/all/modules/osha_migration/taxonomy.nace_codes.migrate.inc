@@ -25,7 +25,7 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     );
 
     $this->source = new MigrateSourceList(
-      new NaceCodesMigrationListJSON($source_file),
+      new OSHAMigrationListJSON($source_file, 'NACE_REV_2_CODE'),
       new NaceCodesMigrationItemJSON($source_file, array()),
       $this->fields()
     );
@@ -112,10 +112,17 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
    * {@inheritdoc }
    */
   public function prepareRow($row) {
-    $row->parent = 0;
     $row->language = 'en';
-    $row->parent = $this->getParent($row);
     $row->weight = $this->getWeightByCode($row);
+
+    $parent_code = $this->getParentCode($row);
+    if (!empty($parent_code)) {
+      $parent_id = MigrationUtil::findTermByFieldValue($parent_code, 'field_nace_code');
+      if (empty($parent_id)) {
+        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
+      }
+      $row->parent = $parent_id;
+    }
 
     return TRUE;
   }
@@ -165,30 +172,16 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     return OSHA_MIGRATION_TAXONOMY_NACE_CODES;
   }
 
-  private function getParent($row) {
-    $parent_code = $this->getParentCode($row);
-    if (!empty($parent_code)) {
-      $parent_id = self::_getTidByCode($parent_code);
-      if (empty($parent_id)) {
-        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
-      }
-      return $parent_id;
-    }
-    return 0;
-  }
 
-  private static function _getTidByCode($code) {
-    $query = new EntityFieldQuery();
-    $result = $query
-      ->entityCondition('entity_type', 'taxonomy_term')
-      ->fieldCondition('field_nace_code', 'value', $code, '=')
-      ->execute();
-    if (!empty($result['taxonomy_term'])) {
-      return current(array_keys($result['taxonomy_term']));
-    }
-    return array();
-  }
-
+  /**
+   * Extract NACE parent code from a record depending on level and code.
+   *
+   * @param object $row
+   *   Row object
+   *
+   * @return null|string
+   *   Code or NULL if not found
+   */
   private function getParentCode($row) {
     $parent_code = NULL;
     $cached = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
@@ -275,20 +268,6 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
       }
     }
     return $mappings;
-  }
-}
-
-class NaceCodesMigrationListJSON extends MigrateListJSON {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getIDsFromJSON(array $data) {
-    $ids = array();
-    foreach ($data as $item) {
-      $ids[] = $item['NACE_REV_2_CODE'];
-    }
-    return $ids;
   }
 }
 

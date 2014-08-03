@@ -23,7 +23,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
     );
 
     $this->source = new MigrateSourceList(
-      new EsenerTaxonomyMigrationListJSON($source_file),
+      new OSHAMigrationListJSON($source_file, 'code'),
       new EsenerTaxonomyMigrationItemJSON($source_file, array()),
       array(
         'parent' => 'Parent tid',
@@ -85,7 +85,16 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
    */
   public function prepareRow($row) {
     $row->language = 'en';
-    $row->parent = $this->getParent($row);
+
+    $row->parent = 0;
+    if (!empty($row->parent_code)) {
+      $parent_id = MigrationUtil::findTermByFieldValue($row->parent_code, 'field_esener_code');
+      if (empty($parent_id)) {
+        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $row->parent_code);
+      }
+      $row->parent = $parent_id;
+    }
+
     return TRUE;
   }
 
@@ -128,49 +137,6 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_TAXONOMY_ESENER;
-  }
-
-  private function getParent($row) {
-    $parent_code = $this->getParentCode($row);
-    if (!empty($parent_code)) {
-      $parent_id = self::_getTidByCode($parent_code);
-      if (empty($parent_id)) {
-        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
-      }
-      return $parent_id;
-    }
-    return 0;
-  }
-
-  private static function _getTidByCode($code) {
-    $query = new EntityFieldQuery();
-    $result = $query
-      ->entityCondition('entity_type', 'taxonomy_term')
-      ->fieldCondition('field_esener_code', 'value', $code, '=')
-      ->execute();
-    if (!empty($result['taxonomy_term'])) {
-      return current(array_keys($result['taxonomy_term']));
-    }
-    return array();
-  }
-
-
-  private function getParentCode($row) {
-    return !empty($row->parent_code) ? $row->parent_code : 0;
-  }
-}
-
-class EsenerTaxonomyMigrationListJSON extends MigrateListJSON {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getIDsFromJSON(array $data) {
-    $ids = array();
-    foreach ($data as $item) {
-      $ids[] = $item['code'];
-    }
-    return $ids;
   }
 }
 

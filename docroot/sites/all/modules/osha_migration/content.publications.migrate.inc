@@ -53,9 +53,7 @@ class OshaMigratePublications extends DynamicMigration {
       ),
       MigrateDestinationNode::getKeySchema()
     );
-
-    $node_options = MigrateDestinationNode::options('en', 'text');
-    $this->destination = new MigrateDestinationNode(OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION, $node_options);
+    $this->destination = new MigrateDestinationNode(OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION);
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('title', 'title');
@@ -229,8 +227,8 @@ class OshaMigratePublications extends DynamicMigration {
 
     $entity->translations = $translation_handler->getTranslations();
     foreach ($languages as $language) {
-      if (!empty($row->description[$language])) {
-        $entity->body[$language][0]['value'] = $row->description[$language];
+      if (!empty($row->title_field[$language])) {
+        $entity->title_field[$language][0]['value'] = $row->title_field[$language];
       }
       if (!empty($row->order_id[$language])) {
         $entity->field_publication_bookshop_id[$language][0]['value'] = $row->order_id[$language];
@@ -264,7 +262,7 @@ class OshaMigratePublications extends DynamicMigration {
     foreach ($languages as $language) {
       $args = array(
         'source' => 'node/' . $entity->nid,
-        'alias' => $row->path[$language],
+        'alias' => $row->id,
         'language' => $language,
       );
       path_save($args);

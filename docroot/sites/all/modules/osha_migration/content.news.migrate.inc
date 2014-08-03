@@ -111,11 +111,17 @@ class MigrateOshaNews extends DynamicMigration {
     $row->language = 'en';
     $tags = $row->subject . ', ' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);
-    $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
-      OSHA_TAXONOMIES_THESAURUS,
-      'field_thesaurus_code',
-      explode(',', $row->multilingual_thesaurus)
-    );
+    if (!empty($row->multilingual_thesaurus)) {
+      $terms = explode(',', $row->multilingual_thesaurus);
+      $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
+        OSHA_TAXONOMIES_THESAURUS,
+        'field_thesaurus_code',
+        $terms
+      );
+    }
+    else {
+      $row->multilingual_thesaurus = NULL;
+    }
     return TRUE;
   }
 
