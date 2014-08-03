@@ -129,25 +129,13 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
   private function getParent($row) {
     $parent_code = $row->parent_code;
     if (!empty($parent_code)) {
-      $parent_id = self::_getTidByCode($parent_code);
+      $parent_id = MigrationUtil::findTermByFieldValue($parent_code, 'field_thesaurus_code');
       if (empty($parent_id)) {
         $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
       }
       return $parent_id;
     }
     return 0;
-  }
-
-  private static function _getTidByCode($code) {
-    $query = new EntityFieldQuery();
-    $result = $query
-      ->entityCondition('entity_type', 'taxonomy_term')
-      ->fieldCondition('field_thesaurus_code', 'value', $code, '=')
-      ->execute();
-    if (!empty($result['taxonomy_term'])) {
-      return current(array_keys($result['taxonomy_term']));
-    }
-    return array();
   }
 
   /**
