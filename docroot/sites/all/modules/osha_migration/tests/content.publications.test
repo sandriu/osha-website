@@ -45,7 +45,7 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp('path', 'pathauto', 'views', 'osha', 'osha_taxonomies', 'osha_publication', 'osha_migration');
+    parent::setUp('entity_translation', 'path', 'pathauto', 'views', 'osha', 'osha_taxonomies', 'osha_publication', 'osha_migration');
     $cfg = MigrationUtil::getProjectConfig();
     variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
   }
@@ -108,14 +108,14 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
 
       $this->assertEqual(
         $witness['author'],
-        $node->field_publication_author['und'][0]['value']
+        $node->field_publication_author[LANGUAGE_NONE][0]['value']
       );
 
-      foreach ($witness['title'] as $lang => $title) {
-        $this->assertEqual($title, $node->title_field[$lang][0]['value']);
+      foreach ($witness['title_field'] as $language => $title) {
+        $this->assertEqual($title, $node->title_field[$language][0]['value']);
         $this->assertEqual(
-          $witness['order_id'][$lang],
-          $node->field_publication_bookshop_id[$lang][0]['value']
+          $witness['order_id'][$language],
+          $node->field_publication_bookshop_id[$language][0]['value']
         );
         /* TODO: Test body and tags */
       }
@@ -139,7 +139,7 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
     $this->assertEqual('private', $first['workflow_state']);
     $this->assertEqual('04/05/2014 11:29 AM', $first['creation_date']);
     $this->assertEqual('12/06/2014 05:03 PM', $first['modification_date']);
-    $this->assertEqual('16/6/2014 00:00', $first['publication_date']);
+    $this->assertEqual('10/06/2014 00:00', $first['publication_date']);
     $this->assertEqual('moral_osha_europa_eu', $first['creator']);
 
     $this->assertEqual('Bulgarian title', $first['title_field']['bg']);
