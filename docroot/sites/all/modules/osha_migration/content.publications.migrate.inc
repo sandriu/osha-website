@@ -105,11 +105,18 @@ class OshaMigratePublications extends DynamicMigration {
     }
     if (!empty($row->multilingual_thesaurus)) {
       $row->multilingual_thesaurus = explode(',', $row->multilingual_thesaurus);
-      $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(OSHA_TAXONOMIES_THESAURUS, 'field_thesaurus_code', $row->multilingual_thesaurus);
+      $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
+        $row->multilingual_thesaurus,
+        'field_thesaurus_code',
+        OSHA_TAXONOMIES_THESAURUS
+      );
     }
     if (!empty($row->nace)) {
       $row->nace = explode(',', $row->nace);
-      $row->nace = MigrationUtil::findTidByTaxonomyField(OSHA_TAXONOMIES_NACE_CODES, 'field_nace_code', $row->nace);
+      $row->nace = MigrationUtil::findTidByTaxonomyField(
+        $row->nace,
+        'field_nace_code',
+        OSHA_TAXONOMIES_NACE_CODES);
     }
 
     $row->field_publication_file = $row->file;

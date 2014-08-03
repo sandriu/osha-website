@@ -20,11 +20,15 @@ class MigrationUtil {
     if (isset($arguments['file_name'])) {
       $file = $arguments['file_name'];
       if (!file_exists($file) || !is_readable($file)) {
-        throw new Exception("Cannot read migration file $file");
+        throw new Exception(
+          t('Cannot read migration file @file', array('@file' => $file))
+        );
       }
     }
     else {
-      throw new Exception('Missing "file_name" migration argument');
+      throw new Exception(
+        t('Invalid migration setup: missing `file_name` parameter (source)')
+      );
     }
     return $file;
   }
@@ -37,7 +41,7 @@ class MigrationUtil {
    *   Vocabulary machine name
    * @param string $field_match
    *   Name of the field to match against (i.e. name)
-   * @param string $terms
+   * @param array $terms
    *   Array of field values to match
    * @param string $language
    *   Field will be inspected on this language
@@ -49,13 +53,13 @@ class MigrationUtil {
    * Note: This method does static caching and loads entire vocabulary for reuse
    * thus is recommended to use when taxonomy does not change during migration.
    */
-  public static function findTidByTaxonomyField($vocabulary_name, $field_match, $terms, $language = LANGUAGE_NONE) {
+  public static function findTidByTaxonomyField($terms, $field_match, $vocabulary_name, $language = LANGUAGE_NONE) {
     if (empty($terms)) {
       return array();
     }
     $ret = array();
-    $terms = array_filter($terms, 'strlen');
     $terms = array_map('trim', $terms);
+    $terms = array_filter($terms, 'strlen');
     $field_values = self::cacheVocabularyTermsFields($vocabulary_name, $field_match, $language);
     $misses = array();
     foreach ($terms as $t) {
@@ -74,7 +78,6 @@ class MigrationUtil {
         'warning'
       );
     }
-
     return $ret;
   }
 
@@ -170,7 +173,7 @@ class MigrationUtil {
         }
       }
     }
-    return self::findTidByTaxonomyField(OSHA_TAXONOMIES_TAGS, $term_field, $ret, LANGUAGE_NONE);
+    return self::findTidByTaxonomyField($ret, $term_field, OSHA_TAXONOMIES_TAGS, LANGUAGE_NONE);
   }
 
   /**
