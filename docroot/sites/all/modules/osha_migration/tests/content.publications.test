@@ -63,6 +63,12 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/thesaurus.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES, 'MigrateOshaTaxonomyPublicationTypes', $source_file);
+
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/publications.txt';
     $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION, 'OshaMigratePublications', $source_file);
 
@@ -85,7 +91,7 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
     );
     $class->getIdList();
     $data = $class::$data;
-    $this->assertEqual(count($data), count($nodes));
+    $this->assertEqual(count(array_keys($data)), count($nodes));
 
     foreach ($nodes as $node) {
       $path = path_load('node/' . $node->nid);
@@ -131,9 +137,9 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
 
     $first = $subject['publications/corporate/annual-report-2013-summary'];
     $this->assertEqual('private', $first['workflow_state']);
-    $this->assertEqual('19/5/14 12:29', $first['creation_date']);
-    $this->assertEqual('12/06/14 05:03 PM', $first['modification_date']);
-    $this->assertEqual('16/6/14 0:00', $first['publication_date']);
+    $this->assertEqual('04/05/2014 11:29 AM', $first['creation_date']);
+    $this->assertEqual('12/06/2014 05:03 PM', $first['modification_date']);
+    $this->assertEqual('16/6/2014 00:00', $first['publication_date']);
     $this->assertEqual('moral_osha_europa_eu', $first['creator']);
 
     $this->assertEqual('Bulgarian title', $first['title_field']['bg']);
