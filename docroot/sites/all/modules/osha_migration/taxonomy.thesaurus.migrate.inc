@@ -94,8 +94,9 @@ class MigrateOshaTaxonomyThesaurus extends DynamicMigration {
     if (!empty($row->parent_code)) {
       $parent_id = MigrationUtil::findTermByFieldValue($row->parent_code, 'field_thesaurus_code');
       if (empty($parent_id)) {
-        $row->parent = $this->handleSourceMigration($this->generateMachineName(), $row->parent_code);
+        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $row->parent_code);
       }
+      $row->parent = $parent_id;
     }
     return TRUE;
   }
