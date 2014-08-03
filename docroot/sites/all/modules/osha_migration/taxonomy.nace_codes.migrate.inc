@@ -25,7 +25,7 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     );
 
     $this->source = new MigrateSourceList(
-      new NaceCodesMigrationListJSON($source_file),
+      new OSHAMigrationListJSON($source_file, 'NACE_REV_2_CODE'),
       new NaceCodesMigrationItemJSON($source_file, array()),
       $this->fields()
     );
@@ -115,13 +115,13 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     $row->language = 'en';
     $row->weight = $this->getWeightByCode($row);
 
-    $row->parent = 0;
-    if (!empty($row->parent_code)) {
-      $parent_code = $this->getParentCode($row);
+    $parent_code = $this->getParentCode($row);
+    if (!empty($parent_code)) {
       $parent_id = MigrationUtil::findTermByFieldValue($parent_code, 'field_nace_code');
       if (empty($parent_id)) {
-        $row->parent = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
+        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
       }
+      $row->parent = $parent_id;
     }
 
     return TRUE;
@@ -268,20 +268,6 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
       }
     }
     return $mappings;
-  }
-}
-
-class NaceCodesMigrationListJSON extends MigrateListJSON {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getIDsFromJSON(array $data) {
-    $ids = array();
-    foreach ($data as $item) {
-      $ids[] = $item['NACE_REV_2_CODE'];
-    }
-    return $ids;
   }
 }
 

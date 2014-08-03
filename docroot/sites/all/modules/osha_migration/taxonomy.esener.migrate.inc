@@ -23,7 +23,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
     );
 
     $this->source = new MigrateSourceList(
-      new EsenerTaxonomyMigrationListJSON($source_file),
+      new OSHAMigrationListJSON($source_file, 'code'),
       new EsenerTaxonomyMigrationItemJSON($source_file, array()),
       array(
         'parent' => 'Parent tid',
@@ -90,8 +90,9 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
     if (!empty($row->parent_code)) {
       $parent_id = MigrationUtil::findTermByFieldValue($row->parent_code, 'field_esener_code');
       if (empty($parent_id)) {
-        $row->parent = $this->handleSourceMigration($this->generateMachineName(), $row->parent_code);
+        $parent_id = $this->handleSourceMigration($this->generateMachineName(), $row->parent_code);
       }
+      $row->parent = $parent_id;
     }
 
     return TRUE;
@@ -136,20 +137,6 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_TAXONOMY_ESENER;
-  }
-}
-
-class EsenerTaxonomyMigrationListJSON extends MigrateListJSON {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getIDsFromJSON(array $data) {
-    $ids = array();
-    foreach ($data as $item) {
-      $ids[] = $item['code'];
-    }
-    return $ids;
   }
 }
 

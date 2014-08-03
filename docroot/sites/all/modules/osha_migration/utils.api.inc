@@ -332,3 +332,31 @@ class MigrationUtil {
     return json_decode(file_get_contents(DRUPAL_ROOT . '/../conf/config.json'), TRUE);
   }
 }
+
+class OSHAMigrationListJSON extends MigrateListJSON {
+
+  protected $codeFieldName;
+
+  /**
+   * {@inheritdoc}
+   *
+   * @param string $code_field_name
+   *   Key field that identifies unique items in the given data
+   */
+  public function __construct($list_url, $code_field_name) {
+    parent::__construct($list_url);
+    $this->codeFieldName = $code_field_name;
+  }
+
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getIDsFromJSON(array $data) {
+    $ids = array();
+    foreach ($data as $item) {
+      $ids[] = $item[$this->codeFieldName];
+    }
+    return $ids;
+  }
+}

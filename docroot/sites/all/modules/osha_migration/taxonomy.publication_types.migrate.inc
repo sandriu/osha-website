@@ -23,7 +23,7 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
     );
 
     $this->source = new MigrateSourceList(
-      new PublicationTypesTaxonomyMigrationListJSON($source_file),
+      new OSHAMigrationListJSON($source_file, 'code'),
       new PublicationTypesTaxonomyMigrationItemJSON($source_file, array()),
       array(
         'en' => 'Term text in english',
@@ -90,20 +90,6 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES;
-  }
-}
-
-class PublicationTypesTaxonomyMigrationListJSON extends MigrateListJSON {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getIDsFromJSON(array $data) {
-    $ids = array();
-    foreach ($data as $item) {
-      $ids[] = $item['code'];
-    }
-    return $ids;
   }
 }
 

@@ -30,7 +30,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
     );
 
     $this->source = new MigrateSourceList(
-      new TagsTaxonomyMigrationListJSON($source_file),
+      new OSHAMigrationListJSON($source_file, 'code'),
       new TagsTaxonomyMigrationItemJSON($source_file, array()),
       array(
         'code' => 'Term code',
@@ -109,20 +109,6 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_TAXONOMY_TAGS;
-  }
-}
-
-class TagsTaxonomyMigrationListJSON extends MigrateListJSON {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getIDsFromJSON(array $data) {
-    $ids = array();
-    foreach ($data as $item) {
-      $ids[] = $item['code'];
-    }
-    return $ids;
   }
 }
 
