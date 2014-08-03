@@ -260,6 +260,14 @@ class PublicationMigrateListCSV extends MigrateList {
   public function __construct($file_url) {
     parent::__construct();
     $this->fileURL = $file_url;
+    if (!file_exists($this->fileURL)) {
+      Migration::displayMessage(
+        t(
+          'Failed to load data file from !fileUrl:',
+          array('!fileUrl' => $this->fileURL)
+        )
+      );
+    }
     $this->parseSourceFile();
   }
 
@@ -324,10 +332,7 @@ class PublicationMigrateListCSV extends MigrateList {
     if (self::$csvData) {
       return array_keys(self::$csvData);
     }
-    Migration::displayMessage(
-      t('Loading of !fileUrl failed:', array('!listurl' => $this->fileURL))
-    );
-    return NULL;
+    return array();
   }
 
   /**
