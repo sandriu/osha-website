@@ -177,6 +177,48 @@ class MigrationUtil {
   }
 
   /**
+   * Parse 'related items' field (i.e. related_publications).
+   *
+   * Extract the values as entities (i.e. related publications) and physical
+   * files (i.e. /local/storage/path/file.pptx)
+   *
+   * @param string $field_value
+   *   Value to parse
+   * @param string $supported_extensions
+   *   (Optional) Supported file extensions.
+   *   Default: PDF,DOC,DOCX,PPT,PPTX,XLS,XLSX
+   *
+   * @return array
+   *   Array with two keys (`items` and `files`) of related content
+   */
+  public static function parseRelatedItemsString($field_value, $supported_extensions = 'pdf|doc|docx|ppt|pptx|xls|xlsx') {
+    $ret = array('items' => NULL, 'files' => NULL);
+    if (empty($field_value)) {
+      return $ret;
+    }
+    $items = array_map('trim', explode(',', $field_value));
+    foreach ($items as $item) {
+      $file_match = sprintf('/^.*\.(%s)$/i', $supported_extensions);
+      if (preg_match($file_match, $item)) {
+        $ret['files'][] = $item;
+      }
+      else {
+        $path = preg_replace('/^\/en\//i', '', $item);
+        $ret['items'][] = $path;
+      }
+    }
+    if (count($ret['items']) + count($ret['files']) != count($items)) {
+      drupal_set_message(
+        t('Could not extract all related items from string: @input (Possible unsupported file extensions: @ext)',
+          array('@input' => $field_value, '@ext' => $supported_extensions)
+        ),
+        'warning'
+      );
+    }
+    return $ret;
+  }
+
+  /**
    * Register and run a migration.
    *
    * @param string $machine_name
