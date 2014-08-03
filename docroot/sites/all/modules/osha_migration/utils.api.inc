@@ -82,6 +82,36 @@ class MigrationUtil {
   }
 
   /**
+   * Find terms by inspecting field value. Not multilingual.
+   *
+   * @param array $term_name
+   *   Field value to match
+   * @param string $field_match
+   *   Name of the field to match against (i.e. name)
+   *
+   * @return array
+   *   Term ID or NULL.
+   *
+   * Note: This method does not cache results, queries the vocabularies
+   */
+  public static function findTermByFieldValue($term_name, $field_match) {
+    $query = new EntityFieldQuery();
+    try {
+      $result = $query
+        ->entityCondition('entity_type', 'taxonomy_term')
+        ->fieldCondition($field_match, 'value', $term_name, '=')
+        ->execute();
+    }
+    catch(Exception $e) {
+      drupal_set_message(
+        sprintf('Cannot find term due to error: %s', $e->getMessage()),
+        'warning'
+      );
+    }
+    return !empty($result['taxonomy_term']) ? current(array_keys($result['taxonomy_term'])) : NULL;
+  }
+
+  /**
    * Cache vocabulary terms mapped to tid. Use to find tid.
    *
    * @param string $vocabulary_name

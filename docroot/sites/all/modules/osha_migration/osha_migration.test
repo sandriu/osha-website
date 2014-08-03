@@ -369,6 +369,7 @@ class MigrationUtilTest extends DrupalWebTestCase {
     $term1->field_tags_code['und'][0]['value'] = 'accident_prevention';
     $term1->vid = $voc->vid;
     taxonomy_term_save($term1);
+    $this->assertEqual(1, $term1->tid);
 
     $term2 = new stdClass();
     $term2->name = 'Dangerous substances';
@@ -378,6 +379,7 @@ class MigrationUtilTest extends DrupalWebTestCase {
     $term2->vid = $voc->vid;
 
     taxonomy_term_save($term2);
+    $this->assertEqual(2, $term2->tid);
   }
 
   /**
@@ -498,5 +500,19 @@ class MigrationUtilTest extends DrupalWebTestCase {
     $subject = MigrationUtil::parseRelatedItemsString($input);
     $this->assertEqual(1, count($subject['files']));
     $this->assertTrue(in_array('/file1.pptx', $subject['files']));
+  }
+
+  /**
+   * Test findTermByFieldValue().
+   */
+  public function testFindTermByFieldValue() {
+    $tid = MigrationUtil::findTermByFieldValue('accident_prevention', 'field_tags_code');
+    $this->assertEqual(1, $tid);
+
+    $tid = MigrationUtil::findTermByFieldValue('Substanţe periculoase', 'name_field');
+    $this->assertEqual(2, $tid);
+
+    $tid = MigrationUtil::findTermByFieldValue('Dangerous substances', 'name');
+    $this->assertNull($tid);
   }
 }
