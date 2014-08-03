@@ -37,12 +37,12 @@ class MigrationUtil {
   /**
    * Find terms in the given vocabulary by matching on its fields (i.e. name).
    *
-   * @param string $vocabulary_name
-   *   Vocabulary machine name
-   * @param string $field_match
-   *   Name of the field to match against (i.e. name)
    * @param array $terms
    *   Array of field values to match
+   * @param string $field_match
+   *   Name of the field to match against (i.e. name)
+   * @param string $vocabulary_name
+   *   Vocabulary machine name
    * @param string $language
    *   Field will be inspected on this language
    *
