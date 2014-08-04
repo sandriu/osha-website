@@ -108,6 +108,27 @@ class MigrateOshaNews extends DynamicMigration {
    * {@inheritdoc}
    */
   public function prepareRow($row) {
+    // @todo: Refactored as utility (EntityRowValidator)
+    if (empty($row->title['en'])) {
+      $this->saveMessage('Skipping node without english title' . $row->id, MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    if ($row->workflow_state != 'published') {
+      $this->saveMessage(
+        sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
+        MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    foreach ($row->title as $language => $value) {
+      if (strlen($value) > 768) {
+        $this->saveMessage(
+          sprintf('Skipping publication node with long title (%s): %s chars', $language, strlen($value)),
+          MigrationBase::MESSAGE_WARNING
+        );
+        return FALSE;
+      }
+    }
+
     $row->language = 'en';
     $tags = $row->subject . ', ' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);
