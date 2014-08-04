@@ -267,9 +267,8 @@ function osha_configure_basic_page() {
 function osha_enable_body_translations() {
   if (module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
     $info = field_info_field('body');
-    /* @todo: Breaks the tests! */
     if ($info !== NULL) {
-      drupal_set_message(t("Making body field translatable"));
+      drupal_set_message('Making body field translatable');
       $form_state['values']['translatable'] = "0";
       $form_state['field']['field_name'] = 'body';
       drupal_form_submit('entity_translation_translatable_form', $form_state, 'body');
@@ -279,6 +278,6 @@ function osha_enable_body_translations() {
     }
   }
   else {
-    drupal_set_message('osha_configure_basic_page: content_types module not available', 'warning');
+    drupal_set_message('osha_configure_basic_page: entity_translation module not available', 'error');
   }
 }

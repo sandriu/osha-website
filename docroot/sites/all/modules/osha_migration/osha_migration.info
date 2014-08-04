@@ -4,6 +4,8 @@ package = "OSHA"
 core = 7.x
 dependencies[] = migrate
 dependencies[] = osha
+dependencies[] = osha_news
+dependencies[] = osha_publication
 dependencies[] = osha_taxonomies
 
 files[] = content.news.migrate.inc

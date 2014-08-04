@@ -5,6 +5,7 @@ version = 7.x-1.1
 project = osha
 dependencies[] = ctools
 dependencies[] = entity
+dependencies[] = entity_translation
 dependencies[] = features
 dependencies[] = i18n
 dependencies[] = locale
