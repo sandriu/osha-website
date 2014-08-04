@@ -26,7 +26,7 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
 
     $this->source = new MigrateSourceList(
       new OSHAMigrationListJSON($source_file, 'NACE_REV_2_CODE'),
-      new NaceCodesMigrationItemJSON($source_file, array()),
+      new NaceCodesMigrationItemJSON($source_file),
       $this->fields()
     );
 

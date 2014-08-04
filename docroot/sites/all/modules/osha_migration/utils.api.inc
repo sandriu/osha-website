@@ -345,3 +345,54 @@ class OSHAMigrationListJSON extends MigrateListJSON {
     return $ids;
   }
 }
+
+class OSHATaxonomyMigrationItemJSON extends MigrateItemJSON {
+
+  protected $data = array();
+  protected $assoc = FALSE;
+  protected $field = NULL;
+
+  /**
+   * {@inheritdoc}
+   *
+   * @param string $source_file
+   *   Path to the data file
+   * @param string $field
+   *   Field to use as key
+   * @param bool $assoc
+   *   Parse the JSON as associative array and store it that way
+   */
+  public function __construct($source_file, $field = 'code', $assoc = FALSE) {
+    $this->itemUrl = $source_file;
+    $this->assoc = $assoc;
+    $this->field = $field;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getItem($item_id) {
+    if (empty($this->data)) {
+      $rows = $this->loadJSONUrl($this->itemUrl, $this->assoc);
+      if ($rows) {
+        foreach ($rows as $row) {
+          $field = $this->field;
+          if (!$this->assoc) {
+            if (!empty($row->{$field})) {
+              $this->data[$row->{$field}] = $row;
+            }
+          }
+          else {
+            if (!empty($row[$field])) {
+              $this->data[$row[$field]] = $row;
+            }
+          }
+        }
+      }
+    }
+    if (isset($this->data[$item_id])) {
+      return $this->assoc ? (object) $this->data[$item_id] : $this->data[$item_id];
+    }
+    return NULL;
+  }
+}

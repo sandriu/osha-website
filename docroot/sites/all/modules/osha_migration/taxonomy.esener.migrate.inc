@@ -24,7 +24,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
 
     $this->source = new MigrateSourceList(
       new OSHAMigrationListJSON($source_file, 'code'),
-      new EsenerTaxonomyMigrationItemJSON($source_file, array()),
+      new OSHATaxonomyMigrationItemJSON($source_file),
       array(
         'parent' => 'Parent tid',
         'en' => 'Term name in english',
@@ -137,23 +137,5 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_TAXONOMY_ESENER;
-  }
-}
-
-class EsenerTaxonomyMigrationItemJSON extends MigrateItemJSON {
-
-  private $cache = array();
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getItem($item_id) {
-    if (empty($this->cache)) {
-      $rows = $this->loadJSONUrl($this->itemUrl);
-      foreach ($rows as $row) {
-        $this->cache[$row->code] = $row;
-      }
-    }
-    return isset($this->cache[$item_id]) ? $this->cache[$item_id] : NULL;
   }
 }
