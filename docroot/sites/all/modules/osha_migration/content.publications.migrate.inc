@@ -108,11 +108,10 @@ class OshaMigratePublications extends DynamicMigration {
         return $types[0];
       }
       else {
-        $this->saveMessage(
+        drupal_set_message(
           sprintf('Cannot decode publication type %s', $row->publication_type),
-          MigrationBase::MESSAGE_WARNING
+          'warning'
         );
-        $row->publication_type = NULL;
       }
     }
     return NULL;
@@ -157,13 +156,13 @@ class OshaMigratePublications extends DynamicMigration {
       'field_thesaurus_code',
       OSHA_TAXONOMIES_THESAURUS
     );
-
     if (!empty($row->nace)) {
       $row->nace = explode(',', $row->nace);
       $row->nace = MigrationUtil::findTidByTaxonomyField(
         $row->nace,
         'field_nace_code',
-        OSHA_TAXONOMIES_NACE_CODES);
+        OSHA_TAXONOMIES_NACE_CODES
+      );
     }
 
     $row->related_publications = array();
