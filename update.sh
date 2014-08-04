@@ -5,10 +5,10 @@ cd docroot/
 
 drush build
 
-if [ "$1" == "--migrate" ]; then
+echo "Registering migrations ..."
+drush migrate-auto-register
 
-	echo "Registering migrations ..."
-	drush migrate-auto-register
+if [ "$1" == "--migrate" ]; then
 
 	echo "Importing NACE codes taxonomy"
 	drush migrate-import --update TaxonomyNaceCodes
