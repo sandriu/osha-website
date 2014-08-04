@@ -17,7 +17,7 @@ class MigrateOshaNews extends DynamicMigration {
 
     $source_file = MigrationUtil::getSourceFile($arguments);
     $this->source = new MigrateSourceList(
-      new NewsContentListCSV($source_file, array('title', 'description', 'text')),
+      new NewsContentListCSV($source_file),
       new NewsContentItemCSV(),
       $this->fields()
     );
@@ -108,6 +108,27 @@ class MigrateOshaNews extends DynamicMigration {
    * {@inheritdoc}
    */
   public function prepareRow($row) {
+    // @todo: Refactored as utility (EntityRowValidator)
+    if (empty($row->title['en'])) {
+      $this->saveMessage('Skipping node without english title' . $row->id, MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    if ($row->workflow_state != 'published') {
+      $this->saveMessage(
+        sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
+        MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    foreach ($row->title as $language => $value) {
+      if (strlen($value) > 768) {
+        $this->saveMessage(
+          sprintf('Skipping publication node with long title (%s): %s chars', $language, strlen($value)),
+          MigrationBase::MESSAGE_WARNING
+        );
+        return FALSE;
+      }
+    }
+
     $row->language = 'en';
     $tags = $row->subject . ', ' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);
@@ -215,16 +236,15 @@ class MigrateOshaNews extends DynamicMigration {
 
 class NewsContentListCSV extends MigrateList {
   protected $file = '';
-  protected $multilingualFields;
   public static $data = array();
 
   /**
    * {@inheritdoc}
    */
-  public function __construct($file, $multilingual_fields = array()) {
+  public function __construct($file) {
     parent::__construct();
     $this->file = $file;
-    $this->multilingualFields = $multilingual_fields;
+    $this->parseSourceFile();
   }
 
   /**
@@ -235,39 +255,36 @@ class NewsContentListCSV extends MigrateList {
   }
 
   /**
+   * Retrieve unique ID from path. Removes language.
+   */
+  protected static function getIDFromSourceRow($row) {
+    $url = !empty($row[2]) ? $row[2] : $row[0];
+    return substr($url, 4);
+  }
+
+  /**
    * Parse the CSV file and populate the local cache.
    */
-  protected function parseMultilingualCSV() {
+  protected function parseSourceFile() {
     $handle = fopen($this->file, 'r');
     $fields = $data = fgetcsv($handle, 1000, ';');
-    $final = array();
+    self::$data = array();
     while (($data = fgetcsv($handle, 100000, ';')) !== FALSE) {
       $language = $data[1];
-      $path = $data[2];
-      if (empty($path)) {
-        $path = $data[0];
-      }
-      $path = preg_replace('/^\/en\//', '', $path);
+      $path = self::getIDFromSourceRow($data);
       foreach ($fields as $key => $field) {
-        if (in_array($field, $this->multilingualFields)) {
-          $final[$path][$field][$language] = $data[$key];
-          continue;
-        }
-        $final[$path][$field] = $data[$key];
-      }
-      $final[$path]['id'] = $path;
-    }
+        switch ($field) {
+          case 'title':
+          case 'description':
+          case 'text':
+            self::$data[$path][$field][$language] = $data[$key];
+            break;
 
-    foreach ($final as $id => $row) {
-      if (isset($row['title']['en'])) {
-        self::$data[$id] = $final[$id];
+          default:
+            self::$data[$path][$field] = $data[$key];
+        }
       }
-      else {
-        drupal_set_message(
-          sprintf('No english translation for row:%s', $id),
-          'warning'
-        );
-      }
+      self::$data[$path]['id'] = $path;
     }
   }
 
@@ -276,7 +293,7 @@ class NewsContentListCSV extends MigrateList {
    */
   public function getIdList() {
     if (empty(self::$data)) {
-      $this->parseMultilingualCSV();
+      $this->parseSourceFile();
     }
     return array_keys(self::$data);
   }
