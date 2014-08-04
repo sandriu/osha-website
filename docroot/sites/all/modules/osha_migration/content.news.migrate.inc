@@ -258,7 +258,7 @@ class NewsContentListCSV extends MigrateList {
    * Retrieve unique ID from path. Removes language.
    */
   protected static function getIDFromSourceRow($row) {
-    $url = !empty($row[2]) ? $row[2] : $row[0];
+    $url = $row[0];
     return substr($url, 4);
   }
 
@@ -272,6 +272,7 @@ class NewsContentListCSV extends MigrateList {
     while (($data = fgetcsv($handle, 100000, ';')) !== FALSE) {
       $language = $data[1];
       $path = self::getIDFromSourceRow($data);
+      self::$data[$path]['id'] = $path;
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
@@ -282,9 +283,9 @@ class NewsContentListCSV extends MigrateList {
 
           default:
             self::$data[$path][$field] = $data[$key];
+            break;
         }
       }
-      self::$data[$path]['id'] = $path;
     }
   }
 
