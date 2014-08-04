@@ -271,6 +271,9 @@ $options['init-modules'] = array(
   'views_ui',
   'views_bulk_operations',
 
+  'mailsystem',
+  'htmlmail',
+
   'taxonomy_access_fix',
   'date',
   'migrate',
