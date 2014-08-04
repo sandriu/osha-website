@@ -45,7 +45,8 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp('entity_translation', 'path', 'pathauto', 'views', 'osha', 'osha_taxonomies', 'osha_publication', 'osha_migration');
+    parent::setUp();
+    module_enable(array('osha_migration'));
     $cfg = MigrationUtil::getProjectConfig();
     variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
   }
@@ -94,33 +95,45 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
     // First broken, second good.
     $this->assertEqual(1, count($nodes));
 
-    foreach ($nodes as $node) {
-      $path = path_load('node/' . $node->nid);
-      $path = $path['alias'];
-      $witness = $data[$path];
+    $node = current($nodes);
+    $path = path_load('node/' . $node->nid);
+    $path = $path['alias'];
+    $witness = $data[$path];
 
-      $this->assertEqual(strtotime($witness['creation_date']), $node->created);
-      $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
+    $this->assertEqual(strtotime($witness['creation_date']), $node->created);
+    $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
 
+    $this->assertEqual(
+      strtotime($witness['publication_date']),
+      strtotime($node->field_publication_date['und'][0]['value'])
+    );
+
+    $this->assertEqual(
+      $witness['author'],
+      $node->field_publication_author[LANGUAGE_NONE][0]['value']
+    );
+
+    foreach ($witness['title_field'] as $language => $title) {
+      $this->assertEqual($title, $node->title_field[$language][0]['value']);
       $this->assertEqual(
-        strtotime($witness['publication_date']),
-        strtotime($node->field_publication_date['und'][0]['value'])
+        $witness['order_id'][$language],
+        $node->field_publication_bookshop_id[$language][0]['value']
       );
-
-      $this->assertEqual(
-        $witness['author'],
-        $node->field_publication_author[LANGUAGE_NONE][0]['value']
-      );
-
-      foreach ($witness['title_field'] as $language => $title) {
-        $this->assertEqual($title, $node->title_field[$language][0]['value']);
-        $this->assertEqual(
-          $witness['order_id'][$language],
-          $node->field_publication_bookshop_id[$language][0]['value']
-        );
-        /* TODO: Test body and tags */
-      }
     }
+    foreach ($witness['description'] as $language => $description) {
+      $this->assertEqual($description, $node->body[$language][0]['value']);
+    }
+    $tids = array(
+      $node->field_tags[LANGUAGE_NONE][0]['tid'],
+      $node->field_tags[LANGUAGE_NONE][1]['tid'],
+    );
+    $tags = taxonomy_term_load_multiple($tids);
+    $terms = array();
+    foreach ($tags as $term) {
+      $terms[] = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+    }
+    $this->assertTrue(in_array('accident_prevention', $terms));
+    $this->assertTrue(in_array('women_and_osh', $terms));
   }
 
   /**

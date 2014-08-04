@@ -246,6 +246,9 @@ class OshaMigratePublications extends DynamicMigration {
       if (!empty($row->title_field[$language])) {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
       }
+      if (!empty($row->description[$language])) {
+        $entity->body[$language][0]['value'] = $row->description[$language];
+      }
       if (!empty($row->order_id[$language])) {
         $entity->field_publication_bookshop_id[$language][0]['value'] = $row->order_id[$language];
       }
