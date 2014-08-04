@@ -2,6 +2,8 @@
 
 osha_configure_solr();
 osha_change_field_size();
+osha_configure_mailsystem();
+osha_configure_htmlmail();
 
 /**
  * Configure the apachesolr and search_api_solr modules with proper settings.
@@ -94,4 +96,31 @@ function osha_configure_solr() {
   else {
     drupal_set_message('Unable to find solr_server section in config. Solr integration may be broken', 'warning');
   }
+}
+
+/**
+ * Configure the drupal mailsystem module with proper settings.
+ */
+function osha_configure_mailsystem() {
+  drupal_set_message('Configuring Drupal Mailsystem module ...');
+
+  $mail_system = array(
+    'default-system' => 'HTMLMailSystem',
+    'htmlmail' => 'DefaultMailSystem',
+  );
+
+  variable_set('mail_system', $mail_system);
+  variable_set('mailsystem_theme', 'default');
+}
+
+/**
+ * Configure the drupal htmlmail module with proper settings.
+ */
+function osha_configure_htmlmail() {
+  drupal_set_message('Configuring Drupal HTML Mail module ...');
+
+  $site_default_theme = variable_get('theme_default', 'bartik');
+
+  variable_set('htmlmail_theme', $site_default_theme);
+  variable_set('htmlmail_postfilter', 'full_html');
 }
