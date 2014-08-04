@@ -308,7 +308,8 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
     );
     $class->getIdList();
     $data = $class::$data;
-    $this->assertEqual(count($data), count($nodes));
+    // One item is broken, one is good.
+    $this->assertEqual(1, count($nodes));
 
     foreach ($nodes as $node) {
       $path = path_load('node/' . $node->nid);

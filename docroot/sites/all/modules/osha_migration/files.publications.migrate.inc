@@ -179,7 +179,6 @@ class PublicationMigrateFilesItemCSV extends MigrateItem {
    * {@inheritdoc}
    */
   public function getItem($item_id) {
-
     if (empty($this->data)) {
       $csv_data = PublicationMigrateFilesListCSV::$csvData;
       foreach ($csv_data as $csv_id => $item) {
