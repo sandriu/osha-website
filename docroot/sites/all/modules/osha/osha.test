@@ -17,7 +17,9 @@ class OshaTest extends DrupalWebTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp('features', 'osha');
+    parent::setUp();
+    /* We enable osha after standard profile installation! */
+    module_enable(array('osha'));
   }
 
   /**
@@ -57,10 +59,7 @@ class OshaTest extends DrupalWebTestCase {
     $enabled = language_list('language');
     $codes = array_keys($enabled);
     $this->assertEqual(count($languages), count($codes));
-
-    // @todo: See http://redmine.eaudeweb.ro/issues/2493
-    // $this->assertEqual($codes[0], $languages[0]);
-
+    $this->assertEqual($codes[0], $languages[0]);
     foreach ($languages as $iso_code) {
       $this->assertTrue(in_array($iso_code, $codes), "Language $iso_code is enabled");
     }
