@@ -328,7 +328,7 @@ class PublicationMigrateList extends MigrateList {
    */
   protected static function getIDFromSourceRow($row) {
     $url = !empty($row[2]) ? $row[2] : $row[0];
-    return preg_replace('/^\/en\//', '', $url);
+    return substr($url, 4);
   }
 
   /**
@@ -338,54 +338,53 @@ class PublicationMigrateList extends MigrateList {
     $handle = fopen($this->fileURL, 'r');
     $fields = $data = fgetcsv($handle, NULL, ';');
 
-    $final = array();
+    self::$data = array();
     while (($data = fgetcsv($handle, NULL, ';')) !== FALSE) {
       $path = self::getIDFromSourceRow($data);
       $language = !empty($data[1]) ? $data[1] : 'en';
       $path_parts = explode('/', $path);
 
-      $final[$path]['id'] = $path;
-      $final[$path]['publication_type'] = !empty($path_parts[1]) ? $path_parts[1] : NULL;
+      self::$data[$path]['id'] = $path;
+      self::$data[$path]['publication_type'] = !empty($path_parts[1]) ? $path_parts[1] : NULL;
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
             if ($language == 'en') {
-              $final[$path]['title'] = $data[$key];
+              self::$data[$path]['title'] = $data[$key];
             }
-            $final[$path]['title_field'][$language] = $data[$key];
+            self::$data[$path]['title_field'][$language] = $data[$key];
             break;
 
           case 'description':
           case 'order_id':
           case 'file':
           case 'cover_image':
-            $final[$path][$field][$language] = $data[$key];
+            self::$data[$path][$field][$language] = $data[$key];
             break;
 
           case 'path':
             $path_language = explode('/', $data[$key], 3);
-            $final[$path][$field][$language] = $path_language[2];
+            self::$data[$path][$field][$language] = $path_language[2];
             continue;
 
           case 'relatedItems':
             /* Related files and publications */
             $items = MigrationUtil::parseRelatedItemsString($data[$key]);
             if (!empty($items['items'])) {
-              $final[$path]['related_publications_path'] = $items['items'];
+              self::$data[$path]['related_publications_path'] = $items['items'];
             }
             if (!empty($items['files'])) {
               /* @todo: cannot migrate this multi-valued field
-               $final[$path]['related_resources'] = $items['files'];
+              self::$data[$path]['related_resources'] = $items['files'];
                */
             }
             break;
 
           default:
-            $final[$path][$field] = $data[$key];
+            self::$data[$path][$field] = $data[$key];
         }
       }
     }
-    self::$data = $final;
   }
 
   /**
