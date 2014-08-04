@@ -27,7 +27,6 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
     parent::setUp();
     /* We enable osha_migration after standard profile installation! */
     module_enable(array('osha_migration'));
-    module_load_include('inc', 'osha_migration', 'utils.api');
     $cfg = MigrationUtil::getProjectConfig();
     variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
   }
