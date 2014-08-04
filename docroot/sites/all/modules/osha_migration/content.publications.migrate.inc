@@ -97,8 +97,7 @@ class OshaMigratePublications extends DynamicMigration {
   /**
    * Handle migration of publication_type field.
    */
-  protected static function handlePublicationType($row) {
-    $migration = Migration::currentMigration();
+  protected function handlePublicationType($row) {
     if (!empty($row->publication_type)) {
       $types = MigrationUtil::findTidByTaxonomyField(
         array($row->publication_type),
@@ -109,7 +108,10 @@ class OshaMigratePublications extends DynamicMigration {
         return $types[0];
       }
       else {
-        $migration->saveMessage("Cannot decode publication type with identifier: {$row->publication_type}", MigrationBase::MESSAGE_WARNING);
+        $this->saveMessage(
+          sprintf('Cannot decode publication type %s', $row->publication_type),
+          MigrationBase::MESSAGE_WARNING
+        );
         $row->publication_type = NULL;
       }
     }
@@ -126,15 +128,30 @@ class OshaMigratePublications extends DynamicMigration {
    *   TRUE if row is valid
    */
   public function prepareRow($row) {
-    $migration = Migration::currentMigration();
+    // @todo: Refactored as utility (EntityRowValidator)
     if (empty($row->title)) {
-      $migration->saveMessage("Skipping record without english title {$row->id}", MigrationBase::MESSAGE_WARNING);
+      $this->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
       return FALSE;
+    }
+    if ($row->workflow_state != 'published') {
+      $this->saveMessage(
+        sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
+        MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    foreach ($row->title_field as $language => $value) {
+      if (strlen($value) > 768) {
+        $this->saveMessage(
+          sprintf('Skipping node with long title (%s): %s chars', $language, strlen($value)),
+          MigrationBase::MESSAGE_WARNING
+        );
+        return FALSE;
+      }
     }
     $row->language = 'en';
     $tags = $row->subject . ',' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);
-    $row->publication_type = self::handlePublicationType($row);
+    $row->publication_type = $this->handlePublicationType($row);
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
       explode(',', $row->multilingual_thesaurus),
       'field_thesaurus_code',
@@ -160,7 +177,7 @@ class OshaMigratePublications extends DynamicMigration {
           $row->related_publications[] = $related_item_nid;
         }
         else {
-          $migration->saveMessage("Failed to migrate related publication: {$path}", MigrationBase::MESSAGE_WARNING);
+          $this->saveMessage("Failed to migrate related publication: {$path}", MigrationBase::MESSAGE_WARNING);
         }
       }
     }
