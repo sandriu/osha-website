@@ -54,12 +54,12 @@ class MigrationUtil {
    * thus is recommended to use when taxonomy does not change during migration.
    */
   public static function findTidByTaxonomyField($terms, $field_match, $vocabulary_name, $language = LANGUAGE_NONE) {
-    if (empty($terms)) {
-      return array();
-    }
     $ret = array();
     $terms = array_map('trim', $terms);
     $terms = array_filter($terms, 'strlen');
+    if (empty($terms)) {
+      return array();
+    }
     $field_values = self::cacheVocabularyTermsFields($vocabulary_name, $field_match, $language);
     $misses = array();
     foreach ($terms as $t) {
@@ -71,12 +71,10 @@ class MigrationUtil {
       }
     }
     if (count($misses)) {
-      drupal_set_message(
-        t('Could not find term(s) "@terms" in @voc vocabulary',
-          array('@terms' => implode(', ', $misses), '@voc' => $vocabulary_name)
-        ),
-        'warning'
+      $error = sprintf('Could not find term(s) "%s" in %s vocabulary',
+        implode(',', $misses), $vocabulary_name
       );
+      drupal_set_message($error);
     }
     return $ret;
   }
@@ -288,15 +286,14 @@ class MigrationUtil {
     if (empty($row->{$field})) {
       return;
     }
-    $migration = Migration::currentMigration();
     /* Validate file path length */
     $valid = array();
     foreach ($row->{$field} as $language => $path) {
       if (is_string($path)) {
         if (strlen($path_prefix) + strlen($path) > 255) {
-          $migration->saveMessage(
+          drupal_set_message(
             "File path cannot be larger than 255 characters, ignoring {$row->file}",
-            MigrationBase::MESSAGE_WARNING
+            'warning'
           );
         }
         else {
@@ -304,19 +301,7 @@ class MigrationUtil {
         }
       }
       else {
-        $valid_inner = array();
-        foreach ($path as $file) {
-          if (strlen($path_prefix) + strlen($file) > 255) {
-            $migration->saveMessage(
-              "File path cannot be larger than 255 characters, ignoring {$file}",
-              MigrationBase::MESSAGE_WARNING
-            );
-          }
-          else {
-            $valid_inner[] = $file;
-          }
-        }
-        $valid[$language] = $valid_inner;
+        drupal_set_message('Multi-valued field migration not implemented', 'error');
       }
     }
     $row->{$field} = $valid;
