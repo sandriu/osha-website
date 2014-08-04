@@ -5,6 +5,8 @@ osha_change_field_size();
 osha_configure_mailsystem();
 osha_configure_htmlmail();
 
+module_disable('overlay');
+
 /**
  * Configure the apachesolr and search_api_solr modules with proper settings.
  */
