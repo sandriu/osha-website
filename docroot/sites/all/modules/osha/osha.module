@@ -235,24 +235,3 @@ function osha_configure_basic_page() {
     drupal_set_message('osha_configure_basic_page: content_types module not available', 'warning');
   }
 }
-
-/**
- * Make the body field translatable.
- */
-function osha_enable_body_translations() {
-  if (module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
-    $info = field_info_field('body');
-    if ($info !== NULL) {
-      drupal_set_message('Making body field translatable');
-      $form_state['values']['translatable'] = "0";
-      $form_state['field']['field_name'] = 'body';
-      drupal_form_submit('entity_translation_translatable_form', $form_state, 'body');
-    }
-    else {
-      drupal_set_message(t("Body field not available yet"), 'error');
-    }
-  }
-  else {
-    drupal_set_message('osha_configure_basic_page: entity_translation module not available', 'error');
-  }
-}
