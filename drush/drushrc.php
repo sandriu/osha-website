@@ -274,6 +274,8 @@ $options['init-modules'] = array(
   'mailsystem',
   'htmlmail',
   'simplenews',
+  'scs',
+  'scs_views',
 
   'taxonomy_access_fix',
   'date',
