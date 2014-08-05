@@ -94,10 +94,10 @@ function osha_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '1',
+          'weight' => '9',
         ),
         'language' => array(
-          'weight' => '2',
+          'weight' => '1',
         ),
       ),
       'display' => array(),
