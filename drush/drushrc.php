@@ -298,6 +298,9 @@ $options['init-modules'] = array(
   'search_api_solr',
   'strongarm',
 
+  'pdf_to_image',
+  'doc_to_imagefield',
+
   'imce_wysiwyg',
   'osha',
   'osha_migration',
