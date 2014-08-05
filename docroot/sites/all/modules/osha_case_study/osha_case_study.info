@@ -23,7 +23,6 @@ features[field_base][] = field_case_study_cover_image
 features[field_base][] = field_case_study_file
 features[field_base][] = field_case_study_organization
 features[field_base][] = field_case_study_results
-features[field_base][] = field_tags
 features[field_instance][] = node-case_study-body
 features[field_instance][] = node-case_study-field_case_study_action
 features[field_instance][] = node-case_study-field_case_study_cover_image
