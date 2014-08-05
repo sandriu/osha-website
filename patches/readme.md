@@ -14,4 +14,5 @@ Example:
   * http://drupal.org/node/1557926
   * http://drupal.org/files/views-more_link_class-1557926.patch
 
+When adding a patch, also add to .gitignore the contrib module path.
 ---
