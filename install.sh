@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Check and apply existing patches to the instance
+./patches/apply-patches.sh
+
 # Setup a clean site in docroot/
 cd docroot/
 drush site-install -y
