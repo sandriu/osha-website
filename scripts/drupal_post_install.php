@@ -4,6 +4,7 @@ osha_configure_solr();
 osha_change_field_size();
 osha_configure_mailsystem();
 osha_configure_htmlmail();
+osha_configure_simplenews();
 
 module_disable('overlay');
 
@@ -125,4 +126,29 @@ function osha_configure_htmlmail() {
 
   variable_set('htmlmail_theme', $site_default_theme);
   variable_set('htmlmail_postfilter', 'full_html');
+}
+
+/**
+ * Configure the drupal simplenews module with proper settings.
+ */
+function osha_configure_simplenews() {
+  drupal_set_message('Configuring Drupal Simplenews module ...');
+
+  $site_mail = variable_get('site_mail', 'no-reply@osha.org');
+  $site_name = variable_get('site_name', 'OSHA');
+
+  variable_set('htmlmail_theme', $site_default_theme);
+  variable_set('simplenews_debug', '1');
+  variable_set('simplenews_format', 'html');
+  variable_set('simplenews_from_address', $site_mail);
+  variable_set('simplenews_from_name', $site_name);
+  variable_set('simplenews_priority', '3');
+  variable_set('simplenews_receipt', 0);
+  variable_set('simplenews_send', '0');
+  variable_set('simplenews_source_cache', 'SimplenewsSourceCacheNone');
+  variable_set('simplenews_spool_expire', '0');
+  variable_set('simplenews_test_address', $site_mail);
+  variable_set('simplenews_test_address_override', 1);
+  variable_set('simplenews_throttle', '20');
+  variable_set('simplenews_use_cron', 1);
 }
