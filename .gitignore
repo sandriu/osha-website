@@ -51,3 +51,7 @@ docroot/sites/*/private
 ehthumbs.db
 Icon\?
 Thumbs.db
+
+# Patched contrib modules #
+###########################
+docroot/sites/all/modules/contrib/entity_translation/*
