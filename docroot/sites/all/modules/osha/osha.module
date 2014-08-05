@@ -212,31 +212,6 @@ function osha_replace_title_field() {
 }
 
 /**
- * Enable translation for the article entity.
- */
-function osha_configure_article() {
-  if (module_load_include('inc', 'node', 'content_types')) {
-    $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
-    $form_state['values']['entity_translation_hide_translation_links'] = 1;
-    $form_state['values']['promote'] = NULL;
-    $form_state['values']['comment'] = 1;
-    $type = node_type_load('article');
-    drupal_form_submit('node_type_form', $form_state, $type);
-    $errors = form_get_errors();
-    if (!empty($errors)) {
-      foreach ($errors as $error) {
-        drupal_set_message(
-          t("Article setup error: !error", array('!error' => $error))
-        );
-      }
-    }
-  }
-  else {
-    drupal_set_message('osha_configure_article: content_types module not available', 'warning');
-  }
-}
-
-/**
  * Enable translation for the basic page entity.
  */
 function osha_configure_basic_page() {
@@ -262,19 +237,19 @@ function osha_configure_basic_page() {
 }
 
 /**
- * Make the body field translatable.
+ * Make the field_image field translatable.
  */
-function osha_enable_body_translations() {
+function osha_enable_field_image_translations() {
   if (module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
-    $info = field_info_field('body');
+    $info = field_info_field('field_image');
     if ($info !== NULL) {
-      drupal_set_message('Making body field translatable');
+      drupal_set_message('Making field_image field translatable');
       $form_state['values']['translatable'] = "0";
-      $form_state['field']['field_name'] = 'body';
-      drupal_form_submit('entity_translation_translatable_form', $form_state, 'body');
+      $form_state['field']['field_name'] = 'field_image';
+      drupal_form_submit('entity_translation_translatable_form', $form_state, 'field_image');
     }
     else {
-      drupal_set_message(t("Body field not available yet"), 'error');
+      drupal_set_message(t("field_image field not available yet"), 'error');
     }
   }
   else {
