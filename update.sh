@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Check and apply existing patches to the instance
-echo "Aplying existing patches to the instance ..."
-# Supress error messages - some patches could be already applied
-./patches/apply-patches.sh > /dev/null 2>&1
-
 # Setup a clean site in docroot/
 cd docroot/
 
