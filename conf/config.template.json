@@ -15,6 +15,7 @@
     },
     "uri": "http://osha.localhost",
     "site_mail": "account@example.com",
+    "site_name": "OSHA",
     "solr_server": {
         "name": "Apache Solr server",
         "enabled": 1,
