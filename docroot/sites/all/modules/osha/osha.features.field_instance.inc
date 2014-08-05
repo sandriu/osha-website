@@ -83,15 +83,15 @@ function osha_field_default_field_instances() {
     'label' => 'Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
-      'entity_translation_sync' => FALSE,
-      'file_directory' => '',
+      'entity_translation_sync' => 1,
+      'file_directory' => 'pages',
       'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
+      'max_filesize' => '5MB',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -102,7 +102,7 @@ function osha_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -235,10 +235,10 @@ function osha_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1970:+3',
       ),
       'type' => 'date_select',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -251,9 +251,9 @@ function osha_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
+        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 10,
       ),
       'teaser' => array(
@@ -279,7 +279,7 @@ function osha_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
