@@ -137,7 +137,6 @@ function osha_configure_simplenews() {
   $site_mail = variable_get('site_mail', 'no-reply@osha.org');
   $site_name = variable_get('site_name', 'OSHA');
 
-  variable_set('htmlmail_theme', $site_default_theme);
   variable_set('simplenews_debug', '1');
   variable_set('simplenews_format', 'html');
   variable_set('simplenews_from_address', $site_mail);
