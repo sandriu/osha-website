@@ -12,6 +12,16 @@ List of patches
   * https://www.drupal.org/node/1925848
   * entity_translation/entitytranslation-incorrect_pathauto_pattern-1925848-8.patch
 
+* pdf_to_image
+	* Allows files of other types than .pdf to be uploaded when field is using pdf_to_image widget
+	* 	This patch is needed by doc_to_imagefield module
+	* pdf_to_imagefield/pdf_to_imagefield-allow_non_pdf_file.patch
+
+* pdf_to_image
+	* Fix for thumbnails of translated files
+	*
+	* pdf_to_imagefield/pdf_to_imagefield_7-3-3-fix-for-multilingual.patch
+
 
 Patch documentation should be in the following format:
 
