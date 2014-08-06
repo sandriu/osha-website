@@ -242,7 +242,7 @@ class ArticleContentListCSV extends MigrateList {
       self::$data[$path]['id'] = $path;
       foreach ($fields as $key => $field) {
         switch ($field) {
-          case 'title':u
+          case 'title':
             if ($language == 'en') {
               self::$data[$path]['title'] = $data[$key];
             }
