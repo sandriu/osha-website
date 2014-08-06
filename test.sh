@@ -8,6 +8,8 @@
 #    * run all tests from specific group: ./test.sh OSHA
 #    * run all tests from OSHA group: ./test.sh
 
+uri=`drush php-script scripts/get_config_param.php uri`
+
 cd docroot/
 
 drush en -y simpletest > /dev/null 2>&1
@@ -15,11 +17,11 @@ drush dis -y apache-solr > /dev/null 2>&1
 
 if [ "$1" == "" ]; then
 	echo "Stand back! I'm running ALL the tests from group OSHA ..."
-	drush test-run OSHA
+	drush -v test-run --uri=${uri} OSHA
 else
 	if [ "$2" != "" ]; then
-		drush test-run $1 --methods=$2
+		drush -v test-run --uri=${uri} $1 --methods=$2
 	else
-		drush test-run $1
+		drush -v test-run --uri=${uri} $1
 	fi
 fi
