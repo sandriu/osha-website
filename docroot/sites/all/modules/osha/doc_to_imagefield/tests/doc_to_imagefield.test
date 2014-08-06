@@ -18,7 +18,9 @@ class DocToImagefieldTest extends DrupalWebTestCase {
   public static $content_type_name = 'doc_to_imagefield_test';
   public static $field_cover_name = 'doc_to_imagefield_cover';
   public static $field_file_name = 'doc_to_imagefield_file';
-  public static $file_types = array('txt', 'pdf', 'ppt');
+  public static $file_types = array('txt', 'pdf', 'ppt', 'doc', 'docx', 'xls', 'xlsx', 'html');
+  public $file_field;
+  public $image_field;
 
   public function setUp() {
     $list = module_list();
@@ -31,15 +33,6 @@ class DocToImagefieldTest extends DrupalWebTestCase {
       parent::setUp('pdf_to_image', 'doc_to_imagefield', 'ctools', 'entity', 'locale');
     }
 
-  }
-
-  /**
-   * Test if an Image field is populated with page.
-   *
-   * from File field with pdf_to_image widget
-   * Supports Entity field translation testing
-   */
-  public function testDocToImage() {
     $content_type_name = self::$content_type_name;
 
     $node_type = array(
@@ -62,10 +55,10 @@ class DocToImagefieldTest extends DrupalWebTestCase {
     $content_type = node_type_load($content_type_name);
 
     // Create fields.
-    $image_field = self::createImageField();
-    $file_field = self::createFileField();
-    $this->assertTrue(is_array($image_field), 'Image field could not be created');
-    $this->assertTrue(is_array($file_field), 'File field could not be created');
+    $this->image_field = self::createImageField();
+    $this->file_field = self::createFileField();
+    $this->assertTrue(is_array($this->image_field), 'Image field could not be created');
+    $this->assertTrue(is_array($this->file_field), 'File field could not be created');
 
     // Enables Translations with fields.
     $entity_trans_exists = module_exists('entity_translation');
@@ -87,10 +80,19 @@ class DocToImagefieldTest extends DrupalWebTestCase {
       $this->assertTrue(empty($errors), "Could not enable translations for $content_type_name");
 
       // This settings is needed otherwise raise error.
-      $image_field['settings']['default_image'] = 0;
-      field_update_instance($image_field);
+      $this->image_field['settings']['default_image'] = 0;
+      field_update_instance($this->image_field);
     }
 
+  }
+
+  /**
+   * Test if an Image field is populated with page.
+   *
+   * from File field with pdf_to_image widget
+   * Supports Entity field translation testing
+   */
+  public function testDocToImage() {
     $language_default = language_default('language');
     $languages = language_list('language');
     // Overwrite global languages with desired language.
@@ -129,7 +131,7 @@ class DocToImagefieldTest extends DrupalWebTestCase {
       node_save($node);
       if ($file_type == 'pdf') {
         // Simulate the batch job from pdf_to_image.
-        self::nodeSaveForPdf('node', $node, $node->nid, self::$field_cover_name, $file_field, (object) $file);
+        self::nodeSaveForPdf('node', $node, $node->nid, self::$field_cover_name, $this->file_field, (object) $file);
       }
 
       // Add the fields in other languages to test multilingual.
@@ -153,7 +155,7 @@ class DocToImagefieldTest extends DrupalWebTestCase {
         if ($file_type == 'pdf') {
           // Simulate the batch job from pdf_to_image
           // because it's not triggered by node save.
-          self::nodeSaveForPdf('node', $node, $node->nid, self::$field_cover_name, $file_field, (object) $file);
+          self::nodeSaveForPdf('node', $node, $node->nid, self::$field_cover_name, $this->file_field, (object) $file);
         }
         else {
           node_save($node);
@@ -220,7 +222,7 @@ class DocToImagefieldTest extends DrupalWebTestCase {
         'settings' => array(
           'pdf_to_image' => array(
             'target_field' => self::$field_cover_name,
-            'density' => '25x25',
+            'density' => '25X25',
             'extra_args' => '',
             'hide_imagefield' => 0,
           ),

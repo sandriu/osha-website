@@ -14,7 +14,7 @@ function doc_to_imagefield_menu() {
   $items = array();
   $items['admin/config/system/doc_to_imagefield'] = array(
     'title' => 'Doc to Image Field',
-    'description' => 'Config iformation for the module',
+    'description' => 'Config information for the module',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('doc_to_imagefield_admin'),
     'access arguments' => array('administer contacts settings'),
@@ -134,7 +134,7 @@ function doc_to_imagefield_test_exec_command() {
  */
 function doc_to_imagefield_get_test_filepath($type = 'txt') {
   $module_path = drupal_get_path('module', 'doc_to_imagefield');
-  $doc_realpath = drupal_realpath($module_path . '/tests/test.' . $type);
+  $doc_realpath = drupal_realpath($module_path . '/tests/test_files/test.' . $type);
   if (!is_file($doc_realpath)) {
     $doc_realpath = FALSE;
   }
@@ -198,8 +198,8 @@ function doc_to_image_generate_process($entity_type, $entity, $field_id, $field_
 
   // If file is not there.
   if (!is_file($doc_realpath)) {
-    drupal_set_message("There was a problem with the file " . $path_parts['basename'] .
-      " Please contact the administrator", 'error');
+    drupal_set_message(sprintf(t("There was a problem with the file %s.
+     Please contact the administrator"), $path_parts['basename']), 'error');
   }
 
   if (!empty($path_parts['extension']) && $path_parts['extension'] != 'pdf') {
@@ -261,7 +261,7 @@ function doc_to_image_generate_process($entity_type, $entity, $field_id, $field_
       }
     }
     else {
-      drupal_set_message("Could not convert " . $path_parts['basename'] . " to .pdf", 'error');
+      drupal_set_message(sprintf(t("Could not convert %s to .pdf"), $path_parts['basename']), 'error');
     }
   }
 }
