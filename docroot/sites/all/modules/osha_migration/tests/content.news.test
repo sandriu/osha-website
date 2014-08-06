@@ -76,6 +76,11 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
       strtotime($node->field_news_publication_date[LANGUAGE_NONE][0]['value'])
     );
 
+    $this->drupalGet(
+      substr($witness['path'], 4)
+    );
+    $this->assertText($node->title_field['en'][0]['value']);
+
     foreach ($witness['title'] as $lang => $title) {
       $this->assertEqual($title, $node->title_field[$lang][0]['value']);
     }
