@@ -113,6 +113,16 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
       $node->field_publication_author[LANGUAGE_NONE][0]['value']
     );
 
+    $languages = language_list();
+    foreach ($witness['path'] as $lang_code => $path) {
+      $this->drupalGet(
+        $path,
+        array("language" => $languages[$lang_code])
+      );
+
+      $this->assertText($node->title_field[$lang_code][0]['value']);
+    }
+
     foreach ($witness['title_field'] as $language => $title) {
       $this->assertEqual($title, $node->title_field[$language][0]['value']);
       $this->assertEqual(
@@ -147,7 +157,6 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
 
     $this->assertTrue(array_key_exists('publications/corporate/annual-report-2013-summary', $subject));
     $this->assertTrue(array_key_exists('publications/e-facts/efact40', $subject));
-
 
     $first = $subject['publications/corporate/annual-report-2013-summary'];
     $this->assertEqual('private', $first['workflow_state']);
