@@ -8,6 +8,7 @@ dependencies[] = osha_news
 dependencies[] = osha_publication
 dependencies[] = osha_taxonomies
 
+files[] = content.articles.migrate.inc
 files[] = content.news.migrate.inc
 files[] = content.publications.migrate.inc
 files[] = utils.api.inc

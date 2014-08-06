@@ -1,0 +1,320 @@
+<?php
+
+/**
+ * Class OshaMigrateArticles migrates articles data
+ */
+class OshaMigrateArticles extends DynamicMigration {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct($arguments = array()) {
+    parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
+    $this->description = 'Import "Articles" contents from CSV file';
+    $this->dependencies = array(
+      OSHA_MIGRATION_TAXONOMY_TAGS,
+      OSHA_MIGRATION_TAXONOMY_THESAURUS,
+      OSHA_MIGRATION_TAXONOMY_NACE_CODES,
+    );
+    $data_path = osha_migration_get_data_dir();
+    $source_file = MigrationUtil::getSourceFile($arguments);
+
+    $this->source = new MigrateSourceList(
+      new ArticleContentListCSV($source_file),
+      new ArticleContentItemCSV(),
+      array(
+        'id' => 'Unique entity path, language independent',
+        'creation_date' => 'Node creation date',
+        'modification_date' => 'Last modification date',
+        'publication_date' => 'Node publication date',
+        'title' => 'Node title',
+        'description' => 'Node summary',
+        'text' => 'Node content',
+        'author' => 'Publication author',
+        'subject' => 'Item tags',
+        'relatedItems' => 'Page image',
+        'multilingual_thesaurus' => 'Item Tesaurus tags merged into tags',
+        'nace' => 'Item NACE Codes',
+      )
+    );
+
+    $this->map = new MigrateSQLMap($this->machineName,
+      array(
+        'id' => array(
+          'type' => 'varchar',
+          'length' => 200,
+          'not null' => TRUE,
+          'description' => 'Item code',
+        ),
+      ),
+      MigrateDestinationNode::getKeySchema()
+    );
+
+    $this->destination = new MigrateDestinationNode(OSHA_ARTICLE_CONTENT_TYPE_ARTICLE);
+
+    $this->addFieldMapping('title', 'title');
+    $this->addFieldMapping('body', 'text');
+    $this->addFieldMapping('body:format')->defaultValue('full_html');
+    $this->addFieldMapping('field_article_summary', 'description');
+    $this->addFieldMapping('field_image', 'relatedItems');
+    $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
+    $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
+    $this->addFieldMapping('field_image:destination_file', 'relatedItems');
+
+    $this->addFieldMapping('field_tags', 'subject');
+    $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_thesaurus', 'multilingual_thesaurus');
+    $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_nace_codes', 'nace');
+    $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_publication_date', 'publication_date');
+
+    $this->addFieldMapping('path', 'id');
+    $this->addFieldMapping('created', 'creation_date');
+    $this->addFieldMapping('changed', 'modification_date');
+    $this->addFieldMapping('uid')->defaultValue(1);
+
+    $this->addUnmigratedSources(array(
+      'author'
+    ));
+
+    $this->addUnmigratedDestinations(array(
+      'promote',
+      'status',
+      'sticky',
+      'revision',
+      'log',
+      'language',
+      'nid',
+      'translate',
+      'revision_uid',
+      'is_new',
+      'body:summary',
+      'field_image:file_class',
+      'field_image:title',
+      'field_image:alt',
+      'field_publication_date:timezone',
+      'field_publication_date:rrule',
+      'field_publication_date:to',
+      'field_tags:create_term',
+      'field_tags:ignore_case',
+      'field_thesaurus:create_term',
+      'field_thesaurus:ignore_case',
+      'comment',
+    ));
+  }
+
+  /**
+   * Migration machine name.
+   *
+   * {@inheritdoc}
+   */
+  protected function generateMachineName() {
+    return OSHA_MIGRATION_CONTENT_TYPE_ARTICLE;
+  }
+
+  /**
+   * Prepare raw data pulled from source.
+   *
+   * {@inheritdoc}
+   */
+  public function prepareRow($row) {
+    // @todo: Refactored as utility (EntityRowValidator)
+    if (empty($row->title)) {
+      $this->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    if ($row->workflow_state != 'published') {
+      $this->saveMessage(
+        sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
+        MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    foreach ($row->title_field as $language => $value) {
+      if (strlen($value) > 768) {
+        $this->saveMessage(
+          sprintf('Skipping node with long title (%s): %s chars', $language, strlen($value)),
+          MigrationBase::MESSAGE_WARNING
+        );
+        return FALSE;
+      }
+    }
+
+    $row->language = 'en';
+    $tags = $row->subject . ',' . $row->subcategory;
+    $row->subject = MigrationUtil::decodeTagsTerms($tags);
+    $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
+      explode(',', $row->multilingual_thesaurus),
+      'field_thesaurus',
+      OSHA_TAXONOMIES_THESAURUS
+    );
+    if (!empty($row->nace)) {
+      $row->nace = explode(',', $row->nace);
+      $row->nace = MigrationUtil::findTidByTaxonomyField(
+        $row->nace,
+        'field_nace_codes',
+        OSHA_TAXONOMIES_NACE_CODES
+      );
+    }
+
+    return TRUE;
+  }
+
+  /**
+   * Called by destination right before saving.
+   *
+   * @param object $entity
+   *   Entity to save
+   * @param object $row
+   *   Source row
+   */
+  public function prepare($entity, $row) {
+    $migration = Migration::currentMigration();
+    $languages = array_keys(language_list());
+    $entity_type = $migration->getDestination()->getEntityType();
+    $translation_handler = entity_translation_get_handler($entity_type, $entity);
+
+    $entity->translations = $translation_handler->getTranslations();
+    foreach ($languages as $language) {
+      if (!empty($row->title_field[$language])) {
+        $entity->title_field[$language][0]['value'] = $row->title_field[$language];
+      }
+      if (!empty($row->description[$language])) {
+        $entity->field_article_summary[$language][0]['value'] = $row->description[$language];
+        $entity->field_article_summary[$language][0]['format'] = 'full_html';
+      }
+      if (!empty($row->text[$language])) {
+        $entity->body[$language][0]['value'] = $row->text[$language];
+        $entity->body[$language][0]['format'] = 'full_html';
+      }
+      if (!empty($row->relatedItems[$language]) && $language != 'en') {
+        $entity->field_image[$language][0]['value'] = $row->relatedItems[$language];
+      }
+      /* Don't translate en (default) */
+      if ($language != $row->language) {
+        if (!isset($entity->translations->data[$language])) {
+          $translation_handler->setTranslation(array(
+            'translate' => 0, 'status' => 1, 'uid' => 1,
+            'language' => $language,
+            'source' => $row->language,
+          ));
+        }
+      }
+    }
+  }
+
+  /**
+   * Sets the node aliases after the migration, nid is available.
+   *
+   * @param object $entity
+   *   Entity to be saved
+   * @param object $row
+   *   Source row
+   */
+  public function complete($entity, $row) {
+    $languages = array_keys(language_list());
+    foreach ($languages as $language) {
+      $args = array(
+        'source' => 'node/' . $entity->nid,
+        'alias' => $row->id,
+        'language' => $language,
+      );
+      path_save($args);
+    }
+  }
+}
+
+class ArticleContentListCSV extends MigrateList {
+  protected $file = '';
+  public static $data = array();
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct($file) {
+    parent::__construct();
+    $this->file = $file;
+    $this->parseSourceFile();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __toString() {
+    return $this->file;
+  }
+
+  /**
+   * Retrieve unique ID from path. Removes language.
+   */
+  protected static function getIDFromSourceRow($row) {
+    $url = !empty($row[2]) ? $row[2] : $row[0];
+    return substr($url, 4);
+  }
+
+  /**
+   * Parse the CSV file and populate the local cache.
+   */
+  protected function parseSourceFile() {
+    $handle = fopen($this->file, 'r');
+    $fields = $data = fgetcsv($handle, NULL, ';');
+
+    self::$data = array();
+    while (($data = fgetcsv($handle, NULL, ';')) !== FALSE) {
+      $path = self::getIDFromSourceRow($data);
+      $language = !empty($data[1]) ? $data[1] : 'en';
+      self::$data[$path]['id'] = $path;
+      foreach ($fields as $key => $field) {
+        switch ($field) {
+          case 'title':
+            if ($language == 'en') {
+              self::$data[$path]['title'] = $data[$key];
+            }
+            self::$data[$path]['title_field'][$language] = $data[$key];
+            break;
+
+          case 'relatedItems':
+          case 'description':
+          case 'text':
+            self::$data[$path][$field][$language] = $data[$key];
+            break;
+
+          default:
+            self::$data[$path][$field] = $data[$key];
+            break;
+        }
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getIdList() {
+    if (self::$data) {
+      return array_keys(self::$data);
+    }
+    return array();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function computeCount() {
+    return count(self::$data);
+  }
+}
+
+class ArticleContentItemCSV extends MigrateItem {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getItem($item_id) {
+    if (!empty(ArticleContentListCSV::$data[$item_id])) {
+      return (object) ArticleContentListCSV::$data[$item_id];
+    }
+    return NULL;
+  }
+}
