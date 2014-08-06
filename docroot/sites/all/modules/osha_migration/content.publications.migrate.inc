@@ -285,6 +285,9 @@ class OshaMigratePublications extends DynamicMigration {
         'language' => $language,
       );
       path_save($args);
+      // Set original alias for the language. Path may differ.
+      $args['alias'] = $row->path[$language];
+      path_save($args);
     }
   }
 }
