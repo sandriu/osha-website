@@ -34,6 +34,11 @@ List of patches
 
 
 
+* file_entity
+  * Fix to let features export the display settings of the default file types
+  * https://www.drupal.org/node/2192391#comment-8878719
+  * file_entity/file_entity_remove_file_display-2192391-16.patch
+
 Patch documentation should be in the following format:
 
 * module name
