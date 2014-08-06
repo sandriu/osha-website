@@ -24,6 +24,12 @@ function osha_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -69,6 +75,12 @@ function osha_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 13,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -111,6 +123,12 @@ function osha_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => -1,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -165,6 +183,12 @@ function osha_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 16,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -210,6 +234,12 @@ function osha_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 17,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -260,6 +290,12 @@ function osha_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 10,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -301,6 +337,12 @@ function osha_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 15,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -340,6 +382,12 @@ function osha_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 11,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',

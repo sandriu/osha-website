@@ -287,6 +287,7 @@ $options['init-modules'] = array(
   'title',
   'wysiwyg',
   'pathauto',
+  'redirect',
   'uuid',
 
   'search_api',
