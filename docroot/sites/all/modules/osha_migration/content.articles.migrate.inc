@@ -120,25 +120,8 @@ class OshaMigrateArticles extends DynamicMigration {
    * {@inheritdoc}
    */
   public function prepareRow($row) {
-    // @todo: Refactored as utility (EntityRowValidator)
-    if (empty($row->title)) {
-      $this->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
+    if(MigrationUtil::entityRowValidator($row, $this) === FALSE) {
       return FALSE;
-    }
-    if ($row->workflow_state != 'published') {
-      $this->saveMessage(
-        sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
-        MigrationBase::MESSAGE_WARNING);
-      return FALSE;
-    }
-    foreach ($row->title_field as $language => $value) {
-      if (strlen($value) > 768) {
-        $this->saveMessage(
-          sprintf('Skipping node with long title (%s): %s chars', $language, strlen($value)),
-          MigrationBase::MESSAGE_WARNING
-        );
-        return FALSE;
-      }
     }
 
     $row->language = 'en';
@@ -246,14 +229,6 @@ class ArticleContentListCSV extends MigrateList {
   }
 
   /**
-   * Retrieve unique ID from path. Removes language.
-   */
-  protected static function getIDFromSourceRow($row) {
-    $url = !empty($row[2]) ? $row[2] : $row[0];
-    return substr($url, 4);
-  }
-
-  /**
    * Parse the CSV file and populate the local cache.
    */
   protected function parseSourceFile() {
@@ -262,12 +237,12 @@ class ArticleContentListCSV extends MigrateList {
 
     self::$data = array();
     while (($data = fgetcsv($handle, NULL, ';')) !== FALSE) {
-      $path = self::getIDFromSourceRow($data);
+      $path = MigrationUtil::getIDFromSourceRow($data);
       $language = !empty($data[1]) ? $data[1] : 'en';
       self::$data[$path]['id'] = $path;
       foreach ($fields as $key => $field) {
         switch ($field) {
-          case 'title':
+          case 'title':u
             if ($language == 'en') {
               self::$data[$path]['title'] = $data[$key];
             }

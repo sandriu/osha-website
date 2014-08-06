@@ -319,6 +319,52 @@ class MigrationUtil {
   public static function getProjectConfig() {
     return json_decode(file_get_contents(DRUPAL_ROOT . '/../conf/config.json'), TRUE);
   }
+
+  /**
+   * Removes language prefix from ID
+   * @param object $row
+   *   Migrated source row
+   * @return string
+   *   Unique row ID
+   */
+  public static function getIDFromSourceRow($row) {
+    $url = !empty($row[2]) ? $row[2] : $row[0];
+    return substr($url, 4);
+  }
+
+  /**
+   * Filter a row by checking default translation, workflow status and title length
+   *
+   * @param object $row
+   *   Migrated source row
+   * @param $class
+   *   Instance of the migration class
+   * @return bool
+   *   TRUE if row is valid, FALSE otherwise
+   */
+  public static function entityRowValidator($row, $class) {
+    if (empty($row->title)) {
+      $class->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    if ($row->workflow_state != 'published') {
+      $class->saveMessage(
+        sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
+        MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    foreach ($row->title_field as $language => $value) {
+      if (strlen($value) > 768) {
+        $class->saveMessage(
+          sprintf('Skipping node with long title (%s): %s chars', $language, strlen($value)),
+          MigrationBase::MESSAGE_WARNING
+        );
+        return FALSE;
+      }
+    }
+
+    return TRUE;
+  }
 }
 
 class OSHAMigrationListJSON extends MigrateListJSON {
