@@ -20,8 +20,8 @@ class OshaMigrateArticles extends DynamicMigration {
     $source_file = MigrationUtil::getSourceFile($arguments);
 
     $this->source = new MigrateSourceList(
-      new ArticleContentListCSV($source_file),
-      new ArticleContentItemCSV(),
+      new ArticleMigrateList($source_file),
+      new ArticleMigrateItem(),
       array(
         'id' => 'Unique entity path, language independent',
         'creation_date' => 'Node creation date',
@@ -208,7 +208,7 @@ class OshaMigrateArticles extends DynamicMigration {
   }
 }
 
-class ArticleContentListCSV extends MigrateList {
+class ArticleMigrateList extends MigrateList {
   protected $file = '';
   public static $data = array();
 
@@ -281,14 +281,14 @@ class ArticleContentListCSV extends MigrateList {
   }
 }
 
-class ArticleContentItemCSV extends MigrateItem {
+class ArticleMigrateItem extends MigrateItem {
 
   /**
    * {@inheritdoc}
    */
   public function getItem($item_id) {
-    if (!empty(ArticleContentListCSV::$data[$item_id])) {
-      return (object) ArticleContentListCSV::$data[$item_id];
+    if (!empty(ArticleMigrateList::$data[$item_id])) {
+      return (object) ArticleMigrateList::$data[$item_id];
     }
     return NULL;
   }
