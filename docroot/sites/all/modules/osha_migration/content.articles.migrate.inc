@@ -203,6 +203,7 @@ class OshaMigrateArticles extends DynamicMigration {
         'alias' => $row->id,
         'language' => $language,
       );
+      $args['alias'] = $row->path[$language];
       path_save($args);
     }
   }
