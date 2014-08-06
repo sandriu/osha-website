@@ -17,11 +17,11 @@ drush dis -y apache-solr > /dev/null 2>&1
 
 if [ "$1" == "" ]; then
 	echo "Stand back! I'm running ALL the tests from group OSHA ..."
-	drush -v test-run --uri=${uri} OSHA
+	drush test-run --uri=${uri} OSHA
 else
 	if [ "$2" != "" ]; then
-		drush -v test-run --uri=${uri} $1 --methods=$2
+		drush test-run --uri=${uri} $1 --methods=$2
 	else
-		drush -v test-run --uri=${uri} $1
+		drush test-run --uri=${uri} $1
 	fi
 fi
