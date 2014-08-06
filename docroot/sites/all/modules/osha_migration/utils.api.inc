@@ -223,6 +223,7 @@ class MigrationUtil {
    *   Array with two keys (`items` and `files`) of related content
    */
   public static function parseRelatedItemsString($field_value, $supported_extensions = 'pdf|doc|docx|ppt|pptx|xls|xlsx') {
+    $languages = implode('|', array_keys(language_list()));
     $ret = array('items' => NULL, 'files' => NULL);
     if (empty($field_value)) {
       return $ret;
@@ -230,11 +231,12 @@ class MigrationUtil {
     $items = array_map('trim', explode(',', $field_value));
     foreach ($items as $item) {
       $file_match = sprintf('/^.*\.(%s)$/i', $supported_extensions);
+      $path_match = sprintf('/^\/(%s)\//i', $languages);
       if (preg_match($file_match, $item)) {
         $ret['files'][] = $item;
       }
       else {
-        $path = preg_replace('/^\/en\//i', '', $item);
+        $path = preg_replace($path_match, '', $item);
         $ret['items'][] = $path;
       }
     }
