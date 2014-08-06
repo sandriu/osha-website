@@ -198,8 +198,8 @@ function doc_to_image_generate_process($entity_type, $entity, $field_id, $field_
 
   // If file is not there.
   if (!is_file($doc_realpath)) {
-    drupal_set_message(sprintf(t("There was a problem with the file %s.
-     Please contact the administrator"), $path_parts['basename']), 'error');
+    drupal_set_message(t("There was a problem with the file @file.
+     Please contact the administrator", array('@file' => $path_parts['basename'])), 'error');
   }
 
   if (!empty($path_parts['extension']) && $path_parts['extension'] != 'pdf') {
@@ -261,7 +261,7 @@ function doc_to_image_generate_process($entity_type, $entity, $field_id, $field_
       }
     }
     else {
-      drupal_set_message(sprintf(t("Could not convert %s to .pdf"), $path_parts['basename']), 'error');
+      drupal_set_message(t("Could not convert @file to .pdf", array('@file' => $path_parts['basename'])), 'error');
     }
   }
 }
