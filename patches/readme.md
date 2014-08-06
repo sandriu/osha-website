@@ -34,6 +34,16 @@ List of patches
 
 
 
+* media
+  * Restore Edit button in Media Browser Widget
+  * https://www.drupal.org/node/2192981#comment-9004143
+  * media/media-restore-edit-button-2192981-13.patch
+
+* media
+  * Fix to let features export the display settings of the default file types
+  * https://www.drupal.org/node/2104193#comment-8878701
+  * media/media_remove_file_display_alter-2104193-76.patch
+
 * file_entity
   * Fix to let features export the display settings of the default file types
   * https://www.drupal.org/node/2192391#comment-8878719
