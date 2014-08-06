@@ -288,6 +288,8 @@ $options['init-modules'] = array(
   'pathauto',
   'redirect',
   'uuid',
+  'file_entity',
+  'media',
 
   #'search_api',
   #'facetapi',
