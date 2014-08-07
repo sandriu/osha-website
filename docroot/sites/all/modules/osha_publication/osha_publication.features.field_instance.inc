@@ -432,8 +432,10 @@ function osha_publication_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
-          'media_default--media_browser_1' => 'media_default--media_browser_1',
-          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'media_browser_osha--media_browser_2' => 'media_browser_osha--media_browser_2',
+          'media_browser_osha--media_browser_3' => 'media_browser_osha--media_browser_3',
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'upload' => 'upload',
         ),
       ),
