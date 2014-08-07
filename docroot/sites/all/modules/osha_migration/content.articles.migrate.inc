@@ -175,14 +175,12 @@ class OshaMigrateArticles extends DynamicMigration {
         $entity->field_image[$language][0]['value'] = $row->relatedItems[$language];
       }
       /* Don't translate en (default) */
-      if ($language != $row->language) {
-        if (!isset($entity->translations->data[$language])) {
-          $translation_handler->setTranslation(array(
-            'translate' => 0, 'status' => 1, 'uid' => 1,
-            'language' => $language,
-            'source' => $row->language,
-          ));
-        }
+      if ($language != $row->language && !isset($entity->translations->data[$language])) {
+        $translation_handler->setTranslation(array(
+          'translate' => 0, 'status' => 1, 'uid' => 1,
+          'language' => $language,
+          'source' => $row->language,
+        ));
       }
     }
   }
@@ -234,30 +232,30 @@ class ArticleMigrateList extends MigrateList {
    */
   protected function parseSourceFile() {
     $handle = fopen($this->file, 'r');
-    $fields = $data = fgetcsv($handle, NULL, ';');
+    $fields = $raw_data = fgetcsv($handle, NULL, ';');
 
     self::$data = array();
-    while (($data = fgetcsv($handle, NULL, ';')) !== FALSE) {
-      $path = MigrationUtil::getIDFromSourceRow($data);
-      $language = !empty($data[1]) ? $data[1] : 'en';
+    while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
+      $path = MigrationUtil::getIDFromSourceRow($raw_data);
+      $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
       self::$data[$path]['id'] = $path;
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
             if ($language == 'en') {
-              self::$data[$path]['title'] = $data[$key];
+              self::$data[$path]['title'] = $raw_data[$key];
             }
-            self::$data[$path]['title_field'][$language] = $data[$key];
+            self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;
 
           case 'relatedItems':
           case 'description':
           case 'text':
-            self::$data[$path][$field][$language] = $data[$key];
+            self::$data[$path][$field][$language] = $raw_data[$key];
             break;
 
           default:
-            self::$data[$path][$field] = $data[$key];
+            self::$data[$path][$field] = $raw_data[$key];
             break;
         }
       }

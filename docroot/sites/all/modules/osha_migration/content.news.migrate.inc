@@ -170,14 +170,12 @@ class MigrateOshaNews extends DynamicMigration {
         $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
         /* Don't translate en (default) */
-        if ($language != $row->language) {
-          if (!isset($entity->translations->data[$language])) {
-            $translation_handler->setTranslation(array(
-              'translate' => 0, 'status' => 1, 'uid' => 1,
-              'language' => $language,
-              'source' => $row->language,
-            ));
-          }
+        if ($language != $row->language && !isset($entity->translations->data[$language])) {
+          $translation_handler->setTranslation(array(
+            'translate' => 0, 'status' => 1, 'uid' => 1,
+            'language' => $language,
+            'source' => $row->language,
+          ));
         }
       }
     }
@@ -267,22 +265,22 @@ class NewsContentListCSV extends MigrateList {
    */
   protected function parseSourceFile() {
     $handle = fopen($this->file, 'r');
-    $fields = $data = fgetcsv($handle, 1000, ';');
+    $fields = $raw_data = fgetcsv($handle, 1000, ';');
     self::$data = array();
-    while (($data = fgetcsv($handle, 100000, ';')) !== FALSE) {
-      $language = $data[1];
-      $path = self::getIDFromSourceRow($data);
+    while (($raw_data = fgetcsv($handle, 100000, ';')) !== FALSE) {
+      $language = $raw_data[1];
+      $path = self::getIDFromSourceRow($raw_data);
       self::$data[$path]['id'] = $path;
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
           case 'description':
           case 'text':
-            self::$data[$path][$field][$language] = $data[$key];
+            self::$data[$path][$field][$language] = $raw_data[$key];
             break;
 
           default:
-            self::$data[$path][$field] = $data[$key];
+            self::$data[$path][$field] = $raw_data[$key];
             break;
         }
       }
