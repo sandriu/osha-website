@@ -13,7 +13,7 @@ uri=`drush php-script scripts/get_config_param.php uri`
 cd docroot/
 
 drush en -y simpletest > /dev/null 2>&1
-drush dis -y apache-solr > /dev/null 2>&1
+drush dis -y apachesolr > /dev/null 2>&1
 
 if [ "$1" == "" ]; then
 	echo "Stand back! I'm running ALL the tests from group OSHA ..."
