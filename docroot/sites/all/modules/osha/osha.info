@@ -145,6 +145,7 @@ features[variable][] = pathauto_transliterate
 features[variable][] = pathauto_update_action
 features[variable][] = search_active_modules
 features[variable][] = search_default_module
+features[views_view][] = media_browser_osha
 features_exclude[field_base][field_tags] = field_tags
 features_exclude[field_base][field_image] = field_image
 features_exclude[taxonomy][tags] = tags
