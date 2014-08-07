@@ -86,6 +86,32 @@ class OshaMigratePublications extends DynamicMigration {
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
+
+    $this->addUnmigratedDestinations(array(
+      'promote',
+      'status',
+      'sticky',
+      'revision',
+      'log',
+      'language',
+      'tnid',
+      'translate',
+      'revision_uid',
+      'is_new',
+      'body:summary',
+      'field_nace_codes:create_term',
+      'field_nace_codes:ignore_case',
+      'field_tags:create_term',
+      'field_tags:ignore_case',
+      'field_thesaurus:create_term',
+      'field_thesaurus:ignore_case',
+      'field_publication_cover_image:alt',
+      'field_publication_cover_image:title',
+      'field_publication_date:timezone',
+      'field_publication_date:rrule',
+      'field_publication_date:to',
+      'comment',
+    ));
   }
 
   /**
@@ -128,25 +154,8 @@ class OshaMigratePublications extends DynamicMigration {
    *   TRUE if row is valid
    */
   public function prepareRow($row) {
-    // @todo: Refactored as utility (EntityRowValidator)
-    if (empty($row->title)) {
-      $this->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
+    if(MigrationUtil::entityRowValidator($row, $this) === FALSE) {
       return FALSE;
-    }
-    if ($row->workflow_state != 'published') {
-      $this->saveMessage(
-        sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
-        MigrationBase::MESSAGE_WARNING);
-      return FALSE;
-    }
-    foreach ($row->title_field as $language => $value) {
-      if (strlen($value) > 768) {
-        $this->saveMessage(
-          sprintf('Skipping node with long title (%s): %s chars', $language, strlen($value)),
-          MigrationBase::MESSAGE_WARNING
-        );
-        return FALSE;
-      }
     }
     $row->language = 'en';
     $tags = $row->subject . ',' . $row->subcategory;
@@ -331,14 +340,6 @@ class PublicationMigrateList extends MigrateList {
   }
 
   /**
-   * Retrieve unique ID from path. Removes language.
-   */
-  protected static function getIDFromSourceRow($row) {
-    $url = !empty($row[2]) ? $row[2] : $row[0];
-    return substr($url, 4);
-  }
-
-  /**
    * Parse the source file and populate the local cache.
    */
   protected function parseSourceFile() {
@@ -347,7 +348,7 @@ class PublicationMigrateList extends MigrateList {
 
     self::$data = array();
     while (($data = fgetcsv($handle, NULL, ';')) !== FALSE) {
-      $path = self::getIDFromSourceRow($data);
+      $path = MigrationUtil::getIDFromSourceRow($data);
       $language = !empty($data[1]) ? $data[1] : 'en';
       $path_parts = explode('/', $path);
 
