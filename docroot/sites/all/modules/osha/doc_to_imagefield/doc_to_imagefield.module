@@ -12,7 +12,7 @@
  */
 function doc_to_imagefield_menu() {
   $items = array();
-  $items['admin/config/system/doc_to_imagefield'] = array(
+  $items['admin/config/media/doc_to_imagefield'] = array(
     'title' => 'Doc to Image Field',
     'description' => 'Config information for the module',
     'page callback' => 'drupal_get_form',
