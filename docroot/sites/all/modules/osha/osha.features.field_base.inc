@@ -130,6 +130,37 @@ function osha_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_language'
+  $field_bases['field_language'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_language',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'languagefield',
+    'settings' => array(
+      'enabled' => 2,
+      'entity_translation_sync' => FALSE,
+      'excluded_languages' => array(),
+      'format' => array(
+        'iso' => 0,
+        'name' => 'name',
+        'name_native' => 0,
+      ),
+      'groups' => '',
+      'languages' => array(),
+    ),
+    'translatable' => 0,
+    'type' => 'language_field',
+  );
+
   // Exported field_base: 'field_nace_codes'
   $field_bases['field_nace_codes'] = array(
     'active' => 1,
