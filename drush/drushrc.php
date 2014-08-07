@@ -290,6 +290,7 @@ $options['init-modules'] = array(
   'uuid',
   'file_entity',
   'media',
+  'languagefield',
 
   #'search_api',
   #'facetapi',
