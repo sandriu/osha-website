@@ -8,3 +8,16 @@ Installation:
 - if using another converter, please see configuration interface of the module
 
 If cannot convert file to pdf, check configuration interface of the module for more information
+
+
+Q&A:
+Q: When I save the node, I get this message: Could not convert @file to .pdf
+A: Please go to module's configuration interface and manually check in terminal the shell command
+
+Q: When I run the test line I get similar error to this: mkstemp("/var/www/.execoooMs34pw") failed: Permission denied
+A: Apache user home is owned b
+
+
+Server configuration:
+sudo yum install libreoffice-base libreoffice-headless libreoffice-impress
+sudo yum install ImageMagick

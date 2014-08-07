@@ -5,6 +5,6 @@ version = "7.x-1.0"
 package = "OSHA"
 
 dependencies[] = pdf_to_image (3.3)
-configure = admin/config/system/doc_to_imagefield
+configure = admin/config/media/doc_to_imagefield
 
 files[] = tests/doc_to_imagefield.test

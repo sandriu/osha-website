@@ -11,7 +11,7 @@ class DocToImagefieldTest extends DrupalWebTestCase {
     return array(
       'name' => 'DocToImagefield',
       'description' => 'Test if the module can create an image from other files',
-      'group' => 'Doc to Imagefield Test',
+      'group' => 'OSHA',
     );
   }
 
