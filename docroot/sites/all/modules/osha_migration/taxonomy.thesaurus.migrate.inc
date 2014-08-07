@@ -176,8 +176,8 @@ class ThesaurusMigrationItemJSON extends MigrateItemJSON {
    */
   public function getItem($item_id) {
     if (empty($this->data)) {
-      $data = $this->loadJSONUrl($this->itemUrl);
-      foreach ($data['@graph'] as $src) {
+      $raw_data = $this->loadJSONUrl($this->itemUrl);
+      foreach ($raw_data['@graph'] as $src) {
         $item = array();
         $item['code'] = substr($src['@id'], 6);
         $item['parent_code'] = (

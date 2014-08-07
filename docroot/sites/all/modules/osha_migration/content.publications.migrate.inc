@@ -341,12 +341,12 @@ class PublicationMigrateList extends MigrateList {
    */
   protected function parseSourceFile() {
     $handle = fopen($this->fileURL, 'r');
-    $fields = $data = fgetcsv($handle, NULL, ';');
+    $fields = $raw_data = fgetcsv($handle, NULL, ';');
 
     self::$data = array();
-    while (($data = fgetcsv($handle, NULL, ';')) !== FALSE) {
-      $path = self::getIDFromSourceRow($data);
-      $language = !empty($data[1]) ? $data[1] : 'en';
+    while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
+      $path = self::getIDFromSourceRow($raw_data);
+      $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
       $path_parts = explode('/', $path);
 
       self::$data[$path]['id'] = $path;
@@ -355,26 +355,26 @@ class PublicationMigrateList extends MigrateList {
         switch ($field) {
           case 'title':
             if ($language == 'en') {
-              self::$data[$path]['title'] = $data[$key];
+              self::$data[$path]['title'] = $raw_data[$key];
             }
-            self::$data[$path]['title_field'][$language] = $data[$key];
+            self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;
 
           case 'description':
           case 'order_id':
           case 'file':
           case 'cover_image':
-            self::$data[$path][$field][$language] = $data[$key];
+            self::$data[$path][$field][$language] = $raw_data[$key];
             break;
 
           case 'path':
-            $path_language = explode('/', $data[$key], 3);
+            $path_language = explode('/', $raw_data[$key], 3);
             self::$data[$path][$field][$language] = $path_language[2];
             continue;
 
           case 'relatedItems':
             /* Related files and publications */
-            $items = MigrationUtil::parseRelatedItemsString($data[$key]);
+            $items = MigrationUtil::parseRelatedItemsString($raw_data[$key]);
             if (!empty($items['items'])) {
               self::$data[$path]['related_publications_path'] = $items['items'];
             }
@@ -386,7 +386,7 @@ class PublicationMigrateList extends MigrateList {
             break;
 
           default:
-            self::$data[$path][$field] = $data[$key];
+            self::$data[$path][$field] = $raw_data[$key];
         }
       }
     }
