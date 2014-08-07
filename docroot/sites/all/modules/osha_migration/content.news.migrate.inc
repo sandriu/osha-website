@@ -37,6 +37,7 @@ class MigrateOshaNews extends DynamicMigration {
     $node_options = MigrateDestinationNode::options('en', 'text');
     $this->destination = new MigrateDestinationNode(OSHA_NEWS_CONTENT_TYPE_NEWS, $node_options);
 
+    $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('field_news_image', 'image');
     $this->addFieldMapping('field_news_image:title', 'imageCaption');
     $this->addFieldMapping('field_news_image:file_replace')->defaultValue(MigrateFile::FILE_EXISTS_REUSE);
@@ -52,6 +53,7 @@ class MigrateOshaNews extends DynamicMigration {
     $this->addFieldMapping('path', 'id');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
+    $this->addFieldMapping('uid')->defaultValue(1);
 
     $this->addUnmigratedSources(array(
       'path',
@@ -63,7 +65,6 @@ class MigrateOshaNews extends DynamicMigration {
     ));
 
     $this->addUnmigratedDestinations(array(
-      'uid',
       'promote',
       'status',
       'sticky',
@@ -108,25 +109,8 @@ class MigrateOshaNews extends DynamicMigration {
    * {@inheritdoc}
    */
   public function prepareRow($row) {
-    // @todo: Refactored as utility (EntityRowValidator)
-    if (empty($row->title['en'])) {
-      $this->saveMessage('Skipping node without english title' . $row->id, MigrationBase::MESSAGE_WARNING);
+    if(MigrationUtil::entityRowValidator($row, $this) === FALSE) {
       return FALSE;
-    }
-    if ($row->workflow_state != 'published') {
-      $this->saveMessage(
-        sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
-        MigrationBase::MESSAGE_WARNING);
-      return FALSE;
-    }
-    foreach ($row->title as $language => $value) {
-      if (strlen($value) > 768) {
-        $this->saveMessage(
-          sprintf('Skipping publication node with long title (%s): %s chars', $language, strlen($value)),
-          MigrationBase::MESSAGE_WARNING
-        );
-        return FALSE;
-      }
     }
 
     $row->language = 'en';
@@ -161,10 +145,9 @@ class MigrateOshaNews extends DynamicMigration {
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
 
     $entity->translations = $translation_handler->getTranslations();
-    $entity->title = $row->title['en'];
     foreach ($languages as $language) {
-      if (!empty($row->title[$language])) {
-        $entity->title_field[$language][0]['value'] = $row->title[$language];
+      if (!empty($row->title_field[$language])) {
+        $entity->title_field[$language][0]['value'] = $row->title_field[$language];
         $entity->field_news_summary[$language][0]['value'] = str_replace('<@#&>', '"', $row->description[$language]);
         $entity->field_news_summary[$language][0]['format'] = 'full_html';
         $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $row->text[$language]);
@@ -253,14 +236,6 @@ class NewsContentListCSV extends MigrateList {
   }
 
   /**
-   * Retrieve unique ID from path. Removes language.
-   */
-  protected static function getIDFromSourceRow($row) {
-    $url = $row[0];
-    return substr($url, 4);
-  }
-
-  /**
    * Parse the CSV file and populate the local cache.
    */
   protected function parseSourceFile() {
@@ -268,12 +243,18 @@ class NewsContentListCSV extends MigrateList {
     $fields = $raw_data = fgetcsv($handle, 1000, ';');
     self::$data = array();
     while (($raw_data = fgetcsv($handle, 100000, ';')) !== FALSE) {
-      $language = $raw_data[1];
-      $path = self::getIDFromSourceRow($raw_data);
+      $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
+      $path = MigrationUtil::getIDFromSourceRow($raw_data);
       self::$data[$path]['id'] = $path;
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
+            if ($language == 'en') {
+              self::$data[$path]['title'] = $raw_data[$key];
+            }
+            self::$data[$path]['title_field'][$language] = $raw_data[$key];
+            break;
+
           case 'description':
           case 'text':
             self::$data[$path][$field][$language] = $raw_data[$key];
