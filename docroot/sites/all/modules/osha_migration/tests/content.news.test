@@ -81,7 +81,7 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
     );
     $this->assertText($node->title_field['en'][0]['value']);
 
-    foreach ($witness['title'] as $lang => $title) {
+    foreach ($witness['title_field'] as $lang => $title) {
       $this->assertEqual($title, $node->title_field[$lang][0]['value']);
     }
     foreach ($witness['text'] as $lang => $value) {
@@ -90,18 +90,16 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
         $node->body[$lang][0]['value']
       );
     }
-    $this->assertEqual(3, count($node->field_tags[LANGUAGE_NONE]));
+    $this->assertEqual(2, count($node->field_tags[LANGUAGE_NONE]));
     $tids = array(
       $node->field_tags[LANGUAGE_NONE][0]['tid'],
       $node->field_tags[LANGUAGE_NONE][1]['tid'],
-      $node->field_tags[LANGUAGE_NONE][2]['tid'],
     );
     $tags = taxonomy_term_load_multiple($tids);
     $terms = array();
     foreach ($tags as $term) {
       $terms[] = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
     }
-    $this->assertTrue(in_array('psychosocial_risks_and_stress', $terms));
     $this->assertTrue(in_array('women_and_osh', $terms));
     $this->assertTrue(in_array('legislation', $terms));
   }
