@@ -8,7 +8,7 @@
 #    * run all tests from specific group: ./test.sh OSHA
 #    * run all tests from OSHA group: ./test.sh
 
-uri=`drush php-script scripts/get_config_param.php uri`
+uri=`drush php-script scripts/get_config_param.php uri | tr -d ' '`
 
 cd docroot/
 
