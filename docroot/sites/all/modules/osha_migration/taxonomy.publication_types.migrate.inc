@@ -70,14 +70,12 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
       if (!empty($row->{$language})) {
         $entity->name_field[$language][0]['value'] = $row->{$language};
         /* Don't translate en (default) */
-        if ($language != 'en') {
-          if (!isset($entity->translations->data[$language])) {
-            $translation_handler->setTranslation(array(
-              'translate' => 0, 'status' => 1, 'uid' => 1,
-              'language' => $language,
-              'source' => 'en',
-            ));
-          }
+        if ($language != 'en' && !isset($entity->translations->data[$language])) {
+          $translation_handler->setTranslation(array(
+            'translate' => 0, 'status' => 1, 'uid' => 1,
+            'language' => $language,
+            'source' => 'en',
+          ));
         }
       }
     }

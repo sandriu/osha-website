@@ -175,14 +175,12 @@ class OshaMigrateArticles extends DynamicMigration {
         $entity->field_image[$language][0]['value'] = $row->relatedItems[$language];
       }
       /* Don't translate en (default) */
-      if ($language != $row->language) {
-        if (!isset($entity->translations->data[$language])) {
-          $translation_handler->setTranslation(array(
-            'translate' => 0, 'status' => 1, 'uid' => 1,
-            'language' => $language,
-            'source' => $row->language,
-          ));
-        }
+      if ($language != $row->language && !isset($entity->translations->data[$language])) {
+        $translation_handler->setTranslation(array(
+          'translate' => 0, 'status' => 1, 'uid' => 1,
+          'language' => $language,
+          'source' => $row->language,
+        ));
       }
     }
   }
