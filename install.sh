@@ -12,6 +12,10 @@ drush build
 
 drush php-script ../scripts/drupal_post_install.php
 
+# Enable required blocks
+echo "Enable required blocks ..."
+drush block-configure language --module=locale --region=header
+
 echo "Registering migrations ..."
 drush migrate-auto-register
 
@@ -37,6 +41,10 @@ if [ "$1" == "--migrate" ]; then
 
 	echo "Importing Publications content"
 	drush migrate-import Publication
+
+	echo "Importing Articles content"
+	drush migrate-import Article
+
 fi
 
 drush cc all

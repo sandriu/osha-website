@@ -80,6 +80,7 @@ class OshaMigratePublications extends DynamicMigration {
     $this->addFieldMapping('field_publication_related_res:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     */
 
+    $this->addFieldMapping('field_related_publications', 'related_publications');
     $this->addFieldMapping('body', 'description');
     $this->addFieldMapping('body:format')->defaultValue('plain_text');
     $this->addFieldMapping('created', 'creation_date');
@@ -201,6 +202,7 @@ class OshaMigratePublications extends DynamicMigration {
     $node->language = 'en';
     $node->title_field['en'][0]['value'] = t('Stub for @code', array('@code' => $source[0]));
     $node->type = OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION;
+    $node->uid = 1;
     node_save($node);
 
     return array($node->nid);
@@ -284,6 +286,9 @@ class OshaMigratePublications extends DynamicMigration {
         'alias' => $row->id,
         'language' => $language,
       );
+      path_save($args);
+      // Set original alias for the language. Path may differ.
+      $args['alias'] = $row->path[$language];
       path_save($args);
     }
   }
