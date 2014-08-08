@@ -81,7 +81,7 @@ as the following:
 Then you would only need to type _drush devify --yes_.
 
 
-##Drush extra commands
+##Drush extra commands (sources available @ https://www.drupal.org/project/drush_extras)
 
 PUSHKEY
 
