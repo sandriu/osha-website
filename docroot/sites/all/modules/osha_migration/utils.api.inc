@@ -188,7 +188,7 @@ class MigrationUtil {
       'risks' => 'emerging_risks',
       'stress' => 'psychosocial_risks_and_stress',
       'young_people' => 'osh_and_young_people',
-      'young_people::educators_mainstreaming' => 'mainstream-ing_osh_into_education',
+      'young_people::educators_mainstreaming' => 'mainstreaming_osh_into_education',
     );
     foreach ($terms as $term) {
       if (array_key_exists($term, $replace)) {
