@@ -12,9 +12,9 @@ class MigrateOshaNews extends DynamicMigration {
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
     $this->description = 'Import "News" contents from CSV file';
-
     $this->dependencies = array(OSHA_MIGRATION_TAXONOMY_THESAURUS, OSHA_MIGRATION_TAXONOMY_TAGS);
 
+    $data_path = osha_migration_get_data_dir();
     $source_file = MigrationUtil::getSourceFile($arguments);
     $this->source = new MigrateSourceList(
       new NewsContentListCSV($source_file),
@@ -34,15 +34,16 @@ class MigrateOshaNews extends DynamicMigration {
       MigrateDestinationNode::getKeySchema()
     );
 
-    $node_options = MigrateDestinationNode::options('en', 'text');
+    $node_options = MigrateDestinationNode::options('en', 'full_html');
     $this->destination = new MigrateDestinationNode(OSHA_NEWS_CONTENT_TYPE_NEWS, $node_options);
 
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('field_news_image', 'image');
     $this->addFieldMapping('field_news_image:title', 'imageCaption');
-    $this->addFieldMapping('field_news_image:file_replace')->defaultValue(MigrateFile::FILE_EXISTS_REUSE);
+    $this->addFieldMapping('field_news_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldmapping('field_news_image:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_news_image:source_dir')->defaultValue(osha_migration_get_data_dir() . '/export/');
+    $this->addFieldMapping('field_news_image:source_dir')->defaultValue($data_path . '/export/');
+    $this->addFieldMapping('field_news_image:destination_file', 'image');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -78,7 +79,6 @@ class MigrateOshaNews extends DynamicMigration {
       'field_news_image:file_class',
       'field_news_image:language',
       'field_news_image:destination_dir',
-      'field_news_image:destination_file',
       'field_news_image:alt',
       'field_news_publication_date:timezone',
       'field_news_publication_date:rrule',
@@ -144,21 +144,34 @@ class MigrateOshaNews extends DynamicMigration {
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
 
     $entity->translations = $translation_handler->getTranslations();
+
     foreach ($languages as $language) {
       if (!empty($row->title_field[$language])) {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
+      }
+      if (!empty($row->description[$language])) {
         $entity->field_news_summary[$language][0]['value'] = str_replace('<@#&>', '"', $row->description[$language]);
         $entity->field_news_summary[$language][0]['format'] = 'full_html';
+      }
+      if (!empty($row->text[$language])) {
         $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
-        /* Don't translate en (default) */
-        if ($language != $row->language && !isset($entity->translations->data[$language])) {
-          $translation_handler->setTranslation(array(
-            'translate' => 0, 'status' => 1, 'uid' => 1,
-            'language' => $language,
-            'source' => $row->language,
-          ));
+      }
+      if (!empty($row->image[$language])) {
+        $image_code = array_flip(array_keys($row->image));
+        $image_code = $image_code[$language];
+        $entity->field_news_image[$language][0] = $entity->field_news_image['en'][$image_code];
+        if($language != 'en') {
+          unset($entity->field_news_image['en'][$image_code]);
         }
+      }
+        /* Don't translate en (default) */
+      if ($language != $row->language && !isset($entity->translations->data[$language])) {
+        $translation_handler->setTranslation(array(
+          'translate' => 0, 'status' => 1, 'uid' => 1,
+          'language' => $language,
+          'source' => $row->language,
+        ));
       }
     }
   }
@@ -254,6 +267,7 @@ class NewsContentListCSV extends MigrateList {
             self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;
 
+          case 'image':
           case 'description':
           case 'text':
             self::$data[$path][$field][$language] = $raw_data[$key];
