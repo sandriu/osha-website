@@ -1,0 +1,4 @@
+name = OSHA
+description = The OSHA front-end theme.
+core = 7.x
+base theme = bartik
