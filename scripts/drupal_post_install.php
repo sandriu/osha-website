@@ -229,6 +229,9 @@ function osha_configure_wysiwyg_settings() {
         'search' => 1,
         'replace' => 1,
       ),
+      'paste' => array(
+        'pasteword' => 1,
+      ),
       'table' => array(
         'tablecontrols' => 1,
       ),
