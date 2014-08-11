@@ -252,6 +252,18 @@ class MigrationUtil {
   }
 
   /**
+   * Transform custom escapes like <@#&> and <&#@> in HTML text.
+   *
+   * @return text
+   *     Decoded text
+   */
+  public static function decodeHTMLText($text) {
+    $search  = array('<@#&>', '<&#@>');
+    $replace = array('"', ',');
+    return str_replace($search, $replace, $text);
+  }
+
+  /**
    * Register and run a migration.
    *
    * @param string $machine_name

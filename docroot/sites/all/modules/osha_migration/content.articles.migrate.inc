@@ -165,11 +165,11 @@ class OshaMigrateArticles extends DynamicMigration {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
       }
       if (!empty($row->description[$language])) {
-        $entity->field_article_summary[$language][0]['value'] = $row->description[$language];
+        $entity->field_article_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
         $entity->field_article_summary[$language][0]['format'] = 'full_html';
       }
       if (!empty($row->text[$language])) {
-        $entity->body[$language][0]['value'] = $row->text[$language];
+        $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
       }
       if (!empty($row->relatedItems[$language]) && $language != 'en') {

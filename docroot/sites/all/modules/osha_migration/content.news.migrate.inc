@@ -147,9 +147,9 @@ class MigrateOshaNews extends DynamicMigration {
     foreach ($languages as $language) {
       if (!empty($row->title_field[$language])) {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
-        $entity->field_news_summary[$language][0]['value'] = str_replace('<@#&>', '"', $row->description[$language]);
+        $entity->field_news_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
         $entity->field_news_summary[$language][0]['format'] = 'full_html';
-        $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $row->text[$language]);
+        $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
         /* Don't translate en (default) */
         if ($language != $row->language && !isset($entity->translations->data[$language])) {
