@@ -53,7 +53,8 @@ class OshaMigratePublications extends DynamicMigration {
       ),
       MigrateDestinationNode::getKeySchema()
     );
-    $this->destination = new MigrateDestinationNode(OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION);
+    $node_options = MigrateDestinationNode::options('en', NULL);
+    $this->destination = new MigrateDestinationNode(OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION, $node_options);
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('title', 'title');
