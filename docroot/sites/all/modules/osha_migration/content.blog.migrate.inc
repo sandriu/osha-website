@@ -55,7 +55,7 @@ class MigrateOshaBlog extends DynamicMigration {
     $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_nace_codes', 'nace');
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
-    $this->addFieldMapping('field_blog_publication_date', 'publication_date');
+    $this->addFieldMapping('field_publication_date', 'publication_date');
 
     $this->addFieldMapping('field_blog_image_caption', 'imageCaption');
     $this->addFieldMapping('created', 'creation_date');
@@ -85,10 +85,14 @@ class MigrateOshaBlog extends DynamicMigration {
       'field_blog_image:file_class',
       'field_blog_image:language',
       'field_blog_image:destination_dir',
+      'field_blog_image:title',
       'field_blog_image:alt',
-      'field_blog_publication_date:timezone',
-      'field_blog_publication_date:rrule',
-      'field_blog_publication_date:to',
+      'field_blog_image_caption:language',
+      'field_nace_codes:create_term',
+      'field_nace_codes:ignore_case',
+      'field_publication_date:timezone',
+      'field_publication_date:rrule',
+      'field_publication_date:to',
       'field_blog_summary',
       'field_blog_summary:format',
       'field_tags:create_term',
