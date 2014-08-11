@@ -7,3 +7,4 @@
 include_once 'osha_news.features.inc';
 
 define('OSHA_NEWS_CONTENT_TYPE_NEWS', 'news');
+define('OSHA_BLOG_CONTENT_TYPE_BLOG', 'blog');
