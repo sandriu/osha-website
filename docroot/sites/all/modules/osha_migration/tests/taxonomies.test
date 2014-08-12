@@ -272,11 +272,20 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
 
     foreach ($terms as $term) {
       $code = $term->field_activity_code[LANGUAGE_NONE][0]['value'];
+      $this->assertEqual("en", $term->language);
       $this->assertEqual($witness[$code]['name'], $term->name_field['en'][0]['value']);
       $this->assertEqual(
         $witness[$code]['level'],
         $term->field_activity_level[LANGUAGE_NONE][0]['value']
       );
+      $actual_parents = taxonomy_get_parents($term->tid);
+      if ($witness[$code]['level'] == 1) {
+        $this->assertEqual(0, count($actual_parents));
+      }
+      else {
+        $this->assertEqual(1, count($actual_parents));
+      }
+
     }
     Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_ACTIVITY);
   }
