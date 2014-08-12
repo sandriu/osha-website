@@ -70,6 +70,7 @@ class MigrateOshaBlogTest extends DrupalWebTestCase {
     $path = $path['alias'];
     $witness = $data[$path];
 
+    $this->assertEqual("en", $node->language);
     $this->assertEqual(strtotime($witness['creation_date']), $node->created);
     $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
 
