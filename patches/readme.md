@@ -22,6 +22,17 @@ List of patches
 	*
 	* pdf_to_imagefield/pdf_to_imagefield_7-3-3-fix-for-multilingual.patch
 
+* pdf_to_image
+	* Skip it if entity saved trough cli (used for migrate)
+	*
+	* pdf_to_imagefield/pdf_to_image_skip_if_cli.patch
+
+* pdf_to_image
+	* Check for empty values to prevent errors (occured in migrate)
+	*
+	* pdf_to_image_check_empty_values.patch
+
+
 
 Patch documentation should be in the following format:
 
