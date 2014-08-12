@@ -174,7 +174,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -281,7 +281,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Enter a comma-separated list of words to describe your content.',
+    'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -329,7 +329,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -423,7 +423,6 @@ function osha_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
-  t('Enter a comma-separated list of words to describe your content.');
   t('Image');
   t('Nace');
   t('Publication date');
@@ -431,6 +430,7 @@ function osha_field_default_field_instances() {
   t('Tags');
   t('Thesaurus');
   t('Title');
+  t('Use comma ( , ) to assign multiple terms');
 
   return $field_instances;
 }

@@ -10,6 +10,7 @@ dependencies[] = features
 dependencies[] = file
 dependencies[] = i18n_taxonomy
 dependencies[] = image
+dependencies[] = osha
 dependencies[] = osha_news
 dependencies[] = osha_taxonomies
 dependencies[] = strongarm
