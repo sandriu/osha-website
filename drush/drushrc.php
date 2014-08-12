@@ -254,8 +254,7 @@ if(file_exists($json_path)) {
   $command_specific['site-install'] = array(
     'db-url' => $db_url,
     'account-mail' => $cfg->admin->email, 'account-name' => $cfg->admin->username, 'account-pass' => $cfg->admin->password,
-    'db-su' => $cfg->db->root_username, "db-su-pw" => $cfg->db->root_password,
-    'site-mail' => $cfg->site_mail, 'site-name' => $cfg->site_name
+    'db-su' => $cfg->db->root_username, 'db-su-pw' => $cfg->db->root_password
   );
 }
 
