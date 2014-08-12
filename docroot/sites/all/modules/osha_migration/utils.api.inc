@@ -63,6 +63,7 @@ class MigrationUtil {
     if (empty($terms)) {
       return array();
     }
+    $terms = array_unique($terms);
     $field_values = self::cacheVocabularyTermsFields($vocabulary_name, $field_match, $language);
     $misses = array();
     foreach ($terms as $t) {
