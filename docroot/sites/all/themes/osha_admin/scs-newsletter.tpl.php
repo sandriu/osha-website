@@ -10,13 +10,49 @@
  *    render() function.
  */
 ?>
-<div id="newsletter">
-  <?php if ($toc): ?>
-    <div id="toc">
-      <?php echo $toc; ?>
+<div class="collage-column">
+  <div class="column-block block_1">
+    <div style="font: 12px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif;">
+      <h1 style="color: #191919; font: 18px/35px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif; letter-spacing: 2px; margin: 34px 0 11px; text-shadow: 2px 2px 5px #dddddd; text-transform: uppercase;">
+        <span><?php print t('Highlights'); ?></span>
+      </h1>
     </div>
-  <?php endif; ?>
-  <?php foreach ($nodes as $node): ?>
-    <?php echo render($node) ?>
-  <?php endforeach; ?>
+    <?php foreach ($nodes as $node): ?>
+      <div style="font: 12px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif;">
+        <table style="border: 1px solid #d1d1d1; color: #191919; font: 13px/16px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif; margin-bottom: 20px; padding: 8px; width: 570px;">
+          <tbody>
+            <tr>
+              <td colspan="2">
+                <h2 style="color: #191919; font-size: 19px; font-weight: bold; margin: 15px 0; padding: 0 0 11px;">
+                  <a href="<?php echo url('node/' . $node['field_news_summary']['#object']->nid, array('absolute' => TRUE)); ?>" style="color: #144989; text-decoration: none;">
+                    <?php print $node['#node']->title; ?>
+                  </a>
+                </h2>
+              </td>
+            </tr>
+            <tr>
+              <td width="120" valign="top">
+                <a href="<?php echo url('node/' . $node['field_news_summary']['#object']->nid, array('absolute' => TRUE)); ?>">
+                  <?php
+                  print theme(
+                    'image_style',
+                    array(
+                      'style_name' => 'thumbnail',
+                      'path' => $node['field_news_image']['#items'][0]['uri'],
+                      'width' => 100,
+                      'alt' => $node['field_news_image']['#items'][0]['alt']
+                    )
+                  );
+                  ?>
+                </a>
+              </td>
+              <td valign="top">
+                <?php print $node['field_news_summary']['#items'][0]['safe_value']; ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <?php endforeach; ?>
+  </div>
 </div>
