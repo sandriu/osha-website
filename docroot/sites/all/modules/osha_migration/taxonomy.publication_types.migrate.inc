@@ -31,8 +31,7 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
       )
     );
 
-    $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_PUBLICATION_TYPES, $term_options);
+    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_PUBLICATION_TYPES);
 
     $this->addFieldMapping('field_publication_type_code', 'code');
     $this->addFieldMapping('format')->defaultValue('plain_text');
@@ -60,6 +59,7 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    $entity->language = "en";
     $migration = Migration::currentMigration();
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
