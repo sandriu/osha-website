@@ -133,6 +133,10 @@ class DocToImagefieldTest extends DrupalWebTestCase {
         // Simulate the batch job from pdf_to_image.
         self::nodeSaveForPdf('node', $node, $node->nid, self::$field_cover_name, $this->file_field, (object) $file);
       }
+      else {
+        // Simulate the batch job from pdf_to_image.
+        self::nodeSaveForDoc('node', $node, $node->nid, self::$field_cover_name, $this->file_field, (object) $file);
+      }
 
       // Add the fields in other languages to test multilingual.
       foreach ($languages as $lang) {
@@ -158,7 +162,7 @@ class DocToImagefieldTest extends DrupalWebTestCase {
           self::nodeSaveForPdf('node', $node, $node->nid, self::$field_cover_name, $this->file_field, (object) $file);
         }
         else {
-          node_save($node);
+          self::nodeSaveForDoc('node', $node, $node->nid, self::$field_cover_name, $this->file_field, (object) $file);
         }
       }
 
@@ -281,20 +285,24 @@ class DocToImagefieldTest extends DrupalWebTestCase {
    * Inspired from pdf_to_image module.
    */
   public static function nodeSaveForPdf($entity_type, $entity, $entity_id, $target_field, $src_field_instance, $pdf_file) {
-    $params = array(
-      'entity' => $entity,
-      'entity_type' => $entity_type,
-      'entity_id' => $entity_id,
-      'image'  => array(
-        'field'    => field_info_field($target_field),
-        'instance' => field_info_instance($entity_type, $target_field, $src_field_instance['bundle']),
-      ),
-      'pdf'    => array(
-        'instance' => $src_field_instance,
-        'file'     => $pdf_file,
-      ),
-    );
+    $params = doc_to_imagefield_create_param_array($entity_type, $entity,
+      $src_field_instance, $entity_id, $target_field, $pdf_file);
     $file = pdf_to_image_generate_page($params, 0);
+    $results['files'] = array($file);
+    $results['params'] = $params;
+    pdf_to_image_generate_process_attach('', $results, '');
+  }
+
+  /**
+   * Function that simulate the behaviour of the batch job from pdf_to_image.
+   *
+   * Inspired from pdf_to_image module.
+   */
+  public static function nodeSaveForDoc($entity_type, $entity, $entity_id, $target_field, $src_field_instance, $pdf_file) {
+    $params = doc_to_imagefield_create_param_array($entity_type, $entity,
+      $src_field_instance, $entity_id, $target_field, $pdf_file);
+    $context = array();
+    $file = doc_to_imagefield_generate_operation($pdf_file, $params, $context);
     $results['files'] = array($file);
     $results['params'] = $params;
     pdf_to_image_generate_process_attach('', $results, '');
