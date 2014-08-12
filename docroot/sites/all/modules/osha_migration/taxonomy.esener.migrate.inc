@@ -32,8 +32,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
       )
     );
 
-    $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_ESENER, $term_options);
+    $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_ESENER);
 
     $this->addFieldMapping('name', 'en');
     $this->addFieldMapping('parent', 'parent');
@@ -107,6 +106,7 @@ class MigrateOshaTaxonomyEsener extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    $entity->language = "en";
     $migration = Migration::currentMigration();
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);

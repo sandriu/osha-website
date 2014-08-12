@@ -30,8 +30,7 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
       $this->fields()
     );
 
-    $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
-    $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
+    $this->destination = new MigrateDestinationTerm($this->vocabulary);
 
     $this->addFieldMapping('field_nace_code', 'NACE_REV_2_CODE');
     $this->addFieldMapping('parent', 'parent');
@@ -136,6 +135,7 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    $entity->language = "en";
     $assoc = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
 
     $migration = Migration::currentMigration();
