@@ -161,6 +161,16 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
     }
   }
 
+  public function preImport() {
+    parent::preImport();
+    variable_set('pathauto_punctuation_period', '2');
+  }
+
+  public function postImport() {
+    parent::postImport();
+    variable_set('pathauto_punctuation_period', '1');
+  }
+
   /**
    * Migration machine name.
    *
