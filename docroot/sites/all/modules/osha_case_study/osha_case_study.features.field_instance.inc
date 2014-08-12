@@ -24,6 +24,12 @@ function osha_case_study_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -69,6 +75,12 @@ function osha_case_study_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 7,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -111,6 +123,12 @@ function osha_case_study_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 5,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -160,6 +178,12 @@ function osha_case_study_field_default_field_instances() {
         'type' => 'file_default',
         'weight' => 4,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -204,6 +228,12 @@ function osha_case_study_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 9,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -245,6 +275,12 @@ function osha_case_study_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 8,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -285,6 +321,12 @@ function osha_case_study_field_default_field_instances() {
         'settings' => array(),
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 2,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -331,6 +373,12 @@ function osha_case_study_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 6,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -381,6 +429,12 @@ function osha_case_study_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 3,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -422,6 +476,12 @@ function osha_case_study_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 1,
       ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -461,6 +521,12 @@ function osha_case_study_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 10,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
