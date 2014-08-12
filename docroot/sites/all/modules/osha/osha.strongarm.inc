@@ -104,7 +104,10 @@ function osha_strongarm() {
           'weight' => '9',
         ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '0',
+        ),
+        'redirect' => array(
+          'weight' => '10',
         ),
       ),
       'display' => array(),

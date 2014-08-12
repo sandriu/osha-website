@@ -114,7 +114,7 @@ function osha_case_study_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 39,
+      'weight' => 5,
     ),
   );
 
@@ -210,7 +210,7 @@ function osha_case_study_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 35,
+      'weight' => 8,
     ),
   );
 
@@ -270,7 +270,7 @@ function osha_case_study_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 41,
+      'weight' => 3,
     ),
   );
 
@@ -317,7 +317,7 @@ function osha_case_study_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 37,
+      'weight' => 6,
     ),
   );
 
@@ -364,7 +364,7 @@ function osha_case_study_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 33,
+      'weight' => 7,
     ),
   );
 

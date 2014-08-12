@@ -58,7 +58,7 @@ function osha_news_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 5,
+      'weight' => 3,
     ),
   );
 
@@ -115,7 +115,7 @@ function osha_news_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -176,7 +176,7 @@ function osha_news_field_default_field_instances() {
         'year_range' => '1999:+3',
       ),
       'type' => 'date_select',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -185,7 +185,7 @@ function osha_news_field_default_field_instances() {
     'bundle' => 'news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -223,7 +223,7 @@ function osha_news_field_default_field_instances() {
         'rows' => 10,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 2,
     ),
   );
 
@@ -232,7 +232,7 @@ function osha_news_field_default_field_instances() {
     'bundle' => 'news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -270,7 +270,7 @@ function osha_news_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -280,7 +280,7 @@ function osha_news_field_default_field_instances() {
     'bundle' => 'news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -318,7 +318,7 @@ function osha_news_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 6,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -368,7 +368,7 @@ function osha_news_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -381,6 +381,7 @@ function osha_news_field_default_field_instances() {
   t('Tags');
   t('Thesaurus');
   t('Title');
+  t('Use comma ( , ) to assign multiple terms');
 
   return $field_instances;
 }

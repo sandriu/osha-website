@@ -71,13 +71,16 @@ function osha_publication_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '15',
+          'weight' => '14',
         ),
         'workbench_access' => array(
           'weight' => '15',
         ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '0',
+        ),
+        'redirect' => array(
+          'weight' => '15',
         ),
       ),
       'display' => array(),
