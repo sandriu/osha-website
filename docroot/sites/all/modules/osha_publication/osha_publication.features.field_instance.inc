@@ -572,7 +572,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
         'label' => 'above',
