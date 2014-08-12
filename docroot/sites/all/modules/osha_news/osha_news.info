@@ -8,6 +8,7 @@ dependencies[] = date
 dependencies[] = features
 dependencies[] = i18n_taxonomy
 dependencies[] = image
+dependencies[] = osha
 dependencies[] = osha_taxonomies
 dependencies[] = strongarm
 dependencies[] = taxonomy
