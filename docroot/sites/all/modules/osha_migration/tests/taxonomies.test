@@ -214,7 +214,7 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
   /**
    * Test tags migration.
    */
-  public function testTagsMigration() {
+  public function TODO_2662_testTagsMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_TAGS);
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
