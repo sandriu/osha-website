@@ -49,6 +49,19 @@ class MigrateOshaTaxonomyActivity extends DynamicMigration {
     $this->addFieldMapping('name_field', 'name');
     $this->addFieldMapping('name_field:language')->defaultValue("en");
     $this->addFieldMapping('field_activity_level', 'level');
+
+    $this->addUnmigratedDestinations(array(
+      'description',
+      'parent_name',
+      'weight',
+      'description_field',
+      'description_field:summary',
+      'description_field:format',
+      'description_field:language',
+      'field_activity_level:language',
+      'field_activity_code:language',
+      'path',
+    ));
   }
 
   /**
