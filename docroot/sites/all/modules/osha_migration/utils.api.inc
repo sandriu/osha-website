@@ -362,7 +362,7 @@ class MigrationUtil {
       $class->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
       return FALSE;
     }
-    if ($row->workflow_state != 'published') {
+    if (!in_array($row->workflow_state, array('published', 'checked'))) {
       $class->saveMessage(
         sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
         MigrationBase::MESSAGE_WARNING);

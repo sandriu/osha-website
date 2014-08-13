@@ -303,6 +303,7 @@ $options['init-modules'] = array(
   'osha_news',
   'osha_publication',
   'osha_case_study',
+  'osha_blog',
 
   'devel',
   'diff',
