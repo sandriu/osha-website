@@ -4,6 +4,7 @@
  * Drupal needs this blank file.
  */
 
+define('OSHA_TAXONOMIES_ACTIVITY', 'activity');
 define('OSHA_TAXONOMIES_TAGS', 'tags');
 define('OSHA_TAXONOMIES_ESENER', 'esener');
 define('OSHA_TAXONOMIES_NACE_CODES', 'nace_codes');

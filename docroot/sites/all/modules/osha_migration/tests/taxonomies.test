@@ -250,4 +250,48 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
     }
     Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_TAGS);
   }
+
+  /**
+   * Test activity migration.
+   */
+  public function testActivityMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_ACTIVITY);
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/activity.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+
+    $result = MigrationUtil::runMigration(
+      OSHA_MIGRATION_TAXONOMY_ACTIVITY,
+      'MigrateOshaTaxonomyActivity',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(count($json), count($terms));
+
+    $witness = array();
+    foreach ($json as $item) {
+      $code = $item['code'];
+      $witness[$code] = $item;
+    }
+
+    foreach ($terms as $term) {
+      $code = $term->field_activity_code[LANGUAGE_NONE][0]['value'];
+      $this->assertEqual("en", $term->language);
+      $this->assertEqual($witness[$code]['name'], $term->name_field['en'][0]['value']);
+      $this->assertEqual(
+        $witness[$code]['level'],
+        $term->field_activity_level[LANGUAGE_NONE][0]['value']
+      );
+      $actual_parents = taxonomy_get_parents($term->tid);
+      if ($witness[$code]['level'] == 1) {
+        $this->assertEqual(0, count($actual_parents));
+      }
+      else {
+        $this->assertEqual(1, count($actual_parents));
+      }
+
+    }
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_ACTIVITY);
+  }
 }
