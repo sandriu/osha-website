@@ -32,7 +32,6 @@ to `config.json` and customize to suit your environment
             "email": "your.email@domain.org"
         },
         "uri": "http://you-vh.localhost",
-        "site_mail": "your.email@domain.org",
         "solr_server": {
             "name": "Apache Solr server",
             "enabled": 1,
@@ -54,7 +53,10 @@ to `config.json` and customize to suit your environment
             "apachesolr_soft_commit": 1
         },
         "variables": {
-            "osha_data_dir": "/var/local/osha/data"
+            "site_mail": "your.email@domain.org",
+            "site_name": "OSHA",
+            "osha_data_dir": "/home/osha/data",
+            "file_temporary_path": "/tmp"
         }
     }
     ```
