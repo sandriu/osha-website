@@ -18,6 +18,7 @@ class OshaMigratePublications extends DynamicMigration {
       OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
     );
     $data_path = osha_migration_get_data_dir();
+    $data_export_path = osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY);
     $source_file = MigrationUtil::getSourceFile($arguments);
 
     $this->source = new MigrateSourceList(
@@ -53,7 +54,7 @@ class OshaMigratePublications extends DynamicMigration {
       ),
       MigrateDestinationNode::getKeySchema()
     );
-    $node_options = MigrateDestinationNode::options('en', NULL);
+    $node_options = MigrateDestinationNode::options('en', 'full_html');
     $this->destination = new MigrateDestinationNode(OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION, $node_options);
 
     $this->addFieldMapping('field_tags', 'subject');
@@ -69,10 +70,17 @@ class OshaMigratePublications extends DynamicMigration {
     $this->addFieldMapping('field_publication_author', 'author');
     $this->addFieldMapping('field_publication_date', 'publication_date');
 
+    $this->addFieldMapping('field_publication_cover_image', 'cover_image');
+    $this->addFieldMapping('field_publication_cover_image:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
+    $this->addFieldMapping('field_publication_cover_image:destination_file', 'filename');
+    $this->addFieldMapping('field_publication_cover_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_publication_cover_image:multilingual')->defaultValue(TRUE);
+
     $this->addFieldMapping('field_publication_file', 'file');
-    $this->addFieldMapping('field_publication_file:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_publication_file:destination_file', 'file');
+    $this->addFieldMapping('field_publication_file:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
+    $this->addFieldMapping('field_publication_file:destination_file', 'filename');
     $this->addFieldMapping('field_publication_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_publication_file:multilingual')->defaultValue(TRUE);
 
     /*
     $this->addFieldMapping('field_publication_related_res', 'related_resources');
@@ -191,8 +199,10 @@ class OshaMigratePublications extends DynamicMigration {
         }
       }
     }
+
     MigrationUtil::cleanMigratedFileField($row, 'file', 'public://publications/documents');
-    // MigrationUtil::cleanMigratedFileField($row, 'related_resources', 'public://publications/related_resources');
+    MigrationUtil::cleanMigratedFileField($row, 'cover_image', 'public://publications/cover_images');
+    //MigrationUtil::cleanMigratedFileField($row, 'related_resources', 'public://publications/related_resources');
     return TRUE;
   }
 
@@ -263,9 +273,6 @@ class OshaMigratePublications extends DynamicMigration {
       }
       if (!empty($row->order_id[$language])) {
         $entity->field_publication_bookshop_id[$language][0]['value'] = $row->order_id[$language];
-      }
-      if (!empty($row->field_publication_file[$language]) && $language != 'en') {
-        $entity->field_publication_file[$language][0]['value'] = $row->file[$language];
       }
       /* Don't translate en (default) */
       if ($language != $row->language && !isset($entity->translations->data[$language])) {
