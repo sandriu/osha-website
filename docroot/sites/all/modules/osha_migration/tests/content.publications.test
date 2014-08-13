@@ -9,7 +9,7 @@ class PublicationMigrateListMock extends PublicationMigrateList {
    * {@inheritdoc}
    */
   public function __construct() {
-    parent::__construct(drupal_get_path('module', 'osha_migration') . '/data/test/publications.txt');
+    parent::__construct(drupal_get_path('module', 'osha_migration') . '/data/test/export/publications.txt');
   }
 
   /**
@@ -47,31 +47,36 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
   public function setUp() {
     parent::setUp();
     module_enable(array('osha_migration'));
-    $cfg = MigrationUtil::getProjectConfig();
-    variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
+    $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/test');
+    variable_set('osha_data_dir', $data_path);
   }
 
   /**
    * Test the migration.
    */
   public function testMigration() {
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/nace_codes.json';
+    $data_path = osha_migration_get_data_dir();
+    $data_export_path  = osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY);
+    $module_path = drupal_get_path('module', 'osha_migration');
+
+    $source_file = $data_path . '/nace_codes.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_NACE_CODES, 'MigrateOshaTaxonomyNaceCodes', $source_file);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
+    $source_file = $data_path . '/thesaurus.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+    $source_file = $module_path . '/data/tags.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/thesaurus.json';
+    $source_file = $module_path . '/data/thesaurus.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
+    $source_file = $module_path . '/data/publication_types.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES, 'MigrateOshaTaxonomyPublicationTypes', $source_file);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/publications.txt';
+    $source_file = $data_export_path . '/publications.txt';
     $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION, 'OshaMigratePublications', $source_file);
+
 
     $this->assertEqual($result, Migration::RESULT_COMPLETED);
 
@@ -144,6 +149,22 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
     }
     $this->assertTrue(in_array('accident_prevention', $terms));
     $this->assertTrue(in_array('women_and_osh', $terms));
+
+    foreach ($witness['cover_image'] as $language => $image) {
+      if (!empty($image)) {
+        $cover_image_name = $node->field_publication_cover_image[$language][0]['filename'];
+        $src_cover_image_name = basename($data_export_path . $image);
+        $this->assertEqual($cover_image_name, $src_cover_image_name);
+      }
+    }
+
+    foreach ($witness['file'] as $language => $file) {
+      if (!empty($file)) {
+        $file_name = $node->field_publication_file[$language][0]['filename'];
+        $src_filename = basename($data_export_path . $file);
+        $this->assertEqual($file_name, $src_filename);
+      }
+    }
   }
 
   /**
@@ -180,13 +201,13 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
     $this->assertEqual('ORD2', $first['order_id']['es']);
     $this->assertEqual('ORD3', $first['order_id']['en']);
 
-    $this->assertEqual('/bg/publications/corporate/annual-report-2013-summary/cover_image.gif', $first['cover_image']['bg']);
-    $this->assertEqual('/es/publications/corporate/annual-report-2013-summary/cover_image.gif', $first['cover_image']['es']);
-    $this->assertEqual('/en/publications/corporate/annual-report-2013-summary/cover_image.gif', $first['cover_image']['en']);
+    $this->assertEqual('/bg/image/druplicon_bg.png', $first['cover_image']['bg']);
+    $this->assertEqual('/es/image/druplicon_es.png', $first['cover_image']['es']);
+    $this->assertEqual('/en/image/druplicon_en.png', $first['cover_image']['en']);
 
-    $this->assertEqual('/bg/publications/corporate/annual-report-2013-summary/AR2013-summary_bg.pdf', $first['file']['bg']);
-    $this->assertEqual('/es/publications/corporate/annual-report-2013-summary/AR2013-summary_es.pdf', $first['file']['es']);
-    $this->assertEqual('/en/publications/corporate/annual-report-2013-summary/Annual Report 2013.pdf', $first['file']['en']);
+    $this->assertEqual('/bg/file/file_test_bg.pdf', $first['file']['bg']);
+    $this->assertEqual('', $first['file']['es']);
+    $this->assertEqual('/en/file/file_test_en.pdf', $first['file']['en']);
 
     $second = $subject['publications/e-facts/efact40'];
     $this->assertEqual(array('publications/corporate/annual-report-2013-summary'), $second['related_publications_path']);
