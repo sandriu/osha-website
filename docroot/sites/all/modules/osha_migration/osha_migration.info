@@ -21,6 +21,7 @@ files[] = taxonomy.publication_types.migrate.inc
 files[] = taxonomy.tags.migrate.inc
 files[] = taxonomy.thesaurus.migrate.inc
 files[] = tests/content.articles.test
+files[] = tests/content.blog.test
 files[] = tests/content.news.test
 files[] = tests/content.publications.test
 files[] = tests/taxonomies.test
