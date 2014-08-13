@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file template.php
+ */
+
 function osha_admin_simplenews_field($variables) {
   $output = '';
 
