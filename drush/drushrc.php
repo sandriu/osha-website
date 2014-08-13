@@ -289,12 +289,12 @@ $options['init-modules'] = array(
   'redirect',
   'uuid',
 
-  'search_api',
-  'facetapi',
-  'search_api_facetapi',
-  'apachesolr',
-  'apachesolr_search',
-  'search_api_solr',
+  #'search_api',
+  #'facetapi',
+  #'search_api_facetapi',
+  #'apachesolr',
+  #'apachesolr_search',
+  #'search_api_solr',
   'strongarm',
 
   'imce_wysiwyg',
@@ -302,7 +302,11 @@ $options['init-modules'] = array(
   'osha_migration',
   'osha_news',
   'osha_publication',
-  'osha_case_study'
+  'osha_case_study',
+
+  'devel',
+  'diff',
+  'simpletest'
 );
 
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
