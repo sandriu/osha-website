@@ -90,7 +90,6 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
       $nodes_nids = array_keys($result['node']);
       $nodes = entity_load('node', $nodes_nids);
     }
-
     $class = new PublicationMigrateList(
       $source_file,
       array('title', 'description', 'order_id', 'file')
@@ -101,7 +100,7 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
     $this->assertEqual(1, count($nodes));
 
     $node = current($nodes);
-    $path = path_load('node/' . $node->nid);
+    $path = path_load(array('source' => 'node/' . $node->nid, 'language' => 'en'));
     $path = $path['alias'];
     $witness = $data[$path];
 
@@ -152,17 +151,17 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
 
     foreach ($witness['cover_image'] as $language => $image) {
       if (!empty($image)) {
-        $cover_image_name = $node->field_publication_cover_image[$language][0]['filename'];
-        $src_cover_image_name = basename($data_export_path . $image);
-        $this->assertEqual($cover_image_name, $src_cover_image_name);
+        $cover_image_name = $node->field_publication_cover_image[$language][0]['uri'];
+        $cover_image_name = str_replace('public://publications/cover_images', '', $cover_image_name);
+        $this->assertEqual($cover_image_name, $image);
       }
     }
 
     foreach ($witness['file'] as $language => $file) {
       if (!empty($file)) {
-        $file_name = $node->field_publication_file[$language][0]['filename'];
-        $src_filename = basename($data_export_path . $file);
-        $this->assertEqual($file_name, $src_filename);
+        $file_name = $node->field_publication_file[$language][0]['uri'];
+        $file_name = str_replace('public://publications/documents', '', $file_name);
+        $this->assertEqual($file_name, $file);
       }
     }
   }

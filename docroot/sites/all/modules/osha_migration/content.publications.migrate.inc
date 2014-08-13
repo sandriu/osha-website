@@ -33,6 +33,7 @@ class OshaMigratePublications extends DynamicMigration {
         'description' => 'Node body',
         'author' => 'Publication author',
         'order_id' => 'Publication Order ID',
+        'cover_image' => 'Publication cover image',
         'subject' => 'Item tags',
         'file' => 'Publication document file',
         'relatedItems' => 'Related publications',
@@ -72,13 +73,13 @@ class OshaMigratePublications extends DynamicMigration {
 
     $this->addFieldMapping('field_publication_cover_image', 'cover_image');
     $this->addFieldMapping('field_publication_cover_image:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
-    $this->addFieldMapping('field_publication_cover_image:destination_file', 'filename');
+    $this->addFieldMapping('field_publication_cover_image:destination_file', 'cover_image');
     $this->addFieldMapping('field_publication_cover_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldMapping('field_publication_cover_image:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_publication_file', 'file');
     $this->addFieldMapping('field_publication_file:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
-    $this->addFieldMapping('field_publication_file:destination_file', 'filename');
+    $this->addFieldMapping('field_publication_file:destination_file', 'file');
     $this->addFieldMapping('field_publication_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldMapping('field_publication_file:multilingual')->defaultValue(TRUE);
 
@@ -128,6 +129,52 @@ class OshaMigratePublications extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION;
+  }
+
+  /**
+   * Executes before Import.
+   */
+  public function preImport() {
+    // Remove default Handlers for Field and Image and let OSHA Handlers to take
+    // care of these fields.
+    $default_file_handler = 'MigrateFileFieldHandler';
+    $default_image_handler = 'MigrateImageFieldHandler';
+    $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
+    if (!is_array($handlers)) {
+      $handlers[] = $default_file_handler;
+      $handlers[] = $default_image_handler;
+
+    }
+    else {
+      if (!in_array($default_file_handler, $handlers)) {
+        $handlers[] = $default_file_handler;
+      }
+      if (!in_array($default_image_handler, $handlers)) {
+        $handlers[] = $default_file_handler;
+      }
+    }
+    variable_set('migrate_disabled_handlers', serialize($handlers));
+  }
+
+  /**
+   * Executes after import.
+   */
+  public function postImport() {
+    // Reset migrate_disabled_handlers variable.
+    $default_file_handler = 'MigrateFileFieldHandler';
+    $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
+    if (is_array($handlers)) {
+      $key = array_search($default_file_handler, $handlers);
+      if ($key !== FALSE) {
+        unset($handlers[$key]);
+      }
+      $default_image_handler = 'MigrateImageFieldHandler';
+      $key = array_search($default_image_handler, $handlers);
+      if ($key !== FALSE) {
+        unset($handlers[$key]);
+      }
+      variable_set('migrate_disabled_handlers', serialize($handlers));
+    }
   }
 
   /**
