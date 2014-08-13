@@ -160,16 +160,20 @@ class MigrateOshaBlog extends DynamicMigration {
     $entity->translations = $translation_handler->getTranslations();
 
     foreach ($languages as $language) {
+      $has_translation = FALSE;
       if (!empty($row->title_field[$language])) {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
+        $has_translation = TRUE;
       }
       if (!empty($row->description[$language])) {
         $entity->field_blog_summary[$language][0]['value'] = str_replace('<@#&>', '"', $row->description[$language]);
         $entity->field_blog_summary[$language][0]['format'] = 'full_html';
+        $has_translation = TRUE;
       }
       if (!empty($row->text[$language])) {
         $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
+        $has_translation = TRUE;
       }
       if (!empty($row->image[$language])) {
         $image_code = array_flip(array_keys($row->image));
@@ -178,9 +182,10 @@ class MigrateOshaBlog extends DynamicMigration {
         if($language != 'en') {
           unset($entity->field_blog_image['en'][$image_code]);
         }
+        $has_translation = TRUE;
       }
       /* Don't translate en (default) */
-      if ($language != $row->language && !isset($entity->translations->data[$language])) {
+      if ($has_translation && $language != $row->language && !isset($entity->translations->data[$language])) {
         $translation_handler->setTranslation(array(
           'translate' => 0, 'status' => 1, 'uid' => 1,
           'language' => $language,
