@@ -32,7 +32,7 @@ function doc_to_imagefield_menu() {
     'title' => 'Bulk Update',
     'description' => 'Bulk Update',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('doc_to_imagefield_bulk'),
+    'page arguments' => array('doc_to_imagefield_bulk_form'),
     'access arguments' => array('administer site configuration'),
     'type' => MENU_LOCAL_TASK,
     'weight' => 2,
@@ -74,7 +74,8 @@ function doc_to_imagefield_admin() {
 /**
  * The admin form for bulk update.
  */
-function doc_to_imagefield_bulk() {
+function doc_to_imagefield_bulk_form() {
+  drupal_set_message('This operation can take a while! Use it with caution!', 'warning');
   $form = array();
   $form['overwrite_existing'] = array(
     '#type' => 'select',
@@ -164,7 +165,6 @@ function doc_to_imagefield_entity_save_bulk($entity_type, $entity, $options, &$c
 function doc_to_imagefield_bulk_finished($success, $results, $operations) {
   if ($success) {
     drupal_set_message(t('@count results processed.', array('@count' => count($results['saved']))));
-    drupal_set_message(t('The final result was "%final"', array('%final' => end($results['saved']))));
   }
   else {
     $error_operation = reset($operations);
@@ -396,7 +396,6 @@ function doc_to_image_generate_process_bulk($entity_type, &$entity, $field_id, $
 
     $file = doc_to_imagefield_create_image_file($doc_file, $params);
     if (!empty($file)) {
-      $field_lang = field_language($entity_type, $entity, $target_field);
       $entity->{$target_field}[$field_lang] = array((array) $file);
       return TRUE;
     }
@@ -469,10 +468,6 @@ function doc_to_imagefield_generate_operation($doc_file, $params, &$context) {
 }
 
 function doc_to_imagefield_generate_image($doc_file, $params) {
-  /*$entity_type = $params['entity_type'];
-  $entity_id = $params['entity_id'];
-  $entity = $params['entity'];
-  $target_field = $params['target_field'];*/
 
   $doc_realpath = drupal_realpath($doc_file->uri);
   $path_parts = pathinfo($doc_realpath);
