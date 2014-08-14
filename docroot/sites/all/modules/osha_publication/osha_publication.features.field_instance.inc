@@ -241,7 +241,7 @@ function osha_publication_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
-      'entity_translation_sync' => 0,
+      'entity_translation_sync' => FALSE,
       'file_directory' => 'publications/cover_images',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -364,11 +364,17 @@ function osha_publication_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'file',
+      'module' => 'pdf_to_image',
       'settings' => array(
+        'pdf_to_image' => array(
+          'density' => '25x25',
+          'extra_args' => '',
+          'hide_imagefield' => 0,
+          'target_field' => 'field_publication_cover_image',
+        ),
         'progress_indicator' => 'throbber',
       ),
-      'type' => 'file_generic',
+      'type' => 'pdf_to_image',
       'weight' => 7,
     ),
     'workbench_access_field' => 0,
