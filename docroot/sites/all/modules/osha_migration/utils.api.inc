@@ -1,6 +1,53 @@
 <?php
 
 /**
+ * Class OshaWebTestCase is the base class for OSHA tests.
+ *
+ * Correctly enables all instance modules in the appropriate order.
+ */
+abstract class OshaWebTestCase extends DrupalWebTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp(array('file', 'file_entity'));
+    require DRUPAL_ROOT . '/../drush/drushrc.php';
+    if (!empty($options['init-modules'])) {
+
+      $modules = $options['init-modules'];
+      unset($modules[array_search('file_entity', $modules)]);
+
+      if (!module_enable($modules)) {
+        foreach ($modules as $module) {
+          if (!module_enable(array($module))) {
+            drupal_set_message('Cannot enable module: ' . $module, 'error');
+          }
+        }
+      }
+    }
+    $this->setDataDirTestData();
+  }
+
+  /**
+   * Set the data directory to test directory.
+   */
+  protected function setDataDirTestData() {
+    $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/test');
+    variable_set('osha_data_dir', $data_path);
+  }
+
+  /**
+   * Set the data directory to exported OSHA data.
+   */
+  protected function setDataDirExportedData() {
+    $cfg = MigrationUtil::getProjectConfig();
+    variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
+  }
+}
+
+
+/**
  * Class MigrationUtil provides generic utility functionality to migrations.
  */
 class MigrationUtil {
