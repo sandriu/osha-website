@@ -11,8 +11,12 @@ class OshaMigratePublicationsFiles extends DynamicMigration {
    */
   public function __construct($arguments) {
     parent::__construct();
-
     $this->description = t('Imports files needed bt publication');
+
+    /* Remove limits on time/memory, slower machines will fail */
+    $this->timeLimit = 0;
+    $this->memoryLimit = PHP_INT_MAX;
+
     $file_name = NULL;
     if (isset($arguments['file_name'])) {
       $file_name = $arguments['file_name'];

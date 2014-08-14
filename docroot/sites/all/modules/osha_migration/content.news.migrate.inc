@@ -12,7 +12,14 @@ class MigrateOshaNews extends DynamicMigration {
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
     $this->description = 'Import "News" contents from CSV file';
-    $this->dependencies = array(OSHA_MIGRATION_TAXONOMY_THESAURUS, OSHA_MIGRATION_TAXONOMY_TAGS);
+    $this->dependencies = array(
+      OSHA_MIGRATION_TAXONOMY_THESAURUS,
+      OSHA_MIGRATION_TAXONOMY_TAGS,
+    );
+
+    /* Remove limits on time/memory, slower machines will fail */
+    $this->timeLimit = 0;
+    $this->memoryLimit = PHP_INT_MAX;
 
     $data_path = osha_migration_get_data_dir();
     $source_file = MigrationUtil::getSourceFile($arguments);

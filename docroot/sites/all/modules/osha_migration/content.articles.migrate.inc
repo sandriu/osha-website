@@ -16,6 +16,11 @@ class OshaMigrateArticles extends DynamicMigration {
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
     );
+
+    /* Remove limits on time/memory, slower machines will fail */
+    $this->timeLimit = 0;
+    $this->memoryLimit = PHP_INT_MAX;
+
     $data_path = osha_migration_get_data_dir();
     $source_file = MigrationUtil::getSourceFile($arguments);
 
