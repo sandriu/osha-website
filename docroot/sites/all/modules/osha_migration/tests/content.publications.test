@@ -46,7 +46,8 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
    */
   public function setUp() {
     parent::setUp();
-    module_enable(array('osha_migration'));
+    require_once dirname(__FILE__) . '/setup.inc';
+    osha_migration_enable_modules_simpletest();
     $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/test');
     variable_set('osha_data_dir', $data_path);
   }
