@@ -49,6 +49,17 @@ List of patches
   * https://www.drupal.org/node/2192391#comment-8878719
   * file_entity/file_entity_remove_file_display-2192391-16.patch
 
+* migrate (7.x-2.5)
+  * Add support for file entity in file.inc destination plugin
+  * patch created from code copied form 2.x-dev version of the module
+  * migrate/migrate_file_plugin_file_entity_support.patch
+
+* migrate (7.x-2.5)
+  * Add support for FILE_EXISTS_RENAME option
+  *
+  * migrate/migrate_file_rename_option.patch
+
+
 Patch documentation should be in the following format:
 
 * module name
