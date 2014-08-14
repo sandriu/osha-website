@@ -281,10 +281,7 @@ class MigrationUtil {
     Migration::registerMigration(
       $klass,
       $machine_name,
-      array(
-        'group_name' => 'OSHA TEST MIGRATIONS',
-        'file_name' => $file,
-      )
+      array('file_name' => $file)
     );
     $migration = Migration::getInstance($machine_name);
     return $migration->processImport();
