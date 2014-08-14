@@ -61,7 +61,7 @@ class OshaMigrateArticles extends DynamicMigration {
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('body', 'text');
     $this->addFieldMapping('body:format')->defaultValue('full_html');
-    $this->addFieldMapping('field_article_summary', 'description');
+    $this->addFieldMapping('field_summary', 'description');
     $this->addFieldMapping('field_image', 'relatedItems');
     $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
@@ -173,8 +173,8 @@ class OshaMigrateArticles extends DynamicMigration {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
       }
       if (!empty($row->description[$language])) {
-        $entity->field_article_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
-        $entity->field_article_summary[$language][0]['format'] = 'full_html';
+        $entity->field_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
+        $entity->field_summary[$language][0]['format'] = 'full_html';
       }
       if (!empty($row->text[$language])) {
         $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);

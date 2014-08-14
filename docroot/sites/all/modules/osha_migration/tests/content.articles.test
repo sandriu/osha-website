@@ -108,7 +108,7 @@ class MigrateOshaArticleTest extends DrupalWebTestCase {
       $this->assertEqual($title, $node->title_field[$language][0]['value']);
     }
     foreach ($witness['description'] as $language => $description) {
-      $this->assertEqual($description, $node->field_article_summary[$language][0]['value']);
+      $this->assertEqual($description, $node->field_summary[$language][0]['value']);
     }
     foreach ($witness['text'] as $language => $text) {
       $this->assertEqual($text, $node->body[$language][0]['value']);
