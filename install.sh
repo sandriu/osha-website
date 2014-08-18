@@ -51,6 +51,9 @@ if [ "$1" == "--migrate" ]; then
 	echo "Importing Blog content"
 	drush migrate-import Blog
 
+	echo "Importing Case Study content"
+	drush migrate-import CaseStudy
+
 fi
 
 drush cc all
