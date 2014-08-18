@@ -3,7 +3,7 @@
 /**
  * Class MigrationUtilTest test migration utilities.
  */
-class MigrationUtilTest extends DrupalWebTestCase {
+class MigrationUtilTest extends OshaWebTestCase {
 
   private $tmpFile = NULL;
 
@@ -24,7 +24,7 @@ class MigrationUtilTest extends DrupalWebTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp('osha_migration');
+    parent::setUp();
     $this->tmpFile = file_directory_temp() . '/test.tmp';
     file_put_contents($this->tmpFile, 'Delete me ...');
     $this->assertTrue(file_exists($this->tmpFile));

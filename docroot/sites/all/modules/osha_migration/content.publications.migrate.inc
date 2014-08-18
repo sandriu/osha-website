@@ -313,6 +313,7 @@ class OshaMigratePublications extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    $entity->path['pathauto'] = 0;
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
@@ -353,12 +354,9 @@ class OshaMigratePublications extends DynamicMigration {
     foreach ($languages as $language) {
       $args = array(
         'source' => 'node/' . $entity->nid,
-        'alias' => $row->id,
+        'alias' => $row->path[$language],
         'language' => $language,
       );
-      path_save($args);
-      // Set original alias for the language. Path may differ.
-      $args['alias'] = $row->path[$language];
       path_save($args);
     }
   }
