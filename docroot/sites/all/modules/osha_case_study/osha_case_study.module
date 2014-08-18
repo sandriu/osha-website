@@ -5,3 +5,5 @@
  */
 
 include_once 'osha_case_study.features.inc';
+
+define('OSHA_CASE_STUDY_CONTENT_TYPE_CASE_STUDY', 'case_study');

@@ -319,7 +319,17 @@ class MigrationUtil {
         }
       }
       else {
-        drupal_set_message('Multi-valued field migration not implemented', 'error');
+        foreach ($path as $index => $file_path) {
+          if (strlen($path_prefix) + strlen($file_path) > 255) {
+            drupal_set_message(
+              "File path cannot be larger than 255 characters, ignoring {$row->file}",
+              'warning'
+            );
+          }
+          else {
+            $valid[$language][] = $file_path;
+          }
+        }
       }
     }
     $row->{$field} = $valid;
@@ -362,7 +372,7 @@ class MigrationUtil {
       $class->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
       return FALSE;
     }
-    if (!in_array($row->workflow_state, array('published', 'checked'))) {
+    if (!in_array($row->workflow_state, array('published', 'checked', 'to_amend'))) {
       $class->saveMessage(
         sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
         MigrationBase::MESSAGE_WARNING);
@@ -379,6 +389,52 @@ class MigrationUtil {
     }
 
     return TRUE;
+  }
+
+  /**
+   *  Activate Osha files handler
+   */
+  public static function activateOshaFilesHandler() {
+    // Remove default Handlers for Field and Image and let OSHA Handlers to take
+    // care of these fields.
+    $default_file_handler = 'MigrateFileFieldHandler';
+    $default_image_handler = 'MigrateImageFieldHandler';
+    $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
+    if (!is_array($handlers)) {
+      $handlers[] = $default_file_handler;
+      $handlers[] = $default_image_handler;
+
+    }
+    else {
+      if (!in_array($default_file_handler, $handlers)) {
+        $handlers[] = $default_file_handler;
+      }
+      if (!in_array($default_image_handler, $handlers)) {
+        $handlers[] = $default_image_handler;
+      }
+    }
+    variable_set('migrate_disabled_handlers', serialize($handlers));
+  }
+
+  /**
+   * Deactivate Osha files handler
+   */
+  public static function deactivateOshaFilesHandler() {
+    // Reset migrate_disabled_handlers variable.
+    $default_file_handler = 'MigrateFileFieldHandler';
+    $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
+    if (is_array($handlers)) {
+      $key = array_search($default_file_handler, $handlers);
+      if ($key !== FALSE) {
+        unset($handlers[$key]);
+      }
+      $default_image_handler = 'MigrateImageFieldHandler';
+      $key = array_search($default_image_handler, $handlers);
+      if ($key !== FALSE) {
+        unset($handlers[$key]);
+      }
+      variable_set('migrate_disabled_handlers', serialize($handlers));
+    }
   }
 }
 
