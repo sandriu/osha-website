@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default theme implementation to format the simplenews newsletter body.
@@ -26,6 +25,10 @@
  *
  * @see template_preprocess_simplenews_newsletter_body()
  */
+?>
+<?php
+$template_path = drupal_get_path('theme', 'osha_frontend');
+$template_url = url($template_path, array('absolute' => TRUE, 'language' => LANGUAGE_NONE));
 ?>
 <h2><?php print $title; ?></h2>
 <?php print render($build); ?>
