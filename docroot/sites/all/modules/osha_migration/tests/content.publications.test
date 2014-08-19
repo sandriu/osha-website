@@ -104,7 +104,7 @@ class MigrateOshaPublicationTest extends OshaWebTestCase {
 
     $this->assertEqual(
       $witness['author'],
-      $node->field_publication_author[LANGUAGE_NONE][0]['value']
+      $node->field_author[LANGUAGE_NONE][0]['value']
     );
 
     $languages = language_list();

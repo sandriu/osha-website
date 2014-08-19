@@ -76,7 +76,7 @@ class OshaMigratePublications extends DynamicMigration {
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_type', 'publication_type');
     $this->addFieldMapping('field_publication_type:source_type')->defaultValue('tid');
-    $this->addFieldMapping('field_publication_author', 'author');
+    $this->addFieldMapping('field_author', 'author');
     $this->addFieldMapping('field_publication_date', 'publication_date');
 
     $this->addFieldMapping('field_cover_image', 'cover_image');
@@ -116,7 +116,7 @@ class OshaMigratePublications extends DynamicMigration {
       'field_tags:ignore_case',
       'field_thesaurus:create_term',
       'field_thesaurus:ignore_case',
-      'field_publication_author:language',
+      'field_author:language',
       'field_cover_image:alt',
       'field_cover_image:title',
       'field_publication_date:timezone',
