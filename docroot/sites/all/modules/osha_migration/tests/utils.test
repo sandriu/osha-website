@@ -39,7 +39,7 @@ class MigrationUtilTest extends OshaWebTestCase {
     $term1->field_tags_code['und'][0]['value'] = 'accident_prevention';
     $term1->vid = $voc->vid;
     taxonomy_term_save($term1);
-    $this->assertEqual(1, $term1->tid);
+    $this->assertEqual(2, $term1->tid);
 
     $term2 = new stdClass();
     $term2->name = 'Dangerous substances';
@@ -49,7 +49,7 @@ class MigrationUtilTest extends OshaWebTestCase {
     $term2->vid = $voc->vid;
 
     taxonomy_term_save($term2);
-    $this->assertEqual(2, $term2->tid);
+    $this->assertEqual(3, $term2->tid);
   }
 
   /**
@@ -92,8 +92,8 @@ class MigrationUtilTest extends OshaWebTestCase {
       OSHA_TAXONOMIES_TAGS
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(1, $subject));
     $this->assertTrue(in_array(2, $subject));
+    $this->assertTrue(in_array(3, $subject));
 
     $subject = MigrationUtil::findTidByTaxonomyField(
       array(' dangerous_substances', 'x'),
@@ -101,7 +101,7 @@ class MigrationUtilTest extends OshaWebTestCase {
       OSHA_TAXONOMIES_TAGS
     );
     $this->assertEqual(1, count($subject));
-    $this->assertTrue(in_array(2, $subject));
+    $this->assertTrue(in_array(3, $subject));
 
     $subject = MigrationUtil::findTidByTaxonomyField(
       array(' Dangerous substances ', ' Accident prevention', '  '),
@@ -110,8 +110,8 @@ class MigrationUtilTest extends OshaWebTestCase {
       'en'
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(1, $subject));
     $this->assertTrue(in_array(2, $subject));
+    $this->assertTrue(in_array(3, $subject));
 
     $subject = MigrationUtil::findTidByTaxonomyField(
       array(' Prevenirea accidentelor ', ' Substanţe periculoase', '  '),
@@ -120,8 +120,8 @@ class MigrationUtilTest extends OshaWebTestCase {
       'ro'
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(1, $subject));
     $this->assertTrue(in_array(2, $subject));
+    $this->assertTrue(in_array(3, $subject));
 
     $subject = MigrationUtil::findTidByTaxonomyField(
       NULL,
@@ -142,8 +142,8 @@ class MigrationUtilTest extends OshaWebTestCase {
       accident_prevention::falls, accident_prevention::fire'
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(1, $subject));
     $this->assertTrue(in_array(2, $subject));
+    $this->assertTrue(in_array(3, $subject));
 
     $subject = MigrationUtil::decodeTagsTerms(NULL);
     $this->assertEqual(0, count($subject));
@@ -173,10 +173,10 @@ class MigrationUtilTest extends OshaWebTestCase {
    */
   public function testFindTermByFieldValue() {
     $tid = MigrationUtil::findTermByFieldValue('accident_prevention', 'field_tags_code');
-    $this->assertEqual(1, $tid);
+    $this->assertEqual(2, $tid);
 
     $tid = MigrationUtil::findTermByFieldValue('Substanţe periculoase', 'name_field');
-    $this->assertEqual(2, $tid);
+    $this->assertEqual(3, $tid);
 
     $tid = MigrationUtil::findTermByFieldValue('Dangerous substances', 'name');
     $this->assertNull($tid);
