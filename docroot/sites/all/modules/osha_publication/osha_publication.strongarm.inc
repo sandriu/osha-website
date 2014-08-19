@@ -71,7 +71,7 @@ function osha_publication_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'workbench_access' => array(
           'weight' => '15',
@@ -80,7 +80,7 @@ function osha_publication_strongarm() {
           'weight' => '0',
         ),
         'redirect' => array(
-          'weight' => '15',
+          'weight' => '17',
         ),
       ),
       'display' => array(),

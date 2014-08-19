@@ -79,23 +79,17 @@ class OshaMigratePublications extends DynamicMigration {
     $this->addFieldMapping('field_publication_author', 'author');
     $this->addFieldMapping('field_publication_date', 'publication_date');
 
-    $this->addFieldMapping('field_publication_cover_image', 'cover_image');
-    $this->addFieldMapping('field_publication_cover_image:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
-    $this->addFieldMapping('field_publication_cover_image:destination_file', 'cover_image');
-    $this->addFieldMapping('field_publication_cover_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldMapping('field_publication_cover_image:multilingual')->defaultValue(TRUE);
+    $this->addFieldMapping('field_cover_image', 'cover_image');
+    $this->addFieldMapping('field_cover_image:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
+    $this->addFieldMapping('field_cover_image:destination_file', 'cover_image');
+    $this->addFieldMapping('field_cover_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_cover_image:multilingual')->defaultValue(TRUE);
 
-    $this->addFieldMapping('field_publication_file', 'file');
-    $this->addFieldMapping('field_publication_file:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
-    $this->addFieldMapping('field_publication_file:destination_file', 'file');
-    $this->addFieldMapping('field_publication_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldMapping('field_publication_file:multilingual')->defaultValue(TRUE);
-
-    /*$this->addFieldMapping('field_publication_related_res', 'related_resources');
-    $this->addFieldMapping('field_publication_related_res:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_publication_related_res:destination_file', 'related_resources');
-    $this->addFieldMapping('field_publication_related_res:file_replace')->defaultValue(FILE_EXISTS_REPLACE);*/
-
+    $this->addFieldMapping('field_file', 'file');
+    $this->addFieldMapping('field_file:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
+    $this->addFieldMapping('field_file:destination_file', 'file');
+    $this->addFieldMapping('field_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_file:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_related_publications', 'related_publications');
     $this->addFieldMapping('body', 'description');
@@ -123,8 +117,8 @@ class OshaMigratePublications extends DynamicMigration {
       'field_thesaurus:create_term',
       'field_thesaurus:ignore_case',
       'field_publication_author:language',
-      'field_publication_cover_image:alt',
-      'field_publication_cover_image:title',
+      'field_cover_image:alt',
+      'field_cover_image:title',
       'field_publication_date:timezone',
       'field_publication_date:rrule',
       'field_publication_date:to',
