@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Class OshaMigrateArticles migrates articles data
+ * Class OshaMigrateJobVacancies migrates jobs data
  */
-class OshaMigrateArticles extends DynamicMigration {
+class OshaMigrateJobVacancies extends DynamicMigration {
 
   /**
    * {@inheritdoc}
    */
   public function __construct($arguments = array()) {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
-    $this->description = 'Import "Articles" contents from CSV file';
+    $this->description = 'Import "Job vacancies" contents from CSV file';
     $this->dependencies = array(
       OSHA_MIGRATION_TAXONOMY_TAGS,
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
@@ -25,8 +25,8 @@ class OshaMigrateArticles extends DynamicMigration {
     $source_file = MigrationUtil::getSourceFile($arguments);
 
     $this->source = new MigrateSourceList(
-      new ArticleMigrateList($source_file),
-      new ArticleMigrateItem(),
+      new JobVacanciesMigrateList($source_file),
+      new JobVacanciesMigrateItem(),
       array(
         'id' => 'Unique entity path, language independent',
         'creation_date' => 'Node creation date',
@@ -35,10 +35,11 @@ class OshaMigrateArticles extends DynamicMigration {
         'title' => 'Node title',
         'description' => 'Node summary',
         'text' => 'Node content',
-        'author' => 'Publication author',
+        'author' => 'Node author',
         'subject' => 'Item tags',
-        'relatedItems' => 'Page image',
-        'multilingual_thesaurus' => 'Item Tesaurus tags merged into tags',
+        'deadline' => 'Item deadline',
+        'shortlisted' => 'Shortlisted (boolean)',
+        'multilingual_thesaurus' => 'Item Thesaurus tags merged into tags',
         'nace' => 'Item NACE Codes',
       )
     );
@@ -56,18 +57,15 @@ class OshaMigrateArticles extends DynamicMigration {
     );
 
     $node_options = MigrateDestinationNode::options('en', NULL);
-    $this->destination = new MigrateDestinationNode(OSHA_ARTICLE_CONTENT_TYPE_ARTICLE, $node_options);
+    $this->destination = new MigrateDestinationNode(OSHA_JOB_VACANCIES_CONTENT_TYPE_JOB_VACANCIES, $node_options);
 
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('body', 'text');
     $this->addFieldMapping('body:format')->defaultValue('full_html');
     $this->addFieldMapping('field_summary', 'description');
-    $this->addFieldMapping('field_image', 'relatedItems');
-    $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_image:destination_file', 'relatedItems');
-
+    $this->addFieldMapping('field_author', 'author');
+    $this->addFieldMapping('field_job_vacancies_deadline', 'deadline');
+    $this->addFieldMapping('field_job_vacancies_shortlisted', 'shortlisted');
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_thesaurus', 'multilingual_thesaurus');
@@ -96,11 +94,12 @@ class OshaMigrateArticles extends DynamicMigration {
       'translate',
       'revision_uid',
       'is_new',
+      'tnid',
       'body:summary',
-      'field_image:file_class',
-      'field_image:title',
-      'field_image:alt',
-      'field_image:destination_dir',
+      'field_author:language',
+      'field_job_vacancies_deadline:timezone',
+      'field_job_vacancies_deadline:rrule',
+      'field_job_vacancies_deadline:to',
       'field_publication_date:timezone',
       'field_publication_date:rrule',
       'field_publication_date:to',
@@ -120,7 +119,7 @@ class OshaMigrateArticles extends DynamicMigration {
    * {@inheritdoc}
    */
   protected function generateMachineName() {
-    return OSHA_MIGRATION_CONTENT_TYPE_ARTICLE;
+    return OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES;
   }
 
   /**
@@ -143,7 +142,7 @@ class OshaMigrateArticles extends DynamicMigration {
     );
     if (!empty($row->nace)) {
       $row->nace = explode(',', $row->nace);
-      $row->nace = MigrationUtil::findTidByTaxonomyField(
+      $row->nace = MigrationUtil::findTiardByTaxonomyField(
         $row->nace,
         'field_nace_codes',
         OSHA_TAXONOMIES_NACE_CODES
@@ -180,9 +179,6 @@ class OshaMigrateArticles extends DynamicMigration {
         $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
       }
-      if (!empty($row->relatedItems[$language]) && $language != 'en') {
-        $entity->field_image[$language][0]['value'] = $row->relatedItems[$language];
-      }
       /* Don't translate en (default) */
       if ($language != $row->language && !isset($entity->translations->data[$language])) {
         $translation_handler->setTranslation(array(
@@ -216,7 +212,7 @@ class OshaMigrateArticles extends DynamicMigration {
   }
 }
 
-class ArticleMigrateList extends MigrateList {
+class JobVacanciesMigrateList extends MigrateList {
   protected $file = '';
   public static $data = array();
 
@@ -257,7 +253,6 @@ class ArticleMigrateList extends MigrateList {
             self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;
 
-          case 'relatedItems':
           case 'description':
           case 'text':
             self::$data[$path][$field][$language] = $raw_data[$key];
@@ -289,14 +284,14 @@ class ArticleMigrateList extends MigrateList {
   }
 }
 
-class ArticleMigrateItem extends MigrateItem {
+class JobVacanciesMigrateItem extends MigrateItem {
 
   /**
    * {@inheritdoc}
    */
   public function getItem($item_id) {
-    if (!empty(ArticleMigrateList::$data[$item_id])) {
-      return (object) ArticleMigrateList::$data[$item_id];
+    if (!empty(JobVacanciesMigrateList::$data[$item_id])) {
+      return (object) JobVacanciesMigrateList::$data[$item_id];
     }
     return NULL;
   }

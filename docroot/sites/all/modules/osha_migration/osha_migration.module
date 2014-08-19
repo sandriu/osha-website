@@ -7,6 +7,7 @@ define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
 define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
 define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
 define('OSHA_MIGRATION_CONTENT_TYPE_ARTICLE', 'Article');
+define('OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES', 'JobVacancies');
 define('OSHA_MIGRATION_CONTENT_TYPE_BLOG', 'Blog');
 define('OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY', 'CaseStudy');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
@@ -60,6 +61,10 @@ function osha_migration_migrate_api() {
       OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY => array(
         'class_name' => 'MigrateOshaCaseStudy',
         'file_name' => osha_migration_get_data_dir() . '/export/case_studies.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES => array(
+        'class_name' => 'OshaMigrateJobVacancies',
+        'file_name' => osha_migration_get_data_dir() . '/export/job_vacancies.txt',
       ),
       OSHA_MIGRATION_CONTENT_TYPE_NEWS => array(
         'class_name' => 'MigrateOshaNews',
