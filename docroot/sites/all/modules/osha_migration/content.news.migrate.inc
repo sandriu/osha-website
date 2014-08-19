@@ -90,8 +90,8 @@ class MigrateOshaNews extends DynamicMigration {
       'field_publication_date:timezone',
       'field_publication_date:rrule',
       'field_publication_date:to',
-      'field_news_summary',
-      'field_news_summary:format',
+      'field_summary',
+      'field_summary:format',
       'field_tags:create_term',
       'field_tags:ignore_case',
       'field_thesaurus:create_term',
@@ -157,8 +157,8 @@ class MigrateOshaNews extends DynamicMigration {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
       }
       if (!empty($row->description[$language])) {
-        $entity->field_news_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
-        $entity->field_news_summary[$language][0]['format'] = 'full_html';
+        $entity->field_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
+        $entity->field_summary[$language][0]['format'] = 'full_html';
       }
       if (!empty($row->text[$language])) {
         $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
