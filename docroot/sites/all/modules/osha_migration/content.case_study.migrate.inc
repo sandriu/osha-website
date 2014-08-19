@@ -42,7 +42,7 @@ class MigrateOshaCaseStudy extends DynamicMigration {
       MigrateDestinationNode::getKeySchema()
     );
 
-    $node_options = MigrateDestinationNode::options('en', NULL);
+    $node_options = MigrateDestinationNode::options('en', 'full_html');
     $this->destination = new MigrateDestinationNode(OSHA_CASE_STUDY_CONTENT_TYPE_CASE_STUDY, $node_options);
 
     $this->addFieldMapping('title', 'title');
@@ -51,6 +51,7 @@ class MigrateOshaCaseStudy extends DynamicMigration {
     $this->addFieldmapping('field_case_study_file:preserve_files')->defaultValue(TRUE);
     $this->addFieldMapping('field_case_study_file:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_case_study_file:destination_file', 'files');
+    $this->addFieldMapping('field_case_study_file:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -59,6 +60,7 @@ class MigrateOshaCaseStudy extends DynamicMigration {
     $this->addFieldMapping('field_nace_codes', 'nace');
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+
 
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
