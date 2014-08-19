@@ -1,0 +1,102 @@
+<?php
+
+define('TMGMT_OSHA_DEFAULT_SOURCE_LANGUAGE', 'en');
+define('TMGMT_OSHA_DEFAULT_TARGET_LANGUAGE', 'ro');
+
+/**
+ * Implements hook_schema_alter().
+ */
+function tmgmt_osha_schema_alter(&$schema) {
+  if (isset($schema['tmgmt_job_item'])) {
+    $schema['tmgmt_job_item']['fields']['target_language'] = array(
+      'target_language' => array(
+        'description' => 'The language the data should be translated to.',
+        'type' => 'varchar',
+        'size' => 12,
+        'default' => '',
+        'not null' => TRUE, // TODO: Optional until we fix job_item creation
+      ),
+    );
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ *
+ * Removes tmgmt unwanted menu items
+ */
+function tmgmt_osha_menu_alter(&$items) {
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tmgmt_osha_form_tmgmt_ui_cart_content_alter(&$form, &$form_state, $form_id) {
+  $form['request_translation']['#submit'] = array('tmgmt_osha_tmgmt_ui_cart_content_submit');
+}
+
+/**
+ * Overrides form submit for tmgmt cart checkout.
+ */
+function tmgmt_osha_tmgmt_ui_cart_content_submit($form, &$form_state) {
+  global $user;
+  $job_empty = TRUE;
+  $target_languages = array_filter($form_state['values']['target_language']);
+
+  $job_items_by_source_language = array();
+  // Group the selected items by source language.
+  foreach (tmgmt_job_item_load_multiple(array_filter($form_state['values']['items'])) as $job_item) {
+    $job_items_by_source_language[$job_item->getSourceLangCode()][$job_item->tjiid] = $job_item;
+  }
+
+  $job = tmgmt_job_create(
+    TMGMT_OSHA_DEFAULT_SOURCE_LANGUAGE,
+    TMGMT_OSHA_DEFAULT_TARGET_LANGUAGE,
+    $user->uid
+  );
+
+  $remove_job_item_ids = array();
+  // Loop over all target languages, create a job for each source and target
+  // language combination add add the relevant job items to it.
+  foreach ($target_languages as $target_language) {
+    $job_empty = TRUE;
+    foreach ($job_items_by_source_language as $job_items) {
+      // Skip in case the source language is the same as the target language.
+      if (TMGMT_OSHA_DEFAULT_SOURCE_LANGUAGE == $target_language) {
+        continue;
+      }
+      /** @var TMGMTJobItem $job_item */
+      foreach ($job_items as $id => $job_item) {
+        try {
+          // As the same item might be added to multiple jobs, we need to
+          // re-create them and delete the old ones, after removing them from
+          // the cart.
+          $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
+          $remove_job_item_ids[$job_item->tjiid] = $job_item->tjiid;
+          $job_empty = FALSE;
+        }
+        catch (Exception $e) {
+          // If an item fails for one target language, then it is also going
+          // to fail for others, so remove it from the array.
+          unset($job_items_by_source_language[TMGMT_OSHA_DEFAULT_SOURCE_LANGUAGE][$id]);
+          drupal_set_message($e->getMessage(), 'error');
+        }
+      }
+    }
+  }
+  if (!$job_empty) {
+    // Remove assigned job items from the cart.
+    if ($remove_job_item_ids) {
+      tmgmt_ui_cart_get()->removeJobItems($remove_job_item_ids);
+      entity_delete_multiple('tmgmt_job_item', $remove_job_item_ids);
+    }
+    if($job) {
+      // Start the checkout process if any jobs were created.
+      tmgmt_ui_job_checkout_and_redirect($form_state, array($job));
+    }
+  }
+  else {
+    //TODO: Delete the job ...?
+  }
+}
