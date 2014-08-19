@@ -123,9 +123,6 @@ class OshaMigrateFiles extends DynamicMigration {
     if (!empty($row->title)) {
       $entity->filename = $row->title;
     }
-    if ($row->title == 'ANNEX - OSH in the transport sector. National report - France') {
-      var_dump($entity);
-    }
   }
 
   /**
