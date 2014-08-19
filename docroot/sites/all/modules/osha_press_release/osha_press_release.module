@@ -5,3 +5,5 @@
  */
 
 include_once 'osha_press_release.features.inc';
+
+define('OSHA_PRESS_RELEASE_CONTENT_TYPE_PRESS_RELEASE', 'press_release');
