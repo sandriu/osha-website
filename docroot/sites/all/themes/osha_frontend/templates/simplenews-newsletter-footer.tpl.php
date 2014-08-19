@@ -76,7 +76,7 @@ $template_url = url($template_path, array('absolute' => TRUE, 'language' => LANG
         'external' => TRUE
       ));
     }
-    ?><span style="background: none repeat scroll 0 0 #eee; border-radius: 0.5em; box-shadow: -1px 1px 0 rgba(0, 0, 0, 0.2); cursor: pointer; display: inline-block; font: 18px/100% Arial,Helvetica,sans-serif; letter-spacing: 1px; margin: 0 2px 0 25px; outline: medium none; padding-left: 1em; padding-right: 1em; padding: 0.5em 1em 0.55em; text-align: center; text-decoration: none; vertical-align: baseline;"><?php print t('Like what you&amp;re reading? <a href="@url" style="@style">Tell a colleague</a>', array('@style' => 'color: #144989; text-decoration: none;', '@url' => 'https://osha.europa.eu/en/news/oshmail/sendto_form')); ?></span>
+    ?><span style="background: none repeat scroll 0 0 #eee; border-radius: 0.5em; box-shadow: -1px 1px 0 rgba(0, 0, 0, 0.2); cursor: pointer; display: inline-block; font: 18px/100% Arial,Helvetica,sans-serif; letter-spacing: 1px; margin: 0 2px 0 25px; outline: medium none; padding-left: 1em; padding-right: 1em; padding: 0.5em 1em 0.55em; text-align: center; text-decoration: none; vertical-align: baseline;"><?php print t('Like what you&apos;re reading? <a href="@url" style="@style">Tell a colleague</a>', array('@style' => 'color: #144989; text-decoration: none;', '@url' => 'https://osha.europa.eu/en/news/oshmail/sendto_form')); ?></span>
   </div>
   <div style="font-family: Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif; font-size: 11px; margin: 45px 0 18px;">
     <?php print t('No longer wish to receive OSHmail? <a href="@url" style="@style">Unsubscribe here.</a>', array('@style' => 'color: #144989; text-decoration: none;', '@url' => '[simplenews-subscriber:unsubscribe-url]')); ?>
