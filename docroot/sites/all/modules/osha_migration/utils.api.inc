@@ -44,6 +44,24 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
     $cfg = MigrationUtil::getProjectConfig();
     variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
   }
+
+  public static function oshaAssertEqualTaxonomyTerms($entity, $entity_taxon_field, $taxon_field, $raw_taxonomy_terms) {
+    $terms = array();
+    $raw_values = array_unique(array_map('trim', explode(',', $raw_taxonomy_terms)));
+    $entity_values = array();
+    if (!empty($entity->{$entity_taxon_field}[LANGUAGE_NONE])) {
+      foreach ($entity->{$entity_taxon_field}[LANGUAGE_NONE] as $term) {
+        $terms[] = $term['tid'];
+      }
+      $terms = taxonomy_term_load_multiple($terms);
+      $entity_values = array();
+      foreach ($terms as $term) {
+        $entity_values[] = $term->{$taxon_field}[LANGUAGE_NONE][0]['value'];
+      }
+    }
+    $diff = array_diff($entity_values, $raw_values);
+    return empty($diff);
+  }
 }
 
 
@@ -203,6 +221,7 @@ class MigrationUtil {
    *
    * @return array
    *   Array of tids
+   * @todo REVIEW THIS FUNCTION
    */
   public static function decodeTagsTerms($terms_str, $term_field = 'field_tags_code') {
     if (empty($terms_str)) {
@@ -270,7 +289,7 @@ class MigrationUtil {
    * @return array
    *   Array with two keys (`items` and `files`) of related content
    */
-  public static function parseRelatedItemsString($field_value, $supported_extensions = 'pdf|doc|docx|ppt|pptx|xls|xlsx') {
+  public static function parseRelatedItemsString($field_value, $item_url_diff = 'publications', $supported_extensions = 'pdf|doc|docx|ppt|pptx|xls|xlsx') {
     $languages = implode('|', array_keys(language_list()));
     $ret = array('items' => NULL, 'files' => NULL);
     if (empty($field_value)) {
@@ -278,14 +297,15 @@ class MigrationUtil {
     }
     $items = array_map('trim', explode(',', $field_value));
     foreach ($items as $item) {
-      $file_match = sprintf('/^.*\.(%s)$/i', $supported_extensions);
+      // $extension_match = sprintf('/^.*\.(%s)$/i', $supported_extensions);
+      $item_url_match = '/\/' . $item_url_diff . '\//';
       $path_match = sprintf('/^\/(%s)\//i', $languages);
-      if (preg_match($file_match, $item)) {
-        $ret['files'][] = $item;
-      }
-      else {
+      if (preg_match($item_url_match, $item)) {
         $path = preg_replace($path_match, '', $item);
         $ret['items'][] = $path;
+      }
+      else {
+        $ret['files'][] = $item;
       }
     }
     if (count($ret['items']) + count($ret['files']) != count($items)) {
