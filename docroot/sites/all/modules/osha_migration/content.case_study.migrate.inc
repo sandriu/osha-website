@@ -46,12 +46,12 @@ class MigrateOshaCaseStudy extends DynamicMigration {
     $this->destination = new MigrateDestinationNode(OSHA_CASE_STUDY_CONTENT_TYPE_CASE_STUDY, $node_options);
 
     $this->addFieldMapping('title', 'title');
-    $this->addFieldMapping('field_case_study_file', 'files');
-    $this->addFieldMapping('field_case_study_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldmapping('field_case_study_file:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_case_study_file:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_case_study_file:destination_file', 'files');
-    $this->addFieldMapping('field_case_study_file:multilingual')->defaultValue(TRUE);
+    $this->addFieldMapping('field_file', 'files');
+    $this->addFieldMapping('field_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldmapping('field_file:preserve_files')->defaultValue(TRUE);
+    $this->addFieldMapping('field_file:source_dir')->defaultValue($data_path . '/export/');
+    $this->addFieldMapping('field_file:destination_file', 'files');
+    $this->addFieldMapping('field_file:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -87,12 +87,12 @@ class MigrateOshaCaseStudy extends DynamicMigration {
       'revision_uid',
       'is_new',
       'body:summary',
-      'field_case_study_cover_image:file_class',
-      'field_case_study_file:file_class',
-      'field_case_study_file:language',
-      'field_case_study_file:destination_dir',
-      'field_case_study_file:description',
-      'field_case_study_file:display',
+      'field_cover_image:file_class',
+      'field_file:file_class',
+      'field_file:language',
+      'field_file:destination_dir',
+      'field_file:description',
+      'field_file:display',
       'field_nace_codes:create_term',
       'field_nace_codes:ignore_case',
       'field_publication_date:timezone',

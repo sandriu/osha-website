@@ -71,10 +71,10 @@ function osha_blog_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '11',
+          'weight' => '13',
         ),
         'redirect' => array(
-          'weight' => '10',
+          'weight' => '12',
         ),
         'language' => array(
           'weight' => '1',

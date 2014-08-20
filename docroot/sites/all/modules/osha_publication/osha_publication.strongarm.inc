@@ -80,7 +80,7 @@ function osha_publication_strongarm() {
           'weight' => '0',
         ),
         'redirect' => array(
-          'weight' => '15',
+          'weight' => '16',
         ),
       ),
       'display' => array(),
