@@ -304,6 +304,7 @@ $options['init-modules'] = array(
   'doc_to_imagefield',
 
   'imce_wysiwyg',
+  'wysiwyg_accordion',
   'osha',
   'osha_migration',
   'osha_news',
