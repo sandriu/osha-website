@@ -181,6 +181,7 @@ class MigrateOshaCaseStudy extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    $entity->path['pathauto'] = 0;
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();

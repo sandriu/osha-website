@@ -80,6 +80,8 @@ class MigrateOshaCaseStudyTest extends OshaWebTestCase {
       );
     }
 
+    $this->oshaAssertEqualFileMultilingMultival($node, 'field_file', $witness, 'files', 'public://case_study/documents');
+
     // Check that tags have been mapped properly.
     $this->assertEqual(2, count($node->field_tags[LANGUAGE_NONE]));
     $tags_ids = array(
