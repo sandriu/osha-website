@@ -99,6 +99,9 @@ class MigrateOshaArticleTest extends OshaWebTestCase {
     foreach ($witness['text'] as $language => $text) {
       $this->assertEqual($text, $node->body[$language][0]['value']);
     }
+
+    $this->oshaAssertEqualFileMultilingual($node, 'field_image', $witness, 'relatedItems', 'public://pages');
+
     $tids = array(
       $node->field_tags[LANGUAGE_NONE][0]['tid'],
       $node->field_tags[LANGUAGE_NONE][1]['tid'],
