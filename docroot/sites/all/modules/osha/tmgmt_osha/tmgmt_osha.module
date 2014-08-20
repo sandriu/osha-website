@@ -28,7 +28,6 @@ function tmgmt_osha_schema_alter(&$schema) {
 function tmgmt_osha_menu_alter(&$items) {
 }
 
-
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -66,7 +65,7 @@ function tmgmt_osha_tmgmt_ui_cart_content_submit($form, &$form_state) {
       if (TMGMT_OSHA_DEFAULT_SOURCE_LANGUAGE == $target_language) {
         continue;
       }
-      /** @var TMGMTJobItem $job_item */
+      /* @var TMGMTJobItem $job_item */
       foreach ($job_items as $id => $job_item) {
         try {
           // As the same item might be added to multiple jobs, we need to
@@ -91,7 +90,7 @@ function tmgmt_osha_tmgmt_ui_cart_content_submit($form, &$form_state) {
       tmgmt_ui_cart_get()->removeJobItems($remove_job_item_ids);
       entity_delete_multiple('tmgmt_job_item', $remove_job_item_ids);
     }
-    if($job) {
+    if ($job) {
       // Start the checkout process if any jobs were created.
       tmgmt_ui_job_checkout_and_redirect($form_state, array($job));
     }
