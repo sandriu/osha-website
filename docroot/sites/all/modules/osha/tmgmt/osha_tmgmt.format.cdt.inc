@@ -7,38 +7,18 @@
  * and target elements so that translation tools are able to understand which
  * content needs to be translated and ignored.
  *
- * On the other hand we need to properly unmask the XLIFF markup back to HTML on
+ * On the other hand we need to properly unmask the markup back to HTML on
  * the translation import. So the process is bidirectional and prior to running
  * the unmasking process we try to validate the integrity in the
  * validateJobTranslationUponImport() method. Currently the integrity check
- * involves only a counter of XLIFF elements that have been created during
- * source processing and has to mach number of XLIFF elements being imported
+ * involves only a counter of elements that have been created during
+ * source processing and has to mach number of elements being imported
  * with the translation.
  *
  * To process the content DOMDocument object is used due to its ability to
  * read broken HTML. This also implies that if broken HTML is in the source
  * content the translation content will be fixed into the extend of DOMDocument
  * abilities.
- *
- * Following is implemented:
- * - All pair tags get escaped using <bpt><ept> markup.
- * - <br> tags are marked with <x ctype="lb">.
- * - <img> tags are marked with <ph ctype="image"> tags. The title and alt
- *   attributes should have been extracted into <sub> elements, however are not
- *   as Trados studio triggers a fatal error in case there are two <sub>
- *   elements at the same level.
- *
- * Not implemented:
- * - Attributes of <img> element are written only as attributes of <ph> element
- *   instead of using x-html: prefix. This results in conflict with own <ph>
- *   element's attributes such as "id". The reason why x-html prefix has not
- *   been used is that Trados studio triggered fatal error on xml validation.
- * - Translatable attributes like title and alt.
- *   @link http://docs.oasis-open.org/xliff/v1.2/xliff-profile-html/xliff-profile-html-1.2-cd02.html#elem_img
- * - Forms - this is big part
- *   @link http://docs.oasis-open.org/xliff/v1.2/xliff-profile-html/xliff-profile-html-1.2-cd02.html#HTMLForms
- * - <pre> elements
- *   @link http://docs.oasis-open.org/xliff/v1.2/xliff-profile-html/xliff-profile-html-1.2-cd02.html#Elem_preformatted
  */
 class OSHATranslatorFileformatCDT extends XMLWriter {
 
