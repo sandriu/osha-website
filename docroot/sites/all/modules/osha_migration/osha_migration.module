@@ -178,7 +178,7 @@ class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
         $owner = isset($entity->uid) ? $entity->uid : 0;
         // Call the MigrateFileInterface implementation to do the real work.
 
-        if ($arguments['multilingual']) {
+        if (!empty($arguments['multilingual'])) {
           $language = $delta;
         }
         // Add support for multi value field.
@@ -228,5 +228,24 @@ class OSHAMigrateImageFieldHandler extends MigrateImageFieldHandler {
   public function prepare($entity, array $field_info, array $instance, array $values) {
     $file_handler = new OSHAMigrateFileFieldHandler();
     return $file_handler->prepare($entity, $field_info, $instance, $values);
+  }
+}
+
+/**
+ * Class OSHAMigrateFile extends MigrateFileUri
+ *  adds multilingual file attribute
+ */
+class OSHAMigrateFileUri extends MigrateFileUri {
+  /**
+   * Implementation of MigrateFileInterface::fields().
+   *
+   * @return array
+   *   fields for file
+   */
+  static public function fields() {
+    return parent::fields() +
+    array(
+      'multilingual' => 'XXX',
+    );
   }
 }
