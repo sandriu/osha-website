@@ -131,21 +131,28 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
 }
 
 function osha_tmgmt_views_default_views_alter(&$views) {
+  if(isset($views['tmgmt_ui_job_items'])) {
+    $handler =& $views['tmgmt_ui_job_items']->display['submit'];
 
-  $handler =& $views['tmgmt_ui_job_items']->display['submit'];
+    /* Field: Translation Management Job Item: Source language */
+    $handler->display_options['fields']['source_language']['id'] = 'source_language';
+    $handler->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
+    $handler->display_options['fields']['source_language']['field'] = 'source_language';
 
-  /* Field: Translation Management Job Item: Source language */
-  $handler->display_options['fields']['source_language']['id'] = 'source_language';
-  $handler->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
-  $handler->display_options['fields']['source_language']['field'] = 'source_language';
+    /* Field: Translation Management Job Item: Target language */
+    $handler->display_options['fields']['target_language']['id'] = 'target_language';
+    $handler->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
+    $handler->display_options['fields']['target_language']['field'] = 'target_language';
 
-  /* Field: Translation Management Job Item: Target language */
-  $handler->display_options['fields']['target_language']['id'] = 'target_language';
-  $handler->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
-  $handler->display_options['fields']['target_language']['field'] = 'target_language';
-
-  // Move operations field last.
-  $operations = $handler->display_options['fields']['operations'];
-  unset($handler->display_options['fields']['operations']);
-  $handler->display_options['fields']['operations'] = $operations;
+    // Move operations field last.
+    $operations = $handler->display_options['fields']['operations'];
+    unset($handler->display_options['fields']['operations']);
+    $handler->display_options['fields']['operations'] = $operations;
+  }
+  if(isset($views['tmgmt_ui_job_overview'])) {
+    $handler =& $views['tmgmt_ui_job_overview']->display['default'];
+    unset($handler->display_options['filters']['source_language']);
+    unset($handler->display_options['filters']['target_language']);
+    unset($handler->display_options['filters']['translator']);
+  }
 }
