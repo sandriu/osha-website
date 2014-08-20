@@ -48,6 +48,7 @@ class MigrateOshaNews extends DynamicMigration {
     $this->addFieldMapping('field_image', 'image');
     $this->addFieldMapping('field_image:title', 'imageCaption');
     $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_image:file_class')->defaultValue('OSHAMigrateFileUri');
     $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
     $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_image:destination_file', 'image');
@@ -84,7 +85,6 @@ class MigrateOshaNews extends DynamicMigration {
       'revision_uid',
       'is_new',
       'body:summary',
-      'field_image:file_class',
       'field_image:language',
       'field_image:destination_dir',
       'field_image:alt',
