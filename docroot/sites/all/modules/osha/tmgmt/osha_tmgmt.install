@@ -10,6 +10,17 @@ function osha_tmgmt_install() {
     'default' => '',
     'not null' => TRUE, // TODO: Optional until we fix job_item creation
   );
+  if (!db_field_exists('tmgmt_job_item', 'source_language')) {
+    watchdog('osha_tmgmt', 'Adding source_language field to tmgmt_job_item');
+    db_add_field('tmgmt_job_item', 'source_language', $field);
+  }
+
+  $field = array(
+    'type' => 'varchar',
+    'length' => 12,
+    'default' => '',
+    'not null' => TRUE, // TODO: Optional until we fix job_item creation
+  );
   if (!db_field_exists('tmgmt_job_item', 'target_language')) {
     watchdog('osha_tmgmt', 'Adding target_language field to tmgmt_job_item');
     db_add_field('tmgmt_job_item', 'target_language', $field);
