@@ -1,10 +1,12 @@
 <?php
 
+osha_configure_default_themes();
 osha_configure_solr();
 osha_change_field_size();
 osha_configure_mailsystem();
 osha_configure_htmlmail();
 osha_configure_simplenews();
+osha_configure_newsletter_category();
 osha_configure_imce();
 osha_configure_wysiwyg_settings();
 
@@ -155,6 +157,17 @@ function osha_configure_simplenews() {
 }
 
 /**
+ * Configure the OSHA newsletter category to format HTML and priority NORMAL.
+ */
+function osha_configure_newsletter_category() {
+  drupal_set_message('Configuring OSHA newsletters format and priority ...');
+
+  db_update('simplenews_category')
+  ->fields(array('format' => 'html', 'priority' => 3))
+  ->execute();
+}
+
+/**
  * Configure IMCE contrib module - Alter User-1 profile and assign User-1 profile to the administrator role.
  */
 function osha_configure_imce(){
@@ -289,4 +302,14 @@ function osha_configure_wysiwyg_settings() {
   ->condition('format', 'full_html')
   ->fields(array('weight' => 0))
   ->execute();
+}
+
+/**
+ * Sets default themes for OSHA project.
+ */
+function osha_configure_default_themes() {
+  drupal_set_message('Configuring Drupal default themes ...');
+
+  variable_set('admin_theme', 'osha_admin');
+  variable_set('theme_default', 'osha_frontend');
 }
