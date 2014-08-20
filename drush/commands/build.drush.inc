@@ -167,7 +167,7 @@ function _drush_enable_themes($themes) {
 
     $drupal_themes = list_themes();
     foreach ($themes as $theme) {
-      if (!(isset($drupal_themes[$theme]) && $drupal_themes[$theme]->status ==1)) {
+      if (!theme_exists($theme)) {
         drush_log(dt('Failed to enable one ore more themes'), 'error');
       }
     }
