@@ -7,3 +7,7 @@ project = tmgmt_osha
 dependencies[] = tmgmt
 dependencies[] = tmgmt_ui
 dependencies[] = tmgmt_entity
+
+; Views integration
+files[] = views/tmgmt_osha.views.inc
+files[] = views/handlers/tmgmt_osha_handler_fields_tmgmt_job_item.inc
