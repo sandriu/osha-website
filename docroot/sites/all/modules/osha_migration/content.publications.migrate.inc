@@ -143,46 +143,14 @@ class OshaMigratePublications extends DynamicMigration {
    * Executes before Import.
    */
   public function preImport() {
-    // Remove default Handlers for Field and Image and let OSHA Handlers to take
-    // care of these fields.
-    $default_file_handler = 'MigrateFileFieldHandler';
-    $default_image_handler = 'MigrateImageFieldHandler';
-    $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
-    if (!is_array($handlers)) {
-      $handlers[] = $default_file_handler;
-      $handlers[] = $default_image_handler;
-
-    }
-    else {
-      if (!in_array($default_file_handler, $handlers)) {
-        $handlers[] = $default_file_handler;
-      }
-      if (!in_array($default_image_handler, $handlers)) {
-        $handlers[] = $default_file_handler;
-      }
-    }
-    variable_set('migrate_disabled_handlers', serialize($handlers));
+    MigrationUtil::activateOshaFilesHandler();
   }
 
   /**
    * Executes after import.
    */
   public function postImport() {
-    // Reset migrate_disabled_handlers variable.
-    $default_file_handler = 'MigrateFileFieldHandler';
-    $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
-    if (is_array($handlers)) {
-      $key = array_search($default_file_handler, $handlers);
-      if ($key !== FALSE) {
-        unset($handlers[$key]);
-      }
-      $default_image_handler = 'MigrateImageFieldHandler';
-      $key = array_search($default_image_handler, $handlers);
-      if ($key !== FALSE) {
-        unset($handlers[$key]);
-      }
-      variable_set('migrate_disabled_handlers', serialize($handlers));
-    }
+    MigrationUtil::deactivateOshaFilesHandler();
   }
 
   /**
