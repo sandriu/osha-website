@@ -7,7 +7,11 @@ project = osha_tmgmt
 dependencies[] = tmgmt
 dependencies[] = tmgmt_ui
 dependencies[] = tmgmt_entity
+dependencies[] = tmgmt_file
 
 ; Views integration
 files[] = views/osha_tmgmt.views.inc
 files[] = views/handlers/osha_tmgmt_handler_fields_tmgmt_job_item.inc
+
+; Translator integration
+files[] = osha_tmgmt.format.cdt.inc

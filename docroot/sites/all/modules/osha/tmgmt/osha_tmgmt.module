@@ -26,6 +26,19 @@ function osha_tmgmt_schema_alter(&$schema) {
 }
 
 /**
+ * Implements hook_tmgmt_file_format_info().
+ */
+function osha_tmgmt_tmgmt_file_format_plugin_info() {
+  return array(
+    'xml' => array(
+      'label' => t('CDT XML file'),
+      'plugin controller class' => 'OSHATranslatorFileformatCDT',
+    ),
+  );
+}
+
+
+/**
  * Implements hook_entity_info_alter().
  */
 function osha_tmgmt_entity_info_alter(&$entity_info) {
