@@ -8,7 +8,6 @@ osha_configure_htmlmail();
 osha_configure_simplenews();
 osha_configure_newsletter_category();
 osha_configure_imce();
-osha_configure_wysiwyg_settings();
 
 module_disable(array('overlay'));
 
@@ -170,138 +169,41 @@ function osha_configure_newsletter_category() {
 /**
  * Configure IMCE contrib module - Alter User-1 profile and assign User-1 profile to the administrator role.
  */
-function osha_configure_imce(){
-    drupal_set_message('Configuring Drupal IMCE module ...');
-    // /admin/config/media/imce
-    if(!module_load_include('inc', 'imce', 'inc/imce.admin')) {
-        throw new Exception('Cannot load inc/imce.admin.inc');
-    }
+function osha_configure_imce() {
+  drupal_set_message('Configuring Drupal IMCE module ...');
+  // /admin/config/media/imce
+  if (!module_load_include('inc', 'imce', 'inc/imce.admin')) {
+    throw new Exception('Cannot load inc/imce.admin.inc');
+  }
 
-    // alter profile User-1
-    $profiles = variable_get('imce_profiles', array());
+  // Alter profile User-1.
+  $profiles = variable_get('imce_profiles', array());
 
-    if (isset($profiles[1])) {
-        $profiles[1]['directories'][0]['name'] = "sites/default/files";
-        variable_set('imce_profiles', $profiles);
-    } else {
-        throw new Exception('Cannot load IMCE profile User-1.');
-    }
+  if (isset($profiles[1])) {
+    $profiles[1]['directories'][0]['name'] = "sites/default/files";
+    variable_set('imce_profiles', $profiles);
+  }
+  else {
+    throw new Exception('Cannot load IMCE profile User-1.');
+  }
 
-    $roles = user_roles();
+  $roles = user_roles();
 
-    if (in_array("administrator", $roles)) {
-        // role administrator found - assign User-1 profile to administrator
-        $roles_profiles = variable_get('imce_roles_profiles', array());
-        $admin_role = user_role_load_by_name("administrator");
+  if (in_array("administrator", $roles)) {
+    // Role administrator found - assign User-1 profile to administrator.
+    $roles_profiles = variable_get('imce_roles_profiles', array());
+    $admin_role = user_role_load_by_name("administrator");
 
-        $roles_profiles[$admin_role->rid]['public_pid'] = 1;
-        $roles_profiles[$admin_role->rid]['private_pid'] = 1;
-        $roles_profiles[$admin_role->rid]['weight'] = 0;
+    $roles_profiles[$admin_role->rid]['public_pid'] = 1;
+    $roles_profiles[$admin_role->rid]['private_pid'] = 1;
+    $roles_profiles[$admin_role->rid]['weight'] = 0;
 
-        variable_set('imce_roles_profiles', $roles_profiles);
-    } else {
-        // role administrator not found
-        throw new Exception('Cannot assign IMCE profile User-1 to administrator - role administrator not found.');
-    }
-}
-
-/**
- * Sets default WYSIWYG settings.
- */
-function osha_configure_wysiwyg_settings() {
-  drupal_set_message('Configuring Drupal WYSIWYG module ...');
-
-  $settings = array(
-    'default' => 1,
-    'user_choose' => 0,
-    'show_toggle' => 1,
-    'language' => 'en',
-    'buttons' => array(
-      'default' => array(
-        'bold' => 1,
-        'italic' => 1,
-        'underline' => 1,
-        'strikethrough' => 1,
-        'justifyfull' => 1,
-        'bullist' => 1,
-        'numlist' => 1,
-        'link' => 1,
-        'anchor' => 1,
-        'image' => 1,
-        'fontselect' => 1,
-        'fontsizeselect' => 1,
-        'code' => 1,
-        'cut' => 1,
-        'copy' => 1,
-        'paste' => 1,
-      ),
-      'contextmenu' => array(
-        'contextmenu' => 1,
-      ),
-      'searchreplace' => array(
-        'search' => 1,
-        'replace' => 1,
-      ),
-      'paste' => array(
-        'pasteword' => 1,
-      ),
-      'table' => array(
-        'tablecontrols' => 1,
-      ),
-      'media' => array(
-        'media' => 1,
-      ),
-      'imce' => array(
-        'imce' => 1,
-      ),
-    ),
-    'toolbar_loc' => 'top',
-    'toolbar_align' => 'left',
-    'path_loc' => 'bottom',
-    'resizing' => 1,
-    'verify_html' => 1,
-    'preformatted' => 0,
-    'convert_fonts_to_spans' => 1,
-    'remove_linebreaks' => 1,
-    'apply_source_formatting' => 0,
-    'paste_auto_cleanup_on_paste' => 0,
-    'block_formats' => 'p,address,pre,h2,h3,h4,h5,h6,div',
-    'css_setting' => 'theme',
-    'css_path' => '',
-    'css_classes' => '',
-  );
-
-  $fields_full_html = array(
-    'format' => 'full_html',
-    'editor' => 'tinymce',
-    'settings' => serialize($settings),
-  );
-
-  $fields_filtered_html = array(
-    'format' => 'filtered_html',
-    'editor' => 'tinymce',
-    'settings' => serialize($settings),
-  );
-
-  $fields_plain_text = array(
-    'format' => 'plain_text',
-    'editor' => 'tinymce',
-    'settings' => serialize($settings),
-  );
-
-  db_insert('wysiwyg')->fields($fields_full_html)->execute();
-  db_insert('wysiwyg')->fields($fields_filtered_html)->execute();
-  db_insert('wysiwyg')->fields($fields_plain_text)->execute();
-
-  db_update('filter_format')
-  ->condition('format', 'filtered_html')
-  ->fields(array('weight' => 1))
-  ->execute();
-
-  db_update('filter_format')
-  ->condition('format', 'full_html')
-  ->fields(array('weight' => 0))
-  ->execute();
+    variable_set('imce_roles_profiles', $roles_profiles);
+  }
+  else {
+    // Role administrator not found.
+    throw new Exception('Cannot assign IMCE profile User-1 to administrator - role administrator not found.');
+  }
 }
 
 /**
