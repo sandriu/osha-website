@@ -3,7 +3,7 @@
 /**
  * Implements hook_install().
  */
-function tmgmt_osha_install() {
+function osha_tmgmt_install() {
   $field = array(
     'type' => 'varchar',
     'length' => 12,
@@ -11,7 +11,7 @@ function tmgmt_osha_install() {
     'not null' => TRUE, // TODO: Optional until we fix job_item creation
   );
   if (!db_field_exists('tmgmt_job_item', 'target_language')) {
-    watchdog('tmgmt_osha', 'Adding target_language field to tmgmt_job_item');
+    watchdog('osha_tmgmt', 'Adding target_language field to tmgmt_job_item');
     db_add_field('tmgmt_job_item', 'target_language', $field);
   }
 }
