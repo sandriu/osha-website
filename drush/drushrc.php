@@ -316,6 +316,11 @@ $options['init-modules'] = array(
   'simpletest'
 );
 
+$options['init-themes'] = array(
+  'osha_admin',
+  'osha_frontend'
+);
+
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
   include_once dirname(__FILE__) . '/drushrc.local.php';
 }
