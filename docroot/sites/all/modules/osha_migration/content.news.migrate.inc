@@ -45,18 +45,18 @@ class MigrateOshaNews extends DynamicMigration {
     $this->destination = new MigrateDestinationNode(OSHA_NEWS_CONTENT_TYPE_NEWS, $node_options);
 
     $this->addFieldMapping('title', 'title');
-    $this->addFieldMapping('field_news_image', 'image');
-    $this->addFieldMapping('field_news_image:title', 'imageCaption');
-    $this->addFieldMapping('field_news_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldmapping('field_news_image:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_news_image:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_news_image:destination_file', 'image');
+    $this->addFieldMapping('field_image', 'image');
+    $this->addFieldMapping('field_image:title', 'imageCaption');
+    $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
+    $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
+    $this->addFieldMapping('field_image:destination_file', 'image');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_thesaurus', 'multilingual_thesaurus');
     $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
-    $this->addFieldMapping('field_news_publication_date', 'publication_date');
+    $this->addFieldMapping('field_publication_date', 'publication_date');
 
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
@@ -83,15 +83,15 @@ class MigrateOshaNews extends DynamicMigration {
       'revision_uid',
       'is_new',
       'body:summary',
-      'field_news_image:file_class',
-      'field_news_image:language',
-      'field_news_image:destination_dir',
-      'field_news_image:alt',
-      'field_news_publication_date:timezone',
-      'field_news_publication_date:rrule',
-      'field_news_publication_date:to',
-      'field_news_summary',
-      'field_news_summary:format',
+      'field_image:file_class',
+      'field_image:language',
+      'field_image:destination_dir',
+      'field_image:alt',
+      'field_publication_date:timezone',
+      'field_publication_date:rrule',
+      'field_publication_date:to',
+      'field_summary',
+      'field_summary:format',
       'field_tags:create_term',
       'field_tags:ignore_case',
       'field_thesaurus:create_term',
@@ -157,8 +157,8 @@ class MigrateOshaNews extends DynamicMigration {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
       }
       if (!empty($row->description[$language])) {
-        $entity->field_news_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
-        $entity->field_news_summary[$language][0]['format'] = 'full_html';
+        $entity->field_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
+        $entity->field_summary[$language][0]['format'] = 'full_html';
       }
       if (!empty($row->text[$language])) {
         $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
@@ -167,9 +167,9 @@ class MigrateOshaNews extends DynamicMigration {
       if (!empty($row->image[$language])) {
         $image_code = array_flip(array_keys($row->image));
         $image_code = $image_code[$language];
-        $entity->field_news_image[$language][0] = $entity->field_news_image['en'][$image_code];
+        $entity->field_image[$language][0] = $entity->field_image['en'][$image_code];
         if ($language != 'en') {
-          unset($entity->field_news_image['en'][$image_code]);
+          unset($entity->field_image['en'][$image_code]);
         }
       }
       /* Don't translate en (default) */

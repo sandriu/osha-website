@@ -60,7 +60,7 @@ class MigrateOshaNewsTest extends OshaWebTestCase {
     $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
     $this->assertEqual(
       strtotime($witness['publication_date']),
-      strtotime($node->field_news_publication_date[LANGUAGE_NONE][0]['value'])
+      strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value'])
     );
 
     $this->drupalGet(

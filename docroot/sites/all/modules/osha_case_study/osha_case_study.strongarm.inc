@@ -78,13 +78,13 @@ function osha_case_study_strongarm() {
           'weight' => '-5',
         ),
         'path' => array(
-          'weight' => '9',
+          'weight' => '11',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'redirect' => array(
-          'weight' => '10',
+          'weight' => '12',
         ),
       ),
       'display' => array(),

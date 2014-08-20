@@ -46,11 +46,11 @@ class MigrateOshaBlog extends DynamicMigration {
     $this->destination = new MigrateDestinationNode(OSHA_BLOG_CONTENT_TYPE_BLOG, $node_options);
 
     $this->addFieldMapping('title', 'title');
-    $this->addFieldMapping('field_blog_image', 'image');
-    $this->addFieldMapping('field_blog_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldmapping('field_blog_image:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_blog_image:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_blog_image:destination_file', 'image');
+    $this->addFieldMapping('field_image', 'image');
+    $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
+    $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
+    $this->addFieldMapping('field_image:destination_file', 'image');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -85,19 +85,19 @@ class MigrateOshaBlog extends DynamicMigration {
       'revision_uid',
       'is_new',
       'body:summary',
-      'field_blog_image:file_class',
-      'field_blog_image:language',
-      'field_blog_image:destination_dir',
-      'field_blog_image:title',
-      'field_blog_image:alt',
-      'field_blog_image_caption:language',
+      'field_image:file_class',
+      'field_image:language',
+      'field_image:destination_dir',
+      'field_image:title',
+      'field_image:alt',
+      'field_image_caption:language',
       'field_nace_codes:create_term',
       'field_nace_codes:ignore_case',
       'field_publication_date:timezone',
       'field_publication_date:rrule',
       'field_publication_date:to',
-      'field_blog_summary',
-      'field_blog_summary:format',
+      'field_summary',
+      'field_summary:format',
       'field_tags:create_term',
       'field_tags:ignore_case',
       'field_thesaurus:create_term',
@@ -181,9 +181,9 @@ class MigrateOshaBlog extends DynamicMigration {
       if (!empty($row->image[$language])) {
         $image_code = array_flip(array_keys($row->image));
         $image_code = $image_code[$language];
-        $entity->field_blog_image[$language][0] = $entity->field_blog_image['en'][$image_code];
+        $entity->field_image[$language][0] = $entity->field_image['en'][$image_code];
         if($language != 'en') {
-          unset($entity->field_blog_image['en'][$image_code]);
+          unset($entity->field_image['en'][$image_code]);
         }
         $has_translation = TRUE;
       }
