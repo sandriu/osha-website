@@ -68,6 +68,37 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
     $diff = array_diff($entity_values, $raw_values);
     return empty($diff);
   }
+
+  public function oshaAssertEqualFileMultilingual($entity, $entity_field_name, $source, $source_field_name, $destination_path = "public://") {
+    foreach ($source[$source_field_name] as $language => $image) {
+      if (!empty($image)) {
+        $file_name = $entity->{$entity_field_name}[$language][0]['uri'];
+        $file_name = str_replace($destination_path, '', $file_name);
+        $this->assertEqual($file_name, $image);
+      }
+    }
+  }
+
+  public function oshaAssertEqualFileMultilingMultival($entity, $entity_field_name, $source, $source_field_name, $destination_path = "public://") {
+    foreach ($source[$source_field_name] as $language => $images) {
+      if (!empty($images)) {
+        $images = explode(',', $images);
+        $images = array_map('trim', $images);
+        if (count($images) > 1) {
+          foreach ($images as $index => $path) {
+            $file_name = $entity->{$entity_field_name}[$language][$index]['uri'];
+            $file_name = str_replace($destination_path, '', $file_name);
+            $this->assertEqual($file_name, $path);
+          }
+        }
+        else {
+          $file_name = $entity->{$entity_field_name}[$language][0]['uri'];
+          $file_name = str_replace($destination_path, '', $file_name);
+          $this->assertEqual($file_name, current($images));
+        }
+      }
+    }
+  }
 }
 
 
