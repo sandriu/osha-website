@@ -80,7 +80,9 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
           // As the same item might be added to multiple jobs, we need to
           // re-create them and delete the old ones, after removing them from
           // the cart.
-          $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
+          $new_job_item = $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
+          $new_job_item->target_language = $target_language;
+          $new_job_item->save();
           $remove_job_item_ids[$job_item->tjiid] = $job_item->tjiid;
           $job_empty = FALSE;
         }
