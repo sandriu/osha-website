@@ -56,7 +56,7 @@ class OshaMigrateJobVacancies extends DynamicMigration {
       MigrateDestinationNode::getKeySchema()
     );
 
-    $node_options = MigrateDestinationNode::options('en', NULL);
+    $node_options = MigrateDestinationNode::options('en', 'full_html');
     $this->destination = new MigrateDestinationNode(OSHA_JOB_VACANCIES_CONTENT_TYPE_JOB_VACANCIES, $node_options);
 
     $this->addFieldMapping('title', 'title');
