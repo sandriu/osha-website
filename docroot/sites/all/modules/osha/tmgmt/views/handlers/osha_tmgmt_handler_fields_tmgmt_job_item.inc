@@ -5,7 +5,7 @@
  *
  * @ingroup views_field_handlers
  */
-class tmgmt_handler_field_tmgmt_job_item_target_language extends views_handler_field {
+class tmgmt_handler_field_tmgmt_job_item_language extends views_handler_field {
 
   /**
    * {@inheritdoc}
