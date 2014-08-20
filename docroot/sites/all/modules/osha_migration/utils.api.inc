@@ -10,6 +10,10 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
   /**
    * {@inheritdoc}
    */
+
+  public $modulePath;
+  public $dataPath;
+
   public function setUp() {
     parent::setUp(array('file', 'file_entity'));
     require DRUPAL_ROOT . '/../drush/drushrc.php';
@@ -27,6 +31,7 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
       }
     }
     $this->setDataDirTestData();
+    $this->modulePath = drupal_get_path('module', 'osha_migration');
   }
 
   /**
@@ -35,6 +40,7 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
   protected function setDataDirTestData() {
     $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/test');
     variable_set('osha_data_dir', $data_path);
+    $this->dataPath = $data_path;
   }
 
   /**
