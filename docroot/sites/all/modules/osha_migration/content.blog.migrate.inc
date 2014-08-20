@@ -51,6 +51,7 @@ class MigrateOshaBlog extends DynamicMigration {
     $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
     $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_image:destination_file', 'image');
+    $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -113,6 +114,20 @@ class MigrateOshaBlog extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_CONTENT_TYPE_BLOG;
+  }
+
+  /**
+   * Executes before Import.
+   */
+  public function preImport() {
+    MigrationUtil::activateOshaFilesHandler();
+  }
+
+  /**
+   * Executes after import.
+   */
+  public function postImport() {
+    MigrationUtil::deactivateOshaFilesHandler();
   }
 
   /**
