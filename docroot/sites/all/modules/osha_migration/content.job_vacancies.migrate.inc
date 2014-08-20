@@ -137,14 +137,15 @@ class OshaMigrateJobVacancies extends DynamicMigration {
     $row->subject = MigrationUtil::decodeTagsTerms($tags);
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
       explode(',', $row->multilingual_thesaurus),
-      'field_thesaurus',
+      'field_thesaurus_code',
       OSHA_TAXONOMIES_THESAURUS
     );
+
     if (!empty($row->nace)) {
       $row->nace = explode(',', $row->nace);
-      $row->nace = MigrationUtil::findTiardByTaxonomyField(
+      $row->nace = MigrationUtil::findTidByTaxonomyField(
         $row->nace,
-        'field_nace_codes',
+        'field_nace_code',
         OSHA_TAXONOMIES_NACE_CODES
       );
     }

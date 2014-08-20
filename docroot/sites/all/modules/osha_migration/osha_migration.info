@@ -28,6 +28,7 @@ files[] = taxonomy.thesaurus.migrate.inc
 files[] = tests/content.articles.test
 files[] = tests/content.blog.test
 files[] = tests/content.case_study.test
+files[] = tests/content.job_vacancies.test
 files[] = tests/content.news.test
 files[] = tests/content.publications.test
 files[] = tests/files.test
