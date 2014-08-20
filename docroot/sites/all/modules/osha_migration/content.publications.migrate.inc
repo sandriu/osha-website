@@ -236,15 +236,6 @@ class OshaMigratePublications extends DynamicMigration {
           else {
             $this->saveMessage("Could not find publication related imported file: {$path}", MigrationBase::MESSAGE_WARNING);
           }
-          /*$rel_file_fid = $this->handleSourceMigration(OSHA_MIGRATION_FILES, $path);
-          var_dump($path);
-          var_dump($rel_file_fid);
-          if (!empty($rel_file_fid)) {
-            $files[] = $rel_file_fid;
-          }
-          else {
-            $this->saveMessage("Failed to migrate related file: {$path}", MigrationBase::MESSAGE_WARNING);
-          }*/
         }
       }
       $row->related_resources = $files;
