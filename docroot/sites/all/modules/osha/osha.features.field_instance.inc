@@ -1012,7 +1012,6 @@ function osha_field_default_field_instances() {
   t('Alternative text is used by screen readers, search engines, and when the image cannot be loaded. By adding alt text you improve accessibility and search engine optimization.');
   t('Body');
   t('Description');
-  t('Enter a comma-separated list of words to describe your content.');
   t('Image');
   t('Language');
   t('Nace');
@@ -1021,9 +1020,9 @@ function osha_field_default_field_instances() {
   t('Tags');
   t('Thesaurus');
   t('Title');
-  t('Use comma ( , ) to assign multiple terms');
   t('Title Text');
   t('Title text is used in the tool tip when a user hovers their mouse over the image. Adding title text makes it easier to understand the context of an image and improves usability.');
+  t('Use comma ( , ) to assign multiple terms');
 
   return $field_instances;
 }
