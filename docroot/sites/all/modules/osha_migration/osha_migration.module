@@ -8,6 +8,7 @@ define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
 define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
 define('OSHA_MIGRATION_CONTENT_TYPE_ARTICLE', 'Article');
 define('OSHA_MIGRATION_CONTENT_TYPE_BLOG', 'Blog');
+define('OSHA_MIGRATION_CONTENT_TYPE_CALLS', 'Calls');
 define('OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY', 'CaseStudy');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
@@ -58,6 +59,10 @@ function osha_migration_migrate_api() {
       OSHA_MIGRATION_CONTENT_TYPE_BLOG => array(
         'class_name' => 'MigrateOshaBlog',
         'file_name' => osha_migration_get_data_dir() . '/export/blog.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_CALLS => array(
+        'class_name' => 'MigrateOshaCalls',
+        'file_name' => osha_migration_get_data_dir() . '/export/call_for_contractors.txt',
       ),
       OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY => array(
         'class_name' => 'MigrateOshaCaseStudy',
@@ -147,11 +152,13 @@ class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
       $file_class = 'MigrateFileUri';
     }
 
+
     // If a destination directory (relative to the Drupal public files directory)
     // is not explicitly provided, use the default for the field.
     if (empty($arguments['destination_dir'])) {
       $arguments['destination_dir'] = $this->destinationDir($field_info, $instance);
     }
+
 
     $return = array();
 
