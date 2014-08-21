@@ -14,7 +14,7 @@ drush php-script ../scripts/drupal_post_install.php
 
 # Enable required blocks
 echo "Enable required blocks ..."
-drush block-configure language --module=locale --region=header
+drush block-configure language --module=locale --region=header --delta=1
 
 echo "Registering migrations ..."
 drush migrate-auto-register

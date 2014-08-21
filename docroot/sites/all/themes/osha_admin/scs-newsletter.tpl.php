@@ -27,7 +27,7 @@
                   <td colspan="2">
                     <h2 style="color: #191919; font-size: 19px; font-weight: bold; margin: 15px 0; padding: 0 0 11px;">
                       <?php
-                      print l($node['#node']->title, url('node/' . $node['field_news_summary']['#object']->nid, array('absolute' => TRUE)), array(
+                      print l($node['#node']->title, url('node/' . $node['field_summary']['#object']->nid, array('absolute' => TRUE)), array(
                         'attributes' => array('style' => 'color: #144989; text-decoration: none;'),
                         'external' => TRUE
                       ));
@@ -40,17 +40,17 @@
                     <?php
                     print l(theme('image_style', array(
                       'style_name' => 'thumbnail',
-                      'path' => $node['field_news_image']['#items'][0]['uri'],
+                      'path' => $node['field_image']['#items'][0]['uri'],
                       'width' => 100,
-                      'alt' => $node['field_news_image']['#items'][0]['alt']
-                    )), url('node/' . $node['field_news_summary']['#object']->nid, array('absolute' => TRUE)), array(
+                      'alt' => $node['field_image']['#items'][0]['alt']
+                    )), url('node/' . $node['field_summary']['#object']->nid, array('absolute' => TRUE)), array(
                       'html' => TRUE,
                       'external' => TRUE
                     ));
                     ?>
                   </td>
                   <td valign="top">
-                    <?php print $node['field_news_summary']['#items'][0]['safe_value']; ?>
+                    <?php print $node['field_summary']['#items'][0]['safe_value']; ?>
                   </td>
                 </tr>
               </tbody>

@@ -304,6 +304,7 @@ $options['init-modules'] = array(
   'doc_to_imagefield',
 
   'imce_wysiwyg',
+  'wysiwyg_accordion',
   'osha',
   'osha_migration',
   'osha_news',
@@ -314,6 +315,11 @@ $options['init-modules'] = array(
   'devel',
   'diff',
   'simpletest'
+);
+
+$options['init-themes'] = array(
+  'osha_admin',
+  'osha_frontend'
 );
 
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {

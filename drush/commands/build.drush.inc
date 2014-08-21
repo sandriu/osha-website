@@ -126,6 +126,12 @@ function _drush_init() {
     // Enable modules.
     $modules = drush_get_option('init-modules', array());
     _drush_enable_modules($modules);
+
+    // Enable themes.
+    drush_log(dt('Enabling the required themes'), 'success');
+
+    $themes = drush_get_option('init-themes', array());
+    _drush_enable_themes($themes);
 }
 
 
@@ -148,4 +154,36 @@ function _drush_enable_modules($modules) {
             }
         }
     }
+}
+
+function _drush_enable_themes($themes) {
+  if(empty($themes)) {
+    return;
+  }
+
+  $debug = drush_get_option('debug-themes', FALSE);
+  if(!$debug){
+    theme_enable($themes);
+
+    $drupal_themes = list_themes();
+    foreach ($themes as $theme) {
+      if (!theme_exists($theme)) {
+        drush_log(dt('Failed to enable one ore more themes'), 'error');
+      }
+    }
+  } else {
+    foreach ($themes as $theme) {
+      if (!theme_exists($theme)) {
+        drush_log(dt('Failed to enable @theme', array('@theme' => $theme)), 'error');
+      }
+    }
+  }
+}
+
+/**
+ * Check if a theme exists and is enabled.
+ */
+function theme_exists($theme_name) {
+  $themes = list_themes();
+  return isset($themes[$theme_name]) && $themes[$theme_name]->status == 1;
 }
