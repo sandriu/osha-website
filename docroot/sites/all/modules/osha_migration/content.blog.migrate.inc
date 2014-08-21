@@ -169,12 +169,12 @@ class MigrateOshaBlog extends DynamicMigration {
         $has_translation = TRUE;
       }
       if (!empty($row->description[$language])) {
-        $entity->field_blog_summary[$language][0]['value'] = str_replace('<@#&>', '"', $row->description[$language]);
+        $entity->field_blog_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
         $entity->field_blog_summary[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
       if (!empty($row->text[$language])) {
-        $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $row->text[$language]);
+        $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
