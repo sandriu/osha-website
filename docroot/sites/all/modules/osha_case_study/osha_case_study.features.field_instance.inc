@@ -61,8 +61,8 @@ function osha_case_study_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-case_study-field_case_study_cover_image'
-  $field_instances['node-case_study-field_case_study_cover_image'] = array(
+  // Exported field_instance: 'node-case_study-field_cover_image'
+  $field_instances['node-case_study-field_cover_image'] = array(
     'bundle' => 'case_study',
     'deleted' => 0,
     'description' => '',
@@ -75,7 +75,7 @@ function osha_case_study_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 5,
+        'weight' => 11,
       ),
       'scs' => array(
         'label' => 'above',
@@ -91,7 +91,7 @@ function osha_case_study_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_case_study_cover_image',
+    'field_name' => 'field_cover_image',
     'label' => 'Cover image',
     'required' => 0,
     'settings' => array(
@@ -114,12 +114,12 @@ function osha_case_study_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
-  // Exported field_instance: 'node-case_study-field_case_study_file'
-  $field_instances['node-case_study-field_case_study_file'] = array(
+  // Exported field_instance: 'node-case_study-field_file'
+  $field_instances['node-case_study-field_file'] = array(
     'bundle' => 'case_study',
     'deleted' => 0,
     'description' => '',
@@ -129,7 +129,7 @@ function osha_case_study_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 4,
+        'weight' => 12,
       ),
       'scs' => array(
         'label' => 'above',
@@ -145,25 +145,31 @@ function osha_case_study_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_case_study_file',
+    'field_name' => 'field_file',
     'label' => 'File',
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
-      'entity_translation_sync' => FALSE,
+      'entity_translation_sync' => 0,
       'file_directory' => 'case_study/documents',
-      'file_extensions' => 'pdf doc docx ppt pptx',
+      'file_extensions' => 'pdf doc docx ppt pptx html odp odt txt',
       'max_filesize' => '50 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'file',
+      'module' => 'pdf_to_image',
       'settings' => array(
-        'progress_indicator' => 'throbber',
+        'pdf_to_image' => array(
+          'density' => '25x25',
+          'extra_args' => '',
+          'hide_imagefield' => 0,
+          'target_field' => 'field_cover_image',
+        ),
+        'progress_indicator' => NULL,
       ),
-      'type' => 'file_generic',
-      'weight' => 4,
+      'type' => 'pdf_to_image',
+      'weight' => 5,
     ),
   );
 
@@ -210,7 +216,7 @@ function osha_case_study_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -317,7 +323,7 @@ function osha_case_study_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 6,
+      'weight' => 8,
     ),
   );
 
@@ -364,7 +370,7 @@ function osha_case_study_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 

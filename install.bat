@@ -1,0 +1,62 @@
+@echo off
+rem Setup a clean site in docroot/
+cd docroot/
+call drush site-install -y
+
+rem Save configuration to database for later usage
+call drush php-script ../scripts/drupal_pre_install.php
+
+call drush init
+call drush build
+
+call drush php-script ../scripts/drupal_post_install.php
+
+rem Enable required blocks
+echo "Enable required blocks ..."
+call drush block-configure language --module=locale --region=header
+
+echo "Registering migrations ..."
+call drush migrate-auto-register
+
+IF NOT %1=="--migrate" GOTO DONE
+
+:MIGRATE
+    echo "Importing Activity taxonomy"
+    call drush migrate-import TaxonomyActivity
+
+    echo "Importing NACE codes taxonomy"
+    call drush migrate-import TaxonomyNaceCodes
+
+    echo "Importing ESENER taxonomy"
+    call drush migrate-import TaxonomyEsener
+
+    echo "Importing Publication types taxonomy"
+    call drush migrate-import TaxonomyPublicationTypes
+
+    echo "Importing multilingual Thesaurus taxonomy"
+    call drush migrate-import TaxonomyThesaurus
+
+    echo "Importing Tags taxonomy"
+    call drush migrate-import TaxonomyTags
+
+	echo "Importing Files content"
+	call drush migrate-import Files
+
+    echo "Importing News content"
+    call drush migrate-import News
+
+    echo "Importing Publications content"
+    call drush migrate-import Publication
+
+    echo "Importing Articles content"
+    call drush migrate-import Article
+
+    echo "Importing Blog content"
+    call drush migrate-import Blog
+
+    echo "Importing Case Study content"
+    call drush migrate-import CaseStudy
+
+:DONE
+
+call drush cc all

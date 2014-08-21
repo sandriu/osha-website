@@ -1,0 +1,4 @@
+name = OSHA admin
+description = The OSHA administration theme.
+core = 7.x
+base theme = seven

@@ -14,7 +14,7 @@ drush php-script ../scripts/drupal_post_install.php
 
 # Enable required blocks
 echo "Enable required blocks ..."
-drush block-configure language --module=locale --region=header
+drush block-configure language --module=locale --region=header --delta=1
 
 echo "Registering migrations ..."
 drush migrate-auto-register
@@ -39,6 +39,9 @@ if [ "$1" == "--migrate" ]; then
 	echo "Importing Tags taxonomy"
 	drush migrate-import TaxonomyTags
 
+	echo "Importing Files content"
+	drush migrate-import Files
+
 	echo "Importing News content"
 	drush migrate-import News
 
@@ -50,6 +53,12 @@ if [ "$1" == "--migrate" ]; then
 
 	echo "Importing Blog content"
 	drush migrate-import Blog
+
+	echo "Importing Case Study content"
+	drush migrate-import CaseStudy
+
+	echo "Importing Job vacancies content"
+	drush migrate-import JobVacancies
 
 fi
 

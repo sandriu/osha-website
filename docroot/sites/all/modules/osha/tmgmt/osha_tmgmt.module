@@ -130,8 +130,11 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
   }
 }
 
+/**
+ * Implements hook_views_default_views_alter().
+ */
 function osha_tmgmt_views_default_views_alter(&$views) {
-  if(isset($views['tmgmt_ui_job_items'])) {
+  if (isset($views['tmgmt_ui_job_items'])) {
     $handler =& $views['tmgmt_ui_job_items']->display['submit'];
 
     /* Field: Translation Management Job Item: Source language */
@@ -149,7 +152,7 @@ function osha_tmgmt_views_default_views_alter(&$views) {
     unset($handler->display_options['fields']['operations']);
     $handler->display_options['fields']['operations'] = $operations;
   }
-  if(isset($views['tmgmt_ui_job_overview'])) {
+  if (isset($views['tmgmt_ui_job_overview'])) {
     $handler =& $views['tmgmt_ui_job_overview']->display['default'];
     unset($handler->display_options['filters']['source_language']);
     unset($handler->display_options['filters']['target_language']);
