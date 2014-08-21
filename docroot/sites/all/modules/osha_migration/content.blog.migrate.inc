@@ -48,9 +48,11 @@ class MigrateOshaBlog extends DynamicMigration {
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('field_image', 'image');
     $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_image:file_class')->defaultValue('OSHAMigrateFileUri');
     $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
     $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_image:destination_file', 'image');
+    $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -60,7 +62,6 @@ class MigrateOshaBlog extends DynamicMigration {
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
 
-    $this->addFieldMapping('field_blog_image_caption', 'imageCaption');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
@@ -85,12 +86,10 @@ class MigrateOshaBlog extends DynamicMigration {
       'revision_uid',
       'is_new',
       'body:summary',
-      'field_image:file_class',
       'field_image:language',
       'field_image:destination_dir',
       'field_image:title',
       'field_image:alt',
-      'field_image_caption:language',
       'field_nace_codes:create_term',
       'field_nace_codes:ignore_case',
       'field_publication_date:timezone',
@@ -113,6 +112,20 @@ class MigrateOshaBlog extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_CONTENT_TYPE_BLOG;
+  }
+
+  /**
+   * Executes before Import.
+   */
+  public function preImport() {
+    MigrationUtil::activateOshaFilesHandler();
+  }
+
+  /**
+   * Executes after import.
+   */
+  public function postImport() {
+    MigrationUtil::deactivateOshaFilesHandler();
   }
 
   /**
@@ -178,14 +191,11 @@ class MigrateOshaBlog extends DynamicMigration {
         $entity->body[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
-      if (!empty($row->image[$language])) {
-        $image_code = array_flip(array_keys($row->image));
-        $image_code = $image_code[$language];
-        $entity->field_image[$language][0] = $entity->field_image['en'][$image_code];
-        if($language != 'en') {
-          unset($entity->field_image['en'][$image_code]);
+      if (!empty($row->imageCaption)) {
+        foreach (array_keys($entity->field_image) as $lang) {
+          $entity->field_image[$lang][0]['image_field_caption']['value'] = $row->imageCaption[$lang];
+          $entity->field_image[$lang][0]['image_field_caption']['format'] = $this->destination->getTextFormat();
         }
-        $has_translation = TRUE;
       }
       /* Don't translate en (default) */
       if ($has_translation && $language != $row->language && !isset($entity->translations->data[$language])) {
@@ -290,6 +300,8 @@ class BlogContentListCSV extends MigrateList {
             break;
 
           case 'description':
+          case 'image':
+          case 'imageCaption':
           case 'text':
             self::$data[$path][$field][$language] = $raw_data[$key];
             break;

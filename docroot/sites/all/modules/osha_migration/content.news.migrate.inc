@@ -48,9 +48,11 @@ class MigrateOshaNews extends DynamicMigration {
     $this->addFieldMapping('field_image', 'image');
     $this->addFieldMapping('field_image:title', 'imageCaption');
     $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_image:file_class')->defaultValue('OSHAMigrateFileUri');
     $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
     $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_image:destination_file', 'image');
+    $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -83,7 +85,6 @@ class MigrateOshaNews extends DynamicMigration {
       'revision_uid',
       'is_new',
       'body:summary',
-      'field_image:file_class',
       'field_image:language',
       'field_image:destination_dir',
       'field_image:alt',
@@ -107,6 +108,20 @@ class MigrateOshaNews extends DynamicMigration {
    */
   protected function generateMachineName() {
     return OSHA_MIGRATION_CONTENT_TYPE_NEWS;
+  }
+
+  /**
+   * Executes before Import.
+   */
+  public function preImport() {
+    MigrationUtil::activateOshaFilesHandler();
+  }
+
+  /**
+   * Executes after import.
+   */
+  public function postImport() {
+    MigrationUtil::deactivateOshaFilesHandler();
   }
 
   /**
@@ -163,14 +178,6 @@ class MigrateOshaNews extends DynamicMigration {
       if (!empty($row->text[$language])) {
         $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
-      }
-      if (!empty($row->image[$language])) {
-        $image_code = array_flip(array_keys($row->image));
-        $image_code = $image_code[$language];
-        $entity->field_image[$language][0] = $entity->field_image['en'][$image_code];
-        if ($language != 'en') {
-          unset($entity->field_image['en'][$image_code]);
-        }
       }
       /* Don't translate en (default) */
       if ($language != $row->language && !isset($entity->translations->data[$language])) {

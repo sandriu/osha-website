@@ -291,6 +291,7 @@ $options['init-modules'] = array(
   'file_entity',
   'media',
   'languagefield',
+  'image_field_caption',
 
   #'search_api',
   #'facetapi',

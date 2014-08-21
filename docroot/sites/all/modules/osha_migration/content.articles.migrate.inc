@@ -67,6 +67,7 @@ class OshaMigrateArticles extends DynamicMigration {
     $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
     $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_image:destination_file', 'relatedItems');
+    $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -124,6 +125,20 @@ class OshaMigrateArticles extends DynamicMigration {
   }
 
   /**
+   * Executes before Import.
+   */
+  public function preImport() {
+    MigrationUtil::activateOshaFilesHandler();
+  }
+
+  /**
+   * Executes after import.
+   */
+  public function postImport() {
+    MigrationUtil::deactivateOshaFilesHandler();
+  }
+
+  /**
    * Prepare raw data pulled from source.
    *
    * {@inheritdoc}
@@ -162,6 +177,7 @@ class OshaMigrateArticles extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    $entity->path['pathauto'] = 0;
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
