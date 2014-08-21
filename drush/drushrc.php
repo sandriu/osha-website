@@ -269,6 +269,7 @@ $options['init-modules'] = array(
   'views',
   'views_ui',
   'views_bulk_operations',
+  'views_filter_populate',
 
   'mailsystem',
   'htmlmail',
@@ -310,6 +311,7 @@ $options['init-modules'] = array(
   'osha_publication',
   'osha_case_study',
   'osha_blog',
+  'osha_newsletter',
 
   'devel',
   'diff',
