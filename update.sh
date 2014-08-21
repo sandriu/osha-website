@@ -46,6 +46,9 @@ if [ "$1" == "--migrate" ]; then
 	echo "Importing Case Study content"
 	drush migrate-import --update CaseStudy
 
+	echo "Importing Job vacancies content"
+	drush migrate-import --update JobVacancies
+
 fi
 
 drush cc all
