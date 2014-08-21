@@ -31,6 +31,9 @@ if [ "$1" == "--migrate" ]; then
 	echo "Importing Files content"
 	drush migrate-import --update Files
 
+	echo "Importing Images content"
+	drush migrate-import --update Images
+
 	echo "Importing News content"
 	drush migrate-import --update News
 
