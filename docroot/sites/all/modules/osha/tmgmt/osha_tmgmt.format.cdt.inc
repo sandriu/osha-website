@@ -61,30 +61,26 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $this->writeElement('FriendlyUrlName', 'TODO');
     $this->writeElement('Keywords', 'TODO');
 
-    // <DynamicElement>
-    $this->startElement('DynamicElement');
-    $this->writeAttribute('dynamicElementKind', 'TextArea');
-    $this->writeAttribute('indexType', 'keyword');
-    $this->writeAttribute('instanceId', 'Gjrm2GSu');
-    $this->writeAttribute('name', 'data');
-    $this->writeAttribute('repeatable', 'false');
-    // <DynamicContent>
-    $this->startElement('DynamicContent');
-    $this->writeCdata(json_encode($item->getData()));
-    // </DynamicContent>
-    $this->endElement();
-    // </DynamicElement>
-    $this->endElement();
+    foreach ($item->getData() as $key => $field) {
+      $this->startElement('DynamicElement');
+
+      $this->writeAttribute('dynamicElementKind', 'TextArea');
+      $this->writeAttribute('indexType', 'keyword');
+      $this->writeAttribute('instanceId', 'Gjrm2GSu');
+      $this->writeAttribute('name', $key);
+      $this->writeAttribute('repeatable', 'false');
+      $this->writeElement('DynamicContent', $field[0]['value']['#text']);
+
+      $this->endElement();
+    }
     // </Translation>
     $this->endElement();
   }
-
 
   /**
    * {@inheritdoc}
    */
   public function export(TMGMTJob $job) {
-
     $this->job = $job;
 
     $this->openMemory();
@@ -109,8 +105,7 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     // <TransactionIdentifier>777</TransactionIdentifier>
     $this->writeElement('TransactionIdentifier', $job->tjid);
 
-    // TODO
-    $this->writeElement('TransactionCode', 'TODO');
+    $this->writeElement('TransactionCode', 'EM-OWS Translation Request');
 
     // <TransactionData>
     $this->startElement('TransactionData');
