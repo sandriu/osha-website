@@ -23,7 +23,28 @@ class OshaMigrateImages extends DynamicMigration {
     $source_file = MigrationUtil::getSourceFile($arguments);
 
     $this->source = new MigrateSourceList(new OshaMigrateImagesListCSV($source_file),
-      new OshaMigrateImagesItemCSV(osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY)), $this->destination->fields());
+      new OshaMigrateImagesItemCSV(osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY)),
+      array(
+        'id' => 'Primary Key (URL pattern)',
+        'path' => 'URL pattern without language',
+        'language' => 'Row language',
+        'workflow_state' => '',
+        'creation_date' => '',
+        'modification_date' => '',
+        'publication_date' => '',
+        'creator' => 'Author user id from the old website',
+        'title' => '',
+        'description' => '',
+        'subject' => 'Categories/Tags',
+        'country' => '',
+        'subcategory' => 'Merged into categories',
+        'multilingual_thesaurus' => '',
+        'nace' => 'Nace codes taxonomy',
+        'image' => 'Image path',
+        'image_uri' => 'Image URI',
+        'timestamp' => 'Timestamp',
+      )
+    );
 
     $this->map = new MigrateSQLMap($this->machineName,
       array(
@@ -57,8 +78,20 @@ class OshaMigrateImages extends DynamicMigration {
     $this->addFieldMapping('field_nace_codes', 'nace');
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
 
+    $this->addUnmigratedSources(
+      array(
+        'country',
+        'creator',
+      )
+    );
+
     $this->addUnmigratedDestinations(
       array(
+        'uid',
+        'field_file_image_alt_text',
+        'field_file_image_alt_text:language',
+        'field_file_image_title_text',
+        'field_file_image_title_text:language',
         'field_nace_codes:create_term',
         'field_nace_codes:ignore_case',
         'field_tags:create_term',
@@ -142,7 +175,6 @@ class OshaMigrateImages extends DynamicMigration {
     else {
       $path = substr($row->path, 1);
     }
-    echo $path . "\n";
     $alias = array(
       'source' => 'file/' . $entity->fid,
       'alias' => $path,
