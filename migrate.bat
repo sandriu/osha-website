@@ -1,26 +1,5 @@
-@echo off
-rem Setup a clean site in docroot/
-cd docroot/
-call drush site-install -y
+cd docroot
 
-rem Save configuration to database for later usage
-call drush php-script ../scripts/drupal_pre_install.php
-
-call drush init
-call drush build
-
-call drush php-script ../scripts/drupal_post_install.php
-
-rem Enable required blocks
-echo "Enable required blocks ..."
-call drush block-configure language --module=locale --region=header
-
-echo "Registering migrations ..."
-call drush migrate-auto-register
-
-IF NOT %1=="--migrate" GOTO DONE
-
-:MIGRATE
     echo "Importing Activity taxonomy"
     call drush migrate-import TaxonomyActivity
 
@@ -57,6 +36,3 @@ IF NOT %1=="--migrate" GOTO DONE
     echo "Importing Case Study content"
     call drush migrate-import CaseStudy
 
-:DONE
-
-call drush cc all
