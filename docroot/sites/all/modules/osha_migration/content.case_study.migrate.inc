@@ -286,11 +286,21 @@ class CaseStudyContentListCSV extends MigrateList {
   protected function parseSourceFile() {
     $handle = fopen($this->file, 'r');
     $fields = $raw_data = fgetcsv($handle, NULL, ';');
+    $work_flow_key = array_search('workflow_state', $fields);
     self::$data = array();
     while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
       $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
       $path = substr(!empty($raw_data[2]) ? $raw_data[2] : $raw_data[0], 1);
       self::$data[$path]['id'] = $path;
+      // Assign the workflow state of the row from english entry.
+      if ($language == 'en') {
+        self::$data[$path]['workflow_state'] = $raw_data[$work_flow_key];
+      }
+      // Skip the private translations.
+      if (!in_array($raw_data[$work_flow_key],
+        array('published', 'checked', 'to_amend'))) {
+        continue;
+      }
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
