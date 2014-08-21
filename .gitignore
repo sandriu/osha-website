@@ -37,7 +37,6 @@ docroot/sites/*/private
 *.jar
 *.rar
 *.tar
-*.zip
 
 # Logs and databases #
 ######################
