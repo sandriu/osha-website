@@ -1,0 +1,11 @@
+name = OSHA Newsletter
+description = The OSHA newsletter custom module theme.
+core = 7.x
+package = OSHA
+version = 7.x-1.0
+project = osha_newsletter
+dependencies[] = scs_views
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_filters_populate
+
