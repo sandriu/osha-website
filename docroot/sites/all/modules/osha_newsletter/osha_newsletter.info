@@ -7,5 +7,3 @@ project = osha_newsletter
 dependencies[] = scs_views
 dependencies[] = views
 dependencies[] = views_bulk_operations
-dependencies[] = views_filters_populate
-
