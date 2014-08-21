@@ -5,10 +5,8 @@
  */
 function osha_tmgmt_install() {
   $field = array(
-    'type' => 'varchar',
-    'length' => 12,
-    'default' => '',
-    'not null' => TRUE, // TODO: Optional until we fix job_item creation
+    'type' => 'varchar', 'length' => 12,
+    'not null' => FALSE, // TODO: Optional until we fix job_item creation
   );
   if (!db_field_exists('tmgmt_job_item', 'source_language')) {
     watchdog('osha_tmgmt', 'Adding source_language field to tmgmt_job_item');
@@ -16,14 +14,23 @@ function osha_tmgmt_install() {
   }
 
   $field = array(
-    'type' => 'varchar',
-    'length' => 12,
-    'default' => '',
-    'not null' => TRUE, // TODO: Optional until we fix job_item creation
+    'type' => 'varchar', 'length' => 12,
+    'not null' => FALSE, // TODO: Optional until we fix job_item creation
   );
   if (!db_field_exists('tmgmt_job_item', 'target_language')) {
     watchdog('osha_tmgmt', 'Adding target_language field to tmgmt_job_item');
     db_add_field('tmgmt_job_item', 'target_language', $field);
+  }
+
+  $field = array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'description' => 'Urgency of the translation (0=normal/1=high)',
+  );
+  if (!db_field_exists('tmgmt_job', 'priority')) {
+    watchdog('osha_tmgmt', 'Adding priority field to tmgmt_job');
+    db_add_field('tmgmt_job', 'priority', $field);
   }
 
   drupal_set_message('creating translator', 'error');

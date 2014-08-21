@@ -12,15 +12,23 @@ function osha_tmgmt_schema_alter(&$schema) {
       'description' => 'The language the data should be translated to.',
       'type' => 'varchar',
       'size' => 12,
-      'default' => '',
-      'not null' => TRUE, // TODO: Optional until we fix job_item creation
+      'not null' => FALSE, // TODO: Optional until we fix job_item creation
     );
     $schema['tmgmt_job_item']['fields']['source_language'] = array(
       'description' => 'The default entity language',
       'type' => 'varchar',
       'size' => 12,
       'default' => '',
-      'not null' => TRUE, // TODO: Optional until we fix job_item creation
+      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+    );
+  }
+  if (isset($schema['tmgmt_job'])) {
+    $schema['tmgmt_job']['fields']['priority'] = array(
+      'description' => 'Urgency of the translation (0=normal/1=high)',
+      'type' => 'int',
+      'unsigned' => FALSE,
+      'default' => 0,
+      'not null' => TRUE,
     );
   }
 }
@@ -43,7 +51,10 @@ function osha_tmgmt_tmgmt_file_format_plugin_info() {
  */
 function osha_tmgmt_entity_info_alter(&$entity_info) {
   if (isset($entity_info['tmgmt_job_item'])) {
-    $entity_info['tmgmt_job_item']['views controller class'] = 'TMGMTOshaJobItemViewsController';
+    $entity_info['tmgmt_job_item']['views controller class'] = 'OshaTMGMTJobItemViewsController';
+  }
+  if (isset($entity_info['tmgmt_job'])) {
+    $entity_info['tmgmt_job']['views controller class'] = 'OshaTMGMTJobViewsController';
   }
 }
 
@@ -153,11 +164,37 @@ function osha_tmgmt_views_default_views_alter(&$views) {
     unset($handler->display_options['fields']['operations']);
     $handler->display_options['fields']['operations'] = $operations;
   }
+
   if (isset($views['tmgmt_ui_job_overview'])) {
     $handler =& $views['tmgmt_ui_job_overview']->display['default'];
+
+    // Remove un-needed filters.
     unset($handler->display_options['filters']['source_language']);
     unset($handler->display_options['filters']['target_language']);
     unset($handler->display_options['filters']['translator']);
+
+    // Remove un-needed columns.
+    unset($handler->display_options['fields']['source_language']);
+    unset($handler->display_options['fields']['target_language']);
+    unset($handler->display_options['fields']['translator']);
+
+    $changed = $handler->display_options['fields']['changed'];
+    unset($handler->display_options['fields']['changed']);
+    $operations = $handler->display_options['fields']['operations'];
+    unset($handler->display_options['fields']['operations']);
+    $word_count = $handler->display_options['fields']['word_count'];
+    unset($handler->display_options['fields']['word_count']);
+    $progress = $handler->display_options['fields']['progress'];
+    unset($handler->display_options['fields']['progress']);
+
+    /* Field: Translation Management Job: Priority */
+    $handler->display_options['fields']['priority']['id'] = 'priority';
+    $handler->display_options['fields']['priority']['table'] = 'tmgmt_job';
+    $handler->display_options['fields']['priority']['field'] = 'priority';
+
+    $handler->display_options['fields']['word_count'] = $word_count;
+    $handler->display_options['fields']['progress'] = $progress;
+    $handler->display_options['fields']['changed'] = $changed;
+    $handler->display_options['fields']['operations'] = $operations;
   }
-  dpm($views);
 }

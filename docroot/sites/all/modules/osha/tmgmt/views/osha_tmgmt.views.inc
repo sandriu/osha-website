@@ -1,6 +1,6 @@
 <?php
 
-class TMGMTOshaJobItemViewsController extends TMGMTJobItemViewsController {
+class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
 
   /**
    * {@inheritdoc}
@@ -28,4 +28,26 @@ class TMGMTOshaJobItemViewsController extends TMGMTJobItemViewsController {
     return $data;
   }
 
+}
+
+
+class OshaTMGMTJobViewsController extends TMGMTJobViewsController {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function views_data() {
+    $data = parent::views_data();
+
+    $data['tmgmt_job']['priority'] = array(
+      'title' => t('Priority'),
+      'help' => t('Urgency of translation'),
+      'real field' => 'priority',
+      'field' => array(
+        'handler' => 'tmgmt_handler_field_tmgmt_job_priority',
+      ),
+    );
+
+    return $data;
+  }
 }
