@@ -69,10 +69,19 @@ class MigrateOshaJobVacanciesTest extends OshaWebTestCase {
       strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value'])
     );
 
-    $this->drupalGet(
-      substr($witness['path'], 4)
-    );
-    $this->assertText($node->title_field['en'][0]['value']);
+    $path = path_load(array('source' => 'node/' . $node->nid, 'language' => 'en'));
+    $path = $path['alias'];
+    $witness = $data[$path];
+
+    $languages = language_list();
+    foreach ($witness['path'] as $lang_code => $path) {
+      $this->drupalGet(
+        $path,
+        array("language" => $languages[$lang_code])
+      );
+
+      $this->assertText($node->title_field[$lang_code][0]['value']);
+    }
 
     foreach ($witness['title_field'] as $lang => $title) {
       $this->assertEqual($title, $node->title_field[$lang][0]['value']);

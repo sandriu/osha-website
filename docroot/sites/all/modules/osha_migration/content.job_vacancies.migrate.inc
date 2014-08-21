@@ -162,6 +162,7 @@ class OshaMigrateJobVacancies extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    $entity->path['pathauto'] = 0;
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
@@ -200,14 +201,13 @@ class OshaMigrateJobVacancies extends DynamicMigration {
    *   Source row
    */
   public function complete($entity, $row) {
-    $languages = array_keys(language_list());
+    $languages = array_keys($row->path);
     foreach ($languages as $language) {
       $args = array(
         'source' => 'node/' . $entity->nid,
-        'alias' => $row->id,
+        'alias' => $row->path[$language],
         'language' => $language,
       );
-      $args['alias'] = $row->path[$language];
       path_save($args);
     }
   }
@@ -253,6 +253,11 @@ class JobVacanciesMigrateList extends MigrateList {
             }
             self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;
+
+          case 'path':
+            $path_language = explode('/', $raw_data[$key], 3);
+            self::$data[$path][$field][$language] = $path_language[2];
+            continue;
 
           case 'description':
           case 'text':
