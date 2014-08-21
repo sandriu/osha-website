@@ -1,4 +1,4 @@
-div#accordion {
+div.wysiwyg_accordion {
     border: dotted 2px #888;
     margin: 10px;
     padding: 0 10px 10px 10px;
@@ -7,7 +7,7 @@ div#accordion {
     border-radius: 10px;
 }
 
-div#accordion  h3 {
+div.wysiwyg_accordion  h3 {
     color: #597F2B;
     border: solid 1px #999;
     font-weight: normal;
