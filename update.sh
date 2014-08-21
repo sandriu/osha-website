@@ -28,6 +28,9 @@ if [ "$1" == "--migrate" ]; then
 	echo "Importing Tags taxonomy"
 	drush migrate-import --update TaxonomyTags
 
+	echo "Importing Files content"
+	drush migrate-import --update Files
+
 	echo "Importing News content"
 	drush migrate-import --update News
 
