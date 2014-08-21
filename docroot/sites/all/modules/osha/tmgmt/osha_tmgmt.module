@@ -2,6 +2,7 @@
 
 define('OSHA_TMGMT_DEFAULT_SOURCE_LANGUAGE', 'en');
 define('OSHA_TMGMT_DEFAULT_TARGET_LANGUAGE', 'ro');
+define('OSHA_TMGMT_CHARACTERS_PER_PAGE', 1650);
 
 /**
  * Implements hook_schema_alter().
@@ -71,6 +72,25 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       $form['request_translation']['#submit'] = array('osha_tmgmt_tmgmt_ui_cart_content_submit');
       break;
 
+    case 'tmgmt_job_form':
+      hide($form['info']['source_language']);
+      hide($form['info']['target_language']);
+      hide($form['info']['translator']);
+      $created = $form['info']['created'];
+      unset($form['info']['created']);
+      if (!empty($form['info']['word_count'])) {
+        $avg_pages = sprintf('%.1f', $form['info']['word_count']['#markup'] / OSHA_TMGMT_CHARACTERS_PER_PAGE);
+        $form['info']['pages'] = array(
+          '#title' => t('Average number of pages'),
+          '#type' => 'item',
+          '#markup' => $avg_pages,
+          '#prefix' => '<div id="tmgmt-ui-pages" class="tmgmt-ui-pages tmgmt-ui-info-item">',
+          '#suffix' => '</div>',
+        );
+      }
+      $form['info']['created'] = $created;
+
+      break;
   }
 }
 
