@@ -33,5 +33,6 @@ files[] = tests/content.news.test
 files[] = tests/content.press_release.test
 files[] = tests/content.publications.test
 files[] = tests/files.test
+files[] = tests/images.test
 files[] = tests/taxonomies.test
 files[] = tests/utils.test
