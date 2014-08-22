@@ -16,12 +16,12 @@ drush en -y simpletest > /dev/null 2>&1
 drush dis -y apachesolr > /dev/null 2>&1
 
 if [ "$1" == "" ]; then
-	echo "Stand back! I'm running ALL the tests from group OSHA ..."
-	drush test-run --uri=${uri} OSHA
+    echo "Stand back! I'm running ALL the tests from group OSHA ..."
+    drush test-run --uri=${uri} OSHA
 else
-	if [ "$2" != "" ]; then
-		drush test-run --uri=${uri} $1 --methods=$2
-	else
-		drush test-run --uri=${uri} $1
-	fi
+    if [ "$2" != "" ]; then
+        drush test-run --uri=${uri} $1 --methods=$2
+    else
+        drush test-run --uri=${uri} $1
+    fi
 fi
