@@ -306,6 +306,9 @@ $options['init-modules'] = array(
 
   'imce_wysiwyg',
   'wysiwyg_accordion',
+
+  'nodequeue',
+
   'osha',
   'osha_migration',
   'osha_news',
