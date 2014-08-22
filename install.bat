@@ -18,7 +18,7 @@ call drush block-configure language --module=locale --region=header
 echo "Registering migrations ..."
 call drush migrate-auto-register
 
-IF NOT %1=="--migrate" GOTO DONE
+IF NOT %1==--migrate GOTO DONE
 
 :MIGRATE
     echo "Importing Activity taxonomy"
