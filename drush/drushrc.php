@@ -308,6 +308,8 @@ $options['init-modules'] = array(
   'wysiwyg_accordion',
 
   'nodequeue',
+  'fe_block',
+  'fe_nodequeue',
 
   'osha',
   'osha_migration',
