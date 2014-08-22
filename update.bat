@@ -34,7 +34,7 @@ IF NOT %1==--migrate GOTO DONE
     call drush migrate-import --update Files
 
     echo "Importing Images content"
-    drush migrate-import --update Images
+    call drush migrate-import --update Images
 
     echo "Importing News content"
     call drush migrate-import --update News
