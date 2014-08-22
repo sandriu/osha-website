@@ -300,6 +300,7 @@ $options['init-modules'] = array(
   #'apachesolr_search',
   #'search_api_solr',
   'strongarm',
+  'exclude_node_title',
 
   'pdf_to_image',
   'doc_to_imagefield',
