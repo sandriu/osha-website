@@ -159,6 +159,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
           $new_job_item = $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
           $new_job_item->source_language = $source_language;
           $new_job_item->target_language = $target_language;
+          OshaTMGMTStatistics::computeJobItemStatistics($new_job_item);
           $new_job_item->save();
           $remove_job_item_ids[$job_item->tjiid] = $job_item->tjiid;
           $job_empty = FALSE;
@@ -183,6 +184,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
       $redirects = tmgmt_ui_job_checkout_multiple(array($job));
       // Update the job title with it's ID as current label doesn't make sense.
       $job->label = t('Translation job #!tjid', array('!tjid' => $job->tjid));
+      OshaTMGMTStatistics::computeJobStatistics($job);
       $job->save();
       if ($redirects) {
         if (isset($_GET['destination'])) {
@@ -261,5 +263,86 @@ function osha_tmgmt_views_default_views_alter(&$views) {
     $handler->display_options['fields']['progress'] = $progress;
     $handler->display_options['fields']['changed'] = $changed;
     $handler->display_options['fields']['operations'] = $operations;
+  }
+}
+
+
+class OshaTMGMTStatistics {
+
+  /**
+   * Compute statistics such as character/page count for a job item.
+   *
+   * @param TMGMTJobItem $job_item
+   *   Attach statistical information to the job item
+   */
+  public static function computeJobItemStatistics(&$job_item) {
+    $job_item->character_count = 0;
+    $job_item->page_count = 0;
+    $job_item->character_count = self::countJobItemCharacters($job_item);
+    if ($job_item->character_count > 0) {
+      $cpp = variable_get('osha_tmgmt_characters_per_page', 1500);
+      $job_item->page_count = $job_item->character_count / $cpp;
+    }
+  }
+
+  /**
+   * Compute statistics such as character/page count for a job.
+   *
+   * @param TMGMTJob $job
+   *   Attach statistical information to the job
+   */
+  public static function computeJobStatistics(&$job) {
+    $job->character_count = 0;
+    $job->page_count = 0;
+    $items = $job->getItems();
+    /* @var TMGMTJobItem $item */
+    foreach ($items as $item) {
+      if ($item->character_count == 0) {
+        self::computeJobItemStatistics($item);
+      }
+      if ($item->character_count > 0) {
+        $job->character_count += $item->character_count;
+      }
+    }
+    if ($job->character_count > 0) {
+      $cpp = variable_get('osha_tmgmt_characters_per_page', 1500);
+      $job->page_count = $job->character_count / $cpp;
+    }
+  }
+
+  /**
+   * Count all characters inside a job item.
+   *
+   * @param TMGMTJobItem $job_item
+   *   Job item.
+   *
+   * @return int
+   *   Number of characters from all job item structures (ie. fields)
+   */
+  public static function countJobItemCharacters($job_item) {
+    $ret = 0;
+    self::count($job_item->getSourceData(), $ret);
+    return $ret;
+  }
+
+  /**
+   * Recursively count the length of inner #text keys of this data array.
+   *
+   * @param TMGMTJobItem $item
+   *   Job item
+   * @param int $count
+   *   Number of characters from all structures (ie. fields)
+   */
+  protected static function count($item, &$count) {
+    if (!empty($item['#text'])) {
+      if (_tmgmt_filter_data($item)) {
+        $count += strlen($item['#text']);
+      }
+    }
+    elseif (is_array($item)) {
+      foreach (element_children($item) as $key) {
+        self::count($item[$key], $count);
+      }
+    }
   }
 }
