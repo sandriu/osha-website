@@ -46,12 +46,12 @@ function osha_publication_views_default_views() {
     'multiple_to' => '',
   );
   /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
   /* Field: Content: Publication Type */
   $handler->display->display_options['fields']['field_publication_type']['id'] = 'field_publication_type';
   $handler->display->display_options['fields']['field_publication_type']['table'] = 'field_data_field_publication_type';
@@ -109,13 +109,31 @@ function osha_publication_views_default_views() {
     3 => 0,
   );
   $handler->display->display_options['filters']['combine']['fields'] = array(
-    'title' => 'title',
+    'title_field' => 'title_field',
     'body' => 'body',
   );
-  /* Filter criterion: Content: Language */
+  /* Filter criterion: Content: Publication Type (field_publication_type) */
+  $handler->display->display_options['filters']['field_publication_type_tid']['id'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['table'] = 'field_data_field_publication_type';
+  $handler->display->display_options['filters']['field_publication_type_tid']['field'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_publication_type_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator_id'] = 'field_publication_type_tid_op';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator'] = 'field_publication_type_tid_op';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['identifier'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_publication_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_publication_type_tid']['vocabulary'] = 'publication_types';
+  /* Filter criterion: Entity translation: Language */
   $handler->display->display_options['filters']['language']['id'] = 'language';
-  $handler->display->display_options['filters']['language']['table'] = 'node';
+  $handler->display->display_options['filters']['language']['table'] = 'entity_translation';
   $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['relationship'] = 'entity_translations';
   $handler->display->display_options['filters']['language']['value'] = array(
     'en' => 'en',
     'bg' => 'bg',
@@ -140,7 +158,12 @@ function osha_publication_views_default_views() {
     'pt' => 'pt',
     'ro' => 'ro',
     'ru' => 'ru',
+    'sk' => 'sk',
+    'sl' => 'sl',
+    'sv' => 'sv',
+    'tr' => 'tr',
   );
+  $handler->display->display_options['filters']['language']['group'] = 1;
   $handler->display->display_options['filters']['language']['exposed'] = TRUE;
   $handler->display->display_options['filters']['language']['expose']['operator_id'] = 'language_op';
   $handler->display->display_options['filters']['language']['expose']['label'] = 'Language';
@@ -151,28 +174,12 @@ function osha_publication_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  $handler->display->display_options['filters']['language']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Content: Publication Type (field_publication_type) */
-  $handler->display->display_options['filters']['field_publication_type_tid']['id'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['table'] = 'field_data_field_publication_type';
-  $handler->display->display_options['filters']['field_publication_type_tid']['field'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator_id'] = 'field_publication_type_tid_op';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['label'] = 'Type';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator'] = 'field_publication_type_tid_op';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['identifier'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_publication_type_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_publication_type_tid']['vocabulary'] = 'publication_types';
   /* Filter criterion: Field: Nace (field_nace_codes) */
   $handler->display->display_options['filters']['field_nace_codes_tid']['id'] = 'field_nace_codes_tid';
   $handler->display->display_options['filters']['field_nace_codes_tid']['table'] = 'field_data_field_nace_codes';
   $handler->display->display_options['filters']['field_nace_codes_tid']['field'] = 'field_nace_codes_tid';
   $handler->display->display_options['filters']['field_nace_codes_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_nace_codes_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_nace_codes_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['operator_id'] = 'field_nace_codes_tid_op';
   $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['label'] = 'Nace';
@@ -189,6 +196,7 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
   $handler->display->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
   $handler->display->display_options['filters']['field_tags_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_tags_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
   $handler->display->display_options['filters']['field_tags_tid']['expose']['label'] = 'Tags';
@@ -205,6 +213,7 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['filters']['field_thesaurus_tid']['table'] = 'field_data_field_thesaurus';
   $handler->display->display_options['filters']['field_thesaurus_tid']['field'] = 'field_thesaurus_tid';
   $handler->display->display_options['filters']['field_thesaurus_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_thesaurus_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_thesaurus_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['operator_id'] = 'field_thesaurus_tid_op';
   $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['label'] = 'Thesaurus';
@@ -219,6 +228,11 @@ function osha_publication_views_default_views() {
 
   /* Display: Publications */
   $handler = $view->new_display('page', 'Publications', 'page');
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Entity translation: translations */
+  $handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
+  $handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
+  $handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
   $handler->display->display_options['path'] = 'publications';
 
   /* Display: Block */
@@ -259,12 +273,12 @@ function osha_publication_views_default_views() {
     'multiple_to' => '',
   );
   /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
   /* Field: Content: File */
   $handler->display->display_options['fields']['field_file']['id'] = 'field_file';
   $handler->display->display_options['fields']['field_file']['table'] = 'field_data_field_file';
@@ -309,11 +323,12 @@ function osha_publication_views_default_views() {
     t('last »'),
     t('Body'),
     t('Search'),
-    t('Language'),
     t('Type'),
+    t('Language'),
     t('Nace'),
     t('Tags'),
     t('Thesaurus'),
+    t('Translations'),
     t('Block'),
     t('queue'),
     t('Publications Slideshow'),
