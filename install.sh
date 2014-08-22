@@ -60,6 +60,13 @@ if [ "$1" == "--migrate" ]; then
 	echo "Importing Job vacancies content"
 	drush migrate-import JobVacancies
 
+	echo "Importing Calls content"
+	drush migrate-import Calls
+    
+	echo "Importing PressRelease content"
+	drush migrate-import PressRelease
+    
+
 fi
 
 drush cc all

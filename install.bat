@@ -57,6 +57,15 @@ IF NOT %1==--migrate GOTO DONE
     echo "Importing Case Study content"
     call drush migrate-import CaseStudy
 
+	echo "Importing Job vacancies content"
+	call drush migrate-import JobVacancies
+
+	echo "Importing Calls content"
+	call drush migrate-import Calls
+    
+	echo "Importing PressRelease content"
+	call drush migrate-import PressRelease
+
 :DONE
 
 call drush cc all

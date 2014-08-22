@@ -36,3 +36,12 @@ cd docroot
     echo "Importing Case Study content"
     call drush migrate-import CaseStudy
 
+	echo "Importing Job vacancies content"
+	call drush migrate-import JobVacancies
+
+	echo "Importing Calls content"
+	call drush migrate-import Calls
+    
+	echo "Importing PressRelease content"
+	call drush migrate-import PressRelease
+
