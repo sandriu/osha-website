@@ -250,5 +250,33 @@
 		"el": "Εκθέσεις αξιολόγησης",
 		"bg": "Доклади за оценка",
 		"code": "evaluation_reports"
+	},
+	{
+		"da": "Casestudier",
+		"de": "Lösungen",
+		"et": "Juhtumiuuringud",
+		"en": "Case studies",
+		"es": "Casos de estudio",
+		"fr": "Études de cas",
+		"hr": "Case studies",
+		"it": "Studi di casi concreti",
+		"lv": "Problēmsituāciju analīze",
+		"lt": "Atvejų tyrimai",
+		"hu": "Esettanulmányok",
+		"mt": "Studji tal-Każijiet",
+		"nl": "Casestudies",
+		"no": "Case Studies",
+		"pl": "Studia przypadku",
+		"pt": "Estudos de casos",
+		"ro": "Studii de caz",
+		"sk": "Prípadové štúdie",
+		"sl": "Študije primerov",
+		"fi": "Tapaustutkimukset",
+		"sv": "Fallstudier",
+		"is": "Case studies",
+		"cs": "Případové studie",
+		"el": "Περιπτωσιολογικές μελέτες",
+		"bg": "Проучвания на отделни случаи",
+		"code": "case_studies"
 	}
 ]
