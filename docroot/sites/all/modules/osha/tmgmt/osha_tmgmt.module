@@ -29,7 +29,9 @@ function osha_tmgmt_schema_alter(&$schema) {
       'description' => 'Number of characters for this job',
     );
     $schema['tmgmt_job_item']['fields']['page_count'] = array(
-      'type' => 'int',
+      'type' => 'numeric',
+      'precision' => 6,
+      'scale' => 2,
       'default' => 0,
       'not null' => TRUE,
       'description' => 'Number of pages for this job',
@@ -43,7 +45,9 @@ function osha_tmgmt_schema_alter(&$schema) {
       'description' => 'Number of characters for this job',
     );
     $schema['tmgmt_job']['fields']['page_count'] = array(
-      'type' => 'int',
+      'type' => 'numeric',
+      'precision' => 6,
+      'scale' => 2,
       'default' => 0,
       'not null' => TRUE,
       'description' => 'Number of pages for this job',

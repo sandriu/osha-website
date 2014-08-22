@@ -74,7 +74,9 @@ function osha_tmgmt_install() {
 
   if (!db_field_exists('tmgmt_job_item', 'page_count')) {
     $field = array(
-      'type' => 'int',
+      'type' => 'numeric',
+      'precision' => 6,
+      'scale' => 2,
       'default' => 0,
       'not null' => TRUE,
       'description' => 'Number of pages for this job item',
@@ -95,7 +97,9 @@ function osha_tmgmt_install() {
 
   if (!db_field_exists('tmgmt_job', 'page_count')) {
     $field = array(
-      'type' => 'int',
+      'type' => 'numeric',
+      'precision' => 6,
+      'scale' => 2,
       'default' => 0,
       'not null' => TRUE,
       'description' => 'Number of pages for this job item',
