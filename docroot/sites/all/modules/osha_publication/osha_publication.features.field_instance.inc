@@ -147,6 +147,7 @@ function osha_publication_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'file_directory' => 'publications/cover_images',
       'file_extensions' => 'png gif jpg jpeg',
+      'image_field_caption' => 0,
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
