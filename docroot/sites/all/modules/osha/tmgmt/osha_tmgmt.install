@@ -1,6 +1,29 @@
 <?php
 
 /**
+ * Implements hook_uninstall().
+ */
+function osha_tmgmt_uninstall() {
+  if (db_field_exists('tmgmt_job_item', 'source_language')) {
+    watchdog('osha_tmgmt', 'Removing source_language field from tmgmt_job_item');
+    db_drop_field('tmgmt_job_item', 'source_language');
+  }
+  if (db_field_exists('tmgmt_job_item', 'target_language')) {
+    watchdog('osha_tmgmt', 'Removing target_language field from tmgmt_job_item');
+    db_drop_field('tmgmt_job_item', 'target_language');
+  }
+  if (db_field_exists('tmgmt_job_item', 'character_count')) {
+    watchdog('osha_tmgmt', 'Removing character_count field from tmgmt_job_item');
+    db_drop_field('tmgmt_job_item', 'character_count');
+  }
+  if (db_field_exists('tmgmt_job', 'priority')) {
+    watchdog('osha_tmgmt', 'Removing priority field from tmgmt_job');
+    db_drop_field('tmgmt_job', 'priority');
+  }
+}
+
+
+/**
  * Implements hook_install().
  */
 function osha_tmgmt_install() {
