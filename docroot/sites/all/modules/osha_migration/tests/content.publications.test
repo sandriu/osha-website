@@ -56,9 +56,6 @@ class MigrateOshaPublicationTest extends OshaWebTestCase {
     $source_file = $module_path . '/data/tags.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
-    $source_file = $module_path . '/data/thesaurus.json';
-    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
-
     $source_file = $module_path . '/data/publication_types.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES, 'MigrateOshaTaxonomyPublicationTypes', $source_file);
 
@@ -104,7 +101,7 @@ class MigrateOshaPublicationTest extends OshaWebTestCase {
 
     $this->assertEqual(
       $witness['author'],
-      $node->field_author[LANGUAGE_NONE][0]['value']
+      $node->field_author[$node->language][0]['value']
     );
 
     $languages = language_list();
@@ -168,34 +165,34 @@ class MigrateOshaPublicationTest extends OshaWebTestCase {
     $this->assertTrue(array_key_exists('publications/corporate/annual-report-2013-summary', $subject));
     $this->assertTrue(array_key_exists('publications/e-facts/efact40', $subject));
 
-    $first = $subject['publications/corporate/annual-report-2013-summary'];
-    $this->assertEqual('private', $first['workflow_state']);
-    $this->assertEqual('04/05/2014 11:29 AM', $first['creation_date']);
-    $this->assertEqual('12/06/2014 05:03 PM', $first['modification_date']);
-    $this->assertEqual('10/06/2014 00:00', $first['publication_date']);
+    $first = $subject['publications/e-facts/efact40'];
+    $this->assertEqual('published', $first['workflow_state']);
+    $this->assertEqual('08/10/08 02:52 PM', $first['creation_date']);
+    $this->assertEqual('10/04/13 11:22 AM', $first['modification_date']);
+    $this->assertEqual('07/10/2008 06:50 AM', $first['publication_date']);
     $this->assertEqual('moral_osha_europa_eu', $first['creator']);
 
-    $this->assertEqual('Bulgarian title', $first['title_field']['bg']);
-    $this->assertEqual('Spanish title', $first['title_field']['es']);
-    $this->assertEqual('English title', $first['title_field']['en']);
-    $this->assertEqual('English title', $first['title']);
+    $this->assertEqual('Finnish title', $first['title_field']['fi']);
+    $this->assertEqual('Hungarian title', $first['title_field']['hu']);
+    $this->assertEqual('English title 2', $first['title_field']['en']);
+    $this->assertEqual('English title 2', $first['title']);
 
-    $this->assertEqual('Description bg', $first['description']['bg']);
-    $this->assertEqual('Description es', $first['description']['es']);
-    $this->assertEqual('Description en', $first['description']['en']);
+    $this->assertEqual('Description 2 fi', $first['description']['fi']);
+    $this->assertEqual('Description 2 hu', $first['description']['hu']);
+    $this->assertEqual('Description 2 en', $first['description']['en']);
 
     $this->assertEqual('European Agency for Safety and Health at Work', $first['author']);
 
-    $this->assertEqual('ORD1', $first['order_id']['bg']);
-    $this->assertEqual('ORD2', $first['order_id']['es']);
-    $this->assertEqual('ORD3', $first['order_id']['en']);
+    $this->assertEqual('ORD5', $first['order_id']['fi']);
+    $this->assertEqual('ORD6', $first['order_id']['hu']);
+    $this->assertEqual('ORD4', $first['order_id']['en']);
 
-    $this->assertEqual('/bg/image/druplicon_bg.png', $first['cover_image']['bg']);
-    $this->assertEqual('/es/image/druplicon_es.png', $first['cover_image']['es']);
+    $this->assertEqual('', $first['cover_image']['fi']);
+    $this->assertEqual('/hu/image/druplicon_hu.png', $first['cover_image']['hu']);
     $this->assertEqual('/en/image/druplicon_en.png', $first['cover_image']['en']);
 
-    $this->assertEqual('/bg/file/file_test_bg.pdf', $first['file']['bg']);
-    $this->assertEqual('', $first['file']['es']);
+    $this->assertEqual('/fi/file/file_test_fi.pdf', $first['file']['fi']);
+    $this->assertEqual('', $first['file']['hu']);
     $this->assertEqual('/en/file/file_test_en.pdf', $first['file']['en']);
 
     $second = $subject['publications/e-facts/efact40'];

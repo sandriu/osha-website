@@ -291,6 +291,7 @@ $options['init-modules'] = array(
   'file_entity',
   'media',
   'languagefield',
+  'image_field_caption',
 
   #'search_api',
   #'facetapi',
@@ -298,6 +299,19 @@ $options['init-modules'] = array(
   #'apachesolr',
   #'apachesolr_search',
   #'search_api_solr',
+
+  'tmgmt_local',
+  'tmgmt_entity',
+  'tmgmt_entity_ui',
+  'tmgmt_ui',
+  'tmgmt_file',
+  'tmgmt_node',
+  'tmgmt_i18n_string',
+  'tmgmt_locale',
+
+  'i18n_menu',
+  'i18n_block',
+
   'strongarm',
 
   'pdf_to_image',
@@ -311,6 +325,7 @@ $options['init-modules'] = array(
   'osha_publication',
   'osha_case_study',
   'osha_blog',
+  'osha_newsletter',
 
   'devel',
   'diff',

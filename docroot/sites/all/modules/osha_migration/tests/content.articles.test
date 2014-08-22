@@ -99,6 +99,9 @@ class MigrateOshaArticleTest extends OshaWebTestCase {
     foreach ($witness['text'] as $language => $text) {
       $this->assertEqual($text, $node->body[$language][0]['value']);
     }
+
+    $this->oshaAssertEqualFileMultilingual($node, 'field_image', $witness, 'relatedItems', 'public://pages');
+
     $tids = array(
       $node->field_tags[LANGUAGE_NONE][0]['tid'],
       $node->field_tags[LANGUAGE_NONE][1]['tid'],
@@ -129,7 +132,7 @@ class MigrateOshaArticleTest extends OshaWebTestCase {
     $this->assertEqual('2012-07-18 17:00:24', $first['creation_date']);
     $this->assertEqual('2014-05-05 13:08:24', $first['modification_date']);
     $this->assertEqual('2012-07-31 15:30:00', $first['publication_date']);
-    $this->assertEqual('moral_osha_europa_eu', $first['creator']);
+    $this->assertEqual('thomas_syslab_com', $first['creator']);
 
     $this->assertEqual('Bulgarian title', $first['title_field']['bg']);
     $this->assertEqual('Spanish title', $first['title_field']['es']);
@@ -144,9 +147,9 @@ class MigrateOshaArticleTest extends OshaWebTestCase {
     $this->assertEqual('Text es', $first['text']['es']);
     $this->assertEqual('Text en', $first['text']['en']);
 
-    $this->assertEqual('/en/safety-health-in-figures/data-survey.jpg', $first['relatedItems']['en']);
-    $this->assertEqual('/es/safety-health-in-figures/data-survey.jpg', $first['relatedItems']['es']);
-    $this->assertEqual('/bg/safety-health-in-figures/data-survey.jpg', $first['relatedItems']['bg']);
+    $this->assertEqual('/en/image/druplicon_en.png', $first['relatedItems']['en']);
+    $this->assertEqual('/es/image/druplicon_es.png', $first['relatedItems']['es']);
+    $this->assertEqual('/bg/image/druplicon_bg.png', $first['relatedItems']['bg']);
 
     $second = $subject['safety-health-in-figures/index_html'];
     $this->assertEqual('gender, accident_prevention, risk_assessment, healthcare', $second['subject']);

@@ -1,0 +1,9 @@
+<?php
+/**
+ * @file
+ * Code for the Job vacancies feature.
+ */
+
+include_once 'osha_job_vacancies.features.inc';
+
+define('OSHA_JOB_VACANCIES_CONTENT_TYPE_JOB_VACANCIES', 'job_vacancies');

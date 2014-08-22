@@ -1,62 +1,71 @@
 @echo off
 rem Setup a clean site in docroot/
 cd docroot/
-drush site-install -y
+call drush site-install -y
 
 rem Save configuration to database for later usage
-drush php-script ../scripts/drupal_pre_install.php
+call drush php-script ../scripts/drupal_pre_install.php
 
-drush init
-drush build
+call drush init
+call drush build
 
-drush php-script ../scripts/drupal_post_install.php
+call drush php-script ../scripts/drupal_post_install.php
 
 rem Enable required blocks
 echo "Enable required blocks ..."
-drush block-configure language --module=locale --region=header
+call drush block-configure language --module=locale --region=header
 
 echo "Registering migrations ..."
-drush migrate-auto-register
+call drush migrate-auto-register
 
-IF NOT %1=="--migrate" GOTO DONE
+IF NOT %1==--migrate GOTO DONE
 
 :MIGRATE
     echo "Importing Activity taxonomy"
-    drush migrate-import TaxonomyActivity
+    call drush migrate-import TaxonomyActivity
 
     echo "Importing NACE codes taxonomy"
-    drush migrate-import TaxonomyNaceCodes
+    call drush migrate-import TaxonomyNaceCodes
 
     echo "Importing ESENER taxonomy"
-    drush migrate-import TaxonomyEsener
+    call drush migrate-import TaxonomyEsener
 
     echo "Importing Publication types taxonomy"
-    drush migrate-import TaxonomyPublicationTypes
+    call drush migrate-import TaxonomyPublicationTypes
 
     echo "Importing multilingual Thesaurus taxonomy"
-    drush migrate-import TaxonomyThesaurus
+    call drush migrate-import TaxonomyThesaurus
 
     echo "Importing Tags taxonomy"
-    drush migrate-import TaxonomyTags
+    call drush migrate-import TaxonomyTags
 
 	echo "Importing Files content"
-	drush migrate-import Files
+	call drush migrate-import Files
 
     echo "Importing News content"
-    drush migrate-import News
+    call drush migrate-import News
 
     echo "Importing Publications content"
-    drush migrate-import Publication
+    call drush migrate-import Publication
 
     echo "Importing Articles content"
-    drush migrate-import Article
+    call drush migrate-import Article
 
     echo "Importing Blog content"
-    drush migrate-import Blog
+    call drush migrate-import Blog
 
     echo "Importing Case Study content"
-    drush migrate-import CaseStudy
+    call drush migrate-import CaseStudy
+
+	echo "Importing Job vacancies content"
+	call drush migrate-import JobVacancies
+
+	echo "Importing Calls content"
+	call drush migrate-import Calls
+    
+	echo "Importing PressRelease content"
+	call drush migrate-import PressRelease
 
 :DONE
 
-drush cc all
+call drush cc all

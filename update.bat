@@ -3,52 +3,61 @@
 rem Setup a clean site in docroot/
 cd docroot/
 
-drush build
+call drush build
 
 echo "Registering migrations ..."
-drush migrate-auto-register
+call drush migrate-auto-register
 
-IF NOT %1=="--migrate" GOTO DONE
+IF NOT %1==--migrate GOTO DONE
 
 :MIGRATE
 
 	echo "Importing Activity taxonomy"
-	drush migrate-import TaxonomyActivity
+	call drush migrate-import TaxonomyActivity
 
 	echo "Importing NACE codes taxonomy"
-	drush migrate-import --update TaxonomyNaceCodes
+	call drush migrate-import --update TaxonomyNaceCodes
 
 	echo "Importing ESENER taxonomy"
-	drush migrate-import --update TaxonomyEsener
+	call drush migrate-import --update TaxonomyEsener
 
 	echo "Importing Publication types taxonomy"
-	drush migrate-import --update TaxonomyPublicationTypes
+	call drush migrate-import --update TaxonomyPublicationTypes
 
 	echo "Importing multilingual Thesaurus taxonomy"
-	drush migrate-import --update TaxonomyThesaurus
+	call drush migrate-import --update TaxonomyThesaurus
 
 	echo "Importing Tags taxonomy"
-	drush migrate-import --update TaxonomyTags
+	call drush migrate-import --update TaxonomyTags
 
 	echo "Importing Files content"
-	drush migrate-import --update Files
+	call drush migrate-import --update Files
 
 	echo "Importing News content"
-	drush migrate-import --update News
+	call drush migrate-import --update News
 
 	echo "Importing Publications content"
-	drush migrate-import --update Publication
+	call drush migrate-import --update Publication
 
 	echo "Importing Articles content"
-	drush migrate-import --update Article
+	call drush migrate-import --update Article
 
 	echo "Importing Blog content"
-	drush migrate-import --update Blog
+	call drush migrate-import --update Blog
 
 	echo "Importing Case Study content"
-	drush migrate-import --update CaseStudy
+	call drush migrate-import --update CaseStudy
+
+	echo "Importing Job vacancies content"
+	call drush migrate-import JobVacancies
+
+	echo "Importing Calls content"
+	call drush migrate-import Calls
+    
+	echo "Importing PressRelease content"
+	call drush migrate-import PressRelease
 
 fi
 
 :DONE
-drush cc all
+call drush cc all

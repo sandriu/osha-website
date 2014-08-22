@@ -61,53 +61,6 @@ function osha_blog_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-blog-field_blog_image_caption'
-  $field_instances['node-blog-field_blog_image_caption'] = array(
-    'bundle' => 'blog',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_blog_image_caption',
-    'label' => 'Image caption',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 8,
-    ),
-  );
-
   // Exported field_instance: 'node-blog-field_image'
   $field_instances['node-blog-field_image'] = array(
     'bundle' => 'blog',
@@ -147,6 +100,7 @@ function osha_blog_field_default_field_instances() {
       'entity_translation_sync' => 0,
       'file_directory' => 'blog',
       'file_extensions' => 'png gif jpg jpeg',
+      'image_field_caption' => 1,
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
@@ -466,7 +420,6 @@ function osha_blog_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Image');
-  t('Image caption');
   t('Nace');
   t('Publication date');
   t('Summary');

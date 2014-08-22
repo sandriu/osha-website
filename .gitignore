@@ -51,3 +51,7 @@ docroot/sites/*/private
 ehthumbs.db
 Icon\?
 Thumbs.db
+
+# Allow these extensions for testing purposes #
+###############################################
+!docroot/sites/all/modules/osha_migration/data/test/export/*/file/*.zip

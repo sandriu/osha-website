@@ -7,7 +7,9 @@ define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
 define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
 define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
 define('OSHA_MIGRATION_CONTENT_TYPE_ARTICLE', 'Article');
+define('OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES', 'JobVacancies');
 define('OSHA_MIGRATION_CONTENT_TYPE_BLOG', 'Blog');
+define('OSHA_MIGRATION_CONTENT_TYPE_CALLS', 'Calls');
 define('OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY', 'CaseStudy');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
@@ -59,9 +61,17 @@ function osha_migration_migrate_api() {
         'class_name' => 'MigrateOshaBlog',
         'file_name' => osha_migration_get_data_dir() . '/export/blog.txt',
       ),
+      OSHA_MIGRATION_CONTENT_TYPE_CALLS => array(
+        'class_name' => 'MigrateOshaCalls',
+        'file_name' => osha_migration_get_data_dir() . '/export/call_for_contractors.txt',
+      ),
       OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY => array(
         'class_name' => 'MigrateOshaCaseStudy',
         'file_name' => osha_migration_get_data_dir() . '/export/case_studies.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES => array(
+        'class_name' => 'OshaMigrateJobVacancies',
+        'file_name' => osha_migration_get_data_dir() . '/export/job_vacancies.txt',
       ),
       OSHA_MIGRATION_CONTENT_TYPE_NEWS => array(
         'class_name' => 'MigrateOshaNews',
@@ -147,11 +157,13 @@ class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
       $file_class = 'MigrateFileUri';
     }
 
+
     // If a destination directory (relative to the Drupal public files directory)
     // is not explicitly provided, use the default for the field.
     if (empty($arguments['destination_dir'])) {
       $arguments['destination_dir'] = $this->destinationDir($field_info, $instance);
     }
+
 
     $return = array();
 
@@ -184,7 +196,7 @@ class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
         $owner = isset($entity->uid) ? $entity->uid : 0;
         // Call the MigrateFileInterface implementation to do the real work.
 
-        if ($arguments['multilingual']) {
+        if (!empty($arguments['multilingual'])) {
           $language = $delta;
         }
         // Add support for multi value field.
@@ -234,5 +246,24 @@ class OSHAMigrateImageFieldHandler extends MigrateImageFieldHandler {
   public function prepare($entity, array $field_info, array $instance, array $values) {
     $file_handler = new OSHAMigrateFileFieldHandler();
     return $file_handler->prepare($entity, $field_info, $instance, $values);
+  }
+}
+
+/**
+ * Class OSHAMigrateFile extends MigrateFileUri
+ *  adds multilingual file attribute
+ */
+class OSHAMigrateFileUri extends MigrateFileUri {
+  /**
+   * Implementation of MigrateFileInterface::fields().
+   *
+   * @return array
+   *   fields for file
+   */
+  static public function fields() {
+    return parent::fields() +
+    array(
+      'multilingual' => 'XXX',
+    );
   }
 }

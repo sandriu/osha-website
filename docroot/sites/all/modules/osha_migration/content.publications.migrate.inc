@@ -143,46 +143,14 @@ class OshaMigratePublications extends DynamicMigration {
    * Executes before Import.
    */
   public function preImport() {
-    // Remove default Handlers for Field and Image and let OSHA Handlers to take
-    // care of these fields.
-    $default_file_handler = 'MigrateFileFieldHandler';
-    $default_image_handler = 'MigrateImageFieldHandler';
-    $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
-    if (!is_array($handlers)) {
-      $handlers[] = $default_file_handler;
-      $handlers[] = $default_image_handler;
-
-    }
-    else {
-      if (!in_array($default_file_handler, $handlers)) {
-        $handlers[] = $default_file_handler;
-      }
-      if (!in_array($default_image_handler, $handlers)) {
-        $handlers[] = $default_file_handler;
-      }
-    }
-    variable_set('migrate_disabled_handlers', serialize($handlers));
+    MigrationUtil::activateOshaFilesHandler();
   }
 
   /**
    * Executes after import.
    */
   public function postImport() {
-    // Reset migrate_disabled_handlers variable.
-    $default_file_handler = 'MigrateFileFieldHandler';
-    $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
-    if (is_array($handlers)) {
-      $key = array_search($default_file_handler, $handlers);
-      if ($key !== FALSE) {
-        unset($handlers[$key]);
-      }
-      $default_image_handler = 'MigrateImageFieldHandler';
-      $key = array_search($default_image_handler, $handlers);
-      if ($key !== FALSE) {
-        unset($handlers[$key]);
-      }
-      variable_set('migrate_disabled_handlers', serialize($handlers));
-    }
+    MigrationUtil::deactivateOshaFilesHandler();
   }
 
   /**
@@ -268,15 +236,6 @@ class OshaMigratePublications extends DynamicMigration {
           else {
             $this->saveMessage("Could not find publication related imported file: {$path}", MigrationBase::MESSAGE_WARNING);
           }
-          /*$rel_file_fid = $this->handleSourceMigration(OSHA_MIGRATION_FILES, $path);
-          var_dump($path);
-          var_dump($rel_file_fid);
-          if (!empty($rel_file_fid)) {
-            $files[] = $rel_file_fid;
-          }
-          else {
-            $this->saveMessage("Failed to migrate related file: {$path}", MigrationBase::MESSAGE_WARNING);
-          }*/
         }
       }
       $row->related_resources = $files;
@@ -454,6 +413,7 @@ class PublicationMigrateList extends MigrateList {
   protected function parseSourceFile() {
     $handle = fopen($this->fileURL, 'r');
     $fields = $raw_data = fgetcsv($handle, NULL, ';');
+    $work_flow_key = array_search('workflow_state', $fields);
 
     self::$data = array();
     while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
@@ -462,6 +422,16 @@ class PublicationMigrateList extends MigrateList {
       $path_parts = explode('/', $path);
 
       self::$data[$path]['id'] = $path;
+      // Assign the workflow state of the row from english entry.
+      if ($language == 'en') {
+        self::$data[$path]['workflow_state'] = $raw_data[$work_flow_key];
+      }
+      // Skip the private translations.
+      if (!in_array($raw_data[$work_flow_key],
+        array('published', 'checked', 'to_amend'))) {
+        continue;
+      }
+
       self::$data[$path]['publication_type'] = !empty($path_parts[1]) ? $path_parts[1] : NULL;
       foreach ($fields as $key => $field) {
         switch ($field) {
@@ -496,7 +466,9 @@ class PublicationMigrateList extends MigrateList {
             break;
 
           default:
-            self::$data[$path][$field] = $raw_data[$key];
+            if ($language == 'en') {
+              self::$data[$path][$field] = $raw_data[$key];
+            }
         }
       }
     }
