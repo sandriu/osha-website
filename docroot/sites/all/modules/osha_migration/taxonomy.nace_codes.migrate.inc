@@ -116,6 +116,13 @@ class MigrateOshaTaxonomyNaceCodes extends DynamicMigration {
    */
   public function prepareRow($row) {
     $row->language = 'en';
+
+    // Because getNextRow() from MigrateList (sources/list.inc)
+    // checks row id using empty empty("0") => true
+    if ($row->NACE_REV_2_CODE == '_0') {
+      $row->NACE_REV_2_CODE = '0';
+    }
+
     $row->weight = $this->getWeightByCode($row);
 
     $parent_code = $this->getParentCode($row);
