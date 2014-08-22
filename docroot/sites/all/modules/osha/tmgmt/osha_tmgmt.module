@@ -113,7 +113,6 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
     OSHA_TMGMT_DEFAULT_TARGET_LANGUAGE,
     $user->uid
   );
-
   $remove_job_item_ids = array();
   // Loop over all target languages, create a job for each source and target
   // language combination add add the relevant job items to it.
@@ -153,8 +152,27 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
       entity_delete_multiple('tmgmt_job_item', $remove_job_item_ids);
     }
     if ($job) {
-      // Start the checkout process if any jobs were created.
-      tmgmt_ui_job_checkout_and_redirect($form_state, array($job));
+      // This whole block replaces tmgmt_ui_job_checkout_and_redirect().
+      $redirects = tmgmt_ui_job_checkout_multiple(array($job));
+      // Update the job title with it's ID as current label doesn't make sense.
+      $job->label = t('Translation job #!tjid', array('!tjid' => $job->tjid));
+      $job->save();
+      if ($redirects) {
+        if (isset($_GET['destination'])) {
+          // Remove existing destination, as that will prevent us from being
+          // redirect to the job checkout page. Set the destination as the final
+          // redirect instead.
+          tmgmt_ui_redirect_queue_set($redirects, $_GET['destination']);
+          unset($_GET['destination']);
+        }
+        else {
+          tmgmt_ui_redirect_queue_set($redirects, current_path());
+        }
+        $form_state['redirect'] = tmgmt_ui_redirect_queue_dequeue();
+
+        // Count of the job messages is one less due to the final redirect.
+        drupal_set_message(format_plural(count($redirects), t('One job needs to be checked out.'), t('@count jobs need to be checked out.')));
+      }
     }
   }
   else {
