@@ -1,0 +1,368 @@
+<?php
+
+define('OSHA_TMGMT_DEFAULT_SOURCE_LANGUAGE', 'en');
+define('OSHA_TMGMT_DEFAULT_TARGET_LANGUAGE', 'ro');
+define('OSHA_TMGMT_WORDS_PER_PAGE', 250);
+
+/**
+ * Implements hook_schema_alter().
+ */
+function osha_tmgmt_schema_alter(&$schema) {
+  if (isset($schema['tmgmt_job_item'])) {
+    $schema['tmgmt_job_item']['fields']['target_language'] = array(
+      'type' => 'varchar',
+      'size' => 12,
+      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'description' => 'The language the data should be translated to.',
+    );
+    $schema['tmgmt_job_item']['fields']['source_language'] = array(
+      'type' => 'varchar',
+      'size' => 12,
+      'default' => '',
+      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'description' => 'The default entity language',
+    );
+    $schema['tmgmt_job_item']['fields']['character_count'] = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of characters for this job',
+    );
+    $schema['tmgmt_job_item']['fields']['page_count'] = array(
+      'type' => 'numeric',
+      'precision' => 6,
+      'scale' => 2,
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of pages for this job',
+    );
+  }
+  if (isset($schema['tmgmt_job'])) {
+    $schema['tmgmt_job']['fields']['character_count'] = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of characters for this job',
+    );
+    $schema['tmgmt_job']['fields']['page_count'] = array(
+      'type' => 'numeric',
+      'precision' => 6,
+      'scale' => 2,
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of pages for this job',
+    );
+    $schema['tmgmt_job']['fields']['priority'] = array(
+      'type' => 'int',
+      'unsigned' => FALSE,
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Urgency of the translation (0=normal/1=high)',
+    );
+  }
+}
+
+/**
+ * Implements hook_tmgmt_file_format_info().
+ */
+function osha_tmgmt_tmgmt_file_format_plugin_info() {
+  return array(
+    'xml' => array(
+      'label' => t('CDT XML file'),
+      'plugin controller class' => 'OSHATranslatorFileformatCDT',
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function osha_tmgmt_entity_info_alter(&$entity_info) {
+  if (isset($entity_info['tmgmt_job_item'])) {
+    $entity_info['tmgmt_job_item']['views controller class'] = 'OshaTMGMTJobItemViewsController';
+  }
+  if (isset($entity_info['tmgmt_job'])) {
+    $entity_info['tmgmt_job']['views controller class'] = 'OshaTMGMTJobViewsController';
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'tmgmt_ui_entity_source_node_overview_form':
+      unset($form['actions']['submit']);
+      break;
+
+    case 'tmgmt_ui_cart_content':
+      $form['request_translation']['#submit'] = array('osha_tmgmt_tmgmt_ui_cart_content_submit');
+      break;
+
+    case 'tmgmt_job_form':
+      hide($form['info']['source_language']);
+      hide($form['info']['target_language']);
+      hide($form['info']['translator']);
+      $created = $form['info']['created'];
+      unset($form['info']['created']);
+      if (!empty($form['info']['word_count'])) {
+        $avg_pages = sprintf('%.1f', $form['info']['word_count']['#markup'] / OSHA_TMGMT_WORDS_PER_PAGE);
+        $form['info']['pages'] = array(
+          '#title' => t('Average number of pages'),
+          '#type' => 'item',
+          '#markup' => $avg_pages,
+          '#prefix' => '<div id="tmgmt-ui-pages" class="tmgmt-ui-pages tmgmt-ui-info-item">',
+          '#suffix' => '</div>',
+        );
+      }
+      $form['info']['created'] = $created;
+
+      break;
+  }
+}
+
+/**
+ * Overrides form submit for tmgmt cart checkout.
+ */
+function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
+  global $user;
+  $job_empty = TRUE;
+  $target_languages = array_filter($form_state['values']['target_language']);
+  $job_items_by_source_language = array();
+  // Group the selected items by source language.
+  foreach (tmgmt_job_item_load_multiple(array_filter($form_state['values']['items'])) as $job_item) {
+    $job_items_by_source_language[$job_item->getSourceLangCode()][$job_item->tjiid] = $job_item;
+  }
+
+  $job = tmgmt_job_create(
+    OSHA_TMGMT_DEFAULT_SOURCE_LANGUAGE,
+    OSHA_TMGMT_DEFAULT_TARGET_LANGUAGE,
+    $user->uid
+  );
+  $remove_job_item_ids = array();
+  // Loop over all target languages, create a job for each source and target
+  // language combination add add the relevant job items to it.
+  foreach ($target_languages as $target_language) {
+    $job_empty = TRUE;
+    foreach ($job_items_by_source_language as $source_language => $job_items) {
+      // Skip in case the source language is the same as the target language.
+      if ($source_language == $target_language) {
+        continue;
+      }
+      /* @var TMGMTJobItem $job_item */
+      foreach ($job_items as $id => $job_item) {
+        try {
+          // As the same item might be added to multiple jobs, we need to
+          // re-create them and delete the old ones, after removing them from
+          // the cart.
+          $new_job_item = $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
+          $new_job_item->source_language = $source_language;
+          $new_job_item->target_language = $target_language;
+          OshaTMGMTStatistics::computeJobItemStatistics($new_job_item);
+          $new_job_item->save();
+          $remove_job_item_ids[$job_item->tjiid] = $job_item->tjiid;
+          $job_empty = FALSE;
+        }
+        catch (Exception $e) {
+          // If an item fails for one target language, then it is also going
+          // to fail for others, so remove it from the array.
+          unset($job_items_by_source_language[$source_language][$id]);
+          drupal_set_message($e->getMessage(), 'error');
+        }
+      }
+    }
+  }
+  if (!$job_empty) {
+    // Remove assigned job items from the cart.
+    if ($remove_job_item_ids) {
+      tmgmt_ui_cart_get()->removeJobItems($remove_job_item_ids);
+      entity_delete_multiple('tmgmt_job_item', $remove_job_item_ids);
+    }
+    if ($job) {
+      // This whole block replaces tmgmt_ui_job_checkout_and_redirect().
+      $redirects = tmgmt_ui_job_checkout_multiple(array($job));
+      // Update the job title with it's ID as current label doesn't make sense.
+      $job->label = t('Translation job #!tjid', array('!tjid' => $job->tjid));
+      OshaTMGMTStatistics::computeJobStatistics($job);
+      $job->save();
+      if ($redirects) {
+        if (isset($_GET['destination'])) {
+          // Remove existing destination, as that will prevent us from being
+          // redirect to the job checkout page. Set the destination as the final
+          // redirect instead.
+          tmgmt_ui_redirect_queue_set($redirects, $_GET['destination']);
+          unset($_GET['destination']);
+        }
+        else {
+          tmgmt_ui_redirect_queue_set($redirects, current_path());
+        }
+        $form_state['redirect'] = tmgmt_ui_redirect_queue_dequeue();
+
+        // Count of the job messages is one less due to the final redirect.
+        drupal_set_message(format_plural(count($redirects), t('One job needs to be checked out.'), t('@count jobs need to be checked out.')));
+      }
+    }
+  }
+  else {
+    //TODO: Delete the job ...?
+  }
+}
+
+/**
+ * Implements hook_views_default_views_alter().
+ */
+function osha_tmgmt_views_default_views_alter(&$views) {
+  if (isset($views['tmgmt_ui_job_items'])) {
+    $handler =& $views['tmgmt_ui_job_items']->display['default'];
+
+    // Hide word count.
+    unset($handler->display_options['fields']['word_count_1']);
+
+    /* Field: Translation Management Job Item: Source language */
+    $handler->display_options['fields']['source_language']['id'] = 'source_language';
+    $handler->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
+    $handler->display_options['fields']['source_language']['field'] = 'source_language';
+
+    /* Field: Translation Management Job Item: Target language */
+    $handler->display_options['fields']['target_language']['id'] = 'target_language';
+    $handler->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
+    $handler->display_options['fields']['target_language']['field'] = 'target_language';
+
+    /* Field: Translation Management Job Item: Character count */
+    $handler->display_options['fields']['page_count']['id'] = 'page_count';
+    $handler->display_options['fields']['page_count']['table'] = 'tmgmt_job_item';
+    $handler->display_options['fields']['page_count']['field'] = 'page_count';
+
+    /* Field: Translation Management Job Item: Character count */
+    $handler->display_options['fields']['character_count']['id'] = 'character_count';
+    $handler->display_options['fields']['character_count']['table'] = 'tmgmt_job_item';
+    $handler->display_options['fields']['character_count']['field'] = 'character_count';
+
+    // Reorder view fields.
+    foreach (array('type', 'progress', 'state', 'changed', 'operations') as $column) {
+      $settings = $handler->display_options['fields'][$column];
+      unset($handler->display_options['fields'][$column]);
+      $handler->display_options['fields'][$column] = $settings;
+    }
+  }
+
+  if (isset($views['tmgmt_ui_job_overview'])) {
+    $handler =& $views['tmgmt_ui_job_overview']->display['default'];
+
+    // Remove un-needed filters.
+    unset($handler->display_options['filters']['source_language']);
+    unset($handler->display_options['filters']['target_language']);
+    unset($handler->display_options['filters']['translator']);
+
+    // Remove un-needed columns.
+    unset($handler->display_options['fields']['source_language']);
+    unset($handler->display_options['fields']['target_language']);
+    unset($handler->display_options['fields']['translator']);
+    unset($handler->display_options['fields']['word_count']);
+
+    /* Field: Translation Management Job: Priority */
+    $handler->display_options['fields']['priority']['id'] = 'priority';
+    $handler->display_options['fields']['priority']['table'] = 'tmgmt_job';
+    $handler->display_options['fields']['priority']['field'] = 'priority';
+
+    /* Field: Translation Management Job: Page count */
+    $handler->display_options['fields']['page_count']['id'] = 'page_count';
+    $handler->display_options['fields']['page_count']['table'] = 'tmgmt_job';
+    $handler->display_options['fields']['page_count']['field'] = 'page_count';
+
+    /* Field: Translation Management Job: Character count */
+    $handler->display_options['fields']['character_count']['id'] = 'character_count';
+    $handler->display_options['fields']['character_count']['table'] = 'tmgmt_job';
+    $handler->display_options['fields']['character_count']['field'] = 'character_count';
+
+    // Reorder view fields.
+    foreach (array('progress', 'changed', 'operations') as $column) {
+      $settings = $handler->display_options['fields'][$column];
+      unset($handler->display_options['fields'][$column]);
+      $handler->display_options['fields'][$column] = $settings;
+    }
+
+  }
+}
+
+
+class OshaTMGMTStatistics {
+
+  /**
+   * Compute statistics such as character/page count for a job item.
+   *
+   * @param TMGMTJobItem $job_item
+   *   Attach statistical information to the job item
+   */
+  public static function computeJobItemStatistics(&$job_item) {
+    $job_item->character_count = 0;
+    $job_item->page_count = 0;
+    $job_item->character_count = self::countJobItemCharacters($job_item);
+    if ($job_item->character_count > 0) {
+      $cpp = variable_get('osha_tmgmt_characters_per_page', 1500);
+      $job_item->page_count = $job_item->character_count / $cpp;
+    }
+  }
+
+  /**
+   * Compute statistics such as character/page count for a job.
+   *
+   * @param TMGMTJob $job
+   *   Attach statistical information to the job
+   */
+  public static function computeJobStatistics(&$job) {
+    $job->character_count = 0;
+    $job->page_count = 0;
+    $items = $job->getItems();
+    /* @var TMGMTJobItem $item */
+    foreach ($items as $item) {
+      if ($item->character_count == 0) {
+        self::computeJobItemStatistics($item);
+      }
+      if ($item->character_count > 0) {
+        $job->character_count += $item->character_count;
+      }
+    }
+    if ($job->character_count > 0) {
+      $cpp = variable_get('osha_tmgmt_characters_per_page', 1500);
+      $job->page_count = $job->character_count / $cpp;
+    }
+  }
+
+  /**
+   * Count all characters inside a job item.
+   *
+   * @param TMGMTJobItem $job_item
+   *   Job item.
+   *
+   * @return int
+   *   Number of characters from all job item structures (ie. fields)
+   */
+  public static function countJobItemCharacters($job_item) {
+    $ret = 0;
+    self::count($job_item->getSourceData(), $ret);
+    return $ret;
+  }
+
+  /**
+   * Recursively count the length of inner #text keys of this data array.
+   *
+   * @param TMGMTJobItem $item
+   *   Job item
+   * @param int $count
+   *   Number of characters from all structures (ie. fields)
+   */
+  protected static function count($item, &$count) {
+    if (!empty($item['#text'])) {
+      if (_tmgmt_filter_data($item)) {
+        $count += strlen($item['#text']);
+      }
+    }
+    elseif (is_array($item)) {
+      foreach (element_children($item) as $key) {
+        self::count($item[$key], $count);
+      }
+    }
+  }
+}
