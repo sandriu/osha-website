@@ -16,6 +16,19 @@ function osha_tmgmt_uninstall() {
     watchdog('osha_tmgmt', 'Removing character_count field from tmgmt_job_item');
     db_drop_field('tmgmt_job_item', 'character_count');
   }
+  if (db_field_exists('tmgmt_job_item', 'page_count')) {
+    watchdog('osha_tmgmt', 'Removing page_count field from tmgmt_job_item');
+    db_drop_field('tmgmt_job_item', 'page_count');
+  }
+
+  if (db_field_exists('tmgmt_job', 'character_count')) {
+    watchdog('osha_tmgmt', 'Removing character_count field from tmgmt_job');
+    db_drop_field('tmgmt_job_item', 'character_count');
+  }
+  if (db_field_exists('tmgmt_job', 'page_count')) {
+    watchdog('osha_tmgmt', 'Removing page_count field from tmgmt_job');
+    db_drop_field('tmgmt_job_item', 'page_count');
+  }
   if (db_field_exists('tmgmt_job', 'priority')) {
     watchdog('osha_tmgmt', 'Removing priority field from tmgmt_job');
     db_drop_field('tmgmt_job', 'priority');
@@ -27,6 +40,7 @@ function osha_tmgmt_uninstall() {
  * Implements hook_install().
  */
 function osha_tmgmt_install() {
+  // tmgmt_job_item alteration.
   if (!db_field_exists('tmgmt_job_item', 'source_language')) {
     // tmgmt_job_item.source_language
     $field = array(
@@ -35,43 +49,66 @@ function osha_tmgmt_install() {
       'not null' => FALSE, // TODO: Optional until we fix job_item creation
       'description' => 'Entity original language',
     );
-    watchdog('osha_tmgmt', 'Adding source_language field to tmgmt_job_item');
     db_add_field('tmgmt_job_item', 'source_language', $field);
   }
 
   if (!db_field_exists('tmgmt_job_item', 'target_language')) {
-    // tmgmt_job_item.target_language
     $field = array(
       'type' => 'varchar',
       'length' => 12,
       'not null' => FALSE, // TODO: Optional until we fix job_item creation
       'description' => 'Language to translate item into',
     );
-    watchdog('osha_tmgmt', 'Adding target_language field to tmgmt_job_item');
     db_add_field('tmgmt_job_item', 'target_language', $field);
   }
 
   if (!db_field_exists('tmgmt_job_item', 'character_count')) {
-    // tmgmt_job_item.character_count
     $field = array(
       'type' => 'int',
       'default' => 0,
       'not null' => TRUE,
-      'description' => 'Number of characters in this job item',
+      'description' => 'Number of characters for this job item',
     );
-    watchdog('osha_tmgmt', 'Adding character_count field to tmgmt_job_item');
     db_add_field('tmgmt_job_item', 'character_count', $field);
   }
 
+  if (!db_field_exists('tmgmt_job_item', 'page_count')) {
+    $field = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of pages for this job item',
+    );
+    db_add_field('tmgmt_job_item', 'page_count', $field);
+  }
+
+  // tmgmt_job alteration.
+  if (!db_field_exists('tmgmt_job', 'character_count')) {
+    $field = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of characters for this job item',
+    );
+    db_add_field('tmgmt_job', 'character_count', $field);
+  }
+
+  if (!db_field_exists('tmgmt_job', 'page_count')) {
+    $field = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of pages for this job item',
+    );
+    db_add_field('tmgmt_job', 'page_count', $field);
+  }
   if (!db_field_exists('tmgmt_job', 'priority')) {
-    // tmgmt_job_item.priority
     $field = array(
       'type' => 'int',
       'default' => 0,
       'not null' => TRUE,
       'description' => 'Urgency of the translation (0=normal/1=high)',
     );
-    watchdog('osha_tmgmt', 'Adding priority field to tmgmt_job');
     db_add_field('tmgmt_job', 'priority', $field);
   }
 

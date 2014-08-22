@@ -26,10 +26,28 @@ function osha_tmgmt_schema_alter(&$schema) {
       'type' => 'int',
       'default' => 0,
       'not null' => TRUE,
-      'description' => 'Number of characters for this job item',
+      'description' => 'Number of characters for this job',
+    );
+    $schema['tmgmt_job_item']['fields']['page_count'] = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of pages for this job',
     );
   }
   if (isset($schema['tmgmt_job'])) {
+    $schema['tmgmt_job']['fields']['character_count'] = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of characters for this job',
+    );
+    $schema['tmgmt_job']['fields']['page_count'] = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of pages for this job',
+    );
     $schema['tmgmt_job']['fields']['priority'] = array(
       'type' => 'int',
       'unsigned' => FALSE,
@@ -107,7 +125,6 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
   global $user;
   $job_empty = TRUE;
   $target_languages = array_filter($form_state['values']['target_language']);
-
   $job_items_by_source_language = array();
   // Group the selected items by source language.
   foreach (tmgmt_job_item_load_multiple(array_filter($form_state['values']['items'])) as $job_item) {
