@@ -100,7 +100,7 @@ class MigrateOshaJobVacanciesTest extends OshaWebTestCase {
     }
     $this->assertEqual(
       $witness['author'],
-      $node->field_author[LANGUAGE_NONE][0]['value']
+      $node->field_author[$node->language][0]['value']
     );
     $this->assertEqual(
       $witness['deadline'],
