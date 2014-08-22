@@ -10,13 +10,12 @@ define('OSHA_TMGMT_WORDS_PER_PAGE', 250);
 function osha_tmgmt_schema_alter(&$schema) {
   if (isset($schema['tmgmt_job_item'])) {
     $schema['tmgmt_job_item']['fields']['target_language'] = array(
-      'description' => 'The language the data should be translated to.',
       'type' => 'varchar',
       'size' => 12,
       'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'description' => 'The language the data should be translated to.',
     );
     $schema['tmgmt_job_item']['fields']['source_language'] = array(
-      'description' => 'The default entity language',
       'type' => 'varchar',
       'size' => 12,
       'default' => '',
@@ -25,11 +24,11 @@ function osha_tmgmt_schema_alter(&$schema) {
   }
   if (isset($schema['tmgmt_job'])) {
     $schema['tmgmt_job']['fields']['priority'] = array(
-      'description' => 'Urgency of the translation (0=normal/1=high)',
       'type' => 'int',
       'unsigned' => FALSE,
       'default' => 0,
       'not null' => TRUE,
+      'description' => 'Urgency of the translation (0=normal/1=high)',
     );
   }
 }

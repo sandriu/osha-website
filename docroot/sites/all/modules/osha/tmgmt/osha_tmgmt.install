@@ -4,20 +4,26 @@
  * Implements hook_install().
  */
 function osha_tmgmt_install() {
-  $field = array(
-    'type' => 'varchar', 'length' => 12,
-    'not null' => FALSE, // TODO: Optional until we fix job_item creation
-  );
   if (!db_field_exists('tmgmt_job_item', 'source_language')) {
+    // tmgmt_job_item.source_language
+    $field = array(
+      'type' => 'varchar',
+      'length' => 12,
+      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'description' => 'Entity original language',
+    );
     watchdog('osha_tmgmt', 'Adding source_language field to tmgmt_job_item');
     db_add_field('tmgmt_job_item', 'source_language', $field);
   }
 
-  $field = array(
-    'type' => 'varchar', 'length' => 12,
-    'not null' => FALSE, // TODO: Optional until we fix job_item creation
-  );
   if (!db_field_exists('tmgmt_job_item', 'target_language')) {
+    // tmgmt_job_item.target_language
+    $field = array(
+      'type' => 'varchar',
+      'length' => 12,
+      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'description' => 'Language to translate item into',
+    );
     watchdog('osha_tmgmt', 'Adding target_language field to tmgmt_job_item');
     db_add_field('tmgmt_job_item', 'target_language', $field);
   }
@@ -29,11 +35,17 @@ function osha_tmgmt_install() {
     'description' => 'Urgency of the translation (0=normal/1=high)',
   );
   if (!db_field_exists('tmgmt_job', 'priority')) {
+    // tmgmt_job_item.priority
+    $field = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Urgency of the translation (0=normal/1=high)',
+    );
     watchdog('osha_tmgmt', 'Adding priority field to tmgmt_job');
     db_add_field('tmgmt_job', 'priority', $field);
   }
 
-  drupal_set_message('creating translator', 'error');
   // Configure file translator for the CDT format and remove other translators.
   /* @var TMGMTTranslator $file */
   $file = tmgmt_translator_load('file');
@@ -43,7 +55,4 @@ function osha_tmgmt_install() {
 
   $local = tmgmt_translator_load('local');
   $local->delete();
-}
-
-function osha_tmgmt_update_7004() {
 }
