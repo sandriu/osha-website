@@ -413,6 +413,7 @@ class PublicationMigrateList extends MigrateList {
   protected function parseSourceFile() {
     $handle = fopen($this->fileURL, 'r');
     $fields = $raw_data = fgetcsv($handle, NULL, ';');
+    $work_flow_key = array_search('workflow_state', $fields);
 
     self::$data = array();
     while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
@@ -421,6 +422,16 @@ class PublicationMigrateList extends MigrateList {
       $path_parts = explode('/', $path);
 
       self::$data[$path]['id'] = $path;
+      // Assign the workflow state of the row from english entry.
+      if ($language == 'en') {
+        self::$data[$path]['workflow_state'] = $raw_data[$work_flow_key];
+      }
+      // Skip the private translations.
+      if (!in_array($raw_data[$work_flow_key],
+        array('published', 'checked', 'to_amend'))) {
+        continue;
+      }
+
       self::$data[$path]['publication_type'] = !empty($path_parts[1]) ? $path_parts[1] : NULL;
       foreach ($fields as $key => $field) {
         switch ($field) {
@@ -455,7 +466,9 @@ class PublicationMigrateList extends MigrateList {
             break;
 
           default:
-            self::$data[$path][$field] = $raw_data[$key];
+            if ($language == 'en') {
+              self::$data[$path][$field] = $raw_data[$key];
+            }
         }
       }
     }

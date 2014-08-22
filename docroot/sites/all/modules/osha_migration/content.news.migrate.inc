@@ -268,10 +268,20 @@ class NewsContentListCSV extends MigrateList {
     $handle = fopen($this->file, 'r');
     $fields = $raw_data = fgetcsv($handle, 1000, ';');
     self::$data = array();
+    $work_flow_key = array_search('workflow_state', $fields);
     while (($raw_data = fgetcsv($handle, 100000, ';')) !== FALSE) {
       $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
       $path = MigrationUtil::getIDFromSourceRow($raw_data);
       self::$data[$path]['id'] = $path;
+      // Assign the workflow state of the row from english entry.
+      if ($language == 'en') {
+        self::$data[$path]['workflow_state'] = $raw_data[$work_flow_key];
+      }
+      // Skip the private translations.
+      if (!in_array($raw_data[$work_flow_key],
+        array('published', 'checked', 'to_amend'))) {
+        continue;
+      }
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
@@ -288,7 +298,9 @@ class NewsContentListCSV extends MigrateList {
             break;
 
           default:
-            self::$data[$path][$field] = $raw_data[$key];
+            if ($language == 'en') {
+              self::$data[$path][$field] = $raw_data[$key];
+            }
             break;
         }
       }

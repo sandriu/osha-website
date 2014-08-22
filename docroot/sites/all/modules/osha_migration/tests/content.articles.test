@@ -132,7 +132,7 @@ class MigrateOshaArticleTest extends OshaWebTestCase {
     $this->assertEqual('2012-07-18 17:00:24', $first['creation_date']);
     $this->assertEqual('2014-05-05 13:08:24', $first['modification_date']);
     $this->assertEqual('2012-07-31 15:30:00', $first['publication_date']);
-    $this->assertEqual('moral_osha_europa_eu', $first['creator']);
+    $this->assertEqual('thomas_syslab_com', $first['creator']);
 
     $this->assertEqual('Bulgarian title', $first['title_field']['bg']);
     $this->assertEqual('Spanish title', $first['title_field']['es']);

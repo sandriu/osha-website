@@ -247,12 +247,13 @@ class JobVacanciesMigrateList extends MigrateList {
       $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
       self::$data[$path]['id'] = $path;
 
-      // Assign the workflow state of the row from english entry
+      // Assign the workflow state of the row from english entry.
       if ($language == 'en') {
         self::$data[$path]['workflow_state'] = $raw_data[$work_flow_key];
       }
-      // Skip the private translations
-      if (!in_array($raw_data[$work_flow_key], array('published', 'checked', 'to_amend'))) {
+      // Skip the private translations.
+      if (!in_array($raw_data[$work_flow_key],
+          array('published', 'checked', 'to_amend'))) {
         continue;
       }
       foreach ($fields as $key => $field) {
@@ -274,7 +275,9 @@ class JobVacanciesMigrateList extends MigrateList {
             break;
 
           default:
-            self::$data[$path][$field] = $raw_data[$key];
+            if ($language == 'en') {
+              self::$data[$path][$field] = $raw_data[$key];
+            }
             break;
         }
       }
