@@ -1,0 +1,224 @@
+<?php
+/**
+ * Implementation of hook_views_default_views_alter().
+ */
+function osha_newsletter_views_default_views_alter(&$views) {
+  // Modify the view newsletter_creation from the scs contrib module.
+  if (array_key_exists('newsletter_creation', $views)) {
+    $view = $views['newsletter_creation'];
+    $handler = $view->display['default'];
+    $handler->display_options['exposed_form']['options']['reset_button'] = TRUE;
+
+    /* Field: Content: Summary */
+    $handler->display_options['fields']['field_summary']['id'] = 'field_summary';
+    $handler->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
+    $handler->display_options['fields']['field_summary']['field'] = 'field_summary';
+    $handler->display_options['fields']['field_summary']['type'] = 'text_trimmed';
+    $handler->display_options['fields']['field_summary']['settings'] = array(
+      'trim_length' => '150',
+    );
+    /* Field: Content: Body */
+    $handler->display_options['fields']['body']['id'] = 'body';
+    $handler->display_options['fields']['body']['table'] = 'field_data_body';
+    $handler->display_options['fields']['body']['field'] = 'body';
+    $handler->display_options['fields']['body']['exclude'] = TRUE;
+    /* Field: Field: Tags */
+    $handler->display_options['fields']['field_tags']['id'] = 'field_tags';
+    $handler->display_options['fields']['field_tags']['table'] = 'field_data_field_tags';
+    $handler->display_options['fields']['field_tags']['field'] = 'field_tags';
+    $handler->display_options['fields']['field_tags']['exclude'] = TRUE;
+    $handler->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
+    $handler->display_options['fields']['field_tags']['delta_offset'] = '0';
+    /* Field: Field: Thesaurus */
+    $handler->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
+    $handler->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
+    $handler->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
+    $handler->display_options['fields']['field_thesaurus']['exclude'] = TRUE;
+    $handler->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
+    $handler->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
+
+    /* Filter criterion: Global: Combine fields filter */
+    $handler->display_options['filters']['combine']['id'] = 'combine';
+    $handler->display_options['filters']['combine']['table'] = 'views';
+    $handler->display_options['filters']['combine']['field'] = 'combine';
+    $handler->display_options['filters']['combine']['operator'] = 'word';
+    $handler->display_options['filters']['combine']['group'] = 1;
+    $handler->display_options['filters']['combine']['exposed'] = TRUE;
+    $handler->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
+    $handler->display_options['filters']['combine']['expose']['label'] = 'Free text search';
+    $handler->display_options['filters']['combine']['expose']['description'] = 'Search in title, body and summary fields ';
+    $handler->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
+    $handler->display_options['filters']['combine']['expose']['identifier'] = 'combine';
+    $handler->display_options['filters']['combine']['expose']['remember_roles'] = array(
+      2 => '2',
+      1 => 0,
+      3 => 0,
+    );
+    $handler->display_options['filters']['combine']['fields'] = array(
+      'title' => 'title',
+      'field_summary' => 'field_summary',
+      'body' => 'body',
+    );
+
+    /* Alter filter criterion: Content: Type */
+    $handler->display_options['filters']['type']['group'] = 1;
+    $handler->display_options['filters']['type']['is_grouped'] = TRUE;
+    $handler->display_options['filters']['type']['group_info']['label'] = 'Type';
+    $handler->display_options['filters']['type']['group_info']['identifier'] = 'type';
+    $handler->display_options['filters']['type']['group_info']['group_items'] = array(
+      1 => array(
+        'title' => 'Article',
+        'operator' => 'in',
+        'value' => array(
+          'article' => 'article',
+          'all' => 0,
+          'page' => 0,
+          'blog' => 0,
+          'case_study' => 0,
+          'news' => 0,
+          'publication' => 0,
+          'simplenews' => 0,
+        ),
+      ),
+      2 => array(
+        'title' => 'Blog',
+        'operator' => 'in',
+        'value' => array(
+          'blog' => 'blog',
+          'all' => 0,
+          'article' => 0,
+          'page' => 0,
+          'case_study' => 0,
+          'news' => 0,
+          'publication' => 0,
+          'simplenews' => 0,
+        ),
+      ),
+      3 => array(
+        'title' => 'News',
+        'operator' => 'in',
+        'value' => array(
+          'news' => 'news',
+          'all' => 0,
+          'article' => 0,
+          'page' => 0,
+          'blog' => 0,
+          'case_study' => 0,
+          'publication' => 0,
+          'simplenews' => 0,
+        ),
+      ),
+      4 => array(
+        'title' => 'Publication',
+        'operator' => 'in',
+        'value' => array(
+          'publication' => 'publication',
+          'all' => 0,
+          'article' => 0,
+          'page' => 0,
+          'blog' => 0,
+          'case_study' => 0,
+          'news' => 0,
+          'simplenews' => 0,
+        ),
+      ),
+    );
+
+    /* Alter filter criterion: Content: Type */
+    $handler->display_options['filters']['type_1']['id'] = 'type_1';
+    $handler->display_options['filters']['type_1']['table'] = 'node';
+    $handler->display_options['filters']['type_1']['field'] = 'type';
+    $handler->display_options['filters']['type_1']['value'] = array(
+      'article' => 'article',
+      'blog' => 'blog',
+      'news' => 'news',
+      'publication' => 'publication',
+    );
+
+    /* Filter criterion: Content: Post date */
+    $handler->display_options['filters']['created']['id'] = 'created';
+    $handler->display_options['filters']['created']['table'] = 'node';
+    $handler->display_options['filters']['created']['field'] = 'created';
+    $handler->display_options['filters']['created']['operator'] = 'between';
+    $handler->display_options['filters']['created']['exposed'] = TRUE;
+    $handler->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
+    $handler->display_options['filters']['created']['expose']['label'] = 'Post date';
+    $handler->display_options['filters']['created']['expose']['operator'] = 'created_op';
+    $handler->display_options['filters']['created']['expose']['identifier'] = 'created';
+    $handler->display_options['filters']['created']['expose']['remember'] = TRUE;
+    $handler->display_options['filters']['created']['expose']['remember_roles'] = array(
+      2 => '2',
+      1 => 0,
+      3 => 0,
+    );
+
+    /* Filter criterion: Field: Tags (field_tags) */
+    $handler->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
+    $handler->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
+    $handler->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
+    $handler->display_options['filters']['field_tags_tid']['value'] = '';
+    $handler->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
+    $handler->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
+    $handler->display_options['filters']['field_tags_tid']['expose']['label'] = 'Tags';
+    $handler->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
+    $handler->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'field_tags_tid';
+    $handler->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
+      2 => '2',
+      1 => 0,
+      3 => 0,
+    );
+    $handler->display_options['filters']['field_tags_tid']['reduce_duplicates'] = TRUE;
+    $handler->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
+
+    /* Filter criterion: Field: Thesaurus (field_thesaurus) */
+    $handler->display_options['filters']['field_thesaurus_tid']['id'] = 'field_thesaurus_tid';
+    $handler->display_options['filters']['field_thesaurus_tid']['table'] = 'field_data_field_thesaurus';
+    $handler->display_options['filters']['field_thesaurus_tid']['field'] = 'field_thesaurus_tid';
+    $handler->display_options['filters']['field_thesaurus_tid']['value'] = '';
+    $handler->display_options['filters']['field_thesaurus_tid']['exposed'] = TRUE;
+    $handler->display_options['filters']['field_thesaurus_tid']['expose']['operator_id'] = 'field_thesaurus_tid_op';
+    $handler->display_options['filters']['field_thesaurus_tid']['expose']['label'] = 'Thesaurus';
+    $handler->display_options['filters']['field_thesaurus_tid']['expose']['operator'] = 'field_thesaurus_tid_op';
+    $handler->display_options['filters']['field_thesaurus_tid']['expose']['identifier'] = 'field_thesaurus_tid';
+    $handler->display_options['filters']['field_thesaurus_tid']['expose']['remember'] = TRUE;
+    $handler->display_options['filters']['field_thesaurus_tid']['expose']['remember_roles'] = array(
+      2 => '2',
+      1 => 0,
+      3 => 0,
+    );
+    $handler->display_options['filters']['field_thesaurus_tid']['vocabulary'] = 'thesaurus';
+
+    $translatables['newsletter_creation'] = array(
+      t('Master'),
+      t('Newsletter creation'),
+      t('more'),
+      t('Apply'),
+      t('Reset'),
+      t('Sort by'),
+      t('Asc'),
+      t('Desc'),
+      t('Items per page'),
+      t('- All -'),
+      t('Offset'),
+      t('« first'),
+      t('‹ previous'),
+      t('next ›'),
+      t('last »'),
+      t('- Choose an operation -'),
+      t('Title'),
+      t('Summary'),
+      t('Type'),
+      t('Post date'),
+      t('Body'),
+      t('Tags'),
+      t('Thesaurus'),
+      t('Free text search'),
+      t('Search in title, body and summary fields '),
+      t('Page'),
+    );
+
+    // Add view to list of views.
+    $view->display['default'] = $handler;
+    $views['newsletter_creation'] = $view;
+  }
+}
