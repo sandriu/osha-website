@@ -12,53 +12,53 @@ IF NOT %1==--migrate GOTO DONE
 
 :MIGRATE
 
-	echo "Importing Activity taxonomy"
-	call drush migrate-import TaxonomyActivity
+    echo "Importing Activity taxonomy"
+    call drush migrate-import TaxonomyActivity
 
-	echo "Importing NACE codes taxonomy"
-	call drush migrate-import --update TaxonomyNaceCodes
+    echo "Importing NACE codes taxonomy"
+    call drush migrate-import --update TaxonomyNaceCodes
 
-	echo "Importing ESENER taxonomy"
-	call drush migrate-import --update TaxonomyEsener
+    echo "Importing ESENER taxonomy"
+    call drush migrate-import --update TaxonomyEsener
 
-	echo "Importing Publication types taxonomy"
-	call drush migrate-import --update TaxonomyPublicationTypes
+    echo "Importing Publication types taxonomy"
+    call drush migrate-import --update TaxonomyPublicationTypes
 
-	echo "Importing multilingual Thesaurus taxonomy"
-	call drush migrate-import --update TaxonomyThesaurus
+    echo "Importing multilingual Thesaurus taxonomy"
+    call drush migrate-import --update TaxonomyThesaurus
 
-	echo "Importing Tags taxonomy"
-	call drush migrate-import --update TaxonomyTags
+    echo "Importing Tags taxonomy"
+    call drush migrate-import --update TaxonomyTags
 
-	echo "Importing Files content"
-	call drush migrate-import --update Files
+    echo "Importing Files content"
+    call drush migrate-import --update Files
 
-	echo "Importing Images content"
-	drush migrate-import --update Images
+    echo "Importing Images content"
+    call drush migrate-import --update Images
 
-	echo "Importing News content"
-	call drush migrate-import --update News
+    echo "Importing News content"
+    call drush migrate-import --update News
 
-	echo "Importing Publications content"
-	call drush migrate-import --update Publication
+    echo "Importing Publications content"
+    call drush migrate-import --update Publication
 
-	echo "Importing Articles content"
-	call drush migrate-import --update Article
+    echo "Importing Articles content"
+    call drush migrate-import --update Article
 
-	echo "Importing Blog content"
-	call drush migrate-import --update Blog
+    echo "Importing Blog content"
+    call drush migrate-import --update Blog
 
-	echo "Importing Case Study content"
-	call drush migrate-import --update CaseStudy
+    echo "Importing Case Study content"
+    call drush migrate-import --update CaseStudy
 
-	echo "Importing Job vacancies content"
-	call drush migrate-import JobVacancies
+    echo "Importing Job vacancies content"
+    call drush migrate-import JobVacancies
 
-	echo "Importing Calls content"
-	call drush migrate-import Calls
+    echo "Importing Calls content"
+    call drush migrate-import Calls
     
-	echo "Importing PressRelease content"
-	call drush migrate-import PressRelease
+    echo "Importing PressRelease content"
+    call drush migrate-import PressRelease
 
 fi
 

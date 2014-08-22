@@ -18,8 +18,11 @@ cd docroot
     echo "Importing Tags taxonomy"
     call drush migrate-import TaxonomyTags
 
-	echo "Importing Files content"
-	call drush migrate-import Files
+    echo "Importing Files content"
+    call drush migrate-import Files
+
+    echo "Importing Images content"
+    call drush migrate-import Images
 
     echo "Importing News content"
     call drush migrate-import News
@@ -36,12 +39,12 @@ cd docroot
     echo "Importing Case Study content"
     call drush migrate-import CaseStudy
 
-	echo "Importing Job vacancies content"
-	call drush migrate-import JobVacancies
+    echo "Importing Job vacancies content"
+    call drush migrate-import JobVacancies
 
-	echo "Importing Calls content"
-	call drush migrate-import Calls
+    echo "Importing Calls content"
+    call drush migrate-import Calls
     
-	echo "Importing PressRelease content"
-	call drush migrate-import PressRelease
+    echo "Importing PressRelease content"
+    call drush migrate-import PressRelease
 

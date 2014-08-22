@@ -40,10 +40,10 @@ IF NOT %1==--migrate GOTO DONE
     call drush migrate-import TaxonomyTags
 
     echo "Importing Files content"
-    drush migrate-import Files
+    call drush migrate-import Files
 
     echo "Importing Images content"
-    drush migrate-import Images
+    call drush migrate-import Images
 
     echo "Importing News content"
     call drush migrate-import News
@@ -60,14 +60,14 @@ IF NOT %1==--migrate GOTO DONE
     echo "Importing Case Study content"
     call drush migrate-import CaseStudy
 
-	echo "Importing Job vacancies content"
-	call drush migrate-import JobVacancies
+    echo "Importing Job vacancies content"
+    call drush migrate-import JobVacancies
 
-	echo "Importing Calls content"
-	call drush migrate-import Calls
+    echo "Importing Calls content"
+    call drush migrate-import Calls
 
-	echo "Importing PressRelease content"
-	call drush migrate-import PressRelease
+    echo "Importing PressRelease content"
+    call drush migrate-import PressRelease
 
 :DONE
 
