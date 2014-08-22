@@ -120,5 +120,7 @@ function osha_tmgmt_install() {
   $file->save();
 
   $local = tmgmt_translator_load('local');
-  $local->delete();
+  if ($local) {
+    $local->delete();
+  }
 }
