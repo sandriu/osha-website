@@ -311,6 +311,9 @@ $options['init-modules'] = array(
   'fe_block',
   'fe_nodequeue',
 
+  'views_slideshow',
+  'views_slideshow_cycle',
+
   'osha',
   'osha_migration',
   'osha_news',
