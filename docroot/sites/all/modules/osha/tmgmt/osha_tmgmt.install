@@ -28,12 +28,18 @@ function osha_tmgmt_install() {
     db_add_field('tmgmt_job_item', 'target_language', $field);
   }
 
-  $field = array(
-    'type' => 'int',
-    'not null' => TRUE,
-    'default' => 0,
-    'description' => 'Urgency of the translation (0=normal/1=high)',
-  );
+  if (!db_field_exists('tmgmt_job_item', 'character_count')) {
+    // tmgmt_job_item.character_count
+    $field = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of characters in this job item',
+    );
+    watchdog('osha_tmgmt', 'Adding character_count field to tmgmt_job_item');
+    db_add_field('tmgmt_job_item', 'character_count', $field);
+  }
+
   if (!db_field_exists('tmgmt_job', 'priority')) {
     // tmgmt_job_item.priority
     $field = array(

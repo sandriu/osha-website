@@ -20,6 +20,13 @@ function osha_tmgmt_schema_alter(&$schema) {
       'size' => 12,
       'default' => '',
       'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'description' => 'The default entity language',
+    );
+    $schema['tmgmt_job_item']['fields']['character_count'] = array(
+      'type' => 'int',
+      'default' => 0,
+      'not null' => TRUE,
+      'description' => 'Number of characters for this job item',
     );
   }
   if (isset($schema['tmgmt_job'])) {
