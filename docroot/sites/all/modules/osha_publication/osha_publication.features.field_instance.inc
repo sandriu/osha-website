@@ -61,6 +61,49 @@ function osha_publication_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-publication-field_activity'
+  $field_instances['node-publication-field_activity'] = array(
+    'bundle' => 'publication',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_activity',
+    'label' => 'Activity',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 18,
+    ),
+  );
+
   // Exported field_instance: 'node-publication-field_author'
   $field_instances['node-publication-field_author'] = array(
     'bundle' => 'publication',
@@ -147,6 +190,7 @@ function osha_publication_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'file_directory' => 'publications/cover_images',
       'file_extensions' => 'png gif jpg jpeg',
+      'image_field_caption' => 0,
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
@@ -537,6 +581,49 @@ function osha_publication_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-publication-field_section'
+  $field_instances['node-publication-field_section'] = array(
+    'bundle' => 'publication',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_section',
+    'label' => 'Section',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 20,
+    ),
+  );
+
   // Exported field_instance: 'node-publication-field_tags'
   $field_instances['node-publication-field_tags'] = array(
     'bundle' => 'publication',
@@ -633,6 +720,49 @@ function osha_publication_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-publication-field_workflow_status'
+  $field_instances['node-publication-field_workflow_status'] = array(
+    'bundle' => 'publication',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_workflow_status',
+    'label' => 'Workflow status',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 22,
+    ),
+  );
+
   // Exported field_instance: 'node-publication-title_field'
   $field_instances['node-publication-title_field'] = array(
     'bundle' => 'publication',
@@ -684,6 +814,7 @@ function osha_publication_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Activity');
   t('Author(s)');
   t('Body');
   t('Bookshop ID');
@@ -694,10 +825,12 @@ function osha_publication_field_default_field_instances() {
   t('Publication Type');
   t('Related publications');
   t('Related resources');
+  t('Section');
   t('Tags');
   t('Thesaurus');
   t('Title');
   t('Use comma ( , ) to assign multiple terms');
+  t('Workflow status');
 
   return $field_instances;
 }
