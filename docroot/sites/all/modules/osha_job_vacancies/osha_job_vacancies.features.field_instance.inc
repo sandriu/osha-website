@@ -61,6 +61,49 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-job_vacancies-field_activity'
+  $field_instances['node-job_vacancies-field_activity'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_activity',
+    'label' => 'Activity',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 14,
+    ),
+  );
+
   // Exported field_instance: 'node-job_vacancies-field_author'
   $field_instances['node-job_vacancies-field_author'] = array(
     'bundle' => 'job_vacancies',
@@ -322,6 +365,49 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-job_vacancies-field_section'
+  $field_instances['node-job_vacancies-field_section'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_section',
+    'label' => 'Section',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 16,
+    ),
+  );
+
   // Exported field_instance: 'node-job_vacancies-field_summary'
   $field_instances['node-job_vacancies-field_summary'] = array(
     'bundle' => 'job_vacancies',
@@ -463,6 +549,49 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-job_vacancies-field_workflow_status'
+  $field_instances['node-job_vacancies-field_workflow_status'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_workflow_status',
+    'label' => 'Workflow status',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 18,
+    ),
+  );
+
   // Exported field_instance: 'node-job_vacancies-title_field'
   $field_instances['node-job_vacancies-title_field'] = array(
     'bundle' => 'job_vacancies',
@@ -514,16 +643,19 @@ function osha_job_vacancies_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Activity');
   t('Author');
   t('Body');
   t('Deadline');
   t('Nace');
   t('Publication Date');
+  t('Section');
   t('Shortlisted');
   t('Summary');
   t('Tags');
   t('Thesaurus');
   t('Title');
+  t('Workflow status');
 
   return $field_instances;
 }
