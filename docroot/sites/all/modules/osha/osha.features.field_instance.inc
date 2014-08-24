@@ -647,6 +647,49 @@ function osha_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-field_activity'
+  $field_instances['node-article-field_activity'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_activity',
+    'label' => 'Activity',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-article-field_image'
   $field_instances['node-article-field_image'] = array(
     'bundle' => 'article',
@@ -690,6 +733,7 @@ function osha_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'file_directory' => 'pages',
       'file_extensions' => 'png gif jpg jpeg',
+      'image_field_caption' => 0,
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
@@ -812,6 +856,49 @@ function osha_field_default_field_instances() {
       ),
       'type' => 'date_select',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_section'
+  $field_instances['node-article-field_section'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_section',
+    'label' => 'Section',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 12,
     ),
   );
 
@@ -957,6 +1044,49 @@ function osha_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-field_workflow_status'
+  $field_instances['node-article-field_workflow_status'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_workflow_status',
+    'label' => 'Workflow status',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 13,
+    ),
+  );
+
   // Exported field_instance: 'node-article-title_field'
   $field_instances['node-article-title_field'] = array(
     'bundle' => 'article',
@@ -1008,6 +1138,7 @@ function osha_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Activity');
   t('Alt Text');
   t('Alternative text is used by screen readers, search engines, and when the image cannot be loaded. By adding alt text you improve accessibility and search engine optimization.');
   t('Body');
@@ -1016,6 +1147,7 @@ function osha_field_default_field_instances() {
   t('Language');
   t('Nace');
   t('Publication date');
+  t('Section');
   t('Summary');
   t('Tags');
   t('Thesaurus');
@@ -1023,6 +1155,7 @@ function osha_field_default_field_instances() {
   t('Title Text');
   t('Title text is used in the tool tip when a user hovers their mouse over the image. Adding title text makes it easier to understand the context of an image and improves usability.');
   t('Use comma ( , ) to assign multiple terms');
+  t('Workflow status');
 
   return $field_instances;
 }
