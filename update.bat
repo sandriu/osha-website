@@ -8,10 +8,9 @@ call drush build
 echo "Registering migrations ..."
 call drush migrate-auto-register
 
-IF NOT %1==--migrate GOTO DONE
+IF NOT "%1"=="--migrate" GOTO DONE
 
 :MIGRATE
-
     echo "Importing Activity taxonomy"
     call drush migrate-import TaxonomyActivity
 
@@ -64,3 +63,4 @@ fi
 
 :DONE
 call drush cc all
+cd ..
