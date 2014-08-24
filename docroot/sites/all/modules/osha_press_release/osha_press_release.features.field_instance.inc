@@ -62,6 +62,49 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-press_release-field_activity'
+  $field_instances['node-press_release-field_activity'] = array(
+    'bundle' => 'press_release',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_activity',
+    'label' => 'Activity',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 14,
+    ),
+  );
+
   // Exported field_instance: 'node-press_release-field_nace_codes'
   $field_instances['node-press_release-field_nace_codes'] = array(
     'bundle' => 'press_release',
@@ -337,6 +380,49 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-press_release-field_section'
+  $field_instances['node-press_release-field_section'] = array(
+    'bundle' => 'press_release',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_section',
+    'label' => 'Section',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 16,
+    ),
+  );
+
   // Exported field_instance: 'node-press_release-field_summary'
   $field_instances['node-press_release-field_summary'] = array(
     'bundle' => 'press_release',
@@ -478,6 +564,49 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-press_release-field_workflow_status'
+  $field_instances['node-press_release-field_workflow_status'] = array(
+    'bundle' => 'press_release',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_workflow_status',
+    'label' => 'Workflow status',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 18,
+    ),
+  );
+
   // Exported field_instance: 'node-press_release-title_field'
   $field_instances['node-press_release-title_field'] = array(
     'bundle' => 'press_release',
@@ -530,16 +659,19 @@ function osha_press_release_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Activity');
   t('Body');
   t('Nace');
   t('Notes to editor');
   t('Publication Date');
   t('Related Links');
   t('Release date');
+  t('Section');
   t('Summary');
   t('Tags');
   t('Thesaurus');
   t('Title');
+  t('Workflow status');
 
   return $field_instances;
 }

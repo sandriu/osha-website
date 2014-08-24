@@ -27,5 +27,6 @@ function osha_press_release_node_info() {
       'help' => '',
     ),
   );
+  drupal_alter('node_info', $items);
   return $items;
 }
