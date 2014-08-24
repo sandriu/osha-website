@@ -33,6 +33,7 @@ features[field_instance][] = node-publication-field_author
 features[field_instance][] = node-publication-field_cover_image
 features[field_instance][] = node-publication-field_file
 features[field_instance][] = node-publication-field_nace_codes
+features[field_instance][] = node-publication-field_project_manager
 features[field_instance][] = node-publication-field_publication_bookshop_id
 features[field_instance][] = node-publication-field_publication_date
 features[field_instance][] = node-publication-field_publication_related_res

@@ -799,6 +799,49 @@ function osha_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-field_project_manager'
+  $field_instances['node-article-field_project_manager'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_project_manager',
+    'label' => 'Project manager',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 14,
+    ),
+  );
+
   // Exported field_instance: 'node-article-field_publication_date'
   $field_instances['node-article-field_publication_date'] = array(
     'bundle' => 'article',
@@ -1230,6 +1273,49 @@ function osha_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-page-field_project_manager'
+  $field_instances['node-page-field_project_manager'] = array(
+    'bundle' => 'page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_project_manager',
+    'label' => 'Project manager',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 38,
+    ),
+  );
+
   // Exported field_instance: 'node-page-field_section'
   $field_instances['node-page-field_section'] = array(
     'bundle' => 'page',
@@ -1375,6 +1461,7 @@ function osha_field_default_field_instances() {
   t('Image');
   t('Language');
   t('Nace');
+  t('Project manager');
   t('Publication date');
   t('Section');
   t('Summary');

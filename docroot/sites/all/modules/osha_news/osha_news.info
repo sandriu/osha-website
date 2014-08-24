@@ -19,6 +19,7 @@ features[features_api][] = api:2
 features[field_instance][] = node-news-body
 features[field_instance][] = node-news-field_activity
 features[field_instance][] = node-news-field_image
+features[field_instance][] = node-news-field_project_manager
 features[field_instance][] = node-news-field_publication_date
 features[field_instance][] = node-news-field_section
 features[field_instance][] = node-news-field_summary

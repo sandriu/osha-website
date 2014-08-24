@@ -602,6 +602,49 @@ function osha_calls_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-calls-field_project_manager'
+  $field_instances['node-calls-field_project_manager'] = array(
+    'bundle' => 'calls',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_project_manager',
+    'label' => 'Project manager',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 25,
+    ),
+  );
+
   // Exported field_instance: 'node-calls-field_publication_date'
   $field_instances['node-calls-field_publication_date'] = array(
     'bundle' => 'calls',
@@ -858,6 +901,7 @@ function osha_calls_field_default_field_instances() {
   t('Contract notice');
   t('Deadline');
   t('Info');
+  t('Project manager');
   t('Publication Date');
   t('Section');
   t('Summary');
