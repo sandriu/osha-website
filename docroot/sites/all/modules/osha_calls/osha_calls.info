@@ -8,6 +8,7 @@ dependencies[] = ctools
 dependencies[] = date
 dependencies[] = features
 dependencies[] = file
+dependencies[] = options
 dependencies[] = osha
 dependencies[] = strongarm
 dependencies[] = text
