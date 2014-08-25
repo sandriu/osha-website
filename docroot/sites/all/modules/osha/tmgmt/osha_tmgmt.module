@@ -104,8 +104,6 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       hide($form['info']['source_language']);
       hide($form['info']['target_language']);
       hide($form['info']['translator']);
-      $created = $form['info']['created'];
-      unset($form['info']['created']);
       if (!empty($form['info']['word_count'])) {
         $avg_pages = sprintf('%.1f', $form['info']['word_count']['#markup'] / OSHA_TMGMT_WORDS_PER_PAGE);
         $form['info']['pages'] = array(
@@ -116,8 +114,11 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           '#suffix' => '</div>',
         );
       }
-      $form['info']['created'] = $created;
-
+      if (isset($form['info']['created'])) {
+        $created = $form['info']['created'];
+        unset($form['info']['created']);
+        $form['info']['created'] = $created;
+      }
       break;
   }
 }
@@ -241,9 +242,11 @@ function osha_tmgmt_views_default_views_alter(&$views) {
 
     // Reorder view fields.
     foreach (array('type', 'progress', 'state', 'changed', 'operations') as $column) {
-      $settings = $handler->display_options['fields'][$column];
-      unset($handler->display_options['fields'][$column]);
-      $handler->display_options['fields'][$column] = $settings;
+      if (isset($handler->display_options['fields'][$column])) {
+        $settings = $handler->display_options['fields'][$column];
+        unset($handler->display_options['fields'][$column]);
+        $handler->display_options['fields'][$column] = $settings;
+      }
     }
   }
 
@@ -278,9 +281,11 @@ function osha_tmgmt_views_default_views_alter(&$views) {
 
     // Reorder view fields.
     foreach (array('progress', 'changed', 'operations') as $column) {
-      $settings = $handler->display_options['fields'][$column];
-      unset($handler->display_options['fields'][$column]);
-      $handler->display_options['fields'][$column] = $settings;
+      if (isset($handler->display_options['fields'][$column])) {
+        $settings = $handler->display_options['fields'][$column];
+        unset($handler->display_options['fields'][$column]);
+        $handler->display_options['fields'][$column] = $settings;
+      }
     }
 
   }
