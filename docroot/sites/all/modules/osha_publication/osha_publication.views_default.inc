@@ -31,7 +31,7 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_plugin'] = 'node';
   /* Field: Content: Publication Date */
   $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
@@ -92,139 +92,6 @@ function osha_publication_views_default_views() {
     'publication' => 'publication',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Global: Combine fields filter */
-  $handler->display->display_options['filters']['combine']['id'] = 'combine';
-  $handler->display->display_options['filters']['combine']['table'] = 'views';
-  $handler->display->display_options['filters']['combine']['field'] = 'combine';
-  $handler->display->display_options['filters']['combine']['operator'] = 'word';
-  $handler->display->display_options['filters']['combine']['group'] = 1;
-  $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
-  $handler->display->display_options['filters']['combine']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
-  $handler->display->display_options['filters']['combine']['expose']['identifier'] = 'combine';
-  $handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['combine']['fields'] = array(
-    'title_field' => 'title_field',
-    'body' => 'body',
-  );
-  /* Filter criterion: Content: Publication Type (field_publication_type) */
-  $handler->display->display_options['filters']['field_publication_type_tid']['id'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['table'] = 'field_data_field_publication_type';
-  $handler->display->display_options['filters']['field_publication_type_tid']['field'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_publication_type_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator_id'] = 'field_publication_type_tid_op';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['label'] = 'Type';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator'] = 'field_publication_type_tid_op';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['identifier'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_publication_type_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_publication_type_tid']['vocabulary'] = 'publication_types';
-  /* Filter criterion: Entity translation: Language */
-  $handler->display->display_options['filters']['language']['id'] = 'language';
-  $handler->display->display_options['filters']['language']['table'] = 'entity_translation';
-  $handler->display->display_options['filters']['language']['field'] = 'language';
-  $handler->display->display_options['filters']['language']['relationship'] = 'entity_translations';
-  $handler->display->display_options['filters']['language']['value'] = array(
-    'en' => 'en',
-    'bg' => 'bg',
-    'cs' => 'cs',
-    'da' => 'da',
-    'de' => 'de',
-    'el' => 'el',
-    'es' => 'es',
-    'et' => 'et',
-    'fi' => 'fi',
-    'hr' => 'hr',
-    'fr' => 'fr',
-    'hu' => 'hu',
-    'is' => 'is',
-    'it' => 'it',
-    'lv' => 'lv',
-    'lt' => 'lt',
-    'nl' => 'nl',
-    'mt' => 'mt',
-    'no' => 'no',
-    'pl' => 'pl',
-    'pt' => 'pt',
-    'ro' => 'ro',
-    'ru' => 'ru',
-    'sk' => 'sk',
-    'sl' => 'sl',
-    'sv' => 'sv',
-    'tr' => 'tr',
-  );
-  $handler->display->display_options['filters']['language']['group'] = 1;
-  $handler->display->display_options['filters']['language']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['language']['expose']['operator_id'] = 'language_op';
-  $handler->display->display_options['filters']['language']['expose']['label'] = 'Language';
-  $handler->display->display_options['filters']['language']['expose']['operator'] = 'language_op';
-  $handler->display->display_options['filters']['language']['expose']['identifier'] = 'language';
-  $handler->display->display_options['filters']['language']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  /* Filter criterion: Field: Nace (field_nace_codes) */
-  $handler->display->display_options['filters']['field_nace_codes_tid']['id'] = 'field_nace_codes_tid';
-  $handler->display->display_options['filters']['field_nace_codes_tid']['table'] = 'field_data_field_nace_codes';
-  $handler->display->display_options['filters']['field_nace_codes_tid']['field'] = 'field_nace_codes_tid';
-  $handler->display->display_options['filters']['field_nace_codes_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_nace_codes_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_nace_codes_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['operator_id'] = 'field_nace_codes_tid_op';
-  $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['label'] = 'Nace';
-  $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['operator'] = 'field_nace_codes_tid_op';
-  $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['identifier'] = 'field_nace_codes_tid';
-  $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_nace_codes_tid']['vocabulary'] = 'nace_codes';
-  /* Filter criterion: Field: Tags (field_tags) */
-  $handler->display->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
-  $handler->display->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
-  $handler->display->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
-  $handler->display->display_options['filters']['field_tags_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_tags_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
-  $handler->display->display_options['filters']['field_tags_tid']['expose']['label'] = 'Tags';
-  $handler->display->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
-  $handler->display->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'field_tags_tid';
-  $handler->display->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
-  /* Filter criterion: Field: Thesaurus (field_thesaurus) */
-  $handler->display->display_options['filters']['field_thesaurus_tid']['id'] = 'field_thesaurus_tid';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['field'] = 'field_thesaurus_tid';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_thesaurus_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['operator_id'] = 'field_thesaurus_tid_op';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['label'] = 'Thesaurus';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['operator'] = 'field_thesaurus_tid_op';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['identifier'] = 'field_thesaurus_tid';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_thesaurus_tid']['vocabulary'] = 'thesaurus';
 
   /* Display: Publications */
   $handler = $view->new_display('page', 'Publications', 'page');
@@ -283,7 +150,8 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['style_options']['views_slideshow_cycle']['cleartypenobg'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'osha_slideshow';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Nodequeue: Queue */
@@ -370,12 +238,6 @@ function osha_publication_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Body'),
-    t('Search'),
-    t('Type'),
-    t('Language'),
-    t('Nace'),
-    t('Tags'),
-    t('Thesaurus'),
     t('Translations'),
     t('Block'),
     t('queue'),

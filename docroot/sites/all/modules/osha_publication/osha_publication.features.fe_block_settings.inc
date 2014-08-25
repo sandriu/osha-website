@@ -16,6 +16,8 @@ function osha_publication_default_fe_block_settings() {
     'cache' => -1,
     'custom' => 0,
     'delta' => 'publications-slidehow',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
     'pages' => 'publications',

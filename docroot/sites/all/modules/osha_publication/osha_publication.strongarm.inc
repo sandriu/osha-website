@@ -62,10 +62,18 @@ function osha_publication_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_publication';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_publication'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'exclude_node_title_content_type_modes_publication';
   $strongarm->value = array(
+    'full' => 'full',
     'teaser' => 'teaser',
-    'full' => 0,
+    'osha_slideshow' => 'osha_slideshow',
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
@@ -78,6 +86,13 @@ function osha_publication_strongarm() {
     'nodeform' => 0,
   );
   $export['exclude_node_title_content_type_modes_publication'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_publication';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_publication'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
