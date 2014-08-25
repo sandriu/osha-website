@@ -335,6 +335,7 @@ $options['init-modules'] = array(
   'osha_case_study',
   'osha_blog',
   'osha_newsletter',
+  'osha_tmgmt',
 
   'devel',
   'diff',
