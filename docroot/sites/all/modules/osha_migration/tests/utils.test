@@ -47,9 +47,16 @@ class MigrationUtilTest extends OshaWebTestCase {
     $term2->name_field['ro'][0]['value'] = 'Substanţe periculoase';
     $term2->field_tags_code['und'][0]['value'] = 'dangerous_substances';
     $term2->vid = $voc->vid;
-
     taxonomy_term_save($term2);
     $this->assertEqual(3, $term2->tid);
+
+    $term3 = new stdClass();
+    $term3->name = 'Health care';
+    $term3->name_field['en'][0]['value'] = 'Health care';
+    $term3->field_tags_code['und'][0]['value'] = 'health_care';
+    $term3->vid = $voc->vid;
+    taxonomy_term_save($term3);
+    $this->assertEqual(4, $term3->tid);
   }
 
   /**
@@ -147,6 +154,14 @@ class MigrationUtilTest extends OshaWebTestCase {
 
     $subject = MigrationUtil::decodeTagsTerms(NULL);
     $this->assertEqual(0, count($subject));
+
+    $subject = MigrationUtil::decodeTagsTerms(
+      'accident_prevention, healthcare, non_tag',
+      'field_tags_code', TRUE
+    );
+    $this->assertEqual(2, count($subject));
+    $this->assertTrue(in_array(2, $subject));
+    $this->assertTrue(in_array(4, $subject));
   }
 
   /**

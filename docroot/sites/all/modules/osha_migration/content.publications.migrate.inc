@@ -191,7 +191,7 @@ class OshaMigratePublications extends DynamicMigration {
     }
     $row->language = 'en';
     $tags = $row->subject . ',' . $row->subcategory;
-    $row->subject = MigrationUtil::decodeTagsTerms($tags);
+    $row->subject = MigrationUtil::decodeTagsTerms($tags, 'field_tags_code', TRUE);
     $row->publication_type = $this->handlePublicationType($row);
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
       explode(',', $row->multilingual_thesaurus),
