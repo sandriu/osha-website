@@ -248,6 +248,7 @@ class MigrationUtil {
 
   /**
    * Transform given term names in tids using hard-coded OSHA mappings.
+   * Note that mappings for publication content type is slightly different, hence the third parameter
    *
    * Read the tech specs to see how mappings are handled.
    *
@@ -260,7 +261,7 @@ class MigrationUtil {
    *   Array of tids
    * @todo REVIEW THIS FUNCTION
    */
-  public static function decodeTagsTerms($terms_str, $term_field = 'field_tags_code') {
+  public static function decodeTagsTerms($terms_str, $term_field = 'field_tags_code', $is_publication = FALSE) {
     if (empty($terms_str)) {
       return array();
     }
@@ -294,6 +295,29 @@ class MigrationUtil {
       'young_people' => 'osh_and_young_people',
       'young_people::educators_mainstreaming' => 'mainstreaming_osh_into_education',
     );
+    if ($is_publication) {
+        unset($replace['campaign_2014_15']);
+        unset($replace['legislation']);
+        $replace['agriculture'] = 'agriculture';
+        $replace['cleaners'] = 'cleaning_workers';
+        $replace['construction'] = 'construction';
+        $replace['csr'] = 'corporate_social_responsibility';
+        $replace['disability'] = 'disabled_people';
+        $replace['disabled_people'] = 'disabled_people';
+        $replace['fisheries'] = 'fisheries';
+        $replace['health_care'] = 'health_care';
+        $replace['healthcare'] = 'health_care';
+        $replace['horeca'] = 'horeca';
+        $replace['maintenance'] = 'maintenance';
+        $replace['migrant_workers'] = 'migrant_workers';
+        $replace['noise'] = 'noise';
+        $replace['risk_assessment'] = 'risk_assessment';
+        $replace['road_transport'] = 'road_transport';
+        $replace['statistics'] = 'statistics';
+        $replace['transport'] = 'transport';
+        $replace['worker_participation'] = 'worker_participation';
+        $replace['whp'] = 'workplace_health_promotion';
+    }
     foreach ($terms as $term) {
       if (array_key_exists($term, $replace)) {
         $ret[] = $replace[$term];

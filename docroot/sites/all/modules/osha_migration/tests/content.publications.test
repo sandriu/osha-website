@@ -197,7 +197,7 @@ class MigrateOshaPublicationTest extends OshaWebTestCase {
 
     $second = $subject['publications/e-facts/efact40'];
     $this->assertEqual(array('publications/corporate/annual-report-2013-summary'), $second['related_publications_path']);
-    $this->assertEqual('gender, accident_prevention, risk_assessment, healthcare', $second['subject']);
+    $this->assertEqual('gender, accident_prevention, risk_assessment, healthcare, horeca', $second['subject']);
     $this->assertEqual('AT, BE, BG, CY, CZ, DK, EE, EU, FI, FR, DE, GR, HU, IE, IT, LV, LT, LU, MT, NL, PL, PT, RO, SK, SI, ES, SE, UK, EUMS', $second['country']);
     $this->assertEqual('08801A, 11201B, 12521C, 18521C, 19641D, 28521A, 28561B, 29161C, 29201D, 46401A, 49441B, 50921C, 50961D', $second['multilingual_thesaurus']);
     $this->assertEqual('81.2, 86, 87, 88', $second['nace']);
