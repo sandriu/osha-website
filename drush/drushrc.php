@@ -287,7 +287,6 @@ $options['init-modules'] = array(
   'wysiwyg',
   'pathauto',
   'redirect',
-  'uuid',
   'file_entity',
   'media',
   'languagefield',
@@ -336,6 +335,9 @@ $options['init-modules'] = array(
   'osha_blog',
   'osha_newsletter',
   'osha_tmgmt',
+
+  // Enable last (conflict with rules)
+  'uuid',
 
   'devel',
   'diff',
