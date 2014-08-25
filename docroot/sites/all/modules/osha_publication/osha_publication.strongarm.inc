@@ -64,8 +64,9 @@ function osha_publication_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'exclude_node_title_content_type_modes_publication';
   $strongarm->value = array(
+    'full' => 'full',
     'teaser' => 'teaser',
-    'full' => 0,
+    'osha_slideshow' => 'osha_slideshow',
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
