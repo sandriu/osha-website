@@ -62,15 +62,23 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $this->writeElement('Keywords', 'TODO');
 
     foreach ($item->getData() as $key => $field) {
-      $this->startElement('DynamicElement');
-
-      $this->writeAttribute('dynamicElementKind', 'TextArea');
-      $this->writeAttribute('indexType', 'keyword');
-      $this->writeAttribute('instanceId', 'Gjrm2GSu');
-      $this->writeAttribute('name', $key);
-      $this->writeAttribute('repeatable', 'false');
-      $this->writeElement('DynamicContent', $field[0]['value']['#text']);
-
+      $text = NULL;
+      if (isset($field['value']['#text'])) {
+        $text = $field['value']['#text'];
+      }
+      elseif (isset($field[0]['value']['#text'])) {
+        $text = $field[0]['value']['#text'];
+      }
+      //@TODO: Check this.
+      if (!empty($text)) {
+        $this->startElement('DynamicElement');
+        $this->writeAttribute('dynamicElementKind', 'TextArea');
+        $this->writeAttribute('indexType', 'keyword');
+        $this->writeAttribute('instanceId', 'Gjrm2GSu');
+        $this->writeAttribute('name', $key);
+        $this->writeAttribute('repeatable', 'false');
+        $this->writeElement('DynamicContent', $text);
+      }
       $this->endElement();
     }
     // </Translation>
