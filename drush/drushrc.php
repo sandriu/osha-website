@@ -313,12 +313,21 @@ $options['init-modules'] = array(
   'i18n_block',
 
   'strongarm',
+  'exclude_node_title',
 
   'pdf_to_image',
   'doc_to_imagefield',
 
   'imce_wysiwyg',
   'wysiwyg_accordion',
+
+  'nodequeue',
+  'fe_block',
+  'fe_nodequeue',
+
+  'views_slideshow',
+  'views_slideshow_cycle',
+
   'osha',
   'osha_migration',
   'osha_news',

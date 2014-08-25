@@ -62,6 +62,49 @@ function osha_calls_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-calls-field_activity'
+  $field_instances['node-calls-field_activity'] = array(
+    'bundle' => 'calls',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_activity',
+    'label' => 'Activity',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 19,
+    ),
+  );
+
   // Exported field_instance: 'node-calls-field_author'
   $field_instances['node-calls-field_author'] = array(
     'bundle' => 'calls',
@@ -559,6 +602,49 @@ function osha_calls_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-calls-field_project_manager'
+  $field_instances['node-calls-field_project_manager'] = array(
+    'bundle' => 'calls',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_project_manager',
+    'label' => 'Project manager',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 25,
+    ),
+  );
+
   // Exported field_instance: 'node-calls-field_publication_date'
   $field_instances['node-calls-field_publication_date'] = array(
     'bundle' => 'calls',
@@ -619,6 +705,49 @@ function osha_calls_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-calls-field_section'
+  $field_instances['node-calls-field_section'] = array(
+    'bundle' => 'calls',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_section',
+    'label' => 'Section',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 21,
+    ),
+  );
+
   // Exported field_instance: 'node-calls-field_summary'
   $field_instances['node-calls-field_summary'] = array(
     'bundle' => 'calls',
@@ -663,6 +792,49 @@ function osha_calls_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-calls-field_workflow_status'
+  $field_instances['node-calls-field_workflow_status'] = array(
+    'bundle' => 'calls',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_workflow_status',
+    'label' => 'Workflow status',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 23,
     ),
   );
 
@@ -718,6 +890,7 @@ function osha_calls_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Activity');
   t('Agency Responses');
   t('Amendments');
   t('Author');
@@ -728,10 +901,13 @@ function osha_calls_field_default_field_instances() {
   t('Contract notice');
   t('Deadline');
   t('Info');
+  t('Project manager');
   t('Publication Date');
+  t('Section');
   t('Summary');
   t('Technical Specs');
   t('Title');
+  t('Workflow status');
 
   return $field_instances;
 }
