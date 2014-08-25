@@ -119,9 +119,11 @@ function osha_tmgmt_install() {
   // Configure file translator for the CDT format and remove other translators.
   /* @var TMGMTTranslator $file */
   $file = tmgmt_translator_load('file');
-  $file->settings['export_format'] = 'xml';
-  $file->settings['allow_override'] = FALSE;
-  $file->save();
+  if ($file) {
+    $file->settings['export_format'] = 'xml';
+    $file->settings['allow_override'] = FALSE;
+    $file->save();
+  }
 
   $local = tmgmt_translator_load('local');
   if ($local) {
