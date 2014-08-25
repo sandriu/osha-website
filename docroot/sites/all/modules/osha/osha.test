@@ -74,4 +74,19 @@ class OshaTest extends DrupalWebTestCase {
     $default = language_default();
     $this->assertEqual($default->prefix, 'en');
   }
+
+  /**
+   * Tests the if the schema is compliant to osha needs.
+   */
+  public function testOshaSchema() {
+    $schema = drupal_get_schema("url_alias");
+    $witness = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+
+    $this->assertEqual($schema['fields']['alias'], $witness, "url_alias.alias column matches");
+  }
 }
