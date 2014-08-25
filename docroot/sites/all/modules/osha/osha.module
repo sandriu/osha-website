@@ -216,3 +216,13 @@ function osha_enable_field_image_translations() {
     drupal_set_message('osha_configure_basic_page: entity_translation module not available', 'error');
   }
 }
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function osha_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['osha_slideshow'] = array(
+    'label' => t('Osha Slideshow'),
+    'custom settings' => TRUE,
+  );
+}
