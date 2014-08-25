@@ -59,6 +59,7 @@ features[variable][] = comment_form_location_publication
 features[variable][] = comment_preview_publication
 features[variable][] = comment_publication
 features[variable][] = comment_subject_field_publication
+features[variable][] = entity_translation_hide_translation_links_publication
 features[variable][] = exclude_node_title_content_type_modes_publication
 features[variable][] = exclude_node_title_content_type_value_publication
 features[variable][] = field_bundle_settings_node__publication

@@ -62,6 +62,13 @@ function osha_publication_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_publication';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_publication'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'exclude_node_title_content_type_modes_publication';
   $strongarm->value = array(
     'full' => 'full',
