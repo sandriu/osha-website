@@ -8,6 +8,7 @@ osha_configure_htmlmail();
 osha_configure_simplenews();
 osha_configure_newsletter_category();
 osha_configure_imce();
+osha_configure_file_translator();
 
 module_disable(array('overlay'));
 
@@ -214,4 +215,17 @@ function osha_configure_default_themes() {
 
   variable_set('admin_theme', 'osha_admin');
   variable_set('theme_default', 'osha_frontend');
+}
+
+/**
+ * Config file translator not available during osha_tmgmt installation.
+ */
+function osha_configure_file_translator() {
+  /* @var TMGMTTranslator $file */
+  $file = tmgmt_translator_load('file');
+  if ($file) {
+    $file->settings['export_format'] = 'xml';
+    $file->settings['allow_override'] = FALSE;
+    $file->save();
+  }
 }
