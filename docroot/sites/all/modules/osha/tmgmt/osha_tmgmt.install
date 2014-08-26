@@ -40,6 +40,7 @@ function osha_tmgmt_uninstall() {
  * Implements hook_install().
  */
 function osha_tmgmt_install() {
+
   // tmgmt_job_item alteration.
   if (!db_field_exists('tmgmt_job_item', 'source_language')) {
     // tmgmt_job_item.source_language
