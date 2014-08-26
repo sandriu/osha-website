@@ -1,11 +1,11 @@
 <?php
 
 $view = new view();
-$view->name = 'tmgmt_node_selection_view';
+$view->name = 'osha_newsletter_node_selection';
 $view->description = '';
 $view->tag = 'default';
 $view->base_table = 'node';
-$view->human_name = 'OSHA TMGMT node selection';
+$view->human_name = 'OSHA newsletter node selection';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -292,6 +292,27 @@ $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
 $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
 $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
 $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+/* Field: Content: Body */
+$handler->display->display_options['fields']['body']['id'] = 'body';
+$handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+$handler->display->display_options['fields']['body']['field'] = 'body';
+$handler->display->display_options['fields']['body']['label'] = '';
+$handler->display->display_options['fields']['body']['exclude'] = TRUE;
+$handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+/* Field: Content: Bookshop ID */
+$handler->display->display_options['fields']['field_publication_bookshop_id']['id'] = 'field_publication_bookshop_id';
+$handler->display->display_options['fields']['field_publication_bookshop_id']['table'] = 'field_data_field_publication_bookshop_id';
+$handler->display->display_options['fields']['field_publication_bookshop_id']['field'] = 'field_publication_bookshop_id';
+$handler->display->display_options['fields']['field_publication_bookshop_id']['label'] = '';
+$handler->display->display_options['fields']['field_publication_bookshop_id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['field_publication_bookshop_id']['element_label_colon'] = FALSE;
+/* Field: Content: Summary */
+$handler->display->display_options['fields']['field_summary']['id'] = 'field_summary';
+$handler->display->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
+$handler->display->display_options['fields']['field_summary']['field'] = 'field_summary';
+$handler->display->display_options['fields']['field_summary']['label'] = '';
+$handler->display->display_options['fields']['field_summary']['exclude'] = TRUE;
+$handler->display->display_options['fields']['field_summary']['element_label_colon'] = FALSE;
 /* Sort criterion: Content: Post date */
 $handler->display->display_options['sorts']['created']['id'] = 'created';
 $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -334,6 +355,7 @@ $handler->display->display_options['filters']['type']['value'] = array(
   'press_release' => 'press_release',
   'publication' => 'publication',
 );
+$handler->display->display_options['filters']['type']['group'] = 1;
 $handler->display->display_options['filters']['type']['exposed'] = TRUE;
 $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
 $handler->display->display_options['filters']['type']['expose']['label'] = 'Type of content';
@@ -345,10 +367,42 @@ $handler->display->display_options['filters']['type']['expose']['remember_roles'
   1 => 0,
   3 => 0,
 );
+/* Filter criterion: Global: Combine fields filter */
+$handler->display->display_options['filters']['combine']['id'] = 'combine';
+$handler->display->display_options['filters']['combine']['table'] = 'views';
+$handler->display->display_options['filters']['combine']['field'] = 'combine';
+$handler->display->display_options['filters']['combine']['operator'] = 'contains';
+$handler->display->display_options['filters']['combine']['group'] = 1;
+$handler->display->display_options['filters']['combine']['exposed'] = TRUE;
+$handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
+$handler->display->display_options['filters']['combine']['expose']['label'] = 'Search text';
+$handler->display->display_options['filters']['combine']['expose']['use_operator'] = TRUE;
+$handler->display->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
+$handler->display->display_options['filters']['combine']['expose']['identifier'] = 'combine';
+$handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+);
+$handler->display->display_options['filters']['combine']['group_info']['label'] = 'Combine fields filter';
+$handler->display->display_options['filters']['combine']['group_info']['identifier'] = 'combine';
+$handler->display->display_options['filters']['combine']['group_info']['remember'] = FALSE;
+$handler->display->display_options['filters']['combine']['group_info']['group_items'] = array(
+  1 => array(),
+  2 => array(),
+  3 => array(),
+);
+$handler->display->display_options['filters']['combine']['fields'] = array(
+  'title' => 'title',
+  'body' => 'body',
+  'field_publication_bookshop_id' => 'field_publication_bookshop_id',
+  'field_summary' => 'field_summary',
+);
 /* Filter criterion: Content: Nid */
 $handler->display->display_options['filters']['nid']['id'] = 'nid';
 $handler->display->display_options['filters']['nid']['table'] = 'node';
 $handler->display->display_options['filters']['nid']['field'] = 'nid';
+$handler->display->display_options['filters']['nid']['group'] = 1;
 $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
 $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
 $handler->display->display_options['filters']['nid']['expose']['label'] = 'Node ID';
@@ -363,6 +417,7 @@ $handler->display->display_options['filters']['nid']['expose']['remember_roles']
 $handler->display->display_options['filters']['field_activity_tid']['id'] = 'field_activity_tid';
 $handler->display->display_options['filters']['field_activity_tid']['table'] = 'field_data_field_activity';
 $handler->display->display_options['filters']['field_activity_tid']['field'] = 'field_activity_tid';
+$handler->display->display_options['filters']['field_activity_tid']['group'] = 1;
 $handler->display->display_options['filters']['field_activity_tid']['exposed'] = TRUE;
 $handler->display->display_options['filters']['field_activity_tid']['expose']['operator_id'] = 'field_activity_tid_op';
 $handler->display->display_options['filters']['field_activity_tid']['expose']['label'] = 'Activity';
@@ -389,6 +444,7 @@ $handler->display->display_options['filters']['field_section_tid']['id'] = 'fiel
 $handler->display->display_options['filters']['field_section_tid']['table'] = 'field_data_field_section';
 $handler->display->display_options['filters']['field_section_tid']['field'] = 'field_section_tid';
 $handler->display->display_options['filters']['field_section_tid']['value'] = '';
+$handler->display->display_options['filters']['field_section_tid']['group'] = 1;
 $handler->display->display_options['filters']['field_section_tid']['exposed'] = TRUE;
 $handler->display->display_options['filters']['field_section_tid']['expose']['operator_id'] = 'field_section_tid_op';
 $handler->display->display_options['filters']['field_section_tid']['expose']['label'] = 'Section';
@@ -406,6 +462,7 @@ $handler->display->display_options['filters']['field_nace_codes_tid']['id'] = 'f
 $handler->display->display_options['filters']['field_nace_codes_tid']['table'] = 'field_data_field_nace_codes';
 $handler->display->display_options['filters']['field_nace_codes_tid']['field'] = 'field_nace_codes_tid';
 $handler->display->display_options['filters']['field_nace_codes_tid']['value'] = '';
+$handler->display->display_options['filters']['field_nace_codes_tid']['group'] = 1;
 $handler->display->display_options['filters']['field_nace_codes_tid']['exposed'] = TRUE;
 $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['operator_id'] = 'field_nace_codes_tid_op';
 $handler->display->display_options['filters']['field_nace_codes_tid']['expose']['label'] = 'Nace Codes';
@@ -423,6 +480,7 @@ $handler->display->display_options['filters']['field_thesaurus_tid']['id'] = 'fi
 $handler->display->display_options['filters']['field_thesaurus_tid']['table'] = 'field_data_field_thesaurus';
 $handler->display->display_options['filters']['field_thesaurus_tid']['field'] = 'field_thesaurus_tid';
 $handler->display->display_options['filters']['field_thesaurus_tid']['value'] = '';
+$handler->display->display_options['filters']['field_thesaurus_tid']['group'] = 1;
 $handler->display->display_options['filters']['field_thesaurus_tid']['exposed'] = TRUE;
 $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['operator_id'] = 'field_thesaurus_tid_op';
 $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['label'] = 'Thesaurus';
@@ -435,27 +493,12 @@ $handler->display->display_options['filters']['field_thesaurus_tid']['expose']['
   3 => 0,
 );
 $handler->display->display_options['filters']['field_thesaurus_tid']['vocabulary'] = 'thesaurus';
-/* Filter criterion: Content: Title (title_field) */
-$handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
-$handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
-$handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
-$handler->display->display_options['filters']['title_field_value']['operator'] = 'contains';
-$handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
-$handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
-$handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Title';
-$handler->display->display_options['filters']['title_field_value']['expose']['use_operator'] = TRUE;
-$handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
-$handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
-$handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
-);
 /* Filter criterion: Content: Workflow status (field_workflow_status) */
 $handler->display->display_options['filters']['field_workflow_status_tid']['id'] = 'field_workflow_status_tid';
 $handler->display->display_options['filters']['field_workflow_status_tid']['table'] = 'field_data_field_workflow_status';
 $handler->display->display_options['filters']['field_workflow_status_tid']['field'] = 'field_workflow_status_tid';
 $handler->display->display_options['filters']['field_workflow_status_tid']['value'] = '';
+$handler->display->display_options['filters']['field_workflow_status_tid']['group'] = 1;
 $handler->display->display_options['filters']['field_workflow_status_tid']['exposed'] = TRUE;
 $handler->display->display_options['filters']['field_workflow_status_tid']['expose']['operator_id'] = 'field_workflow_status_tid_op';
 $handler->display->display_options['filters']['field_workflow_status_tid']['expose']['label'] = 'Workflow status';
@@ -474,6 +517,7 @@ $handler->display->display_options['filters']['name']['table'] = 'users';
 $handler->display->display_options['filters']['name']['field'] = 'name';
 $handler->display->display_options['filters']['name']['relationship'] = 'uid';
 $handler->display->display_options['filters']['name']['operator'] = 'contains';
+$handler->display->display_options['filters']['name']['group'] = 1;
 $handler->display->display_options['filters']['name']['exposed'] = TRUE;
 $handler->display->display_options['filters']['name']['expose']['operator_id'] = 'name_op';
 $handler->display->display_options['filters']['name']['expose']['label'] = 'Author name';
@@ -490,6 +534,7 @@ $handler->display->display_options['filters']['changed']['id'] = 'changed';
 $handler->display->display_options['filters']['changed']['table'] = 'node';
 $handler->display->display_options['filters']['changed']['field'] = 'changed';
 $handler->display->display_options['filters']['changed']['operator'] = 'between';
+$handler->display->display_options['filters']['changed']['group'] = 1;
 $handler->display->display_options['filters']['changed']['exposed'] = TRUE;
 $handler->display->display_options['filters']['changed']['expose']['operator_id'] = 'changed_op';
 $handler->display->display_options['filters']['changed']['expose']['label'] = 'Updated';
@@ -510,7 +555,7 @@ $handler->display->display_options['menu']['title'] = 'OSHA content';
 $handler->display->display_options['menu']['weight'] = '-30';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
-$translatables['tmgmt_node_selection_view'] = array(
+$translatables['osha_newsletter_node_selection'] = array(
   t('Master'),
   t('OSHA content selection'),
   t('more'),
@@ -538,13 +583,14 @@ $translatables['tmgmt_node_selection_view'] = array(
   t('Updated date'),
   t('Author name'),
   t('Type'),
+  t('Search text'),
+  t('Combine fields filter'),
   t('Node ID'),
   t('Activity'),
   t('Activity (field_activity)'),
   t('Section'),
   t('Nace Codes'),
   t('Thesaurus'),
-  t('Title'),
   t('Workflow status'),
   t('Enter name or part of author\'s name'),
   t('Select an interval for filtering'),
