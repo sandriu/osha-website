@@ -1,0 +1,21 @@
+#edit-changed-wrapper {
+  width: 500px;
+}
+
+#edit-changed-wrapper label,
+#edit-changed-wrapper div.views-widget label:first-child,
+#edit-changed-wrapper div.form-item,
+#edit-changed-wrapper #edit-changed-min,
+#edit-changed-wrapper div.views-widget
+{
+    display: inline;
+}
+
+#edit-changed-wrapper label:first-child {
+    display: block;
+}
+
+
+.view-id-tmgmt_node_selection_view div.sort-by-wrapper {
+    clear: both;
+}
