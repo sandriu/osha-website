@@ -4,7 +4,7 @@
  * Class MigrateOshaCalls migrates calls.txt contents. The data
  * is stored inside the <em>Calls</em> content type.
  */
-class MigrateOshaCalls extends DynamicMigration {
+class MigrateOshaCalls extends OSHADynamicMigration {
 
   /**
    * {@inheritdoc}
@@ -142,20 +142,6 @@ class MigrateOshaCalls extends DynamicMigration {
   }
 
   /**
-   * Executes before Import.
-   */
-  public function preImport() {
-    MigrationUtil::activateOshaFilesHandler();
-  }
-
-  /**
-   * Executes after import.
-   */
-  public function postImport() {
-    MigrationUtil::deactivateOshaFilesHandler();
-  }
-
-  /**
    * Prepare raw data pulled from source.
    *
    * {@inheritdoc}
@@ -185,7 +171,8 @@ class MigrateOshaCalls extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
-    $entity->path['pathauto'] = 0;
+    parent::prepare($entity, $row);
+
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
@@ -219,12 +206,8 @@ class MigrateOshaCalls extends DynamicMigration {
         $has_translation = TRUE;
       }
 
-      if ($has_translation && $language != $row->language && !isset($entity->translations->data[$language])) {
-        $translation_handler->setTranslation(array(
-          'translate' => 0, 'status' => 1, 'uid' => 1,
-          'language' => $language,
-          'source' => $row->language,
-        ));
+      if ($has_translation) {
+        MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
       }
     }
   }
@@ -259,26 +242,6 @@ class MigrateOshaCalls extends DynamicMigration {
       'award_notice' => '',
       'award_notice_corrigendum' => '',
     );
-  }
-
-  /**
-   * Sets the node aliases after the migration, nid is available.
-   *
-   * @param object $entity
-   *   Entity to be saved
-   * @param object $row
-   *   Source row
-   */
-  public function complete($entity, $row) {
-    $languages = array_keys($row->path);
-    foreach ($languages as $language) {
-      $args = array(
-        'source' => 'node/' . $entity->nid,
-        'alias' => $row->path[$language],
-        'language' => $language,
-      );
-      path_save($args);
-    }
   }
 }
 
