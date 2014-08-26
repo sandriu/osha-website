@@ -561,6 +561,42 @@ class MigrationUtil {
       variable_set('migrate_disabled_handlers', serialize($handlers));
     }
   }
+
+  public static function setTranslation(&$translation_handler, $entity, $row, $language) {
+    /* Don't translate en (default) */
+    if ($language != $row->language
+        && !isset($entity->translations->data[$language])) {
+      $translation_handler->setTranslation(array(
+        'translate' => 0, 'status' => 1, 'uid' => 1,
+        'language' => $language,
+        'source' => $row->language,
+      ));
+    }
+  }
+
+  public static function createAliases($entity, $row, $entity_type, $id_key) {
+    $languages = array_keys($entity->translations->data);
+    if (!in_array($row->language, $languages)) {
+      $languages[] = $row->language;
+    }
+    foreach ($languages as $language) {
+      if (isset($row->path[$language])) {
+        $path = $row->path[$language];
+        if (substr($row->path[$language], 1, 2) == $language) {
+          $path = substr($row->path[$language], 4);
+        }
+      }
+      else {
+        $path = $row->id;
+      }
+      $args = array(
+        'source' => $entity_type . '/' . $entity->{$id_key},
+        'alias' => $path,
+        'language' => $language,
+      );
+      path_save($args);
+    }
+  }
 }
 
 class OSHAMigrationListJSON extends MigrateListJSON {
@@ -639,5 +675,37 @@ class OSHATaxonomyMigrationItemJSON extends MigrateItemJSON {
       return $this->assoc ? (object) $this->data[$item_id] : $this->data[$item_id];
     }
     return NULL;
+  }
+}
+
+class OSHADynamicMigration extends DynamicMigration {
+  /**
+   * Executes before Import.
+   */
+  public function preImport() {
+    MigrationUtil::activateOshaFilesHandler();
+  }
+
+  /**
+   * Executes after import.
+   */
+  public function postImport() {
+    MigrationUtil::deactivateOshaFilesHandler();
+  }
+
+  public function prepare($entity, $row) {
+    $entity->path['pathauto'] = 0;
+  }
+
+  /**
+   * Sets the node aliases after the migration, nid is available.
+   *
+   * @param object $entity
+   *   Entity to be saved
+   * @param object $row
+   *   Source row
+   */
+  public function complete($entity, $row) {
+    MigrationUtil::createAliases($entity, $row, 'node', 'nid');
   }
 }
