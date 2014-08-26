@@ -88,6 +88,27 @@ function osha_tmgmt_entity_info_alter(&$entity_info) {
 }
 
 /**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * Hide unwanted translation sources tabs from tmgmt interface.
+ */
+function osha_tmgmt_menu_local_tasks_alter(&$items) {
+  $disable = array(
+    'admin/tmgmt/sources/i18n_string_taxonomy_term',
+    'admin/tmgmt/sources/i18n_string_taxonomy_vocabulary',
+  );
+  if (isset($items['tabs']['1']['output']) && is_array($items['tabs']['1']['output'])) {
+    foreach ($items['tabs']['1']['output'] as $index => &$tab) {
+      if (isset($tab['#link']['path'])
+          && in_array($tab['#link']['path'], $disable)) {
+        $tab['#link']['access'] = FALSE;
+        unset($items['tabs']['1']['output'][$index]);
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
