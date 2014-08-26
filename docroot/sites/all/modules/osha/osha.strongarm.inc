@@ -723,6 +723,20 @@ function osha_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_nace_codes_pattern';
+  $strongarm->value = 'nace-codes/[term:field_nace_code]';
+  $export['pathauto_taxonomy_term_nace_codes_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_thesaurus_pattern';
+  $strongarm->value = 'thesaurus/[term:field_thesaurus_code]';
+  $export['pathauto_taxonomy_term_thesaurus_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_transliterate';
   $strongarm->value = FALSE;
   $export['pathauto_transliterate'] = $strongarm;
