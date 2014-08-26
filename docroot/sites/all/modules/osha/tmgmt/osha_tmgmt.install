@@ -43,20 +43,22 @@ function osha_tmgmt_install() {
   // tmgmt_job_item alteration.
   if (!db_field_exists('tmgmt_job_item', 'source_language')) {
     // tmgmt_job_item.source_language
+    // Accepts NULL because language is assigned when the cart is checked out
     $field = array(
       'type' => 'varchar',
       'length' => 12,
-      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'not null' => FALSE,
       'description' => 'Entity original language',
     );
     db_add_field('tmgmt_job_item', 'source_language', $field);
   }
 
   if (!db_field_exists('tmgmt_job_item', 'target_language')) {
+    // Accepts NULL because language is assigned when the cart is checked out
     $field = array(
       'type' => 'varchar',
       'length' => 12,
-      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'not null' => FALSE,
       'description' => 'Language to translate item into',
     );
     db_add_field('tmgmt_job_item', 'target_language', $field);

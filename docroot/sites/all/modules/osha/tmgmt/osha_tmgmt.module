@@ -12,14 +12,14 @@ function osha_tmgmt_schema_alter(&$schema) {
     $schema['tmgmt_job_item']['fields']['target_language'] = array(
       'type' => 'varchar',
       'size' => 12,
-      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'not null' => FALSE,
       'description' => 'The language the data should be translated to.',
     );
     $schema['tmgmt_job_item']['fields']['source_language'] = array(
       'type' => 'varchar',
       'size' => 12,
       'default' => '',
-      'not null' => FALSE, // TODO: Optional until we fix job_item creation
+      'not null' => FALSE,
       'description' => 'The default entity language',
     );
     $schema['tmgmt_job_item']['fields']['character_count'] = array(
