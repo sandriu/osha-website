@@ -24,6 +24,12 @@ function osha_news_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -72,6 +78,12 @@ function osha_news_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 12,
       ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -117,6 +129,12 @@ function osha_news_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 10,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'scs' => array(
         'label' => 'hidden',
@@ -181,6 +199,12 @@ function osha_news_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 15,
       ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -229,6 +253,12 @@ function osha_news_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 9,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'scs' => array(
         'label' => 'above',
@@ -291,6 +321,12 @@ function osha_news_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 13,
       ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -334,6 +370,12 @@ function osha_news_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 11,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'scs' => array(
         'label' => 'hidden',
@@ -386,6 +428,12 @@ function osha_news_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 4,
       ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -434,6 +482,12 @@ function osha_news_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_link',
         'weight' => 5,
       ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -481,6 +535,12 @@ function osha_news_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 14,
       ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -523,6 +583,12 @@ function osha_news_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'scs' => array(
         'label' => 'hidden',
