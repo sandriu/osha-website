@@ -225,6 +225,7 @@ function osha_entity_info_alter(&$entity_info) {
     'label' => t('Osha Slideshow'),
     'custom settings' => TRUE,
   );
+}
 
 /**
  * Implements hook_date_field_formatter_settings_form_alter().
