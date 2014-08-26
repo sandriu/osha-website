@@ -1,11 +1,11 @@
 <?php
 
 $view = new view();
-$view->name = 'osha_newsletter_node_selection';
+$view->name = 'tmgmt_node_selection_view';
 $view->description = '';
 $view->tag = 'default';
 $view->base_table = 'node';
-$view->human_name = 'OSHA newsletter node selection';
+$view->human_name = 'OSHA TMGMT node selection';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -555,7 +555,7 @@ $handler->display->display_options['menu']['title'] = 'OSHA content';
 $handler->display->display_options['menu']['weight'] = '-30';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
-$translatables['osha_newsletter_node_selection'] = array(
+$translatables['tmgmt_node_selection_view'] = array(
   t('Master'),
   t('OSHA content selection'),
   t('more'),
