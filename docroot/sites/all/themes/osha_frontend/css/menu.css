@@ -3,35 +3,35 @@
 .region-header .block-menu li a {border-bottom: 0;}
 
 /* dropdown stuff */
-#main-menu-links a {
+.region-header #main-menu-links a {
     float: none;
     white-space: nowrap;
     font-size: 14px;
 }
-#main-menu-links > li > span {
+.region-header #main-menu-links > li > span {
     font-weight: bold;
     padding: 5px 10px;
     font-size: 14px;
 }
-#main-menu-links ul {
+.region-header #main-menu-links ul {
     padding: 0;
     position: absolute;
     left: -1000px;
 }
-#main-menu-links li:hover ul {
+.region-header #main-menu-links li:hover ul {
     left: auto;
     z-index: 1000;
     background: #fff;
 }
-#main-menu-links ul li {
+.region-header #main-menu-links ul li {
     float: none;
     margin: 0;
     padding: 0;
 }
-#main-menu-links ul li:hover a {
+.region-header #main-menu-links ul li:hover a {
     background: rgba(240, 240, 240, 1);
 }
-#main-menu-links ul a {
+.region-header #main-menu-links ul a {
     background: #ccc;
     background: rgba(200, 200, 200, 0.7);
     width: 150px;
@@ -45,10 +45,10 @@
     border-top-right-radius: 0px;
 }
 /* active link */
-#main-menu-links li.active-trail a {
+.region-header #main-menu-links li.active-trail a {
     background: #ccc;
     background: rgba(200, 200, 200, 0.7);
 }
-#main-menu-links li.active-trail>a {
+.region-header #main-menu-links li.active-trail>a {
     background: #ffffff;
 }
