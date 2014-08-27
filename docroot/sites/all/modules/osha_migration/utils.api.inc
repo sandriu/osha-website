@@ -453,7 +453,20 @@ class MigrationUtil {
   }
 
   /**
-   * Check and remove invalid files to be migrated from the given field.
+   * Check and replace invalid files to be migrated from the given field.
+   *
+   * File paths that exceed the 255 character limit are replaced with their
+   * corespondent from an hardcoded file located at osha_migration/data/
+   * named renamed_files.json
+   *
+   * The function populates:
+   *   $row->{$field} with the old values, this value will be stored as an alias
+   *   $row->{OSHA_MIGRATION_REPLACED_PATH_PREFIX . $field}, with the new values
+   *      this value will be stored in file_managed.uri
+   *      with valid values,
+   *
+   * This system was made with the purpose of keeping the old paths while
+   * complying with the restriction of 255 chars for the uri.
    *
    * @param object $row
    *   Migrated source row
@@ -466,35 +479,64 @@ class MigrationUtil {
     if (empty($row->{$field})) {
       return;
     }
-    /* Validate file path length */
+    /* Container for valid paths (< 255 chars) */
     $valid = array();
+    /* Container for old paths */
+    $old_paths = array();
     foreach ($row->{$field} as $language => $path) {
       if (is_string($path)) {
-        if (strlen($path_prefix) + strlen($path) > 255) {
-          drupal_set_message(
-            "File path cannot be larger than 255 characters, ignoring {$row->file}",
-            'warning'
-          );
-        }
-        else {
-          $valid[$language] = $path;
-        }
+        $valid[$language] = self::getFileDestination($path, $path_prefix);
+        $old_paths[$language] = $path;
       }
       else {
-        foreach ($path as $index => $file_path) {
-          if (strlen($path_prefix) + strlen($file_path) > 255) {
-            drupal_set_message(
-              "File path cannot be larger than 255 characters, ignoring {$row->file}",
-              'warning'
-            );
-          }
-          else {
-            $valid[$language][] = $file_path;
-          }
+        foreach ($path as $file_path) {
+          $valid[$language] = self::getFileDestination($file_path, $path_prefix);
+          $old_paths[$language][] = $file_path;
         }
       }
     }
-    $row->{$field} = $valid;
+
+    $row->{$field} = $old_paths;
+    $row->{OSHA_MIGRATION_REPLACED_PATH_PREFIX . $field} = $valid;
+  }
+
+  /**
+   * Function that returns a valid destination name.
+   *
+   * If the old path is found as a key then it returns the new_path name.
+   *
+   * @param string $old_path
+   *   The old path
+   * @param string $path_prefix
+   *   The path prefix
+   *
+   * @return string
+   *   Returns the truncated string from a file if old path can be found or the
+   *   old path otherwise
+   */
+  public static function getFileDestination($old_path, $path_prefix) {
+    $file = drupal_get_path('module', 'osha_migration') . "/data/renamed_files.json";
+    static $data;
+    if (empty($data)) {
+      $data = json_decode(file_get_contents($file), TRUE);
+    }
+    if (strlen($path_prefix) + strlen($old_path) > 255) {
+      if (!isset($data[$old_path])) {
+        drupal_set_message(
+          "File path cannot be larger than 255 characters, ignoring " . $old_path,
+          'warning'
+        );
+      }
+      else {
+        drupal_set_message(
+          "File path larger than 255 characters, replacing " . $old_path . "with " . $data[$old_path],
+          'status'
+        );
+
+        return $data[$old_path];
+      }
+    }
+    return $old_path;
   }
 
   /**
