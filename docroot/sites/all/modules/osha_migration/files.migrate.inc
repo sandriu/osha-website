@@ -12,6 +12,11 @@ class OshaMigrateFiles extends DynamicMigration {
   public function __construct($arguments) {
     parent::__construct();
     $this->description = t('Imports files needed bt publication');
+    $this->dependencies = array(
+      OSHA_MIGRATION_TAXONOMY_TAGS,
+      OSHA_MIGRATION_TAXONOMY_THESAURUS,
+      OSHA_MIGRATION_TAXONOMY_NACE_CODES,
+    );
 
     /* Remove limits on time/memory, slower machines will fail */
     $this->timeLimit = 0;
