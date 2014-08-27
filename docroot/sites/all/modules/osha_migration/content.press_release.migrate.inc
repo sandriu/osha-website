@@ -4,7 +4,7 @@
  * Class MigrateOshaNews migrates news.txt contents. The data
  * is stored inside the <em>News</em> content type.
  */
-class MigrateOshaPressRelease extends DynamicMigration {
+class MigrateOshaPressRelease extends OSHADynamicMigration {
 
   /**
    * {@inheritdoc}
@@ -162,6 +162,8 @@ class MigrateOshaPressRelease extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    parent::prepare($entity, $row);
+
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
@@ -170,16 +172,20 @@ class MigrateOshaPressRelease extends DynamicMigration {
     $entity->translations = $translation_handler->getTranslations();
 
     foreach ($languages as $language) {
+      $has_translation = FALSE;
       if (!empty($row->title_field[$language])) {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
+        $has_translation = TRUE;
       }
       if (!empty($row->description[$language])) {
         $entity->field_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
         $entity->field_summary[$language][0]['format'] = 'full_html';
+        $has_translation = TRUE;
       }
       if (!empty($row->text[$language])) {
         $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
+        $has_translation = TRUE;
       }
       if (!empty($row->notesToEditors[$language])) {
         $entity->field_pr_notes_to_editor[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->notesToEditors[$language]);
@@ -194,35 +200,9 @@ class MigrateOshaPressRelease extends DynamicMigration {
             explode(",", $row->relatedLinks[$language])
           );
       }
-      /* Don't translate en (default) */
-      if ($language != $row->language && !isset($entity->translations->data[$language])) {
-        $translation_handler->setTranslation(array(
-          'translate' => 0, 'status' => 1, 'uid' => 1,
-          'language' => $language,
-          'source' => $row->language,
-        ));
+      if ($has_translation) {
+        MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
       }
-    }
-  }
-
-  /**
-   * Sets the node aliases after the migration, nid is available.
-   *
-   * @param object $entity
-   *   Entity to be saved
-   * @param object $row
-   *   Source row
-   */
-  public function complete($entity, $row) {
-    $languages = array_keys(language_list());
-    foreach ($languages as $language) {
-      /* Same alias for all languages (see mappings) */
-      $args = array(
-        'source' => 'node/' . $entity->nid,
-        'alias' => $row->id,
-        'language' => $language,
-      );
-      path_save($args);
     }
   }
 }
