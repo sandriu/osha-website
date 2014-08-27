@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Osha Menu feature.
  */
+
+include_once 'osha_menu.features.inc';
