@@ -337,6 +337,7 @@ $options['init-modules'] = array(
   'osha_blog',
   'osha_newsletter',
   'osha_tmgmt',
+  'osha_menu',
 
   // Enable last (conflict with rules)
   'uuid',
