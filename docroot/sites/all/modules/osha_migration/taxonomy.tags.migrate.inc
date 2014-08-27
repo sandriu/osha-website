@@ -46,6 +46,7 @@ class MigrateOshaTaxonomyTags extends DynamicMigration {
     $this->destination = new MigrateDestinationTerm(OSHA_TAXONOMIES_TAGS);
 
     $this->addFieldMapping('field_tags_code', 'code');
+    $this->addFieldMapping('field_excluded_from', 'excluded_from');
     $this->addFieldMapping('parent', 'parent');
     $this->addFieldMapping('format')->defaultValue('plain_text');
     $this->addFieldMapping('name', 'en');
