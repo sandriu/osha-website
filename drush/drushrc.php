@@ -316,6 +316,7 @@ $options['init-modules'] = array(
   'doc_to_imagefield',
 
   'special_menu_items',
+  'menu_block',
 
   'imce_wysiwyg',
   'wysiwyg_accordion',
