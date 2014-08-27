@@ -4,6 +4,10 @@ define('OSHA_TMGMT_DEFAULT_SOURCE_LANGUAGE', 'en');
 define('OSHA_TMGMT_DEFAULT_TARGET_LANGUAGE', 'ro');
 define('OSHA_TMGMT_WORDS_PER_PAGE', 250);
 
+define('OSHA_TMGMT_JOB_PRIORITY_HIGH', 2);
+define('OSHA_TMGMT_JOB_PRIORITY_LOW', 1);
+define('OSHA_TMGMT_JOB_PRIORITY_NORMAL', 0);
+
 /**
  * Implements hook_schema_alter().
  */
