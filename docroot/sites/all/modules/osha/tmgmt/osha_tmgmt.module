@@ -155,22 +155,18 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
 
     case 'tmgmt_ui_cart_content':
       $form['request_translation']['#submit'] = array('osha_tmgmt_tmgmt_ui_cart_content_submit');
+      $form['priority'] = array(
+        '#title' => t('Job priority'),
+        '#type' => 'select',
+        '#options' => array(0 => 'Normal', 2 => 'High', 1 => 'Low'),
+        '#weight' => 0,
+      );
       break;
 
     case 'tmgmt_job_form':
       hide($form['info']['source_language']);
       hide($form['info']['target_language']);
       hide($form['info']['translator']);
-      if (!empty($form['info']['word_count'])) {
-        $avg_pages = sprintf('%.1f', $form['info']['word_count']['#markup'] / OSHA_TMGMT_WORDS_PER_PAGE);
-        $form['info']['pages'] = array(
-          '#title' => t('Average number of pages'),
-          '#type' => 'item',
-          '#markup' => $avg_pages,
-          '#prefix' => '<div id="tmgmt-ui-pages" class="tmgmt-ui-pages tmgmt-ui-info-item">',
-          '#suffix' => '</div>',
-        );
-      }
       if (isset($form['info']['created'])) {
         $created = $form['info']['created'];
         unset($form['info']['created']);
@@ -186,7 +182,8 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
 function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
   global $user;
   $job_empty = TRUE;
-  $target_languages = array_filter($form_state['values']['target_language']);
+  $values = $form_state['values'];
+  $target_languages = array_filter($values['target_language']);
   $job_items_by_source_language = array();
   // Group the selected items by source language.
   foreach (tmgmt_job_item_load_multiple(array_filter($form_state['values']['items'])) as $job_item) {
@@ -242,6 +239,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
       $redirects = tmgmt_ui_job_checkout_multiple(array($job));
       // Update the job title with it's ID as current label doesn't make sense.
       $job->label = t('Translation job #!tjid', array('!tjid' => $job->tjid));
+      $job->priority = $values['priority'];
       OshaTMGMTStatistics::computeJobStatistics($job);
       $job->save();
       if ($redirects) {

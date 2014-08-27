@@ -14,6 +14,9 @@ class tmgmt_handler_field_tmgmt_job_priority extends views_handler_field {
     $object = $this->get_value($values);
     switch ($object) {
       case 1:
+        return t('Low');
+
+      case 2:
         return t('High');
 
       default:
