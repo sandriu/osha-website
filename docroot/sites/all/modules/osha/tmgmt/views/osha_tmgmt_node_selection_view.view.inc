@@ -16,6 +16,7 @@ $handler->display->display_options['title'] = 'OSHA content selection';
 $handler->display->display_options['css_class'] = 'tmgmt_node_selection_view';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'create translation jobs';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
