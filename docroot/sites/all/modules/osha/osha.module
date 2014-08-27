@@ -231,39 +231,24 @@ function osha_entity_info_alter(&$entity_info) {
  * Implements hook_form_alter()
  */
 function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
-
-  if (!isset($form['field_tags'])) {
-    // form doesn't contain field_tags
-    return;
-  }
-
-  // $form_id has the following template <machine_name>_node_form
-  $machine_name = substr($form_id, 0, -strlen('_node_form'));
-
-  if (!isset($form['field_tags']['und']['#options'])) {
-    // it's not a selectable list
-    return;
-  }
-
-  // $options contains options as $key => $name
-  $options = $form['field_tags']['und']['#options'];
-  unset($options['_none']);
-
-  // tids of terms from select list
-  $tids = array_keys($options);
-
-  foreach ($tids as $tid) {
-    $term = taxonomy_term_load($tid);
-    if (!empty($term->field_excluded_from)) {
-
-      $excluded_from = array_map(function($a) {
-        return $a['value'];
-      }, $term->field_excluded_from['und']);
-
-      if (in_array($machine_name, $excluded_from)) {
-        unset($form['field_tags']['und']['#options'][$tid]);
+  if (isset($form['field_tags']['und']['#options'])) {
+    // $form_id has the following template <machine_name>_node_form
+    $machine_name = substr($form_id, 0, -strlen('_node_form'));
+    // $options contains options as $key => $name
+    $options = $form['field_tags']['und']['#options'];
+    unset($options['_none']);
+    // tids of terms from select list
+    $tids = array_keys($options);
+    $terms = taxonomy_term_load_multiple($tids);
+    foreach ($terms as $tid => $term) {
+      if (!empty($term->field_excluded_from)) {
+        $excluded_from = array_map(function($a) {
+          return $a['value'];
+        }, $term->field_excluded_from['und']);
+        if (in_array($machine_name, $excluded_from)) {
+          unset($form['field_tags']['und']['#options'][$tid]);
+        }
       }
     }
   }
-
 }
