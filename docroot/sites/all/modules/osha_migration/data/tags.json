@@ -1016,7 +1016,7 @@
     },
     {
         "code": "napo",
-        "exclude_from": [ "publication" ],
+        "excluded_from": [ "publication" ],
         "bg": "Напо",
         "cs": "Napo",
         "da": "Napo",
