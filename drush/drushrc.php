@@ -315,6 +315,8 @@ $options['init-modules'] = array(
   'pdf_to_image',
   'doc_to_imagefield',
 
+  'special_menu_items',
+
   'imce_wysiwyg',
   'wysiwyg_accordion',
 
