@@ -317,6 +317,7 @@ $options['init-modules'] = array(
 
   'special_menu_items',
   'menu_block',
+  'menuimage',
 
   'imce_wysiwyg',
   'wysiwyg_accordion',
