@@ -665,6 +665,38 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-tags-field_excluded_from'
+  $field_instances['taxonomy_term-tags-field_excluded_from'] = array(
+    'bundle' => 'tags',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_excluded_from',
+    'label' => 'Excluded from',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-tags-field_tags_code'
   $field_instances['taxonomy_term-tags-field_tags_code'] = array(
     'bundle' => 'tags',
@@ -854,6 +886,7 @@ function osha_taxonomies_field_default_field_instances() {
   t('Changes');
   t('Code');
   t('Description');
+  t('Excluded from');
   t('Excludes');
   t('Includes');
   t('Includes_also');

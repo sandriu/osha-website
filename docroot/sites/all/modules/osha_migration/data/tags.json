@@ -1,6 +1,7 @@
 [
     {
         "code": "accident_prevention",
+        "excluded_from": [],
         "bg": "Превенция на злополуки",
         "cs": "Prevence úrazů",
         "da": "Forebyggelse af ulykker",
@@ -29,6 +30,7 @@
     },
     {
         "code": "ageing_and_osh",
+        "excluded_from": [],
         "bg": "",
         "cs": "",
         "da": "",
@@ -57,6 +59,7 @@
     },
     {
         "code": "campaign_2014_2015",
+        "excluded_from": [ "publication" ],
         "bg": "Кампания 2014 - 2015 г.",
         "cs": "Kampaň 2014–2015",
         "da": "Kampagne 2014 - 2015",
@@ -85,6 +88,7 @@
     },
     {
         "code": "dangerous_substances",
+        "excluded_from": [],
         "bg": "Опасни вещества",
         "cs": "Nebezpečné látky",
         "da": "Farlige stoffer",
@@ -113,6 +117,7 @@
     },
     {
         "code": "emerging_risks",
+        "excluded_from": [],
         "bg": "",
         "cs": "",
         "da": "",
@@ -141,6 +146,7 @@
     },
     {
         "code": "esener",
+        "excluded_from": [],
         "bg": "ESENER",
         "cs": "ESENER",
         "da": "ESENER",
@@ -169,6 +175,7 @@
     },
     {
         "code": "good_osh_is_good_for_business",
+        "excluded_from": [],
         "bg": "Доброто управление на БЗР е добро за бизнеса",
         "cs": "Dobrá BOZP je přínosem pro firmu",
         "da": "Et godt arbejdsmiljø er godt for din virksomhed",
@@ -197,6 +204,7 @@
     },
     {
         "code": "green_jobs",
+        "excluded_from": [],
         "bg": "зелени работни места",
         "cs": "zelená pracovní místa",
         "da": "grønne job",
@@ -225,6 +233,7 @@
     },
     {
         "code": "leadership",
+        "excluded_from": [],
         "bg": "Лидерство",
         "cs": "",
         "da": "Lederskab",
@@ -253,6 +262,7 @@
     },
     {
         "code": "legislation",
+        "excluded_from": [ "publication" ],
         "bg": "законодателство",
         "cs": "Právní předpisy",
         "da": "Lovgivning",
@@ -281,6 +291,7 @@
     },
     {
         "code": "mainstreaming_osh_into_education",
+        "excluded_from": [],
         "bg": "Включване на БЗУТ в образованието",
         "cs": "Zaměření BOZP na vzdělávání",
         "da": "Integration af arbejdsmiljø i uddannelse",
@@ -309,6 +320,7 @@
     },
     {
         "code": "musculoskeletal_disorders",
+        "excluded_from": [],
         "bg": "Мускулно-скелетни смущения",
         "cs": "Muskuloskeletální poruchy",
         "da": "Muskel- og skeletbesvær",
@@ -337,6 +349,7 @@
     },
     {
         "code": "nanomaterials",
+        "excluded_from": [],
         "bg": "Наноматериалите",
         "cs": "Nanomateriály",
         "da": "Nanomaterialer",
@@ -365,6 +378,7 @@
     },
     {
         "code": "osh_and_young_people",
+        "excluded_from": [],
         "bg": "",
         "cs": "",
         "da": "",
@@ -393,6 +407,7 @@
     },
     {
         "code": "psychosocial_risks_and_stress",
+        "excluded_from": [],
         "bg": "Психосоциални рискове и стрес на работното място",
         "cs": "Stres a psychosociální rizika",
         "da": "Stress og psykosociale risici",
@@ -421,6 +436,7 @@
     },
     {
         "code": "women_and_osh",
+        "excluded_from": [],
         "bg": "",
         "cs": "",
         "da": "",
@@ -449,6 +465,7 @@
     },
     {
         "code": "work_related_diseases",
+        "excluded_from": [],
         "bg": "",
         "cs": "",
         "da": "",
@@ -477,6 +494,7 @@
     },
     {
         "code": "microenterprises",
+        "excluded_from": [],
         "bg": "",
         "cs": "",
         "da": "",
@@ -505,6 +523,7 @@
     },
     {
         "code": "agriculture",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Agriculture",
         "cs": "Zemědělství",
         "da": "Landbrug",
@@ -533,6 +552,7 @@
     },
     {
         "code": "cleaning_workers",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Почистване на работниците",
         "cs": "Čištění pracovníků",
         "da": "Rengøring arbejdstagere",
@@ -561,6 +581,7 @@
     },
     {
         "code": "construction",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Construction",
         "cs": "Construction",
         "da": "Bygge- og anlægssektoren",
@@ -589,6 +610,7 @@
     },
     {
         "code": "corporate_social_responsibility",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Корпоративна социална отговорност",
         "cs": "Společná sociální odpovědnost",
         "da": "Virksomhedernes sociale ansvar",
@@ -617,6 +639,7 @@
     },
     {
         "code": "disabled_people",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "",
         "cs": "",
         "da": "",
@@ -645,6 +668,7 @@
     },
     {
         "code": "fisheries",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Fisheries",
         "cs": "Fisheries",
         "da": "Fiskerisektoren",
@@ -673,6 +697,7 @@
     },
     {
         "code": "health_care",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Здравеопазване",
         "cs": "Zdravotní péče",
         "da": "Sundhedspleje",
@@ -701,6 +726,7 @@
     },
     {
         "code": "horeca",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "ХОРЕКА",
         "cs": "HORECA",
         "da": "HORECA",
@@ -729,6 +755,7 @@
     },
     {
         "code": "maintenance",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Поддръжка",
         "cs": "Údržba",
         "da": "Vedligeholdelse",
@@ -757,6 +784,7 @@
     },
     {
         "code": "migrant_workers",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Работници мигранти",
         "cs": "Migrující pracovníci",
         "da": "Vandrende arbejdstagere",
@@ -785,6 +813,7 @@
     },
     {
         "code": "noise",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "",
         "cs": "Hluk při práci",
         "da": "Støj på arbejdspladsen",
@@ -813,6 +842,7 @@
     },
     {
         "code": "risk_assessment",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Оценка на риска",
         "cs": "Hodnocení rizik",
         "da": "Risikovurdering",
@@ -841,6 +871,7 @@
     },
     {
         "code": "road_transport",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Автомобилен транспорт",
         "cs": "Silniční doprava",
         "da": "Vejtransport",
@@ -869,6 +900,7 @@
     },
     {
         "code": "statistics",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Статистика",
         "cs": "Statistika",
         "da": "Statistik",
@@ -897,6 +929,7 @@
     },
     {
         "code": "transport",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Транспорт",
         "cs": "Doprava",
         "da": "Transport",
@@ -925,6 +958,7 @@
     },
     {
         "code": "worker_participation",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Участие на работниците",
         "cs": "Účast zaměstnanců",
         "da": "Medarbejderdeltagelse",
@@ -953,6 +987,7 @@
     },
     {
         "code": "workplace_health_promotion",
+        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
         "bg": "Насърчаване на здравето на работното място",
         "cs": "Podpora ochrany zdraví na pracovišti",
         "da": "Fremme af sundheden på arbejdspladsen",
@@ -978,5 +1013,34 @@
         "sk": "Podpora ochrany zdravia na pracovisku",
         "sl": "Spodbujanje zdravja na delovnem mestu",
         "sv": "Hälsofrämjande insatser på arbetsplatsen"
+    },
+    {
+        "code": "napo",
+        "excluded_from": [ "publication" ],
+        "bg": "Напо",
+        "cs": "Napo",
+        "da": "Napo",
+        "de": "Napo",
+        "el": "Napo",
+        "en": "Napo",
+        "es": "Napo",
+        "et": "Napo",
+        "fi": "Napo",
+        "fr": "Napo",
+        "hr": "Napo",
+        "hu": "Napo",
+        "it": "Napo",
+        "is": "Napo",
+        "lt": "Napo",
+        "lv": "Napo",
+        "mt": "Napo",
+        "nl": "Napo",
+        "no": "Napo",
+        "pl": "Napo",
+        "pt": "Napo",
+        "ro": "Napo",
+        "sk": "Napo",
+        "sl": "Napo",
+        "sv": "Napo"
     }
 ]
