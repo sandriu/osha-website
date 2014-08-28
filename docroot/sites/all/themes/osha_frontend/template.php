@@ -26,7 +26,7 @@ function osha_frontend_menu_link__menu_block($variables) {
   $delta = $element['#bid']['delta'];
 
   // Get the variable provided by osha_menu module.
-  $render_img = variable_get(OSHA_MENU_RENDER_IMG_VAR_NAME . '_' . $delta, 0);
+  $render_img = variable_get('menu_block_' . $delta . '_' . OSHA_MENU_RENDER_IMG_VAR_NAME, 0);
   if (empty($element['#localized_options']['content']['image'])
     || !$render_img) {
     return theme_menu_link($variables);
