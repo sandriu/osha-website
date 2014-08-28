@@ -43,6 +43,19 @@ function osha_frontend_menu_link__menu_block($variables) {
   $output_image = l($image, $element['#href'], array('html' => TRUE));
 
   return '<li' . drupal_attributes($element['#attributes']) . '>
-    <div>' . $output_link . '</div><div>' . $output_image . '</div></li>';
+    <div class="introduction-title">' . $output_link . '</div>
+    <div class="introduction-image">' . $output_image . '</div>
+    </li>';
 }
 
+/**
+ * @todo @Ivan: Edit only below
+ */
+
+
+
+
+
+/**
+ * @todo @Ivan: Do not go below this line
+ */
