@@ -130,6 +130,38 @@ function osha_taxonomies_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_excluded_from'
+  $field_bases['field_excluded_from'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_excluded_from',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'article' => 'Article',
+        'page' => 'Basic page',
+        'blog' => 'Blog',
+        'job_vacancies' => 'Job vacancies',
+        'news' => 'News',
+        'press_release' => 'Press release',
+        'publication' => 'Publication',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_nace_changes'
   $field_bases['field_nace_changes'] = array(
     'active' => 1,
