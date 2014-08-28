@@ -59,6 +59,11 @@ List of patches
   *
   * migrate/migrate_file_rename_option.patch
 
+* menu_block
+  * Add hooks for editing, saving, deleting menu block.
+    Useful for modules that want to extend the menu block form.
+  *
+  * menu_block/menu_block_add_hooks_edit_save_delete_block.patch
 
 Patch documentation should be in the following format:
 

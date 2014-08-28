@@ -93,5 +93,42 @@ function hook_menu_block_get_sort_menus() {
 }
 
 /**
+ * Alter the configuration form for menu blocks.
+ *
+ * @param array $form
+ *   The form after all menu_block inputs are added.
+ */
+function hook_menu_block_configure_form_alter(&$form) {
+}
+
+/**
+ * Function called when a menu_block is saved.
+ *
+ * Useful to set variables that you previously added to form with
+ * hook_menu_block_configure_form_alter
+ *
+ * @param int $delta
+ *   Block id
+ * @param array $edit
+ *   The submitted form
+ */
+function hook_menu_block_block_save($delta, $edit) {
+}
+
+/**
+ * Function called when a menu_block is deleted.
+ *
+ * Useful to unset variables that you've previously set using
+ * hook_menu_block_configure_form_alter
+ *
+ * @param int $delta
+ *   Block id
+ * @param array $edit
+ *   Submitted form
+ */
+function hook_menu_block_block_delete($delta, $edit) {
+}
+
+/**
  * @} End of "addtogroup hooks".
  */

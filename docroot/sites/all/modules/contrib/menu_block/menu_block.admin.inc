@@ -167,6 +167,11 @@ function menu_block_delete_submit($form, &$form_state) {
   variable_del("menu_block_{$delta}_expanded");
   variable_del("menu_block_{$delta}_sort");
 
+  foreach (module_implements('menu_block_block_delete') as $module) {
+    $function = $module . '_menu_block_block_delete';
+    $function($form, $form_state);
+  }
+
   db_delete('block')
     ->condition('module', 'menu_block')
     ->condition('delta', $delta)
@@ -443,6 +448,8 @@ function menu_block_configure_form($form, &$form_state) {
     $form['display_options']['#default_value'] = 'advanced';
   }
 
+  drupal_alter('menu_block_configure_form', $form, $form_state);
+
   return $form;
 }
 
@@ -487,6 +494,10 @@ function _menu_block_block_save($delta = '', $edit = array()) {
       variable_set("menu_block_{$delta}_depth", $edit['depth']);
       variable_set("menu_block_{$delta}_expanded", $edit['expanded']);
       variable_set("menu_block_{$delta}_sort", $edit['sort']);
+      foreach (module_implements('menu_block_block_save') as $module) {
+        $function = $module . '_menu_block_block_save';
+        $function($delta, $edit);
+      }
     }
   }
 }
