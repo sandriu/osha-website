@@ -196,4 +196,19 @@ class MigrationUtilTest extends OshaWebTestCase {
     $tid = MigrationUtil::findTermByFieldValue('Dangerous substances', 'name');
     $this->assertNull($tid);
   }
+
+  /**
+   * Test cleanMigratedFileField().
+   */
+  public function testCleanMigratedFileField() {
+    $file = drupal_get_path('module', 'osha_migration') . "/data/test/test_clean_migrated_file_field_object.json";
+    $row = json_decode(file_get_contents($file), TRUE);
+    $test_object = (object) $row["test_object"];
+    $witness = (object) $row["witness"];
+
+    MigrationUtil::cleanMigratedFileField($test_object, 'file_array', 'public://something/something');
+    MigrationUtil::cleanMigratedFileField($test_object, 'file', 'public://something/something');
+
+    $this->assertEqual($test_object, $witness, "The path mapping is correct");
+  }
 }
