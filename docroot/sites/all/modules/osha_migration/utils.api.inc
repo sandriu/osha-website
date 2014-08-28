@@ -448,13 +448,19 @@ class MigrationUtil {
     $old_paths = array();
     foreach ($row->{$field} as $language => $path) {
       if (is_string($path)) {
-        $valid[$language] = self::getFileDestination($path, $path_prefix);
-        $old_paths[$language] = $path;
+        $destination = self::getFileDestination($path, $path_prefix);
+        if (!empty($destination)) {
+          $valid[$language] = $destination;
+          $old_paths[$language] = $path;
+        }
       }
       else {
         foreach ($path as $file_path) {
-          $valid[$language] = self::getFileDestination($file_path, $path_prefix);
-          $old_paths[$language][] = $file_path;
+          $destination = self::getFileDestination($file_path, $path_prefix);
+          if (!empty($destination)) {
+            $valid[$language][] = $destination;
+            $old_paths[$language][] = $file_path;
+          }
         }
       }
     }
@@ -489,6 +495,7 @@ class MigrationUtil {
           "File path cannot be larger than 255 characters, ignoring " . $old_path,
           'warning'
         );
+        return NULL;
       }
       else {
         drupal_set_message(
