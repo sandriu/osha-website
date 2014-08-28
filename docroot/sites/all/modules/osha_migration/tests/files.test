@@ -77,7 +77,7 @@ class MigrateOshaFilesTest extends OshaWebTestCase {
     $this->assertEqual(2, count($files));
 
     foreach ($files as $file) {
-      $path = str_replace('public:/', '', $file->uri);
+      $path = str_replace(OSHA_MIGRATE_FILES_DEST_DIR, '', $file->uri);
       $raw_file = $data[$path];
       $this->assertEqual($file->filename, $raw_file['title']);
 

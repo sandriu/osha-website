@@ -52,6 +52,15 @@ function osha_schema_alter(&$schema) {
       'default' => '',
     );
   }
+
+  if (isset($schema['url_alias'])) {
+    $schema['url_alias']['fields']['alias'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 }
 
 /**
@@ -122,6 +131,13 @@ function osha_change_field_size() {
   if (osha_get_mysql_column_size('field_revision_title_field', 'title_field_value') < $column_size) {
     drupal_set_message("Changing field_revision_title_field size to $column_size");
     db_change_field('field_revision_title_field', 'title_field_value', 'title_field_value',
+      array('type' => 'varchar','length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('url_alias', 'alias') < $column_size) {
+    drupal_set_message("Changing url_alias size to $column_size");
+    db_change_field('url_alias', 'alias', 'alias',
       array('type' => 'varchar','length' => $column_size)
     );
   }

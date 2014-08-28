@@ -1,6 +1,6 @@
 <?php
 
-define('OSHA_MIGRATE_FILES_DEST_DIR', 'public://');
+define('OSHA_MIGRATE_FILES_DEST_DIR', 'public://files');
 /**
  * Class MigrateOshaPublicationFiles
  */
@@ -39,7 +39,7 @@ class OshaMigrateFiles extends DynamicMigration {
       array(
         'id' => array(
           'type' => 'varchar',
-          'length' => 200,
+          'length' => 255,
           'not null' => TRUE,
           'description' => 'File old path',
         ),
@@ -48,7 +48,7 @@ class OshaMigrateFiles extends DynamicMigration {
     );
 
     $this->addFieldMapping('source_dir')->defaultValue(osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY));
-    $this->addFieldMapping('destination_file', 'file');
+    $this->addFieldMapping('destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'file');
     $this->addFieldMapping('value', 'file_uri');
     $this->addFieldMapping('destination_dir')->defaultValue(OSHA_MIGRATE_FILES_DEST_DIR);
     $this->addFieldMapping('preserve_files')->defaultValue(FALSE);
@@ -114,6 +114,10 @@ class OshaMigrateFiles extends DynamicMigration {
         'field_nace_code',
         OSHA_TAXONOMIES_NACE_CODES
       );
+    }
+    $destination = MigrationUtil::cleanMigratedFile($row, 'file', OSHA_MIGRATE_FILES_DEST_DIR);
+    if (empty($destination)) {
+      return FALSE;
     }
     if (!is_file(osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY) . $row->file)) {
       $this->saveMessage("File could not be found, ignoring {$row->file}", MigrationBase::MESSAGE_WARNING);

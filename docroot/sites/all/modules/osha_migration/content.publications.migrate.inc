@@ -87,7 +87,7 @@ class OshaMigratePublications extends OSHADynamicMigration {
 
     $this->addFieldMapping('field_file', 'file');
     $this->addFieldMapping('field_file:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
-    $this->addFieldMapping('field_file:destination_file', 'file');
+    $this->addFieldMapping('field_file:destination_file', 'replaced_file');
     $this->addFieldMapping('field_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldMapping('field_file:multilingual')->defaultValue(TRUE);
 

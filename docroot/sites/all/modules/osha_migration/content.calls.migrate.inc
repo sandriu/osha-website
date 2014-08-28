@@ -128,7 +128,7 @@ class MigrateOshaCalls extends OSHADynamicMigration {
     $this->addFieldMapping("$destination:file_replace")->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldmapping("$destination:preserve_files")->defaultValue(TRUE);
     $this->addFieldMapping("$destination:source_dir")->defaultValue(osha_migration_get_data_dir() . '/export/');
-    $this->addFieldMapping("$destination:destination_file", $source);
+    $this->addFieldMapping("$destination:destination_file", OSHA_MIGRATION_REPLACED_PATH_PREFIX . $source);
     $this->addFieldMapping("$destination:multilingual")->defaultValue(TRUE);
   }
 
@@ -158,6 +158,7 @@ class MigrateOshaCalls extends OSHADynamicMigration {
     MigrationUtil::cleanMigratedFileField($row, 'agency_responses', 'public://calls/documents');
     MigrationUtil::cleanMigratedFileField($row, 'award_notice', 'public://calls/documents');
     MigrationUtil::cleanMigratedFileField($row, 'award_notice_corrigendum', 'public://calls/documents');
+
 
     return TRUE;
   }

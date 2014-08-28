@@ -20,6 +20,8 @@ define('OSHA_MIGRATION_FILES_PUBLICATION', 'FilesPublication');
 
 define('OSHA_MIGRATION_EXPORT_DIRECTORY', 'export');
 
+define('OSHA_MIGRATION_REPLACED_PATH_PREFIX', 'replaced_');
+
 /**
  * Implements hook_migrate_api().
  *
@@ -235,6 +237,12 @@ class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
     if ($file) {
       $field_array = array('fid' => $file->fid);
       $return[$language][] = $this->buildFieldArray($field_array, $instance_arguments, $delta);
+      $args = array(
+        'source' => 'file/' . $file->fid,
+        'alias' => substr($path, strlen('/en/')),
+        'language' => $language,
+      );
+      path_save($args);
     }
   }
 }
