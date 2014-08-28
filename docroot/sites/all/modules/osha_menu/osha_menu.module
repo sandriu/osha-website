@@ -5,3 +5,37 @@
  */
 
 include_once 'osha_menu.features.inc';
+define('OSHA_MENU_RENDER_IMG_VAR_NAME', 'render_menu_image');
+
+/**
+ * Implements hook_block_configure_alter().
+ */
+function osha_menu_menu_block_configure_form_alter(&$form, &$form_state) {
+  $form['osha_menu_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('OSHA Menu Settings'),
+  );
+  $form['osha_menu_settings'][OSHA_MENU_RENDER_IMG_VAR_NAME] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Render Menu Image.'),
+    '#default_value' => variable_get(OSHA_MENU_RENDER_IMG_VAR_NAME . '_' .
+      $form_state['values']['delta'], 0),
+    '#description' => t('Render Image in menu'),
+  );
+}
+
+/**
+ * Implements hook_menu_block_block_save().
+ */
+function osha_menu_menu_block_block_save($delta, $form) {
+  variable_set(OSHA_MENU_RENDER_IMG_VAR_NAME . '_' . $delta,
+    $form[OSHA_MENU_RENDER_IMG_VAR_NAME]);
+}
+
+/**
+ * Implements hook_menu_block_block_delete().
+ */
+function osha_menu_menu_block_block_delete($form, $form_state) {
+  $delta = $form_state['values']['delta'];
+  variable_del(OSHA_MENU_RENDER_IMG_VAR_NAME . '_' . $delta);
+}
