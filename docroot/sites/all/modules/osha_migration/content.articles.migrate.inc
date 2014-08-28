@@ -3,7 +3,7 @@
 /**
  * Class OshaMigrateArticles migrates articles data
  */
-class OshaMigrateArticles extends DynamicMigration {
+class OshaMigrateArticles extends OSHADynamicMigration {
 
   /**
    * {@inheritdoc}
@@ -125,20 +125,6 @@ class OshaMigrateArticles extends DynamicMigration {
   }
 
   /**
-   * Executes before Import.
-   */
-  public function preImport() {
-    MigrationUtil::activateOshaFilesHandler();
-  }
-
-  /**
-   * Executes after import.
-   */
-  public function postImport() {
-    MigrationUtil::deactivateOshaFilesHandler();
-  }
-
-  /**
    * Prepare raw data pulled from source.
    *
    * {@inheritdoc}
@@ -177,57 +163,37 @@ class OshaMigrateArticles extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
-    $entity->path['pathauto'] = 0;
+    parent::prepare($entity, $row);
+
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
-    $translation_handler = entity_translation_get_handler($entity_type, $entity);
 
+    $translation_handler = entity_translation_get_handler($entity_type, $entity);
     $entity->translations = $translation_handler->getTranslations();
+
     foreach ($languages as $language) {
+      $has_translation = FALSE;
       if (!empty($row->title_field[$language])) {
         $entity->title_field[$language][0]['value'] = $row->title_field[$language];
+        $has_translation = TRUE;
       }
       if (!empty($row->description[$language])) {
         $entity->field_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->description[$language]);
         $entity->field_summary[$language][0]['format'] = 'full_html';
+        $has_translation = TRUE;
       }
       if (!empty($row->text[$language])) {
         $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->text[$language]);
         $entity->body[$language][0]['format'] = 'full_html';
+        $has_translation = TRUE;
       }
       if (!empty($row->relatedItems[$language]) && $language != 'en') {
         $entity->field_image[$language][0]['value'] = $row->relatedItems[$language];
       }
-      /* Don't translate en (default) */
-      if ($language != $row->language && !isset($entity->translations->data[$language])) {
-        $translation_handler->setTranslation(array(
-          'translate' => 0, 'status' => 1, 'uid' => 1,
-          'language' => $language,
-          'source' => $row->language,
-        ));
+      if ($has_translation) {
+        MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
       }
-    }
-  }
-
-  /**
-   * Sets the node aliases after the migration, nid is available.
-   *
-   * @param object $entity
-   *   Entity to be saved
-   * @param object $row
-   *   Source row
-   */
-  public function complete($entity, $row) {
-    $languages = array_keys(language_list());
-    foreach ($languages as $language) {
-      $args = array(
-        'source' => 'node/' . $entity->nid,
-        'alias' => $row->id,
-        'language' => $language,
-      );
-      $args['alias'] = $row->path[$language];
-      path_save($args);
     }
   }
 }

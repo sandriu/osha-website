@@ -4,7 +4,7 @@
  * Class MigrateOshaBlog migrates blog.txt contents. The data
  * is stored inside the <em>Blog</em> content type.
  */
-class MigrateOshaBlog extends DynamicMigration {
+class MigrateOshaBlog extends OSHADynamicMigration {
 
   /**
    * {@inheritdoc}
@@ -115,20 +115,6 @@ class MigrateOshaBlog extends DynamicMigration {
   }
 
   /**
-   * Executes before Import.
-   */
-  public function preImport() {
-    MigrationUtil::activateOshaFilesHandler();
-  }
-
-  /**
-   * Executes after import.
-   */
-  public function postImport() {
-    MigrationUtil::deactivateOshaFilesHandler();
-  }
-
-  /**
    * Prepare raw data pulled from source.
    *
    * {@inheritdoc}
@@ -168,6 +154,8 @@ class MigrateOshaBlog extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
+    parent::prepare($entity, $row);
+
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
@@ -197,13 +185,8 @@ class MigrateOshaBlog extends DynamicMigration {
           $entity->field_image[$lang][0]['image_field_caption']['format'] = $this->destination->getTextFormat();
         }
       }
-      /* Don't translate en (default) */
-      if ($has_translation && $language != $row->language && !isset($entity->translations->data[$language])) {
-        $translation_handler->setTranslation(array(
-          'translate' => 0, 'status' => 1, 'uid' => 1,
-          'language' => $language,
-          'source' => $row->language,
-        ));
+      if ($has_translation) {
+        MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
       }
     }
   }
@@ -235,27 +218,6 @@ class MigrateOshaBlog extends DynamicMigration {
       'multilingual_thesaurus' => '',
       'nace' => 'Nace codes taxonomy',
     );
-  }
-
-  /**
-   * Sets the node aliases after the migration, nid is available.
-   *
-   * @param object $entity
-   *   Entity to be saved
-   * @param object $row
-   *   Source row
-   */
-  public function complete($entity, $row) {
-    $languages = array_keys(language_list());
-    foreach ($languages as $language) {
-      /* Same alias for all languages (see mappings) */
-      $args = array(
-        'source' => 'node/' . $entity->nid,
-        'alias' => $row->id,
-        'language' => $language,
-      );
-      path_save($args);
-    }
   }
 }
 
