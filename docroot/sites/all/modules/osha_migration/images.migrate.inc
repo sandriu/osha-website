@@ -1,6 +1,6 @@
 <?php
 
-define('OSHA_MIGRATE_IMAGES_DEST_DIR', 'public://');
+define('OSHA_MIGRATE_IMAGES_DEST_DIR', 'public://images');
 /**
  * Class OshaMigrateImages
  */
@@ -59,7 +59,7 @@ class OshaMigrateImages extends DynamicMigration {
     );
 
     $this->addFieldMapping('source_dir')->defaultValue(osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY));
-    $this->addFieldMapping('destination_file', 'image');
+    $this->addFieldMapping('destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'image');
     $this->addFieldMapping('value', 'image_uri');
     $this->addFieldMapping('destination_dir')->defaultValue(OSHA_MIGRATE_IMAGES_DEST_DIR);
     $this->addFieldMapping('preserve_files')->defaultValue(FALSE);
@@ -143,7 +143,10 @@ class OshaMigrateImages extends DynamicMigration {
         OSHA_TAXONOMIES_NACE_CODES
       );
     }
-    if (!is_file(osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY) . $row->image)) {
+    $destination = MigrationUtil::cleanMigratedFile($row, 'image', OSHA_MIGRATE_FILES_DEST_DIR);
+    if (empty($destination)) {
+      return FALSE;
+    }    if (!is_file(osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY) . $row->image)) {
       $this->saveMessage("Image could not be found, ignoring {$row->image}", MigrationBase::MESSAGE_WARNING);
       return FALSE;
     }

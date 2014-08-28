@@ -506,6 +506,20 @@ class MigrationUtil {
     $row->{OSHA_MIGRATION_REPLACED_PATH_PREFIX . $field} = $valid;
   }
 
+  public static function cleanMigratedFile(&$row, $field, $path_prefix = 'public://') {
+    if (empty($row->{$field})) {
+      return;
+    }
+    $destination = self::getFileDestination($row->{$field}, $path_prefix);
+    if (!empty($destination)) {
+      $row->{OSHA_MIGRATION_REPLACED_PATH_PREFIX . $field} = $destination;
+      return $destination;
+    }
+    else {
+      return NULL;
+    }
+  }
+
   /**
    * Function that returns a valid destination name.
    *
