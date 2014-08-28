@@ -18,8 +18,8 @@ function osha_menu_menu_block_configure_form_alter(&$form, &$form_state) {
   $form['osha_menu_settings'][OSHA_MENU_RENDER_IMG_VAR_NAME] = array(
     '#type' => 'checkbox',
     '#title' => t('Render Menu Image.'),
-    '#default_value' => variable_get(OSHA_MENU_RENDER_IMG_VAR_NAME . '_' .
-      $form_state['values']['delta'], 0),
+    '#default_value' => variable_get('menu_block_' .
+      $form_state['values']['delta'] . '_' . OSHA_MENU_RENDER_IMG_VAR_NAME, 0),
     '#description' => t('Render Image in menu'),
   );
 }
@@ -28,7 +28,7 @@ function osha_menu_menu_block_configure_form_alter(&$form, &$form_state) {
  * Implements hook_menu_block_block_save().
  */
 function osha_menu_menu_block_block_save($delta, $form) {
-  variable_set(OSHA_MENU_RENDER_IMG_VAR_NAME . '_' . $delta,
+  variable_set('menu_block_' . $delta . '_' . OSHA_MENU_RENDER_IMG_VAR_NAME,
     $form[OSHA_MENU_RENDER_IMG_VAR_NAME]);
 }
 
@@ -37,5 +37,5 @@ function osha_menu_menu_block_block_save($delta, $form) {
  */
 function osha_menu_menu_block_block_delete($form, $form_state) {
   $delta = $form_state['values']['delta'];
-  variable_del(OSHA_MENU_RENDER_IMG_VAR_NAME . '_' . $delta);
+  variable_del('menu_block_' . $delta . '_' . OSHA_MENU_RENDER_IMG_VAR_NAME);
 }
