@@ -299,7 +299,9 @@ $options['init-modules'] = array(
   #'apachesolr_search',
   #'search_api_solr',
 
+  'tmgmt',
   'tmgmt_local',
+  'tmgmt_node',
   'tmgmt_entity',
   'tmgmt_entity_ui',
   'tmgmt_ui',

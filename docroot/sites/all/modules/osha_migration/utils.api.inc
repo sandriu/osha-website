@@ -13,9 +13,19 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
 
   public $modulePath;
   public $dataPath;
+  protected $userAdmin;
+  protected $permissionsAdmin = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
-    parent::setUp(array('file', 'file_entity'));
+    $modules = func_get_args();
+    if (isset($modules[0]) && is_array($modules[0])) {
+      $modules = $modules[0];
+    }
+    $modules = array_merge(array('file', 'file_entity'), $modules);
+    parent::setUp($modules);
     require DRUPAL_ROOT . '/../drush/drushrc.php';
     if (!empty($options['init-modules'])) {
 
@@ -98,6 +108,33 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
         }
       }
     }
+  }
+
+  /**
+   * Will create a user with admin permissions and log it in.
+   *
+   * @param array $additional_permissions
+   *   Additional permissions that will be granted to admin user.
+   * @param boolean $reset_permissions
+   *   Flag to determine if default admin permissions will be replaced by
+   *   $additional_permissions.
+   *
+   * @return object
+   *   Newly created and logged in user object.
+   */
+  protected function loginAsAdmin($additional_permissions = array(), $reset_permissions = FALSE) {
+    $permissions = $this->permissionsAdmin;
+
+    if ($reset_permissions) {
+      $permissions = $additional_permissions;
+    }
+    elseif (!empty($additional_permissions)) {
+      $permissions = array_merge($permissions, $additional_permissions);
+    }
+
+    $this->userAdmin = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($this->userAdmin);
+    return $this->userAdmin;
   }
 }
 

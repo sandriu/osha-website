@@ -42,7 +42,9 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     // <Translation>
     $this->startElement('Translation');
     $this->writeElement('TranslationSourceLanguage', $item->source_language);
-    $this->writeElement('TranslationTargetLanguage', $item->target_language);
+    foreach ($item->target_languages as $language) {
+      $this->writeElement('TranslationTargetLanguage', $language);
+    }
 
     // <ContentIdentifier>
     $this->startElement('ContentIdentifier');
@@ -52,49 +54,86 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $this->endElement();
 
     // TODO:EDW
-    $this->writeElement('Priority', 'Normal');
+    $this->writeElement('Priority', $this->getPriority($job));
+
+    $this->writeElement('CharacterLength', $item->character_count);
     // TODO:EDW
-    $this->writeElement('CharacterLength', $item->getCountPending());
-    // TODO:EDW
-    $this->writeElement('PreviewLink', 'TODO');
-    $this->writeElement('ContentTitle', 'TODO');
-    $this->writeElement('FriendlyUrlName', 'TODO');
-    $this->writeElement('Keywords', 'TODO');
+    $this->writeElement('PreviewLink', 'NO PREVIEW LINK');
+    $this->writeElement('ContentTitle', 'NO TITLE');
+    $this->writeElement('FriendlyUrlName', 'NO FRIENDLY URL');
+    $this->writeElement('Keywords', 'NO KEYWORDS');
 
     foreach ($item->getData() as $key => $field) {
       $text = NULL;
-      if (isset($field['value']['#text'])) {
+      if (isset($field['#text'])) {
+        $text = $field['#text'];
+      }
+      elseif (isset($field['value']['#text'])) {
         $text = $field['value']['#text'];
       }
       elseif (isset($field[0]['value']['#text'])) {
         $text = $field[0]['value']['#text'];
       }
+
       //@TODO: Check this.
       if (!empty($text)) {
         $this->startElement('DynamicElement');
         $this->writeAttribute('dynamicElementKind', 'TextArea');
-        $this->writeAttribute('indexType', 'keyword');
-        $this->writeAttribute('instanceId', 'Gjrm2GSu');
+        $this->writeAttribute('indexType', $item->item_type);
+        $this->writeAttribute('instanceId', $item->item_id);
         $this->writeAttribute('name', $key);
         $this->writeAttribute('repeatable', 'false');
-        $this->writeElement('DynamicContent', $text);
+        $this->startElement('DynamicContent');
+        $this->writeCdata($text);
+        // </DynamicContent>
+        $this->endElement();
+        // </DynamicElement>
+        $this->endElement();
       }
-      $this->endElement();
     }
     // </Translation>
     $this->endElement();
   }
 
   /**
+   *
+   */
+
+  public function getPriority($job) {
+    static $priorities = array(
+      OSHA_TMGMT_JOB_PRIORITY_NORMAL => "Normal",
+      OSHA_TMGMT_JOB_PRIORITY_LOW => "Low",
+      OSHA_TMGMT_JOB_PRIORITY_HIGH => "High"
+    );
+
+    return $priorities[$job->priority];
+  }
+  /**
    * {@inheritdoc}
    */
   public function export(TMGMTJob $job) {
     $this->job = $job;
 
+    $job_items = array();
+    // TODO use the one internal.
+    $job->char_counter = 0;
+    foreach ($job->getItems() as $item) {
+      if (!isset($job_items[$item->item_type][$item->item_id])) {
+        $item->target_languages = array();
+        $item->target_languages[] = $item->target_language;
+
+        $job_items[$item->item_type][$item->item_id] = $item;
+        $job->char_counter += $item->character_count;
+      }
+      else {
+        $job_items[$item->item_type][$item->item_id]->target_languages[] = $item->target_language;
+      }
+    }
+
     $this->openMemory();
     $this->setIndent(TRUE);
     $this->setIndentString(' ');
-    $this->startDocument('1.0', 'UTF-8');
+    $this->startDocument('1.0', 'UTF-8', 'no');
 
     // <Transaction> Root element.
     $this->startElement('Transaction');
@@ -118,13 +157,12 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     // <TransactionData>
     $this->startElement('TransactionData');
     $this->startElement('TranslationDetails');
-    // TODO
-    $this->writeElement('TotalCharacterLength', 10);
+    $this->writeElement('TotalCharacterLength', $job->char_counter);
 
-    foreach ($job->getItems() as $item) {
-      // <Transaction>
-      $this->addItem($item, $job);
-      // </Transaction
+    foreach ($job_items as $item_type => $item_ids) {
+      foreach ($item_ids as $item_id => $item) {
+        $this->addItem($item, $job);
+      }
     }
 
     // </TransactionDetails>
