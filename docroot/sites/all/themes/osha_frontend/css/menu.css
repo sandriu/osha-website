@@ -52,3 +52,8 @@
 .region-header #main-menu-links li.active-trail>a {
     background: #ffffff;
 }
+
+#main-menu-links img {
+    display: block;
+    max-width: 100px;
+}
