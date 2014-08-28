@@ -227,7 +227,9 @@ class MigrateOshaTaxonomyTest extends OshaWebTestCase {
     $witness = array();
     foreach ($json as $arr) {
       $code = $arr['code'];
-      $witness[$code] = count(array_filter($arr)) - 1;
+      unset($arr['code']);
+      unset($arr['excluded_from']);
+      $witness[$code] = count(array_filter($arr));
     }
 
     foreach ($terms as $term) {
