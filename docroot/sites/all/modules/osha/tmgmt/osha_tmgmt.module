@@ -239,13 +239,15 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
       entity_delete_multiple('tmgmt_job_item', $remove_job_item_ids);
     }
     if ($job) {
-      // This whole block replaces tmgmt_ui_job_checkout_and_redirect().
-      $redirects = tmgmt_ui_job_checkout_multiple(array($job));
+
       // Update the job title with it's ID as current label doesn't make sense.
       $job->label = t('Translation job #!tjid', array('!tjid' => $job->tjid));
       $job->priority = $values['priority'];
       OshaTMGMTStatistics::computeJobStatistics($job);
       $job->save();
+
+      // This whole block replaces tmgmt_ui_job_checkout_and_redirect().
+      $redirects = tmgmt_ui_job_checkout_multiple(array($job));
       if ($redirects) {
         if (isset($_GET['destination'])) {
           // Remove existing destination, as that will prevent us from being
@@ -384,8 +386,12 @@ class OshaTMGMTStatistics {
       if ($item->character_count == 0) {
         self::computeJobItemStatistics($item);
       }
-      if ($item->character_count > 0) {
-        $job->character_count += $item->character_count;
+    }
+    foreach (self::getUniqueItems($job) as $item_type => $items) {
+      foreach ($items as $item) {
+        if ($item->character_count > 0) {
+          $job->character_count += $item->character_count;
+        }
       }
     }
     if ($job->character_count > 0) {
@@ -420,7 +426,7 @@ class OshaTMGMTStatistics {
   protected static function count($item, &$count) {
     if (!empty($item['#text'])) {
       if (_tmgmt_filter_data($item)) {
-        $count += strlen($item['#text']);
+        $count += strlen(preg_replace("/\s+/", "", strip_tags($item['#text'])));
       }
     }
     elseif (is_array($item)) {
@@ -428,5 +434,30 @@ class OshaTMGMTStatistics {
         self::count($item[$key], $count);
       }
     }
+  }
+
+  /**
+   * Generates an unique array of items, based on item_type and item_id.
+   *
+   * @param object $job
+   *   The job with the items
+   *
+   * @return array
+   *   Items -> Items[item_type][item_id] contains an item
+   */
+  public static function getUniqueItems($job) {
+    $job_items = array();
+    foreach ($job->getItems() as $item) {
+      if (!isset($job_items[$item->item_type][$item->item_id])) {
+        $item->target_languages = array();
+        $item->target_languages[] = $item->target_language;
+
+        $job_items[$item->item_type][$item->item_id] = $item;
+      }
+      else {
+        $job_items[$item->item_type][$item->item_id]->target_languages[] = $item->target_language;
+      }
+    }
+    return $job_items;
   }
 }
