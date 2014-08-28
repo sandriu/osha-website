@@ -2,6 +2,8 @@
 
 class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
+  private $row_order = 0;
+
   /**
    * {@inheritdoc}
    */
@@ -65,6 +67,7 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
    */
   public function prepare($entity, $row) {
     $entity->language = "en";
+    $entity->weight = ++$this->row_order;
     $migration = Migration::currentMigration();
     $entity_type = $migration->getDestination()->getEntityType();
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
