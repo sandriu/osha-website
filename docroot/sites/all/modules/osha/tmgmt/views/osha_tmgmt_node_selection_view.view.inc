@@ -350,7 +350,6 @@ $handler->display->display_options['filters']['type']['value'] = array(
   'page' => 'page',
   'blog' => 'blog',
   'calls' => 'calls',
-  'case_study' => 'case_study',
   'job_vacancies' => 'job_vacancies',
   'news' => 'news',
   'press_release' => 'press_release',

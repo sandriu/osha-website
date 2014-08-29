@@ -2,7 +2,7 @@
 
 /**
  * Class MigrateOshaCaseStudy migrates case_studies.txt contents. The data
- * is stored inside the <em>CaseStudy</em> content type.
+ * is stored inside the <em>Publication</em> content type.
  */
 class MigrateOshaCaseStudy extends OSHADynamicMigration {
 
@@ -16,6 +16,8 @@ class MigrateOshaCaseStudy extends OSHADynamicMigration {
       OSHA_MIGRATION_TAXONOMY_TAGS,
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
+      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
+      OSHA_MIGRATION_FILES,
     );
 
     /* Remove limits on time/memory, slower machines will fail */
@@ -43,9 +45,10 @@ class MigrateOshaCaseStudy extends OSHADynamicMigration {
     );
 
     $node_options = MigrateDestinationNode::options('en', 'full_html');
-    $this->destination = new MigrateDestinationNode(OSHA_CASE_STUDY_CONTENT_TYPE_CASE_STUDY, $node_options);
+    $this->destination = new MigrateDestinationNode(OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION, $node_options);
 
     $this->addFieldMapping('title', 'title');
+    $this->addFieldMapping('field_publication_type', 'publication_type');
     $this->addFieldMapping('field_file', 'files');
     $this->addFieldMapping('field_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldmapping('field_file:preserve_files')->defaultValue(TRUE);
@@ -126,6 +129,7 @@ class MigrateOshaCaseStudy extends OSHADynamicMigration {
     }
 
     $row->language = 'en';
+    $row->publication_type = 'Case studies';
     $tags = $row->subject . ',' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
@@ -152,7 +156,7 @@ class MigrateOshaCaseStudy extends OSHADynamicMigration {
         }
       }
     }
-    MigrationUtil::cleanMigratedFileField($row, 'files', 'public://case_study/documents');
+    MigrationUtil::cleanMigratedFileField($row, 'files', 'public://publications/documents');
 
 
     return TRUE;

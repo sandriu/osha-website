@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class MigrateOshaCaseStudyTest tests case study content type migration
+ * Class MigrateOshaCaseStudyTest tests case study publication type migration
  */
 class MigrateOshaCaseStudyTest extends OshaWebTestCase {
 
@@ -22,6 +22,8 @@ class MigrateOshaCaseStudyTest extends OshaWebTestCase {
    * Test the migration.
    */
   public function testMigration() {
+    $data_export_path  = osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY);
+
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/nace_codes.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_NACE_CODES, 'MigrateOshaTaxonomyNaceCodes', $source_file);
 
@@ -31,6 +33,12 @@ class MigrateOshaCaseStudyTest extends OshaWebTestCase {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES, 'MigrateOshaTaxonomyPublicationTypes', $source_file);
+
+    $source_file = $data_export_path . '/files.txt';
+    MigrationUtil::runMigration(OSHA_MIGRATION_FILES, 'OshaMigrateFiles', $source_file);
+
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/case_studies.txt';
     $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY, 'MigrateOshaCaseStudy', $source_file);
 
@@ -38,7 +46,7 @@ class MigrateOshaCaseStudyTest extends OshaWebTestCase {
 
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', OSHA_CASE_STUDY_CONTENT_TYPE_CASE_STUDY)
+      ->entityCondition('bundle', OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION)
       ->propertyCondition('status', 1);
     $result = $query->execute();
     $nodes = array();
@@ -80,7 +88,7 @@ class MigrateOshaCaseStudyTest extends OshaWebTestCase {
       );
     }
 
-    $this->oshaAssertEqualFileMultilingMultival($node, 'field_file', $witness, 'files', 'public://case_study/documents');
+    $this->oshaAssertEqualFileMultilingMultival($node, 'field_file', $witness, 'files', 'public://publications/documents');
 
     // Check that tags have been mapped properly.
     $this->assertEqual(2, count($node->field_tags[LANGUAGE_NONE]));
