@@ -313,6 +313,7 @@ $options['init-modules'] = array(
 
   'strongarm',
   'exclude_node_title',
+  'metatag',
 
   'pdf_to_image',
   'doc_to_imagefield',
