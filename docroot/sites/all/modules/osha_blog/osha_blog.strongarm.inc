@@ -105,13 +105,13 @@ function osha_blog_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '13',
+          'weight' => '14',
         ),
         'redirect' => array(
-          'weight' => '12',
+          'weight' => '13',
         ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
       ),
       'display' => array(),

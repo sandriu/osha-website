@@ -63,7 +63,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -112,7 +112,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 11,
     ),
   );
 
@@ -165,7 +165,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 9,
     ),
   );
 
@@ -230,7 +230,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 6,
+      'weight' => 4,
     ),
   );
 
@@ -284,7 +284,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 10,
     ),
   );
 
@@ -337,7 +337,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -386,7 +386,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 13,
     ),
   );
 
@@ -452,7 +452,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -501,7 +501,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 12,
     ),
   );
 
@@ -554,7 +554,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -607,7 +607,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 6,
     ),
   );
 
@@ -660,7 +660,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -709,7 +709,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 14,
     ),
   );
 
@@ -764,7 +764,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 

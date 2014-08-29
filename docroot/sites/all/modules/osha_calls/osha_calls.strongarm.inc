@@ -102,10 +102,10 @@ function osha_calls_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '16',
+          'weight' => '20',
         ),
         'redirect' => array(
-          'weight' => '15',
+          'weight' => '19',
         ),
         'language' => array(
           'weight' => '0',

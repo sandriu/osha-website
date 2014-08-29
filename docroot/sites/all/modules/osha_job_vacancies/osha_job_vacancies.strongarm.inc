@@ -109,13 +109,13 @@ function osha_job_vacancies_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '12',
+          'weight' => '15',
         ),
         'redirect' => array(
-          'weight' => '11',
+          'weight' => '16',
         ),
         'language' => array(
-          'weight' => '10',
+          'weight' => '0',
         ),
       ),
       'display' => array(),

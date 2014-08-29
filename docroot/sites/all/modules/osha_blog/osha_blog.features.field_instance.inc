@@ -63,7 +63,7 @@ function osha_blog_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -112,7 +112,7 @@ function osha_blog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 9,
     ),
   );
 
@@ -176,7 +176,7 @@ function osha_blog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 3,
     ),
   );
 
@@ -229,7 +229,7 @@ function osha_blog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 10,
+      'weight' => 7,
     ),
   );
 
@@ -278,7 +278,7 @@ function osha_blog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 21,
+      'weight' => 11,
     ),
   );
 
@@ -344,7 +344,7 @@ function osha_blog_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -393,7 +393,7 @@ function osha_blog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 10,
     ),
   );
 
@@ -446,7 +446,7 @@ function osha_blog_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -499,7 +499,7 @@ function osha_blog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 6,
     ),
   );
 
@@ -552,7 +552,7 @@ function osha_blog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -601,7 +601,7 @@ function osha_blog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 12,
     ),
   );
 
@@ -656,7 +656,7 @@ function osha_blog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
