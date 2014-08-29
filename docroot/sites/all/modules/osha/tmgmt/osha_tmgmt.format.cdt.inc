@@ -96,14 +96,19 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
   }
 
   /**
+   * Returns the priority of the job.
    *
+   * @param TMGMTJob $job
+   *   The TMGMT job
+   *
+   * @return string
+   *   Returns the corresponding priority
    */
-
-  public function getPriority($job) {
+  public function getPriority(TMGMTJob $job) {
     static $priorities = array(
       OSHA_TMGMT_JOB_PRIORITY_NORMAL => "Normal",
       OSHA_TMGMT_JOB_PRIORITY_LOW => "Low",
-      OSHA_TMGMT_JOB_PRIORITY_HIGH => "High"
+      OSHA_TMGMT_JOB_PRIORITY_HIGH => "High",
     );
 
     return $priorities[$job->priority];
@@ -114,21 +119,7 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
   public function export(TMGMTJob $job) {
     $this->job = $job;
 
-    $job_items = array();
-    // TODO use the one internal.
-    $job->char_counter = 0;
-    foreach ($job->getItems() as $item) {
-      if (!isset($job_items[$item->item_type][$item->item_id])) {
-        $item->target_languages = array();
-        $item->target_languages[] = $item->target_language;
-
-        $job_items[$item->item_type][$item->item_id] = $item;
-        $job->char_counter += $item->character_count;
-      }
-      else {
-        $job_items[$item->item_type][$item->item_id]->target_languages[] = $item->target_language;
-      }
-    }
+    $job_items = OshaTMGMTStatistics::getUniqueItems($job);
 
     $this->openMemory();
     $this->setIndent(TRUE);
@@ -157,7 +148,7 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     // <TransactionData>
     $this->startElement('TransactionData');
     $this->startElement('TranslationDetails');
-    $this->writeElement('TotalCharacterLength', $job->char_counter);
+    $this->writeElement('TotalCharacterLength', $job->character_count);
 
     foreach ($job_items as $item_type => $item_ids) {
       foreach ($item_ids as $item_id => $item) {
