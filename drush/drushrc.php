@@ -329,6 +329,10 @@ $options['init-modules'] = array(
 
   'taxonomy_manager',
 
+  // Newsletter modules.
+  'entity_collection',
+  'entity_collection_db',
+
   'osha',
   'osha_migration',
   'osha_news',
