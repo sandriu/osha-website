@@ -6,7 +6,6 @@ osha_change_field_size();
 osha_configure_mailsystem();
 osha_configure_htmlmail();
 osha_configure_simplenews();
-osha_configure_newsletter_category();
 osha_configure_imce();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
@@ -156,17 +155,6 @@ function osha_configure_simplenews() {
   variable_set('simplenews_test_address_override', 1);
   variable_set('simplenews_throttle', '20');
   variable_set('simplenews_use_cron', 1);
-}
-
-/**
- * Configure the OSHA newsletter category to format HTML and priority NORMAL.
- */
-function osha_configure_newsletter_category() {
-  drupal_set_message('Configuring OSHA newsletters format and priority ...');
-
-  db_update('simplenews_category')
-  ->fields(array('format' => 'html', 'priority' => 3))
-  ->execute();
 }
 
 /**

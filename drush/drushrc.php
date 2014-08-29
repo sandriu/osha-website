@@ -278,9 +278,6 @@ $options['init-modules'] = array(
 
   'mailsystem',
   'htmlmail',
-  'simplenews',
-  'scs',
-  'scs_views',
 
   'taxonomy_access_fix',
   'date',
@@ -334,10 +331,6 @@ $options['init-modules'] = array(
   'views_slideshow_cycle',
 
   'taxonomy_manager',
-
-  // Newsletter modules.
-  'entity_collection',
-  'entity_collection_db',
 
   'osha',
   'osha_migration',
