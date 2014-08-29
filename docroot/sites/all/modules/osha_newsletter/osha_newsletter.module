@@ -48,7 +48,7 @@ function osha_newsletter_add_to_newsletter_action($node, $context) {
  */
 function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
-    #case 'entity_collection_edit_form':
+    case 'entity_collection_edit_form':
     case 'entity_collection_add_form':
       if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
         osha_newsletter_fix_entity_collection_add_form($form, $form_state);
@@ -197,6 +197,7 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $form['settings']['style_settings']['#access'] = FALSE;
   $form['field_newsletter_sent']['#access'] = FALSE;
   $form['field_created']['#access'] = FALSE;
+  $form['contexts']['#access'] = FALSE;
 }
 
 /**
