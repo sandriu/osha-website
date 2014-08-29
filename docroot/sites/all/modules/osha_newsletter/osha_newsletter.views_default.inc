@@ -575,5 +575,155 @@ function osha_newsletter_views_default_views() {
   );
   $export['newsletter_node_selection'] = $view;
 
+  $view = new view();
+  $view->name = 'newsletters_overview';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'entity_collection_collections';
+  $view->human_name = 'Newsletters overview';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'List of newsletters';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '25';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'rendered_entity' => 'rendered_entity',
+    'field_newsletter_sent' => 'field_newsletter_sent',
+    'field_created' => 'field_created',
+    'field_newsletter_author' => 'field_newsletter_author',
+    'rendered_entity_1' => 'rendered_entity_1',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_created';
+  $handler->display->display_options['style_options']['info'] = array(
+    'rendered_entity' => array(
+      'align' => 'views-align-left',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_newsletter_sent' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_newsletter_author' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'rendered_entity_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<p>
+<a href="/admin/structure/entity_collection/add/newsletter_content_collection">Create newsletter</a>
+</p>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  /* Field: Entity Collection: Rendered Entity Collection */
+  $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_entity_collection';
+  $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity']['label'] = '';
+  $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'block';
+  $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
+  /* Field: Entity Collection: Newsletter sent? */
+  $handler->display->display_options['fields']['field_newsletter_sent']['id'] = 'field_newsletter_sent';
+  $handler->display->display_options['fields']['field_newsletter_sent']['table'] = 'field_data_field_newsletter_sent';
+  $handler->display->display_options['fields']['field_newsletter_sent']['field'] = 'field_newsletter_sent';
+  $handler->display->display_options['fields']['field_newsletter_sent']['label'] = 'Was sent?';
+  /* Field: Entity Collection: Created */
+  $handler->display->display_options['fields']['field_created']['id'] = 'field_created';
+  $handler->display->display_options['fields']['field_created']['table'] = 'field_data_field_created';
+  $handler->display->display_options['fields']['field_created']['field'] = 'field_created';
+  $handler->display->display_options['fields']['field_created']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Entity Collection: Author */
+  $handler->display->display_options['fields']['field_newsletter_author']['id'] = 'field_newsletter_author';
+  $handler->display->display_options['fields']['field_newsletter_author']['table'] = 'field_data_field_newsletter_author';
+  $handler->display->display_options['fields']['field_newsletter_author']['field'] = 'field_newsletter_author';
+  $handler->display->display_options['fields']['field_newsletter_author']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Entity Collection: Rendered Entity Collection */
+  $handler->display->display_options['fields']['rendered_entity_1']['id'] = 'rendered_entity_1';
+  $handler->display->display_options['fields']['rendered_entity_1']['table'] = 'views_entity_entity_collection';
+  $handler->display->display_options['fields']['rendered_entity_1']['field'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity_1']['label'] = 'Actions';
+  $handler->display->display_options['fields']['rendered_entity_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['rendered_entity_1']['alter']['text'] = '<a href="/entity-collection/[rendered_entity_1]">View</a> | <a href="/entity-collection/[rendered_entity_1]/content">Manage content</a> | <a href="/entity-collection/[rendered_entity_1]/edit">Settings</a> | <a href="/entity-collection/[rendered_entity_1]/delete">Delete</a>';
+  $handler->display->display_options['fields']['rendered_entity_1']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['rendered_entity_1']['display'] = 'id';
+  $handler->display->display_options['fields']['rendered_entity_1']['view_mode'] = 'block';
+  $handler->display->display_options['fields']['rendered_entity_1']['bypass_access'] = 0;
+
+  /* Display: List of newsletters */
+  $handler = $view->new_display('page', 'List of newsletters', 'page');
+  $handler->display->display_options['path'] = 'admin/content/newsletter';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Newsletter';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $translatables['newsletters_overview'] = array(
+    t('Master'),
+    t('List of newsletters'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('<p>
+<a href="/admin/structure/entity_collection/add/newsletter_content_collection">Create newsletter</a>
+</p>'),
+    t('Was sent?'),
+    t('Created'),
+    t('Author'),
+    t('Actions'),
+    t('<a href="/entity-collection/[rendered_entity_1]">View</a> | <a href="/entity-collection/[rendered_entity_1]/content">Manage content</a> | <a href="/entity-collection/[rendered_entity_1]/edit">Settings</a> | <a href="/entity-collection/[rendered_entity_1]/delete">Delete</a>'),
+  );
+  $export['newsletters_overview'] = $view;
+
   return $export;
 }
