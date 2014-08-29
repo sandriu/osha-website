@@ -1,224 +1,245 @@
 <?php
 /**
- * Implementation of hook_views_default_views_alter().
+ * @file
+ * Code for the osha_newsletter feature.
  */
-function osha_newsletter_views_default_views_alter(&$views) {
-  // Modify the view newsletter_creation from the scs contrib module.
-  if (array_key_exists('newsletter_creation', $views)) {
-    $view = $views['newsletter_creation'];
-    $handler = $view->display['default'];
-    $handler->display_options['exposed_form']['options']['reset_button'] = TRUE;
 
-    /* Field: Content: Summary */
-    $handler->display_options['fields']['field_summary']['id'] = 'field_summary';
-    $handler->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
-    $handler->display_options['fields']['field_summary']['field'] = 'field_summary';
-    $handler->display_options['fields']['field_summary']['type'] = 'text_trimmed';
-    $handler->display_options['fields']['field_summary']['settings'] = array(
-      'trim_length' => '150',
-    );
-    /* Field: Content: Body */
-    $handler->display_options['fields']['body']['id'] = 'body';
-    $handler->display_options['fields']['body']['table'] = 'field_data_body';
-    $handler->display_options['fields']['body']['field'] = 'body';
-    $handler->display_options['fields']['body']['exclude'] = TRUE;
-    /* Field: Field: Tags */
-    $handler->display_options['fields']['field_tags']['id'] = 'field_tags';
-    $handler->display_options['fields']['field_tags']['table'] = 'field_data_field_tags';
-    $handler->display_options['fields']['field_tags']['field'] = 'field_tags';
-    $handler->display_options['fields']['field_tags']['exclude'] = TRUE;
-    $handler->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
-    $handler->display_options['fields']['field_tags']['delta_offset'] = '0';
-    /* Field: Field: Thesaurus */
-    $handler->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-    $handler->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-    $handler->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-    $handler->display_options['fields']['field_thesaurus']['exclude'] = TRUE;
-    $handler->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
-    $handler->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
+include_once 'osha_newsletter.features.inc';
 
-    /* Filter criterion: Global: Combine fields filter */
-    $handler->display_options['filters']['combine']['id'] = 'combine';
-    $handler->display_options['filters']['combine']['table'] = 'views';
-    $handler->display_options['filters']['combine']['field'] = 'combine';
-    $handler->display_options['filters']['combine']['operator'] = 'word';
-    $handler->display_options['filters']['combine']['group'] = 1;
-    $handler->display_options['filters']['combine']['exposed'] = TRUE;
-    $handler->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
-    $handler->display_options['filters']['combine']['expose']['label'] = 'Free text search';
-    $handler->display_options['filters']['combine']['expose']['description'] = 'Search in title, body and summary fields ';
-    $handler->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
-    $handler->display_options['filters']['combine']['expose']['identifier'] = 'combine';
-    $handler->display_options['filters']['combine']['expose']['remember_roles'] = array(
-      2 => '2',
-      1 => 0,
-      3 => 0,
-    );
-    $handler->display_options['filters']['combine']['fields'] = array(
-      'title' => 'title',
-      'field_summary' => 'field_summary',
-      'body' => 'body',
-    );
-
-    /* Alter filter criterion: Content: Type */
-    $handler->display_options['filters']['type']['group'] = 1;
-    $handler->display_options['filters']['type']['is_grouped'] = TRUE;
-    $handler->display_options['filters']['type']['group_info']['label'] = 'Type';
-    $handler->display_options['filters']['type']['group_info']['identifier'] = 'type';
-    $handler->display_options['filters']['type']['group_info']['group_items'] = array(
-      1 => array(
-        'title' => 'Article',
-        'operator' => 'in',
-        'value' => array(
-          'article' => 'article',
-          'all' => 0,
-          'page' => 0,
-          'blog' => 0,
-          'case_study' => 0,
-          'news' => 0,
-          'publication' => 0,
-          'simplenews' => 0,
+function osha_newsletter_action_info() {
+  return array(
+    'osha_newsletter_add_to_newsletter_action' => array(
+      'label' => t('Add to newsletter'),
+      'group' => t('Newsletter'),
+      'type' => 'node',
+      'parameter' => array(
+        'newsletter' => array(
+          'type' => 'node',
+          'label' => 'Newsletter',
+          'description' => t('Newsletter to add this node to'),
         ),
       ),
-      2 => array(
-        'title' => 'Blog',
-        'operator' => 'in',
-        'value' => array(
-          'blog' => 'blog',
-          'all' => 0,
-          'article' => 0,
-          'page' => 0,
-          'case_study' => 0,
-          'news' => 0,
-          'publication' => 0,
-          'simplenews' => 0,
-        ),
-      ),
-      3 => array(
-        'title' => 'News',
-        'operator' => 'in',
-        'value' => array(
-          'news' => 'news',
-          'all' => 0,
-          'article' => 0,
-          'page' => 0,
-          'blog' => 0,
-          'case_study' => 0,
-          'publication' => 0,
-          'simplenews' => 0,
-        ),
-      ),
-      4 => array(
-        'title' => 'Publication',
-        'operator' => 'in',
-        'value' => array(
-          'publication' => 'publication',
-          'all' => 0,
-          'article' => 0,
-          'page' => 0,
-          'blog' => 0,
-          'case_study' => 0,
-          'news' => 0,
-          'simplenews' => 0,
-        ),
-      ),
-    );
+      // TODO: EDW
+      #'acces callback' => 'tmgmt_rules_job_submit_access',
+    ),
+  );
+}
 
-    /* Alter filter criterion: Content: Type */
-    $handler->display_options['filters']['type_1']['id'] = 'type_1';
-    $handler->display_options['filters']['type_1']['table'] = 'node';
-    $handler->display_options['filters']['type_1']['field'] = 'type';
-    $handler->display_options['filters']['type_1']['value'] = array(
-      'article' => 'article',
-      'blog' => 'blog',
-      'news' => 'news',
-      'publication' => 'publication',
-    );
 
-    /* Filter criterion: Content: Post date */
-    $handler->display_options['filters']['created']['id'] = 'created';
-    $handler->display_options['filters']['created']['table'] = 'node';
-    $handler->display_options['filters']['created']['field'] = 'created';
-    $handler->display_options['filters']['created']['operator'] = 'between';
-    $handler->display_options['filters']['created']['exposed'] = TRUE;
-    $handler->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
-    $handler->display_options['filters']['created']['expose']['label'] = 'Post date';
-    $handler->display_options['filters']['created']['expose']['operator'] = 'created_op';
-    $handler->display_options['filters']['created']['expose']['identifier'] = 'created';
-    $handler->display_options['filters']['created']['expose']['remember'] = TRUE;
-    $handler->display_options['filters']['created']['expose']['remember_roles'] = array(
-      2 => '2',
-      1 => 0,
-      3 => 0,
-    );
-
-    /* Filter criterion: Field: Tags (field_tags) */
-    $handler->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
-    $handler->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
-    $handler->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
-    $handler->display_options['filters']['field_tags_tid']['value'] = '';
-    $handler->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
-    $handler->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
-    $handler->display_options['filters']['field_tags_tid']['expose']['label'] = 'Tags';
-    $handler->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
-    $handler->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'field_tags_tid';
-    $handler->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
-      2 => '2',
-      1 => 0,
-      3 => 0,
-    );
-    $handler->display_options['filters']['field_tags_tid']['reduce_duplicates'] = TRUE;
-    $handler->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
-
-    /* Filter criterion: Field: Thesaurus (field_thesaurus) */
-    $handler->display_options['filters']['field_thesaurus_tid']['id'] = 'field_thesaurus_tid';
-    $handler->display_options['filters']['field_thesaurus_tid']['table'] = 'field_data_field_thesaurus';
-    $handler->display_options['filters']['field_thesaurus_tid']['field'] = 'field_thesaurus_tid';
-    $handler->display_options['filters']['field_thesaurus_tid']['value'] = '';
-    $handler->display_options['filters']['field_thesaurus_tid']['exposed'] = TRUE;
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['operator_id'] = 'field_thesaurus_tid_op';
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['label'] = 'Thesaurus';
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['operator'] = 'field_thesaurus_tid_op';
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['identifier'] = 'field_thesaurus_tid';
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['remember'] = TRUE;
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['remember_roles'] = array(
-      2 => '2',
-      1 => 0,
-      3 => 0,
-    );
-    $handler->display_options['filters']['field_thesaurus_tid']['vocabulary'] = 'thesaurus';
-
-    $translatables['newsletter_creation'] = array(
-      t('Master'),
-      t('Newsletter creation'),
-      t('more'),
-      t('Apply'),
-      t('Reset'),
-      t('Sort by'),
-      t('Asc'),
-      t('Desc'),
-      t('Items per page'),
-      t('- All -'),
-      t('Offset'),
-      t('« first'),
-      t('‹ previous'),
-      t('next ›'),
-      t('last »'),
-      t('- Choose an operation -'),
-      t('Title'),
-      t('Summary'),
-      t('Type'),
-      t('Post date'),
-      t('Body'),
-      t('Tags'),
-      t('Thesaurus'),
-      t('Free text search'),
-      t('Search in title, body and summary fields '),
-      t('Page'),
-    );
-
-    // Add view to list of views.
-    $view->display['default'] = $handler;
-    $views['newsletter_creation'] = $view;
+/**
+ * Actual VBO target action defined in hook_action_info above.
+ */
+function osha_newsletter_add_to_newsletter_action($node, $context) {
+  if(isset($context['view_info']['arguments']['0'])) {
+    $collection_name = $context['view_info']['arguments']['0'];
+    /* @var EntityCollectionRow */
+    $collection = entity_collection_load($collection_name);
+    if ($collection) {
+      $item = new EntityCollectionTreeNode('node', $node->nid, $node);
+      $contexts = _entity_collection_get_contexts($collection);
+      entity_collection_append_item($collection, $item, $contexts);
+      $collection->save();
+    }
   }
+}
+
+function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
+  return;
+  switch ($form_id) {
+    #case 'entity_collection_edit_form':
+    case 'entity_collection_add_form':
+      if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
+        #osha_newsletter_fix_entity_collection_add_form($form, $form_state);
+      }
+      break;
+
+    case 'entity_collection_content_add_form':
+      hide($form['add_content']);
+
+      $collection = $form_state['entity_collection'];
+      $view = views_get_view('newsletter_node_selection');
+      // Set the display and arguments based on the pane's context.
+      $view->set_display('newsletter_selection_view_page');
+      $args = $view->args;
+      $args[0] = $collection->name;
+      $view->set_arguments($args);
+
+      // Remove error Notice: Undefined property: view::$dom_id.
+      $view->pre_execute();
+      $view->execute();
+      $output = $view->render();
+
+      $form['filter'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Add more content to the newsletter'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+      );
+      $form['filter']['content'] = array(
+        '#ype' => 'item',
+        '#markup' => $output,
+      );
+      break;
+
+    case 'views_form_newsletter_node_selection_newsletter_selection_view_page':
+      $form['#action'] = '/' . $_GET['q'];
+      if (!empty($form['actions']['submit']['#submit'])) {
+        $form['actions']['submit']['#submit'][] = 'osha_newsletter_entity_collection_newsletter_add_form_submit';
+      }
+      break;
+
+    case 'entity_collection_content_form':
+      break;
+
+    case 'search_block_form':
+      break;
+
+    default:
+  }
+}
+
+/**
+ * Alter form to create entity collection of type newsletter_content_collection.
+ *
+ * @param array $form
+ *   Drupal form
+ * @param array $form_state
+ *   Drupal form state
+ */
+function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
+  global $user;
+
+  $default_style = 'entity_collection_style_hierarchy';
+  $default_row = 'entity_collection_row_view_mode';
+  $allowed_bundles = array(
+    'node' => array(
+      'publication', 'page', 'blog', 'news', 'press_release'
+      //TODO: event, highlight - also check.
+    ),
+    'taxonomy_term' => array('newsletter_sections'),
+  );
+
+  $form_state['bundle'] = 'newsletter_content_collection';
+
+  // Set value and hide Style.
+  $form_state['values']['settings']['style_settings'] = $default_style;
+  $form['style']['#default_value'] = $default_style;
+  $form['style']['#value'] = $default_style;
+
+  // Set value and hide Row.
+  $form_state['values']['settings']['row_settings'] = $default_row;
+  $form['row']['#default_value'] = $default_row;
+  $form['row']['#value'] = $default_row;
+
+  $form_state['values']['settings']['allowed_bundles'] = $allowed_bundles;
+
+  // Form settings - We need to simulate Ajax select controls.
+  // Row settings.
+  $collection = $form_state['entity_collection'];
+  $collection->row = $default_row;
+  $collection->style = $default_style;
+  $collection->settings = array(
+    'row_settings' => array('style_per_row' => 0),
+    'style_settings' => array('max_depth' => 1),
+    'allowed_bundles' => $allowed_bundles,
+  );
+
+  $style = EntityCollectionStyle::getStyle($collection);
+  if (isset($style) && method_exists($style, 'settingsForm')) {
+    $style->settingsForm($form['settings']['style_settings']);
+  }
+  $row = EntityCollectionRow::getRow($collection);
+  $row->settingsForm($form['settings']['row_settings']);
+
+  // Enable custom styles values per row (Teaser etc.).
+  $form['settings']['row_settings']['style_per_row']['#default_value'] = TRUE;
+  // Set default mode to teaser for nodes.
+  $form['settings']['row_settings']['default_style']['node']['#default_value'] = 'teaser';
+
+  // Add content types to allowed contents.
+  // TODO: EDW - Make it setting from configuration screen.
+  $form['settings']['allowed_bundles']['node']['#default_value'] = array(
+    'blog', 'news', 'publication', 'press_release',
+  );
+
+  // Add Newsletter Section taxonomy to supported contents.
+  // TODO: EDW - Make it setting from configuration screen.
+  $form['settings']['allowed_bundles']['taxonomy_term']['#default_value'] = array(
+    'newsletter_sections',
+  );
+
+  // Alter title field label.
+  $form['title']['#title'] = t('Newsletter title');
+  // Alter submit button label.
+  $form['actions']['submit']['#value'] = t('Create newsletter');
+
+  // Set author to current user.
+  $form['field_newsletter_author'][LANGUAGE_NONE]['#default_value'] = $user->uid;
+  $form['field_newsletter_author'][LANGUAGE_NONE]['#access'] = FALSE;
+
+  // Add a date when to select content from
+  $form['filter_content_after'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Automatically add content created after ...'),
+    '#size' => 30,
+    '#description' => t("Leave empty if you don't want content added for you"),
+    '#required' => FALSE,
+    '#value' => format_date(time(), 'short'),
+  );
+
+  // Hide fields set above to their default values.
+  $form['style']['#access'] = FALSE;
+  $form['row']['#access'] = FALSE;
+  $form['settings']['row_settings']['#access'] = FALSE;
+  $form['settings']['allowed_bundles']['#access'] = FALSE;
+  $form['settings']['style_settings']['#access'] = FALSE;
+  $form['field_newsletter_sent']['#access'] = FALSE;
+  $form['field_newsletter_created']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function osha_newsletter_entity_insert($entity, $type) {
+  return;
+  if ($type == 'entity_collection'
+      && isset($entity->bundle)
+      && $entity->bundle == 'newsletter_content_collection') {
+
+    $coming_soon_tid = 1768; //TODO: Remove hard-coding
+
+    // Assign all taxonomies to the newly created entity.
+    $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+    $terms = taxonomy_get_tree($voc->vid);
+    $weight = 0;
+    foreach ($terms as $weight => $term) {
+      $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $term);
+      $item->position = $weight * 30;
+      $contexts = _entity_collection_get_contexts($entity);
+      entity_collection_append_item($entity, $item, $contexts);
+    }
+    // Create 'Coming soon' node and append it at the end.
+    $node = osha_newsletter_create_node('Coming soon ...');
+    $item = new EntityCollectionTreeNode('node', $node->nid, $node);
+    $item->position = ($weight + 1) * 30;
+    $item->parent = 'taxonomy_term:' . $coming_soon_tid;
+    $contexts = _entity_collection_get_contexts($entity);
+    entity_collection_append_item($entity, $item, $contexts);
+  }
+}
+
+function osha_newsletter_create_node($title, $type = 'newsletter_article') {
+  global $user;
+  $node = new stdClass();
+  $node->title = $title;
+  $node->type = $type;
+  node_object_prepare($node);
+  $node->language = 'en';
+  $node->uid = $user->uid;
+  $node->status = 1;
+  $node->promote = 0;
+  $node->title_field[$node->language][0]['value'] = $title;
+  $node = node_submit($node);
+  node_save($node);
+  return $node;
 }
