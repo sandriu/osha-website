@@ -133,6 +133,9 @@ function osha_publication_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'osha_slideshow' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
