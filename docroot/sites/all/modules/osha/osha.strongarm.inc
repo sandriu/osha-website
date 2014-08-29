@@ -368,13 +368,13 @@ function osha_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '9',
+          'weight' => '13',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'redirect' => array(
-          'weight' => '10',
+          'weight' => '14',
         ),
       ),
       'display' => array(),
@@ -425,13 +425,13 @@ function osha_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '30',
+          'weight' => '7',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '8',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
