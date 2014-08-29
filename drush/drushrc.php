@@ -318,6 +318,10 @@ $options['init-modules'] = array(
   'pdf_to_image',
   'doc_to_imagefield',
 
+  'special_menu_items',
+  'menu_block',
+  'menuimage',
+
   'imce_wysiwyg',
   'wysiwyg_accordion',
 
@@ -338,6 +342,7 @@ $options['init-modules'] = array(
   'osha_newsletter',
   'osha_tmgmt',
   'osha_highlight',
+  'osha_menu',
 
   // Enable last (conflict with rules)
   'uuid',
