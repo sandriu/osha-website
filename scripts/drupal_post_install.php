@@ -221,6 +221,9 @@ function osha_configure_file_translator() {
 }
 
 
+/**
+ * Populate initial terms into the newsletter_sections taxonomy.
+ */
 function osha_newsletter_create_taxonomy() {
   $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
   $terms = taxonomy_get_tree($voc->vid);
