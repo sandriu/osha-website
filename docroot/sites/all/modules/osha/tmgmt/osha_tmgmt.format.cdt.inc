@@ -65,6 +65,9 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
 
     foreach ($item->getData() as $key => $field) {
       $text = NULL;
+      if ($key == "node_title") {
+          continue;
+      }
       if (isset($field['#text'])) {
         $text = $field['#text'];
       }
