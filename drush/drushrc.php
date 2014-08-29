@@ -261,9 +261,15 @@ if(file_exists($json_path)) {
 $options['init-modules'] = array(
   'ctools', 'entity',
 
+  // Newsletter modules.
+  'entity_collection',
+  'entity_collection_db',
+
   'locale',
   'entity_translation',
   'i18n',
+  'i18n_string',
+  'i18n_taxonomy',
   'variable',
 
   'views',

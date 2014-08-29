@@ -9,6 +9,7 @@ osha_configure_simplenews();
 osha_configure_newsletter_category();
 osha_configure_imce();
 osha_configure_file_translator();
+osha_newsletter_create_taxonomy();
 
 module_disable(array('overlay'));
 
@@ -228,5 +229,29 @@ function osha_configure_file_translator() {
     $file->settings['export_format'] = 'xml';
     $file->settings['allow_override'] = FALSE;
     $file->save();
+  }
+}
+
+
+function osha_newsletter_create_taxonomy() {
+  $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+  $terms = taxonomy_get_tree($voc->vid);
+
+  if (empty($terms)) {
+    $new_terms = array(
+      'Highlights',
+      'OSH matters',
+      'Latest publications',
+      'Coming soon',
+      'Blog',
+      'News',
+      'Events',
+    );
+    foreach ($new_terms as $term_name) {
+      $term = new stdClass();
+      $term->name = $term_name;
+      $term->vid = $voc->vid;
+      taxonomy_term_save($term);
+    }
   }
 }
