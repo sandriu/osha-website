@@ -43,6 +43,9 @@ function osha_newsletter_add_to_newsletter_action($node, $context) {
   }
 }
 
+/**
+ * Implements hook_form_alter().
+ */
 function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     #case 'entity_collection_edit_form':
@@ -112,7 +115,7 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $default_row = 'entity_collection_row_view_mode';
   $allowed_bundles = array(
     'node' => array(
-      'publication', 'page', 'blog', 'news', 'press_release'
+      'publication', 'page', 'blog', 'news', 'press_release',
       //TODO: event, highlight - also check.
     ),
     'taxonomy_term' => array('newsletter_sections'),
@@ -204,7 +207,7 @@ function osha_newsletter_entity_insert($entity, $type) {
       && isset($entity->bundle)
       && $entity->bundle == 'newsletter_content_collection') {
 
-    $coming_soon_tid = 1768; //TODO: Remove hard-coding
+    $coming_soon_tid = 4; //TODO: Remove hard-coding
 
     // Assign all taxonomies to the newly created entity.
     $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
@@ -226,6 +229,17 @@ function osha_newsletter_entity_insert($entity, $type) {
   }
 }
 
+/**
+ * Create new node of specified type.
+ *
+ * @param string $title
+ *   Node title
+ * @param string $type
+ *   bundle name
+ *
+ * @return object
+ *   Saved node.
+ */
 function osha_newsletter_create_node($title, $type = 'newsletter_article') {
   global $user;
   $node = new stdClass();
