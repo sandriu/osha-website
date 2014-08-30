@@ -651,8 +651,11 @@ function osha_newsletter_views_default_views() {
   $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_entity_collection';
   $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
   $handler->display->display_options['fields']['rendered_entity']['label'] = '';
+  $handler->display->display_options['fields']['rendered_entity']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['rendered_entity']['alter']['path'] = 'entity-collection/test_1';
+  $handler->display->display_options['fields']['rendered_entity']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 0;
   $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'block';
   $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
   /* Field: Entity Collection: Newsletter sent? */
@@ -684,7 +687,7 @@ function osha_newsletter_views_default_views() {
   $handler->display->display_options['fields']['rendered_entity_1']['field'] = 'rendered_entity';
   $handler->display->display_options['fields']['rendered_entity_1']['label'] = 'Actions';
   $handler->display->display_options['fields']['rendered_entity_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['rendered_entity_1']['alter']['text'] = '<a href="/entity-collection/[rendered_entity_1]">View</a> | <a href="/entity-collection/[rendered_entity_1]/content">Manage content</a> | <a href="/entity-collection/[rendered_entity_1]/edit">Settings</a> | <a href="/entity-collection/[rendered_entity_1]/delete">Delete</a>';
+  $handler->display->display_options['fields']['rendered_entity_1']['alter']['text'] = '<a href="/entity-collection/[rendered_entity_1]/content">Manage content</a> | <a href="/entity-collection/[rendered_entity_1]/edit">Settings</a> | <a href="/entity-collection/[rendered_entity_1]/delete">Delete</a>';
   $handler->display->display_options['fields']['rendered_entity_1']['link_to_entity'] = 1;
   $handler->display->display_options['fields']['rendered_entity_1']['display'] = 'id';
   $handler->display->display_options['fields']['rendered_entity_1']['view_mode'] = 'block';
@@ -721,7 +724,7 @@ function osha_newsletter_views_default_views() {
     t('Created'),
     t('Author'),
     t('Actions'),
-    t('<a href="/entity-collection/[rendered_entity_1]">View</a> | <a href="/entity-collection/[rendered_entity_1]/content">Manage content</a> | <a href="/entity-collection/[rendered_entity_1]/edit">Settings</a> | <a href="/entity-collection/[rendered_entity_1]/delete">Delete</a>'),
+    t('<a href="/entity-collection/[rendered_entity_1]/content">Manage content</a> | <a href="/entity-collection/[rendered_entity_1]/edit">Settings</a> | <a href="/entity-collection/[rendered_entity_1]/delete">Delete</a>'),
   );
   $export['newsletters_overview'] = $view;
 
