@@ -113,8 +113,8 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $default_row = 'entity_collection_row_view_mode';
   $allowed_bundles = array(
     'node' => array(
-      'publication', 'page', 'blog', 'news', 'press_release',
-      //TODO: event, highlight - also check.
+      'publication', 'page', 'blog', 'news', 'press_release', 'highlight',
+      // TODO:EDW: check 'event' - non existing for now.
     ),
     'taxonomy_term' => array('newsletter_sections'),
   );
