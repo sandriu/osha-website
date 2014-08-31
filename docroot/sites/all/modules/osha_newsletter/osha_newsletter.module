@@ -56,8 +56,6 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'entity_collection_content_add_form':
-      hide($form['add_content']);
-
       $collection = $form_state['entity_collection'];
       $view = views_get_view('newsletter_node_selection');
       // Set the display and arguments based on the pane's context.
