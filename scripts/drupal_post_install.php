@@ -238,10 +238,11 @@ function osha_newsletter_create_taxonomy() {
       'News',
       'Events',
     );
-    foreach ($new_terms as $term_name) {
+    foreach ($new_terms as $idx => $term_name) {
       $term = new stdClass();
       $term->name = $term_name;
       $term->vid = $voc->vid;
+      $term->weight = $idx;
       taxonomy_term_save($term);
     }
   }
