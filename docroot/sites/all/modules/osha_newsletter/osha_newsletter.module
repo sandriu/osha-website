@@ -141,7 +141,7 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $collection->row = $default_row;
   $collection->style = $default_style;
   $collection->settings = array(
-    'row_settings' => array('style_per_row' => 0),
+    'row_settings' => array('style_per_row' => 1),
     'style_settings' => array('max_depth' => 1),
     'allowed_bundles' => $allowed_bundles,
   );
@@ -179,16 +179,6 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $form['field_newsletter_author'][LANGUAGE_NONE]['#default_value'] = $user->uid;
   $form['field_newsletter_author'][LANGUAGE_NONE]['#access'] = FALSE;
 
-  // Add a date when to select content from
-  $form['filter_content_after'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Automatically add content created after ...'),
-    '#size' => 30,
-    '#description' => t("Leave empty if you don't want content added for you"),
-    '#required' => FALSE,
-    '#value' => format_date(time(), 'short'),
-  );
-
   // Hide fields set above to their default values.
   $form['style']['#access'] = FALSE;
   $form['row']['#access'] = FALSE;
@@ -208,9 +198,17 @@ function osha_newsletter_entity_insert($entity, $type) {
       && isset($entity->bundle)
       && $entity->bundle == 'newsletter_content_collection') {
 
-    $coming_soon_tid = 4; //TODO: Remove hard-coding
+    // TODO:EDW Remove hard-coding.
+    $coming_soon_tid = variable_get('osha_newsletter_coming_soon_tid', 1768);
 
     // Assign all taxonomies to the newly created entity.
+    // Highlights
+    // OSH matters
+    // Latest publications
+    // Coming soon
+    // - Blog
+    // - News
+    // - Events.
     $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
     $terms = taxonomy_get_tree($voc->vid);
     $weight = 0;
@@ -220,13 +218,34 @@ function osha_newsletter_entity_insert($entity, $type) {
       $contexts = _entity_collection_get_contexts($entity);
       entity_collection_append_item($entity, $item, $contexts);
     }
+
     // Create 'Coming soon' node and append it at the end.
-    $node = osha_newsletter_create_node('Coming soon ...');
+    $node = osha_newsletter_create_node('Sample content for coming soon ...');
     $item = new EntityCollectionTreeNode('node', $node->nid, $node);
     $item->position = ($weight + 1) * 30;
     $item->parent = 'taxonomy_term:' . $coming_soon_tid;
     $contexts = _entity_collection_get_contexts($entity);
     entity_collection_append_item($entity, $item, $contexts);
+
+    // Select latest content and attach it to the newsletter.
+    if (!empty($entity->field_newsletter_content_after[LANGUAGE_NONE][0]['value'])) {
+      $after = $entity->field_newsletter_content_after[LANGUAGE_NONE][0]['value'];
+      $query = new EntityFieldQuery();
+      $rows = $query->entityCondition('entity_type', 'node')
+        // TODO:EDW fix bundles.
+        ->entityCondition('bundle', array('article', 'news'))
+        ->propertyCondition('created', $after, '>=')
+        ->execute();
+      if (isset($rows['node'])) {
+        $nodes = node_load_multiple(array_keys($rows['node']));
+        foreach ($nodes as $nid => $node) {
+          $item = new EntityCollectionTreeNode('node', $nid, $node);
+          $item->position = ($weight + 1) * 30;
+          $item->parent = 'taxonomy_term:' . $coming_soon_tid;
+          entity_collection_append_item($entity, $item, $contexts);
+        }
+      }
+    }
   }
 }
 

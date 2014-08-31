@@ -261,10 +261,6 @@ if(file_exists($json_path)) {
 $options['init-modules'] = array(
   'ctools', 'entity',
 
-  // Newsletter modules.
-  'entity_collection',
-  'entity_collection_db',
-
   'locale',
   'entity_translation',
   'i18n',
@@ -342,10 +338,14 @@ $options['init-modules'] = array(
   'osha_news',
   'osha_publication',
   'osha_blog',
-  'osha_newsletter',
   'osha_tmgmt',
   'osha_highlight',
   'osha_menu',
+
+  // Newsletter modules.
+  'entity_collection',
+  'entity_collection_db',
+  'osha_newsletter',
 
   // Enable last (conflict with rules)
   'uuid',

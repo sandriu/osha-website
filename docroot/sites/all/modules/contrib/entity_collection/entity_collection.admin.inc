@@ -229,7 +229,6 @@ function entity_collection_form_validate($form, &$form_state) {
  * @param array $form_state
  */
 function entity_collection_form_submit($form, &$form_state) {
-  var_dump($form_state);
   ctools_include('cache');
   $entity_collection = $form_state['entity_collection'];
   // Let the style plugin postprocess the new style settings.
