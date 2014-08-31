@@ -6,6 +6,36 @@
 
 include_once 'osha_newsletter.features.inc';
 
+/**
+ * Implements hook_permission().
+ */
+function osha_newsletter_permission() {
+  return array(
+    'administer osha newsletter' => array(
+      'title' => t('Administer OSHA newsletter'),
+      'description' => t('Configure OSHA newsletter module'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function osha_newsletter_menu() {
+  $items = array();
+  $items['admin/config/content/newsletter'] = array(
+    'title' => 'Newsletter settings',
+    'description' => 'Configure newsletter behavior',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_newsletter_admin_form'),
+    'access arguments' => array('administer osha newsletter'),
+    'position' => 'left',
+    'weight' => 5,
+    'file' => 'osha_newsletter.admin.inc',
+  );
+  return $items;
+}
+
 function osha_newsletter_action_info() {
   return array(
     'osha_newsletter_add_to_newsletter_action' => array(
@@ -112,10 +142,7 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $default_style = 'entity_collection_style_hierarchy';
   $default_row = 'entity_collection_row_view_mode';
   $allowed_bundles = array(
-    'node' => array(
-      'publication', 'page', 'blog', 'news', 'press_release', 'highlight',
-      // TODO:EDW: check 'event' - non existing for now.
-    ),
+    'node' => variable_get('osha_newsletter_allowed_bundles'),
     'taxonomy_term' => array('newsletter_sections'),
   );
 
@@ -157,16 +184,10 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $form['settings']['row_settings']['default_style']['node']['#default_value'] = 'teaser';
 
   // Add content types to allowed contents.
-  // TODO: EDW - Make it setting from configuration screen.
-  $form['settings']['allowed_bundles']['node']['#default_value'] = array(
-    'blog', 'news', 'publication', 'press_release',
-  );
+  $form['settings']['allowed_bundles']['node']['#default_value'] = variable_get('osha_newsletter_allowed_bundles');
 
   // Add Newsletter Section taxonomy to supported contents.
-  // TODO: EDW - Make it setting from configuration screen.
-  $form['settings']['allowed_bundles']['taxonomy_term']['#default_value'] = array(
-    'newsletter_sections',
-  );
+  $form['settings']['allowed_bundles']['taxonomy_term']['#default_value'] = array('newsletter_sections');
 
   // Alter title field label.
   $form['title']['#title'] = t('Newsletter title');
@@ -196,42 +217,42 @@ function osha_newsletter_entity_insert($entity, $type) {
       && isset($entity->bundle)
       && $entity->bundle == 'newsletter_content_collection') {
 
-    // TODO:EDW Remove hard-coding.
-    $coming_soon_tid = variable_get('osha_newsletter_coming_soon_tid', 1768);
+    $coming_soon_tid = variable_get('osha_newsletter_coming_soon_tid');
+    if (!empty($coming_soon_tid)) {
+      // Assign all taxonomies to the newly created entity.
+      // Highlights
+      // OSH matters
+      // Latest publications
+      // Coming soon
+      // - Blog
+      // - News
+      // - Events.
+      $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+      $terms = taxonomy_get_tree($voc->vid);
+      $weight = 0;
+      foreach ($terms as $weight => $term) {
+        $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $term);
+        $item->position = $weight * 30;
+        $contexts = _entity_collection_get_contexts($entity);
+        entity_collection_append_item($entity, $item, $contexts);
+      }
 
-    // Assign all taxonomies to the newly created entity.
-    // Highlights
-    // OSH matters
-    // Latest publications
-    // Coming soon
-    // - Blog
-    // - News
-    // - Events.
-    $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
-    $terms = taxonomy_get_tree($voc->vid);
-    $weight = 0;
-    foreach ($terms as $weight => $term) {
-      $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $term);
-      $item->position = $weight * 30;
+      // Create 'Coming soon' node and append it at the end.
+      $node = osha_newsletter_create_node('Sample content for coming soon ...');
+      $item = new EntityCollectionTreeNode('node', $node->nid, $node);
+      $item->position = ($weight + 1) * 30;
+      $item->parent = 'taxonomy_term:' . $coming_soon_tid;
       $contexts = _entity_collection_get_contexts($entity);
       entity_collection_append_item($entity, $item, $contexts);
     }
 
-    // Create 'Coming soon' node and append it at the end.
-    $node = osha_newsletter_create_node('Sample content for coming soon ...');
-    $item = new EntityCollectionTreeNode('node', $node->nid, $node);
-    $item->position = ($weight + 1) * 30;
-    $item->parent = 'taxonomy_term:' . $coming_soon_tid;
-    $contexts = _entity_collection_get_contexts($entity);
-    entity_collection_append_item($entity, $item, $contexts);
-
     // Select latest content and attach it to the newsletter.
     if (!empty($entity->field_newsletter_content_after[LANGUAGE_NONE][0]['value'])) {
+      $weight = 0;
       $after = $entity->field_newsletter_content_after[LANGUAGE_NONE][0]['value'];
       $query = new EntityFieldQuery();
       $rows = $query->entityCondition('entity_type', 'node')
-        // TODO:EDW fix bundles.
-        ->entityCondition('bundle', array('article', 'news'))
+        ->entityCondition('bundle', variable_get('osha_newsletter_allowed_bundles'))
         ->propertyCondition('created', $after, '>=')
         ->execute();
       if (isset($rows['node'])) {
