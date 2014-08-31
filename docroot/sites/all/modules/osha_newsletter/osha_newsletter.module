@@ -79,9 +79,18 @@ function osha_newsletter_add_to_newsletter_action($node, $context) {
 function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'entity_collection_edit_form':
+      if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
+        osha_newsletter_fix_entity_collection_edit_form($form, $form_state);
+        // Alter submit button label.
+        $form['actions']['submit']['#value'] = t('Update newsletter');
+      }
+      break;
+
     case 'entity_collection_add_form':
       if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
         osha_newsletter_fix_entity_collection_add_form($form, $form_state);
+        // Alter submit button label.
+        $form['actions']['submit']['#value'] = t('Create newsletter');
       }
       break;
 
@@ -136,6 +145,18 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  *   Drupal form state
  */
+function osha_newsletter_fix_entity_collection_edit_form(&$form, &$form_state) {
+
+}
+
+/**
+ * Alter form to create entity collection of type newsletter_content_collection.
+ *
+ * @param array $form
+ *   Drupal form
+ * @param array $form_state
+ *   Drupal form state
+ */
 function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   global $user;
 
@@ -146,19 +167,20 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
     'taxonomy_term' => array('newsletter_sections'),
   );
 
+  // Pre-populate form_state.
   $form_state['bundle'] = 'newsletter_content_collection';
+  $form_state['values']['settings']['style_settings'] = array('max_depth' => '1');
+  $form_state['values']['settings']['row_settings'] = array('style_per_row' => '1');
+  $form_state['values']['settings']['allowed_bundles'] = $allowed_bundles;
 
   // Set value and hide Style.
-  $form_state['values']['settings']['style_settings'] = $default_style;
+
   $form['style']['#default_value'] = $default_style;
   $form['style']['#value'] = $default_style;
 
   // Set value and hide Row.
-  $form_state['values']['settings']['row_settings'] = $default_row;
   $form['row']['#default_value'] = $default_row;
   $form['row']['#value'] = $default_row;
-
-  $form_state['values']['settings']['allowed_bundles'] = $allowed_bundles;
 
   // Form settings - We need to simulate Ajax select controls.
   // Row settings.
@@ -166,10 +188,17 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $collection->row = $default_row;
   $collection->style = $default_style;
   $collection->settings = array(
-    'row_settings' => array('style_per_row' => 1),
-    'style_settings' => array('max_depth' => 1),
+    'row_settings' => array('style_per_row' => '1'),
+    'style_settings' => array('max_depth' => '1'),
     'allowed_bundles' => $allowed_bundles,
   );
+
+
+  // Add content types to allowed contents.
+  $form['settings']['allowed_bundles']['node']['#default_value'] = variable_get('osha_newsletter_allowed_bundles');
+
+  // Add Newsletter Section taxonomy to supported contents.
+  $form['settings']['allowed_bundles']['taxonomy_term']['#default_value'] = array('newsletter_sections');
 
   $style = EntityCollectionStyle::getStyle($collection);
   if (isset($style) && method_exists($style, 'settingsForm')) {
@@ -180,19 +209,13 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
 
   // Enable custom styles values per row (Teaser etc.).
   $form['settings']['row_settings']['style_per_row']['#default_value'] = TRUE;
+  $form['settings']['style_settings']['max_depth']['#default_value'] = 1;
   // Set default mode to teaser for nodes.
   $form['settings']['row_settings']['default_style']['node']['#default_value'] = 'teaser';
 
-  // Add content types to allowed contents.
-  $form['settings']['allowed_bundles']['node']['#default_value'] = variable_get('osha_newsletter_allowed_bundles');
-
-  // Add Newsletter Section taxonomy to supported contents.
-  $form['settings']['allowed_bundles']['taxonomy_term']['#default_value'] = array('newsletter_sections');
 
   // Alter title field label.
   $form['title']['#title'] = t('Newsletter title');
-  // Alter submit button label.
-  $form['actions']['submit']['#value'] = t('Create newsletter');
 
   // Set author to current user.
   $form['field_newsletter_author'][LANGUAGE_NONE]['#default_value'] = $user->uid;
@@ -201,8 +224,8 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   // Hide fields set above to their default values.
   $form['style']['#access'] = FALSE;
   $form['row']['#access'] = FALSE;
-  $form['settings']['row_settings']['#access'] = FALSE;
-  $form['settings']['allowed_bundles']['#access'] = FALSE;
+  #$form['settings']['row_settings']['#access'] = FALSE;
+  #$form['settings']['allowed_bundles']['#access'] = FALSE;
   $form['settings']['style_settings']['#access'] = FALSE;
   $form['field_newsletter_sent']['#access'] = FALSE;
   $form['field_created']['#access'] = FALSE;
