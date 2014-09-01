@@ -60,7 +60,7 @@ function osha_newsletter_action_info() {
  * Actual VBO target action defined in hook_action_info above.
  */
 function osha_newsletter_add_to_newsletter_action($node, $context) {
-  if(isset($context['view_info']['arguments']['0'])) {
+  if (isset($context['view_info']['arguments']['0'])) {
     $collection_name = $context['view_info']['arguments']['0'];
     /* @var EntityCollectionRow */
     $collection = entity_collection_load($collection_name);
@@ -131,7 +131,9 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'entity_collection_content_form':
-      // TODO:EDW: Use a different colour for taxonomy term.
+      // Attach js to add css class for taxonomy rows.
+      // #attributes on $v doesn't work.
+      $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
       foreach ($form['content'] as $k => &$v) {
         if (strpos($k, 'taxonomy_term:') !== FALSE) {
           hide($v['style']);
@@ -290,7 +292,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
       entity_collection_append_item($entity_collection, $item, $contexts);
     }
 
-    $term_ct_map = unserialize(variable_get('osha_newsletter_term_ct_map'));
+    $term_ct_map = variable_get('osha_newsletter_term_ct_map');
 
     if (!empty($term_ct_map['newsletter_article'])) {
       // Create 'Coming soon' node and append it at the end.
@@ -304,9 +306,10 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
     // Select latest content and attach it to the newsletter.
     if (!empty($entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'])) {
       $after = $entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'];
+      $after = strtotime($after);
       $query = new EntityFieldQuery();
       $rows = $query->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', variable_get('osha_newsletter_allowed_bundles'))
+        ->entityCondition('bundle', variable_get('osha_newsletter_allowed_bundles'), 'IN')
         ->propertyCondition('created', $after, '>=')
         ->execute();
       if (isset($rows['node'])) {

@@ -32,15 +32,15 @@ function osha_newsletter_admin_form() {
 
   $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
   $tax = taxonomy_get_tree($voc->vid);
-  $options = array('' => '-- Please select --');
+  $options_tax = array('' => '-- Please select --');
   foreach ($tax as $term) {
-    $options[$term->tid] = $term->name;
+    $options_tax[$term->tid] = $term->name;
   }
   $form['osha_newsletter_coming_soon_tid'] = array(
     '#type' => 'select',
     '#attributes' => array('tabindex' => 3),
     '#title' => t('Coming soon section'),
-    '#options' => $options,
+    '#options' => $options_tax,
     '#default_value' => variable_get('osha_newsletter_coming_soon_tid', 0),
     '#description' => t('Select which section above corresponds to the comming soon'),
     '#required' => TRUE,
@@ -87,7 +87,25 @@ function osha_newsletter_admin_form() {
     '#default_value' => $allowed_bundles,
   );
 
-  // Set tabindex on submit button
+  $form['osha_newsletter_term_ct_map'] = array(
+    '#title' => t('Mapping'),
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#tree' => TRUE,
+  );
+
+  $term_ct_map = variable_get('osha_newsletter_term_ct_map', array());
+
+  foreach ($options as $content_type => $title) {
+    $form['osha_newsletter_term_ct_map'][$content_type] = array(
+      '#type' => 'select',
+      '#title' => $title,
+      '#options' => $options_tax,
+      '#default_value' => !empty($term_ct_map[$content_type]) ? $term_ct_map[$content_type] : '',
+    );
+  }
+
+  // Set tabindex on submit button.
   $ret = system_settings_form($form);
   if (isset($ret['actions']['submit'])) {
     $ret['actions']['submit']['#attributes'] = array('tabindex' => 5);

@@ -19,3 +19,7 @@
 .view-id-tmgmt_node_selection_view div.sort-by-wrapper {
     clear: both;
 }
+
+tr.osha_newsletter_section_admin_content {
+    background: #d3e7f4;
+}

@@ -231,8 +231,8 @@ function osha_newsletter_create_taxonomy() {
 
   if (empty($terms)) {
     $new_terms = array(
-      '' => 'Highlights',
-      'highlight' => 'OSH matters',
+      '' => 'OSH matters',
+      'highlight' => 'Highlights',
       'publication' => 'Latest publications',
       'newsletter_article' => 'Coming soon',
       'blog' => 'Blog',
@@ -253,7 +253,7 @@ function osha_newsletter_create_taxonomy() {
       }
       $cont_type_term_map[$new_terms_ct[$term->name]] = $term->tid;
     }
-    variable_set('osha_newsletter_term_ct_map', serialize($cont_type_term_map));
+    variable_set('osha_newsletter_term_ct_map', $cont_type_term_map);
   }
 }
 
