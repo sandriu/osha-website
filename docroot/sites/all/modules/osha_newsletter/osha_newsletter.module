@@ -281,28 +281,28 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
     // - Events.
     $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
     $terms = taxonomy_get_tree($voc->vid);
-    $weight = 0;
+    $weights = array();
     foreach ($terms as $weight => $term) {
       $entity = entity_load('taxonomy_term', array($term->tid));
       $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
       $item->position = $weight * 30;
+      $weights[$term->tid] = $item->position;
       entity_collection_append_item($entity_collection, $item, $contexts);
     }
 
-    $coming_soon_tid = variable_get('osha_newsletter_coming_soon_tid');
-    if (!empty($coming_soon_tid)) {
+    $term_ct_map = unserialize(variable_get('osha_newsletter_term_ct_map'));
+
+    if (!empty($term_ct_map['newsletter_article'])) {
       // Create 'Coming soon' node and append it at the end.
       $node = osha_newsletter_create_node('Sample content for coming soon ...');
       $item = new EntityCollectionTreeNode('node', $node->nid, $node);
-      $item->position = ($weight + 1) * 30;
-      $item->parent = 'taxonomy_term:' . $coming_soon_tid;
+      $item->position = ++$weights[$term_ct_map['newsletter_article']];
       $item->style = variable_get('osha_newsletter_node_view_mode', 'teaser');
       entity_collection_append_item($entity_collection, $item, $contexts);
     }
 
     // Select latest content and attach it to the newsletter.
     if (!empty($entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'])) {
-      $weight = 0;
       $after = $entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'];
       $query = new EntityFieldQuery();
       $rows = $query->entityCondition('entity_type', 'node')
@@ -313,9 +313,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
         $nodes = node_load_multiple(array_keys($rows['node']));
         foreach ($nodes as $nid => $node) {
           $item = new EntityCollectionTreeNode('node', $nid, $node);
-          $item->position = ($weight + 1) * 30;
-          // TODO:EDW Assign news to News section etc. by setting parent
-          // $item->parent = 'taxonomy_term:' . $coming_soon_tid;
+          $item->position = ++$weights[$term_ct_map[$node->type]];
           $item->style = variable_get('osha_newsletter_node_view_mode', 'teaser');
           entity_collection_append_item($entity_collection, $item, $contexts);
         }

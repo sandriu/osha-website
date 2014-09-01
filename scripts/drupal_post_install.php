@@ -231,24 +231,29 @@ function osha_newsletter_create_taxonomy() {
 
   if (empty($terms)) {
     $new_terms = array(
-      'Highlights',
-      'OSH matters',
-      'Latest publications',
-      'Coming soon',
-      'Blog',
-      'News',
-      'Events',
+      '' => 'Highlights',
+      'highlight' => 'OSH matters',
+      'publication' => 'Latest publications',
+      'newsletter_article' => 'Coming soon',
+      'blog' => 'Blog',
+      'news' => 'News',
+      'event' => 'Events',
     );
+    $cont_type_term_map = array();
+    $new_terms_ct = array_flip($new_terms);
     foreach ($new_terms as $idx => $term_name) {
       $term = new stdClass();
       $term->name = $term_name;
+      $term->language = 'en';
       $term->vid = $voc->vid;
       $term->weight = $idx;
       taxonomy_term_save($term);
       if ($term->name == 'Coming soon') {
         variable_set('osha_newsletter_coming_soon_tid', $term->tid);
       }
+      $cont_type_term_map[$new_terms_ct[$term->name]] = $term->tid;
     }
+    variable_set('osha_newsletter_term_ct_map', serialize($cont_type_term_map));
   }
 }
 
