@@ -152,7 +152,14 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
  *   Drupal form state
  */
 function osha_newsletter_fix_entity_collection_edit_form(&$form, &$form_state) {
-
+  // Hide fields set above to their default values.
+  $form['contexts']['#access'] = FALSE;
+  $form['field_newsletter_sent']['#access'] = FALSE;
+  $form['field_newsletter_author']['#access'] = FALSE;
+  $form['field_created']['#access'] = FALSE;
+  $form['field_newsletter_content_after']['#access'] = FALSE;
+  $form['style']['#access'] = FALSE;
+  $form['row']['#access'] = FALSE;
 }
 
 /**
