@@ -265,8 +265,8 @@ function osha_newsletter_entity_insert($entity, $type) {
       $item = new EntityCollectionTreeNode('node', $node->nid, $node);
       $item->position = ($weight + 1) * 30;
       $item->parent = 'taxonomy_term:' . $coming_soon_tid;
-      $contexts = _entity_collection_get_contexts($entity);
-      entity_collection_append_item($entity, $item, $contexts);
+      $item->style = variable_get('osha_newsletter_node_view_mode', 'teaser');
+      entity_collection_append_item($entity_collection, $item, $contexts);
     }
 
     // Select latest content and attach it to the newsletter.

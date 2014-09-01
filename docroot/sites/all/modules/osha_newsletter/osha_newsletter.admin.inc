@@ -46,6 +46,25 @@ function osha_newsletter_admin_form() {
     '#required' => TRUE,
   );
 
+  $entity_info = entity_get_info('node');
+  if (isset($entity_info['view modes'])) {
+    $options = array();
+    foreach ($entity_info['view modes'] as $machine_name => $info) {
+      $options[$machine_name] = $info['label'];
+    }
+    $form['osha_newsletter_node_view_mode'] = array(
+      '#type' => 'select',
+      '#attributes' => array('tabindex' => 4),
+      '#title' => t('Default view mode'),
+      '#options' => $options,
+      '#default_value' => variable_get('osha_newsletter_node_view_mode', 'teaser'),
+      '#description' => t('Default view mode when render nodes in newsletter'),
+      '#required' => FALSE,
+    );
+  }
+
+
+
   $allowed_bundles = variable_get(
     'osha_newsletter_allowed_bundles',
     array(
