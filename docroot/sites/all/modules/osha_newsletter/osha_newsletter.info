@@ -1,9 +1,9 @@
-name = osha_newsletter
+name = OSHA Newsletter
 description = The newsletter sending functionality
 core = 7.x
 package = OSHA
 version = 7.x-0.3
-project = OSHA Newsletter
+project = osha_newsletter
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = entity_collection
