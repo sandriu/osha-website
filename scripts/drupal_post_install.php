@@ -244,6 +244,9 @@ function osha_newsletter_create_taxonomy() {
       $term->vid = $voc->vid;
       $term->weight = $idx;
       taxonomy_term_save($term);
+      if ($term->name == 'Coming soon') {
+        variable_set('osha_newsletter_coming_soon_tid', $term->tid);
+      }
     }
   }
 }
