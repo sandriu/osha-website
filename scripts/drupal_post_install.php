@@ -9,6 +9,7 @@ osha_configure_simplenews();
 osha_configure_imce();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
+osha_configure_newsletter_permissions();
 
 module_disable(array('overlay'));
 
@@ -246,4 +247,17 @@ function osha_newsletter_create_taxonomy() {
       taxonomy_term_save($term);
     }
   }
+}
+
+
+/**
+ * Assign required permissions to roles - newsletter.
+ */
+function osha_configure_newsletter_permissions(){
+  user_role_change_permissions(DRUPAL_ANONYMOUS_RID, array(
+    'view newsletter_content_collection entity collections' => TRUE
+  ));
+  user_role_change_permissions(DRUPAL_AUTHENTICATED_RID, array(
+    'view newsletter_content_collection entity collections' => TRUE
+  ));
 }
