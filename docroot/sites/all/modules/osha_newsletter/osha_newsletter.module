@@ -128,6 +128,12 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'entity_collection_content_form':
+      // TODO:EDW: Use a different colour for taxonomy term.
+      foreach ($form['content'] as $k => &$v) {
+        if (strpos($k, 'taxonomy_term:') !== FALSE) {
+          hide($v['style']);
+        }
+      }
       break;
 
     case 'search_block_form':
@@ -229,8 +235,8 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   // Hide fields set above to their default values.
   $form['style']['#access'] = FALSE;
   $form['row']['#access'] = FALSE;
-  #$form['settings']['row_settings']['#access'] = FALSE;
-  #$form['settings']['allowed_bundles']['#access'] = FALSE;
+  // $form['settings']['row_settings']['#access'] = FALSE;
+  // $form['settings']['allowed_bundles']['#access'] = FALSE;
   $form['settings']['style_settings']['#access'] = FALSE;
   $form['field_newsletter_sent']['#access'] = FALSE;
   $form['field_created']['#access'] = FALSE;
