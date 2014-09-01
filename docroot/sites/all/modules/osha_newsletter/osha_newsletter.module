@@ -77,6 +77,7 @@ function osha_newsletter_add_to_newsletter_action($node, $context) {
  * Implements hook_form_alter().
  */
 function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
+
   switch ($form_id) {
     case 'entity_collection_edit_form':
       if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
@@ -91,6 +92,8 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
         osha_newsletter_fix_entity_collection_add_form($form, $form_state);
         // Alter submit button label.
         $form['actions']['submit']['#value'] = t('Create newsletter');
+        // Add a submit handler.
+        $form['#submit'][] = 'osha_newsletter_entity_collection_form_submit';
       }
       break;
 
@@ -141,6 +144,14 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
 
     default:
   }
+}
+
+/**
+ * Submit callback when adding a newsletter.
+ */
+function osha_newsletter_entity_collection_form_submit($form, &$form_state) {
+  $eid = $form_state['entity_collection']->eid;
+  $form_state['redirect'] = 'entity-collection/' . $eid . '/content';
 }
 
 /**
