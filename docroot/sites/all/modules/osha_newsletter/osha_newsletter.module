@@ -170,7 +170,12 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   // Pre-populate form_state.
   $form_state['bundle'] = 'newsletter_content_collection';
   $form_state['values']['settings']['style_settings'] = array('max_depth' => '1');
-  $form_state['values']['settings']['row_settings'] = array('style_per_row' => '1');
+  $form_state['values']['settings']['row_settings'] = array(
+    'style_per_row' => '1',
+    'default_style' => array(
+      'node' => 'teaser',
+    ),
+  );
   $form_state['values']['settings']['allowed_bundles'] = $allowed_bundles;
 
   // Set value and hide Style.
