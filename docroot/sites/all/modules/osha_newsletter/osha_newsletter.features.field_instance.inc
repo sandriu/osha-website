@@ -272,45 +272,7 @@ function osha_newsletter_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => -5,
-    ),
-  );
-
-  // Exported field_instance: 'taxonomy_term-newsletter_sections-field_newsl_content_type'
-  $field_instances['taxonomy_term-newsletter_sections-field_newsl_content_type'] = array(
-    'bundle' => 'newsletter_sections',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 2,
-      ),
-      'token' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'field_name' => 'field_newsl_content_type',
-    'label' => 'Content Type',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 41,
+      'weight' => 1,
     ),
   );
 
@@ -354,7 +316,7 @@ function osha_newsletter_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -362,7 +324,6 @@ function osha_newsletter_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Author');
   t('Body');
-  t('Content Type');
   t('Created');
   t('Description');
   t('Name');
