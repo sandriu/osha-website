@@ -647,12 +647,23 @@ function osha_newsletter_views_default_views() {
 </p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Field: Entity Collection: Rendered Entity Collection */
+  $handler->display->display_options['fields']['rendered_entity_2']['id'] = 'rendered_entity_2';
+  $handler->display->display_options['fields']['rendered_entity_2']['table'] = 'views_entity_entity_collection';
+  $handler->display->display_options['fields']['rendered_entity_2']['field'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity_2']['label'] = 'ID';
+  $handler->display->display_options['fields']['rendered_entity_2']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['rendered_entity_2']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['rendered_entity_2']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['rendered_entity_2']['display'] = 'id';
+  $handler->display->display_options['fields']['rendered_entity_2']['view_mode'] = 'block';
+  $handler->display->display_options['fields']['rendered_entity_2']['bypass_access'] = 0;
+  /* Field: Entity Collection: Rendered Entity Collection */
   $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
   $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_entity_collection';
   $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
-  $handler->display->display_options['fields']['rendered_entity']['label'] = '';
+  $handler->display->display_options['fields']['rendered_entity']['label'] = 'Title';
   $handler->display->display_options['fields']['rendered_entity']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['rendered_entity']['alter']['path'] = 'entity-collection/test_1';
+  $handler->display->display_options['fields']['rendered_entity']['alter']['path'] = 'entity-collection/[rendered_entity_2]';
   $handler->display->display_options['fields']['rendered_entity']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 0;
@@ -720,6 +731,8 @@ function osha_newsletter_views_default_views() {
     t('<p>
 <a href="/admin/structure/entity_collection/add/newsletter_content_collection">Create newsletter</a>
 </p>'),
+    t('ID'),
+    t('Title'),
     t('Was sent?'),
     t('Created'),
     t('Author'),
