@@ -284,21 +284,27 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
     $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
     $terms = taxonomy_get_tree($voc->vid);
     $weights = array();
+    // Max number of nodes pre-inserted for each section (term).
+    $max_nodes = variable_get('osha_newsletter_after_max_nodes', 10);
     foreach ($terms as $weight => $term) {
       $entity = entity_load('taxonomy_term', array($term->tid));
       $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
-      $item->position = $weight * 30;
-      $weights[$term->tid] = $item->position;
+      // Set weights for sections and children.
+      $weights[$term->tid]['parent'] = $weight * ($max_nodes + 1);
+      $weights[$term->tid]['children'] = $weights[$term->tid]['parent'];
+      $item->position = $weights[$term->tid]['parent'];
       entity_collection_append_item($entity_collection, $item, $contexts);
     }
 
+    // Mapping of term newsletter sections and content types.
     $term_ct_map = variable_get('osha_newsletter_term_ct_map');
 
     if (!empty($term_ct_map['newsletter_article'])) {
       // Create 'Coming soon' node and append it at the end.
       $node = osha_newsletter_create_node('Sample content for coming soon ...');
       $item = new EntityCollectionTreeNode('node', $node->nid, $node);
-      $item->position = ++$weights[$term_ct_map['newsletter_article']];
+      $weights[$term_ct_map['newsletter_article']]['children']++;
+      $item->position = $weights[$term_ct_map['newsletter_article']]['children'];
       $item->style = variable_get('osha_newsletter_node_view_mode', 'teaser');
       entity_collection_append_item($entity_collection, $item, $contexts);
     }
@@ -315,10 +321,17 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
       if (isset($rows['node'])) {
         $nodes = node_load_multiple(array_keys($rows['node']));
         foreach ($nodes as $nid => $node) {
-          $item = new EntityCollectionTreeNode('node', $nid, $node);
-          $item->position = ++$weights[$term_ct_map[$node->type]];
-          $item->style = variable_get('osha_newsletter_node_view_mode', 'teaser');
-          entity_collection_append_item($entity_collection, $item, $contexts);
+          // Don't add any more nodes if already max_nodes for section.
+          if ($weights[$term_ct_map[$node->type]]['children'] <
+              $weights[$term_ct_map[$node->type]]['parent'] + $max_nodes) {
+
+            // Increment weight for nodes of current section.
+            $weights[$term_ct_map[$node->type]]['children']++;
+            $item = new EntityCollectionTreeNode('node', $nid, $node);
+            $item->position = $weights[$term_ct_map[$node->type]]['children'];
+            $item->style = variable_get('osha_newsletter_node_view_mode', 'teaser');
+            entity_collection_append_item($entity_collection, $item, $contexts);
+          }
         }
       }
     }

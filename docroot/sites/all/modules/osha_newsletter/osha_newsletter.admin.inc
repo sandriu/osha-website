@@ -30,22 +30,6 @@ function osha_newsletter_admin_form() {
     '#required' => TRUE,
   );
 
-  $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
-  $tax = taxonomy_get_tree($voc->vid);
-  $options_tax = array('' => '-- Please select --');
-  foreach ($tax as $term) {
-    $options_tax[$term->tid] = $term->name;
-  }
-  $form['osha_newsletter_coming_soon_tid'] = array(
-    '#type' => 'select',
-    '#attributes' => array('tabindex' => 3),
-    '#title' => t('Coming soon section'),
-    '#options' => $options_tax,
-    '#default_value' => variable_get('osha_newsletter_coming_soon_tid', 0),
-    '#description' => t('Select which section above corresponds to the comming soon'),
-    '#required' => TRUE,
-  );
-
   $entity_info = entity_get_info('node');
   if (isset($entity_info['view modes'])) {
     $options = array();
@@ -57,13 +41,22 @@ function osha_newsletter_admin_form() {
       '#attributes' => array('tabindex' => 4),
       '#title' => t('Default view mode'),
       '#options' => $options,
-      '#default_value' => variable_get('osha_newsletter_node_view_mode', 'teaser'),
+      '#default_value' => variable_get('osha_newsletter_node_view_mode', 'tzeaser'),
       '#description' => t('Default view mode when render nodes in newsletter'),
       '#required' => FALSE,
     );
   }
 
-
+  $form['osha_newsletter_after_max_nodes'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Max number of nodes after creation'),
+    '#default_value' => variable_get('osha_newsletter_after_max_nodes', 15),
+    '#attributes' => array('tabindex' => 4),
+    '#size' => 40,
+    '#maxlength' => 40,
+    '#description' => t('Add the maximum number of nodes of each content type should be added when using "after creation" functionality.'),
+    '#required' => TRUE,
+  );
 
   $allowed_bundles = variable_get(
     'osha_newsletter_allowed_bundles',
@@ -80,7 +73,7 @@ function osha_newsletter_admin_form() {
   }
 
   $form['osha_newsletter_allowed_bundles'] = array(
-    '#attributes' => array('tabindex' => 4),
+    '#attributes' => array('tabindex' => 5),
     '#type' => 'checkboxes',
     '#title' => t('Add to newsletter items of the following types'),
     '#options' => $options,
@@ -95,6 +88,13 @@ function osha_newsletter_admin_form() {
   );
 
   $term_ct_map = variable_get('osha_newsletter_term_ct_map', array());
+
+  $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+  $tax = taxonomy_get_tree($voc->vid);
+  $options_tax = array('' => '-- Please select --');
+  foreach ($tax as $term) {
+    $options_tax[$term->tid] = $term->name;
+  }
 
   foreach ($options as $content_type => $title) {
     $form['osha_newsletter_term_ct_map'][$content_type] = array(
