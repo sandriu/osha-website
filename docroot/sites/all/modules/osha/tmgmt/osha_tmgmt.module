@@ -78,6 +78,14 @@ function osha_tmgmt_tmgmt_file_format_plugin_info() {
   );
 }
 
+/**
+ * Implements hook_tmgmt_translator_plugin_info().
+ */
+function osha_tmgmt_tmgmt_translator_plugin_info_alter(&$info) {
+  if (isset($info['file'])) {
+    $info['file']['plugin controller class'] = 'OSHATMGMTFileTranslatorPluginController';
+  }
+}
 
 /**
  * Implements hook_entity_info_alter().
