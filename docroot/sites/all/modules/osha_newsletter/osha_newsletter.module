@@ -314,13 +314,26 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
       entity_collection_append_item($entity_collection, $item, $contexts);
     }
 
+    // Get allowed bundles for nodes.
+    $settings = unserialize($entity_collection->settings);
+    if (!empty($settings['allowed_bundles']['node'])) {
+      $allowed_bundles = $settings['allowed_bundles']['node'];
+    }
+    else {
+      $allowed_bundles = variable_get('osha_newsletter_allowed_bundles',
+        array(
+          'publication', 'page', 'blog', 'news', 'press_release', 'highlight',
+        )
+      );
+    }
+
     // Select latest content and attach it to the newsletter.
     if (!empty($entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'])) {
       $after = $entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'];
       $after = strtotime($after);
       $query = new EntityFieldQuery();
       $rows = $query->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', variable_get('osha_newsletter_allowed_bundles'), 'IN')
+        ->entityCondition('bundle', $allowed_bundles, 'IN')
         ->propertyCondition('created', $after, '>=')
         ->execute();
       if (isset($rows['node'])) {
