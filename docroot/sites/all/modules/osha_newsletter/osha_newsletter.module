@@ -99,17 +99,8 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
 
     case 'entity_collection_content_add_form':
       $collection = $form_state['entity_collection'];
-      $view = views_get_view('newsletter_node_selection');
-      // Set the display and arguments based on the pane's context.
-      $view->set_display('newsletter_selection_view_page');
-      $args = $view->args;
-      $args[0] = $collection->name;
-      $view->set_arguments($args);
 
-      // Remove error Notice: Undefined property: view::$dom_id.
-      $view->pre_execute();
-      $view->execute();
-      $output = $view->render();
+      $output = views_embed_view('newsletter_node_selection', 'newsletter_selection_view_page', $collection->name);
 
       $form['filter'] = array(
         '#type' => 'fieldset',
@@ -118,9 +109,12 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
         '#collapsed' => TRUE,
       );
       $form['filter']['content'] = array(
-        '#ype' => 'item',
+        '#type' => 'item',
         '#markup' => $output,
       );
+
+      $form['#validate'][] = 'osha_newsletter_form_validate';
+
       break;
 
     case 'views_form_newsletter_node_selection_newsletter_selection_view_page':
@@ -146,6 +140,11 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
 
     default:
   }
+}
+
+
+function osha_newsletter_form_validate($form, &$form_state){
+  // TODO : Check the submitted items
 }
 
 /**
