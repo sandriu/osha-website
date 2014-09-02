@@ -94,6 +94,7 @@ class EntityCollectionStorageDB extends EntityCollectionStorage {
       ->fields('rs', array('eid'))
       ->condition('eid', $entity_id)
       ->condition('name', $collection->name)
+      ->condition('entity_type', $type)
       ->condition('contexts', $this->serializeContexts($contexts))
       ->execute()->fetchField();
   }
