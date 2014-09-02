@@ -36,6 +36,32 @@ function osha_newsletter_menu() {
   return $items;
 }
 
+function osha_newsletter_menu_alter(&$items) {
+  if (isset($items['entity-collection/%entity_collection/content'])) {
+    $items['entity-collection/%entity_collection/content']['page callback'] =
+      'osha_newsletter_entity_collection_content_admin';
+  }
+}
+
+function osha_newsletter_entity_collection_content_admin($entity_collection) {
+  $form = entity_collection_content_admin($entity_collection);
+  if ($entity_collection->bundle == 'newsletter_content_collection') {
+    $view = views_embed_view('newsletter_node_selection', 'newsletter_selection_view_page', $entity_collection->name);
+    $form['add_content_view'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Add more content to the newsletter'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#tree' => TRUE,
+    );
+    $form['add_content_view']['content'] = array(
+      '#type' => 'item',
+      '#markup' => $view,
+    );
+  }
+  return $form;
+}
+
 function osha_newsletter_action_info() {
   return array(
     'osha_newsletter_add_to_newsletter_action' => array(
@@ -68,7 +94,6 @@ function osha_newsletter_add_to_newsletter_action($node, $context) {
       $item = new EntityCollectionTreeNode('node', $node->nid, $node);
       $contexts = _entity_collection_get_contexts($collection);
       entity_collection_append_item($collection, $item, $contexts);
-      $collection->save();
     }
   }
 }
@@ -97,26 +122,6 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
       }
       break;
 
-    case 'entity_collection_content_add_form':
-      $collection = $form_state['entity_collection'];
-
-      $output = views_embed_view('newsletter_node_selection', 'newsletter_selection_view_page', $collection->name);
-
-      $form['filter'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Add more content to the newsletter'),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-      );
-      $form['filter']['content'] = array(
-        '#type' => 'item',
-        '#markup' => $output,
-      );
-
-      $form['#validate'][] = 'osha_newsletter_form_validate';
-
-      break;
-
     case 'views_form_newsletter_node_selection_newsletter_selection_view_page':
       $form['#action'] = '/' . $_GET['q'];
       if (!empty($form['actions']['submit']['#submit'])) {
@@ -127,10 +132,12 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
     case 'entity_collection_content_form':
       // Attach js to add css class for taxonomy rows.
       // #attributes on $v doesn't work.
-      $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
-      foreach ($form['content'] as $k => &$v) {
-        if (strpos($k, 'taxonomy_term:') !== FALSE) {
-          hide($v['style']);
+      if (isset($form_state['entity_collection']) && $form_state['entity_collection']->bundle == 'newsletter_content_collection') {
+        $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
+        foreach ($form['content'] as $k => &$v) {
+          if (strpos($k, 'taxonomy_term:') !== FALSE) {
+            hide($v['style']);
+          }
         }
       }
       break;
@@ -294,7 +301,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
       $entity = entity_load('taxonomy_term', array($term->tid));
       $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
       // Set weights for sections and children.
-      $weights[$term->tid]['parent'] = $weight * ($max_nodes + 1);
+      $weights[$term->tid]['parent'] = ($weight + 1) * ($max_nodes + 1);
       $weights[$term->tid]['children'] = $weights[$term->tid]['parent'];
       $item->position = $weights[$term->tid]['parent'];
       entity_collection_append_item($entity_collection, $item, $contexts);
