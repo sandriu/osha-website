@@ -188,8 +188,13 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
 
   $default_style = 'entity_collection_style_hierarchy';
   $default_row = 'entity_collection_row_view_mode';
+  $allowed_bundles_var = variable_get('osha_newsletter_allowed_bundles',
+    array(
+      'publication', 'page', 'blog', 'news', 'press_release', 'highlight',
+    )
+  );
   $allowed_bundles = array(
-    'node' => variable_get('osha_newsletter_allowed_bundles'),
+    'node' => $allowed_bundles_var,
     'taxonomy_term' => array('newsletter_sections'),
   );
 
@@ -226,7 +231,7 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
 
 
   // Add content types to allowed contents.
-  $form['settings']['allowed_bundles']['node']['#default_value'] = variable_get('osha_newsletter_allowed_bundles');
+  $form['settings']['allowed_bundles']['node']['#default_value'] = $allowed_bundles_var;
 
   // Add Newsletter Section taxonomy to supported contents.
   $form['settings']['allowed_bundles']['taxonomy_term']['#default_value'] = array('newsletter_sections');
