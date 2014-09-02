@@ -189,7 +189,7 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $default_row = 'entity_collection_row_view_mode';
   $allowed_bundles_var = variable_get('osha_newsletter_allowed_bundles',
     array(
-      'publication', 'page', 'blog', 'news', 'press_release', 'highlight',
+      'publication', 'newsletter_article', 'blog', 'news', 'press_release', 'highlight',
     )
   );
   $allowed_bundles = array(
@@ -321,7 +321,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
     else {
       $allowed_bundles = variable_get('osha_newsletter_allowed_bundles',
         array(
-          'publication', 'page', 'blog', 'news', 'press_release', 'highlight',
+          'publication', 'newsletter_article', 'blog', 'news', 'press_release', 'highlight',
         )
       );
     }
@@ -339,7 +339,8 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
         $nodes = node_load_multiple(array_keys($rows['node']));
         foreach ($nodes as $nid => $node) {
           // Don't add any more nodes if already max_nodes for section.
-          if ($weights[$term_ct_map[$node->type]]['children'] <
+          if (isset($weights[$term_ct_map[$node->type]]) &&
+              $weights[$term_ct_map[$node->type]]['children'] <
               $weights[$term_ct_map[$node->type]]['parent'] + $max_nodes) {
 
             // Increment weight for nodes of current section.
