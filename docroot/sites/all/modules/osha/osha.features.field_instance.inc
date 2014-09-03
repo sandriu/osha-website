@@ -887,6 +887,7 @@ function osha_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'osha_date_theme' => '',
         ),
         'type' => 'date_default',
         'weight' => 6,
