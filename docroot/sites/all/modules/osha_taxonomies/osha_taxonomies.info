@@ -57,6 +57,5 @@ features[taxonomy][] = activity
 features[taxonomy][] = esener
 features[taxonomy][] = nace_codes
 features[taxonomy][] = publication_types
-features[taxonomy][] = tags
 features[taxonomy][] = thesaurus
 files[] = osha_taxonomies.test
