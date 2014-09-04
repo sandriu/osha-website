@@ -106,6 +106,16 @@ regions[footer_thirdcolumn] = Footer third column
 regions[footer_fourthcolumn] = Footer fourth column
 regions[footer] = Footer
 
+; Global settings
+; features[] = logo
+; features[] = name
+features[] = slogan
+features[] = favicon
+features[] = main_menu
+features[] = secondary_menu
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = comment_user_verification
 
 
 ; Various page elements output by the theme can be toggled on and off. The
