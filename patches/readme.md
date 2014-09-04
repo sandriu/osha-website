@@ -7,6 +7,12 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches
 
+* menuimage
+  * Fix bug of redirect after menu save
+  * https://www.drupal.org/node/2139233
+  * menuimage/edit_item_alter_submit-page_not_found_if_multilingual_is_activated-2139233_0.patch
+
+
 * entity_translation
   * Fix bug of incorrect language none for pathauto alias
   * https://www.drupal.org/node/1925848
