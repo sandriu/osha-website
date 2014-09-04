@@ -343,6 +343,7 @@ $options['init-modules'] = array(
   'osha_tmgmt',
   'osha_highlight',
   'osha_menu',
+  'lang_dropdown',
 
   // Enable last (conflict with rules)
   'uuid',
