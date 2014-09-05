@@ -168,8 +168,12 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
     case 'tmgmt_ui_cart_content':
       $languages = tmgmt_available_languages();
       $options = array();
+      $job_char_count = 0;
+      $job_page_count = 0;
       foreach (tmgmt_ui_cart_get()->getJobItemsFromCart() as $item) {
         OshaTMGMTStatistics::computeJobItemStatistics($item);
+        $job_char_count += $item->character_count;
+        $job_page_count += $item->page_count;
         $uri = $item->getSourceUri();
         $options[$item->tjiid] = array(
           $item->getSourceType(),
@@ -185,8 +189,8 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#header' => array(
           t('Type'),
           t('Content'),
-          t('Page Count'),
-          t('Character Count'),
+          t('Page Count') . "( " . round($job_page_count, 2) . " )",
+          t('Character Count') . "( " . $job_char_count . " )",
           t('Language'),
         ),
         '#empty' => t('There are no items in your cart.'),
