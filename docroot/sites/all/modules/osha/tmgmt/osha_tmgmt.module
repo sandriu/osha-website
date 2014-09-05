@@ -449,6 +449,10 @@ class OshaTMGMTStatistics {
   /**
    * Recursively count the length of inner #text keys of this data array.
    *
+   * The HTML tags are ignored.
+   * The Whitespaces/tabs/newlines are ignored.
+   * The &nbsp; are ignored.
+   *
    * @param TMGMTJobItem $item
    *   Job item
    * @param int $count
@@ -457,7 +461,7 @@ class OshaTMGMTStatistics {
   protected static function count($item, &$count) {
     if (!empty($item['#text'])) {
       if (_tmgmt_filter_data($item)) {
-        $count += strlen(preg_replace("/\s+/", "", strip_tags($item['#text'])));
+        $count += strlen(str_replace("&nbsp;", "", preg_replace("/\s+/", "", strip_tags($item['#text']))));
       }
     }
     elseif (is_array($item)) {
