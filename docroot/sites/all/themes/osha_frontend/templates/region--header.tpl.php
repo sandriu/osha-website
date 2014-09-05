@@ -50,11 +50,6 @@
  *  - $theme_url: The absolute url to the Email theme directory.
  */
 ?>
-<?php
-$template_path = drupal_get_path('theme', 'osha_frontend');
-$template_url = url($template_path, array('absolute' => TRUE, 'language' => LANGUAGE_NONE));
-?>
-
 
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 
