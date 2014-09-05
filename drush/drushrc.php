@@ -321,6 +321,7 @@ $options['init-modules'] = array(
   'special_menu_items',
   'menu_block',
   'menuimage',
+  'lang_dropdown',
 
   'imce_wysiwyg',
   'wysiwyg_accordion',
@@ -343,7 +344,7 @@ $options['init-modules'] = array(
   'osha_tmgmt',
   'osha_highlight',
   'osha_menu',
-  'lang_dropdown',
+  'osha_content',
 
   // Enable last (conflict with rules)
   'uuid',
