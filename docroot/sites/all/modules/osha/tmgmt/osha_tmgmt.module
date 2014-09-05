@@ -206,6 +206,37 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'tmgmt_job_form':
+      $languages = tmgmt_available_languages();
+      $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($form_state['tmgmt_job']);
+      $target_languages = array();
+      foreach ($target_languages_codes as $lang_code) {
+        $target_languages[$lang_code] = $languages[$lang_code];
+      }
+
+      $form['language_info'] = array(
+        '#type' => 'container',
+        '#attributes' => array('class' => array('tmgmt-ui-job-info', 'clearfix')),
+        '#weight' => 1,
+      );
+
+      $form['language_info']['target_languages'] = array(
+        '#title' => t('Target languages'),
+        '#type' => 'checkboxes',
+        '#default_value' => $target_languages,
+        '#options' => drupal_map_assoc($target_languages),
+        '#disabled' => TRUE,
+        '#weight' => 1,
+        '#attributes' => array('class' => array('container-inline')),
+      );
+
+      $form['language_info']['target_languages_not'] = array(
+        '#type' => 'checkboxes',
+        '#options' => drupal_map_assoc(array_diff($languages, $target_languages)),
+        '#disabled' => TRUE,
+        '#weight' => 2,
+        '#attributes' => array('class' => array('container-inline')),
+      );
+
       hide($form['info']['source_language']);
       hide($form['info']['target_language']);
       hide($form['info']['translator']);
@@ -501,5 +532,23 @@ class OshaTMGMTStatistics {
       }
     }
     return $job_items;
+  }
+
+  /**
+   * Returns the job target languages.
+   *
+   * @param TMGMTJob $job
+   *   The job.
+   *
+   * @return array
+   *   Array of language codes
+   */
+  public static function getJobTargetLanguages(TMGMTJob $job) {
+    $target_languages = array();
+    foreach ($job->getItems() as $item) {
+      $target_languages[] = $item->target_language;
+    }
+
+    return array_unique($target_languages);
   }
 }
