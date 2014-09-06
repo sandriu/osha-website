@@ -88,6 +88,13 @@ function osha_tmgmt_tmgmt_translator_plugin_info_alter(&$info) {
 }
 
 /**
+ * Implements hook_tmgmt_source_plugin_info_alter().
+ */
+function osha_tmgmt_tmgmt_source_plugin_info_alter(&$info) {
+  $info['entity']['plugin controller class'] = 'OSHATMGMTEntitySourcePluginController';
+}
+
+/**
  * Implements hook_entity_info_alter().
  */
 function osha_tmgmt_entity_info_alter(&$entity_info) {
@@ -286,6 +293,10 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
           $new_job_item = $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
           $new_job_item->source_language = $source_language;
           $new_job_item->target_language = $target_language;
+          // @TODO: Set plugin type entity on add to cart, not here (ugly).
+          if ($new_job_item->plugin == 'node') {
+            $new_job_item->plugin = 'entity';
+          }
           OshaTMGMTStatistics::computeJobItemStatistics($new_job_item);
           $new_job_item->save();
           $remove_job_item_ids[$job_item->tjiid] = $job_item->tjiid;
