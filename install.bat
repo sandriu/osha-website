@@ -11,6 +11,10 @@ call drush build
 
 call drush php-script ../scripts/drupal_post_install.php
 
+rem Configure blocks
+call drush block-configure language_content --module=lang_dropdown --region=header --weight=-19
+call drush block-configure --delta=3 --module=menu_block --region=content --weight=19
+
 echo "Registering migrations ..."
 call drush migrate-auto-register
 
