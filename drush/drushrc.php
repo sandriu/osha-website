@@ -334,6 +334,7 @@ $options['init-modules'] = array(
   'views_slideshow_cycle',
 
   'taxonomy_manager',
+  'node_export',
 
   'osha',
   'osha_migration',
