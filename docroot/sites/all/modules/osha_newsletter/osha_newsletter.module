@@ -529,24 +529,44 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
 
   $items = $content->children;
   $elements = array();
-  $key = NULL;
+  $last_section = NULL;
+  $blogs = array();
+  $news = array();
+  $events = array();
 
   foreach ($items as $item) {
     if ($item->type == 'taxonomy_term') {
       $term = taxonomy_term_view($item->content, 'token');
-      $elements[] = $term;
+      $last_section = $item->content->name_original;
+      if ($last_section == 'Blog') {
+        $blogs[] = $term;
+      } else if ($last_section == 'News') {
+        $news[] = $term;
+      } else if ($last_section == 'Events') {
+        $events[] = $term;
+      } else {
+        $elements[] = $term;
+      }
     } else if ($item->type == 'node') {
       $style = $item->style;
       $node = node_view($item->content,$style);
-      $elements[] = $node;
+
+      if ($last_section == 'Blog') {
+        $blogs[] = $node;
+      } else if ($last_section == 'News') {
+        $news[] = $node;
+      } else if ($last_section == 'Events') {
+        $events[] = $node;
+      } else {
+        $elements[] = $node;
+      }
     }
   }
-
 
   // Get message data from source.
   $message['subject'] = $source->title;
   $message['body']['header'] = theme('newsletter_header', array('languages' => NULL));
-  $message['body']['body'] = theme('newsletter_body', array('items' => $elements));
+  $message['body']['body'] = theme('newsletter_body', array('items' => $elements, 'blogs' => $blogs, 'news' => $news, 'events' => $events));
   $message['body']['footer'] = theme('newsletter_footer');
 
   // Optional params for HTML mails.
@@ -571,7 +591,10 @@ function osha_newsletter_theme() {
   $theme['newsletter_body'] = array(
     'template' => 'newsletter_body',
     'variables' => array(
-      'items' => NULL
+      'items' => NULL,
+      'blogs' => NULL,
+      'news' => NULL,
+      'events' => NULL
     ),
     'path' => $path . '/templates'
   );
