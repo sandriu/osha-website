@@ -76,10 +76,10 @@ function osha_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'header',
+        'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => -19,
       ),
       'seven' => array(
         'region' => '',
