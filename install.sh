@@ -12,9 +12,6 @@ drush build
 
 drush php-script ../scripts/drupal_post_install.php
 
-# Configure blocks
-drush block-configure --delta=3 --module=menu_block --region=content --weight=19
-
 echo "Registering migrations ..."
 drush migrate-auto-register
 
