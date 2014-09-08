@@ -92,6 +92,7 @@ function osha_tmgmt_tmgmt_translator_plugin_info_alter(&$info) {
  */
 function osha_tmgmt_tmgmt_source_plugin_info_alter(&$info) {
   $info['entity']['plugin controller class'] = 'OSHATMGMTEntitySourcePluginController';
+  $info['node']['plugin controller class'] = 'OSHATMGMTNodeSourcePluginController';
 }
 
 /**
