@@ -25,21 +25,21 @@
         'path' => 'https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork',
         'alt' => t('Facebook')
       ),
-      'flickr' => array(
-        'path' => 'https://www.flickr.com/people/euosha',
-        'alt' => t('Flickr')
+      'blog' => array(
+        'path' => 'https://osha.europa.eu/en/about/director_corner/blog',
+        'alt' => t('blog')
       ),
       'youtube' => array(
         'path' => 'https://www.youtube.com/user/EUOSHA',
-        'alt' => t('youtube')
+        'alt' => t('Youtube')
       )
     );
 
     foreach ($social as $name => $options) {
       print l(theme('image', array(
         'path' => $directory . '/images/icon-oshmail-' . $name . '.png',
-        'width' => 40,
-        'height' => 40,
+        'width' => 'auto',
+        'height' => 26,
         'alt' => $options['alt'],
         'attributes' => array('style' => 'border: none; margin-right: 5px; vertical-align: middle;')
       )), $options['path'], array(
