@@ -68,7 +68,7 @@
                       'width' => 'auto',
                       'height' => 26,
                       'alt' => $options['alt'],
-                      'attributes' => array('style' => 'border: none; margin-right: 5px; vertical-align: middle;')
+                      'attributes' => array('style' => 'border: none; margin-right: 24px; vertical-align: middle;')
                     )), $options['path'], array(
                       'attributes' => array('style' => 'color: #144989; text-decoration: none;'),
                       'html' => TRUE,
