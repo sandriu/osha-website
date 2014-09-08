@@ -10,7 +10,18 @@
   <tbody>
     <tr>
       <td>
-        <img src="Osha-EU-logos.png" width="256" height="60" alt="Osha logo" />
+        <?php
+          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+          print l(theme('image', array(
+          'path' => $directory . '/images/Osha-EU-logos.png',
+          'width' => 256,
+          'height' => 60,
+          'alt' => 'Osha logo',
+          )), $site_url, array(
+          'html' => TRUE,
+          'external' => TRUE
+        ));
+        ?>
       </td>
       <td>
         <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;">July 2014</div>
