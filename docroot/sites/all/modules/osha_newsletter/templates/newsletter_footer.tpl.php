@@ -19,10 +19,8 @@
     <tr>
       <td style="padding-top: 15px; padding-bottom: 15px; text-align: center; font-family: Arial,sans-serif; font-size: 12px; color: #333333;">
         <span><?php print t('Occupational Safety and Health News &ndash; Europe'); ?></span>
-        <span>
-          <?php print t('Brought to you by EU-OSHA. Visit us at:'); ?>
-          <span style="color: #003399; padding-top: 0;"><?php print l(t('http://osha.europa.eu'), 'http://osha.europa.eu'); ?></span>
-        </span>
+        <?php print t('Brought to you by EU-OSHA. Visit us at: <a href="@url" style="@style">http://osha.europa.eu</a>',
+                    array('@style' => 'color: #003399; border-bottom-color: #DC2F82; border-bottom-style: solid; border-bottom-width: 1px; text-decoration: none;', '@url' => 'https://osha.europa.eu/en')); ?>
       </td>
     </tr>
   </tbody>
@@ -37,8 +35,7 @@
             <tr>
               <td style="padding-top: 10px; padding-bottom: 10px; color: #FFFFFF; font-family: Arial, sans-serif; font-size: 13px; ">
                 <?php print t('Subscribe to our <a href="@url" style="@style">Alert service</a> for <br/> customised content delivery',
-                            array('@style' => 'color: #FFFFFF;', '
-                                      @url' => url('https://osha.europa.eu/en/alertservice'))); ?>
+                            array('@style' => 'color: #FFFFFF;', '@url' => url('https://osha.europa.eu/en/alertservice'))); ?>
               </td>
               <td class="social" style="padding-top: 10px; padding-bottom: 10px;">
                 <?php
