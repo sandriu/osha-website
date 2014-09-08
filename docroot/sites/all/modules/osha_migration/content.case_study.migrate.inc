@@ -53,7 +53,7 @@ class MigrateOshaCaseStudy extends OSHADynamicMigration {
     $this->addFieldMapping('field_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldmapping('field_file:preserve_files')->defaultValue(TRUE);
     $this->addFieldMapping('field_file:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_file:destination_file', 'files');
+    $this->addFieldMapping('field_file:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'files');
     $this->addFieldMapping('field_file:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_tags', 'subject');
@@ -152,12 +152,15 @@ class MigrateOshaCaseStudy extends OSHADynamicMigration {
         $exp = explode(',', $files);
         if (count($exp) > 1) {
           $exp = array_map('trim', $exp);
-          $row->files[$lang] = $exp;
+          $row->files[$lang] = MigrationUtil::decodeHTMLText($exp);
+        }
+        else {
+          $row->files[$lang] = MigrationUtil::decodeHTMLText(trim($exp[0]));
         }
       }
     }
-    MigrationUtil::cleanMigratedFileField($row, 'files', 'public://publications/documents');
 
+    MigrationUtil::cleanMigratedFileField($row, 'files', 'public://publications/documents');
 
     return TRUE;
   }
