@@ -81,6 +81,127 @@ function osha_newsletter_action_info() {
   );
 }
 
+/**
+ * Implements hook_block_info().
+ */
+function osha_newsletter_block_info() {
+  $blocks['osha_newsletter_subscribe'] = array(
+    'info' => t('Subscribe to OSHA Newsletter'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['osha_newsletter_unsubscribe'] = array(
+    'info' => t('Unsubscribe from OSHA Newsletter'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ *
+ * @param string $delta Block delta (block identifier)
+ * @return array
+ */
+function osha_newsletter_block_view($delta = '') {
+  switch($delta) {
+    case 'osha_newsletter_subscribe':
+      if(user_access('access content')) {
+        $block['subject'] = t('OSHMail Newsletter');
+        // subscribe form
+        $block['content'] = drupal_get_form('osha_newsletter_subscribe_form');
+        return $block;
+      }
+      break;
+    case 'osha_newsletter_unsubscribe':
+      if(user_access('access content')) {
+        $block['subject'] = t('Unsubscribe from OSHMail Newsletter');
+        // unsubscribe form
+        $block['content'] = drupal_get_form('osha_newsletter_unsubscribe_form');
+        return $block;
+      }
+      break;
+  }
+  return array();
+}
+
+/**
+ * The subscribe form.
+ */
+function osha_newsletter_subscribe_form() {
+  $form['intro'] = array(
+    '#markup' => t('Once a month, OSHmail keeps you updated on ocupational safety and health.<br/> You can sign up below:'),
+  );
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('E-mail address'),
+    '#size' => 30,
+    '#required' => TRUE
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Subscribe')
+  );
+
+  return $form;
+}
+
+/**
+ * The unsubscribe form.
+ */
+function osha_newsletter_unsubscribe_form() {
+  $form['intro'] = array(
+    '#markup' => t('Not interested any more?<br/> You can unsubscribe below:'),
+  );
+  $form['unsubscribe_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('E-mail address'),
+    '#size' => 30,
+    '#required' => TRUE
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Unsubscribe')
+  );
+
+  return $form;
+}
+
+/**
+ * Subscribe form validation.
+ */
+function osha_newsletter_subscribe_form_validate($form, &$form_state) {
+  if (!valid_email_address($form_state['values']['email'])) {
+    form_set_error('email', t('That e-mail address is not valid.'));
+  }
+}
+
+/**
+ * Form submission logic for the subscription form.
+ */
+function osha_newsletter_subscribe_form_submit($form, &$form_state) {
+  $subscribe_email = $form_state['values']['email'];
+
+  osha_newsletter_send_email('subscribe_email', $subscribe_email, $form_state);
+}
+
+/**
+ * Unsubscribe form validation.
+ */
+function osha_newsletter_unsubscribe_form_validate($form, &$form_state) {
+  if (!valid_email_address($form_state['values']['unsubscribe_email'])) {
+    form_set_error('unsubscribe_email', t('That e-mail address is not valid.'));
+  }
+}
+
+/**
+ * Form submission logic for the subscription form.
+ */
+function osha_newsletter_unsubscribe_form_submit($form, &$form_state) {
+  $unsubscribe_email = $form_state['values']['unsubscribe_email'];
+
+  osha_newsletter_send_email('unsubscribe_email', $unsubscribe_email, $form_state);
+}
 
 /**
  * Actual VBO target action defined in hook_action_info above.
@@ -431,17 +552,21 @@ function osha_newsletter_mail($key, &$message, $params) {
     'langcode' => $message['language']->language,
   );
 
-  $source = entity_collection_load($params['#style']->entity_collection->name);
-
   switch ($key) {
     // Send a test message to the user email.
     case 'test_newsletter':
+      $source = entity_collection_load($params['#style']->entity_collection->name);
       osha_newsletter_build_mail($message, $source);
       break;
     case 'send_newsletter':
-      //$message['subject'] = t('E-mail sent from @site-name', array('@site-name' => variable_get('site_name', 'OSHA')), $options);
-      //$message['body'][] = t('@name sent you the following message:', array('@name' => $user->name), $options);
+      $source = entity_collection_load($params['#style']->entity_collection->name);
       osha_newsletter_build_mail($message, $source);
+      break;
+    case 'subscribe_email':
+      osha_newsletter_build_subscribe_mail($message);
+      break;
+    case 'unsubscribe_email':
+      osha_newsletter_build_unsubscribe_mail($message);
       break;
   }
 }
@@ -469,7 +594,16 @@ function osha_newsletter_send_email_to_subscribers(&$form_state) {
 
 
 /**
- * Send test version of newsletter.
+ * Send email for subscription.
+ */
+function osha_newsletter_send_unsubscribe_email(&$form_state) {
+  $unbscribe_email = $form_state['values']['email'];
+
+  osha_newsletter_send_email('unsubscribe_email', $unbscribe_email, $form_state);
+}
+
+/**
+ * Send email.
  *  $test_addresses - the email address for test
  */
 function osha_newsletter_send_email($key, $email_addresses, $form_values) {
@@ -573,6 +707,29 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
   $message['params']['plain'] = NULL;
 }
 
+/**
+ * Implements hook_mail().
+ */
+function osha_newsletter_build_subscribe_mail(&$message){
+  // Get message data from source.
+  $message['subject'] = 'Subscribe to OSHMail newsletter';
+  $message['body']['body'] = 'Subscribe to osha mail body text.';
+
+  // Optional params for HTML mails.
+  $message['params']['plain'] = NULL;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function osha_newsletter_build_unsubscribe_mail(&$message){
+  // Get message data from source.
+  $message['subject'] = 'Unsubscribe form OSHMail Newsletter';
+  $message['body']['body'] = 'Unsubscribe form osha mail body text.';
+
+  // Optional params for HTML mails.
+  $message['params']['plain'] = NULL;
+}
 
 /**
  * Implements hook_theme().
