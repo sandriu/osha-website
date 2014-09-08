@@ -31,11 +31,11 @@
 <table border="0" cellpadding="0" cellspacing="0" width="800">
   <tbody>
     <tr>
-      <td style="background-color: #B2B3B5; width:800px; font-family: Arial,sans-serif; font-size: 13px; color: #FFFFFF;">
+      <td style="background-color: #B2B3B5; width:800px;">
         <table border="0" cellpadding="28" cellspacing="0" width="800">
           <tbody>
             <tr>
-              <td style="padding-top: 10px; padding-bottom: 10px;">
+              <td style="padding-top: 10px; padding-bottom: 10px; color: #FFFFFF; font-family: Arial, sans-serif; font-size: 13px; ">
                 <?php print t('Subscribe to our <a href="@url" style="@style">Alert service</a> for <br/> customised content delivery',
                             array('@style' => 'color: #FFFFFF;', '
                                       @url' => url('https://osha.europa.eu/en/alertservice'))); ?>
@@ -80,7 +80,7 @@
                   }
                 ?>
               </td>
-              <td style="text-align: center; padding-top: 10px; padding-bottom: 10px;">
+              <td style="padding-top: 10px; padding-bottom: 10px; color: #FFFFFF; font-family: Arial, sans-serif; font-size: 13px; text-align: center;">
                 <?php print t('Like what you&apos;re reading? <br/><a href="@url" style="@style">Tell a colleague</a>', array('@style' => 'color: #FFFFFF;', '@url' => 'https://osha.europa.eu/en/news/oshmail/sendto_form')); ?>
               </td>
             </tr>
@@ -89,10 +89,16 @@
       </td>
     </tr>
     <tr>
-      <td style="text-align: center;">
-        <span>
-          <?php print t('No longer wish to receive OSHmail? <a href="@url" style="@style">Unsubscribe here.</a>', array('@style' => 'color: #003399; text-decoration: none;', '@url' => '[simplenews-subscriber:unsubscribe-url]')); ?>
-        </span>
+      <td style="text-align: center; width:800px;">
+        <table border="0" cellpadding="28" cellspacing="0" width="800">
+          <tbody>
+            <tr>
+              <td style="text-align: center; font-family: Arial, sans-serif; font-size: 13px;">
+                <?php print t('No longer wish to receive OSHmail? <a href="@url" style="@style">Unsubscribe here.</a>', array('@style' => 'color: #003399; text-decoration: none;', '@url' => '[simplenews-subscriber:unsubscribe-url]')); ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </td>
     </tr>
   </tbody>
