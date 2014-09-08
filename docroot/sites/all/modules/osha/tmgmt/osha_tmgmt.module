@@ -214,7 +214,8 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
 
     case 'tmgmt_job_form':
       $languages = tmgmt_available_languages();
-      $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($form_state['tmgmt_job']);
+      $job = $form_state['tmgmt_job'];
+      $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($job);
       $target_languages = array();
       foreach ($target_languages_codes as $lang_code) {
         $target_languages[$lang_code] = $languages[$lang_code];
@@ -242,6 +243,21 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#disabled' => TRUE,
         '#weight' => 2,
         '#attributes' => array('class' => array('container-inline')),
+      );
+
+      $form['info']['total_character_count'] = array(
+        '#title' => t('Total character count'),
+        '#type'  => 'item',
+        '#markup' => $job->character_count,
+        '#prefix' => '<div id="tmgmt-ui-character-count" class="tmgmt-ui-character-count tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
+      );
+      $form['info']['page_count'] = array(
+        '#title' => t('Page count'),
+        '#type'  => 'item',
+        '#markup' => $job->page_count,
+        '#prefix' => '<div id="tmgmt-ui-page-count" class="tmgmt-ui-page-count tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
       );
 
       hide($form['info']['source_language']);
