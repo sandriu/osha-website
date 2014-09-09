@@ -208,9 +208,9 @@ function osha_newsletter_create_taxonomy() {
   if (empty($terms)) {
     $new_terms = array(
       'highlight' => 'Highlights',
+      '' => 'OSH matters',
       'publication' => 'Latest publications',
       'newsletter_article' => 'Coming soon',
-      '' => 'OSH matters',
       'blog' => 'Blog',
       'news' => 'News',
       'event' => 'Events',
