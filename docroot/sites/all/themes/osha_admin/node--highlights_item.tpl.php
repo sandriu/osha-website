@@ -78,7 +78,7 @@
  * @see template_process()
  */
 ?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-top: 15px; padding-bottom: 15px;">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="396" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-top: 15px; padding-bottom: 15px;">
   <tbody>
     <tr>
       <td>
@@ -115,7 +115,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="item-text-body" style="font-size: 13px; font-family: Arial, sans-serif; color: #777777;">
+        <div class="item-text-body" style="width: 396px; font-size: 13px; font-family: Arial, sans-serif; color: #777777;">
           <?php print($field_summary[0]['safe_value']); ?>
         </div>
       </td>
