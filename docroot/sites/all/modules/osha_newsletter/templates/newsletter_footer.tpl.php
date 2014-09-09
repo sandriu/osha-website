@@ -63,6 +63,7 @@
                   );
 
                   foreach ($social as $name => $options) {
+                    $directory = drupal_get_path('module','osha_newsletter');
                     print l(theme('image', array(
                       'path' => $directory . '/images/icon-oshmail-' . $name . '.png',
                       'width' => 'auto',
