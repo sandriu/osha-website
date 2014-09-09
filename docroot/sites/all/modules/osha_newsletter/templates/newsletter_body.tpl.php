@@ -1,11 +1,11 @@
 <table border="0" cellpadding="28" cellspacing="0" width="800">
   <tbody>
     <tr>
-      <td  width="800" style="padding-top: 0px; padding-bottom: 0px;">
-        <table border="0" cellpadding="20" cellspacing="0" width="800">
+      <td  width="744" style="padding-top: 0px; padding-bottom: 0px;">
+        <table border="0" cellpadding="20" cellspacing="0" width="744">
           <tbody>
             <tr>
-              <td width="450" style="padding-top: 0px;" class="left-column">
+              <td width="396" style="padding-top: 0px;" class="left-column">
                 <?php
                   foreach ($items as $item) {
                     print(render($item));
@@ -13,7 +13,7 @@
                 ?>
               </td>
 
-              <td width="350" style="vertical-align: top; padding-top: 0px; padding-right: 0px;" class="right-column">
+              <td width="308" style="vertical-align: top; padding-top: 0px; padding-right: 0px;" class="right-column">
                 <div style="font: 12px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif;">
                   <?php
                     if (!empty($blogs) && sizeof($blogs) > 1) {
