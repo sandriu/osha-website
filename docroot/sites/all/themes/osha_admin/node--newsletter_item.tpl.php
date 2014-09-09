@@ -77,21 +77,38 @@
  * @see template_process()
  */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="font: 12px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif;">
-  <table style="color: #191919; font: 13px/16px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif; margin-bottom: 10px; padding: 8px; width: 570px;">
-    <tbody>
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="396" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-top: 15px; padding-bottom: 15px">
+  <tbody>
     <tr>
-      <td colspan="2">
-        <h2 style="color: #191919; font-size: 15px; font-weight: bold; margin: 5px 0; padding: 0 0 5px;">
-          <?php
+      <td style="padding-left: 0px; padding-right: 0px;">
+        <table align="left" border="0" cellpadding="0" cellspacing="0" width="14" class="link-arrow" style="height: 22px;">
+          <tbody>
+            <tr>
+              <td style="vertical-align: top; padding-top: 2px;">
+                <?php
+                  $directory = drupal_get_path('module','osha_newsletter');
+                  $site_url = variable_get('site_base_url', 'http://osha.localhost');
+                  print l(theme('image', array(
+                  'path' => $directory . '/images/link-arrow.png',
+                  'width' => 7,
+                  'height' => 11,
+                  'alt' => 'link arrow',
+                  )), $site_url, array(
+                  'html' => TRUE,
+                  'external' => TRUE
+                ));
+                ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <?php
           print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-            'attributes' => array('style' => 'color: #144989; text-decoration: none;'),
+            'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
             'external' => TRUE
           ));
-          ?>
-        </h2>
+        ?>
       </td>
     </tr>
-    </tbody>
-  </table>
-</div>
+  </tbody>
+</table>
