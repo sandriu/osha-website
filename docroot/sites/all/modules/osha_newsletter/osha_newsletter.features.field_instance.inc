@@ -195,7 +195,7 @@ function osha_newsletter_field_default_field_instances() {
         'weight' => 0,
       ),
       'highlights_item' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
           'trim_length' => 600,
