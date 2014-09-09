@@ -712,8 +712,8 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
  */
 function osha_newsletter_build_subscribe_mail(&$message){
   // Get message data from source.
-  $message['subject'] = 'Subscribe to OSHMail newsletter';
-  $message['body']['body'] = 'Subscribe to osha mail body text.';
+  $message['subject'] = '';
+  $message['body']['body'] = 'subscribe OSHMail anonymous\n';
 
   // Optional params for HTML mails.
   $message['params']['plain'] = NULL;
@@ -724,8 +724,8 @@ function osha_newsletter_build_subscribe_mail(&$message){
  */
 function osha_newsletter_build_unsubscribe_mail(&$message){
   // Get message data from source.
-  $message['subject'] = 'Unsubscribe form OSHMail Newsletter';
-  $message['body']['body'] = 'Unsubscribe form osha mail body text.';
+  $message['subject'] = '';
+  $message['body']['body'] = 'unsubscribe OSHMail\n';
 
   // Optional params for HTML mails.
   $message['params']['plain'] = NULL;
