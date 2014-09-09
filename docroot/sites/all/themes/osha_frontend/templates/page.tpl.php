@@ -58,13 +58,16 @@
     ?>
 
     <?php if ($sidebar_first): ?>
-      <aside class="sidebars">
+      <aside class="sidebars_first">
         <?php print $sidebar_first; ?>
       </aside>
     <?php endif; ?>
-  
-    <div id="content" class="column" role="main">
-      <?php print render($page['highlighted']); ?>
+	<?php if ($sidebar_second): ?>
+		<div id="content" class="three_column">
+	<?php else: ?>
+		<div id="content" class="two_column">
+	<?php endif; ?>
+	<?php print render($page['highlighted']); ?>
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
