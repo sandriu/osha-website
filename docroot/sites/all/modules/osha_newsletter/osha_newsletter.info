@@ -47,6 +47,7 @@ features[variable][] = entity_translation_comment_filter_newsletter_article
 features[variable][] = entity_translation_hide_translation_links_newsletter_article
 features[variable][] = entity_translation_node_metadata_newsletter_article
 features[variable][] = field_bundle_settings_entity_collection__newsletter_content_collection
+features[variable][] = field_bundle_settings_node__newsletter_article
 features[variable][] = field_bundle_settings_taxonomy_term__newsletter_sections
 features[variable][] = language_content_type_newsletter_article
 features[variable][] = menu_options_newsletter_article
