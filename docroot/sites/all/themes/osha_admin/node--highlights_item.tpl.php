@@ -78,39 +78,47 @@
  * @see template_process()
  */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="font: 12px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif;">
-  <table style="border: 1px solid #d1d1d1; color: #191919; font: 13px/16px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif; margin-bottom: 20px; padding: 8px; width: 570px;">
-    <tbody>
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-top: 15px; padding-bottom: 15px;">
+  <tbody>
     <tr>
-      <td colspan="2">
-        <h2 style="color: #191919; font-size: 19px; font-weight: bold; margin: 15px 0; padding: 0 0 11px;">
-          <?php
-          print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-            'attributes' => array('style' => 'color: #144989; text-decoration: none;'),
-            'external' => TRUE
-          ));
-          ?>
-        </h2>
+      <td>
+        <table align="left" border="0" cellpadding="0" cellspacing="0" width="33%" class="item-thumbnail" style="padding-bottom: 10px;">
+          <tbody>
+            <tr>
+              <td>
+                <?php
+                  print l(theme('image_style', array(
+                    'style_name' => 'thumbnail',
+                    'path' => $field_image[0]['uri'],
+                    'width' => 100,
+                    'alt' => $field_image[0]['alt']
+                  )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                    'html' => TRUE,
+                    'external' => TRUE
+                  ));
+                ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table align="right" border="0" cellpadding="0" cellspacing="0" width="67%" class="item-title" style="padding-bottom: 10px;">
+          <tbody>
+            <tr>
+              <td style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px; font-family: Oswald, Arial,sans-serif; font-size: 18px;">
+                <?php
+                  print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                    'attributes' => array('style' => 'color: #003399; text-decoration: none;'),
+                    'external' => TRUE
+                  ));
+                ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="item-text-body" style="font-size: 13px; font-family: Arial, sans-serif; color: #777777;">
+          <?php print($field_summary[0]['safe_value']); ?>
+        </div>
       </td>
     </tr>
-    <tr>
-      <td width="120" valign="top">
-        <?php
-        print l(theme('image_style', array(
-          'style_name' => 'thumbnail',
-          'path' => $field_image[0]['uri'],
-          'width' => 100,
-          'alt' => $field_image[0]['alt']
-        )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
-          'html' => TRUE,
-          'external' => TRUE
-        ));
-        ?>
-      </td>
-      <td valign="top">
-        <?php print($field_summary[0]['safe_value']); ?>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+  </tbody>
+</table>
