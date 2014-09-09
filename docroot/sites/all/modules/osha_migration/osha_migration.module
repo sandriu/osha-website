@@ -11,6 +11,7 @@ define('OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES', 'JobVacancies');
 define('OSHA_MIGRATION_CONTENT_TYPE_BLOG', 'Blog');
 define('OSHA_MIGRATION_CONTENT_TYPE_CALLS', 'Calls');
 define('OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY', 'CaseStudy');
+define('OSHA_MIGRATION_CONTENT_TYPE_HIGHLIGHT', 'Highlight');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
 define('OSHA_MIGRATION_FILES', 'Files');
@@ -71,6 +72,10 @@ function osha_migration_migrate_api() {
       OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY => array(
         'class_name' => 'MigrateOshaCaseStudy',
         'file_name' => osha_migration_get_data_dir() . '/export/case_studies.txt',
+      ),
+      OSHA_HIGHLIGHT_CONTENT_TYPE_HIGHLIGHT => array(
+        'class_name' => 'MigrateOshaHighlight',
+        'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
       ),
       OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES => array(
         'class_name' => 'OshaMigrateJobVacancies',
