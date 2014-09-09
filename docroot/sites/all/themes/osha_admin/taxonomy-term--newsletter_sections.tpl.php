@@ -5,7 +5,7 @@
     </tr>
   </tbody>
 </table>
-<table border="0" cellpadding="10" cellspacing="0" width="396" class="category-name">
+<table border="0" cellpadding="10" cellspacing="0" width="396" class="category-name" style="border-bottom-width: 2px; border-style: dotted; border-color: #CFDDEE;">
   <tbody>
     <tr>
       <td style="font-family: Oswald, Arial, sans-serif; font-weight: normal; font-size: 20px; padding-left: 0px; padding-right: 0px;">
@@ -20,3 +20,4 @@
     </tr>
   </tbody>
 </table>
+<div style="width: 396px; height: 10px;"></div>

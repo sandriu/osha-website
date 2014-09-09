@@ -77,7 +77,7 @@
  * @see template_process()
  */
 ?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="396" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-top: 15px; padding-bottom: 15px">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="396">
   <tbody>
     <tr>
       <td style="padding-left: 0px; padding-right: 0px;">
@@ -102,12 +102,20 @@
             </tr>
           </tbody>
         </table>
-        <?php
-          print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-            'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
-            'external' => TRUE
-          ));
-        ?>
+        <table align="left" border="0" cellpadding="0" cellspacing="0" class="link-title">
+          <tbody>
+            <tr>
+              <td>
+                <?php
+                  print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                    'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
+                    'external' => TRUE
+                  ));
+                ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </td>
     </tr>
   </tbody>
