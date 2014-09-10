@@ -22,7 +22,7 @@
                     }
                   }
                 ?>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
@@ -55,7 +55,7 @@
                     }
                   }
                 ?>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
@@ -88,7 +88,7 @@
                     }
                   }
                 ?>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
