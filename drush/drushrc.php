@@ -345,6 +345,7 @@ $options['init-modules'] = array(
   'osha_highlight',
   'osha_menu',
   'osha_content',
+  'osha_wiki',
 
   // Newsletter modules.
   'entity_collection',
