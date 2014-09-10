@@ -78,11 +78,11 @@
  * @see template_process()
  */
 ?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="396" style="border-style: dotted; border-top-width: 2px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px;  border-color: #CFDDEE; padding-top: 15px; padding-bottom: 15px;">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-style: dotted; border-top-width: 2px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px;  border-color: #CFDDEE; padding-top: 15px; padding-bottom: 15px;">
   <tbody>
     <tr>
       <td>
-        <table align="left" border="0" cellpadding="0" cellspacing="0" width="33%" class="item-thumbnail" style="padding-bottom: 10px;">
+        <table align="left" border="0" cellpadding="0" cellspacing="0" class="item-thumbnail" style="width: 33%; padding-bottom: 10px;">
           <tbody>
             <tr>
               <td>
@@ -101,7 +101,7 @@
             </tr>
           </tbody>
         </table>
-        <table align="right" border="0" cellpadding="0" cellspacing="0" width="67%" class="item-title" style="padding-bottom: 10px;">
+        <table align="right" border="0" cellpadding="0" cellspacing="0" class="item-title" style="width: 67%; padding-bottom: 10px;">
           <tbody>
             <tr>
               <td style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px; font-family: Oswald, Arial,sans-serif; font-size: 18px;">
@@ -115,7 +115,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="item-text-body" style="width: 396px; font-size: 13px; font-family: Arial, sans-serif; color: #777777;">
+        <div class="item-text-body" style="width: 100%; font-size: 13px; font-family: Arial, sans-serif; color: #777777;">
           <?php print($field_summary[0]['safe_value']); ?>
         </div>
       </td>
