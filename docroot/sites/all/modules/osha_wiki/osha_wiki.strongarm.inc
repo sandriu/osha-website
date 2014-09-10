@@ -14,7 +14,7 @@ function osha_wiki_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_wiki_page';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_wiki_page'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -216,7 +216,6 @@ function osha_wiki_strongarm() {
   $strongarm->name = 'node_options_wiki_page';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_wiki_page'] = $strongarm;
 
