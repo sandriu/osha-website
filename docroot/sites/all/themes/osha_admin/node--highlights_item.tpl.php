@@ -78,8 +78,11 @@
  * @see template_process()
  */
 ?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-style: dotted; border-top-width: 2px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px;  border-color: #CFDDEE; padding-top: 15px; padding-bottom: 15px;">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 15px; padding-bottom: 15px;">
   <tbody>
+    <tr>
+      <td style="border-style: dotted; border-top-width: 2px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px; border-color: #FF0000; padding-top: 0px; pading-bottom: 10px; height: 0px;" class="dotted-line"></td>
+    </tr>
     <tr>
       <td>
         <table align="left" border="0" cellpadding="0" cellspacing="0" class="item-thumbnail" width="33%" style="padding-bottom: 10px;">
