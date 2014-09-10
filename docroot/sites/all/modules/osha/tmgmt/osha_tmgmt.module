@@ -257,6 +257,44 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         $form['info']['created'] = $created;
       }
       break;
+
+    case 'tmgmt_entity_ui_translate_form':
+      list($id, $vid, $bundle) = entity_extract_ids($form_state['entity_type'], $form_state['entity']);
+      $entity_language = entity_language($form_state['entity_type'], $form_state['entity']);
+      $items = osha_tmgmt_job_item_load_latest('entity', $form_state['entity_type'], $id, $entity_language);
+
+      // Remove all previously disabled checkboxes - we override that.
+      $languages = language_list();
+
+      foreach ($languages as $langcode => $language) {
+        // Reset the pending column and ordering, rebuild based on job item.
+        unset($form['languages'][$langcode]);
+        $form['languages']['#options'][$langcode][4] = t('None');
+
+        if ($langcode == $entity_language) {
+          $form['languages'][$langcode] = array(
+            '#type' => 'checkbox',
+            '#disabled' => TRUE,
+          );
+        }
+        elseif (isset($items[$langcode])) {
+          $item = $items[$langcode];
+          $uri = $item->uri();
+          $wrapper = entity_metadata_wrapper('tmgmt_job_item', $item);
+          $additional = l($wrapper->state->label(), $uri['path'], array('query' => array('destination' => current_path())));
+          // Disable the checkbox for this row since there is already a
+          // translation in progress that has not yet been finished. This way we
+          // make sure that we don't stack multiple active translations for the
+          // same item on top of each other.
+          $form['languages']['#options'][$langcode][4] = $additional;
+          $form['languages'][$langcode] = array(
+            '#type' => 'checkbox',
+            '#disabled' => TRUE,
+          );
+        }
+      }
+      break;
+
   }
 }
 
@@ -352,6 +390,48 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
     //TODO: Delete the job ...?
   }
 }
+
+
+/**
+ * Loads active job entities that have a job item with the identifiers.
+ *
+ * @param $plugin
+ *   The source plugin.
+ * @param $item_type
+ *   The source item type.
+ * @param $item_id
+ *   The source item id.
+ * @param string $source_language
+ *   The source language of the item.
+ *
+ * @return array
+ *   An array of job entities.
+ */function osha_tmgmt_job_item_load_latest($plugin, $item_type, $item_id, $source_language) {
+  $query = db_select('tmgmt_job_item', 'tji');
+  $query->innerJoin('tmgmt_job', 'tj', 'tj.tjid = tji.tjid');
+  $result = $query->condition('tj.source_language', $source_language)
+    // Only query for jobs that are currently active.
+    ->condition('tj.state', array(TMGMT_JOB_STATE_UNPROCESSED, TMGMT_JOB_STATE_ACTIVE))
+    // And only query for job items that are not yet finished.
+    ->condition('tji.state', TMGMT_JOB_ITEM_STATE_ACCEPTED, '<>')
+    ->condition('tji.plugin', $plugin)
+    ->condition('tji.item_type', $item_type)
+    ->condition('tji.item_id', $item_id)
+    ->fields('tji', array('tjiid'))
+    ->fields('tj', array('target_language'))
+    ->orderBy('tji.changed', 'DESC')
+    ->groupBy('tji.tjiid')
+    ->execute();
+  if ($items = $result->fetchAllKeyed()) {
+    $return = array();
+    foreach (tmgmt_job_item_load_multiple(array_keys($items)) as $key => $item) {
+      $return[$item->target_language] = $item;
+    }
+    return $return;
+  }
+  return FALSE;
+}
+
 
 /**
  * Implements hook_views_default_views_alter().
