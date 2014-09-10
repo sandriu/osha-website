@@ -216,11 +216,13 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
 
     case 'tmgmt_job_form':
       $languages = tmgmt_available_languages();
-      $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($form_state['tmgmt_job']);
+      $job = $form_state['tmgmt_job'];
+      $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($job);
       $target_languages = array();
       foreach ($target_languages_codes as $lang_code) {
         $target_languages[$lang_code] = $languages[$lang_code];
       }
+      drupal_set_title($job->label());
 
       $form['language_info'] = array(
         '#type' => 'container',
