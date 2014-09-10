@@ -238,7 +238,7 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $languages = $xml->xpath("//TranslationTargetLanguage");
     foreach ($languages as $language) {
       $lang = (string) $language;
-      if (!isset($this->mappedItemsIDs[(string) $language])) {
+      if ($lang != $job->source_language && !isset($this->mappedItemsIDs[$lang])) {
         drupal_set_message(sprintf('Target language %s could not be found', $lang), 'error');
         return FALSE;
       }
@@ -292,17 +292,20 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
       foreach ($this->importedXML->xpath('//Translation') as $translation) {
         // Get the target language of the current translation element.
         $target_language = (string) $translation->TranslationTargetLanguage;
-        foreach ($translation->xpath('DynamicElement') as $unit) {
-          // Get the Job Item ID that handles the language translation
-          // of the current entity id and type.
-          $entity_id = (string) $unit['instanceId'];
-          $entity_type = (string) $unit['indexType'];
-          if (!empty($this->mappedItemsIDs[$target_language][$entity_type][$entity_id])) {
-            $item_id = $this->mappedItemsIDs[$target_language][$entity_type][$entity_id];
-            $reader->XML($unit->DynamicContent->asXML());
-            $reader->read();
-            $this->importedTransUnits[$item_id . (string) $unit['name']]['#text']
-              = $this->processForImport($reader->readInnerXML(), $job);
+        if ($job->source_language != $target_language) {
+          foreach ($translation->xpath('DynamicElement') as $unit) {
+            // Get the Job Item ID that handles the language translation
+            // of the current entity id and type.
+            $entity_id = (string) $unit['instanceId'];
+            $entity_type = (string) $unit['indexType'];
+            if (!empty($this->mappedItemsIDs[$target_language][$entity_type][$entity_id])) {
+
+              $item_id = $this->mappedItemsIDs[$target_language][$entity_type][$entity_id];
+              $reader->XML($unit->DynamicContent->asXML());
+              $reader->read();
+              $this->importedTransUnits[$item_id . (string) $unit['name']]['#text']
+                = $this->processForImport($reader->readInnerXML(), $job);
+            }
           }
         }
       }
