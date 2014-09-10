@@ -77,7 +77,7 @@
  * @see template_process()
  */
 ?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="396">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tbody>
     <tr>
       <td style="padding-left: 0px; padding-right: 0px;">
