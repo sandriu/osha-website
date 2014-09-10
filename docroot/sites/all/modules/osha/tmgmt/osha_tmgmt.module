@@ -269,6 +269,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       foreach ($languages as $langcode => $language) {
         // Reset the pending column and ordering, rebuild based on job item.
         unset($form['languages'][$langcode]);
+        //@TODO:EDW Improve handling of column index below
         $form['languages']['#options'][$langcode][4] = t('None');
 
         if ($langcode == $entity_language) {
@@ -286,6 +287,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           // translation in progress that has not yet been finished. This way we
           // make sure that we don't stack multiple active translations for the
           // same item on top of each other.
+          //@TODO:EDW Improve handling of column index below
           $form['languages']['#options'][$langcode][4] = $additional;
           $form['languages'][$langcode] = array(
             '#type' => 'checkbox',
