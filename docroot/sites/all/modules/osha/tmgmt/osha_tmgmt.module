@@ -320,8 +320,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
       entity_delete_multiple('tmgmt_job_item', $remove_job_item_ids);
     }
     if ($job) {
-
-      // Update the job title with it's ID as current label doesn't make sense.
+      // Set the title to job #
       $job->label = t('Translation job #!tjid', array('!tjid' => $job->tjid));
       $job->priority = $values['priority'];
       OshaTMGMTStatistics::computeJobStatistics($job);
