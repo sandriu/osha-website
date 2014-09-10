@@ -19,7 +19,7 @@ function osha_wiki_ctools_plugin_api($module = NULL, $api = NULL) {
 function osha_wiki_node_info() {
   $items = array(
     'wiki_page' => array(
-      'name' => t('OSHA Wiki Page'),
+      'name' => t('Wiki Page'),
       'base' => 'node_content',
       'description' => t('Selected Wiki page'),
       'has_title' => '1',

@@ -13,13 +13,6 @@ function osha_wiki_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'additional_settings__active_tab_wiki_page';
-  $strongarm->value = 'edit-workflow';
-  $export['additional_settings__active_tab_wiki_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_wiki_page';
   $strongarm->value = 0;
   $export['comment_anonymous_wiki_page'] = $strongarm;
