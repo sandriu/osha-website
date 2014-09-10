@@ -95,7 +95,7 @@
         ));
         ?>
       </td>
-      <td align="right" width="95%" style="text-align: left;">
+      <td align="right" width="95%" style="text-align: left; padding-top: 10px; padding-bottom: 10px;">
         <?php
           print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
             'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
@@ -103,6 +103,9 @@
           ));
         ?>
       </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="border-style: dotted; border-bottom-width: 2px; border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; border-color: #CFDDEE; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="dotted-line no-padding"></td>
     </tr>
   </tbody>
 </table>
