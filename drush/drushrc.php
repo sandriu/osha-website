@@ -264,6 +264,8 @@ $options['init-modules'] = array(
   'locale',
   'entity_translation',
   'i18n',
+  'i18n_string',
+  'i18n_taxonomy',
   'variable',
 
   'views',
@@ -272,9 +274,6 @@ $options['init-modules'] = array(
 
   'mailsystem',
   'htmlmail',
-  'simplenews',
-  'scs',
-  'scs_views',
 
   'taxonomy_access_fix',
   'date',
@@ -342,11 +341,15 @@ $options['init-modules'] = array(
   'osha_news',
   'osha_publication',
   'osha_blog',
-  'osha_newsletter',
   'osha_tmgmt',
   'osha_highlight',
   'osha_menu',
   'osha_content',
+
+  // Newsletter modules.
+  'entity_collection',
+  'entity_collection_db',
+  'osha_newsletter',
 
   // Enable last (conflict with rules)
   'uuid',

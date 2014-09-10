@@ -1,220 +1,822 @@
 <?php
 /**
- * Implementation of hook_views_default_views_alter().
+ * @file
+ * Code for the osha_newsletter feature.
  */
-function osha_newsletter_views_default_views_alter(&$views) {
-  // Modify the view newsletter_creation from the scs contrib module.
-  if (array_key_exists('newsletter_creation', $views)) {
-    $view = $views['newsletter_creation'];
-    $handler = $view->display['default'];
-    $handler->display_options['exposed_form']['options']['reset_button'] = TRUE;
 
-    /* Field: Content: Summary */
-    $handler->display_options['fields']['field_summary']['id'] = 'field_summary';
-    $handler->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
-    $handler->display_options['fields']['field_summary']['field'] = 'field_summary';
-    $handler->display_options['fields']['field_summary']['type'] = 'text_trimmed';
-    $handler->display_options['fields']['field_summary']['settings'] = array(
-      'trim_length' => '150',
-    );
-    /* Field: Content: Body */
-    $handler->display_options['fields']['body']['id'] = 'body';
-    $handler->display_options['fields']['body']['table'] = 'field_data_body';
-    $handler->display_options['fields']['body']['field'] = 'body';
-    $handler->display_options['fields']['body']['exclude'] = TRUE;
-    /* Field: Field: Tags */
-    $handler->display_options['fields']['field_tags']['id'] = 'field_tags';
-    $handler->display_options['fields']['field_tags']['table'] = 'field_data_field_tags';
-    $handler->display_options['fields']['field_tags']['field'] = 'field_tags';
-    $handler->display_options['fields']['field_tags']['exclude'] = TRUE;
-    $handler->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
-    $handler->display_options['fields']['field_tags']['delta_offset'] = '0';
-    /* Field: Field: Thesaurus */
-    $handler->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-    $handler->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-    $handler->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-    $handler->display_options['fields']['field_thesaurus']['exclude'] = TRUE;
-    $handler->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
-    $handler->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
+include_once 'osha_newsletter.features.inc';
 
-    /* Filter criterion: Global: Combine fields filter */
-    $handler->display_options['filters']['combine']['id'] = 'combine';
-    $handler->display_options['filters']['combine']['table'] = 'views';
-    $handler->display_options['filters']['combine']['field'] = 'combine';
-    $handler->display_options['filters']['combine']['operator'] = 'word';
-    $handler->display_options['filters']['combine']['group'] = 1;
-    $handler->display_options['filters']['combine']['exposed'] = TRUE;
-    $handler->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
-    $handler->display_options['filters']['combine']['expose']['label'] = 'Free text search';
-    $handler->display_options['filters']['combine']['expose']['description'] = 'Search in title, body and summary fields ';
-    $handler->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
-    $handler->display_options['filters']['combine']['expose']['identifier'] = 'combine';
-    $handler->display_options['filters']['combine']['expose']['remember_roles'] = array(
-      2 => '2',
-      1 => 0,
-      3 => 0,
-    );
-    $handler->display_options['filters']['combine']['fields'] = array(
-      'title' => 'title',
-      'field_summary' => 'field_summary',
-      'body' => 'body',
-    );
+/**
+ * Implements hook_permission().
+ */
+function osha_newsletter_permission() {
+  return array(
+    'administer osha newsletter' => array(
+      'title' => t('Administer OSHA newsletter'),
+      'description' => t('Configure OSHA newsletter module'),
+    ),
+  );
+}
 
-    /* Alter filter criterion: Content: Type */
-    $handler->display_options['filters']['type']['group'] = 1;
-    $handler->display_options['filters']['type']['is_grouped'] = TRUE;
-    $handler->display_options['filters']['type']['group_info']['label'] = 'Type';
-    $handler->display_options['filters']['type']['group_info']['identifier'] = 'type';
-    $handler->display_options['filters']['type']['group_info']['group_items'] = array(
-      1 => array(
-        'title' => 'Article',
-        'operator' => 'in',
-        'value' => array(
-          'article' => 'article',
-          'all' => 0,
-          'page' => 0,
-          'blog' => 0,
-          'news' => 0,
-          'publication' => 0,
-          'simplenews' => 0,
+/**
+ * Implements hook_menu().
+ */
+function osha_newsletter_menu() {
+  $items = array();
+  $items['admin/config/content/newsletter'] = array(
+    'title' => 'Newsletter settings',
+    'description' => 'Configure newsletter behavior',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_newsletter_admin_form'),
+    'access arguments' => array('administer osha newsletter'),
+    'position' => 'left',
+    'weight' => 5,
+    'file' => 'osha_newsletter.admin.inc',
+  );
+  return $items;
+}
+
+function osha_newsletter_menu_alter(&$items) {
+  if (isset($items['entity-collection/%entity_collection/content'])) {
+    $items['entity-collection/%entity_collection/content']['page callback'] =
+      'osha_newsletter_entity_collection_content_admin';
+  }
+}
+
+function osha_newsletter_entity_collection_content_admin($entity_collection) {
+  $form = entity_collection_content_admin($entity_collection);
+  if ($entity_collection->bundle == 'newsletter_content_collection') {
+    $view = views_embed_view('newsletter_node_selection', 'newsletter_selection_view_page', $entity_collection->name);
+    $form['add_content_view'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Add more content to the newsletter'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#tree' => TRUE,
+    );
+    $form['add_content_view']['content'] = array(
+      '#type' => 'item',
+      '#markup' => $view,
+    );
+  }
+  return $form;
+}
+
+function osha_newsletter_action_info() {
+  return array(
+    'osha_newsletter_add_to_newsletter_action' => array(
+      'label' => t('Add to newsletter'),
+      'group' => t('Newsletter'),
+      'type' => 'node',
+      'parameter' => array(
+        'newsletter' => array(
+          'type' => 'node',
+          'label' => 'Newsletter',
+          'description' => t('Newsletter to add this node to'),
         ),
       ),
-      2 => array(
-        'title' => 'Blog',
-        'operator' => 'in',
-        'value' => array(
-          'blog' => 'blog',
-          'all' => 0,
-          'article' => 0,
-          'page' => 0,
-          'news' => 0,
-          'publication' => 0,
-          'simplenews' => 0,
-        ),
-      ),
-      3 => array(
-        'title' => 'News',
-        'operator' => 'in',
-        'value' => array(
-          'news' => 'news',
-          'all' => 0,
-          'article' => 0,
-          'page' => 0,
-          'blog' => 0,
-          'publication' => 0,
-          'simplenews' => 0,
-        ),
-      ),
-      4 => array(
-        'title' => 'Publication',
-        'operator' => 'in',
-        'value' => array(
-          'publication' => 'publication',
-          'all' => 0,
-          'article' => 0,
-          'page' => 0,
-          'blog' => 0,
-          'news' => 0,
-          'simplenews' => 0,
-        ),
-      ),
-    );
+      // TODO: EDW
+      #'acces callback' => 'tmgmt_rules_job_submit_access',
+    ),
+  );
+}
 
-    /* Alter filter criterion: Content: Type */
-    $handler->display_options['filters']['type_1']['id'] = 'type_1';
-    $handler->display_options['filters']['type_1']['table'] = 'node';
-    $handler->display_options['filters']['type_1']['field'] = 'type';
-    $handler->display_options['filters']['type_1']['value'] = array(
-      'article' => 'article',
-      'blog' => 'blog',
-      'news' => 'news',
-      'publication' => 'publication',
-    );
+/**
+ * Implements hook_block_info().
+ */
+function osha_newsletter_block_info() {
+  $blocks['osha_newsletter_subscribe'] = array(
+    'info' => t('Subscribe to OSHA Newsletter'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['osha_newsletter_unsubscribe'] = array(
+    'info' => t('Unsubscribe from OSHA Newsletter'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
 
-    /* Filter criterion: Content: Post date */
-    $handler->display_options['filters']['created']['id'] = 'created';
-    $handler->display_options['filters']['created']['table'] = 'node';
-    $handler->display_options['filters']['created']['field'] = 'created';
-    $handler->display_options['filters']['created']['operator'] = 'between';
-    $handler->display_options['filters']['created']['exposed'] = TRUE;
-    $handler->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
-    $handler->display_options['filters']['created']['expose']['label'] = 'Post date';
-    $handler->display_options['filters']['created']['expose']['operator'] = 'created_op';
-    $handler->display_options['filters']['created']['expose']['identifier'] = 'created';
-    $handler->display_options['filters']['created']['expose']['remember'] = TRUE;
-    $handler->display_options['filters']['created']['expose']['remember_roles'] = array(
-      2 => '2',
-      1 => 0,
-      3 => 0,
-    );
+  return $blocks;
+}
 
-    /* Filter criterion: Field: Tags (field_tags) */
-    $handler->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
-    $handler->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
-    $handler->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
-    $handler->display_options['filters']['field_tags_tid']['value'] = '';
-    $handler->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
-    $handler->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
-    $handler->display_options['filters']['field_tags_tid']['expose']['label'] = 'Tags';
-    $handler->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
-    $handler->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'field_tags_tid';
-    $handler->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
-      2 => '2',
-      1 => 0,
-      3 => 0,
-    );
-    $handler->display_options['filters']['field_tags_tid']['reduce_duplicates'] = TRUE;
-    $handler->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
+/**
+ * Implements hook_block_view()
+ *
+ * @param string $delta Block delta (block identifier)
+ * @return array
+ */
+function osha_newsletter_block_view($delta = '') {
+  switch($delta) {
+    case 'osha_newsletter_subscribe':
+      if(user_access('access content')) {
+        $block['subject'] = t('OSHMail Newsletter');
+        // subscribe form
+        $block['content'] = drupal_get_form('osha_newsletter_subscribe_form');
+        return $block;
+      }
+      break;
+    case 'osha_newsletter_unsubscribe':
+      if(user_access('access content')) {
+        $block['subject'] = t('Unsubscribe from OSHMail Newsletter');
+        // unsubscribe form
+        $block['content'] = drupal_get_form('osha_newsletter_unsubscribe_form');
+        return $block;
+      }
+      break;
+  }
+  return array();
+}
 
-    /* Filter criterion: Field: Thesaurus (field_thesaurus) */
-    $handler->display_options['filters']['field_thesaurus_tid']['id'] = 'field_thesaurus_tid';
-    $handler->display_options['filters']['field_thesaurus_tid']['table'] = 'field_data_field_thesaurus';
-    $handler->display_options['filters']['field_thesaurus_tid']['field'] = 'field_thesaurus_tid';
-    $handler->display_options['filters']['field_thesaurus_tid']['value'] = '';
-    $handler->display_options['filters']['field_thesaurus_tid']['exposed'] = TRUE;
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['operator_id'] = 'field_thesaurus_tid_op';
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['label'] = 'Thesaurus';
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['operator'] = 'field_thesaurus_tid_op';
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['identifier'] = 'field_thesaurus_tid';
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['remember'] = TRUE;
-    $handler->display_options['filters']['field_thesaurus_tid']['expose']['remember_roles'] = array(
-      2 => '2',
-      1 => 0,
-      3 => 0,
-    );
-    $handler->display_options['filters']['field_thesaurus_tid']['vocabulary'] = 'thesaurus';
+/**
+ * The subscribe form.
+ */
+function osha_newsletter_subscribe_form() {
+  $form['intro'] = array(
+    '#markup' => t('Once a month, OSHmail keeps you updated on ocupational safety and health.<br/> You can sign up below:'),
+  );
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('E-mail address'),
+    '#size' => 30,
+    '#required' => TRUE
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Subscribe')
+  );
 
-    $translatables['newsletter_creation'] = array(
-      t('Master'),
-      t('Newsletter creation'),
-      t('more'),
-      t('Apply'),
-      t('Reset'),
-      t('Sort by'),
-      t('Asc'),
-      t('Desc'),
-      t('Items per page'),
-      t('- All -'),
-      t('Offset'),
-      t('« first'),
-      t('‹ previous'),
-      t('next ›'),
-      t('last »'),
-      t('- Choose an operation -'),
-      t('Title'),
-      t('Summary'),
-      t('Type'),
-      t('Post date'),
-      t('Body'),
-      t('Tags'),
-      t('Thesaurus'),
-      t('Free text search'),
-      t('Search in title, body and summary fields '),
-      t('Page'),
-    );
+  return $form;
+}
 
-    // Add view to list of views.
-    $view->display['default'] = $handler;
-    $views['newsletter_creation'] = $view;
+/**
+ * The unsubscribe form.
+ */
+function osha_newsletter_unsubscribe_form() {
+  $form['intro'] = array(
+    '#markup' => t('Not interested any more?<br/> You can unsubscribe below:'),
+  );
+  $form['unsubscribe_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('E-mail address'),
+    '#size' => 30,
+    '#required' => TRUE
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Unsubscribe')
+  );
+
+  return $form;
+}
+
+/**
+ * Subscribe form validation.
+ */
+function osha_newsletter_subscribe_form_validate($form, &$form_state) {
+  if (!valid_email_address($form_state['values']['email'])) {
+    form_set_error('email', t('That e-mail address is not valid.'));
+  }
+}
+
+/**
+ * Unsubscribe form validation.
+ */
+function osha_newsletter_unsubscribe_form_validate($form, &$form_state) {
+  if (!valid_email_address($form_state['values']['unsubscribe_email'])) {
+    form_set_error('unsubscribe_email', t('That e-mail address is not valid.'));
+  }
+}
+
+function _get_listserv_subscription_email(){
+  global $user;
+
+  $listserv = explode("@",variable_get('osha_newsletter_listserv'));
+  $listserv_domain = '';
+
+  if (isset($listserv[1])) {
+    $listserv_domain = $listserv[1];
+  }
+
+  $list_name = variable_get('osha_newsletter_list_name', 'OSHMail');
+
+  if ($listserv_domain != '') {
+    return $list_name . '@' . $listserv_domain;
+  } else {
+    return $user->mail;
+  }
+}
+
+/**
+ * Form submission logic for the subscription form.
+ */
+function osha_newsletter_subscribe_form_submit($form, &$form_state) {
+  global $user;
+
+  $subscribe_email = $form_state['values']['email'];
+  $to = variable_get('osha_newsletter_listserv');//_get_listserv_subscription_email();
+
+  osha_newsletter_send_email('subscribe_email', $to, $subscribe_email, $form_state);
+}
+
+/**
+ * Form submission logic for the subscription form.
+ */
+function osha_newsletter_unsubscribe_form_submit($form, &$form_state) {
+
+
+  $unsubscribe_email = $form_state['values']['unsubscribe_email'];
+  $to = variable_get('osha_newsletter_listserv');//_get_listserv_subscription_email();
+
+  osha_newsletter_send_email('unsubscribe_email', $to, $unsubscribe_email, $form_state);
+}
+
+/**
+ * Actual VBO target action defined in hook_action_info above.
+ */
+function osha_newsletter_add_to_newsletter_action($node, $context) {
+  if (isset($context['view_info']['arguments']['0'])) {
+    $collection_name = $context['view_info']['arguments']['0'];
+    /* @var EntityCollectionRow */
+    $collection = entity_collection_load($collection_name);
+    if ($collection) {
+      $item = new EntityCollectionTreeNode('node', $node->nid, $node);
+      $contexts = _entity_collection_get_contexts($collection);
+      entity_collection_append_item($collection, $item, $contexts);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
+
+  switch ($form_id) {
+    case 'entity_collection_edit_form':
+      if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
+        osha_newsletter_fix_entity_collection_edit_form($form, $form_state);
+        // Alter submit button label.
+        $form['actions']['submit']['#value'] = t('Update newsletter');
+      }
+      break;
+
+    case 'entity_collection_add_form':
+      if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
+        osha_newsletter_fix_entity_collection_add_form($form, $form_state);
+        // Alter submit button label.
+        $form['actions']['submit']['#value'] = t('Create newsletter');
+        // Add a submit handler.
+        $form['#submit'][] = 'osha_newsletter_entity_collection_form_submit';
+      }
+      break;
+
+    case 'views_form_newsletter_node_selection_newsletter_selection_view_page':
+      $form['#action'] = '/' . $_GET['q'];
+      if (!empty($form['actions']['submit']['#submit'])) {
+        $form['actions']['submit']['#submit'][] = 'osha_newsletter_entity_collection_newsletter_add_form_submit';
+      }
+      break;
+
+    case 'entity_collection_content_form':
+      // add submit button to send newsletter and send test newsletter
+      if (isset($form['content'])) {
+        $form['actions']['send_test_newsletter'] = array(
+          '#type' => 'submit',
+          '#value' => t('Send test newsletter'),
+          '#submit' => array('osha_newsletter_send_test_email')
+        );
+        $form['actions']['send_newsletter'] = array(
+          '#type' => 'submit',
+          '#value' => t('Send newsletter to subscribers'),
+          '#submit' => array('osha_newsletter_send_email_to_subscribers')
+        );
+      }
+
+      // Attach js to add css class for taxonomy rows.
+      // #attributes on $v doesn't work.
+      if (isset($form_state['entity_collection']) && $form_state['entity_collection']->bundle == 'newsletter_content_collection') {
+        $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
+        foreach ($form['content'] as $k => &$v) {
+          if (strpos($k, 'taxonomy_term:') !== FALSE) {
+            hide($v['style']);
+          }
+        }
+      }
+      break;
+
+    case 'search_block_form':
+      break;
+
+    default:
+  }
+}
+
+
+function osha_newsletter_form_validate($form, &$form_state){
+  // TODO : Check the submitted items
+}
+
+/**
+ * Submit callback when adding a newsletter.
+ */
+function osha_newsletter_entity_collection_form_submit($form, &$form_state) {
+  $eid = $form_state['entity_collection']->eid;
+  $form_state['redirect'] = 'entity-collection/' . $eid . '/content';
+}
+
+/**
+ * Alter form to create entity collection of type newsletter_content_collection.
+ *
+ * @param array $form
+ *   Drupal form
+ * @param array $form_state
+ *   Drupal form state
+ */
+function osha_newsletter_fix_entity_collection_edit_form(&$form, &$form_state) {
+  // Hide fields set above to their default values.
+  $form['contexts']['#access'] = FALSE;
+  $form['field_newsletter_sent']['#access'] = FALSE;
+  $form['field_newsletter_author']['#access'] = FALSE;
+  $form['field_created']['#access'] = FALSE;
+  $form['field_newsletter_content_after']['#access'] = FALSE;
+  $form['style']['#access'] = FALSE;
+  $form['row']['#access'] = FALSE;
+}
+
+/**
+ * Alter form to create entity collection of type newsletter_content_collection.
+ *
+ * @param array $form
+ *   Drupal form
+ * @param array $form_state
+ *   Drupal form state
+ */
+function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
+  global $user;
+
+  $default_style = 'entity_collection_style_flat';
+  $default_row = 'entity_collection_row_view_mode';
+  $allowed_bundles_var = variable_get('osha_newsletter_allowed_bundles',
+    array(
+      'publication', 'newsletter_article', 'blog', 'news', 'press_release', 'highlight',
+    )
+  );
+  $allowed_bundles = array(
+    'node' => $allowed_bundles_var,
+    'taxonomy_term' => array('newsletter_sections'),
+  );
+
+  // Pre-populate form_state.
+  $form_state['bundle'] = 'newsletter_content_collection';
+  $form_state['values']['settings']['style_settings'] = array('max_depth' => '1');
+  $form_state['values']['settings']['row_settings'] = array(
+    'style_per_row' => '1',
+    'default_style' => array(
+      'node' => 'newsletter_item',
+    ),
+  );
+  $form_state['values']['settings']['allowed_bundles'] = $allowed_bundles;
+
+  // Set value and hide Style.
+
+  $form['style']['#default_value'] = $default_style;
+  $form['style']['#value'] = $default_style;
+
+  // Set value and hide Row.
+  $form['row']['#default_value'] = $default_row;
+  $form['row']['#value'] = $default_row;
+
+  // Form settings - We need to simulate Ajax select controls.
+  // Row settings.
+  $collection = $form_state['entity_collection'];
+  $collection->row = $default_row;
+  $collection->style = $default_style;
+  $collection->settings = array(
+    'row_settings' => array('style_per_row' => '1'),
+    'style_settings' => array('max_depth' => '1'),
+    'allowed_bundles' => $allowed_bundles,
+  );
+
+
+  // Add content types to allowed contents.
+  $form['settings']['allowed_bundles']['node']['#default_value'] = $allowed_bundles_var;
+
+  // Add Newsletter Section taxonomy to supported contents.
+  $form['settings']['allowed_bundles']['taxonomy_term']['#default_value'] = array('newsletter_sections');
+
+  $style = EntityCollectionStyle::getStyle($collection);
+  if (isset($style) && method_exists($style, 'settingsForm')) {
+    $style->settingsForm($form['settings']['style_settings']);
+  }
+  $row = EntityCollectionRow::getRow($collection);
+  $row->settingsForm($form['settings']['row_settings']);
+
+  // Enable custom styles values per row (Newsletter item etc.).
+  $form['settings']['row_settings']['style_per_row']['#default_value'] = TRUE;
+  $form['settings']['style_settings']['max_depth']['#default_value'] = 1;
+  // Set default mode to newsletter_item for nodes.
+  $form['settings']['row_settings']['default_style']['node']['#default_value'] = 'newsletter_item';
+
+
+  // Alter title field label.
+  $form['title']['#title'] = t('Newsletter title');
+
+  // Set author to current user.
+  $form['field_newsletter_author'][LANGUAGE_NONE]['#default_value'] = $user->uid;
+  $form['field_newsletter_author'][LANGUAGE_NONE]['#access'] = FALSE;
+
+  // Hide fields set above to their default values.
+  $form['style']['#access'] = FALSE;
+  $form['row']['#access'] = FALSE;
+  // $form['settings']['row_settings']['#access'] = FALSE;
+  // $form['settings']['allowed_bundles']['#access'] = FALSE;
+  $form['settings']['style_settings']['#access'] = FALSE;
+  $form['field_newsletter_sent']['#access'] = FALSE;
+  $form['field_created']['#access'] = FALSE;
+  $form['contexts']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function osha_newsletter_entity_insert($entity_collection, $type) {
+  if ($type == 'entity_collection'
+      && isset($entity_collection->bundle)
+      && $entity_collection->bundle == 'newsletter_content_collection') {
+
+    $contexts = _entity_collection_get_contexts($entity_collection);
+
+    // Assign all taxonomies to the newly created entity.
+    // Highlights
+    // OSH matters
+    // Latest publications
+    // Coming soon
+    // - Blog
+    // - News
+    // - Events.
+    $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+    $terms = taxonomy_get_tree($voc->vid);
+    $weights = array();
+    // Max number of nodes pre-inserted for each section (term).
+    $max_nodes = variable_get('osha_newsletter_after_max_nodes', 10);
+    foreach ($terms as $weight => $term) {
+      $entity = entity_load('taxonomy_term', array($term->tid));
+      $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
+      // Set weights for sections and children.
+      $weights[$term->tid]['parent'] = ($weight + 1) * ($max_nodes + 1);
+      $weights[$term->tid]['children'] = $weights[$term->tid]['parent'];
+      $item->position = $weights[$term->tid]['parent'];
+      entity_collection_append_item($entity_collection, $item, $contexts);
+    }
+
+    // Mapping of term newsletter sections and content types.
+    $term_ct_map = variable_get('osha_newsletter_term_ct_map');
+
+    if (!empty($term_ct_map['newsletter_article'])) {
+      // Create 'Coming soon' node and append it at the end.
+      $node = osha_newsletter_create_node('Sample content for coming soon ...');
+      $item = new EntityCollectionTreeNode('node', $node->nid, $node);
+      $weights[$term_ct_map['newsletter_article']]['children']++;
+      $item->position = $weights[$term_ct_map['newsletter_article']]['children'];
+      $item->style = (isset($term_ct_map['view_mode_newsletter_article'])) ? $term_ct_map['view_mode_newsletter_article'] : variable_get('osha_newsletter_node_view_mode', 'newsletter_item');
+      entity_collection_append_item($entity_collection, $item, $contexts);
+    }
+
+    // Get allowed bundles for nodes.
+    $settings = unserialize($entity_collection->settings);
+    if (!empty($settings['allowed_bundles']['node'])) {
+      $allowed_bundles = $settings['allowed_bundles']['node'];
+    }
+    else {
+      $allowed_bundles = variable_get('osha_newsletter_allowed_bundles',
+        array(
+          'publication', 'newsletter_article', 'blog', 'news', 'press_release', 'highlight',
+        )
+      );
+    }
+
+    // Select latest content and attach it to the newsletter.
+    if (!empty($entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'])) {
+      $after = $entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'];
+      $after = strtotime($after);
+      $query = new EntityFieldQuery();
+      $rows = $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', $allowed_bundles, 'IN')
+        ->propertyCondition('created', $after, '>=')
+        ->execute();
+      if (isset($rows['node'])) {
+        $nodes = node_load_multiple(array_keys($rows['node']));
+        foreach ($nodes as $nid => $node) {
+          // Don't add any more nodes if already max_nodes for section.
+          if (isset($weights[$term_ct_map[$node->type]]) &&
+              $weights[$term_ct_map[$node->type]]['children'] <
+              $weights[$term_ct_map[$node->type]]['parent'] + $max_nodes) {
+
+            // Increment weight for nodes of current section.
+            $weights[$term_ct_map[$node->type]]['children']++;
+            $item = new EntityCollectionTreeNode('node', $nid, $node);
+            $item->position = $weights[$term_ct_map[$node->type]]['children'];
+            $item->style = (isset($term_ct_map['view_mode_'.$node->type])) ? $term_ct_map['view_mode_'.$node->type] : variable_get('osha_newsletter_node_view_mode', 'newsletter_item');
+            entity_collection_append_item($entity_collection, $item, $contexts);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Create new node of specified type.
+ *
+ * @param string $title
+ *   Node title
+ * @param string $type
+ *   bundle name
+ *
+ * @return object
+ *   Saved node.
+ */
+function osha_newsletter_create_node($title, $type = 'newsletter_article') {
+  global $user;
+  $node = new stdClass();
+  $node->title = $title;
+  $node->type = $type;
+  node_object_prepare($node);
+  $node->language = 'en';
+  $node->uid = $user->uid;
+  $node->status = 1;
+  $node->promote = 0;
+  $node->title_field[$node->language][0]['value'] = $title;
+  $node = node_submit($node);
+  node_save($node);
+  return $node;
+}
+
+
+/**
+ * Implements hook_mail().
+ *
+ * This hook defines a list of possible e-mail templates that this module can
+ * send. Each e-mail is given a unique identifier, or 'key'.
+ *
+ * $message comes in with some standard properties already set: 'to' address,
+ * 'from' address, and a set of default 'headers' from drupal_mail(). The goal
+ * of hook_mail() is to set the message's 'subject' and 'body' properties, as
+ * well as make any adjustments to the headers that are necessary.
+ *
+ * The $params argument is an array which can hold any additional data required
+ * to build the mail subject and body; for example, user-entered form data, or
+ * some context information as to where the mail request came from.
+ *
+ * Note that hook_mail() is not actually a hook. It is only called for a single
+ * module, the module named in the first argument of drupal_mail(). So it's
+ * a callback of a type, but not a hook.
+ */
+function osha_newsletter_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['language']->language,
+  );
+
+  switch ($key) {
+    // Send a test message to the user email.
+    case 'test_newsletter':
+      $source = entity_collection_load($params['#style']->entity_collection->name);
+      osha_newsletter_build_mail($message, $source);
+      break;
+    case 'send_newsletter':
+      $source = entity_collection_load($params['#style']->entity_collection->name);
+      osha_newsletter_build_mail($message, $source);
+      break;
+    case 'subscribe_email':
+      osha_newsletter_build_subscribe_mail($message);
+      break;
+    case 'unsubscribe_email':
+      osha_newsletter_build_unsubscribe_mail($message);
+      break;
+  }
+}
+
+
+/**
+ * Send test version of newsletter.
+ */
+function osha_newsletter_send_test_email(&$form_state) {
+  global $user;
+
+  $to = $user->mail;
+  $from = variable_get('osha_newsletter_listserv_from', $user->mail);
+
+  osha_newsletter_send_email('test_newsletter', $to, $from ,$form_state);
+}
+
+
+/**
+ * Send email to subscribers (to listserver)
+ */
+function osha_newsletter_send_email_to_subscribers(&$form_state) {
+  global $user;
+
+  $to = _get_listserv_subscription_email();
+  $from = variable_get('osha_newsletter_listserv_from', $user->mail);
+
+  osha_newsletter_send_email('send_newsletter', $to, $from, $form_state);
+}
+
+/**
+ * Send email.
+ *  $test_addresses - the email address for test
+ */
+function osha_newsletter_send_email($key, $to, $from, $form_values) {
+  // All system mails need to specify the module and template key (mirrored from
+  // hook_mail()) that the message they want to send comes from.
+  $module = 'osha_newsletter';
+
+  // "params" loads in additional context for email content completion in
+  // hook_mail(). In this case, we want to pass in the values the user entered
+  // into the form, which include the message body.
+  $params = $form_values;
+
+  // The language of the e-mail. This will one of three values:
+  // - user_preferred_language(): Used for sending mail to a particular website
+  //   user, so that the mail appears in their preferred language.
+  // - global $language: Used when sending a mail back to the user currently
+  //   viewing the site. This will send it in the language they're currently
+  //   using.
+  // - language_default(): Used when sending mail to a pre-existing, 'neutral'
+  //   address, such as the system e-mail address, or when you're unsure of the
+  //   language preferences of the intended recipient.
+  //
+  // Since in our case, we are sending a message to a random e-mail address that
+  // is not necessarily tied to a user account, we will use the site's default
+  // language.
+  $language = language_default();
+
+  // Whether or not to automatically send the mail when drupal_mail() is
+  // called. This defaults to TRUE, and is normally what you want unless you
+  // need to do additional processing before drupal_mail_send() is called.
+  $send = TRUE;
+  // Send the mail, and check for success. Note that this does not guarantee
+  // message delivery; only that there were no PHP-related issues encountered
+  // while sending.
+  $result = drupal_mail($module, $key, $to, $language, $params, $from, $send);
+  if ($result['result'] == TRUE) {
+    drupal_set_message(t('Your message has been sent to @emails.', array('@emails' => $to)));
+  }
+  else {
+    drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+  }
+}
+
+
+/**
+ * Build subject and body of the test and normal newsletter email.
+ *
+ * array $message - Message array as used by hook_mail().
+ * array $source - The EntityCollection instance.
+ */
+function osha_newsletter_build_mail(&$message, EntityCollection $source) {
+  $content = entity_collection_load_content($source->bundle, $source);
+
+  $items = $content->children;
+  $elements = array();
+  $last_section = NULL;
+  $blogs = array();
+  $news = array();
+  $events = array();
+
+  foreach ($items as $item) {
+    if ($item->type == 'taxonomy_term') {
+      $term = taxonomy_term_view($item->content, 'token');
+      $last_section = $item->content->name_original;
+      if ($last_section == 'Blog') {
+        $blogs[] = $term;
+      } else if ($last_section == 'News') {
+        $news[] = $term;
+      } else if ($last_section == 'Events') {
+        $events[] = $term;
+      } else {
+        $elements[] = $term;
+      }
+    } else if ($item->type == 'node') {
+      $style = $item->style;
+      $node = node_view($item->content,$style);
+
+      if ($last_section == 'Blog') {
+        $blogs[] = $node;
+      } else if ($last_section == 'News') {
+        $news[] = $node;
+      } else if ($last_section == 'Events') {
+        $events[] = $node;
+      } else {
+        $elements[] = $node;
+      }
+    }
+  }
+
+  // Get message data from source.
+  $message['subject'] = $source->title;
+  $message['body']['header'] = theme('newsletter_header', array('languages' => NULL));
+  $message['body']['body'] = theme('newsletter_body', array('items' => $elements, 'blogs' => $blogs, 'news' => $news, 'events' => $events));
+  $message['body']['footer'] = theme('newsletter_footer');
+
+  // Optional params for HTML mails.
+  $message['params']['plain'] = NULL;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function osha_newsletter_build_subscribe_mail(&$message){
+  //Get list name
+  $list = variable_get('osha_newsletter_list_name', 'OSHMail');
+
+  // Get message data from source.
+  $message['subject'] = '';
+  $message['body']['body'] = 'subscribe ' . $list . ' anonymous';
+
+  // Optional params for HTML mails.
+  $message['params']['plain'] = NULL;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function osha_newsletter_build_unsubscribe_mail(&$message){
+  //Get list name
+  $list = variable_get('osha_newsletter_list_name', 'OSHMail');
+
+  // Get message data from source.
+  $message['subject'] = '';
+  $message['body']['body'] = 'unsubscribe ' . $list;
+
+  // Optional params for HTML mails.
+  $message['params']['plain'] = NULL;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_newsletter_theme() {
+  $theme = array();
+  $path = drupal_get_path('module', 'osha_newsletter');
+
+  $theme['newsletter_header'] = array(
+    'template' => 'newsletter_header',
+    'variables' => array(
+      'languages' => NULL
+    ),
+    'path' => $path . '/templates'
+  );
+  $theme['newsletter_body'] = array(
+    'template' => 'newsletter_body',
+    'variables' => array(
+      'items' => NULL,
+      'blogs' => NULL,
+      'news' => NULL,
+      'events' => NULL
+    ),
+    'path' => $path . '/templates'
+  );
+  $theme['newsletter_footer'] = array(
+    'template' => 'newsletter_footer',
+    'path' => $path . '/templates'
+  );
+
+  return $theme;
+}
+
+
+/**
+ * Define custom view mode for entities - newsletter
+ */
+function osha_newsletter_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['highlights_item'] = array(
+    'label' => t('Newsletter Highlights'),
+    'custom settings' => TRUE
+  );
+
+  $entity_info['node']['view modes']['newsletter_item'] = array(
+    'label' => t('Newsletter Item'),
+    'custom settings' => TRUE
+  );
+}
+
+function osha_newsletter_preprocess_node(&$vars) {
+  if ($vars['view_mode'] == 'highlights_item') {
+    if (array_key_exists('links', $vars)) {
+      unset($vars['links']);
+    }
+
+    $vars['theme_hook_suggestions'][] = 'node__highlights_item';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__highlights_item';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->nid . '__highlights_item';
+  }
+
+  if ($vars['view_mode'] == 'newsletter_item') {
+    if (array_key_exists('links', $vars)) {
+      unset($vars['links']);
+  }
+
+    $vars['theme_hook_suggestions'][] = 'node__newsletter_item';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__newsletter_item';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->nid . '__newsletter_item';
   }
 }

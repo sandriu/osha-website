@@ -5,10 +5,10 @@ osha_configure_solr();
 osha_change_field_size();
 osha_configure_mailsystem();
 osha_configure_htmlmail();
-osha_configure_simplenews();
-osha_configure_newsletter_category();
 osha_configure_imce();
 osha_configure_file_translator();
+osha_newsletter_create_taxonomy();
+osha_configure_newsletter_permissions();
 
 module_disable(array('overlay'));
 
@@ -133,40 +133,6 @@ function osha_configure_htmlmail() {
   variable_set('htmlmail_postfilter', 'full_html');
 }
 
-/**
- * Configure the drupal simplenews module with proper settings.
- */
-function osha_configure_simplenews() {
-  drupal_set_message('Configuring Drupal Simplenews module ...');
-
-  $site_mail = variable_get('site_mail', 'no-reply@osha.org');
-  $site_name = variable_get('site_name', 'OSHA');
-
-  variable_set('simplenews_debug', '1');
-  variable_set('simplenews_format', 'html');
-  variable_set('simplenews_from_address', $site_mail);
-  variable_set('simplenews_from_name', $site_name);
-  variable_set('simplenews_priority', '3');
-  variable_set('simplenews_receipt', 0);
-  variable_set('simplenews_send', '0');
-  variable_set('simplenews_source_cache', 'SimplenewsSourceCacheNone');
-  variable_set('simplenews_spool_expire', '0');
-  variable_set('simplenews_test_address', $site_mail);
-  variable_set('simplenews_test_address_override', 1);
-  variable_set('simplenews_throttle', '20');
-  variable_set('simplenews_use_cron', 1);
-}
-
-/**
- * Configure the OSHA newsletter category to format HTML and priority NORMAL.
- */
-function osha_configure_newsletter_category() {
-  drupal_set_message('Configuring OSHA newsletters format and priority ...');
-
-  db_update('simplenews_category')
-  ->fields(array('format' => 'html', 'priority' => 3))
-  ->execute();
-}
 
 /**
  * Configure IMCE contrib module - Alter User-1 profile and assign User-1 profile to the administrator role.
@@ -229,4 +195,57 @@ function osha_configure_file_translator() {
     $file->settings['allow_override'] = FALSE;
     $file->save();
   }
+}
+
+
+/**
+ * Populate initial terms into the newsletter_sections taxonomy.
+ */
+function osha_newsletter_create_taxonomy() {
+  $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+  $terms = taxonomy_get_tree($voc->vid);
+
+  if (empty($terms)) {
+    $new_terms = array(
+      'highlight' => 'Highlights',
+      '' => 'OSH matters',
+      'publication' => 'Latest publications',
+      'newsletter_article' => 'Coming soon',
+      'blog' => 'Blog',
+      'news' => 'News',
+      'event' => 'Events',
+    );
+    $cont_type_term_map = array();
+    $new_terms_ct = array_flip($new_terms);
+
+    $weight = 0;
+
+    foreach ($new_terms as $idx => $term_name) {
+      $term = new stdClass();
+      $term->name = $term_name;
+      $term->language = 'en';
+      $term->vid = $voc->vid;
+      // weight must be an integer
+      $term->weight = $weight++;
+      taxonomy_term_save($term);
+      if ($term->name == 'Coming soon') {
+        variable_set('osha_newsletter_coming_soon_tid', $term->tid);
+      }
+      $cont_type_term_map[$new_terms_ct[$term->name]] = $term->tid;
+    }
+    variable_set('osha_newsletter_term_ct_map', $cont_type_term_map);
+  }
+}
+
+
+/**
+ * Assign required permissions to roles - newsletter.
+ */
+function osha_configure_newsletter_permissions(){
+  user_role_change_permissions(DRUPAL_ANONYMOUS_RID, array(
+    'view newsletter_content_collection entity collections' => TRUE
+  ));
+  user_role_change_permissions(DRUPAL_AUTHENTICATED_RID, array(
+    'view newsletter_content_collection entity collections' => TRUE
+  ));
 }
