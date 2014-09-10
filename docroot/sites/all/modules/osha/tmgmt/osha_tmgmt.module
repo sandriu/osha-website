@@ -222,7 +222,11 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       foreach ($target_languages_codes as $lang_code) {
         $target_languages[$lang_code] = $languages[$lang_code];
       }
-      drupal_set_title($job->label());
+      $wrapper = entity_metadata_wrapper('tmgmt_job', $job);
+      drupal_set_title(t('@title - @state', array(
+        '@title' => $job->label(),
+        '@state' => $wrapper->state->label(),
+      )));
 
       $form['language_info'] = array(
         '#type' => 'container',
