@@ -51,8 +51,6 @@
  */
 ?>
 
-<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
-
 <div id="socialNetworksBlue">
 	<div id="icons">
 		<a href=""><img src="/sites/all/themes/osha_frontend/images/twitterTop.png" alt="Twitter"></a>

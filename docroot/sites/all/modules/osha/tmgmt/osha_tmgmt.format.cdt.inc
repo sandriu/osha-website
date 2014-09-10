@@ -211,11 +211,14 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
       $phase = reset($phase);
     }
     else {
+      drupal_set_message('Transaction identifier tag could not be found', 'error');
       return FALSE;
     }
 
     // Check if the job can be loaded.
-    if (!$job = tmgmt_job_load((string) $phase)) {
+    $jid = (string) $phase;
+    if (!$job = tmgmt_job_load($jid)) {
+      drupal_set_message(sprintf('File\'s job %s could not be found', $jid), 'error');
       return FALSE;
     }
 
@@ -223,7 +226,9 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $items_ids = array_keys($job->getItems());
     $identifiers = $xml->xpath("//ContentIdentifier");
     foreach ($identifiers as $identifier) {
-      if (!in_array((string) $identifier, $items_ids)) {
+      $jiid = (string) $identifier;
+      if (!in_array($jiid, $items_ids)) {
+        drupal_set_message(sprintf('Job item %s could not be found', $jiid), 'error');
         return FALSE;
       }
     }
@@ -232,13 +237,16 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $this->getMappedItemIDs($job);
     $languages = $xml->xpath("//TranslationTargetLanguage");
     foreach ($languages as $language) {
+      $lang = (string) $language;
       if (!isset($this->mappedItemsIDs[(string) $language])) {
+        drupal_set_message(sprintf('Target language %s could not be found', $lang), 'error');
         return FALSE;
       }
     }
 
     $targets = $this->getImportedTargets($job);
     if (empty($targets)) {
+      drupal_set_message('Targets could not be processed', 'error');
       return FALSE;
     }
     $reader = new XMLReader();
