@@ -78,7 +78,7 @@
  * @see template_process()
  */
 ?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 15px; padding-bottom: 15px;">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 15px;">
   <tbody>
     <tr>
       <td style="border-style: dotted; border-top-width: 2px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px; border-color: #CFDDEE; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="dotted-line"></td>
@@ -88,10 +88,10 @@
     </tr>
     <tr>
       <td>
-        <table align="left" border="0" cellpadding="0" cellspacing="0" class="item-thumbnail" width="33%" style="padding-bottom: 10px;">
+        <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <tbody>
             <tr>
-              <td>
+              <td width="33%" style="padding-bottom: 10px;">
                 <?php
                   print l(theme('image_style', array(
                     'style_name' => 'thumbnail',
@@ -104,13 +104,7 @@
                   ));
                 ?>
               </td>
-            </tr>
-          </tbody>
-        </table>
-        <table align="right" border="0" cellpadding="0" cellspacing="0" class="item-title" width="67%" style="padding-bottom: 10px;">
-          <tbody>
-            <tr>
-              <td style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px; font-family: Oswald, Arial,sans-serif; font-size: 18px;">
+              <td width="67%" valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px; font-family: Oswald, Arial, sans-serif; font-size: 18px; vertical-align: top;">
                 <?php
                   print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
                     'attributes' => array('style' => 'color: #003399; text-decoration: none;'),
@@ -121,9 +115,15 @@
             </tr>
           </tbody>
         </table>
-        <div class="item-text-body" style="width: 100%; font-size: 13px; font-family: Arial, sans-serif; color: #777777;">
-          <?php print($field_summary[0]['safe_value']); ?>
-        </div>
+        <table border="0" cellpadding="0" cellspacing="0" class="item-summary" width="100%" style="padding-bottom: 10px;">
+          <tbody>
+            <tr>
+              <td style="width: 100%; font-size: 13px; font-family: Arial, sans-serif; color: #777777;">
+                <?php print($field_summary[0]['safe_value']); ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </td>
     </tr>
   </tbody>
