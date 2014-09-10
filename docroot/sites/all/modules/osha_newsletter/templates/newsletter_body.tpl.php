@@ -1,11 +1,11 @@
 <table border="0" cellpadding="28" cellspacing="0" width="800">
   <tbody>
     <tr>
-      <td style="width: 100%; padding-top: 0px; padding-bottom: 0px;">
-        <table border="0" cellpadding="20" cellspacing="0" style="width: 100%;">
+      <td width="100%" style="padding-top: 0px; padding-bottom: 0px;">
+        <table border="0" cellpadding="20" cellspacing="0" width="100%">
           <tbody>
             <tr>
-              <td style="width: 396px; padding-top: 0px;" class="left-column">
+              <td width="396" style="padding-top: 0px;" class="left-column">
                 <?php
                   foreach ($items as $item) {
                     print(render($item));
@@ -13,7 +13,7 @@
                 ?>
               </td>
 
-              <td style="width: 308px; vertical-align: top; padding-top: 0px; padding-right: 0px;" class="right-column">
+              <td width="308" style="vertical-align: top; padding-top: 0px; padding-right: 0px;" class="right-column">
 
                 <?php
                   if (!empty($blogs) && sizeof($blogs) > 1) {
@@ -22,7 +22,7 @@
                     }
                   }
                 ?>
-                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
@@ -55,7 +55,7 @@
                     }
                   }
                 ?>
-                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
@@ -88,7 +88,7 @@
                     }
                   }
                 ?>
-                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
