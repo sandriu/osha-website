@@ -247,6 +247,12 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       hide($form['info']['source_language']);
       hide($form['info']['target_language']);
       hide($form['info']['translator']);
+      if ($form_state['tmgmt_job']->state == TMGMT_JOB_STATE_UNPROCESSED) {
+        hide($form['translator_wrapper']);
+        if (isset($form['job_items_wrapper']['suggestions'])) {
+          hide($form['job_items_wrapper']['suggestions']);
+        }
+      }
       if (isset($form['info']['created'])) {
         $created = $form['info']['created'];
         unset($form['info']['created']);
