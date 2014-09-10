@@ -11,22 +11,33 @@ function osha_newsletter_admin_form() {
   $form['osha_newsletter_listserv'] = array(
     '#type' => 'textfield',
     '#title' => t('Listserv e-mail address'),
-    '#default_value' => variable_get('osha_newsletter_listserv', 'test@list.osha.europa.eu'),
+    '#default_value' => variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu'),
     '#size' => 40,
     '#attributes' => array('tabindex' => 1),
     '#maxlength' => 60,
-    '#description' => t('Destination listserv account to send the newsletter for dispatch'),
+    '#description' => t('Destination listserv account to send the subscribe/unsubscribe newsletter requests'),
     '#required' => TRUE,
   );
 
   $form['osha_newsletter_listserv_from'] = array(
     '#type' => 'textfield',
     '#title' => t('E-mail author'),
-    '#default_value' => variable_get('osha_newsletter_listserv_from', 'news@osha.europa.eu'),
+    '#default_value' => variable_get('osha_newsletter_listserv_from', 'oshmail@osha.europa.eu'),
     '#attributes' => array('tabindex' => 2),
     '#size' => 40,
     '#maxlength' => 40,
     '#description' => t('E-mail sender as it will appear in the "From" header of the e-mail'),
+    '#required' => TRUE,
+  );
+
+  $form['osha_newsletter_list_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('List name'),
+    '#default_value' => variable_get('osha_newsletter_list_name', 'OSHMail-Test'),
+    '#attributes' => array('tabindex' => 2),
+    '#size' => 40,
+    '#maxlength' => 40,
+    '#description' => t('The newsletter list name'),
     '#required' => TRUE,
   );
 
@@ -41,7 +52,7 @@ function osha_newsletter_admin_form() {
       '#attributes' => array('tabindex' => 4),
       '#title' => t('Default view mode'),
       '#options' => $options,
-      '#default_value' => variable_get('osha_newsletter_node_view_mode', 'tzeaser'),
+      '#default_value' => variable_get('osha_newsletter_node_view_mode', 'newsletter_item'),
       '#description' => t('Default view mode when render nodes in newsletter'),
       '#required' => FALSE,
     );
@@ -50,7 +61,7 @@ function osha_newsletter_admin_form() {
   $form['osha_newsletter_after_max_nodes'] = array(
     '#type' => 'textfield',
     '#title' => t('Max number of nodes after creation'),
-    '#default_value' => variable_get('osha_newsletter_after_max_nodes', 15),
+    '#default_value' => variable_get('osha_newsletter_after_max_nodes', 10),
     '#attributes' => array('tabindex' => 4),
     '#size' => 40,
     '#maxlength' => 40,
@@ -62,7 +73,7 @@ function osha_newsletter_admin_form() {
     'osha_newsletter_allowed_bundles',
     array(
       // TODO:EDW: check 'event' - non existing for now.
-      'publication', 'page', 'blog', 'news', 'press_release', 'highlight',
+      'publication', 'page', 'blog', 'news', 'press_release', 'highlight', 'newsletter_article'
     )
   );
   $entity_info = entity_get_info();
@@ -96,12 +107,26 @@ function osha_newsletter_admin_form() {
     $options_tax[$term->tid] = $term->name;
   }
 
+  $options_view_modes = array('' => '-- Please select --');
+  if (isset($entity_info['node']['view modes'])) {
+    foreach ($entity_info['node']['view modes'] as $machine_name => $info) {
+      $options_view_modes[$machine_name] = $info['label'];
+    }
+  }
+
   foreach ($options as $content_type => $title) {
     $form['osha_newsletter_term_ct_map'][$content_type] = array(
       '#type' => 'select',
       '#title' => $title,
       '#options' => $options_tax,
       '#default_value' => !empty($term_ct_map[$content_type]) ? $term_ct_map[$content_type] : '',
+    );
+    $form['osha_newsletter_term_ct_map']['view_mode_'.$content_type] = array(
+      '#type' => 'select',
+      '#title' => t('View mode for ').$title,
+      '#options' => $options_view_modes,
+      '#default_value' => ($content_type == 'highlight') ? 'highlights_item' : 'newsletter_item',
+      '#description' => t('Default view mode when render this content type in newsletter'),
     );
   }
 
