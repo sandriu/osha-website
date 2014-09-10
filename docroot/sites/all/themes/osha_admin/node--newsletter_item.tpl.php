@@ -80,43 +80,32 @@
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tbody>
     <tr>
-      <td style="padding-left: 0px; padding-right: 0px;">
-        <table align="left" border="0" cellpadding="0" cellspacing="0" width="14" class="link-arrow" style="height: 22px;">
-          <tbody>
-            <tr>
-              <td style="vertical-align: top; padding-top: 2px;">
-                <?php
-                  $directory = drupal_get_path('module','osha_newsletter');
-                  $site_url = variable_get('site_base_url', 'http://osha.localhost');
-                  print l(theme('image', array(
-                  'path' => $directory . '/images/link-arrow.png',
-                  'width' => 7,
-                  'height' => 11,
-                  'alt' => 'link arrow',
-                  )), $site_url, array(
-                  'html' => TRUE,
-                  'external' => TRUE
-                ));
-                ?>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table align="left" border="0" cellpadding="0" cellspacing="0" class="link-title">
-          <tbody>
-            <tr>
-              <td>
-                <?php
-                  print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-                    'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
-                    'external' => TRUE
-                  ));
-                ?>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <td align="left" width="5%" style="padding-left: 0px; padding-right: 0px; vertical-align: top; padding-top: 5px;">
+        <?php
+          $directory = drupal_get_path('module','osha_newsletter');
+          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+          print l(theme('image', array(
+          'path' => $directory . '/images/link-arrow.png',
+          'width' => 7,
+          'height' => 11,
+          'alt' => 'link arrow',
+          )), $site_url, array(
+          'html' => TRUE,
+          'external' => TRUE
+        ));
+        ?>
       </td>
+      <td align="right" width="95%" style="text-align: left; padding-top: 10px; padding-bottom: 10px;">
+        <?php
+          print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
+            'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
+            'external' => TRUE
+          ));
+        ?>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="border-style: dotted; border-bottom-width: 2px; border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; border-color: #CFDDEE; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="dotted-line no-padding"></td>
     </tr>
   </tbody>
 </table>
