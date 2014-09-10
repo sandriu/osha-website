@@ -1,11 +1,11 @@
 <table border="0" cellpadding="28" cellspacing="0" width="800">
   <tbody>
     <tr>
-      <td  width="744" style="padding-top: 0px; padding-bottom: 0px;">
-        <table border="0" cellpadding="20" cellspacing="0" width="744">
+      <td style="width: 100%; padding-top: 0px; padding-bottom: 0px;">
+        <table border="0" cellpadding="20" cellspacing="0" style="width: 100%;">
           <tbody>
             <tr>
-              <td width="396" style="padding-top: 0px;" class="left-column">
+              <td style="width: 396px; padding-top: 0px;" class="left-column">
                 <?php
                   foreach ($items as $item) {
                     print(render($item));
@@ -13,17 +13,16 @@
                 ?>
               </td>
 
-              <td width="308" style="vertical-align: top; padding-top: 0px; padding-right: 0px;" class="right-column">
-                <div style="font: 12px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif;">
-                  <?php
-                    if (!empty($blogs) && sizeof($blogs) > 1) {
-                      foreach ($blogs as $item) {
-                        print(render($item));
-                      }
+              <td style="width: 308px; vertical-align: top; padding-top: 0px; padding-right: 0px;" class="right-column">
+
+                <?php
+                  if (!empty($blogs) && sizeof($blogs) > 1) {
+                    foreach ($blogs as $item) {
+                      print(render($item));
                     }
-                  ?>
-                </div>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                  }
+                ?>
+                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
@@ -48,16 +47,15 @@
                   </tbody>
                 </table>
 
-                <div style="font: 12px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif;">
-                  <?php
-                    if (!empty($news) && sizeof($news) > 1) {
-                      foreach ($news as $item) {
-                        print(render($item));
-                      }
+
+                <?php
+                  if (!empty($news) && sizeof($news) > 1) {
+                    foreach ($news as $item) {
+                      print(render($item));
                     }
-                  ?>
-                </div>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                  }
+                ?>
+                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
@@ -82,16 +80,15 @@
                   </tbody>
                 </table>
 
-                <div style="font: 12px Verdana,Helvetica,'Lucida Grande',Lucida,Arial,sans-serif;">
-                  <?php
-                    if (!empty($events) && sizeof($events) > 1) {
-                      foreach ($events as $item) {
-                        print(render($item));
-                      }
+
+                <?php
+                  if (!empty($events) && sizeof($events) > 1) {
+                    foreach ($events as $item) {
+                      print(render($item));
                     }
-                  ?>
-                </div>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
+                  }
+                ?>
+                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border-top-width: 2px; border-style: dotted; border-color: #CFDDEE; padding-bottom: 15px;" class="pink-arrow">
                   <tbody>
                     <tr>
                       <td style="font-family: Oswald, Arial, sans-serif; font-size: 18px; color: #003399; text-align: right;">
