@@ -100,6 +100,8 @@ function osha_tmgmt_tmgmt_source_plugin_info_alter(&$info) {
 function osha_tmgmt_entity_info_alter(&$entity_info) {
   if (isset($entity_info['tmgmt_job_item'])) {
     $entity_info['tmgmt_job_item']['views controller class'] = 'OshaTMGMTJobItemViewsController';
+    $entity_info['tmgmt_job_item']['entity class'] = 'OshaTMGMTJobItem';
+    $entity_info['tmgmt_job_item']['metadata controller class'] = 'OshaTMGMTJobItemMetadataController';
   }
   if (isset($entity_info['tmgmt_job'])) {
     $entity_info['tmgmt_job']['views controller class'] = 'OshaTMGMTJobViewsController';
