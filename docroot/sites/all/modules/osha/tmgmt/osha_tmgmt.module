@@ -169,9 +169,17 @@ function osha_tmgmt_preprocess_page(&$variables) {
  * Implements hook_form_alter().
  */
 function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
+  // Checks if the form is a source item form, and generates it's supposed id.
+  $form_source_id = '';
+  if (isset($form_state['plugin']) && isset($form_state['item_type'])) {
+    $form_source_id = 'tmgmt_ui_' . $form_state['plugin'] . '_source_' . $form_state['item_type'] . '_overview_form';
+  }
+
   switch ($form_id) {
-    case 'tmgmt_ui_entity_source_node_overview_form':
-      unset($form['actions']['submit']);
+    case $form_source_id:
+      if (isset($form['actions']['submit'])) {
+        unset($form['actions']['submit']);
+      }
       break;
 
     case 'tmgmt_ui_cart_content':
