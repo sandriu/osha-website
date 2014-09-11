@@ -17,6 +17,8 @@ class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
       ),
     );
 
+    $data['tmgmt_job_item']['label']['field']['handler'] = 'osha_tmgmt_handler_field_tmgmt_entity_label';
+
     $data['tmgmt_job_item']['target_language'] = array(
       'title' => t('Target language'),
       'help' => t('Language to translate to.'),
