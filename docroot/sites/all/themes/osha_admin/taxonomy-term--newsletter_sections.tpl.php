@@ -19,6 +19,16 @@
               print($name_field[0]['safe_value']);
           }
         ?>
+        <?php
+          $directory = drupal_get_path('module','osha_newsletter');
+          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+          print(theme('image', array(
+          'path' => $directory . '/images/blog-callout.png',
+          'width' => 36,
+          'height' => 30,
+          'alt' => 'blog callout'
+          )));
+        ?>
       </td>
     </tr>
     <tr>
