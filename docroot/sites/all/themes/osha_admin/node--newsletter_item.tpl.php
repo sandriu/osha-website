@@ -80,6 +80,11 @@
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tbody>
     <tr>
+      <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-left: 14px;">
+        <span class="item-date">Jun 11, 2014</span>
+      </td>
+    </tr>
+    <tr>
       <td align="left" width="5%" style="padding-left: 0px; padding-right: 0px; vertical-align: top; padding-top: 5px;">
         <?php
           $directory = drupal_get_path('module','osha_newsletter');
@@ -95,7 +100,7 @@
         ));
         ?>
       </td>
-      <td align="right" width="95%" style="text-align: left; padding-top: 10px; padding-bottom: 10px;">
+      <td align="right" width="95%" style="text-align: left; padding-top: 5px; padding-bottom: 5px;">
         <?php
           print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
             'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
@@ -106,6 +111,9 @@
     </tr>
     <tr>
       <td colspan="2" style="border-style: dotted; border-bottom-width: 2px; border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; border-color: #CFDDEE; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="dotted-line no-padding"></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding-bottom: 5px;" class="space-beyond-dotted-line"></td>
     </tr>
   </tbody>
 </table>
