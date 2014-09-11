@@ -120,6 +120,11 @@ class MigrateOshaNews extends OSHADynamicMigration {
       return FALSE;
     }
 
+    $type = strstr($row->id, '/', TRUE);
+    if ($type === 'teaser') {
+      return FALSE;
+    }
+
     $row->language = 'en';
     $tags = $row->subject . ', ' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);

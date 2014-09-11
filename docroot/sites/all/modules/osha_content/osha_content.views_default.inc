@@ -40,6 +40,10 @@ function osha_content_views_default_views() {
     ),
   );
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Footer: Global: Unfiltered text */
+  $handler->display->display_options['footer']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['footer']['area_text_custom']['field'] = 'area_text_custom';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
@@ -102,6 +106,56 @@ function osha_content_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+
+  /* Display: News Block */
+  $handler = $view->new_display('block', 'News Block', 'block_1');
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Unfiltered text */
+  $handler->display->display_options['footer']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['footer']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['content'] = '<a href="/news">View all</a>';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'news' => 'news',
+  );
+
+  /* Display: Publication Block */
+  $handler = $view->new_display('block', 'Publication Block', 'block_2');
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Unfiltered text */
+  $handler->display->display_options['footer']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['footer']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['content'] = '<a href="/publications">View all</a>';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'publication' => 'publication',
+  );
   $translatables['related_content'] = array(
     t('Master'),
     t('Related Content'),
@@ -113,6 +167,10 @@ function osha_content_views_default_views() {
     t('Desc'),
     t('All'),
     t('Block'),
+    t('News Block'),
+    t('<a href="/news">View all</a>'),
+    t('Publication Block'),
+    t('<a href="/publications">View all</a>'),
   );
   $export['related_content'] = $view;
 
