@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Class MigrateOshaNews migrates news.txt contents. The data
- * is stored inside the <em>News</em> content type.
+ * Class MigrateOshaHighlight migrates news.txt contents. The data
+ * is stored inside the <em>Highlight</em> content type.
  */
-class MigrateOshaNews extends OSHADynamicMigration {
+class MigrateOshaHighlight extends OSHADynamicMigration {
 
   /**
    * {@inheritdoc}
    */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
-    $this->description = 'Import "News" contents from CSV file';
+    $this->description = 'Import "Highlight" contents from CSV file';
     $this->dependencies = array(
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_TAGS,
@@ -24,8 +24,8 @@ class MigrateOshaNews extends OSHADynamicMigration {
     $data_path = osha_migration_get_data_dir();
     $source_file = MigrationUtil::getSourceFile($arguments);
     $this->source = new MigrateSourceList(
-      new NewsContentListCSV($source_file),
-      new NewsContentItemCSV(),
+      new HighlightContentListCSV($source_file),
+      new HighlightContentItemCSV(),
       $this->fields()
     );
 
@@ -42,7 +42,7 @@ class MigrateOshaNews extends OSHADynamicMigration {
     );
 
     $node_options = MigrateDestinationNode::options('en', 'full_html');
-    $this->destination = new MigrateDestinationNode(OSHA_NEWS_CONTENT_TYPE_NEWS, $node_options);
+    $this->destination = new MigrateDestinationNode(OSHA_HIGHLIGHT_CONTENT_TYPE_HIGHLIGHT, $node_options);
 
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('field_image', 'image');
@@ -107,7 +107,7 @@ class MigrateOshaNews extends OSHADynamicMigration {
    * {@inheritdoc}
    */
   protected function generateMachineName() {
-    return OSHA_MIGRATION_CONTENT_TYPE_NEWS;
+    return OSHA_MIGRATION_CONTENT_TYPE_HIGHLIGHT;
   }
 
   /**
@@ -121,7 +121,7 @@ class MigrateOshaNews extends OSHADynamicMigration {
     }
 
     $type = strstr($row->id, '/', TRUE);
-    if ($type === 'teaser') {
+    if ($type !== 'teaser') {
       return FALSE;
     }
 
@@ -200,7 +200,7 @@ class MigrateOshaNews extends OSHADynamicMigration {
       'creator' => 'Author user id from the old website',
       'title' => '',
       'description' => '',
-      'text' => 'Body of the news',
+      'text' => 'Body of the highlight',
       'image' => 'Path to image file',
       'imageCaption' => 'Image tooltip',
       'subject' => 'Categories/Tags',
@@ -212,7 +212,7 @@ class MigrateOshaNews extends OSHADynamicMigration {
   }
 }
 
-class NewsContentListCSV extends MigrateList {
+class HighlightContentListCSV extends MigrateList {
   protected $file = '';
   public static $data = array();
 
@@ -237,10 +237,10 @@ class NewsContentListCSV extends MigrateList {
    */
   protected function parseSourceFile() {
     $handle = fopen($this->file, 'r');
-    $fields = $raw_data = fgetcsv($handle, 1000, ';');
+    $fields = $raw_data = fgetcsv($handle, NULL, ';');
     self::$data = array();
     $work_flow_key = array_search('workflow_state', $fields);
-    while (($raw_data = fgetcsv($handle, 100000, ';')) !== FALSE) {
+    while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
       $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
       $path = MigrationUtil::getIDFromSourceRow($raw_data);
       self::$data[$path]['id'] = $path;
@@ -296,14 +296,14 @@ class NewsContentListCSV extends MigrateList {
   }
 }
 
-class NewsContentItemCSV extends MigrateItem {
+class HighlightContentItemCSV extends MigrateItem {
 
   /**
    * {@inheritdoc}
    */
   public function getItem($item_id) {
-    if (array_key_exists($item_id, NewsContentListCSV::$data)) {
-      return (object) NewsContentListCSV::$data[$item_id];
+    if (array_key_exists($item_id, HighlightContentListCSV::$data)) {
+      return (object) HighlightContentListCSV::$data[$item_id];
     }
     return NULL;
   }

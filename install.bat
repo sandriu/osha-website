@@ -44,6 +44,9 @@ IF NOT "%1"=="--migrate" GOTO DONE
     echo "Importing News content"
     call drush migrate-import News
 
+    echo "Importing Highlight content"
+    call drush migrate-import Highlight
+
     echo "Importing Publications content"
     call drush migrate-import Publication
 
