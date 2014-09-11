@@ -260,6 +260,21 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#attributes' => array('class' => array('container-inline')),
       );
 
+      $form['info']['total_character_count'] = array(
+        '#title' => t('Total character count'),
+        '#type'  => 'item',
+        '#markup' => $job->character_count,
+        '#prefix' => '<div id="tmgmt-ui-character-count" class="tmgmt-ui-character-count tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
+      );
+      $form['info']['page_count'] = array(
+        '#title' => t('Page count'),
+        '#type'  => 'item',
+        '#markup' => $job->page_count,
+        '#prefix' => '<div id="tmgmt-ui-page-count" class="tmgmt-ui-page-count tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
+      );
+
       hide($form['info']['source_language']);
       hide($form['info']['target_language']);
       hide($form['info']['translator']);
