@@ -426,6 +426,9 @@ class PublicationMigrateList extends MigrateList {
             if (!empty($items['items'])) {
               self::$data[$path]['related_publications_path'] = $items['items'];
             }
+            else {
+              self::$data[$path]['related_publications_path'] = array();
+            }
             if (!empty($items['files'])) {
               self::$data[$path]['related_resources'] = $items['files'];
             }
@@ -435,6 +438,16 @@ class PublicationMigrateList extends MigrateList {
             if ($language == 'en') {
               self::$data[$path][$field] = $raw_data[$key];
             }
+        }
+      }
+    }
+    foreach (self::$data as $path => $row) {
+      if (!isset($row['related_publications_path'])) {
+        continue;
+      }
+      foreach ($row['related_publications_path'] as $key => $publication) {
+        if (!isset(self::$data[$publication])) {
+          unset(self::$data[$path]['related_publications_path'][$key]);
         }
       }
     }
