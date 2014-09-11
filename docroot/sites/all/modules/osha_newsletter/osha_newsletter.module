@@ -675,6 +675,7 @@ function osha_newsletter_send_email($key, $to, $from, $form_values) {
 function osha_newsletter_build_mail(&$message, EntityCollection $source) {
   $content = entity_collection_load_content($source->bundle, $source);
 
+  $newsletter_title = $source->title;
   $items = $content->children;
   $elements = array();
   $last_section = NULL;
@@ -712,10 +713,13 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
   }
 
   $languages = language_list();
+  usort($languages, function ($a, $b) {
+    return strcmp($a->name, $b->name);
+  });
 
   // Get message data from source.
   $message['subject'] = $source->title;
-  $message['body']['header'] = theme('newsletter_header', array('languages' => $languages));
+  $message['body']['header'] = theme('newsletter_header', array('languages' => $languages, 'newsletter_title' => $newsletter_title));
   $message['body']['body'] = theme('newsletter_body', array('items' => $elements, 'blogs' => $blogs, 'news' => $news, 'events' => $events));
   $message['body']['footer'] = theme('newsletter_footer');
 
@@ -763,7 +767,8 @@ function osha_newsletter_theme() {
   $theme['newsletter_header'] = array(
     'template' => 'newsletter_header',
     'variables' => array(
-      'languages' => NULL
+      'languages' => NULL,
+      'newsletter_title' => NULL
     ),
     'path' => $path . '/templates'
   );
