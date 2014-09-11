@@ -7,6 +7,9 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* rules
+  * added && if isset($data[$hook]) to avoid error when running update.sh (https://www.drupal.org/node/2161847)
+  * https://www.drupal.org/files/issues/rules-fix-unsupported-operand-types-2161847-2.patch
 * nodequeue
   * Fix undefined function apachesolr_mark_node (https://www.drupal.org/node/1425326)
   * https://www.drupal.org/files/nodequeue-apachesolr-fix.patch
