@@ -79,11 +79,18 @@
 ?>
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tbody>
-    <tr>
-      <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-left: 14px;">
-        <span class="item-date">Jun 11, 2014</span>
-      </td>
-    </tr>
+    <?php
+    if (isset($field_publication_date)) {
+      $date = strtotime($field_publication_date[0]['value']);
+    ?>
+      <tr>
+        <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-left: 14px;">
+          <span class="item-date"><?php print date('M d, Y',$date);?></span>
+        </td>
+      </tr>
+    <?php
+    }
+    ?>
     <tr>
       <td align="left" width="5%" style="padding-left: 0px; padding-right: 0px; vertical-align: top; padding-top: 5px;">
         <?php
