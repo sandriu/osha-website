@@ -87,6 +87,10 @@ function osha_newsletter_action_info() {
 function osha_newsletter_block_info() {
   $blocks['osha_newsletter_subscribe'] = array(
     'info' => t('Subscribe to OSHA Newsletter'),
+    'status' => 1,
+    'region' => 'sidebar_second',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
     'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['osha_newsletter_unsubscribe'] = array(
@@ -95,6 +99,44 @@ function osha_newsletter_block_info() {
   );
 
   return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ *
+ * This hook declares configuration options for blocks provided by this module.
+ */
+function osha_newsletter_block_configure($delta = '') {
+  $form = array();
+
+  switch($delta) {
+    case 'osha_newsletter_subscribe':
+      $form['subscribe_block_intro_text'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Block intro text'),
+        '#size' => 60,
+        '#description' => t('This text will appear in the Subscription block before the e-mail field.'),
+        '#default_value' => variable_get('subscribe_block_intro_text', t('Once a month, OSHmail keeps you updated on ocupational safety and health.<br/> You can sign up below:')),
+      );
+      $form['subscribe_block_details_link_label'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Link label'),
+        '#size' => 60,
+        '#description' => t('This text will appear as link label in the Subscription block after the e-mail field.'),
+        '#default_value' => variable_get('subscribe_block_details_link_label', t('How will EU-OSHA use my details?')),
+      );
+      $form['subscribe_block_details_link_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Link URL'),
+        '#size' => 60,
+        '#description' => t('This text will appear as link url in the Subscription block after the e-mail field.'),
+        '#default_value' => variable_get('subscribe_block_details_link_url', 'https://osha.europa.eu/en/news/oshmail/'),
+      );
+
+      break;
+  }
+
+  return $form;
 }
 
 /**
@@ -130,13 +172,18 @@ function osha_newsletter_block_view($delta = '') {
  */
 function osha_newsletter_subscribe_form() {
   $form['intro'] = array(
-    '#markup' => t('Once a month, OSHmail keeps you updated on ocupational safety and health.<br/> You can sign up below:'),
+    '#markup' => variable_get('subscribe_block_intro_text', t('Once a month, OSHmail keeps you updated on ocupational safety and health.<br/> You can sign up below:')),
   );
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => t('E-mail address'),
     '#size' => 30,
     '#required' => TRUE
+  );
+  $link_label = variable_get('subscribe_block_details_link_label', t('How will EU-OSHA use my details?'));
+  $link_url = variable_get('subscribe_block_details_link_url', 'https://osha.europa.eu/en/news/oshmail/');
+  $form['details_link'] = array(
+    '#markup' => '<a href='.$link_url.'>'.$link_label.'</a><br/>',
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -208,10 +255,8 @@ function _get_listserv_subscription_email(){
  * Form submission logic for the subscription form.
  */
 function osha_newsletter_subscribe_form_submit($form, &$form_state) {
-  global $user;
-
   $subscribe_email = $form_state['values']['email'];
-  $to = variable_get('osha_newsletter_listserv');//_get_listserv_subscription_email();
+  $to = variable_get('osha_newsletter_listserv');
 
   osha_newsletter_send_email('subscribe_email', $to, $subscribe_email, $form_state);
 }
@@ -220,10 +265,8 @@ function osha_newsletter_subscribe_form_submit($form, &$form_state) {
  * Form submission logic for the subscription form.
  */
 function osha_newsletter_unsubscribe_form_submit($form, &$form_state) {
-
-
   $unsubscribe_email = $form_state['values']['unsubscribe_email'];
-  $to = variable_get('osha_newsletter_listserv');//_get_listserv_subscription_email();
+  $to = variable_get('osha_newsletter_listserv');
 
   osha_newsletter_send_email('unsubscribe_email', $to, $unsubscribe_email, $form_state);
 }
@@ -656,6 +699,7 @@ function osha_newsletter_send_email($key, $to, $from, $form_values) {
   // Send the mail, and check for success. Note that this does not guarantee
   // message delivery; only that there were no PHP-related issues encountered
   // while sending.
+
   $result = drupal_mail($module, $key, $to, $language, $params, $from, $send);
   if ($result['result'] == TRUE) {
     drupal_set_message(t('Your message has been sent to @emails.', array('@emails' => $to)));
