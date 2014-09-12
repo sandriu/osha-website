@@ -401,9 +401,11 @@ class MigrationUtil {
       if (preg_match($item_url_match, $item)) {
         $path = preg_replace($path_match, '', $item);
         $ret['items'][] = $path;
+        $ret['paths'][$path] = $item;
       }
       else {
         $ret['files'][] = $item;
+        $ret['paths'][$item] = $item;
       }
     }
     if (count($ret['items']) + count($ret['files']) != count($items)) {

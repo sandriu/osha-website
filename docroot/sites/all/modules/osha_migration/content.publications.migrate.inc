@@ -435,6 +435,7 @@ class PublicationMigrateList extends MigrateList {
             else {
               self::$data[$path]['related_resources'] = array();
             }
+            self::$data[$path]['paths'] = $items['paths'];
             break;
 
           default:
@@ -450,7 +451,7 @@ class PublicationMigrateList extends MigrateList {
       }
       foreach ($row['related_publications_path'] as $key => $publication) {
         if (!isset(self::$data[$publication])) {
-          self::$data[$path]['related_resources'][] = $publication;
+          self::$data[$path]['related_resources'][] =  self::$data[$path]['paths'][$publication];
           unset(self::$data[$path]['related_publications_path'][$key]);
         }
       }
