@@ -13,10 +13,25 @@
     <tr>
       <td style="font-family: Oswald, Arial, sans-serif; font-weight: normal; font-size: 20px; padding-left: 0px; padding-right: 0px;">
         <?php
+          $label = "";
           if (isset($name_field[$language])) {
-            print($name_field[$language][0]['safe_value']);
+            $label = $name_field[$language][0]['safe_value'];
+            print($label);
             } else {
-              print($name_field[0]['safe_value']);
+              $label = $name_field[0]['safe_value'];
+              print($label);
+          }
+        ?>
+        <?php
+          if ($label == 'Blog') {
+            $directory = drupal_get_path('module','osha_newsletter');
+            $site_url = variable_get('site_base_url', 'http://osha.localhost');
+            print(theme('image', array(
+              'path' => $directory . '/images/blog-callout.png',
+              'width' => 36,
+              'height' => 30,
+              'alt' => 'blog callout'
+            )));
           }
         ?>
       </td>

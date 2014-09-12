@@ -92,6 +92,8 @@ function osha_tmgmt_tmgmt_translator_plugin_info_alter(&$info) {
  */
 function osha_tmgmt_tmgmt_source_plugin_info_alter(&$info) {
   $info['entity']['plugin controller class'] = 'OSHATMGMTEntitySourcePluginController';
+  $info['node']['plugin controller class'] = 'OSHATMGMTNodeSourcePluginController';
+  $info['i18n_string']['plugin controller class'] = 'OSHATMGMTI18nStringSourcePluginController';
 }
 
 /**
@@ -100,6 +102,8 @@ function osha_tmgmt_tmgmt_source_plugin_info_alter(&$info) {
 function osha_tmgmt_entity_info_alter(&$entity_info) {
   if (isset($entity_info['tmgmt_job_item'])) {
     $entity_info['tmgmt_job_item']['views controller class'] = 'OshaTMGMTJobItemViewsController';
+    $entity_info['tmgmt_job_item']['entity class'] = 'OshaTMGMTJobItem';
+    $entity_info['tmgmt_job_item']['metadata controller class'] = 'OshaTMGMTJobItemMetadataController';
   }
   if (isset($entity_info['tmgmt_job'])) {
     $entity_info['tmgmt_job']['views controller class'] = 'OshaTMGMTJobViewsController';
@@ -167,9 +171,17 @@ function osha_tmgmt_preprocess_page(&$variables) {
  * Implements hook_form_alter().
  */
 function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
+  // Checks if the form is a source item form, and generates it's supposed id.
+  $form_source_id = '';
+  if (isset($form_state['plugin']) && isset($form_state['item_type'])) {
+    $form_source_id = 'tmgmt_ui_' . $form_state['plugin'] . '_source_' . $form_state['item_type'] . '_overview_form';
+  }
+
   switch ($form_id) {
-    case 'tmgmt_ui_entity_source_node_overview_form':
-      unset($form['actions']['submit']);
+    case $form_source_id:
+      if (isset($form['actions']['submit'])) {
+        unset($form['actions']['submit']);
+      }
       break;
 
     case 'tmgmt_ui_cart_content':
@@ -191,6 +203,8 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         );
       }
 
+      #increase the size of the language select list
+      $form['target_language']['#size'] = count($languages);
       $form['items'] = array(
         '#type' => 'tableselect',
         '#header' => array(
@@ -214,11 +228,17 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
 
     case 'tmgmt_job_form':
       $languages = tmgmt_available_languages();
-      $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($form_state['tmgmt_job']);
+      $job = $form_state['tmgmt_job'];
+      $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($job);
       $target_languages = array();
       foreach ($target_languages_codes as $lang_code) {
         $target_languages[$lang_code] = $languages[$lang_code];
       }
+      $wrapper = entity_metadata_wrapper('tmgmt_job', $job);
+      drupal_set_title(t('@title - @state', array(
+        '@title' => $job->label(),
+        '@state' => $wrapper->state->label(),
+      )));
 
       $form['language_info'] = array(
         '#type' => 'container',
@@ -227,7 +247,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       );
 
       $form['language_info']['target_languages'] = array(
-        '#title' => t('Target languages'),
+        '#title' => t('Target languages').' ('.count($target_languages_codes).')',
         '#type' => 'checkboxes',
         '#default_value' => $target_languages,
         '#options' => drupal_map_assoc($target_languages),
@@ -242,6 +262,21 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#disabled' => TRUE,
         '#weight' => 2,
         '#attributes' => array('class' => array('container-inline')),
+      );
+
+      $form['info']['total_character_count'] = array(
+        '#title' => t('Total character count'),
+        '#type'  => 'item',
+        '#markup' => $job->character_count,
+        '#prefix' => '<div id="tmgmt-ui-character-count" class="tmgmt-ui-character-count tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
+      );
+      $form['info']['page_count'] = array(
+        '#title' => t('Page count'),
+        '#type'  => 'item',
+        '#markup' => $job->page_count,
+        '#prefix' => '<div id="tmgmt-ui-page-count" class="tmgmt-ui-page-count tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
       );
 
       hide($form['info']['source_language']);
@@ -259,6 +294,46 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         $form['info']['created'] = $created;
       }
       break;
+
+    case 'tmgmt_entity_ui_translate_form':
+      list($id, $vid, $bundle) = entity_extract_ids($form_state['entity_type'], $form_state['entity']);
+      $entity_language = entity_language($form_state['entity_type'], $form_state['entity']);
+      $items = osha_tmgmt_job_item_load_latest('entity', $form_state['entity_type'], $id, $entity_language);
+
+      // Remove all previously disabled checkboxes - we override that.
+      $languages = language_list();
+
+      foreach ($languages as $langcode => $language) {
+        // Reset the pending column and ordering, rebuild based on job item.
+        unset($form['languages'][$langcode]);
+        //@TODO:EDW Improve handling of column index below
+        $form['languages']['#options'][$langcode][4] = t('None');
+
+        if ($langcode == $entity_language) {
+          $form['languages'][$langcode] = array(
+            '#type' => 'checkbox',
+            '#disabled' => TRUE,
+          );
+        }
+        elseif (isset($items[$langcode])) {
+          $item = $items[$langcode];
+          $uri = $item->uri();
+          $wrapper = entity_metadata_wrapper('tmgmt_job_item', $item);
+          $additional = l($wrapper->state->label(), $uri['path'], array('query' => array('destination' => current_path())));
+          // Disable the checkbox for this row since there is already a
+          // translation in progress that has not yet been finished. This way we
+          // make sure that we don't stack multiple active translations for the
+          // same item on top of each other.
+          //@TODO:EDW Improve handling of column index below
+          $form['languages']['#options'][$langcode][4] = $additional;
+          $form['languages'][$langcode] = array(
+            '#type' => 'checkbox',
+            '#disabled' => TRUE,
+          );
+        }
+      }
+      break;
+
   }
 }
 
@@ -324,8 +399,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
       entity_delete_multiple('tmgmt_job_item', $remove_job_item_ids);
     }
     if ($job) {
-
-      // Update the job title with it's ID as current label doesn't make sense.
+      // Set the title to job #
       $job->label = t('Translation job #!tjid', array('!tjid' => $job->tjid));
       $job->priority = $values['priority'];
       OshaTMGMTStatistics::computeJobStatistics($job);
@@ -355,6 +429,48 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
     //TODO: Delete the job ...?
   }
 }
+
+
+/**
+ * Loads active job entities that have a job item with the identifiers.
+ *
+ * @param $plugin
+ *   The source plugin.
+ * @param $item_type
+ *   The source item type.
+ * @param $item_id
+ *   The source item id.
+ * @param string $source_language
+ *   The source language of the item.
+ *
+ * @return array
+ *   An array of job entities.
+ */function osha_tmgmt_job_item_load_latest($plugin, $item_type, $item_id, $source_language) {
+  $query = db_select('tmgmt_job_item', 'tji');
+  $query->innerJoin('tmgmt_job', 'tj', 'tj.tjid = tji.tjid');
+  $result = $query->condition('tj.source_language', $source_language)
+    // Only query for jobs that are currently active.
+    ->condition('tj.state', array(TMGMT_JOB_STATE_UNPROCESSED, TMGMT_JOB_STATE_ACTIVE))
+    // And only query for job items that are not yet finished.
+    ->condition('tji.state', TMGMT_JOB_ITEM_STATE_ACCEPTED, '<>')
+    ->condition('tji.plugin', $plugin)
+    ->condition('tji.item_type', $item_type)
+    ->condition('tji.item_id', $item_id)
+    ->fields('tji', array('tjiid'))
+    ->fields('tj', array('target_language'))
+    ->orderBy('tji.changed', 'DESC')
+    ->groupBy('tji.tjiid')
+    ->execute();
+  if ($items = $result->fetchAllKeyed()) {
+    $return = array();
+    foreach (tmgmt_job_item_load_multiple(array_keys($items)) as $key => $item) {
+      $return[$item->target_language] = $item;
+    }
+    return $return;
+  }
+  return FALSE;
+}
+
 
 /**
  * Implements hook_views_default_views_alter().

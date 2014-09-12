@@ -335,6 +335,7 @@ $options['init-modules'] = array(
   'taxonomy_manager',
   'node_export',
   'mpac',
+  'linkit',
 
   'osha',
   'osha_migration',

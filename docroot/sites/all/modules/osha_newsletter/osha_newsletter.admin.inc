@@ -61,7 +61,7 @@ function osha_newsletter_admin_form() {
   $form['osha_newsletter_after_max_nodes'] = array(
     '#type' => 'textfield',
     '#title' => t('Max number of nodes after creation'),
-    '#default_value' => variable_get('osha_newsletter_after_max_nodes', 10),
+    '#default_value' => variable_get('osha_newsletter_after_max_nodes', 30),
     '#attributes' => array('tabindex' => 4),
     '#size' => 40,
     '#maxlength' => 40,
@@ -73,7 +73,7 @@ function osha_newsletter_admin_form() {
     'osha_newsletter_allowed_bundles',
     array(
       // TODO:EDW: check 'event' - non existing for now.
-      'publication', 'page', 'blog', 'news', 'press_release', 'highlight', 'newsletter_article'
+      'publication', 'article', 'blog', 'news', 'press_release', 'highlight', 'newsletter_article'
     )
   );
   $entity_info = entity_get_info();

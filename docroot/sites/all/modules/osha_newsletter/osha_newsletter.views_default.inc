@@ -703,6 +703,14 @@ function osha_newsletter_views_default_views() {
   $handler->display->display_options['fields']['rendered_entity_1']['display'] = 'id';
   $handler->display->display_options['fields']['rendered_entity_1']['view_mode'] = 'block';
   $handler->display->display_options['fields']['rendered_entity_1']['bypass_access'] = 0;
+  /* Filter criterion: Entity Collection: Newsletter sent? (field_newsletter_sent) */
+  $handler->display->display_options['filters']['field_newsletter_sent_value']['id'] = 'field_newsletter_sent_value';
+  $handler->display->display_options['filters']['field_newsletter_sent_value']['table'] = 'field_data_field_newsletter_sent';
+  $handler->display->display_options['filters']['field_newsletter_sent_value']['field'] = 'field_newsletter_sent_value';
+  $handler->display->display_options['filters']['field_newsletter_sent_value']['value'] = array(
+    0 => '0',
+    1 => '1',
+  );
 
   /* Display: List of newsletters */
   $handler = $view->new_display('page', 'List of newsletters', 'page');
