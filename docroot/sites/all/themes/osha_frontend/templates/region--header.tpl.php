@@ -61,7 +61,7 @@
 	</div>
 </div>
 <div id="languagesAndSearch">
-	<div id="contact"><a href="">Contact Us</a> | <a href="">Press</a> </div>
+	<div id="contact"><a href=""><?php echo t('News & Events'); ?></a> | <a href=""><?php echo t('Press'); ?></a> | <a href=""><?php echo t('Contact Us'); ?></a> <span class="a_small"><a  onclick="zoomSmall()">a</a></span><span class="a_medium"><a onclick="zoomMedium()">a</a></span><span class="a_big"><a  onclick="zoomBig()">a</a></span></div>
 	<div>
 		<img src="/sites/all/themes/osha_frontend/images/languageico.png" alt="Select language">
 	</div>
