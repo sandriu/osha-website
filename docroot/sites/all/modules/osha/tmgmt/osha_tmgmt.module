@@ -201,6 +201,8 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         );
       }
 
+      #increase the size of the language select list
+      $form['target_language']['#size'] = count($languages);
       $form['items'] = array(
         '#type' => 'tableselect',
         '#header' => array(
@@ -243,7 +245,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       );
 
       $form['language_info']['target_languages'] = array(
-        '#title' => t('Target languages'),
+        '#title' => t('Target languages').' ('.count($target_languages_codes).')',
         '#type' => 'checkboxes',
         '#default_value' => $target_languages,
         '#options' => drupal_map_assoc($target_languages),
