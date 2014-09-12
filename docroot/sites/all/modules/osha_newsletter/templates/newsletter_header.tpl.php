@@ -25,8 +25,8 @@
         ?>
       </td>
       <td>
-        <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;">July 2014</div>
-        <div class="newsletter-number" style="color: #003399; font-size: 24px; font-weight: 300; text-align: right;"><?php print $newsletter_title?></div>
+        <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;padding-bottom:5px;font-family: Oswald, Arial">July 2014</div>
+        <div class="newsletter-number" style="color: #003399; font-size: 24px; font-weight: 300; text-align: right;font-family: Oswald, Arial"><?php print $newsletter_title?></div>
       </td>
     </tr>
   </tbody>

@@ -1,9 +1,21 @@
 body {
  margin:0 0;
  font-family:arial, verdana, sans-serif;
- font-size:.9em;
+
  background:#D2DCED;
  overflow-y:scroll;
+}
+
+.bodysmall{
+	font-size:0.7em;
+}
+
+.bodymedium{
+	font-size:0.9em;
+}
+
+.bodybig{
+	font-size:1.1em;
 }
 
 header{
@@ -11,6 +23,20 @@ header{
 	margin:0px;
 	padding-left:0px!important;
 	padding-right:0px!important;
+}
+
+.a_small a{
+	padding-left:0.5em;
+	padding-right:0.2em;
+}
+
+.a_medium a{
+	padding-right:0.2em;
+	font-size:1.5em;
+}
+
+.a_big a{
+	font-size:2em;
 }
 
 .sidebars_first{
@@ -108,6 +134,7 @@ header{
 	padding-left:0px;
 	height:39px;
 	margin-right:1px;
+	
 }
 
 #block-menu-block-1 .menu li span {
@@ -154,6 +181,7 @@ color: #003399;
 #block-menu-block-1 .menu li .menu  {
 	border-bottom: 0px solid #002f9d;
 	z-index:999;
+	box-shadow: 2px 4px 5px 8px #ccc;
 }
 
 #block-menu-block-1 .menu li  {
@@ -187,6 +215,7 @@ color: #003399;
 	border-top:  0px solid #A6B8DB;
 	border-bottom: 5px solid #002f9d;
 	background-color:#FFFFFF;
+	box-shadow: none;
 }
 
 #block-menu-block-1 .menu li ul  {
@@ -258,12 +287,13 @@ h1{
 }
 
 #socialNetworksBlue #icons {
- background: url("../images/socialBorderLeft.png") no-repeat scroll 0 0px, url("../images/socialBorderRight.png") no-repeat scroll 100% 0px, none repeat scroll 0 0 #002f9d;
+	background: url("../images/socialBorderLeft.png") no-repeat scroll 0 0px, url("../images/socialBorderRight.png") no-repeat scroll 100% 0px, none repeat scroll 0 0 #002f9d;
     height: 26px;
     margin: -5px auto 0;
     text-align: center;
     width: 235px;
 	padding-top: 4px;
+	background-color: #002f9d;
 }
 
 #icons img {
@@ -275,10 +305,15 @@ a{
 }
 
 #contact{
- margin-bottom: 20px;
-margin-right: 2.2em;
-padding-bottom: px;
-margin-top: -10px;
+	margin-bottom: 15px;
+	margin-right: 2.2em;
+	padding-bottom: px;
+	margin-top: -10px;
+}
+
+#contact a{
+	color:#003399;
+	text-decoration:none;
 }
 
 #languagesAndSearch 
@@ -412,6 +447,10 @@ padding: 0em 0em 0em 1.8em;;
 
 /*PUBLICATIONS*/
 
+span.date-display-single{
+	font-size:0.8em;
+}
+
 .node-publication.node-teaser {
 	background: url("../images/back-tit-blue.png") repeat-x scroll 0 100% transparent;
     margin-bottom: 0.5em;
@@ -535,6 +574,15 @@ padding: 0em 0em 0em 1.8em;;
 
 /*ACCORDION*/
 
+.accordion_clear{
+	display:block; /*<span class="accordion_clear">&nbsp;</span> Put this code in the paragraphs of accordion if you need a Carry return */
+}
+
+.ui-accordion .ui-accordion-header{
+	width:95%;
+	padding-right:1em;
+}
+
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
 	height:auto;
 	font-family: 'Oswald';
@@ -551,7 +599,7 @@ padding: 0em 0em 0em 1.8em;;
 }
 
 .ui-state-default .ui-icon{
-	background: url("../images/flecha-desplegar-hide.png") no-repeat scroll 96% center transparent!important;
+	background: url("../images/triangle-collapsed.png") no-repeat scroll 96% center transparent!important;
 	width:100%;
 }
 
@@ -578,7 +626,7 @@ padding: 0em 0em 0em 1.8em;;
 }	
 
 .ui-state-active .ui-icon{
-	background: url("../images/flecha-desplegar.png") no-repeat scroll 96% center transparent!important;
+	background: url("../images/triangle-expanded.png") no-repeat scroll 96% center transparent!important;
 	width:100%;
 	padding-top:3px;
 }
@@ -857,3 +905,83 @@ font-weight: normal;
 }
 
 /**END WIKIZONE**/
+
+/*SLIDESHOW*/
+
+#views_slideshow_cycle_div_publications-slidehow_2{
+	width:100%;
+}
+
+.view-mode-osha_slideshow{
+	background-color: #e4eaf4;
+    height: 220px;
+    margin-left: 4em;
+    width: 86%;
+}
+
+.view-mode-osha_slideshow .field-name-field-cover-image{
+	float:left;
+	padding:1em;
+
+}
+
+.view-mode-osha_slideshow .field-name-title-field{
+	font-family: 'Oswald';
+	font-size: 1.1em;
+	font-weight: 300;
+	color: #003399;
+	margin: 0px;
+	line-height: 1.5em;
+	width:93%;
+}
+
+.view-mode-osha_slideshow .field-name-field-publication-date{
+	padding-top:0.5em;
+	width:93%;
+}
+
+.view-mode-osha_slideshow .field-name-body p{
+	margin:0;
+	font-family: Arial;
+	font-size: 0.8em;
+	width:93%;
+}
+
+.view-mode-osha_slideshow .field-name-field-file{
+	background: url("../images/separator.jpg") no-repeat scroll 23% 100% rgba(0, 0, 0, 0);
+    height: 50px;
+}
+
+
+#views_slideshow_controls_text_previous_publications-slidehow{
+    display: block;
+	width:60px;
+    height: 220px;
+    position: absolute;
+    top: 20.3em;
+    z-index: 999999999;
+	background: url('../images/slideshow-left.png') no-repeat;
+	color:#cbd9ec;
+}
+
+#views_slideshow_controls_text_previous_publications-slidehow a{
+	color:#cbd9ec;
+}
+
+#views_slideshow_controls_text_next_publications-slidehow{
+    display: block;
+    height: 220px;
+	width:60px;
+    position: absolute;
+    top: 20.3em;
+	right:11.5em;
+    z-index: 999999999;
+	background: url('../images/slideshow-right.png') no-repeat;
+	color:#cbd9ec;
+}
+
+#views_slideshow_controls_text_next_publications-slidehow a{
+	color:#cbd9ec;
+}
+
+/*END SLIDESHOW*/

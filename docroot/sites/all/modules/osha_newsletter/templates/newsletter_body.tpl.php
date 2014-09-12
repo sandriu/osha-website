@@ -1,3 +1,4 @@
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 <table border="0" cellpadding="28" cellspacing="0" width="800">
   <tbody>
     <tr>
