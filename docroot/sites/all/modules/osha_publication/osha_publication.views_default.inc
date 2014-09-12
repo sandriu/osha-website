@@ -96,10 +96,6 @@ function osha_publication_views_default_views() {
   /* Display: Publications */
   $handler = $view->new_display('page', 'Publications', 'page');
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Content: Entity translation: translations */
-  $handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
-  $handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
-  $handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
   $handler->display->display_options['path'] = 'publications';
 
   /* Display: Block */
@@ -238,7 +234,6 @@ function osha_publication_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Body'),
-    t('Translations'),
     t('Block'),
     t('queue'),
     t('Publications Slideshow'),
