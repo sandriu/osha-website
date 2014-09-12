@@ -84,7 +84,13 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
         // Construct the name key flattened.
         $data = array_filter(tmgmt_flatten_data($field), '_tmgmt_filter_data');
         reset($data);
-        $name_attr = '][' . $key . '][' . key($data);
+        $name_attr = '][' . $key;
+        $data_key = key($data);
+        // On menu and strings there is no key for $data.
+        if (!empty($data_key)) {
+          $name_attr .= '][' . $data_key;
+        }
+
         $this->writeAttribute('name', $name_attr);
 
         $this->writeAttribute('repeatable', 'false');
@@ -179,7 +185,8 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $tjid = reset($tjid);
     $job = tmgmt_job_load((string) $tjid);
 
-    $data = tmgmt_unflatten_data($this->getImportedTargets($job));
+    $flat_data = $this->getImportedTargets($job);
+    $data = tmgmt_unflatten_data($flat_data);
     return $data;
   }
 
