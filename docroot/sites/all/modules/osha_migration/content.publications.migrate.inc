@@ -432,6 +432,9 @@ class PublicationMigrateList extends MigrateList {
             if (!empty($items['files'])) {
               self::$data[$path]['related_resources'] = $items['files'];
             }
+            else {
+              self::$data[$path]['related_resources'] = array();
+            }
             break;
 
           default:
@@ -447,6 +450,7 @@ class PublicationMigrateList extends MigrateList {
       }
       foreach ($row['related_publications_path'] as $key => $publication) {
         if (!isset(self::$data[$publication])) {
+          self::$data[$path]['related_resources'][] = $publication;
           unset(self::$data[$path]['related_publications_path'][$key]);
         }
       }
