@@ -337,6 +337,10 @@ $options['init-modules'] = array(
   'mpac',
   'linkit',
 
+  'workbench',
+  'workbench_access',
+  'workbench_moderation',
+
   'osha',
   'osha_migration',
   'osha_news',
@@ -347,6 +351,7 @@ $options['init-modules'] = array(
   'osha_menu',
   'osha_content',
   'osha_wiki',
+  'osha_workflow',
 
   // Newsletter modules.
   'entity_collection',
