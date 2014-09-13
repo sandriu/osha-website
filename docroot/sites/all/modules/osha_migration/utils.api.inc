@@ -271,7 +271,8 @@ class MigrationUtil {
       $voc = taxonomy_vocabulary_machine_name_load($vocabulary_name);
       $terms = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
       foreach ($terms as $term) {
-        if (!empty($term->{$field_name}[$language][0]['value'])) {
+        if (!empty($term->{$field_name}[$language][0]['value']) ||
+            $term->{$field_name}[$language][0]['value'] == '0') {
           $value = $term->{$field_name}[$language][0]['value'];
           $cache[$vocabulary_name][$field_name][$language][$value] = $term->tid;
         }

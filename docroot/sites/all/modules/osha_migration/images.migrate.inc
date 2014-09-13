@@ -135,7 +135,7 @@ class OshaMigrateImages extends DynamicMigration {
       'field_thesaurus_code',
       OSHA_TAXONOMIES_THESAURUS
     );
-    if (!empty($row->nace)) {
+    if (!empty($row->nace) || $row->nace == '0') {
       $row->nace = explode(',', $row->nace);
       $row->nace = MigrationUtil::findTidByTaxonomyField(
         $row->nace,
