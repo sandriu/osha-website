@@ -18,6 +18,7 @@
           'width' => 256,
           'height' => 60,
           'alt' => 'Osha logo',
+          'attributes' => array('style' => 'border: 0px;')
           )), $site_url, array(
           'html' => TRUE,
           'external' => TRUE

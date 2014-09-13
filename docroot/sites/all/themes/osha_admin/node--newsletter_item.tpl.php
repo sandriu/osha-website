@@ -101,6 +101,7 @@
           'width' => 7,
           'height' => 11,
           'alt' => 'link arrow',
+          'attributes' => array('style' => 'border: 0px;')
           )), $site_url, array(
           'html' => TRUE,
           'external' => TRUE

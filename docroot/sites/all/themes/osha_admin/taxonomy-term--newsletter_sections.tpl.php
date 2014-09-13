@@ -30,7 +30,8 @@
               'path' => $directory . '/images/blog-callout.png',
               'width' => 36,
               'height' => 30,
-              'alt' => 'blog callout'
+              'alt' => 'callout',
+              'attributes' => array('style' => 'border: 0px;')
             )));
           }
         ?>
