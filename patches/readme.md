@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* menuimage
+  * Modify menulink options to use image uri, not fid. Useful for features export/import
+  * menuimage/menuimage_store_path_not_fid.patch
+
 * entity_collection
   * Fix bug when saving different entities with same eid (overwrites one another)
   * entity_collection/entity_collection-entities-with-same-eid.patch

@@ -28,20 +28,18 @@ function osha_frontend_menu_link__menu_block($variables) {
 
   // Get the variable provided by osha_menu module.
   $render_img = variable_get('menu_block_' . $delta . '_' . OSHA_MENU_RENDER_IMG_VAR_NAME, 0);
-  if (empty($element['#localized_options']['content']['image'])
-    || !$render_img) {
+  if (!$render_img) {
     return theme_menu_link($variables);
-  }
-  // Render the image provided by menuimage module.
-  $fid = $element['#localized_options']['content']['image'];
-  $file = file_load($fid);
-  if ($file) {
-    $image_url = file_create_url($file->uri);
   }
   // $element['#attributes']['data-image-url'] = $image_url;
   $output_link = l($element['#title'], $element['#href'], $element['#localized_options']);
-  $image = '<img src="' . $image_url . '"/>';
-  $output_image = l($image, $element['#href'], array('html' => TRUE));
+
+  $output_image = "";
+  if (!empty($element['#localized_options']['content']['image'])
+      && $image_url = file_create_url($element['#localized_options']['content']['image'])) {
+    $image = '<img src="' . $image_url . '"/>';
+    $output_image = l($image, $element['#href'], array('html' => TRUE));
+  }
 
   return '<li' . drupal_attributes($element['#attributes']) . '>
     <div class="introduction-title">' . $output_link . '</div>
