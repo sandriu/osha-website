@@ -574,6 +574,9 @@ function osha_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_governance:<front>',
+      'content' => array(
+        'image' => 'public://menuimage/governance.jpg',
+      ),
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -955,6 +958,9 @@ function osha_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_organisation:<front>',
+      'content' => array(
+        'image' => 'public://menuimage/organisation.jpg',
+      ),
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -1033,6 +1039,9 @@ function osha_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_press:<front>',
+      'content' => array(
+        'image' => 'public://menuimage/press.jpg',
+      ),
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -1057,6 +1066,9 @@ function osha_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_procurement:<front>',
+      'content' => array(
+        'image' => 'public://menuimage/procurement.jpg',
+      ),
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -1108,6 +1120,9 @@ function osha_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_publications:publications',
+      'content' => array(
+        'image' => 'public://menuimage/publications.jpg',
+      ),
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -1276,6 +1291,9 @@ function osha_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_what-we-do:<front>',
+      'content' => array(
+        'image' => 'public://menuimage/what-we-do.jpg',
+      ),
       'alter' => TRUE,
     ),
     'module' => 'menu',
