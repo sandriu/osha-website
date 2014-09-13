@@ -38,8 +38,8 @@ IF NOT "%1"=="--migrate" GOTO DONE
     echo "Importing Files content"
     call drush migrate-import Files
 
-    echo "Importing Images content"
-    call drush migrate-import Images
+    rem echo "Importing Images content"
+    rem call drush migrate-import Images
 
     echo "Importing News content"
     call drush migrate-import News

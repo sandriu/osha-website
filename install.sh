@@ -38,8 +38,8 @@ if [ "$1" == "--migrate" ]; then
     echo "Importing Files content"
     drush migrate-import Files
 
-    echo "Importing Images content"
-    drush migrate-import Images
+    #echo "Importing Images content"
+    #drush migrate-import Images
 
     echo "Importing News content"
     drush migrate-import News
