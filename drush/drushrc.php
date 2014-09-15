@@ -291,13 +291,6 @@ $options['init-modules'] = array(
   'languagefield',
   'image_field_caption',
 
-  #'search_api',
-  #'facetapi',
-  #'search_api_facetapi',
-  #'apachesolr',
-  #'apachesolr_search',
-  #'search_api_solr',
-
   'tmgmt',
   'tmgmt_local',
   'tmgmt_node',
@@ -353,6 +346,14 @@ $options['init-modules'] = array(
   'osha_content',
   'osha_wiki',
   'osha_workflow',
+
+  'search_api',
+  'facetapi',
+  'search_api_facetapi',
+  'apachesolr',
+  'apachesolr_search',
+  'apachesolr_multilingual',
+  'osha_search',
 
   // Newsletter modules.
   'entity_collection',
