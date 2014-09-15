@@ -13,6 +13,7 @@ osha_configure_imce();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
 osha_configure_newsletter_permissions();
+osha_configure_search_autocomplete();
 
 module_disable(array('overlay'));
 
@@ -271,4 +272,24 @@ function osha_configure_newsletter_permissions(){
   user_role_change_permissions(DRUPAL_AUTHENTICATED_RID, array(
     'view newsletter_content_collection entity collections' => TRUE
   ));
+}
+
+/**
+ * Set-up the search_autocomplete module.
+ */
+function osha_configure_search_autocomplete() {
+  db_update('search_autocomplete_forms')
+    ->fields(array(
+      'data_view' => 'solr_autocomplete',
+      'theme' => 'basic-blue.css',
+    ))
+    ->condition('fid', '#edit-search-block-form--2')
+    ->execute();
+
+  db_update('search_autocomplete_forms')
+    ->fields(array(
+      'enabled' => 0,
+    ))
+    ->condition('fid', '#edit-search-block-form--2', '<>')
+    ->execute();
 }
