@@ -1006,13 +1006,14 @@ function osha_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_related_oshwiki_articles',
-    'label' => 'Related OSHWiki articles',
-    'required' => FALSE,
+    'label' => 'OSHWiki featured articles',
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
         'match_operator' => 'CONTAINS',
@@ -1640,8 +1641,8 @@ function osha_field_default_field_instances() {
   t('Image');
   t('Language');
   t('Nace');
+  t('OSHWiki featured articles');
   t('Publication date');
-  t('Related OSHWiki articles');
   t('Summary');
   t('Tags');
   t('Thesaurus');
