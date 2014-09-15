@@ -14,8 +14,10 @@ function osha_search_default_fe_block_settings() {
 
   $export['facetapi-8o8kdtP8CKjahDIu1Wy5LGxnDHg3ZYnT'] = array(
     'cache' => -1,
+    'custom' => 0,
     'delta' => '8o8kdtP8CKjahDIu1Wy5LGxnDHg3ZYnT',
     'i18n_block_language' => array(),
+    'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => '',
@@ -46,12 +48,16 @@ function osha_search_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   $export['facetapi-GiIy4zr9Gu0ZSa0bumw1Y9qIIpIDf1wu'] = array(
     'cache' => -1,
+    'custom' => 0,
     'delta' => 'GiIy4zr9Gu0ZSa0bumw1Y9qIIpIDf1wu',
     'i18n_block_language' => array(),
+    'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => '',
@@ -82,12 +88,16 @@ function osha_search_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   $export['facetapi-QfTyFeGb1KbQrR93nh7XrYogoI6d76aY'] = array(
     'cache' => -1,
+    'custom' => 0,
     'delta' => 'QfTyFeGb1KbQrR93nh7XrYogoI6d76aY',
     'i18n_block_language' => array(),
+    'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => '',
@@ -118,12 +128,16 @@ function osha_search_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   $export['facetapi-hNfrGJrhQCkJN130wM9Uvc23hGV71MDl'] = array(
     'cache' => -1,
+    'custom' => 0,
     'delta' => 'hNfrGJrhQCkJN130wM9Uvc23hGV71MDl',
     'i18n_block_language' => array(),
+    'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => '',
@@ -154,6 +168,48 @@ function osha_search_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
+  $export['search-form'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'form',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'search',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'bartik',
+        'weight' => -1,
+      ),
+      'osha_admin' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_admin',
+        'weight' => -1,
+      ),
+      'osha_frontend' => array(
+        'region' => 'header',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => -1,
+      ),
+      'seven' => array(
+        'region' => 'dashboard_sidebar',
+        'status' => 1,
+        'theme' => 'seven',
+        'weight' => -10,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   return $export;
