@@ -36,10 +36,10 @@ function osha_news_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_first',
+        'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => -27,
       ),
       'seven' => array(
         'region' => '',
