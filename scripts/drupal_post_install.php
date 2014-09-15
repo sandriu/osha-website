@@ -9,6 +9,7 @@ osha_configure_imce();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
 osha_configure_newsletter_permissions();
+osha_newsletter_create_oshmail_page();
 
 module_disable(array('overlay'));
 
@@ -247,4 +248,50 @@ function osha_configure_newsletter_permissions(){
   user_role_change_permissions(DRUPAL_AUTHENTICATED_RID, array(
     'view newsletter_content_collection entity collections' => TRUE
   ));
+}
+
+/**
+ * Create OSHMail Newsletter - basic page
+ */
+function osha_newsletter_create_oshmail_page(){
+  drupal_set_message('Create OSHMail newsletter page ...');
+
+  global $user;
+
+  $node = new stdClass();
+  $node->type = 'page';
+  node_object_prepare($node);
+  $node->uid = $user->uid;
+  $node->name = $user->name;
+  $node->title = 'OSHMail newsletter';
+  $node->language = 'en';
+  $node->body[$node->language][0]['value'] = '';
+  $node->body[$node->language][0]['format'] = 'full_html';
+  $node->path['alias'] = 'pages/oshmail-newsletter';
+  $node->comment = 0;
+  $node->status = 1;
+  $node->promote = 0;
+  $node->revision = 0;
+  $node->changed = $_SERVER['REQUEST_TIME'];
+  $node->created = $_SERVER['REQUEST_TIME'];
+  $node->menu = array(
+    'enabled' => 1,
+    'mlid' => 0,
+    'module' => 'menu',
+    'hidden' => 0,
+    'language' => 'und',
+    'has_children' => 0,
+    'customized' => 0,
+    'options' => array(),
+    'expanded' => 0,
+    'parent_depth_limit' => 8,
+    'link_title' => 'OSHMail newsletter',
+    'description' => '',
+    'parent' => 'main-menu:0',
+    'weight' => -46,
+    'plid' => 587,
+    'menu_name' => 'main-menu'
+  );
+  node_submit($node);
+  node_save($node);
 }
