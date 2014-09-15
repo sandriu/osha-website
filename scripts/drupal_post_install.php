@@ -282,14 +282,15 @@ function osha_configure_search_autocomplete() {
     ->fields(array(
       'data_view' => 'solr_autocomplete',
       'theme' => 'basic-blue.css',
+      'data_callback' => 'search_autocomplete/autocomplete/3',
     ))
-    ->condition('fid', '#edit-search-block-form--2')
+    ->condition('selector', '#edit-search-block-form--2')
     ->execute();
 
   db_update('search_autocomplete_forms')
     ->fields(array(
       'enabled' => 0,
     ))
-    ->condition('fid', '#edit-search-block-form--2', '<>')
+    ->condition('selector', '#edit-search-block-form--2', '<>')
     ->execute();
 }
