@@ -279,6 +279,7 @@ $options['init-modules'] = array(
   'date',
   'migrate',
   'features',
+  'feeds_ui',
 
   'entityreference',
   'link',
