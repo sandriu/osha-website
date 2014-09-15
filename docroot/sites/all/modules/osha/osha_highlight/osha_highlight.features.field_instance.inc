@@ -308,6 +308,69 @@ function osha_highlight_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-highlight-field_related_oshwiki_articles'
+  $field_instances['node-highlight-field_related_oshwiki_articles'] = array(
+    'bundle' => 'highlight',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => 0,
+          'view_mode' => 'teaser',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 12,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_oshwiki_articles',
+    'label' => 'Related OSHWiki articles',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-highlight-field_summary'
   $field_instances['node-highlight-field_summary'] = array(
     'bundle' => 'highlight',
@@ -370,7 +433,7 @@ function osha_highlight_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -562,7 +625,7 @@ function osha_highlight_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -639,7 +702,7 @@ function osha_highlight_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -649,6 +712,7 @@ function osha_highlight_field_default_field_instances() {
   t('Body');
   t('Image');
   t('Publication Date');
+  t('Related OSHWiki articles');
   t('Summary');
   t('Tags');
   t('Thesaurus');

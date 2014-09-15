@@ -364,6 +364,15 @@ function osha_strongarm() {
       'email_textalt' => array(
         'custom_settings' => FALSE,
       ),
+      'osha_slideshow' => array(
+        'custom_settings' => TRUE,
+      ),
+      'highlights_item' => array(
+        'custom_settings' => TRUE,
+      ),
+      'newsletter_item' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

@@ -25,6 +25,7 @@ features[field_instance][] = node-news-body
 features[field_instance][] = node-news-field_activity
 features[field_instance][] = node-news-field_image
 features[field_instance][] = node-news-field_publication_date
+features[field_instance][] = node-news-field_related_oshwiki_articles
 features[field_instance][] = node-news-field_summary
 features[field_instance][] = node-news-field_tags
 features[field_instance][] = node-news-field_thesaurus
