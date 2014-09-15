@@ -5,3 +5,35 @@
  */
 
 include_once 'osha_wiki.features.inc';
+
+/**
+ * Implements hook_feeds_after_parse().
+ */
+function osha_wiki_feeds_after_parse(FeedsSource $source, FeedsParserResult $result) {
+  // Decode description field.
+  foreach ($result->items as &$item) {
+    $item['description'] = html_entity_decode($item['description']);
+  }
+}
+
+/**
+ * Implements hook_feeds_presave().
+ */
+function osha_wiki_feeds_presave(FeedsSource $source, $entity, $item) {
+  // Get first content section from content table.
+  $first_step = explode('<span class="toctext">', $item['description']);
+  $second_step = explode("</span>", $first_step[1]);
+  $first_chapter = $second_step[0];
+
+  // Html title for the first section of the content.
+  $title_span = '<span class="mw-headline" id="' . str_replace(' ', '_', $first_chapter) . '">';
+
+  // Get the content between first section and next section (h2).
+  $first_step = explode($title_span, $item['description']);
+  $second_step = explode("</h2>", $first_step[1]);
+  $third_step = explode("<h2>", $second_step[1]);
+  $summary = $third_step[0];
+
+  // Attach the entity summary as first section content.
+  $entity->body[$entity->language][0]['summary'] = $summary;
+}
