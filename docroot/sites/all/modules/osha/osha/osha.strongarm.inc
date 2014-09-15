@@ -371,10 +371,16 @@ function osha_strongarm() {
           'weight' => '13',
         ),
         'language' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'redirect' => array(
           'weight' => '14',
+        ),
+        'metatags' => array(
+          'weight' => '15',
+        ),
+        'workbench_access' => array(
+          'weight' => '0',
         ),
       ),
       'display' => array(),
