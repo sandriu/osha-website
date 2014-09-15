@@ -331,6 +331,7 @@ $options['init-modules'] = array(
 
   'views_slideshow',
   'views_slideshow_cycle',
+  'custom_formatters',
 
   'taxonomy_manager',
   'node_export',

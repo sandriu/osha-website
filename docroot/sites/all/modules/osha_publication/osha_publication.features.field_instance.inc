@@ -299,9 +299,9 @@ function osha_publication_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'file',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
+        'type' => 'custom_formatters_publication_file',
         'weight' => 5,
       ),
       'highlights_item' => array(
@@ -607,7 +607,7 @@ function osha_publication_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
@@ -755,13 +755,12 @@ function osha_publication_field_default_field_instances() {
     'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
-          'links' => 0,
-          'view_mode' => 'teaser',
+          'link' => FALSE,
         ),
-        'type' => 'entityreference_entity_view',
+        'type' => 'entityreference_label',
         'weight' => 6,
       ),
       'highlights_item' => array(

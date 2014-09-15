@@ -5,6 +5,7 @@ package = OSHA
 version = 7.x-1.2
 project = osha_publication
 dependencies[] = ctools
+dependencies[] = custom_formatters
 dependencies[] = date
 dependencies[] = doc_to_imagefield
 dependencies[] = entityreference
