@@ -318,9 +318,9 @@ function osha_publication_field_default_field_instances() {
       ),
       'osha_slideshow' => array(
         'label' => 'hidden',
-        'module' => 'file',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
+        'type' => 'custom_formatters_publication_file',
         'weight' => 4,
       ),
       'scs' => array(
