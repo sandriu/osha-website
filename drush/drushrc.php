@@ -353,6 +353,8 @@ $options['init-modules'] = array(
   'apachesolr',
   'apachesolr_search',
   'apachesolr_multilingual',
+  'search_autocomplete',
+  'apachesolr_views',
   'osha_search',
 
   // Newsletter modules.

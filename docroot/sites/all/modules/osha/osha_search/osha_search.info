@@ -8,6 +8,7 @@ dependencies[] = apachesolr_search
 dependencies[] = ctools
 dependencies[] = facetapi
 dependencies[] = fe_block
+dependencies[] = apachesolr_views
 dependencies[] = search_autocomplete
 dependencies[] = strongarm
 dependencies[] = views
