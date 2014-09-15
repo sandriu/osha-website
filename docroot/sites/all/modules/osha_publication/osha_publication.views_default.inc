@@ -248,7 +248,6 @@ function osha_publication_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Body'),
-    t('Translations'),
     t('Get the actual content from a content revision.'),
     t('Block'),
     t('queue'),

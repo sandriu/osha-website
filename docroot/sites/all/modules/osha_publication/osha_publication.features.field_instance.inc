@@ -608,9 +608,9 @@ function osha_publication_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'custom_formatters',
+        'module' => 'file',
         'settings' => array(),
-        'type' => 'custom_formatters_publication_related_res',
+        'type' => 'file_default',
         'weight' => 7,
       ),
       'highlights_item' => array(
@@ -756,9 +756,11 @@ function osha_publication_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'custom_formatters',
-        'settings' => array(),
-        'type' => 'custom_formatters_publication_related_publications',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
         'weight' => 6,
       ),
       'highlights_item' => array(
