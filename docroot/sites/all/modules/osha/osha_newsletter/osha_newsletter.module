@@ -95,6 +95,10 @@ function osha_newsletter_block_info() {
   );
   $blocks['osha_newsletter_subscribe_extra'] = array(
     'info' => t('Subscribe to OSHA Newsletter block - with extra link to unsubscribe page'),
+    'status' => 1,
+    'region' => 'content',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'pages/oshmail-newsletter',
     'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['osha_newsletter_unsubscribe'] = array(
@@ -103,6 +107,10 @@ function osha_newsletter_block_info() {
   );
   $blocks['osha_newsletter_latest'] = array(
     'info' => t('Display the latest newsletters'),
+    'status' => 1,
+    'region' => 'sidebar_second',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'pages/oshmail-newsletter',
     'cache' => DRUPAL_NO_CACHE,
   );
 
@@ -290,12 +298,9 @@ function _osha_newsletter_latest_block_content(){
   });
 
   if (sizeof($collections)>0) {
-    if (sizeof($collections) - $newsletters_no > 0) {
-      for($i=0; $i<$newsletters_no; $i++){
-        // do something
-      }
-    } else {
-      for($i=0; $i<sizeof($collections); $i++){
+    $count_newsletters = 0;
+    for($i=0; $i<sizeof($collections); $i++){
+      if ($newsletters_no - $count_newsletters > 0) {
         $item = $collections[$i];
         $items[$item->name]['title'] = $item->title;
         $items[$item->name]['url'] = 'entity-collection/'.$item->eid;
@@ -303,22 +308,24 @@ function _osha_newsletter_latest_block_content(){
         // retrive elements from collection
         $elements = entity_collection_load_content($item->bundle, $item)->children;
         if (sizeof($elements)>0) {
-          $count = 0;
+          $count_items = 0;
           foreach($elements as $child){
-            if ($newsletter_items_no - $count > 0) {
+            if ($newsletter_items_no - $count_items > 0) {
               if ($child->type == 'node') {
                 $node = node_view($child->content,'newsletter_item');
                 $items[$item->name]['items'][] = $node;
-                $count++;
+                $count_items++;
               }
             } else {
               break;
             }
           }
         }
+        $count_newsletters++;
       }
     }
   }
+
   return theme('latest_newsletters_block', array('items' => $items));
 }
 
@@ -581,7 +588,7 @@ function osha_newsletter_fix_entity_collection_add_form(&$form, &$form_state) {
   $default_row = 'entity_collection_row_view_mode';
   $allowed_bundles_var = variable_get('osha_newsletter_allowed_bundles',
     array(
-      'publication', 'newsletter_article', 'blog', 'news', 'press_release', 'highlight',
+      'publication', 'article', 'blog', 'news', 'press_release', 'highlight', 'newsletter_article'
     )
   );
   $allowed_bundles = array(
@@ -713,7 +720,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
     else {
       $allowed_bundles = variable_get('osha_newsletter_allowed_bundles',
         array(
-          'publication', 'newsletter_article', 'blog', 'news', 'press_release', 'highlight',
+          'publication', 'article', 'blog', 'news', 'press_release', 'highlight', 'newsletter_article'
         )
       );
     }
@@ -731,7 +738,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
         $nodes = node_load_multiple(array_keys($rows['node']));
         foreach ($nodes as $nid => $node) {
           // Don't add any more nodes if already max_nodes for section.
-          if (isset($weights[$term_ct_map[$node->type]]) &&
+          if (isset($term_ct_map[$node->type]) && isset($weights[$term_ct_map[$node->type]]) &&
               $weights[$term_ct_map[$node->type]]['children'] <
               $weights[$term_ct_map[$node->type]]['parent'] + $max_nodes) {
 
@@ -739,12 +746,20 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
             $weights[$term_ct_map[$node->type]]['children']++;
             $item = new EntityCollectionTreeNode('node', $nid, $node);
             $item->position = $weights[$term_ct_map[$node->type]]['children'];
-            $item->style = (isset($term_ct_map['view_mode_'.$node->type])) ? $term_ct_map['view_mode_'.$node->type] : variable_get('osha_newsletter_node_view_mode', 'newsletter_item');
+            $item->style = (isset($term_ct_map['view_mode_'.$node->type])) ? $term_ct_map['view_mode_'.$node->type] : _default_view_mode($node->type);
             entity_collection_append_item($entity_collection, $item, $contexts);
           }
         }
       }
     }
+  }
+}
+
+function _default_view_mode($content_type){
+  if ($content_type == 'highlight') {
+    return 'highlights_item';
+  } else {
+    return 'newsletter_item';
   }
 }
 
