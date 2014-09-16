@@ -339,8 +339,8 @@ $options['init-modules'] = array(
   'uuid',
   'uuid_features',
 
+  'osha_taxonomies',
   'osha',
-  'osha_taxonomy',
   'osha_migration',
   'osha_news',
   'osha_publication',
