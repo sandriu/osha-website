@@ -418,11 +418,10 @@ function osha_newsletter_views_default_views() {
   );
   $handler->display->display_options['filters']['field_activity_tid']['vocabulary'] = 'activity';
   $handler->display->display_options['filters']['field_activity_tid']['hierarchy'] = 1;
-  /* Filter criterion: Content: Section (field_section) */
+  /* Filter criterion: Broken/missing handler */
   $handler->display->display_options['filters']['field_section_tid']['id'] = 'field_section_tid';
   $handler->display->display_options['filters']['field_section_tid']['table'] = 'field_data_field_section';
   $handler->display->display_options['filters']['field_section_tid']['field'] = 'field_section_tid';
-  $handler->display->display_options['filters']['field_section_tid']['value'] = '';
   $handler->display->display_options['filters']['field_section_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_section_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_section_tid']['expose']['operator_id'] = 'field_section_tid_op';
@@ -435,7 +434,6 @@ function osha_newsletter_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  $handler->display->display_options['filters']['field_section_tid']['vocabulary'] = 'section';
   /* Filter criterion: Field: Nace (field_nace_codes) */
   $handler->display->display_options['filters']['field_nace_codes_tid']['id'] = 'field_nace_codes_tid';
   $handler->display->display_options['filters']['field_nace_codes_tid']['table'] = 'field_data_field_nace_codes';
