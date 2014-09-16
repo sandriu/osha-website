@@ -21,6 +21,7 @@ features[field_instance][] = node-highlight-body
 features[field_instance][] = node-highlight-field_activity
 features[field_instance][] = node-highlight-field_image
 features[field_instance][] = node-highlight-field_publication_date
+features[field_instance][] = node-highlight-field_related_oshwiki_articles
 features[field_instance][] = node-highlight-field_summary
 features[field_instance][] = node-highlight-field_tags
 features[field_instance][] = node-highlight-field_thesaurus
