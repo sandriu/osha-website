@@ -13,6 +13,9 @@ osha_configure_imce();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
 osha_configure_newsletter_permissions();
+osha_configure_search_autocomplete();
+osha_configure_feeds();
+osha_newsletter_create_oshmail_page();
 
 module_disable(array('overlay'));
 
@@ -264,11 +267,96 @@ function osha_newsletter_create_taxonomy() {
 /**
  * Assign required permissions to roles - newsletter.
  */
-function osha_configure_newsletter_permissions(){
+function osha_configure_newsletter_permissions() {
   user_role_change_permissions(DRUPAL_ANONYMOUS_RID, array(
     'view newsletter_content_collection entity collections' => TRUE
   ));
   user_role_change_permissions(DRUPAL_AUTHENTICATED_RID, array(
     'view newsletter_content_collection entity collections' => TRUE
   ));
+}
+
+/**
+ * Set-up the search_autocomplete module.
+ */
+function osha_configure_search_autocomplete() {
+  db_update('search_autocomplete_forms')
+    ->fields(array(
+      'data_view' => 'solr_autocomplete',
+      'theme' => 'basic-blue.css',
+      'data_callback' => 'search_autocomplete/autocomplete/3',
+    ))
+    ->condition('selector', '#edit-search-block-form--2')
+    ->execute();
+
+  db_update('search_autocomplete_forms')
+    ->fields(array(
+      'enabled' => 0,
+    ))
+    ->condition('selector', '#edit-search-block-form--2', '<>')
+    ->execute();
+}
+
+/**
+ * Add configuration to wiki feed.
+ */
+function osha_configure_feeds() {
+  drupal_set_message('Configuring Wiki Feed ...');
+  $source = feeds_source('wiki');
+  $config = array(
+    'FeedsHTTPFetcher' => array(
+      'source' => 'http://oshwiki-staging.mainstrat.com/wiki/Special:Ask/-5B-5B:%2B-5D-5D-20-5B-5BOSHA_55641D::%2B-5D-5D-20-5B-5BLanguage-20code::en-5D-5D/-3F-23-2D/format%3Dfeed/sort%3DModification-20date/order%3Ddescending/searchlabel%3D-20Atom-20feed-20example/type%3Datom/title%3DSemantic-20MediaWiki/description%3DLatest-20news-20from-20semantic-2Dmediawiki.org/page%3Dfull/offset%3D0',
+    ),
+  );
+  $source->addConfig($config);
+  $source->save();
+  // Add to schedule, make sure importer is scheduled, too.
+  $source->schedule();
+  $source->importer->schedule();
+}
+
+/**
+ * Create OSHMail Newsletter - basic page
+ */
+function osha_newsletter_create_oshmail_page(){
+  drupal_set_message('Create OSHMail newsletter page ...');
+
+  global $user;
+
+  $node = new stdClass();
+  $node->type = 'page';
+  node_object_prepare($node);
+  $node->uid = $user->uid;
+  $node->name = $user->name;
+  $node->title = 'OSHMail newsletter';
+  $node->language = 'en';
+  $node->body[$node->language][0]['value'] = '';
+  $node->body[$node->language][0]['format'] = 'full_html';
+  $node->path['alias'] = 'pages/oshmail-newsletter';
+  $node->comment = 0;
+  $node->status = 1;
+  $node->promote = 0;
+  $node->revision = 0;
+  $node->changed = $_SERVER['REQUEST_TIME'];
+  $node->created = $_SERVER['REQUEST_TIME'];
+  $node->menu = array(
+    'enabled' => 1,
+    'mlid' => 0,
+    'module' => 'menu',
+    'hidden' => 0,
+    'language' => 'und',
+    'has_children' => 0,
+    'customized' => 0,
+    'options' => array(),
+    'expanded' => 0,
+    'parent_depth_limit' => 8,
+    'link_title' => 'OSHMail newsletter',
+    'description' => '',
+    'parent' => 'main-menu:0',
+    'weight' => -46,
+    'plid' => 587,
+    'menu_name' => 'main-menu'
+  );
+  node_submit($node);
+  node_save($node);
 }

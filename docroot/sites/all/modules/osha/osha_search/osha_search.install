@@ -5,7 +5,9 @@
  */
 function osha_search_install() {
 
-  $permissions = array('search content', 'use advanced search');
+  $permissions = array(
+    'search content', 'use advanced search', 'use Search Autocomplete',
+  );
   $anonymous = user_role_load_by_name('anonymous user');
   $authenticated = user_role_load_by_name('authenticated user');
 

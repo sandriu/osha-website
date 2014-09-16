@@ -77,11 +77,9 @@ function osha_publication_strongarm() {
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
-    'scs' => 0,
     'diff_standard' => 0,
-    'email_plain' => 0,
-    'email_html' => 0,
-    'email_textalt' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -152,13 +150,16 @@ function osha_publication_strongarm() {
           'weight' => '18',
         ),
         'workbench_access' => array(
-          'weight' => '15',
+          'weight' => '16',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'redirect' => array(
           'weight' => '19',
+        ),
+        'metatags' => array(
+          'weight' => '20',
         ),
       ),
       'display' => array(),

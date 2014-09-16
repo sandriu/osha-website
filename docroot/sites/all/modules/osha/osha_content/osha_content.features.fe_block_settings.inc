@@ -20,7 +20,7 @@ function osha_content_default_fe_block_settings() {
     'machine_name' => 'join_oshmail_subscribers',
     'module' => 'block',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'pages/oshmail-newsletter',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -39,7 +39,7 @@ function osha_content_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -24,
+        'weight' => -23,
       ),
       'seven' => array(
         'region' => '',
@@ -49,7 +49,7 @@ function osha_content_default_fe_block_settings() {
       ),
     ),
     'title' => '<none>',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['block-osha_wiki_intro'] = array(
@@ -60,7 +60,7 @@ function osha_content_default_fe_block_settings() {
     'machine_name' => 'osha_wiki_intro',
     'module' => 'block',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'pages/oshmail-newsletter',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -76,10 +76,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_first',
+        'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -20,
+        'weight' => -26,
       ),
       'seven' => array(
         'region' => '',
@@ -100,7 +100,7 @@ function osha_content_default_fe_block_settings() {
     'machine_name' => 'oshmail_subscribe_categories',
     'module' => 'block',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'pages/oshmail-newsletter',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -116,10 +116,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'content',
+        'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => -19,
       ),
       'seven' => array(
         'region' => '',
@@ -129,7 +129,7 @@ function osha_content_default_fe_block_settings() {
       ),
     ),
     'title' => '<none>',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['views-related_content-block'] = array(
@@ -196,10 +196,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_first',
+        'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -14,
+        'weight' => -24,
       ),
       'seven' => array(
         'region' => '',
@@ -236,10 +236,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_first',
+        'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -13,
+        'weight' => -25,
       ),
       'seven' => array(
         'region' => '',

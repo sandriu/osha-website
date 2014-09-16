@@ -364,6 +364,15 @@ function osha_strongarm() {
       'email_textalt' => array(
         'custom_settings' => FALSE,
       ),
+      'osha_slideshow' => array(
+        'custom_settings' => TRUE,
+      ),
+      'highlights_item' => array(
+        'custom_settings' => TRUE,
+      ),
+      'newsletter_item' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -371,10 +380,16 @@ function osha_strongarm() {
           'weight' => '13',
         ),
         'language' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'redirect' => array(
           'weight' => '14',
+        ),
+        'metatags' => array(
+          'weight' => '15',
+        ),
+        'workbench_access' => array(
+          'weight' => '0',
         ),
       ),
       'display' => array(),
