@@ -30,3 +30,7 @@ tr.osha_newsletter_section_admin_content {
 .newsletter-wrapper tr td:last-child {
   border: 0px;
 }
+
+.newsletter-wrapper .blue-line td {
+  padding: 0px;
+}
