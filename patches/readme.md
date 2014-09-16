@@ -11,6 +11,10 @@ List of patches (most recent first)
   * Fix undefined function apachesolr_mark_node (https://www.drupal.org/node/1425326)
   * https://www.drupal.org/files/nodequeue-apachesolr-fix.patch
 
+* features
+  * Add support for node UUID in menu import/export
+  * features/features_menu_uuid_export.patchs
+
 * menuimage
   * Modify menulink options to use image uri, not fid. Useful for features export/import
   * menuimage/menuimage_store_path_not_fid.patch
