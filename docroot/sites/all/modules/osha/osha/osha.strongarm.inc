@@ -833,11 +833,11 @@ function osha_strongarm() {
   $strongarm->name = 'uuid_features_entity_taxonomy_term';
   $strongarm->value = array(
     'tags' => 'tags',
-    'activity' => 0,
+    'activity' => 'activity',
+    'nace_codes' => 'nace_codes',
+    'publication_types' => 'publication_types',
+    'thesaurus' => 'thesaurus',
     'esener' => 0,
-    'nace_codes' => 0,
-    'publication_types' => 0,
-    'thesaurus' => 0,
     'section' => 0,
     'workflow_status' => 0,
     'newsletter_sections' => 0,
@@ -890,11 +890,11 @@ function osha_strongarm() {
   $strongarm->name = 'uuid_features_file_taxonomy_term';
   $strongarm->value = array(
     'tags' => 'tags',
-    'activity' => 0,
+    'activity' => 'activity',
+    'nace_codes' => 'nace_codes',
+    'publication_types' => 'publication_types',
+    'thesaurus' => 'thesaurus',
     'esener' => 0,
-    'nace_codes' => 0,
-    'publication_types' => 0,
-    'thesaurus' => 0,
     'section' => 0,
     'workflow_status' => 0,
     'newsletter_sections' => 0,
@@ -905,7 +905,7 @@ function osha_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'uuid_features_vocabulary_terms';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['uuid_features_vocabulary_terms'] = $strongarm;
 
   return $export;
