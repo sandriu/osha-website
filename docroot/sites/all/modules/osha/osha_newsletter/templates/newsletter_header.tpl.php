@@ -1,4 +1,4 @@
-<table border="0" cellpadding="0" cellspacing="0" width="800" class="top-blue-line">
+<table border="0" cellpadding="0" cellspacing="0" width="800" class="blue-line">
   <tbody>
     <tr>
       <td colspan="2" style="background-color:#003399; width:800px; height: 4px;" valign="top"></td>
@@ -44,7 +44,7 @@
       <td style="padding-top: 0px; padding-bottom: 0px;">
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
           <tbody>
-            <tr>
+            <tr class="blue-line">
               <td style="background-color:#003399; width: 100%; height: 4px;"></td>
             </tr>
             <tr>
@@ -70,7 +70,7 @@
                 </table>
               </td>
             </tr>
-            <tr>
+            <tr class="blue-line">
               <td style="background-color:#003399; width: 100%; height: 4px;"></td>
             </tr>
           </tbody>
