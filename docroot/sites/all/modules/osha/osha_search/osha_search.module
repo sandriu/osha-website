@@ -5,3 +5,11 @@
  */
 
 include_once 'osha_search.features.inc';
+
+/**
+ * {@inheritdoc}
+ */
+function osha_search_menu_alter(&$items) {
+  $items['search/wiki']['weight'] = '2';
+  $items['search/site']['weight'] = '1';
+}
