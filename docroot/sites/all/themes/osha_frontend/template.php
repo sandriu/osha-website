@@ -79,6 +79,17 @@ function osha_frontend_date_calendar_icon($variables) {
 }
 
 /**
+ * Implements hook_apachesolr_sort_list().
+ */
+function osha_frontend_apachesolr_sort_list($vars) {
+  $items = &$vars['items'];
+  unset($items['sort_label']);
+  unset($items['bundle']);
+  unset($items['sort_name']);
+  return theme('item_list', array('items' => $vars['items']));
+}
+
+/**
  * @todo @Ivan: Edit only below
  */
 
