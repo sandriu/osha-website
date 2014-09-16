@@ -34,3 +34,8 @@ tr.osha_newsletter_section_admin_content {
 .newsletter-wrapper .blue-line td {
   padding: 0px;
 }
+
+.newsletter-wrapper .newsletter-month,
+.newsletter-wrapper .newsletter-number {
+  height: 31px;
+}
