@@ -357,6 +357,7 @@ $options['init-modules'] = array(
   'search_autocomplete',
   'apachesolr_views',
   'osha_search',
+  'uuid_features',
 
   // Newsletter modules.
   'entity_collection',
