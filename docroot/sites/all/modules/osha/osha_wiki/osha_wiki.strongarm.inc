@@ -182,6 +182,12 @@ function osha_wiki_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'highlights_item' => array(
+        'custom_settings' => TRUE,
+      ),
+      'newsletter_item' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
