@@ -208,14 +208,14 @@ publications',
         'weight' => -1,
       ),
       'seven' => array(
-        'region' => 'dashboard_sidebar',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'seven',
         'weight' => -10,
       ),
     ),
     'title' => '',
-    'visibility' => 1,
+    'visibility' => 0,
   );
 
   return $export;
