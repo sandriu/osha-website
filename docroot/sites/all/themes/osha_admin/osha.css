@@ -29,13 +29,21 @@ tr.osha_newsletter_section_admin_content {
 .newsletter-wrapper table,
 .newsletter-wrapper tr td:last-child {
   border: 0px;
+  margin-bottom: 0px;
 }
 
-.newsletter-wrapper .blue-line td {
+.newsletter-wrapper .blue-line td,
+.newsletter-wrapper .right-column td,
+.newsletter-wrapper .left-column td {
   padding: 0px;
 }
 
 .newsletter-wrapper .newsletter-month,
 .newsletter-wrapper .newsletter-number {
   height: 31px;
+}
+
+.newsletter-wrapper .category-name td {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
