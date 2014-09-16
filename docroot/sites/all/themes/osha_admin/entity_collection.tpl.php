@@ -9,6 +9,9 @@ if (module_exists('osha_newsletter') && isset($variables['element'])) {
 
     // preprocess data
     $newsletter_title = $source->title;
+    $newsletter_id = $source->eid;
+    $newsletter_date = $source->field_created[LANGUAGE_NONE][0]['value'];
+
     $elements = array();
     $last_section = NULL;
     $blogs = array();
@@ -49,7 +52,7 @@ if (module_exists('osha_newsletter') && isset($variables['element'])) {
       return strcmp($a->name, $b->name);
     });
 
-    print theme_render_template($module_templates_path.'/newsletter_header.tpl.php', array('languages' => $languages, 'newsletter_title' => $newsletter_title));
+    print theme_render_template($module_templates_path.'/newsletter_header.tpl.php', array('languages' => $languages, 'newsletter_title' => $newsletter_title, 'newsletter_id' => $newsletter_id, 'newsletter_date' => $newsletter_date));
     print theme_render_template($module_templates_path.'/newsletter_body.tpl.php', array('items' => $elements, 'blogs' => $blogs, 'news' => $news, 'events' => $events));
     print theme_render_template($module_templates_path.'/newsletter_footer.tpl.php', array());
   }

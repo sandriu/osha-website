@@ -26,7 +26,12 @@
         ?>
       </td>
       <td>
-        <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;">July 2014</div>
+        <?php
+        $newsletter_ready_date = date('M Y');
+        if($newsletter_date) {
+          $newsletter_ready_date = date('M Y', strtotime($newsletter_date));
+        }?>
+        <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>
         <div class="newsletter-number" style="color: #003399; font-size: 24px; font-weight: 300; text-align: right;"><?php print $newsletter_title?></div>
       </td>
     </tr>
@@ -54,8 +59,8 @@
                         <?php
                          if ($languages) {
                             $last_lang = array_pop($languages);
-                            foreach ($languages as $langcode => $language):?>
-                            <a href="#" style="text-decoration: none; color: #003399;"><?php print $language->native . ' | ';?></a><?php  endforeach; ?> <a href="#" style="text-decoration: none; color: #003399;"><?php print $last_lang->native;?></a>
+                            foreach ($languages as $language):?>
+                            <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $language));?>" style="text-decoration: none; color: #003399;"><?php print $language->native . ' | ';?></a><?php  endforeach; ?> <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $last_lang));?>" style="text-decoration: none; color: #003399;"><?php print $last_lang->native;?></a>
                          <?php
                          }
                         ?>
