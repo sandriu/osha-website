@@ -18,7 +18,7 @@ function osha_custom_formatters_defaults() {
   $formatter->description = '';
   $formatter->mode = 'php';
   $formatter->field_types = 'file';
-  $formatter->code = '$output = "Download PDF in: ";
+  $formatter->code = '$output = "<span>Download PDF in: </span>";
 
 foreach($variables[\'#object\']->field_file as $lang => $object) {
     $output .=  \'<a href="\' . file_create_url($object[0][\'uri\']) . \'">\' . strtoupper($lang) . \'</a> | \';
@@ -46,7 +46,7 @@ foreach ($related_pubs as $pub) {
 	$node = node_load($pub[\'target_id\']);
 	$title = isset($node->title_field[$curr_lang][0]) ? $node->title_field[$curr_lang][0][\'value\'] : $node->title_field[\'en\'][0][\'value\'];
 	$output .=  \'<a href="\' . url(\'node/\' . $node->nid, array(\'absolute\' => TRUE)) . \'">\' . $title . \'</a>\';
-	$output .= \' Download PDF in:\';
+	$output .= \'<span>Download PDF in:</span>\';
 	foreach ($node->field_file as $lang => $object) {
 		$output .=  \' <a href="\' . file_create_url($object[0][\'uri\']) . \'">\' . strtoupper($lang) . \'</a> | \';
 	}
