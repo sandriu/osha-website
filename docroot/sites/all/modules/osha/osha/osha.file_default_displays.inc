@@ -64,7 +64,7 @@ function osha_file_default_displays() {
   $file_display->api_version = 1;
   $file_display->name = 'document__teaser__file_field_file_default';
   $file_display->weight = 50;
-  $file_display->status = TRUE;
+  $file_display->status = FALSE;
   $file_display->settings = array();
   $export['document__teaser__file_field_file_default'] = $file_display;
 
