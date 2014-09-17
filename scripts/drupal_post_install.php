@@ -15,7 +15,6 @@ osha_newsletter_create_taxonomy();
 osha_configure_newsletter_permissions();
 osha_configure_search_autocomplete();
 osha_configure_feeds();
-osha_newsletter_create_oshmail_page();
 
 module_disable(array('overlay'));
 
