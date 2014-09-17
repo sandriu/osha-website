@@ -280,21 +280,31 @@ function osha_configure_newsletter_permissions() {
  * Set-up the search_autocomplete module.
  */
 function osha_configure_search_autocomplete() {
-  db_update('search_autocomplete_forms')
-    ->fields(array(
-      'data_view' => 'solr_autocomplete',
-      'theme' => 'basic-blue.css',
-      'data_callback' => 'search_autocomplete/autocomplete/3',
-    ))
-    ->condition('selector', '#edit-search-block-form--2')
-    ->execute();
-
+  // Disable other search forms - we dont' use them.
   db_update('search_autocomplete_forms')
     ->fields(array(
       'enabled' => 0,
     ))
     ->condition('selector', '#edit-search-block-form--2', '<>')
     ->execute();
+  // Configure the search form.
+  $fid = db_select('search_autocomplete_forms', 'f')
+    ->fields('f', array('fid'))
+    ->condition('selector', '#edit-search-block-form--2')
+    ->execute()->fetchField(0);
+  if ($fid) {
+    db_update('search_autocomplete_forms')
+      ->fields(array(
+        'data_view' => 'solr_autocomplete',
+        'theme' => 'basic-blue.css',
+        'data_callback' => 'search_autocomplete/autocomplete/' . $fid . '/',
+      ))
+      ->condition('selector', '#edit-search-block-form--2')
+      ->execute();
+  }
+  else {
+    drupal_set_message('Failed to configure search_autocomplete form', 'error');
+  }
 }
 
 /**
