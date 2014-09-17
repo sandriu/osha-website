@@ -11,6 +11,10 @@ List of patches (most recent first)
   * Fix undefined function apachesolr_mark_node (https://www.drupal.org/node/1425326)
   * https://www.drupal.org/files/nodequeue-apachesolr-fix.patch
 
+* uuid_features
+  * Add support for workbench moderation states. It sets published if exported revision published.
+  * uuid_features/uuid_features-workbench-moderation-state-support.patch
+
 * features
   * Add support for node UUID in menu import/export
   * features/features_menu_uuid_export.patchs
