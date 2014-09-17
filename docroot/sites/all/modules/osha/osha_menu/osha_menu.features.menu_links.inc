@@ -110,7 +110,7 @@ function osha_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 1,
     'expanded' => 1,
-    'weight' => -47,
+    'weight' => -49,
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
@@ -157,7 +157,7 @@ function osha_menu_menu_default_menu_links() {
     'hidden' => 0,
     'external' => 0,
     'has_children' => 1,
-    'expanded' => 0,
+    'expanded' => 1,
     'weight' => -50,
     'customized' => 1,
     'language' => 'und',
@@ -342,7 +342,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_surveys--statistics:publications',
+    'parent_identifier' => 'main-menu_surveys--statistics:node/5',
   );
   // Exported menu link: main-menu_eu-directives:node/9
   $menu_links['main-menu_eu-directives:node/9'] = array(
@@ -367,7 +367,7 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
     'item_uuid' => '6f6f90f0-e453-40af-b0bd-593af4da286f',
-    'parent_identifier' => 'main-menu_european-legislation:<front>',
+    'parent_identifier' => 'main-menu_european-legislation:node/12',
   );
   // Exported menu link: main-menu_eu-guidelines:<front>
   $menu_links['main-menu_eu-guidelines:<front>'] = array(
@@ -391,7 +391,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_european-legislation:<front>',
+    'parent_identifier' => 'main-menu_european-legislation:node/12',
   );
   // Exported menu link: main-menu_eu-osh-standards:node/7
   $menu_links['main-menu_eu-osh-standards:node/7'] = array(
@@ -416,30 +416,31 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
     'item_uuid' => '57d9e0dc-976e-4e5d-b792-ba007ccb98a9',
-    'parent_identifier' => 'main-menu_european-legislation:<front>',
+    'parent_identifier' => 'main-menu_european-legislation:node/12',
   );
-  // Exported menu link: main-menu_european-legislation:<front>
-  $menu_links['main-menu_european-legislation:<front>'] = array(
+  // Exported menu link: main-menu_european-legislation:node/12
+  $menu_links['main-menu_european-legislation:node/12'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'node/12',
+    'router_path' => 'node/%',
     'link_title' => 'European Legislation',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_european-legislation:<front>',
+      'identifier' => 'main-menu_european-legislation:node/12',
       'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 1,
     'expanded' => 1,
     'weight' => 0,
-    'customized' => 0,
+    'customized' => 1,
     'language' => 'und',
-    'menu_links_customized' => 0,
+    'menu_links_customized' => 1,
+    'item_uuid' => 'a940a49d-3ea0-4dee-b487-d301ce495610',
     'parent_identifier' => 'main-menu_legislation:<nolink>',
   );
   // Exported menu link: main-menu_film-awards:<front>
@@ -1059,7 +1060,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_surveys--statistics:publications',
+    'parent_identifier' => 'main-menu_surveys--statistics:node/5',
   );
   // Exported menu link: main-menu_press:<front>
   $menu_links['main-menu_press:<front>'] = array(
@@ -1192,17 +1193,17 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
   );
-  // Exported menu link: main-menu_surveys--statistics:publications
-  $menu_links['main-menu_surveys--statistics:publications'] = array(
+  // Exported menu link: main-menu_surveys--statistics:node/5
+  $menu_links['main-menu_surveys--statistics:node/5'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'publications',
-    'router_path' => 'publications',
+    'link_path' => 'node/5',
+    'router_path' => 'node/%',
     'link_title' => 'Surveys & Statistics',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_surveys--statistics:publications',
+      'identifier' => 'main-menu_surveys--statistics:node/5',
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -1214,6 +1215,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
+    'item_uuid' => '387191b6-0baf-4823-906d-55c6b560c388',
     'parent_identifier' => 'main-menu_surveys--statistics:<nolink>',
   );
   // Exported menu link: main-menu_themes:<nolink>
