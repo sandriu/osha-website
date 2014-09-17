@@ -60,7 +60,7 @@ function osha_content_default_fe_block_settings() {
     'machine_name' => 'osha_wiki_intro',
     'module' => 'block',
     'node_types' => array(),
-    'pages' => 'pages/oshmail-newsletter',
+    'pages' => '<front>',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -89,7 +89,7 @@ function osha_content_default_fe_block_settings() {
       ),
     ),
     'title' => '<none>',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['block-oshmail_subscribe_categories'] = array(

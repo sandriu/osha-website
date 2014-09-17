@@ -34,7 +34,7 @@ function osha_content_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relationship: Field: Tags (field_tags) */
   $handler->display->display_options['relationships']['field_tags_tid']['id'] = 'field_tags_tid';
@@ -234,7 +234,6 @@ function osha_content_views_default_views() {
   $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
     'tags' => 'tags',
   );
-  $handler->display->display_options['arguments']['tid']['default_argument_skip_url'] = TRUE;
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
@@ -273,7 +272,7 @@ function osha_content_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'entity';
@@ -285,6 +284,8 @@ function osha_content_views_default_views() {
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['nid']['breadcrumb_enable'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['breadcrumb'] = '%1';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -304,13 +305,13 @@ function osha_content_views_default_views() {
   $handler->display->display_options['arguments']['tid']['id'] = 'tid';
   $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['tid']['exception']['value'] = '';
   $handler->display->display_options['arguments']['tid']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['tid']['title'] = '%2 related to %1';
-  $handler->display->display_options['arguments']['tid']['breadcrumb_enable'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['title'] = '%2 tagged with "%3"';
   $handler->display->display_options['arguments']['tid']['breadcrumb'] = '%1';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['tid']['default_argument_options']['term_page'] = FALSE;
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['tid']['default_argument_options']['anyall'] = '+';
   $handler->display->display_options['arguments']['tid']['default_argument_options']['limit'] = TRUE;
   $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
@@ -340,8 +341,8 @@ function osha_content_views_default_views() {
     t('Publication Block'),
     t('Publications'),
     t('Page'),
-    t('%2 related to %1'),
     t('%1'),
+    t('%2 tagged with "%3"'),
   );
   $export['related_content'] = $view;
 
