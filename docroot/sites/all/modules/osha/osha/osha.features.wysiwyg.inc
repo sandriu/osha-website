@@ -18,6 +18,7 @@ function osha_wysiwyg_default_profiles() {
       'default' => 1,
       'user_choose' => 0,
       'show_toggle' => 1,
+      'theme' => 'advanced',
       'language' => 'en',
       'buttons' => array(
         'default' => array(
@@ -31,6 +32,7 @@ function osha_wysiwyg_default_profiles() {
           'link' => 1,
           'anchor' => 1,
           'image' => 1,
+          'formatselect' => 1,
           'fontselect' => 1,
           'fontsizeselect' => 1,
           'code' => 1,
@@ -41,12 +43,12 @@ function osha_wysiwyg_default_profiles() {
         'contextmenu' => array(
           'contextmenu' => 1,
         ),
+        'paste' => array(
+          'pasteword' => 1,
+        ),
         'searchreplace' => array(
           'search' => 1,
           'replace' => 1,
-        ),
-        'paste' => array(
-          'pasteword' => 1,
         ),
         'table' => array(
           'tablecontrols' => 1,
@@ -101,6 +103,7 @@ function osha_wysiwyg_default_profiles() {
           'link' => 1,
           'anchor' => 1,
           'image' => 1,
+          'formatselect' => 1,
           'fontselect' => 1,
           'fontsizeselect' => 1,
           'code' => 1,
