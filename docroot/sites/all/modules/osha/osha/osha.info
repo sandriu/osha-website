@@ -97,6 +97,7 @@ features[file_display][] = image__teaser__file_field_image
 features[filter][] = filtered_html
 features[filter][] = full_html
 features[filter][] = plain_text
+features[formatters][] = publication_bookshop_id
 features[formatters][] = publication_file
 features[formatters][] = publication_related_publications
 features[formatters][] = publication_related_res
