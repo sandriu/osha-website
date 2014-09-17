@@ -13,6 +13,24 @@ function osha_custom_formatters_defaults() {
   $formatter = new stdClass();
   $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
   $formatter->api_version = 2;
+  $formatter->name = 'publication_bookshop_id';
+  $formatter->label = 'publication_bookshop_id';
+  $formatter->description = '';
+  $formatter->mode = 'php';
+  $formatter->field_types = 'text';
+  $formatter->code = 'global $language ;
+$curr_lang = $language->language;
+$object = isset($variables[\'#object\']->field_publication_bookshop_id[$curr_lang]) ? $variables[\'#object\']->field_publication_bookshop_id[$curr_lang] :$variables[\'#object\']->field_publication_bookshop_id[\'en\'];
+$code = $object[0][\'value\'];
+
+$output = \'<span>Order a printed copy <a href="http://bookshop.europa.eu/is-bin/INTERSHOP.enfinity/WFS/EU-Bookshop-Site/en_GB/-/EUR/ViewPublication-Start?PublicationKey=\' . $code . \'"><img src="\' . $GLOBALS[\'base_url\'] . \'/sites/all/themes/osha_frontend/images/content/eu_bookshop.gif" alt="EU Bookshop: You can order a printed copy of this document" title="EU Bookshop: You can order a printed copy of this document"></a></span>\';
+return $output;';
+  $formatter->fapi = '';
+  $export['publication_bookshop_id'] = $formatter;
+
+  $formatter = new stdClass();
+  $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
+  $formatter->api_version = 2;
   $formatter->name = 'publication_file';
   $formatter->label = 'publication_file';
   $formatter->description = '';
