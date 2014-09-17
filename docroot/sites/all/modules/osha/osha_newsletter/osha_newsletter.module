@@ -888,7 +888,6 @@ function osha_newsletter_send_email($key, $to, $from, $form_values) {
   // Send the mail, and check for success. Note that this does not guarantee
   // message delivery; only that there were no PHP-related issues encountered
   // while sending.
-
   $result = drupal_mail($module, $key, $to, $language, $params, $from, $send);
   if ($result['result'] == TRUE) {
     drupal_set_message(t('Your message has been sent to @emails.', array('@emails' => $to)));
@@ -898,6 +897,11 @@ function osha_newsletter_send_email($key, $to, $from, $form_values) {
   }
 }
 
+function osha_newsletter_mail_alter(&$message) {
+    $sender = $message['headers']['From'];
+    $message['headers']['Sender'] = $sender;
+    $message['headers']['Return-Path'] = $sender;
+}
 
 /**
  * Build subject and body of the test and normal newsletter email.
