@@ -38,6 +38,7 @@
         "osha_data_dir": "/var/local/osha/data",
         "site_name": "OSHA",
         "site_mail": "account@example.com",
-        "file_temporary_path": "/tmp"
+        "file_temporary_path": "/tmp",
+        "sa_admin_helper": "0"
     }
 }
