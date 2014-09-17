@@ -332,12 +332,13 @@ $options['init-modules'] = array(
   'mpac',
   'linkit',
 
-  'workbench',
-  'workbench_access',
-  'workbench_moderation',
   // Enable last (conflict with rules)
   'uuid',
   'uuid_features',
+
+  'workbench',
+  'workbench_access',
+  'workbench_moderation',
 
   'osha_taxonomies',
   'osha',
