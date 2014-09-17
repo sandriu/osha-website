@@ -67,10 +67,6 @@ function osha_search_views_default_views() {
     1 => 0,
     3 => 0,
   );
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'autocomplete/solr';
   $translatables['solr_autocomplete'] = array(
     t('Master'),
     t('Solr autocomplete'),
@@ -84,7 +80,6 @@ function osha_search_views_default_views() {
     t('url'),
     t('<a href="[url]">[sm_title_field]</a>'),
     t('content'),
-    t('Page'),
   );
   $export['solr_autocomplete'] = $view;
 
