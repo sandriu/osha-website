@@ -424,7 +424,7 @@ function osha_newsletter_unsubscribe_form_validate($form, &$form_state) {
 function _get_listserv_subscription_email(){
   global $user;
 
-  $listserv = explode("@",variable_get('osha_newsletter_listserv'));
+  $listserv = explode("@",variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu'));
   $listserv_domain = '';
 
   if (isset($listserv[1])) {
@@ -445,7 +445,7 @@ function _get_listserv_subscription_email(){
  */
 function osha_newsletter_subscribe_form_submit($form, &$form_state) {
   $subscribe_email = $form_state['values']['email'];
-  $to = variable_get('osha_newsletter_listserv');
+  $to = variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu');
 
   osha_newsletter_send_email('subscribe_email', $to, $subscribe_email, $form_state);
 }
@@ -455,7 +455,7 @@ function osha_newsletter_subscribe_form_submit($form, &$form_state) {
  */
 function osha_newsletter_unsubscribe_form_submit($form, &$form_state) {
   $unsubscribe_email = $form_state['values']['unsubscribe_email'];
-  $to = variable_get('osha_newsletter_listserv');
+  $to = variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu');
 
   osha_newsletter_send_email('unsubscribe_email', $to, $unsubscribe_email, $form_state);
 }
@@ -752,14 +752,6 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
         }
       }
     }
-  }
-}
-
-function _default_view_mode($content_type){
-  if ($content_type == 'highlight') {
-    return 'highlights_item';
-  } else {
-    return 'newsletter_item';
   }
 }
 
