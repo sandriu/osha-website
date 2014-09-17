@@ -133,7 +133,7 @@ search/*',
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => 'NACE Codes',
     'visibility' => 1,
   );
 
@@ -146,7 +146,8 @@ search/*',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'publications/*
-publications',
+publications
+solr-publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -174,7 +175,7 @@ publications',
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => 'Publication type',
     'visibility' => 1,
   );
 
