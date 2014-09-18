@@ -331,18 +331,24 @@ function osha_configure_feeds() {
 function osha_configure_addtoany_social_share() {
   drupal_set_message('Configuring Addtoany contrib module ...');
 
-  variable_set('addtoany_buttons_size', 32);
-  variable_set('addtoany_additional_html', '<div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class="a2a_button_twitter"></a><a class="a2a_button_facebook"></a><a class="a2a_button_linkedin"></a><a class="a2a_button_google_plus"></a></div><script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>');
+  variable_set('addtoany_buttons_size', 16);
+  variable_set('addtoany_additional_html', '<a class="a2a_button_twitter"></a><a class="a2a_button_facebook"></a><a class="a2a_button_linkedin"></a><a class="a2a_button_google_plus"></a>');
+  variable_set('addtoany_additional_html_placement', 'after');
   variable_set('addtoany_display_in_nodecont', '0');
   variable_set('addtoany_display_in_nodelink', '1');
   variable_set('addtoany_display_in_teasers', '0');
+  variable_set('addtoany_link_text', 'Share this news on:');
+  variable_set('addtoany_image', 'text');
+  variable_set('addtoany_custom_image', '');
+  variable_set('addtoany_image_attributes', 'Share"');
+  
   variable_set('addtoany_nodetypes', array(
     'news' => 'news',
     'article' => 0,
     'page' => 0,
     'blog' => 0,
     'calls' => 0,
-    'highlight' => 0,
+    'highlight' => 'highlight',
     'job_vacancies' => 0,
     'newsletter_article' => 0,
     'press_release' => 0,
