@@ -336,6 +336,10 @@ $options['init-modules'] = array(
   'uuid',
   'uuid_features',
 
+  'path_breadcrumbs',
+  'path_breadcrumbs_ui',
+  'path_breadcrumbs_i18n',
+
   'workbench',
   'workbench_access',
   'workbench_moderation',
@@ -368,11 +372,8 @@ $options['init-modules'] = array(
   'entity_collection_db',
   'osha_newsletter',
 
-  //social share
+  // Social share
   'addtoany',
-
-  // Enable last (conflict with rules)
-  'uuid',
 
   'devel',
   'diff',
