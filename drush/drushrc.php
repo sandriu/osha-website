@@ -280,6 +280,7 @@ $options['init-modules'] = array(
   'migrate',
   'features',
   'feeds_ui',
+  'feeds_crawler',
 
   'entityreference',
   'link',
