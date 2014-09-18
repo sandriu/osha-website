@@ -309,6 +309,7 @@ function osha_content_views_default_views() {
   $handler->display->display_options['arguments']['tid']['exception']['value'] = '';
   $handler->display->display_options['arguments']['tid']['title_enable'] = TRUE;
   $handler->display->display_options['arguments']['tid']['title'] = '%2 tagged with "%3"';
+  $handler->display->display_options['arguments']['tid']['breadcrumb_enable'] = TRUE;
   $handler->display->display_options['arguments']['tid']['breadcrumb'] = '%1';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['tid']['default_argument_options']['term_page'] = FALSE;
