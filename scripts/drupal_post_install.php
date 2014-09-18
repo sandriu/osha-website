@@ -312,17 +312,18 @@ function osha_configure_search_autocomplete() {
  */
 function osha_configure_feeds() {
   drupal_set_message('Configuring Wiki Feed ...');
-  $source = feeds_source('wiki');
-  $config = array(
-    'FeedsHTTPFetcher' => array(
-      'source' => 'http://oshwiki-staging.mainstrat.com/wiki/Special:Ask/-5B-5B:%2B-5D-5D-20-5B-5BOSHA_55641D::%2B-5D-5D-20-5B-5BLanguage-20code::en-5D-5D/-3F-23-2D/format%3Dfeed/sort%3DModification-20date/order%3Ddescending/searchlabel%3D-20Atom-20feed-20example/type%3Datom/title%3DSemantic-20MediaWiki/description%3DLatest-20news-20from-20semantic-2Dmediawiki.org/page%3Dfull/offset%3D0',
-    ),
-  );
-  $source->addConfig($config);
-  $source->save();
-  // Add to schedule, make sure importer is scheduled, too.
-  $source->schedule();
-  $source->importer->schedule();
+
+  // Create Importers
+  // foreac lang osha_wiki_feeds_create_importer
+
+  // foreach importer
+  //  $source = feeds_source('wiki');
+  //  $config = $source->importer()->getConfig();
+  //  $config = $config['fetcher']['config'];
+  //  $source->addConfig($config);
+  //  $source->save();
+  //  $source->schedule();
+  //  $source->importer->schedule();
 }
 
 /**
