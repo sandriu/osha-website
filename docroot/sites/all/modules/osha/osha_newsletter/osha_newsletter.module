@@ -690,12 +690,12 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
     // Max number of nodes pre-inserted for each section (term).
     $max_nodes = variable_get('osha_newsletter_after_max_nodes', 10);
     foreach ($terms as $weight => $term) {
-      $entity = entity_load('taxonomy_term', array($term->tid));
+      $entity = entity_uuid_load('taxonomy_term', array($term->uuid));
       $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
       // Set weights for sections and children.
-      $weights[$term->tid]['parent'] = ($weight + 1) * ($max_nodes + 1);
-      $weights[$term->tid]['children'] = $weights[$term->tid]['parent'];
-      $item->position = $weights[$term->tid]['parent'];
+      $weights[$term->uuid]['parent'] = ($weight + 1) * ($max_nodes + 1);
+      $weights[$term->uuid]['children'] = $weights[$term->uuid]['parent'];
+      $item->position = $weights[$term->uuid]['parent'];
       entity_collection_append_item($entity_collection, $item, $contexts);
     }
 
