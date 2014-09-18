@@ -90,8 +90,10 @@ function osha_newsletter_block_info() {
     'status' => 1,
     'region' => 'sidebar_second',
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => '<front>',
+    'pages' => '<front>
+/oshnews',
     'cache' => DRUPAL_NO_CACHE,
+    'weight' => -30
   );
   $blocks['osha_newsletter_subscribe_extra'] = array(
     'info' => t('Subscribe to OSHA Newsletter block - with extra link to unsubscribe page'),

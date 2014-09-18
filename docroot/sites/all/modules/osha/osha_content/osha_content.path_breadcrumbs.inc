@@ -14,7 +14,7 @@ function osha_content_path_breadcrumbs_settings_info() {
   $path_breadcrumb->api_version = 1;
   $path_breadcrumb->machine_name = 'osh_news';
   $path_breadcrumb->name = 'OSH news';
-  $path_breadcrumb->path = 'news';
+  $path_breadcrumb->path = 'oshnews';
   $path_breadcrumb->data = array(
     'titles' => array(
       0 => 'OSH news',

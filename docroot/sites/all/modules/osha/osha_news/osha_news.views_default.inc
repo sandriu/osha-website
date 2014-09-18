@@ -22,7 +22,7 @@ function osha_news_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'News';
+  $handler->display->display_options['title'] = 'OSH News';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -76,12 +76,22 @@ function osha_news_views_default_views() {
 
   /* Display: News */
   $handler = $view->new_display('page', 'News', 'page');
-  $handler->display->display_options['path'] = 'news';
+  $handler->display->display_options['path'] = 'oshnews';
 
   /* Display: Latest News */
   $handler = $view->new_display('block', 'Latest News', 'latest_news_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'OSH News';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'View all';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -130,7 +140,7 @@ function osha_news_views_default_views() {
   $handler->display->display_options['block_description'] = 'OSH News';
   $translatables['news'] = array(
     t('Master'),
-    t('News'),
+    t('OSH News'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -145,8 +155,9 @@ function osha_news_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Get the actual content from a content revision.'),
+    t('News'),
     t('Latest News'),
-    t('OSH News'),
+    t('View all'),
     t('queue'),
   );
   $export['news'] = $view;
