@@ -15,6 +15,7 @@ osha_newsletter_create_taxonomy();
 osha_configure_newsletter_permissions();
 osha_configure_search_autocomplete();
 osha_configure_feeds();
+osha_configure_addtoany_social_share();
 
 module_disable(array('overlay'));
 
@@ -322,4 +323,37 @@ function osha_configure_feeds() {
   // Add to schedule, make sure importer is scheduled, too.
   $source->schedule();
   $source->importer->schedule();
+}
+
+/**
+ * Add configuration to addtoany contrib module.
+ */
+function osha_configure_addtoany_social_share() {
+  drupal_set_message('Configuring Addtoany contrib module ...');
+
+  variable_set('addtoany_buttons_size', 16);
+  variable_set('addtoany_additional_html', '<a class="a2a_button_twitter"></a><a class="a2a_button_facebook"></a><a class="a2a_button_linkedin"></a><a class="a2a_button_google_plus"></a>');
+  variable_set('addtoany_additional_html_placement', 'after');
+  variable_set('addtoany_display_in_nodecont', '0');
+  variable_set('addtoany_display_in_nodelink', '1');
+  variable_set('addtoany_display_in_teasers', '0');
+  variable_set('addtoany_link_text', 'Share this news on:');
+  variable_set('addtoany_image', 'text');
+  variable_set('addtoany_custom_image', '');
+  variable_set('addtoany_image_attributes', 'Share"');
+  
+  variable_set('addtoany_nodetypes', array(
+    'news' => 'news',
+    'article' => 0,
+    'page' => 0,
+    'blog' => 0,
+    'calls' => 0,
+    'highlight' => 'highlight',
+    'job_vacancies' => 0,
+    'newsletter_article' => 0,
+    'press_release' => 0,
+    'publication' => 0,
+    'wiki_page' => 0,
+    )
+  );
 }
