@@ -340,7 +340,7 @@ function osha_configure_addtoany_social_share() {
   variable_set('addtoany_link_text', 'Share this news on:');
   variable_set('addtoany_image', 'text');
   variable_set('addtoany_custom_image', '');
-  variable_set('addtoany_image_attributes', 'Share"');
+  variable_set('addtoany_image_attributes', 'Share');
   
   variable_set('addtoany_nodetypes', array(
     'news' => 'news',
