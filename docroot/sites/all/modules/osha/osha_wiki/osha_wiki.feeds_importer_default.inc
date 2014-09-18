@@ -18,12 +18,26 @@ function osha_wiki_feeds_importer_default() {
     'name' => 'Wiki',
     'description' => '',
     'fetcher' => array(
-      'plugin_key' => 'FeedsHTTPFetcher',
+      'plugin_key' => 'FeedsCrawler',
       'config' => array(
-        'auto_detect_feeds' => FALSE,
-        'use_pubsubhubbub' => FALSE,
+        'auto_detect_feeds' => 0,
+        'use_pubsubhubbub' => 0,
         'designated_hub' => '',
-        'request_timeout' => NULL,
+        'request_timeout' => '',
+        'crawler' => array(
+          'num_pages' => '3',
+          'delay' => '1',
+          'first_run' => '0',
+          'auto' => '0',
+          'xpath' => '',
+          'url' => array(
+            'url_pattern' => 'http://oshwiki-staging.mainstrat.com/wiki/Special:Ask/-5B-5B:+-5D-5D-20-5B-5BLanguage-20code::fr-5D-5D/-3F-23-2D/format=feed/sort=Modification-20date/order=descending/searchlabel=-20Atom-20feed-20example/type=atom/title=Semantic-20MediaWiki/description=Latest-20news-20from-20semantic-2Dmediawiki.org/page=full/offset=$index/limit=5',
+            'initial' => '0',
+            'increment' => '5',
+          ),
+          'osh_importer_language' => 'bg',
+        ),
+        'crawled' => FALSE,
       ),
     ),
     'parser' => array(
@@ -74,7 +88,7 @@ function osha_wiki_feeds_importer_default() {
     'import_period' => '1800',
     'expire_period' => 3600,
     'import_on_create' => 1,
-    'process_in_background' => 0,
+    'process_in_background' => 1,
   );
   $export['wiki'] = $feeds_importer;
 
