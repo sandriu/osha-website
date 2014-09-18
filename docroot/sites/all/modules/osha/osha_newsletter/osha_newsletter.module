@@ -431,7 +431,7 @@ function _get_listserv_subscription_email(){
     $listserv_domain = $listserv[1];
   }
 
-  $list_name = variable_get('osha_newsletter_list_name', 'OSHMail');
+  $list_name = variable_get('osha_newsletter_list_name', 'OSHMail-Test');
 
   if ($listserv_domain != '') {
     return $list_name . '@' . $listserv_domain;
@@ -746,12 +746,20 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
             $weights[$term_ct_map[$node->type]]['children']++;
             $item = new EntityCollectionTreeNode('node', $nid, $node);
             $item->position = $weights[$term_ct_map[$node->type]]['children'];
-            $item->style = (isset($term_ct_map['view_mode_'.$node->type])) ? $term_ct_map['view_mode_'.$node->type] : _default_view_mode($node->type);
+            $item->style = (isset($term_ct_map['view_mode_'.$node->type])) ? $term_ct_map['view_mode_'.$node->type] : _init_node_view_mode($node->type);
             entity_collection_append_item($entity_collection, $item, $contexts);
           }
         }
       }
     }
+  }
+}
+
+function _init_node_view_mode($content_type){
+  if ($content_type == 'highlight') {
+    return 'highlights_item';
+  } else {
+    return 'newsletter_item';
   }
 }
 
