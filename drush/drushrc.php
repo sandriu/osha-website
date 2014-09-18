@@ -368,6 +368,11 @@ $options['init-modules'] = array(
   'entity_collection_db',
   'osha_newsletter',
 
+  //social share
+  'addtoany',
+
+  // Enable last (conflict with rules)
+  'uuid',
 
   'devel',
   'diff',
