@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* nodequeue
+  * Fix undefined function apachesolr_mark_node (https://www.drupal.org/node/1425326)
+  * https://www.drupal.org/files/nodequeue-apachesolr-fix.patch
+
 * menuimage
   * Modify menulink options to use image uri, not fid. Useful for features export/import
   * menuimage/menuimage_store_path_not_fid.patch
