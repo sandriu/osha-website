@@ -103,7 +103,7 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="/highlight">View more</a>';
+  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="/highlight">View all</a>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Nodequeue: Queue */
   $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
@@ -182,7 +182,7 @@ function osha_highlight_views_default_views() {
     t('last »'),
     t('Highlights'),
     t('Highlights on the home page'),
-    t('<a href="/highlight">View more</a>'),
+    t('<a href="/highlight">View all</a>'),
     t('queue'),
     t('Summary'),
     t('See more'),
