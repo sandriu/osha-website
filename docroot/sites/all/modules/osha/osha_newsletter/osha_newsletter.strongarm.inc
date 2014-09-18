@@ -200,5 +200,96 @@ function osha_newsletter_strongarm() {
   $strongarm->value = 0;
   $export['node_submitted_newsletter_article'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_newsletter_after_max_nodes';
+  $strongarm->value = '30';
+  $export['osha_newsletter_after_max_nodes'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_newsletter_allowed_bundles';
+  $strongarm->value = array(
+    'article' => 'article',
+    'blog' => 'blog',
+    'highlight' => 'highlight',
+    'news' => 'news',
+    'newsletter_article' => 'newsletter_article',
+    'press_release' => 'press_release',
+    'publication' => 'publication',
+    'page' => 0,
+    'calls' => 0,
+    'job_vacancies' => 0,
+    'wiki_page' => 0,
+  );
+  $export['osha_newsletter_allowed_bundles'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_newsletter_coming_soon_tid';
+  $strongarm->value = '4';
+  $export['osha_newsletter_coming_soon_tid'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_newsletter_listserv';
+  $strongarm->value = 'listserv@list.osha.europa.eu';
+  $export['osha_newsletter_listserv'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_newsletter_listserv_from';
+  $strongarm->value = 'oshmail@osha.europa.eu';
+  $export['osha_newsletter_listserv_from'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_newsletter_list_name';
+  $strongarm->value = 'OSHMail-Test';
+  $export['osha_newsletter_list_name'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_newsletter_node_view_mode';
+  $strongarm->value = 'newsletter_item';
+  $export['osha_newsletter_node_view_mode'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_newsletter_term_ct_map';
+  $strongarm->value = array(
+    'article' => '',
+    'view_mode_article' => 'newsletter_item',
+    'page' => '',
+    'view_mode_page' => 'newsletter_item',
+    'blog' => '5',
+    'view_mode_blog' => 'newsletter_item',
+    'calls' => '',
+    'view_mode_calls' => 'newsletter_item',
+    'highlight' => '1',
+    'view_mode_highlight' => 'highlights_item',
+    'job_vacancies' => '',
+    'view_mode_job_vacancies' => 'newsletter_item',
+    'news' => '6',
+    'view_mode_news' => 'newsletter_item',
+    'newsletter_article' => '4',
+    'view_mode_newsletter_article' => 'newsletter_item',
+    'press_release' => '',
+    'view_mode_press_release' => 'newsletter_item',
+    'publication' => '3',
+    'view_mode_publication' => 'newsletter_item',
+    'wiki_page' => '',
+    'view_mode_wiki_page' => 'newsletter_item',
+  );
+  $export['osha_newsletter_term_ct_map'] = $strongarm;
+
   return $export;
 }
