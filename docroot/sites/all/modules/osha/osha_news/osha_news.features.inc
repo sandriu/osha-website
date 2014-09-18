@@ -40,7 +40,7 @@ function osha_news_fe_nodequeue_export_fields() {
     'show_in_links' => 0,
     'reference' => 0,
     'reverse' => 0,
-    'i18n' => 0,
+    'i18n' => 1,
     'subqueues' => 1,
     'types' => array(
       0 => 'news',
