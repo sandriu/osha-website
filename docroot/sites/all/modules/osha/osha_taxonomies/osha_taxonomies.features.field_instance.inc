@@ -157,6 +157,40 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-article_types-field_article_type_code'
+  $field_instances['taxonomy_term-article_types-field_article_type_code'] = array(
+    'bundle' => 'article_types',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_article_type_code',
+    'label' => 'Article Type Code',
+    'required' => FALSE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 41,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-esener-description_field'
   $field_instances['taxonomy_term-esener-description_field'] = array(
     'bundle' => 'esener',
@@ -883,6 +917,7 @@ function osha_taxonomies_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Article Type Code');
   t('Changes');
   t('Code');
   t('Description');
