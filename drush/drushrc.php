@@ -271,6 +271,7 @@ $options['init-modules'] = array(
   'views',
   'views_ui',
   'views_bulk_operations',
+  'better_exposed_filters',
 
   'mailsystem',
   'htmlmail',
