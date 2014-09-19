@@ -37,11 +37,11 @@ function osha_wiki_feeds_presave(FeedsSource $source, $entity, $item) {
   // Set the entity language as defined in importer form.
   $importer_id = $source->importer()->id;
   $lang = variable_get(
-    'osh_importer_language[' . $importer_id . ']', 'en');
+    'osh_wiki_importer_language[' . $importer_id . ']', 'en');
   $entity->language = $lang;
 
   // Attach the entity summary as first section content.
-  $entity->body[$entity->language][0]['summary'] = $summary;
+  $entity->body[$entity->language][0]['value'] = $summary;
 }
 
 /**
@@ -50,10 +50,6 @@ function osha_wiki_feeds_presave(FeedsSource $source, $entity, $item) {
 function osha_wiki_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'feeds_import_form' || $form_id == 'FeedsCrawler_feeds_form') {
     array_unshift($form['#submit'], 'osha_wiki_feeds_importer_form_submit');
-    $options = array();
-    foreach (language_list() as $lang => $language) {
-      $options[$lang] = $language->name;
-    }
     if ($form_id == 'feeds_import_form') {
       $form_data = &$form['feeds']['FeedsCrawler'];
       $importer_id = $form['#importer_id'];
@@ -62,12 +58,18 @@ function osha_wiki_form_alter(&$form, &$form_state, $form_id) {
       $form_data = &$form['crawler'];
       $importer_id = arg(3);
     }
-    $form_data['osh_importer_language'] = array(
+    $options = array_map(
+      function ($language) {
+        return $language->name;
+      },
+      language_list()
+    );
+    $form_data['osh_wiki_importer_language'] = array(
       '#title' => 'Language',
       '#type' => 'select',
       '#options' => $options,
       '#default_value' => variable_get(
-        'osh_importer_language[' . $importer_id . ']', 'en'),
+        'osh_wiki_importer_language[' . $importer_id . ']', 'en'),
     );
   }
 }
