@@ -33,8 +33,9 @@
   hide($content['comments']);
   hide($content['links']);
   // unset to render below after a div
-  $related_oshwiki=$content['field_related_oshwiki_articles'];
-  hide($content['field_related_oshwiki_articles']);
+  if (isset($content['field_related_oshwiki_articles'])) {
+    hide($content['field_related_oshwiki_articles']);
+  }
   print render($content);
   if (empty($field_related_oshwiki_articles)) { ?>
     <div id="related-wiki">
