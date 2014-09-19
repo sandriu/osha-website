@@ -95,7 +95,8 @@ function osha_newsletter_block_info() {
     'pages' => '<front>
 oshnews
 highlights
-highlight/*',
+highlight/*
+news/*',
     'cache' => DRUPAL_NO_CACHE,
     'weight' => -30
   );
