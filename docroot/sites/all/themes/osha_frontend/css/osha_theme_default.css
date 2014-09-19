@@ -6,6 +6,16 @@ body {
  overflow-y:scroll;
 }
 
+h2{
+	background: none repeat scroll 0 0 #e8eef7;
+    color: #003399;
+    font-family: "Oswald";
+    font-size: 1.35em;
+    font-weight: 400;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
 .bodysmall{
 	font-size:0.7em;
 }
@@ -109,7 +119,7 @@ header{
 }
 
 .three_column{
-	width: 49%!important;
+	width: 46%!important;
 }
 
 
@@ -117,10 +127,28 @@ header{
 	border-top: 5px solid #003399;
 	margin-top: 0em;
 	margin-left: 3em;
-	width: 19%;
+	width: 24%;
 	float:left;
 }
 
+.sidebars_second ul  {
+	list-style: none outside none;
+	list-style-image: url("../images/li_arrow.png");
+	line-height:0px;
+}
+
+.sidebars_second ul li {
+	padding-bottom:5px;
+}
+
+.sidebars_second ul li a {
+	color: #003399;
+    font-family: Arial;
+    font-size: 0.8em;
+    font-weight: bold;
+	text-decoration:none;
+	line-height:1.3em;
+}
 
 /* MENU */
 
@@ -181,7 +209,7 @@ color: #003399;
 #block-menu-block-1 .menu li .menu  {
 	border-bottom: 0px solid #002f9d;
 	z-index:999;
-	box-shadow: 2px 4px 5px 8px #ccc;
+	/*box-shadow: 2px 4px 5px 8px #ccc;*/
 }
 
 #block-menu-block-1 .menu li  {
@@ -209,6 +237,7 @@ color: #003399;
     margin-top: 4px;
     position: absolute;
     width: 20.6em;
+	z-index: 9999999999;
 }
 
 #block-menu-block-1 .menu li .menu  li .menu {
@@ -239,6 +268,15 @@ color: #003399;
 
 #block-menu-block-1 li:nth-child(7) ul li ul{
 	margin-left:0px;
+}
+
+
+#block-menu-block-1 li:nth-child(5) ul li:nth-child(1) ul{ /*When the submenu contains two levels we need theese CSS. Example: Campaings and Awards*/
+	border-bottom:0px!important;
+}
+
+#block-menu-block-1 li:nth-child(5) ul li:nth-child(2){ /*When the submenu contains two levels we need theese CSS. Example: Campaings and Awards*/
+	margin-top:7em;
 }
 
 /*END MENU*/
@@ -464,6 +502,10 @@ span.date-display-single{
 	padding-bottom:0.5em;
 }
 
+.node-publication.node-teaser .field-name-title-field a{
+    color:#000000!important;
+}
+
 .node-publication.node-teaser .field-name-field-publication-type{
 	float:left;
 	color: #003399;
@@ -484,8 +526,45 @@ span.date-display-single{
     width: 100%;
 }
 
+.node-publication .field-name-field-wiki-page-url a {
+	background: url("../images/flecha.png") no-repeat scroll right center transparent;
+    color: #003399;
+    float: right;
+    font-family: "Oswald",sans-serif;
+    font-size: 1.1em;
+    margin: 0;
+    padding-bottom: 0.3em;
+    text-align: right;
+    width: 100%;
+	padding-right:1.5em
+}
+
 .node-publication.node-teaser .links  a{
 	padding-right:0.5em;
+}
+
+.node-publication .field-name-field-publication-bookshop-id{
+	float:right;
+	margin-top: -14px;
+}
+
+.node-publication .field-name-field-publication-bookshop-id span{
+	color: #003399;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-left: -26em;
+    margin-top: -1px;
+    padding-top: 18px;
+    position: absolute;
+}
+
+.node-publication .field-name-field-publication-bookshop-id span img{
+	background: url("../images/summary_arrow.png") no-repeat scroll 80% 50% rgba(0, 0, 0, 0);
+	margin-left: -3em;
+	margin-top: -3px;
+	padding-left: 4em;
+	padding-right: 7em;
+	float: right;
 }
 
 .pager .pager-current{
@@ -500,7 +579,8 @@ span.date-display-single{
 
 /*END PUBLICATIONS*/
 
-/*PUBLICATIONS FULL*/
+/*PUBLICATIONS twin_publications*/
+
 .node-publication.view-mode-full .field-name-field-publication-type a{
 	color: #003399;
     font-family: "Oswald";
@@ -509,16 +589,103 @@ span.date-display-single{
 }
 
 .node-publication.view-mode-full .field-name-field-cover-image{
-	float:left;
-	padding-right:1em;
+    float: left;
+    padding-right: 1em;
 }
 
 .node-publication.view-mode-full  .field-name-body p{
 	margin-top:0;
+	font-family:Arial;
+	font-size:0.8em;
+	color:#585759;
+	line-height: 1.5em;
 
 }
 
-/*END PUBLICATIONS FULL*/
+.node-publication .field-name-field-related-publications{
+	margin-left: 12em!important;
+    width: 80%!important;
+}
+
+.field-name-field-related-publications h3{
+	color: #000;
+    font-family: Oswald;
+    font-size: 1.4em;
+    font-weight: lighter;
+	height:2em;
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	padding:0em;
+	margin:0em;
+}
+
+
+
+.node-publication.view-mode-full .field-name-field-file{
+	background-color: #e9edf6;
+    color: #7c7d81;
+    font-size: 0.8em;
+    font-weight: bold;
+    height: 28px;
+    margin-left: 15em;
+    padding-left: 1em;
+    padding-top: 4px;
+    width: 78%;
+}
+
+
+
+.node-publication .field-name-field-file a{
+	font-family:arial!important;
+    font-weight: normal;
+}
+
+.node-publication.view-mode-full .field-name-field-related-publications{
+	margin-left: 0em;
+    width: 100%;
+	clear:both;
+}
+
+.node-publication .field-name-field-related-publications ul{
+	background-color:#f3f3f3;
+	list-style:none;
+	margin-top:0px;
+	padding-right:0.5em;
+}
+
+.field-name-field-related-publications ul a{
+	background-color:#f3f3f3;
+	list-style:none;
+	font-family:arial!important;
+	color:#000000!important;
+	font-weight:bold;
+	font-size:0.8em;
+}
+
+.field-name-field-related-publications ul span{
+	display:block;
+	color:#58585a;
+	font-weight:bold;
+	font-size:0.8em;
+	padding-right:0.5em;
+}
+
+.field-name-field-related-oshwiki-articles{
+	clear:both;
+}
+
+.node-wiki-page .field-name-title-field{
+    color: #000;
+    font-family: Oswald;
+    font-size: 1.4em;
+    font-weight: lighter;
+    height: 2em;
+    margin: 0;
+    padding: 0;
+	padding-top:0.5em;
+}
+
+/*END PUBLICATIONS twin_publications*/
+
 
 
 /*ARTICLES*/
@@ -593,9 +760,7 @@ span.date-display-single{
 	padding-left: 10px;
 	padding-bottom: 2px;
 	border:0px;
-	margin-bottom:0.5em;
-	
-	
+	margin-bottom:0.5em;	
 }
 
 .ui-state-default .ui-icon{
@@ -958,7 +1123,7 @@ font-weight: normal;
 	width:60px;
     height: 220px;
     position: absolute;
-    top: 20.3em;
+    top: 292px;
     z-index: 999999999;
 	background: url('../images/slideshow-left.png') no-repeat;
 	color:#cbd9ec;
@@ -973,7 +1138,7 @@ font-weight: normal;
     height: 220px;
 	width:60px;
     position: absolute;
-    top: 20.3em;
+    top: 292px;
 	right:11.5em;
     z-index: 999999999;
 	background: url('../images/slideshow-right.png') no-repeat;
@@ -984,4 +1149,244 @@ font-weight: normal;
 	color:#cbd9ec;
 }
 
+.carousel-indicators{
+	position: absolute;
+	top: 460px;
+	text-align: center;
+	z-index: 999999999999999;
+	margin-left: 23em;
+}	
+
+.carousel-indicators li {
+	display: block;
+	float: left;
+	width: 10px;
+	height: 10px;
+	margin-left: 5px;
+	text-indent: -999px;
+	background-color: #ccc;
+	background-color: rgba(255,255,255,0.25);
+	border-radius: 5px;
+	border: 1px solid #a6b8db;
+}
+
 /*END SLIDESHOW*/
+
+
+/*OSHMail Newsletter*/
+
+#block-osha-newsletter-osha-newsletter-subscribe{
+	background-color: #A6B8DB;
+	padding: 0em 1em 1em 1em;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe h2{
+	background-color: #A6B8DB;
+	font-size: 1.3em;
+	font-weight: lighter;
+	font-family: 'Oswald', sans-serif;
+	color: #003399;
+	margin: 0 0 .5em 0;
+	/* padding-top: 0.5em; */
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe div{
+	color: #000;
+	font-family: Arial,sans-serif;
+	font-size: 0.75em;
+	margin: 0 0 .5em 0;
+	line-height:1.5em;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe #edit-submit--2{
+	color: #001791;
+	font-family: 'Oswald',sans-serif;
+	font-size: 1.6em;
+	text-align: right;
+	background-color: #A6B8DB;
+	border:0;
+	background: url("../images/flecha.png") no-repeat scroll right center transparent;
+	padding-right: 2em;
+	width:100%;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe a{
+	text-decoration: none;
+	border-bottom: 1px solid #dc2f82;
+	color: #003399;
+	font-weight:bold;
+	
+}
+
+/* END OSHMail Newsletter */
+
+
+/* PAGE FRONT */
+
+.banner_home{
+	height:295px;
+}
+
+.left_column{
+	float:left;
+}
+
+.sidebars_second_home{
+	border:0px!important;
+}
+
+#highlights_home{
+	border-top:5px solid #003399;
+	margin-top:0.5em;
+	padding-top:1em;
+	padding-left:1em;
+	
+}
+
+.separator_highlights_home{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	margin-top:1.5em;
+}
+
+.title_hightlights{
+	 width: 20em;
+	 font-family: 'Oswald', sans-serif;
+	 color: #000;
+	 font-size: 1.4em;
+	 font-weight: lighter;
+	 float:left;
+}
+
+.field-name-field-related-oshwiki-articles .field-label {
+	font-family: 'Oswald';
+	font-size: 1.35em;
+	font-weight: 400;
+	color: #003399;
+	background: 0 0 #e8eef7;
+	padding-left: 10px;
+	padding-bottom: 2px;
+}
+
+.viewAll
+{
+ font-size: 1.1em;
+ width: 90px;
+ float: right;
+ font-family: 'Oswald', sans-serif;
+ color:#003399;
+ 
+}
+.viewAll a
+{
+	text-decoration: none;
+	color:#003399;
+}
+
+.highlights_row{
+	clear:both;
+}
+
+.highlights_column_left{
+	color: #000000;
+	float: left;
+	width: 380px;
+	padding:0em 1em 1em 1em;
+}
+
+.highlights_column_right{
+	color: #000000;
+	float: left;
+	width: 380px;
+	padding:0em 1em 1em 1em;
+}
+
+.date{
+	font-family: Arial;
+	color: #000;
+	font-size: 0.8em;
+	font-weight:bold;
+}
+
+.highlights_title{
+	height:50px;
+}
+
+.highlights_title a{ 
+	color: #003399;
+	font-family: 'Oswald',sans-serif;
+	font-size: 1.35em;
+	line-height: 1.1em;
+	text-decoration:none;
+}
+
+.highlights_body{
+	color: #000;
+	font-size: 0.9em;
+	font-family: Arial;
+	font-weight:bold;
+	line-height: 1.3em;
+}
+
+.highlights_link {
+	margin-top:1.5em;
+}
+
+.highlights_link a{
+	font-size: 1.063em;
+	font-family: 'Oswald', sans-serif;
+	color: #003399;
+	background: url("../images/flecha.png") no-repeat scroll right center transparent;
+	padding-right:1.5em;
+	text-decoration:none;
+}
+
+/*END PAGE FRONT*/
+
+/*NEWS LIST*/
+
+.view-news .views-row{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+}
+
+.node-news .field-name-field-image{
+	float:left;
+	padding-right:1em;
+	padding-bottom:1em;
+}
+
+.node-news .field-name-title-field a{
+	color: #003399;
+	font-family: Arial!important; 
+	font-size: 1em;
+	line-height: 1.1em;
+	margin: 0 0 0.7em;
+	background: url("../images/li_arrow.png") no-repeat scroll left center transparent;
+	padding-left:1em;
+	font-weight:bold;
+}
+
+.node-news .field-name-field-summary {
+	margin:0;
+	padding:0;
+}
+
+.node-news .field-name-field-summary p{
+	margin:0;
+	padding:0;
+	font-family: Arial!important; 
+	font-size: 0.9em;
+	color:#000000;
+	font-weight:normal;	
+}
+
+.node-news .field-name-field-publication-date{
+	margin:0;
+	padding:0;
+	font-family: Arial!important; 
+	font-size: 0.9em;
+	color:#000000;
+	font-weight:normal;	
+}
+
+
+/*END NEW LIST*/
