@@ -312,18 +312,25 @@ function osha_configure_search_autocomplete() {
  */
 function osha_configure_feeds() {
   drupal_set_message('Configuring Wiki Feed ...');
-
-  // Create Importers
-  // foreac lang osha_wiki_feeds_create_importer
-
-  // foreach importer
-  //  $source = feeds_source('wiki');
-  //  $config = $source->importer()->getConfig();
-  //  $config = $config['fetcher']['config'];
-  //  $source->addConfig($config);
-  //  $source->save();
-  //  $source->schedule();
-  //  $source->importer->schedule();
+  $importers = feeds_importer_load_all(FALSE);
+  foreach ($importers as $feed_id => $importer) {
+    $source = feeds_source($feed_id);
+    $config = $importer->getConfig();
+    $config = $config['fetcher']['config'];
+    $url = $config['crawler']['url']['url_pattern'];
+    $source_config['FeedsCrawler'] = array(
+      'source' => $url,
+      'crawler' => $config['crawler'],
+      'crawled' => $config['crawled'],
+      'osh_wiki_importer_language' => $config['crawler']['osh_wiki_importer_language'],
+    );
+    $source->addConfig($source_config);
+    $source->save();
+    $source->schedule();
+    $importer->schedule();
+    $source->startImport();
+    variable_set('osh_wiki_importer_language[' . $feed_id . ']', $config['crawler']['osh_wiki_importer_language']);
+  }
 }
 
 /**

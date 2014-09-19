@@ -7,6 +7,7 @@ project = osha_wiki
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = feeds
+dependencies[] = feeds_crawler
 dependencies[] = i18n_taxonomy
 dependencies[] = link
 dependencies[] = osha

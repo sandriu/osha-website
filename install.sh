@@ -10,6 +10,9 @@ drush php-script ../scripts/drupal_pre_install.php
 drush init
 drush build
 
+# Clear cache. Feeds which could have a bug in ctools integration
+drush cc all
+
 drush php-script ../scripts/drupal_post_install.php
 
 echo "Registering migrations ..."
