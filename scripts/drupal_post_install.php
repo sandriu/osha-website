@@ -313,6 +313,7 @@ function osha_configure_search_autocomplete() {
 function osha_configure_feeds() {
   drupal_set_message('Configuring Wiki Feed ...');
   $importers = feeds_importer_load_all(FALSE);
+  $permissions = array();
   foreach ($importers as $feed_id => $importer) {
     $source = feeds_source($feed_id);
     $config = $importer->getConfig();
@@ -326,11 +327,15 @@ function osha_configure_feeds() {
     );
     $source->addConfig($source_config);
     $source->save();
-    $source->schedule();
-    $importer->schedule();
-    $source->startImport();
-    variable_set('osh_wiki_importer_language[' . $feed_id . ']', $config['crawler']['osh_wiki_importer_language']);
+
+    $permissions[] = sprintf('import %s feeds', $feed_id);
+    $permissions[] = sprintf('clear %s feeds', $feed_id);
+    $permissions[] = sprintf('unlock %s feeds', $feed_id);
   }
+
+  // Grant permissions on all feeds to administrator role.
+  $administrator = user_role_load_by_name('administrator');
+  user_role_grant_permissions($administrator->rid, $permissions);
 }
 
 /**
