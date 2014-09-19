@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 body {
  margin:0 0;
  font-family:arial, verdana, sans-serif;
-
  background:#D2DCED;
  overflow-y:scroll;
 }
@@ -210,7 +208,6 @@ color: #003399;
 #block-menu-block-1 .menu li .menu  {
 	border-bottom: 0px solid #002f9d;
 	z-index:999;
-	/*box-shadow: 2px 4px 5px 8px #ccc;*/
 }
 
 #block-menu-block-1 .menu li  {
@@ -245,7 +242,6 @@ color: #003399;
 	border-top:  0px solid #A6B8DB;
 	border-bottom: 5px solid #002f9d;
 	background-color:#FFFFFF;
-	box-shadow: none;
 }
 
 #block-menu-block-1 .menu li ul  {
@@ -736,6 +732,12 @@ span.date-display-single{
 	line-height: 1.2em;
 	padding-bottom: 0.2em;
 	width: 216px;
+	position:relative;
+}
+
+.introduction-title  a{
+	position:absolute;
+	bottom:5px;
 }
 
 /*END ARTICLES*/
@@ -1353,6 +1355,8 @@ font-weight: normal;
 	float:left;
 	padding-right:1em;
 	padding-bottom:1em;
+	min-height:95px;
+	min-width:100px;
 }
 
 .node-news .field-name-title-field a{
@@ -1378,6 +1382,7 @@ font-weight: normal;
 	font-size: 0.9em;
 	color:#000000;
 	font-weight:normal;	
+	padding: 0 0 12px;
 }
 
 .node-news .field-name-field-publication-date{
@@ -1575,7 +1580,6 @@ color: #003399;
 #block-menu-block-1 .menu li .menu  {
 	border-bottom: 0px solid #002f9d;
 	z-index:999;
-	box-shadow: 2px 4px 5px 8px #ccc;
 }
 
 #block-menu-block-1 .menu li  {
@@ -1609,7 +1613,6 @@ color: #003399;
 	border-top:  0px solid #A6B8DB;
 	border-bottom: 5px solid #002f9d;
 	background-color:#FFFFFF;
-	box-shadow: none;
 }
 
 #block-menu-block-1 .menu li ul  {
@@ -1677,7 +1680,7 @@ h1{
 #socialNetworksBlue {
 	border-top:5px solid #002f9d;
 	width:100%;
-	margin-top:-24px;
+	margin-top: 0px;
 }
 
 #socialNetworksBlue #icons {
@@ -1958,7 +1961,7 @@ span.date-display-single{
 	letter-spacing: -0.5px;
 	margin-bottom: 0.2em;
 	border-bottom: 10px solid #d2dced;
-	height: 23px;
+	height: 47px;
 	line-height: 1.2em;
 	padding-bottom: 0.2em;
 	width: 216px;
@@ -2379,4 +2382,3 @@ font-weight: normal;
 }
 
 /*END SLIDESHOW*/
->>>>>>> branch 'develop-theme' of https://github.com/EU-OSHA/osha-website.git
