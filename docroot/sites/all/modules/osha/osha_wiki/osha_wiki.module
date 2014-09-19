@@ -36,12 +36,14 @@ function osha_wiki_feeds_presave(FeedsSource $source, $entity, $item) {
 
   // Set the entity language as defined in importer form.
   $importer_id = $source->importer()->id;
-  $lang = variable_get(
-    'osh_wiki_importer_language[' . $importer_id . ']', 'en');
+  $lang = variable_get($importer_id, 'en');
   $entity->language = $lang;
 
   // Attach the entity summary as first section content.
-  $entity->body[$entity->language][0]['value'] = $summary;
+  $entity->body[$entity->language][0] = array(
+    'value' => $summary,
+    'format' => 'full_html',
+  );
 }
 
 /**
@@ -68,8 +70,7 @@ function osha_wiki_form_alter(&$form, &$form_state, $form_id) {
       '#title' => 'Language',
       '#type' => 'select',
       '#options' => $options,
-      '#default_value' => variable_get(
-        'osh_wiki_importer_language[' . $importer_id . ']', 'en'),
+      '#default_value' => variable_get($importer_id, 'en'),
     );
   }
 }
@@ -86,7 +87,7 @@ function osha_wiki_feeds_importer_form_submit($form, &$form_state) {
     $lang = $form_state['values']['crawler']['osh_wiki_importer_language'];
     $importer_id = arg(3);
   }
-  variable_set('osh_wiki_importer_language[' . $importer_id . ']', $lang);
+  variable_set($importer_id, $lang);
 }
 
 
@@ -147,7 +148,7 @@ function osha_wiki_feeds_importer_create($feed_id, $url = NULL, $language = 'en'
         'crawler' => array(
           'num_pages' => '0',
           'delay' => '1',
-          'first_run' => '1',
+          'first_run' => '0',
           'auto' => '0',
           'xpath' => '',
           'url' => array(
