@@ -23,11 +23,14 @@ IF NOT "%1"=="--migrate" GOTO DONE
     echo "Importing NACE codes taxonomy"
     call drush migrate-import TaxonomyNaceCodes
 
-    echo "Importing ESENER taxonomy"
-    call drush migrate-import TaxonomyEsener
+    rem echo "Importing ESENER taxonomy"
+    rem call drush migrate-import TaxonomyEsener
 
     echo "Importing Publication types taxonomy"
     call drush migrate-import TaxonomyPublicationTypes
+
+    echo "Importing Article types taxonomy"
+    call drush migrate-import TaxonomyArticleTypes
 
     echo "Importing multilingual Thesaurus taxonomy"
     call drush migrate-import TaxonomyThesaurus

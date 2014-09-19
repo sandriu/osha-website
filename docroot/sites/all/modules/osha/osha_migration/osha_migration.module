@@ -5,6 +5,7 @@ define('OSHA_MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
 define('OSHA_MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
 define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
 define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
+define('OSHA_MIGRATION_TAXONOMY_ARTICLE_TYPES', 'TaxonomyArticleTypes');
 define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
 define('OSHA_MIGRATION_CONTENT_TYPE_ARTICLE', 'Article');
 define('OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES', 'JobVacancies');
@@ -52,6 +53,10 @@ function osha_migration_migrate_api() {
       OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
         'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
         'file_name' => $migration_module_dir . '/data/publication_types.json',
+      ),
+      OSHA_MIGRATION_TAXONOMY_ARTICLE_TYPES => array(
+        'class_name' => 'MigrateOshaTaxonomyArticleTypes',
+        'file_name' => $migration_module_dir . '/data/article_types.json',
       ),
       OSHA_MIGRATION_TAXONOMY_THESAURUS => array(
         'class_name' => 'MigrateOshaTaxonomyThesaurus',

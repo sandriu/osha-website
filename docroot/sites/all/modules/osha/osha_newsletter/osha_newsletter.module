@@ -93,7 +93,10 @@ function osha_newsletter_block_info() {
     'region' => 'sidebar_second',
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => '<front>
-oshnews',
+oshnews
+highlights
+highlight/*
+news/*',
     'cache' => DRUPAL_NO_CACHE,
     'weight' => -30
   );
@@ -360,7 +363,7 @@ function osha_newsletter_subscribe_extra_form() {
   );
   $form['unsubscribe'] = array(
     '#type' => 'submit',
-    '#value' => t('Unubscribe'),
+    '#value' => t('Unsubscribe'),
     '#submit' => array('osha_newsletter_unsubscribe_form_submit')
   );
 

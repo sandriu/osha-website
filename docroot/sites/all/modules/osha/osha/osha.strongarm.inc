@@ -293,19 +293,19 @@ function osha_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '13',
-        ),
-        'language' => array(
-          'weight' => '1',
-        ),
-        'redirect' => array(
           'weight' => '14',
         ),
-        'metatags' => array(
+        'language' => array(
+          'weight' => '2',
+        ),
+        'redirect' => array(
           'weight' => '15',
         ),
+        'metatags' => array(
+          'weight' => '16',
+        ),
         'workbench_access' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
       ),
       'display' => array(),

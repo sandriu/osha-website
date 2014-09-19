@@ -12,6 +12,9 @@ drush php-script ../scripts/drupal_pre_install.php
 drush init
 drush build
 
+# Clear cache. Feeds which could have a bug in ctools integration
+drush cc all
+
 drush php-script ../scripts/drupal_post_install.php
 
 echo "Registering migrations ..."
@@ -25,11 +28,14 @@ if [ "$1" == "--migrate" ]; then
     echo "Importing NACE codes taxonomy"
     drush migrate-import TaxonomyNaceCodes
 
-    echo "Importing ESENER taxonomy"
-    drush migrate-import TaxonomyEsener
+#    echo "Importing ESENER taxonomy"
+#    drush migrate-import TaxonomyEsener
 
     echo "Importing Publication types taxonomy"
     drush migrate-import TaxonomyPublicationTypes
+
+    echo "Importing Article types taxonomy"
+    drush migrate-import TaxonomyArticleTypes
 
     echo "Importing multilingual Thesaurus taxonomy"
     drush migrate-import TaxonomyThesaurus

@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function osha_wiki_install() {
+  variable_set('workbench_access_node_type_wiki_page', 0);
+}

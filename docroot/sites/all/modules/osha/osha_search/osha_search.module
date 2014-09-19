@@ -13,3 +13,32 @@ function osha_search_menu_alter(&$items) {
   $items['search/wiki']['weight'] = '2';
   $items['search/site']['weight'] = '1';
 }
+
+/**
+ * Implements hook_apachesolr_index_document_build().
+ *
+ * We use it to index the field_image so we can have it in the search results.
+ */
+function osha_search_apachesolr_index_documents_alter(array $documents, $entity, $entity_type, $env_id) {
+  if (!empty($entity->field_image)) {
+    global $base_url;
+    foreach ($documents as $document) {
+      foreach ($entity->field_image as $language => $values) {
+        $flang = $document->getField('ss_language');
+        if ($flang['value'] == $language) {
+          $url = image_style_url('thumbnail', $values['0']['uri']);
+          // TODO: Is this OK?
+          $url = str_replace($base_url, '', $url);
+          $document->addField('ss_field_image_url_' . $language, $url);
+        }
+      }
+    }
+  }
+}
+
+function osha_search_apachesolr_query_alter($query) {
+  $query->addParam('fl', 'dm_field_publication_date');
+  foreach (array_keys(language_list()) as $language) {
+    $query->addParam('fl', 'ss_field_image_url_' . $language);
+  }
+}

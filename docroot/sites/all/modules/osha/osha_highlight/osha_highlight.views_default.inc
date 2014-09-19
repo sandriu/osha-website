@@ -76,7 +76,7 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'highlight' => 'highlight',
   );
-  $handler->display->display_options['path'] = 'highlight';
+  $handler->display->display_options['path'] = 'highlights';
 
   /* Display: Highlights on the home page */
   $handler = $view->new_display('block', 'Highlights on the home page', 'block_1');

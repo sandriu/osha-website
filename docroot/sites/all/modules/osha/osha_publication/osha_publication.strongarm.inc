@@ -147,19 +147,19 @@ function osha_publication_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '18',
+          'weight' => '19',
         ),
         'workbench_access' => array(
-          'weight' => '16',
+          'weight' => '17',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'redirect' => array(
-          'weight' => '19',
+          'weight' => '20',
         ),
         'metatags' => array(
-          'weight' => '20',
+          'weight' => '21',
         ),
       ),
       'display' => array(),

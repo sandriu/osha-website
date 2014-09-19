@@ -233,17 +233,45 @@ function osha_configure_search_autocomplete() {
  */
 function osha_configure_feeds() {
   drupal_set_message('Configuring Wiki Feed ...');
-  $source = feeds_source('wiki');
-  $config = array(
-    'FeedsHTTPFetcher' => array(
-      'source' => 'http://oshwiki-staging.mainstrat.com/wiki/Special:Ask/-5B-5B:%2B-5D-5D-20-5B-5BOSHA_55641D::%2B-5D-5D-20-5B-5BLanguage-20code::en-5D-5D/-3F-23-2D/format%3Dfeed/sort%3DModification-20date/order%3Ddescending/searchlabel%3D-20Atom-20feed-20example/type%3Datom/title%3DSemantic-20MediaWiki/description%3DLatest-20news-20from-20semantic-2Dmediawiki.org/page%3Dfull/offset%3D0',
-    ),
-  );
-  $source->addConfig($config);
-  $source->save();
-  // Add to schedule, make sure importer is scheduled, too.
-  $source->schedule();
-  $source->importer->schedule();
+  $importers = feeds_importer_load_all(FALSE);
+  $permissions = array();
+  foreach ($importers as $feed_id => $importer) {
+    $source = feeds_source($feed_id);
+    $config = $importer->getConfig();
+    $config = $config['fetcher']['config'];
+    $url = $config['crawler']['url']['url_pattern'];
+    $source_config['FeedsCrawler'] = array(
+      'source' => $url,
+      'crawler' => $config['crawler'],
+      'crawled' => $config['crawled'],
+      'osh_wiki_importer_language' => $config['crawler']['osh_wiki_importer_language'],
+    );
+    $source->addConfig($source_config);
+    $source->schedule();
+    $importer->schedule();
+    $source->save();
+    $source->startImport();
+
+    $permissions[] = sprintf('import %s feeds', $feed_id);
+    $permissions[] = sprintf('clear %s feeds', $feed_id);
+    $permissions[] = sprintf('unlock %s feeds', $feed_id);
+    variable_set($feed_id, $config['crawler']['osh_wiki_importer_language']);
+  }
+
+  // TODO: Delete malformed nodes created by import. Imports when created.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'wiki_page');
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    node_delete_multiple($nids);
+    drupal_set_message('Removed !count malformed wiki nodes :-) ', array('!count' => count($nids)));
+  }
+
+  // Grant permissions on all feeds to administrator role.
+  $administrator = user_role_load_by_name('administrator');
+  user_role_grant_permissions($administrator->rid, $permissions);
 }
 
 /**
