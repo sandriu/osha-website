@@ -271,6 +271,7 @@ $options['init-modules'] = array(
   'views',
   'views_ui',
   'views_bulk_operations',
+  'better_exposed_filters',
 
   'mailsystem',
   'htmlmail',
@@ -360,11 +361,7 @@ $options['init-modules'] = array(
   'search_api',
   'facetapi',
   'search_api_facetapi',
-  'apachesolr',
-  'apachesolr_search',
-  'apachesolr_multilingual',
   'search_autocomplete',
-  'apachesolr_views',
   'osha_search',
 
   // Newsletter modules.
