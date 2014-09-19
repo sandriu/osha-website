@@ -16,11 +16,14 @@ if [ "$1" == "--migrate" ]; then
     echo "Importing NACE codes taxonomy"
     drush migrate-import --update TaxonomyNaceCodes
 
-    echo "Importing ESENER taxonomy"
-    drush migrate-import --update TaxonomyEsener
+#    echo "Importing ESENER taxonomy"
+#    drush migrate-import --update TaxonomyEsener
 
     echo "Importing Publication types taxonomy"
     drush migrate-import --update TaxonomyPublicationTypes
+
+    echo "Importing Article types taxonomy"
+    drush migrate-import --update TaxonomyArticleTypes
 
     echo "Importing multilingual Thesaurus taxonomy"
     drush migrate-import --update TaxonomyThesaurus

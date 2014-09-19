@@ -15,7 +15,7 @@ class OshaMigrateFilesListMock extends OshaMigrateFilesListCSV {
 
 
 /**
- * Class MigrateOshaPublicationTest tests publication content type migration.
+ * Class MigrateOshaFilesTest tests file migration.
  */
 class MigrateOshaFilesTest extends OshaWebTestCase {
 
