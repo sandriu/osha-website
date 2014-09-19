@@ -104,7 +104,7 @@ function osha_newsletter_admin_form() {
   $tax = taxonomy_get_tree($voc->vid);
   $options_tax = array('' => '-- Please select --');
   foreach ($tax as $term) {
-    $options_tax[$term->tid] = $term->name;
+    $options_tax[$term->uuid] = $term->name;
   }
 
   $options_view_modes = array('' => '-- Please select --');

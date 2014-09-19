@@ -90,6 +90,16 @@ function osha_frontend_apachesolr_sort_list($vars) {
 }
 
 /**
+ * Implements hook_preprocess_node().
+ */
+function osha_frontend_process_node(&$vars) {
+  // Change default text of the read more link.
+  if (isset($vars['content']['links']['node']['#links']['node-readmore'])) {
+    $vars['content']['links']['node']['#links']['node-readmore']['title'] = t('Show details');
+  }
+}
+
+/**
  * @todo @Ivan: Edit only below
  */
 

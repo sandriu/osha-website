@@ -107,7 +107,8 @@ articles/campaigns
 articles/awards
 articles/emerging-risks
 articles/surveys-and-statistics-osh
-articles/european-risk-observatory',
+articles/european-risk-observatory
+introduction/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -126,7 +127,7 @@ articles/european-risk-observatory',
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -22,
+        'weight' => 50,
       ),
       'seven' => array(
         'region' => '',

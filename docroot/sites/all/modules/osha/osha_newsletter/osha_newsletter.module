@@ -90,8 +90,10 @@ function osha_newsletter_block_info() {
     'status' => 1,
     'region' => 'sidebar_second',
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => '<front>',
+    'pages' => '<front>
+/oshnews',
     'cache' => DRUPAL_NO_CACHE,
+    'weight' => -30
   );
   $blocks['osha_newsletter_subscribe_extra'] = array(
     'info' => t('Subscribe to OSHA Newsletter block - with extra link to unsubscribe page'),
@@ -351,6 +353,14 @@ function osha_newsletter_subscribe_extra_form() {
     '#type' => 'submit',
     '#value' => t('Subscribe')
   );
+  $form['unsubscribe_text'] = array(
+    '#markup' => '<hr><span>'.t('Not interested anymore?').'</span>',
+  );
+  $form['unsubscribe'] = array(
+    '#type' => 'submit',
+    '#value' => t('Unubscribe'),
+    '#submit' => array('osha_newsletter_unsubscribe_form_submit')
+  );
 
   return $form;
 }
@@ -389,7 +399,7 @@ function osha_newsletter_unsubscribe_form() {
   $form['intro'] = array(
     '#markup' => t('Not interested any more?<br/> You can unsubscribe below:'),
   );
-  $form['unsubscribe_email'] = array(
+  $form['email'] = array(
     '#type' => 'textfield',
     '#title' => t('E-mail address'),
     '#size' => 30,
@@ -416,8 +426,8 @@ function osha_newsletter_subscribe_form_validate($form, &$form_state) {
  * Unsubscribe form validation.
  */
 function osha_newsletter_unsubscribe_form_validate($form, &$form_state) {
-  if (!valid_email_address($form_state['values']['unsubscribe_email'])) {
-    form_set_error('unsubscribe_email', t('That e-mail address is not valid.'));
+  if (!valid_email_address($form_state['values']['email'])) {
+    form_set_error('email', t('That e-mail address is not valid.'));
   }
 }
 
@@ -454,7 +464,7 @@ function osha_newsletter_subscribe_form_submit($form, &$form_state) {
  * Form submission logic for the subscription form.
  */
 function osha_newsletter_unsubscribe_form_submit($form, &$form_state) {
-  $unsubscribe_email = $form_state['values']['unsubscribe_email'];
+  $unsubscribe_email = $form_state['values']['email'];
   $to = variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu');
 
   osha_newsletter_send_email('unsubscribe_email', $to, $unsubscribe_email, $form_state);
@@ -690,12 +700,12 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
     // Max number of nodes pre-inserted for each section (term).
     $max_nodes = variable_get('osha_newsletter_after_max_nodes', 10);
     foreach ($terms as $weight => $term) {
-      $entity = entity_load('taxonomy_term', array($term->tid));
+      $entity = entity_uuid_load('taxonomy_term', array($term->uuid));
       $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
       // Set weights for sections and children.
-      $weights[$term->tid]['parent'] = ($weight + 1) * ($max_nodes + 1);
-      $weights[$term->tid]['children'] = $weights[$term->tid]['parent'];
-      $item->position = $weights[$term->tid]['parent'];
+      $weights[$term->uuid]['parent'] = ($weight + 1) * ($max_nodes + 1);
+      $weights[$term->uuid]['children'] = $weights[$term->uuid]['parent'];
+      $item->position = $weights[$term->uuid]['parent'];
       entity_collection_append_item($entity_collection, $item, $contexts);
     }
 

@@ -80,7 +80,7 @@
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tbody>
     <?php
-    if (isset($field_publication_date)) {
+    if (isset($field_publication_date) && $node->type != 'newsletter_article') {
       $date = strtotime($field_publication_date[0]['value']);
     ?>
       <tr>
