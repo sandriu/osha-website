@@ -15,6 +15,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
       OSHA_MIGRATION_TAXONOMY_TAGS,
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
+      OSHA_MIGRATION_TAXONOMY_ARTICLE_TYPES,
     );
 
     /* Remove limits on time/memory, slower machines will fail */
@@ -40,6 +41,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
         'relatedItems' => 'Page image',
         'multilingual_thesaurus' => 'Item Tesaurus tags merged into tags',
         'nace' => 'Item NACE Codes',
+        'article_type' => 'Article type taxonomy',
       )
     );
 
@@ -71,6 +73,8 @@ class OshaMigrateArticles extends OSHADynamicMigration {
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_article_type', 'article_type');
+    $this->addFieldMapping('field_article_type:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_thesaurus', 'multilingual_thesaurus');
     $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_nace_codes', 'nace');
@@ -111,6 +115,8 @@ class OshaMigrateArticles extends OSHADynamicMigration {
       'field_thesaurus:ignore_case',
       'field_nace_codes:create_term',
       'field_nace_codes:ignore_case',
+      'field_article_type:create_term',
+      'field_article_type:ignore_case',
       'comment',
     ));
   }
@@ -123,6 +129,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
   protected function generateMachineName() {
     return OSHA_MIGRATION_CONTENT_TYPE_ARTICLE;
   }
+
 
   /**
    * Prepare raw data pulled from source.
@@ -137,6 +144,11 @@ class OshaMigrateArticles extends OSHADynamicMigration {
     $row->language = 'en';
     $tags = $row->subject . ',' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);
+    $article_types = MigrationUtil::findTidByTaxonomyField(
+        array($row->article_type), 'field_article_type_code', OSHA_TAXONOMIES_ARTICLE_TYPES
+    );
+    $row->article_type = $article_types[0];
+
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
       explode(',', $row->multilingual_thesaurus),
       'field_thesaurus',
@@ -239,6 +251,13 @@ class ArticleMigrateList extends MigrateList {
       if (!in_array($raw_data[$work_flow_key],
           array('published', 'checked', 'to_amend'))) {
         continue;
+      }
+
+      $path_parts = explode('/', $path);
+      if (!empty($path_parts[0]) && $path_parts[0] == 'topics') {
+        self::$data[$path]['article_type'] = 'section';
+      } else {
+        self::$data[$path]['article_type'] = 'page';
       }
       foreach ($fields as $key => $field) {
         switch ($field) {
