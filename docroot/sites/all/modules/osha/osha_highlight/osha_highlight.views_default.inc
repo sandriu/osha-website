@@ -109,11 +109,12 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
   $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
-  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 0;
+  $handler->display->display_options['relationships']['nodequeue_rel']['required'] = TRUE;
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
   $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
+    'highlights_on_the_home_page' => 'highlights_on_the_home_page',
     'latest_news' => 0,
     'publication_queue' => 0,
-    'highlights_on_the_home_page' => 0,
   );
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Publication Date */
