@@ -4,11 +4,16 @@
 cd docroot/
 drush site-install -y
 
+drush en -y apachesolr apachesolr_views apachesolr_search apachesolr_multilingual apachesolr_views
+
 # Save configuration to database for later usage
 drush php-script ../scripts/drupal_pre_install.php
 
 drush init
 drush build
+
+# Clear cache. Feeds which could have a bug in ctools integration
+drush cc all
 
 drush php-script ../scripts/drupal_post_install.php
 

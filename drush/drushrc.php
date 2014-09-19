@@ -280,7 +280,9 @@ $options['init-modules'] = array(
   'date',
   'migrate',
   'features',
+  'feeds',
   'feeds_ui',
+  'feeds_crawler',
 
   'entityreference',
   'link',
@@ -361,11 +363,7 @@ $options['init-modules'] = array(
   'search_api',
   'facetapi',
   'search_api_facetapi',
-  'apachesolr',
-  'apachesolr_search',
-  'apachesolr_multilingual',
   'search_autocomplete',
-  'apachesolr_views',
   'osha_search',
 
   // Newsletter modules.
