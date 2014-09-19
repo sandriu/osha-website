@@ -32,13 +32,23 @@
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
+  // unset to render below after a div
+  $related_oshwiki=$content['field_related_oshwiki_articles'];
+  hide($content['field_related_oshwiki_articles']);
   print render($content);
-
   if (empty($field_related_oshwiki_articles)) { ?>
-    <div id="no-related-wiki">
-      <a href="http://oshwiki.eu/"><?php print t('View all');?></a>
+    <div id="related-wiki">
+      <span><?php print t('Get more info about this topic on OSHWiki');?></span>
+      <a href="http://oshwiki.eu/"><?php print t('Open');?></a>
     <div>
   <?php
+    } else {
+  ?>
+    <div id="related-wiki">
+      <span><?php print t('OSHWiki featured articles');?></span>
+    <div>
+  <?php
+    print render($content['field_related_oshwiki_articles']);
   }
   ?>
 
