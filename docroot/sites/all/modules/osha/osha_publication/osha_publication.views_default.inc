@@ -104,12 +104,89 @@ function osha_publication_views_default_views() {
 
   /* Display: Publications */
   $handler = $view->new_display('page', 'Publications', 'page');
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Clear filter';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+    ),
+    'field_publication_type_tid' => array(
+      'bef_format' => 'bef',
+      'more_options' => array(
+        'bef_select_all_none' => 1,
+        'bef_collapsible' => 0,
+        'is_secondary' => 1,
+        'any_label' => 'All',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+  );
+  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
+  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
+  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content revision: Content */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
   $handler->display->display_options['relationships']['nid']['table'] = 'node_revision';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['relationships']['nid']['required'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'publication' => 'publication',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Workbench Moderation: Published */
+  $handler->display->display_options['filters']['published']['id'] = 'published';
+  $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['published']['value'] = '1';
+  $handler->display->display_options['filters']['published']['group'] = 1;
+  /* Filter criterion: Content: Publication Type (field_publication_type) */
+  $handler->display->display_options['filters']['field_publication_type_tid']['id'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['table'] = 'field_data_field_publication_type';
+  $handler->display->display_options['filters']['field_publication_type_tid']['field'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['operator'] = 'and';
+  $handler->display->display_options['filters']['field_publication_type_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_publication_type_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator_id'] = 'field_publication_type_tid_op';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator'] = 'field_publication_type_tid_op';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['identifier'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_publication_type_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_publication_type_tid']['vocabulary'] = 'publication_types';
   $handler->display->display_options['path'] = 'publications';
 
   /* Display: Block */
@@ -248,7 +325,10 @@ function osha_publication_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Body'),
+    t('Clear filter'),
+    t('Select any filter and click on Apply to see results'),
     t('Get the actual content from a content revision.'),
+    t('Type'),
     t('Block'),
     t('queue'),
     t('Publications Slideshow'),
