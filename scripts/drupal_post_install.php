@@ -326,11 +326,26 @@ function osha_configure_feeds() {
       'osh_wiki_importer_language' => $config['crawler']['osh_wiki_importer_language'],
     );
     $source->addConfig($source_config);
+    $source->schedule();
+    $importer->schedule();
     $source->save();
+    $source->startImport();
 
     $permissions[] = sprintf('import %s feeds', $feed_id);
     $permissions[] = sprintf('clear %s feeds', $feed_id);
     $permissions[] = sprintf('unlock %s feeds', $feed_id);
+    variable_set($feed_id, $config['crawler']['osh_wiki_importer_language']);
+  }
+
+  // TODO: Delete malformed nodes created by import. Imports when created.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'wiki_page');
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    node_delete_multiple($nids);
+    drupal_set_message('Removed !count malformed wiki nodes :-) ', array('!count' => count($nids)));
   }
 
   // Grant permissions on all feeds to administrator role.
