@@ -360,7 +360,7 @@ function osha_newsletter_subscribe_extra_form() {
   );
   $form['unsubscribe'] = array(
     '#type' => 'submit',
-    '#value' => t('Unubscribe'),
+    '#value' => t('Unsubscribe'),
     '#submit' => array('osha_newsletter_unsubscribe_form_submit')
   );
 
