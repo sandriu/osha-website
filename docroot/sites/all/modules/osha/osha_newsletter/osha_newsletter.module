@@ -93,7 +93,10 @@ function osha_newsletter_block_info() {
     'region' => 'sidebar_second',
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => '<front>
-oshnews',
+oshnews
+highlights
+highlight/*
+news/*',
     'cache' => DRUPAL_NO_CACHE,
     'weight' => -30
   );
