@@ -55,3 +55,5 @@ Thumbs.db
 # Allow these extensions for testing purposes #
 ###############################################
 !docroot/sites/all/modules/osha/osha_migration/data/test/export/*/file/*.zip
+
+data
