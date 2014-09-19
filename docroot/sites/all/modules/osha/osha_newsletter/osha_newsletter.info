@@ -38,6 +38,7 @@ features[field_instance][] = node-newsletter_article-body
 features[field_instance][] = node-newsletter_article-title_field
 features[field_instance][] = taxonomy_term-newsletter_sections-description_field
 features[field_instance][] = taxonomy_term-newsletter_sections-name_field
+files[] = osha_newsletter.test
 features[node][] = newsletter_article
 features[taxonomy][] = newsletter_sections
 features[uuid_node][] = 5976d8f5-cd3a-4b9c-9b25-16e6333530f6

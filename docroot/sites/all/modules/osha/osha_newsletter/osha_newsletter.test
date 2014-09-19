@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Class NewsletterTest.
+ */
+class NewsletterTest extends OshaWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Newsletter testing',
+      'description' => 'Tests the newsletter',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+  }
+
+  public function testNewsletter() {
+  }
+}
