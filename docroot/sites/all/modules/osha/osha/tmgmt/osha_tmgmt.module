@@ -345,6 +345,10 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
   $job_empty = TRUE;
   $values = $form_state['values'];
   $target_languages = array_filter($values['target_language']);
+  if (empty($target_languages)) {
+    drupal_set_message(t('No target language selected'), 'error');
+    return;
+  }
   $job_items_by_source_language = array();
   // Group the selected items by source language.
   foreach (tmgmt_job_item_load_multiple(array_filter($form_state['values']['items'])) as $job_item) {
