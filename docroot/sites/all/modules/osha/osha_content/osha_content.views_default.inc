@@ -329,6 +329,10 @@ function osha_content_views_default_views() {
   $handler = $view->new_display('block', 'Publication Block Center', 'block_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Related publications';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -416,7 +420,6 @@ function osha_content_views_default_views() {
   $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
     'tags' => 'tags',
   );
-  $handler->display->display_options['arguments']['tid']['default_argument_skip_url'] = TRUE;
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';

@@ -339,6 +339,7 @@ function osha_content_default_fe_block_settings() {
     'title' => '',
     'visibility' => 0,
   );
+
   $export['views-related_content-block_5'] = array(
     'cache' => -1,
     'custom' => 0,
