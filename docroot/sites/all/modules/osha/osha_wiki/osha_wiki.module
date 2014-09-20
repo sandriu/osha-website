@@ -47,6 +47,16 @@ function osha_wiki_feeds_presave(FeedsSource $source, $entity, $item) {
 }
 
 /**
+ * Define custom view mode for entities - wiki
+ */
+function osha_wiki_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['osha_wiki'] = array(
+    'label' => t('OSH Wiki'),
+    'custom settings' => TRUE
+  );
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_wiki_form_alter(&$form, &$form_state, $form_id) {
@@ -212,4 +222,21 @@ function osha_wiki_feeds_importer_create($feed_id, $url = NULL, $language = 'en'
     'process_in_background' => 1,
   );
   return $feeds_importer;
+}
+
+/* *
+ * Implements hook_block_list_alter() to hide the related wiki under publication
+ * when manual wiki articles have been linked to the current publication
+ */
+
+function osha_wiki_block_list_alter(&$blocks) {
+    $node = menu_get_object();
+    if ($node && !empty($node->field_related_oshwiki_articles[LANGUAGE_NONE][0])) {
+        foreach ($blocks as $block_id => $block) {
+            if ($block->delta == 'related_content-block_5') {
+                unset ($blocks[$block_id]);
+                break;
+            }
+        }
+    }
 }
