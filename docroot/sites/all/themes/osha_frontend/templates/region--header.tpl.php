@@ -65,7 +65,6 @@
 	<div>
 		<img src="/sites/all/themes/osha_frontend/images/languageico.png" alt="Select language">
 	</div>
-	<div id="searchText"><input type="text" value="Search" id="searchField" onfocus="deleteSearch()"> <input type="image" onclick="notImplemented()" src="/sites/all/themes/osha_frontend/images/searchico.png"></div>
 </div>
 <div id="agencyLogo"><a href="/en"><img src="/sites/all/themes/osha_frontend/images/agencyLogo.png" alt="European Agency for Safety and Health at Work"></a></div>
 <div id="europeLogo"><img src="/sites/all/themes/osha_frontend/images/europeLogo.png" alt="Europe Flag"></div>

@@ -524,13 +524,13 @@ span.date-display-single{
 }
 
 .node-publication .field-name-field-wiki-page-url a {
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
+	background: url("../images/flecha.png") no-repeat scroll right 24% transparent;
     color: #003399;
     float: right;
     font-family: "Oswald",sans-serif;
     font-size: 1.1em;
     margin: 0;
-    padding-bottom: 0.3em;
+    padding-bottom: 1.3em;
     text-align: right;
     width: 100%;
 	padding-right:1.5em
@@ -670,13 +670,18 @@ span.date-display-single{
 	clear:both;
 }
 
+.node-wiki-page {
+  background: url("../images/separator_home.jpg") repeat-x;
+  background-position: bottom,left;
+}
+
 .node-wiki-page .field-name-title-field{
     color: #000;
     font-family: Oswald;
     font-size: 1.4em;
     font-weight: lighter;
     height: 2em;
-    margin: 0;
+    margin: 0 0 0 0.5em;
     padding: 0;
 	padding-top:0.5em;
 }
@@ -1215,7 +1220,6 @@ font-weight: normal;
 
 #block-osha-newsletter-osha-newsletter-subscribe a{
 	text-decoration: none;
-	border-bottom: 1px solid #dc2f82;
 	color: #003399;
 	font-weight:bold;
 	
@@ -1912,6 +1916,7 @@ span.date-display-single{
 
 .node-publication.view-mode-full  .field-name-body p{
 	margin-top:0;
+	padding-left:1em;
 
 }
 
@@ -2382,3 +2387,370 @@ font-weight: normal;
 }
 
 /*END SLIDESHOW*/
+
+/*SIDEBAR SECOND*/
+
+	/*-- OSHWiki */
+	#block-views-related-content-block-4{
+		background-color:#e9edf6;
+	}
+	
+	#block-views-related-content-block-4 h2{
+		background: url("../images/oshwiki_logo.png") no-repeat scroll 5% 30% transparent;
+		padding-left:2em;
+	}
+	
+	#block-views-related-content-block-4 .views-field-title-field{
+		padding-left:1em;
+		padding-bottom:0.5em;
+	}
+	
+	#block-views-related-content-block-4 a{
+		color:#003399;
+		text-decoration:none;
+		background: url("../images/flecha.png") no-repeat scroll 100% 100% transparent;
+		padding-right:2em;
+		font-size:0.8em;
+		font-weight:bold;
+	}
+	
+	
+	/*-- Publications */
+	#block-views-related-content-block-2{
+		background-color:#FFFFFF;
+		border-top: 5px solid #003399;
+	}
+	
+	#block-views-related-content-block-2 h2{
+		background: url("../images/publications_logo.png") no-repeat scroll 5% 30% transparent;
+		padding-left:2em;
+		color:#000000;
+		font-family: 'Oswald', sans-serif;
+		font-size: 1.4em;
+		font-weight: lighter;
+
+	}
+	
+	#block-views-related-content-block-2 .views-field-title-field{
+		padding-left:1em;
+		padding-bottom:0.5em;
+	}
+	
+	#block-views-related-content-block-2 a{
+		color:#003399;
+		text-decoration:none;
+		background: url("../images/li_arrow.png") no-repeat scroll 0% 100% transparent;
+		padding-left:1em;
+		font-size:0.8em;
+		font-weight:bold;
+	}
+	
+	
+	
+	#block-views-related-content-block-2 .more-link a{
+		background: url("../images/flecha.png") no-repeat scroll 85% 61% transparent;
+		color: #003399;
+		float: right;
+		font-family: "Oswald",sans-serif;
+		font-size: 1em;
+		padding-right:2em;
+	}
+	
+	
+	/*-- Related*/
+	
+	#block-block-4{
+		margin-bottom:0px;
+	}
+	
+	#block-block-4 p{
+		background: url("../images/related_logo.png") no-repeat scroll 3% 176% transparent;
+		border-top: 5px solid #003399;
+		color: #000000;
+		font-family: "Oswald",sans-serif;
+		font-size: 1.4em;
+		font-weight: lighter;
+		padding-left: 2em;
+		padding-top: 0.5em;
+		padding-bottom:0px;
+		margin-bottom:0px;
+	}
+	
+	/*-- News */
+	#block-views-related-content-block-1{
+		background-color:#FFFFFF;
+	}
+	
+	#block-views-related-content-block-1 h2{
+		background: url("../images/news_logo.png") no-repeat scroll 100% 30% transparent;
+		color: #000000;
+		font-family: "Oswald",sans-serif;
+		font-size: 1.2em;
+		font-weight: lighter;
+		margin-bottom: 0;
+		padding-bottom: 0;
+		padding-left: 0.5em;
+	}
+	
+	#block-views-related-content-block-1 .view-related-content{
+		background: url("../images/separator_home.jpg") repeat-x scroll 0% -7px rgba(0, 0, 0, 0);
+	}
+	
+	#block-views-related-content-block-1 .views-field-title-field{
+		padding-left:1em;
+		padding-bottom:0.5em;
+	}
+	
+	#block-views-related-content-block-1 a{
+		color:#003399;
+		text-decoration:none;
+		background: url("../images/li_arrow.png") no-repeat scroll 0% 100% transparent;
+		padding-left:1em;
+		font-size:0.8em;
+		font-weight:bold;
+	}
+	
+
+/*END SIDEBAR SECOND*/
+
+/*RELATED WIKI IN SECTIONS*/
+	
+#related-wiki{
+	background-color:#e8ecf5;
+	margin-top:1em;
+	margin-bottom:1em;
+}
+
+#related-wiki .related_wiki_head{
+	width:100%;
+	height:80px;
+	background: url("../images/related_wiki_head.png") no-repeat scroll 0% 100% #003399;
+}
+
+#related-wiki .related_wiki_head span{
+	color: #FFFFFF;
+	padding-top: 28px;
+	padding-left: 1.5em;
+	font-family: "Oswald",sans-serif;
+	font-size: 2em;
+	margin-top: 1em;
+	display: block;
+}
+
+#related-wiki .field-name-title-field{
+	background-color:#325bad;
+	color:#FFFFFF;
+	padding-left:2.2em;
+	margin-left:0;
+}
+
+.field-name-field-related-oshwiki-articles .field-name-body p{
+	color:#000000;
+	padding-left:3.2em;
+}
+
+#related-wiki .field-name-field-related-oshwiki-articles .field-name-field-wiki-page-url a{
+	background: url("../images/flecha.png") no-repeat scroll 85% 30% transparent;
+	color: #003399;
+	float: right;
+	font-family: "Oswald",sans-serif;
+	font-size: 1.3em;
+    padding-right: 3em;
+	padding-bottom:1em;
+}
+
+.field-name-body #votebox{
+	padding-left:3.2em;
+}
+
+/*END RELATED WIKI*/
+
+/*SIDEBAR FIRST FILTERS*/
+
+
+#block-views-exp-publications-page h2{
+	display: table-cell;
+	color: #000;
+	font-size: 1.3em;
+	font-family: "Oswald",sans-serif;
+	font-weight: lighter;
+	background: none repeat scroll 0 0 transparent;
+	padding-left:0;
+}
+
+#block-views-exp-publications-page label{
+	color: #003399;
+	font-size: 0.8em;
+	font-weight: bold;
+	font-family: arial;
+	padding-bottom: 0.2em;
+}
+
+.bef-checkboxes{
+	background-color: #f3f3f3;
+    height: 212px;
+    overflow: auto;
+    padding: 0.5em 0.5em 0.5em 1em;
+}
+
+
+.form-checkboxes a{
+	color:#003399;
+	text-decoration:underline;
+}
+
+
+.bef-checkboxes label{
+	color:#57565b!important;
+}
+
+#edit-combine-wrapper{
+	background-image: url('../images/separator_home.jpg');
+	background-repeat: repeat-x;
+	background-position: top left;
+	padding-top:1em;
+}
+
+#edit-field-tags-tid-wrapper{
+	background-image: url('../images/separator_home.jpg');
+	background-repeat: repeat-x;
+	background-position: top left;
+	padding-top:1em;
+}
+
+#edit-language-wrapper{
+	background-image: url('../images/separator_home.jpg');
+	background-repeat: repeat-x;
+	background-position: top left;
+	padding-top:1em;
+}
+
+#edit-field-publication-type-tid-wrapper{
+	background-image: url('../images/separator_home.jpg');
+	background-repeat: repeat-x;
+	background-position: top left;
+	padding-top:1em;
+}
+
+/*END SIDEBAR FIRST FILTERS*/
+
+/*SEARCH FORM HEAD*/
+
+#block-search-form{
+	position: absolute;
+    right: 9.6em;
+    top: 6.5em;
+}
+
+#edit-search-block-form--2{
+	background:#002f9d;
+	border:0px;
+	color:#FFFFFF;
+}
+
+#ui-theme-basic-blue.ui-menu{
+	left: 1px !important;
+}
+
+/*END SEARCH FORM HEAD*/
+
+
+/*oshmail-newsletter*/
+
+#block-osha-newsletter-osha-newsletter-latest h2{
+	color: #000;
+	font-family: 'Oswald',sans-serif;
+	font-size: 1.25em;
+	font-weight: lighter;
+	margin: 0;
+	padding: 0 0 0.3em;
+	background: none repeat scroll 0 0 transparent;
+	background-image: url('../images/separator_home.jpg');
+	background-repeat: repeat-x;
+	background-position: bottom left;
+}
+
+		/*OSHMail Newsletter*/
+
+		#block-osha-newsletter-osha-newsletter-subscribe-extra{
+			background-color: #A6B8DB;
+			padding: 0em 1em 1em 1em;
+		}
+
+		#block-osha-newsletter-osha-newsletter-subscribe-extra h2{
+			background-color: #a6b8db;
+			color: #003399;
+			font-family: "Oswald",sans-serif;
+			font-size: 1.5em;
+			font-weight: lighter;
+			margin: 0;
+			padding: 0;
+		}
+
+		#block-osha-newsletter-osha-newsletter-subscribe-extra div{
+			color: #000;
+			font-family: Arial,sans-serif;
+			font-size: 1em;
+			margin: 0 0 .5em 0;
+			line-height:1.5em;
+		}
+
+		#block-osha-newsletter-osha-newsletter-subscribe-extra #edit-submit--2{
+			color: #001791;
+			font-family: 'Oswald',sans-serif;
+			font-size: 1.6em;
+			text-align: right;
+			background-color: #A6B8DB;
+			border:0;
+			background: url("../images/flecha.png") no-repeat scroll right center transparent;
+			padding-right: 2em;
+			width:100%;
+		}
+
+		#block-osha-newsletter-osha-newsletter-subscribe-extra a{
+			text-decoration: none;
+			border-bottom: 1px solid #dc2f82;
+			color: #003399;
+			font-weight:bold;
+			font-family: arial;
+			
+		}
+
+
+
+/*end oshmail-newsletter*/
+
+
+/*SEARCH*/
+
+#block-apachesolr-search-sort h2{
+	display: table-cell;
+	color: #000;
+	font-size: 1.3em;
+	font-family: "Oswald",sans-serif;
+	font-weight: lighter;
+	background: none repeat scroll 0 0 transparent;
+	padding-left:0;
+}
+
+#block-views-exp-publications-page label{
+	color: #003399;
+	font-size: 0.8em;
+	font-weight: bold;
+	font-family: arial;
+	padding-bottom: 0.2em;
+}
+
+.block-facetapi h2{
+	display: table-cell;
+	color: #000;
+	font-size: 1.3em;
+	font-family: "Oswald",sans-serif;
+	font-weight: lighter;
+	background: none repeat scroll 0 0 transparent;
+	padding-left:0;
+}
+
+
+
+/*END SEARCH*/

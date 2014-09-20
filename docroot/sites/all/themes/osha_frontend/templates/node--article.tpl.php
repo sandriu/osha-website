@@ -46,7 +46,7 @@
       <div>
     <?php } else { ?>
       <div id="related-wiki">
-        <span><?php print t('OSHWiki featured articles');?></span>
+        <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
       <div>
       <?php
     }
