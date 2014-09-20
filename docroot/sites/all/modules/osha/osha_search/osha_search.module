@@ -19,7 +19,7 @@ function osha_search_menu_alter(&$items) {
  *
  * We use it to index the field_image so we can have it in the search results.
  */
-function osha_search_apachesolr_index_documents_alter(array $documents, $entity, $entity_type, $env_id) {
+function disabled_osha_search_apachesolr_index_documents_alter(array $documents, $entity, $entity_type, $env_id) {
   if (!empty($entity->field_image)) {
     global $base_url;
     foreach ($documents as $document) {
