@@ -205,7 +205,7 @@ function osha_wiki_field_default_field_instances() {
         'title' => '',
       ),
       'display' => array(
-        'url_cutoff' => 80,
+        'url_cutoff' => 255,
       ),
       'enable_tokens' => 0,
       'entity_translation_sync' => FALSE,
@@ -216,7 +216,7 @@ function osha_wiki_field_default_field_instances() {
       ),
       'rel_remove' => 'default',
       'title' => 'value',
-      'title_maxlength' => 128,
+      'title_maxlength' => 255,
       'title_value' => 'Read full OSHWiki article',
       'url' => 0,
       'user_register_form' => FALSE,

@@ -468,19 +468,23 @@ function osha_content_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_tags_node']['relationship'] = 'field_tags_tid';
   $handler->display->display_options['relationships']['reverse_field_tags_node']['required'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: URL */
+  $handler->display->display_options['fields']['field_wiki_page_url']['id'] = 'field_wiki_page_url';
+  $handler->display->display_options['fields']['field_wiki_page_url']['table'] = 'field_data_field_wiki_page_url';
+  $handler->display->display_options['fields']['field_wiki_page_url']['field'] = 'field_wiki_page_url';
+  $handler->display->display_options['fields']['field_wiki_page_url']['label'] = '';
+  $handler->display->display_options['fields']['field_wiki_page_url']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_wiki_page_url']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_wiki_page_url']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_wiki_page_url']['type'] = 'link_url';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
   $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
-  $handler->display->display_options['fields']['title_field']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title_field']['alter']['path'] = '[field_wiki_page_url]';
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
-  $handler->display->display_options['fields']['title_field']['settings'] = array(
-    'title_style' => 'div',
-    'title_link' => 'content',
-    'title_class' => 'p4',
-  );
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
