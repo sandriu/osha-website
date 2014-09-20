@@ -449,12 +449,6 @@ function osha_content_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'OSHWiki';
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '(opens new tab/window)';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Field: Tags (field_tags) */
   $handler->display->display_options['relationships']['field_tags_tid']['id'] = 'field_tags_tid';
@@ -566,7 +560,6 @@ function osha_content_views_default_views() {
     t('Related publications'),
     t('Wiki Block'),
     t('OSHWiki'),
-    t('(opens new tab/window)'),
   );
   $export['related_content'] = $view;
 
