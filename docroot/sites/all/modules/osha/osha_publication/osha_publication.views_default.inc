@@ -338,11 +338,31 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['filters']['field_tags_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_tags_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
-  /* Filter criterion: Content: Language */
-  $handler->display->display_options['filters']['language']['id'] = 'language';
-  $handler->display->display_options['filters']['language']['table'] = 'node';
-  $handler->display->display_options['filters']['language']['field'] = 'language';
-  $handler->display->display_options['filters']['language']['value'] = array(
+  /* Filter criterion: Content: Publication Type (field_publication_type) */
+  $handler->display->display_options['filters']['field_publication_type_tid']['id'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['table'] = 'field_data_field_publication_type';
+  $handler->display->display_options['filters']['field_publication_type_tid']['field'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_publication_type_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator_id'] = 'field_publication_type_tid_op';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator'] = 'field_publication_type_tid_op';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['identifier'] = 'field_publication_type_tid';
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_publication_type_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_publication_type_tid']['vocabulary'] = 'publication_types';
+  /* Filter criterion: Entity translation: Language */
+  $handler->display->display_options['filters']['language_1']['id'] = 'language_1';
+  $handler->display->display_options['filters']['language_1']['table'] = 'entity_translation';
+  $handler->display->display_options['filters']['language_1']['field'] = 'language';
+  $handler->display->display_options['filters']['language_1']['value'] = array(
     'en' => 'en',
     'bg' => 'bg',
     'cs' => 'cs',
@@ -371,40 +391,18 @@ function osha_publication_views_default_views() {
     'sv' => 'sv',
     'tr' => 'tr',
   );
-  $handler->display->display_options['filters']['language']['group'] = 1;
-  $handler->display->display_options['filters']['language']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['language']['expose']['operator_id'] = 'language_op';
-  $handler->display->display_options['filters']['language']['expose']['label'] = 'Available in languages';
-  $handler->display->display_options['filters']['language']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['language']['expose']['operator'] = 'language_op';
-  $handler->display->display_options['filters']['language']['expose']['identifier'] = 'language';
-  $handler->display->display_options['filters']['language']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['language']['expose']['remember_roles'] = array(
+  $handler->display->display_options['filters']['language_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['language_1']['expose']['operator_id'] = 'language_1_op';
+  $handler->display->display_options['filters']['language_1']['expose']['label'] = 'Available in languages';
+  $handler->display->display_options['filters']['language_1']['expose']['operator'] = 'language_1_op';
+  $handler->display->display_options['filters']['language_1']['expose']['identifier'] = 'language_1';
+  $handler->display->display_options['filters']['language_1']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['language_1']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
   );
-  $handler->display->display_options['filters']['language']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Content: Publication Type (field_publication_type) */
-  $handler->display->display_options['filters']['field_publication_type_tid']['id'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['table'] = 'field_data_field_publication_type';
-  $handler->display->display_options['filters']['field_publication_type_tid']['field'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_publication_type_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator_id'] = 'field_publication_type_tid_op';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['label'] = 'Type';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['operator'] = 'field_publication_type_tid_op';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['identifier'] = 'field_publication_type_tid';
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_publication_type_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_publication_type_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_publication_type_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_publication_type_tid']['vocabulary'] = 'publication_types';
+  $handler->display->display_options['filters']['language_1']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'publications';
 
   /* Display: Block */
@@ -549,8 +547,8 @@ function osha_publication_views_default_views() {
     t('Show details'),
     t('Search all publications'),
     t('Topic'),
-    t('Available in languages'),
     t('Type'),
+    t('Available in languages'),
     t('Block'),
     t('queue'),
     t('Publications Slideshow'),
