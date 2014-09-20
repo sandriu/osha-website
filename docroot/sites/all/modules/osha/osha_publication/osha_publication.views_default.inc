@@ -148,13 +148,13 @@ function osha_publication_views_default_views() {
         ),
       ),
     ),
-    'language' => array(
-      'bef_format' => 'default',
+    'field_publication_type_tid' => array(
+      'bef_format' => 'bef',
       'more_options' => array(
         'bef_select_all_none' => 1,
         'bef_collapsible' => 0,
         'is_secondary' => 1,
-        'any_label' => '',
+        'any_label' => 'All',
         'bef_filter_description' => '',
         'tokens' => array(
           'available' => array(
@@ -166,13 +166,13 @@ function osha_publication_views_default_views() {
         ),
       ),
     ),
-    'field_publication_type_tid' => array(
+    'language_1' => array(
       'bef_format' => 'bef',
       'more_options' => array(
         'bef_select_all_none' => 1,
         'bef_collapsible' => 0,
-        'is_secondary' => 1,
-        'any_label' => 'All',
+        'is_secondary' => 0,
+        'any_label' => '',
         'bef_filter_description' => '',
         'tokens' => array(
           'available' => array(
