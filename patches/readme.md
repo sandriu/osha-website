@@ -7,6 +7,11 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* entity_translation
+  * Added entity_translation in views (to be able to filter by language)
+  * https://www.drupal.org/node/1330332
+  * https://www.drupal.org/files/issues/entity_translation-filter_views-1330332-47.patch
+
 * rules
   * added && if isset($data[$hook]) to avoid error when running update.sh (https://www.drupal.org/node/2161847)
   * https://www.drupal.org/files/issues/rules-fix-unsupported-operand-types-2161847-2.patch
