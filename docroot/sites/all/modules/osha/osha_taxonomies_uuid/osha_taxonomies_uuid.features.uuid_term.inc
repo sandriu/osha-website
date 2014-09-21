@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * osha_taxonomies.features.uuid_term.inc
+ * osha_taxonomies_uuid.features.uuid_term.inc
  */
 
 /**
  * Implements hook_uuid_features_default_terms().
  */
-function osha_taxonomies_uuid_features_default_terms() {
+function osha_taxonomies_uuid_uuid_features_default_terms() {
   $terms = array();
 
   $terms[] = array(

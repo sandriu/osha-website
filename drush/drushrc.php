@@ -348,6 +348,7 @@ $options['init-modules'] = array(
   'workbench_moderation',
 
   'osha_taxonomies',
+  'osha_taxonomies_uuid',
   'osha',
   'osha_migration',
   'osha_news',
