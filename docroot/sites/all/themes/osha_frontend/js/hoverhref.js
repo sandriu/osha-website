@@ -1,7 +1,6 @@
 jQuery(document).ready(function () {
-
     hoverThemes();
-  
+	zoomMedium();
 });
 
 
@@ -39,6 +38,25 @@ function hoverThemes() {
 	});
 }
 
+        
+	function zoomSmall() {
+		jQuery("body").addClass("bodysmall");
+		jQuery("body").removeClass("bodymedium");
+		jQuery("body").removeClass("bodybig");
+	}
+	
+	function zoomMedium() {
+		jQuery("body").addClass("bodymedium");
+		jQuery("body").removeClass("bodysmall");
+		jQuery("body").removeClass("bodybig");
+	}
+	function zoomBig() {
+		jQuery("body").addClass("bodybig");
+		jQuery("body").removeClass("bodysmall");
+		jQuery("body").removeClass("bodymedium");
+	}
+		
+		
 
 
 
