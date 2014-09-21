@@ -29,5 +29,19 @@ function wysiwyg_accordion_accordion_plugin() {
             'internal' => FALSE,
             'settings' => array(),
         ),
+        'accordion_panel' => array(
+            'path' => drupal_get_path('module', 'wysiwyg_accordion') . '/plugins',
+            'js file' => 'accordion_panel.js',
+            'js path' => drupal_get_path('module', 'wysiwyg_accordion') . '/plugins',
+            'css path' => drupal_get_path('module', 'wysiwyg_accordion') . '/plugins',
+            'css file' => 'accordion.css',
+            'icon title' => 'Accordion Panel',
+            'icon path' => drupal_get_path('module', 'wysiwyg_accordion') . '/plugins/icons',
+            'icon file' => 'accordion_panel.png',
+            'buttons' => array('accordion_panel' => t('Accordion Panel')),
+            'load' => TRUE,
+            'internal' => FALSE,
+            'settings' => array(),
+        ),
     );
 }

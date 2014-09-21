@@ -136,6 +136,7 @@ function osha_wysiwyg_default_profiles() {
         'drupal' => array(
           'accordion' => 1,
           'accordion_header' => 1,
+          'accordion_panel' => 1,
         ),
       ),
       'toolbar_loc' => 'top',

@@ -583,7 +583,7 @@ padding: 0em 0em 0em 1.8em;;
 	padding-top:3px;
 }
 	
-.ui-accordion p {
+.ui-accordion-content  {
 	font-family: Arial;
 	font-size: 0.8em;
 	color: #000;
