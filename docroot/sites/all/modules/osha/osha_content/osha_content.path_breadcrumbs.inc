@@ -30,5 +30,45 @@ function osha_content_path_breadcrumbs_settings_info() {
   $path_breadcrumb->weight = 0;
   $export['osh_news'] = $path_breadcrumb;
 
+  $path_breadcrumb = new stdClass();
+  $path_breadcrumb->api_version = 1;
+  $path_breadcrumb->machine_name = 'osh_publications';
+  $path_breadcrumb->name = 'Publications';
+  $path_breadcrumb->path = 'publications';
+  $path_breadcrumb->data = array(
+    'titles' => array(
+      0 => 'Publications',
+    ),
+    'paths' => array(
+      0 => '<none>',
+    ),
+    'home' => 1,
+    'translatable' => 1,
+    'arguments' => array(),
+    'access' => array(),
+  );
+  $path_breadcrumb->weight = 0;
+  $export['osh_publications'] = $path_breadcrumb;
+
+  $path_breadcrumb = new stdClass();
+  $path_breadcrumb->api_version = 1;
+  $path_breadcrumb->machine_name = 'oshmail_newsletter';
+  $path_breadcrumb->name = 'OSHMAIL newsletter';
+  $path_breadcrumb->path = 'oshmail_newsletter';
+  $path_breadcrumb->data = array(
+    'titles' => array(
+      0 => 'OSHMAIL newsletter',
+    ),
+    'paths' => array(
+      0 => '<none>',
+    ),
+    'home' => 1,
+    'translatable' => 1,
+    'arguments' => array(),
+    'access' => array(),
+  );
+  $path_breadcrumb->weight = 0;
+  $export['oshmail_newsletter'] = $path_breadcrumb;
+
   return $export;
 }
