@@ -2016,5 +2016,113 @@ function osha_taxonomies_uuid_features_default_terms() {
       0 => 'f77ff1e1-cccc-4f56-b470-ad638467b135',
     ),
   );
+  $terms[] = array(
+    'name' => 'Page',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 1,
+    'uuid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'article_types',
+    'field_article_type_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'page',
+          'format' => NULL,
+          'safe_value' => 'page',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'entity_id' => 1044,
+          'language' => 'en',
+          'source' => '',
+          'uid' => 0,
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1411244110,
+          'changed' => 1411244110,
+        ),
+      ),
+    ),
+  );
+  $terms[] = array(
+    'name' => 'Introduction',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 2,
+    'uuid' => '5cd70528-4ea1-4cce-9370-370c22dee0d7',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'article_types',
+    'field_article_type_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'introduction',
+          'format' => NULL,
+          'safe_value' => 'introduction',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'entity_id' => 1045,
+          'language' => 'en',
+          'source' => '',
+          'uid' => 0,
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1411244110,
+          'changed' => 1411244110,
+        ),
+      ),
+    ),
+  );
+  $terms[] = array(
+    'name' => 'Section',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 3,
+    'uuid' => '6ccf7187-42f8-4813-bf55-b5b3d218dc37',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'article_types',
+    'field_article_type_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'section',
+          'format' => NULL,
+          'safe_value' => 'section',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'entity_id' => 1046,
+          'language' => 'en',
+          'source' => '',
+          'uid' => 0,
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1411244110,
+          'changed' => 1411244110,
+        ),
+      ),
+    ),
+  );
   return $terms;
 }

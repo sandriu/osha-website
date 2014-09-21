@@ -104,35 +104,6 @@ function osha_taxonomies_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_taxonomy_term__article_types';
-  $strongarm->value = array(
-    'view_modes' => array(),
-    'extra_fields' => array(
-      'form' => array(
-        'metatags' => array(
-          'weight' => '40',
-        ),
-        'path' => array(
-          'weight' => '30',
-        ),
-        'redirect' => array(
-          'weight' => '30',
-        ),
-        'name' => array(
-          'weight' => '-5',
-        ),
-        'description' => array(
-          'weight' => '0',
-        ),
-      ),
-      'display' => array(),
-    ),
-  );
-  $export['field_bundle_settings_taxonomy_term__article_types'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_taxonomy_term_activity_pattern';
   $strongarm->value = 'activity/[term:field_activity_code]';
   $export['pathauto_taxonomy_term_activity_pattern'] = $strongarm;
@@ -178,6 +149,7 @@ function osha_taxonomies_strongarm() {
   $strongarm->name = 'uuid_features_entity_taxonomy_term';
   $strongarm->value = array(
     'activity' => 'activity',
+    'article_types' => 'article_types',
     'newsletter_sections' => 'newsletter_sections',
     'tags' => 0,
     'esener' => 0,
@@ -199,6 +171,7 @@ function osha_taxonomies_strongarm() {
     'esener' => 0,
     'nace_codes' => 0,
     'publication_types' => 0,
+    'article_types' => 0,
     'section' => 0,
     'thesaurus' => 0,
     'workflow_status' => 0,
