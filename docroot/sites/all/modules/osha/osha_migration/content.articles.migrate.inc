@@ -15,7 +15,6 @@ class OshaMigrateArticles extends OSHADynamicMigration {
       OSHA_MIGRATION_TAXONOMY_TAGS,
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
-      OSHA_MIGRATION_TAXONOMY_ARTICLE_TYPES,
     );
 
     /* Remove limits on time/memory, slower machines will fail */

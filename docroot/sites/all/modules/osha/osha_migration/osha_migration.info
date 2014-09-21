@@ -29,7 +29,6 @@ files[] = taxonomy.activity.migrate.inc
 files[] = taxonomy.esener.migrate.inc
 files[] = taxonomy.nace_codes.migrate.inc
 files[] = taxonomy.publication_types.migrate.inc
-files[] = taxonomy.article_types.migrate.inc
 files[] = taxonomy.tags.migrate.inc
 files[] = taxonomy.thesaurus.migrate.inc
 files[] = tests/content.articles.test

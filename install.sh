@@ -34,9 +34,6 @@ if [ "$1" == "--migrate" ]; then
     echo "Importing Publication types taxonomy"
     drush migrate-import TaxonomyPublicationTypes
 
-    echo "Importing Article types taxonomy"
-    drush migrate-import TaxonomyArticleTypes
-
     echo "Importing multilingual Thesaurus taxonomy"
     drush migrate-import TaxonomyThesaurus
 

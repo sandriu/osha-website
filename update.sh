@@ -22,9 +22,6 @@ if [ "$1" == "--migrate" ]; then
     echo "Importing Publication types taxonomy"
     drush migrate-import --update TaxonomyPublicationTypes
 
-    echo "Importing Article types taxonomy"
-    drush migrate-import --update TaxonomyArticleTypes
-
     echo "Importing multilingual Thesaurus taxonomy"
     drush migrate-import --update TaxonomyThesaurus
 

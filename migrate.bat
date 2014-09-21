@@ -12,9 +12,6 @@ cd docroot
     echo "Importing Publication types taxonomy"
     call drush migrate-import TaxonomyPublicationTypes
 
-    echo "Importing Article types taxonomy"
-    call drush migrate-import TaxonomyArticleTypes
-
     echo "Importing multilingual Thesaurus taxonomy"
     call drush migrate-import TaxonomyThesaurus
 
