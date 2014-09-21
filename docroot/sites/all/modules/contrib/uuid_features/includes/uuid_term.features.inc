@@ -168,7 +168,32 @@ function uuid_term_features_rebuild($module) {
       if ($voc) {
         $term->vid = $voc->vid;
         uuid_features_file_field_import($term, 'taxonomy_term');
+        _uuid_features_taxonomy_text_fields_import($term);
         entity_uuid_save('taxonomy_term', $term);
+      }
+    }
+  }
+}
+
+/**
+ * Handle importing extra text fields on taxonomies.
+ */
+function _uuid_features_taxonomy_text_fields_import(&$import) {
+  $import_bundle = $import->vocabulary_machine_name;
+  // Get all fields from this bundle.
+  $fields = field_info_instances('taxonomy_term', $import_bundle);
+
+  foreach($fields as $field_instance) {
+    // Load field info to check the type.
+    $field = &$import->{$field_instance['field_name']};
+    $info = field_info_field($field_instance['field_name']);
+    if ($info['type'] == 'text') {
+      foreach($field as $language => $values) {
+        if (is_array($values)) {
+          foreach($values as $i => $value) {
+            $field[$language][$i] = (array)$value;
+          }
+        }
       }
     }
   }

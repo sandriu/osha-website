@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* uuid_features (EdW)
+  * Added custom code to support custom text fields on taxonomies (field_article_type_code)
+  * uuid_features-taxonomies-custom-text-fields.patch
+  
 * entity_translation
   * Added entity_translation in views (to be able to filter by language)
   * https://www.drupal.org/node/1330332
