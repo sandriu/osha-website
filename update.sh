@@ -25,8 +25,8 @@ if [ "$1" == "--migrate" ]; then
     echo "Importing multilingual Thesaurus taxonomy"
     drush migrate-import --update TaxonomyThesaurus
 
-    echo "Importing Tags taxonomy"
-    drush migrate-import --update TaxonomyTags
+    #echo "Importing Tags taxonomy"
+    #drush migrate-import --update TaxonomyTags
 
     echo "Importing Files content"
     drush migrate-import --update Files

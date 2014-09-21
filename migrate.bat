@@ -15,8 +15,8 @@ cd docroot
     echo "Importing multilingual Thesaurus taxonomy"
     call drush migrate-import TaxonomyThesaurus
 
-    echo "Importing Tags taxonomy"
-    call drush migrate-import TaxonomyTags
+    rem echo "Importing Tags taxonomy"
+    rem call drush migrate-import TaxonomyTags
 
     echo "Importing Files content"
     call drush migrate-import Files

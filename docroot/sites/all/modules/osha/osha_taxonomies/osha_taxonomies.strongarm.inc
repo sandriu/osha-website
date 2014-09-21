@@ -148,10 +148,10 @@ function osha_taxonomies_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'uuid_features_entity_taxonomy_term';
   $strongarm->value = array(
+    'tags' => 'tags',
     'activity' => 'activity',
     'article_types' => 'article_types',
     'newsletter_sections' => 'newsletter_sections',
-    'tags' => 0,
     'esener' => 0,
     'nace_codes' => 0,
     'publication_types' => 0,
