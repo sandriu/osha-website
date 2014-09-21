@@ -25,69 +25,10 @@
 				document.write("<IMG SRC="+image[index]+" border='0' align='right'>");
 			</script>
 		</div>
-		<div id="highlights_home">
-			<div class="title_hightlights">Highlights</div><div class="viewAll"><a href="">View all <img src="/sites/all/themes/osha_frontend/images/flecha.png" alt="View all"></a></div>
-			<div class="separator_highlights_home">&nbsp;</div>
-		</div>
 		<div class="highlights_row">
-			<div class="highlights_column_left">
-				<div class="date">
-					11/08/2014
-				</div>
-				<div class="highlights_title">
-					<a href="">International Youth Day 2014: mental health matters</a>
-				</div>
-				<div class="highlights_body">
-					On 12 August every year, we celebrate International Youth Day to recognise the vital contribution of youth to society.This year’s theme is “Youth and Mental Health”...
-				</div>
-				<div class="highlights_link">
-					<a href="">See more</a>
-				</div>
-			</div>
-			<div class="highlights_column_right">
-				<div class="date">
-					31/07/2014
-				</div>
-				<div class="highlights_title">
-					<a href="">Stay connected: explore our social networks</a>
-				</div>
-				<div class="highlights_body">
-					EU-OSHA maintains an active presence in social media using it as a knowledge sharing hub on occupational safety and health. Social media channels add value to...
-				</div>
-				<div class="highlights_link">
-					<a href="">See more</a>
-				</div>
-			</div>
+			<?php print render($page['content']); ?>
 		</div>
-		<div class="highlights_row">
-			<div class="highlights_column_left">
-				<div class="date">
-					24/07/2014
-				</div>
-				<div class="highlights_title">
-					<a href="">Recommend OSHmail to a colleague</a>
-				</div>
-				<div class="highlights_body">
-					More than 63,000 subscribers already share your point of view. As a subscriber to OSHmail, the newsletter of the European Agency for Safety and Health at Work...
-				</div>
-				<div class="highlights_link">
-					<a href="">See more</a>
-				</div>
-			</div>
-			<div class="highlights_column_right">
-				<div class="date">
-					17/07/2014
-				</div>
-				<div class="highlights_title">
-					<a href="">New risks spark concern in the electricity sector</a>
-				</div>
-				<div class="highlights_body">
-					The rapid pace of technological innovation is creating new risks for workers in the electricity sector. A recent workshop held for the EU Sectoral Social...
-				</div>
-				<div class="highlights_link">
-					<a href="">See more</a>
-				</div>
-			</div>
+		
 		</div>
 	</div>
 	<?php
