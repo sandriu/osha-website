@@ -321,6 +321,16 @@ function osha_disable_blocks(){
   ->condition('theme', 'osha_frontend')
   ->execute();
 
+  db_update('block')
+  ->fields(array('status' => 0))
+  ->condition('module', 'user')
+  ->condition('delta', 'login')
+  ->condition('theme', 'osha_frontend')
+  ->execute();
+
+  // we could also use drush
+  // block-configure --module=user --delta=login --region=-1 --theme=osha_frontend
+
   // Flush cache
   cache_clear_all();
 }
