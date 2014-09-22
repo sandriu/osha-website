@@ -245,56 +245,146 @@
  *
  * Keep this code block at the end of this file to take full effect.
  */
-if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
-  include_once dirname(__FILE__) . '/drushrc.local.php';
-}
 
 // Read JSON configuration file from conf/ and pre-configure drush commands
-$json_path = getcwd() . '/../conf/config.json';
+$json_path = dirname(__FILE__) . '/../conf/config.json';
 if(file_exists($json_path)) {
-	$cfg = json_decode(file_get_contents($json_path));
-	$db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
-	$command_specific['site-install'] = array(
-		'db-url' => $db_url,
-		'account-mail' => $cfg->admin->email, 'account-name' => $cfg->admin->username, 'account-pass' => $cfg->admin->password,
-		'db-su' => $cfg->db->root_username, "db-su-pw" => $cfg->db->root_password,
-		'site-mail' => $cfg->site_mail
-	);
+  $cfg = json_decode(file_get_contents($json_path));
+  $db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
+  $command_specific['site-install'] = array(
+    'db-url' => $db_url,
+    'account-mail' => $cfg->admin->email, 'account-name' => $cfg->admin->username, 'account-pass' => $cfg->admin->password,
+    'db-su' => $cfg->db->root_username, 'db-su-pw' => $cfg->db->root_password
+  );
 }
 
 $options['init-modules'] = array(
-	'ctools', 'entity',
+  'ctools', 'entity',
 
-	'locale',
-	'entity_translation',
-	'i18n',
-	'variable',
+  'locale',
+  'entity_translation',
+  'i18n',
+  'i18n_string',
+  'i18n_taxonomy',
+  'variable',
 
-	'views',
-	'views_ui',
-	'views_bulk_operations',
+  'views',
+  'views_ui',
+  'views_bulk_operations',
+  'better_exposed_filters',
 
-	'taxonomy_access_fix',
-	'date',
-	'migrate',
-	'features',
+  'mailsystem',
+  'htmlmail',
 
-	'entityreference',
-	'link',
-	'title',
-	'wysiwyg',
-	'pathauto',
-	'uuid',
+  'taxonomy_access_fix',
+  'date',
+  'migrate',
+  'features',
+  'feeds',
+  'feeds_ui',
+  'feeds_crawler',
 
-	'search_api',
-	'facetapi',
-	'search_api_facetapi',
-	'apachesolr',
-	'apachesolr_search',
-	'search_api_solr',
-	'strongarm',
+  'entityreference',
+  'link',
+  'title',
+  'wysiwyg',
+  'pathauto',
+  'redirect',
+  'file_entity',
+  'media',
+  'languagefield',
+  'image_field_caption',
 
-	'imce_wysiwyg',
-	'osha',
-	'osha_migration'
+  'tmgmt',
+  'tmgmt_local',
+  'tmgmt_node',
+  'tmgmt_entity',
+  'tmgmt_entity_ui',
+  'tmgmt_ui',
+  'tmgmt_file',
+  'tmgmt_i18n_string',
+
+  'i18n_menu',
+  'i18n_block',
+
+  'strongarm',
+  'exclude_node_title',
+  'metatag',
+
+  'pdf_to_image',
+  'doc_to_imagefield',
+
+  'special_menu_items',
+  'menu_block',
+  'menuimage',
+  'lang_dropdown',
+
+  'imce_wysiwyg',
+  'wysiwyg_accordion',
+
+  'nodequeue',
+  'fe_block',
+  'fe_nodequeue',
+
+  'views_slideshow',
+  'views_slideshow_cycle',
+  'custom_formatters',
+
+  'taxonomy_manager',
+  'node_export',
+  'mpac',
+  'linkit',
+
+  // Enable last (conflict with rules)
+  'uuid',
+  'uuid_features',
+
+  'path_breadcrumbs',
+  'path_breadcrumbs_ui',
+  'path_breadcrumbs_i18n',
+
+  'workbench',
+  'workbench_access',
+  'workbench_moderation',
+
+  'osha_taxonomies',
+  'osha_taxonomies_uuid',
+  'osha',
+  'osha_migration',
+  'osha_news',
+  'osha_publication',
+  'osha_blog',
+  'osha_tmgmt',
+  'osha_highlight',
+  'osha_menu',
+  'osha_wiki',
+  'osha_workflow',
+  'osha_content',
+
+  'search_api',
+  'facetapi',
+  'search_api_facetapi',
+  'search_autocomplete',
+  'osha_search',
+
+  // Newsletter modules.
+  'entity_collection',
+  'entity_collection_db',
+  'osha_newsletter',
+
+  // Social share
+  'addtoany',
+
+  'devel',
+  'diff',
+  'simpletest'
 );
+
+$options['init-themes'] = array(
+  'osha_admin',
+  'osha_frontend'
+);
+
+if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
+  include_once dirname(__FILE__) . '/drushrc.local.php';
+}

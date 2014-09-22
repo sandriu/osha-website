@@ -32,7 +32,6 @@ to `config.json` and customize to suit your environment
             "email": "your.email@domain.org"
         },
         "uri": "http://you-vh.localhost",
-        "site_mail": "your.email@domain.org",
         "solr_server": {
             "name": "Apache Solr server",
             "enabled": 1,
@@ -54,7 +53,10 @@ to `config.json` and customize to suit your environment
             "apachesolr_soft_commit": 1
         },
         "variables": {
-            "osha_data_dir": "/var/local/osha/data"
+            "site_mail": "your.email@domain.org",
+            "site_name": "OSHA",
+            "osha_data_dir": "/home/osha/data",
+            "file_temporary_path": "/tmp"
         }
     }
     ```
@@ -78,7 +80,7 @@ to `config.json` and customize to suit your environment
 
 *Warning*: Running install.sh on an existing instance *will destroy* that instance (database) loosing all customisations
 
-*Note:* You can pass `--skip-migrations` to not install the migrations for you.
+*Note:* You have to pass `--migrate` to install the migrations (taxonomies)
 
 4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
 
@@ -90,7 +92,7 @@ To update an existing instance without reinstalling (and loosing existing conten
 * Update the code repository from Github (`git pull [origin develop]`)
 * Run `update.sh` which reverts all features and updates the migrated data
 
-*Note:* You can pass `--skip-migrations` to not install the migrations for you.
+*Note:* You have to pass `--migrate` to update the migrations (taxonomies)
 
 The output of the console should look like this:
 
@@ -161,5 +163,10 @@ Summary:
 * _master_ - The production branch, updated with each release.
 * _develop_ - Main development branch. Tests are performed on this branch
 * _release-_* - Release branches
+
+##Translation workflow##
+
+* Module page - https://www.drupal.org/project/tmgmt
+* FAQs: https://www.drupal.org/node/1547632
 
 -- edw

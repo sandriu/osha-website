@@ -1,0 +1,9 @@
+<?php
+/**
+ * @file
+ * Code for the Highlight feature.
+ */
+
+include_once 'osha_highlight.features.inc';
+
+define('OSHA_HIGHLIGHT_CONTENT_TYPE_HIGHLIGHT', 'highlight');
