@@ -19,7 +19,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -237,7 +247,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -248,7 +258,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -259,7 +269,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -270,7 +280,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -281,7 +291,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -292,7 +302,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -303,7 +313,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -314,7 +324,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -325,7 +335,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -336,7 +346,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -347,7 +357,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -358,7 +368,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -369,7 +379,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -380,7 +390,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -391,7 +401,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -402,7 +412,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -413,7 +423,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -424,7 +434,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -435,7 +445,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -446,7 +456,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -457,7 +467,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -468,7 +478,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -479,7 +489,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -490,7 +500,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -501,7 +511,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 70,
+          'entity_id' => 8,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -575,7 +585,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 8,
+          'entity_id' => 9,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -649,7 +659,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 9,
+          'entity_id' => 14,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -672,7 +682,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -845,7 +865,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -856,7 +876,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -867,7 +887,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -878,7 +898,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -889,7 +909,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -900,7 +920,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -911,7 +931,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -922,7 +942,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -933,7 +953,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -944,7 +964,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -955,7 +975,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -966,7 +986,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -977,7 +997,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -988,7 +1008,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -999,7 +1019,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -1010,7 +1030,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -1021,7 +1041,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -1032,7 +1052,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -1043,7 +1063,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -1054,7 +1074,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -1065,7 +1085,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -1076,7 +1096,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 43,
+          'entity_id' => 21,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -1099,7 +1119,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -1317,7 +1347,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -1328,7 +1358,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -1339,7 +1369,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -1350,7 +1380,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -1361,7 +1391,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -1372,7 +1402,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -1383,7 +1413,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -1394,7 +1424,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -1405,7 +1435,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -1416,7 +1446,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -1427,7 +1457,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -1438,7 +1468,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -1449,7 +1479,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -1460,7 +1490,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -1471,7 +1501,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -1482,7 +1512,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -1493,7 +1523,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -1504,7 +1534,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -1515,7 +1545,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -1526,7 +1556,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -1537,7 +1567,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -1548,7 +1578,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -1559,7 +1589,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -1570,7 +1600,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -1581,7 +1611,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 63,
+          'entity_id' => 35,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -1655,7 +1685,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 10,
+          'entity_id' => 47,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -1732,7 +1762,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 11,
+          'entity_id' => 50,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -1758,7 +1788,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -1931,7 +1971,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -1942,7 +1982,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -1953,7 +1993,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -1964,7 +2004,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -1975,7 +2015,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -1986,7 +2026,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -1997,7 +2037,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -2008,7 +2048,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -2019,7 +2059,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -2030,7 +2070,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -2041,7 +2081,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -2052,7 +2092,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -2063,7 +2103,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -2074,7 +2114,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -2085,7 +2125,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -2096,7 +2136,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -2107,7 +2147,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -2118,7 +2158,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -2129,7 +2169,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -2140,7 +2180,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -2151,7 +2191,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -2162,7 +2202,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 40,
+          'entity_id' => 52,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -2185,7 +2225,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -2372,7 +2422,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -2383,7 +2433,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -2394,7 +2444,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -2405,7 +2455,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -2416,7 +2466,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -2427,7 +2477,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -2438,7 +2488,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -2449,7 +2499,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -2460,7 +2510,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -2471,7 +2521,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -2482,7 +2532,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -2493,7 +2543,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -2504,7 +2554,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -2515,7 +2565,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -2526,7 +2576,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -2537,7 +2587,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -2548,7 +2598,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -2559,7 +2609,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -2570,7 +2620,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -2581,7 +2631,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -2592,7 +2642,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -2603,7 +2653,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -2614,7 +2664,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -2625,7 +2675,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 47,
+          'entity_id' => 53,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -2648,7 +2698,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -2866,7 +2926,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -2877,7 +2937,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -2888,7 +2948,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -2899,7 +2959,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -2910,7 +2970,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -2921,7 +2981,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -2932,7 +2992,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -2943,7 +3003,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -2954,7 +3014,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -2965,7 +3025,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -2976,7 +3036,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -2987,7 +3047,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -2998,7 +3058,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -3009,7 +3069,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -3020,7 +3080,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -3031,7 +3091,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -3042,7 +3102,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -3053,7 +3113,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -3064,7 +3124,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -3075,7 +3135,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -3086,7 +3146,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -3097,7 +3157,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -3108,7 +3168,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -3119,7 +3179,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -3130,7 +3190,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 61,
+          'entity_id' => 55,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -3204,7 +3264,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 12,
+          'entity_id' => 56,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -3227,7 +3287,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -3253,7 +3323,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 44,
+          'entity_id' => 61,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -3327,7 +3397,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 13,
+          'entity_id' => 62,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -3353,7 +3423,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -3571,7 +3651,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -3582,7 +3662,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -3593,7 +3673,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -3604,7 +3684,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -3615,7 +3695,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -3626,7 +3706,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -3637,7 +3717,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -3648,7 +3728,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -3659,7 +3739,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -3670,7 +3750,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -3681,7 +3761,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -3692,7 +3772,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -3703,7 +3783,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -3714,7 +3794,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -3725,7 +3805,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -3736,7 +3816,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -3747,7 +3827,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -3758,7 +3838,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -3769,7 +3849,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -3780,7 +3860,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -3791,7 +3871,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -3802,7 +3882,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -3813,7 +3893,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -3824,7 +3904,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -3835,7 +3915,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 59,
+          'entity_id' => 64,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -3858,7 +3938,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -4052,7 +4142,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -4063,7 +4153,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -4074,7 +4164,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -4085,7 +4175,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -4096,7 +4186,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -4107,7 +4197,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -4118,7 +4208,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -4129,7 +4219,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -4140,7 +4230,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -4151,7 +4241,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -4162,7 +4252,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -4173,7 +4263,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -4184,7 +4274,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -4195,7 +4285,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -4206,7 +4296,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -4217,7 +4307,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -4228,7 +4318,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -4239,7 +4329,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -4250,7 +4340,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -4261,7 +4351,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -4272,7 +4362,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -4283,7 +4373,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -4294,7 +4384,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -4305,7 +4395,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -4316,7 +4406,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 52,
+          'entity_id' => 67,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -4339,7 +4429,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -4533,7 +4633,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -4544,7 +4644,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -4555,7 +4655,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -4566,7 +4666,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -4577,7 +4677,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -4588,7 +4688,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -4599,7 +4699,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -4610,7 +4710,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -4621,7 +4721,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -4632,7 +4732,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -4643,7 +4743,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -4654,7 +4754,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -4665,7 +4765,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -4676,7 +4776,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -4687,7 +4787,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -4698,7 +4798,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -4709,7 +4809,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -4720,7 +4820,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -4731,7 +4831,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -4742,7 +4842,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -4753,7 +4853,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -4764,7 +4864,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -4775,7 +4875,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -4786,7 +4886,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -4797,7 +4897,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 45,
+          'entity_id' => 70,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -4820,7 +4920,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -5038,7 +5148,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -5049,7 +5159,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -5060,7 +5170,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -5071,7 +5181,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -5082,7 +5192,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -5093,7 +5203,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -5104,7 +5214,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -5115,7 +5225,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -5126,7 +5236,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -5137,7 +5247,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -5148,7 +5258,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -5159,7 +5269,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -5170,7 +5280,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -5181,7 +5291,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -5192,7 +5302,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -5203,7 +5313,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -5214,7 +5324,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -5225,7 +5335,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -5236,7 +5346,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -5247,7 +5357,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -5258,7 +5368,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -5269,7 +5379,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -5280,7 +5390,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -5291,7 +5401,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -5302,7 +5412,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 72,
+          'entity_id' => 73,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -5325,7 +5435,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -5351,7 +5471,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 56,
+          'entity_id' => 77,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -5374,7 +5494,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -5400,7 +5530,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 53,
+          'entity_id' => 78,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -5438,7 +5568,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 37,
+          'entity_id' => 79,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -5459,7 +5589,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -5677,7 +5817,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -5688,7 +5828,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -5699,7 +5839,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -5710,7 +5850,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -5721,7 +5861,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -5732,7 +5872,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -5743,7 +5883,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -5754,7 +5894,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -5765,7 +5905,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -5776,7 +5916,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -5787,7 +5927,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -5798,7 +5938,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -5809,7 +5949,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -5820,7 +5960,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -5831,7 +5971,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -5842,7 +5982,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -5853,7 +5993,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -5864,7 +6004,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -5875,7 +6015,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -5886,7 +6026,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -5897,7 +6037,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -5908,7 +6048,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -5919,7 +6059,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -5930,7 +6070,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -5941,7 +6081,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 66,
+          'entity_id' => 88,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -6015,7 +6155,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 14,
+          'entity_id' => 89,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -6038,7 +6178,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -6238,7 +6388,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -6249,7 +6399,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -6260,7 +6410,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -6271,7 +6421,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -6282,7 +6432,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -6293,7 +6443,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -6304,7 +6454,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -6315,7 +6465,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -6326,7 +6476,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -6337,7 +6487,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -6348,7 +6498,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -6359,7 +6509,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -6370,7 +6520,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -6381,7 +6531,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -6392,7 +6542,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -6403,7 +6553,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -6414,7 +6564,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -6425,7 +6575,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -6436,7 +6586,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -6447,7 +6597,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -6458,7 +6608,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -6469,7 +6619,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -6480,7 +6630,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -6491,7 +6641,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -6502,7 +6652,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 49,
+          'entity_id' => 90,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -6540,7 +6690,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 38,
+          'entity_id' => 92,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -6561,7 +6711,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -6758,7 +6918,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -6769,7 +6929,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -6780,7 +6940,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -6791,7 +6951,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -6802,7 +6962,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -6813,7 +6973,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -6824,7 +6984,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -6835,7 +6995,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -6846,7 +7006,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -6857,7 +7017,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -6868,7 +7028,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -6879,7 +7039,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -6890,7 +7050,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -6901,7 +7061,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -6912,7 +7072,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -6923,7 +7083,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -6934,7 +7094,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -6945,7 +7105,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -6956,7 +7116,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -6967,7 +7127,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -6978,7 +7138,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -6989,7 +7149,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 69,
+          'entity_id' => 94,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -7012,7 +7172,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -7062,7 +7232,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 62,
+          'entity_id' => 101,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -7085,7 +7255,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -7146,7 +7326,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 48,
+          'entity_id' => 107,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -7157,7 +7337,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 48,
+          'entity_id' => 107,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -7168,7 +7348,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 48,
+          'entity_id' => 107,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -7179,7 +7359,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 48,
+          'entity_id' => 107,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -7190,7 +7370,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 48,
+          'entity_id' => 107,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -7201,7 +7381,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 48,
+          'entity_id' => 107,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -7275,7 +7455,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 15,
+          'entity_id' => 108,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -7316,7 +7496,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 39,
+          'entity_id' => 113,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -7388,7 +7568,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 16,
+          'entity_id' => 115,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -7462,7 +7642,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 17,
+          'entity_id' => 118,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -7539,7 +7719,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 18,
+          'entity_id' => 119,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -7616,7 +7796,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 19,
+          'entity_id' => 123,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -7642,7 +7822,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -7836,7 +8026,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -7847,7 +8037,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -7858,7 +8048,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -7869,7 +8059,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -7880,7 +8070,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -7891,7 +8081,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -7902,7 +8092,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -7913,7 +8103,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -7924,7 +8114,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -7935,7 +8125,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -7946,7 +8136,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -7957,7 +8147,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -7968,7 +8158,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -7979,7 +8169,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -7990,7 +8180,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -8001,7 +8191,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -8012,7 +8202,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -8023,7 +8213,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -8034,7 +8224,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -8045,7 +8235,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -8056,7 +8246,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -8067,7 +8257,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -8078,7 +8268,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -8089,7 +8279,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -8100,7 +8290,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 54,
+          'entity_id' => 124,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -8174,7 +8364,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 20,
+          'entity_id' => 129,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -8251,7 +8441,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 21,
+          'entity_id' => 133,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -8277,7 +8467,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -8488,7 +8688,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -8499,7 +8699,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -8510,7 +8710,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -8521,7 +8721,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -8532,7 +8732,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -8543,7 +8743,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -8554,7 +8754,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -8565,7 +8765,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -8576,7 +8776,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -8587,7 +8787,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -8598,7 +8798,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -8609,7 +8809,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -8620,7 +8820,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -8631,7 +8831,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -8642,7 +8842,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -8653,7 +8853,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -8664,7 +8864,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -8675,7 +8875,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -8686,7 +8886,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -8697,7 +8897,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -8708,7 +8908,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -8719,7 +8919,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -8730,7 +8930,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -8741,7 +8941,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 73,
+          'entity_id' => 134,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -8764,7 +8964,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -8982,7 +9192,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -8993,7 +9203,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -9004,7 +9214,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -9015,7 +9225,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -9026,7 +9236,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -9037,7 +9247,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -9048,7 +9258,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -9059,7 +9269,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -9070,7 +9280,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -9081,7 +9291,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -9092,7 +9302,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -9103,7 +9313,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -9114,7 +9324,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -9125,7 +9335,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -9136,7 +9346,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -9147,7 +9357,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -9158,7 +9368,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -9169,7 +9379,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -9180,7 +9390,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -9191,7 +9401,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -9202,7 +9412,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -9213,7 +9423,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -9224,7 +9434,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -9235,7 +9445,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -9246,7 +9456,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 64,
+          'entity_id' => 135,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -9269,7 +9479,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -9487,7 +9707,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -9498,7 +9718,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -9509,7 +9729,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -9520,7 +9740,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -9531,7 +9751,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -9542,7 +9762,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -9553,7 +9773,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -9564,7 +9784,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -9575,7 +9795,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -9586,7 +9806,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -9597,7 +9817,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -9608,7 +9828,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -9619,7 +9839,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -9630,7 +9850,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -9641,7 +9861,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -9652,7 +9872,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -9663,7 +9883,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -9674,7 +9894,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -9685,7 +9905,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -9696,7 +9916,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -9707,7 +9927,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -9718,7 +9938,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -9729,7 +9949,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -9740,7 +9960,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -9751,7 +9971,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 67,
+          'entity_id' => 136,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -9825,7 +10045,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 22,
+          'entity_id' => 142,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -9902,7 +10122,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 23,
+          'entity_id' => 145,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -9928,7 +10148,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -10101,7 +10331,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -10112,7 +10342,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -10123,7 +10353,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -10134,7 +10364,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -10145,7 +10375,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -10156,7 +10386,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -10167,7 +10397,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -10178,7 +10408,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -10189,7 +10419,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -10200,7 +10430,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -10211,7 +10441,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -10222,7 +10452,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -10233,7 +10463,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -10244,7 +10474,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -10255,7 +10485,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -10266,7 +10496,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -10277,7 +10507,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -10288,7 +10518,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -10299,7 +10529,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -10310,7 +10540,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -10321,7 +10551,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -10332,7 +10562,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 50,
+          'entity_id' => 148,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -10355,7 +10585,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -10381,7 +10621,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 55,
+          'entity_id' => 149,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -10455,7 +10695,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 24,
+          'entity_id' => 150,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -10532,7 +10772,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 25,
+          'entity_id' => 153,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -10558,7 +10798,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -10758,7 +11008,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -10769,7 +11019,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -10780,7 +11030,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -10791,7 +11041,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -10802,7 +11052,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -10813,7 +11063,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -10824,7 +11074,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -10835,7 +11085,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -10846,7 +11096,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -10857,7 +11107,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -10868,7 +11118,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -10879,7 +11129,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -10890,7 +11140,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -10901,7 +11151,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -10912,7 +11162,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -10923,7 +11173,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -10934,7 +11184,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -10945,7 +11195,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -10956,7 +11206,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -10967,7 +11217,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -10978,7 +11228,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -10989,7 +11239,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -11000,7 +11250,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -11011,7 +11261,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -11022,7 +11272,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 75,
+          'entity_id' => 157,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -11045,7 +11295,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -11256,7 +11516,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -11267,7 +11527,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -11278,7 +11538,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -11289,7 +11549,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -11300,7 +11560,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -11311,7 +11571,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -11322,7 +11582,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -11333,7 +11593,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -11344,7 +11604,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -11355,7 +11615,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -11366,7 +11626,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -11377,7 +11637,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -11388,7 +11648,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -11399,7 +11659,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -11410,7 +11670,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -11421,7 +11681,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -11432,7 +11692,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -11443,7 +11703,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -11454,7 +11714,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -11465,7 +11725,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -11476,7 +11736,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -11487,7 +11747,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -11498,7 +11758,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -11509,7 +11769,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 74,
+          'entity_id' => 162,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -11583,7 +11843,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 26,
+          'entity_id' => 163,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -11609,7 +11869,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -11809,7 +12079,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -11820,7 +12090,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -11831,7 +12101,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -11842,7 +12112,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -11853,7 +12123,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -11864,7 +12134,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -11875,7 +12145,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -11886,7 +12156,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -11897,7 +12167,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -11908,7 +12178,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -11919,7 +12189,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -11930,7 +12200,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -11941,7 +12211,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -11952,7 +12222,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -11963,7 +12233,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -11974,7 +12244,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -11985,7 +12255,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -11996,7 +12266,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -12007,7 +12277,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -12018,7 +12288,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -12029,7 +12299,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -12040,7 +12310,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -12051,7 +12321,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -12062,7 +12332,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -12073,7 +12343,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 42,
+          'entity_id' => 164,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -12096,7 +12366,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -12143,7 +12423,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 57,
+          'entity_id' => 165,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -12154,7 +12434,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 57,
+          'entity_id' => 165,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -12165,7 +12445,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 57,
+          'entity_id' => 165,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -12176,7 +12456,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 57,
+          'entity_id' => 165,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -12250,7 +12530,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 27,
+          'entity_id' => 171,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -12327,7 +12607,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 28,
+          'entity_id' => 177,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -12353,7 +12633,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -12571,7 +12861,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -12582,7 +12872,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -12593,7 +12883,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -12604,7 +12894,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -12615,7 +12905,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -12626,7 +12916,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -12637,7 +12927,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -12648,7 +12938,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -12659,7 +12949,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -12670,7 +12960,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -12681,7 +12971,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -12692,7 +12982,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -12703,7 +12993,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -12714,7 +13004,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -12725,7 +13015,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -12736,7 +13026,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -12747,7 +13037,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -12758,7 +13048,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -12769,7 +13059,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -12780,7 +13070,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -12791,7 +13081,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -12802,7 +13092,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -12813,7 +13103,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -12824,7 +13114,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -12835,7 +13125,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 65,
+          'entity_id' => 179,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -12858,7 +13148,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -13055,7 +13355,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -13066,7 +13366,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -13077,7 +13377,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -13088,7 +13388,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -13099,7 +13399,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -13110,7 +13410,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -13121,7 +13421,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -13132,7 +13432,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -13143,7 +13443,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -13154,7 +13454,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -13165,7 +13465,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -13176,7 +13476,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -13187,7 +13487,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -13198,7 +13498,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -13209,7 +13509,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -13220,7 +13520,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -13231,7 +13531,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -13242,7 +13542,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -13253,7 +13553,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -13264,7 +13564,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -13275,7 +13575,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -13286,7 +13586,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 71,
+          'entity_id' => 186,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -13309,7 +13609,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -13527,7 +13837,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -13538,7 +13848,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -13549,7 +13859,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -13560,7 +13870,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -13571,7 +13881,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -13582,7 +13892,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -13593,7 +13903,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -13604,7 +13914,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -13615,7 +13925,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -13626,7 +13936,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -13637,7 +13947,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -13648,7 +13958,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -13659,7 +13969,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -13670,7 +13980,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -13681,7 +13991,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -13692,7 +14002,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -13703,7 +14013,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -13714,7 +14024,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -13725,7 +14035,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -13736,7 +14046,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -13747,7 +14057,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -13758,7 +14068,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -13769,7 +14079,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -13780,7 +14090,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -13791,7 +14101,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 60,
+          'entity_id' => 187,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -13865,7 +14175,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 29,
+          'entity_id' => 188,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -13942,7 +14252,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 30,
+          'entity_id' => 191,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -13968,7 +14278,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -14186,7 +14506,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -14197,7 +14517,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -14208,7 +14528,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -14219,7 +14539,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -14230,7 +14550,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -14241,7 +14561,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -14252,7 +14572,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -14263,7 +14583,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -14274,7 +14594,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -14285,7 +14605,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -14296,7 +14616,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -14307,7 +14627,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -14318,7 +14638,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -14329,7 +14649,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -14340,7 +14660,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -14351,7 +14671,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -14362,7 +14682,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -14373,7 +14693,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -14384,7 +14704,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -14395,7 +14715,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -14406,7 +14726,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -14417,7 +14737,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -14428,7 +14748,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -14439,7 +14759,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -14450,7 +14770,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 58,
+          'entity_id' => 193,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -14524,7 +14844,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 31,
+          'entity_id' => 200,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -14601,7 +14921,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 32,
+          'entity_id' => 203,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -14675,7 +14995,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 33,
+          'entity_id' => 210,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -14701,7 +15021,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -14727,7 +15057,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 41,
+          'entity_id' => 213,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -14801,7 +15131,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 34,
+          'entity_id' => 215,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -14824,7 +15154,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(
       'und' => array(
         0 => array(
@@ -15021,7 +15361,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -15032,7 +15372,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -15043,7 +15383,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -15054,7 +15394,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -15065,7 +15405,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -15076,7 +15416,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -15087,7 +15427,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -15098,7 +15438,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -15109,7 +15449,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -15120,7 +15460,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -15131,7 +15471,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -15142,7 +15482,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -15153,7 +15493,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -15164,7 +15504,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -15175,7 +15515,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -15186,7 +15526,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -15197,7 +15537,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -15208,7 +15548,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -15219,7 +15559,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -15230,7 +15570,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -15241,7 +15581,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -15252,7 +15592,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 68,
+          'entity_id' => 217,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -15275,7 +15615,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -15448,7 +15798,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -15459,7 +15809,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -15470,7 +15820,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -15481,7 +15831,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -15492,7 +15842,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -15503,7 +15853,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -15514,7 +15864,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -15525,7 +15875,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -15536,7 +15886,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -15547,7 +15897,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -15558,7 +15908,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -15569,7 +15919,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -15580,7 +15930,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -15591,7 +15941,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -15602,7 +15952,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -15613,7 +15963,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -15624,7 +15974,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -15635,7 +15985,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -15646,7 +15996,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -15657,7 +16007,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -15668,7 +16018,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -15679,7 +16029,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 51,
+          'entity_id' => 218,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -15753,7 +16103,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 35,
+          'entity_id' => 225,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -15776,7 +16126,17 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'tags',
-    'description_field' => array(),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'plain_text',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_excluded_from' => array(),
     'field_tags_code' => array(
       'und' => array(
@@ -15970,7 +16330,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'bg' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'bg',
           'source' => 'en',
           'uid' => 1,
@@ -15981,7 +16341,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'lt',
           'source' => 'en',
           'uid' => 1,
@@ -15992,7 +16352,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'lv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'lv',
           'source' => 'en',
           'uid' => 1,
@@ -16003,7 +16363,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'mt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'mt',
           'source' => 'en',
           'uid' => 1,
@@ -16014,7 +16374,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'nl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'nl',
           'source' => 'en',
           'uid' => 1,
@@ -16025,7 +16385,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'no' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'no',
           'source' => 'en',
           'uid' => 1,
@@ -16036,7 +16396,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'pl',
           'source' => 'en',
           'uid' => 1,
@@ -16047,7 +16407,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'pt' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'pt',
           'source' => 'en',
           'uid' => 1,
@@ -16058,7 +16418,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'ro' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'ro',
           'source' => 'en',
           'uid' => 1,
@@ -16069,7 +16429,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sk' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'sk',
           'source' => 'en',
           'uid' => 1,
@@ -16080,7 +16440,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sl' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'sl',
           'source' => 'en',
           'uid' => 1,
@@ -16091,7 +16451,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'it' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'it',
           'source' => 'en',
           'uid' => 1,
@@ -16102,7 +16462,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'is' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'is',
           'source' => 'en',
           'uid' => 1,
@@ -16113,7 +16473,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hu' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'hu',
           'source' => 'en',
           'uid' => 1,
@@ -16124,7 +16484,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'cs' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'cs',
           'source' => 'en',
           'uid' => 1,
@@ -16135,7 +16495,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'da' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'da',
           'source' => 'en',
           'uid' => 1,
@@ -16146,7 +16506,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'de' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'de',
           'source' => 'en',
           'uid' => 1,
@@ -16157,7 +16517,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'el' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'el',
           'source' => 'en',
           'uid' => 1,
@@ -16168,7 +16528,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -16179,7 +16539,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'es' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'es',
           'source' => 'en',
           'uid' => 1,
@@ -16190,7 +16550,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'et' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'et',
           'source' => 'en',
           'uid' => 1,
@@ -16201,7 +16561,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'fi',
           'source' => 'en',
           'uid' => 1,
@@ -16212,7 +16572,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'fr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'fr',
           'source' => 'en',
           'uid' => 1,
@@ -16223,7 +16583,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'hr' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'hr',
           'source' => 'en',
           'uid' => 1,
@@ -16234,7 +16594,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 46,
+          'entity_id' => 230,
           'language' => 'sv',
           'source' => 'en',
           'uid' => 1,
@@ -16308,7 +16668,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 36,
+          'entity_id' => 231,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
