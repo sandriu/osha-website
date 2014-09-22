@@ -7,6 +7,11 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* workbench_moderation
+  * Added patch for node_export
+  * https://www.drupal.org/node/2176841
+  * https://www.drupal.org/files/issues/node_export-2176841-4.patch
+
 * uuid_features (EdW)
   * Added custom code to support custom text fields on taxonomies (field_article_type_code)
   * uuid_features-taxonomies-custom-text-fields.patch
