@@ -17,10 +17,6 @@ List of patches (most recent first)
   * https://www.drupal.org/node/2176841
   * https://www.drupal.org/files/issues/node_export-2176841-4.patch
 
-* uuid_features (EdW)
-  * Added custom code to support custom text fields on taxonomies (field_article_type_code)
-  * uuid_features-taxonomies-custom-text-fields.patch
-
 * entity_translation
   * Added entity_translation in views (to be able to filter by language)
   * https://www.drupal.org/node/1330332
