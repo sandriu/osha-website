@@ -240,13 +240,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Vägtransporter',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Road Transport',
-          'format' => NULL,
-          'safe_value' => 'Road Transport',
-        ),
-      ),
     ),
     'name_original' => 'Road Transport',
     'translations' => array(
@@ -578,13 +571,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '1: Anticipating change',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '1: Anticipating change',
-          'format' => NULL,
-          'safe_value' => '1: Anticipating change',
-        ),
-      ),
     ),
     'name_original' => '1: Anticipating change',
     'translations' => array(
@@ -646,13 +632,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '3: Tools for OSH management',
-          'format' => NULL,
-          'safe_value' => '3: Tools for OSH management',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '3: Tools for OSH management',
           'format' => NULL,
@@ -863,13 +842,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Farliga ämnen',
           'format' => NULL,
           'safe_value' => 'Farliga ämnen',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Dangerous substances',
-          'format' => NULL,
-          'safe_value' => 'Dangerous substances',
         ),
       ),
     ),
@@ -1354,13 +1326,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Fisheries',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Fisheries',
-          'format' => NULL,
-          'safe_value' => 'Fisheries',
-        ),
-      ),
     ),
     'name_original' => 'Fisheries',
     'translations' => array(
@@ -1692,13 +1657,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '2.1. European Survey of Enterprises on New &amp; Emerging Risks (ESENER)',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '2.1. European Survey of Enterprises on New & Emerging Risks (ESENER)',
-          'format' => NULL,
-          'safe_value' => '2.1. European Survey of Enterprises on New &amp; Emerging Risks (ESENER)',
-        ),
-      ),
     ),
     'name_original' => '2.1. European Survey of Enterprises on New & Emerging Risks (ESENER)',
     'translations' => array(
@@ -1763,13 +1721,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '7.1. Finance & Accounting',
-          'format' => NULL,
-          'safe_value' => '7.1. Finance &amp; Accounting',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '7.1. Finance & Accounting',
           'format' => NULL,
@@ -1983,13 +1934,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Förebyggande av olyckor',
           'format' => NULL,
           'safe_value' => 'Förebyggande av olyckor',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Accident prevention',
-          'format' => NULL,
-          'safe_value' => 'Accident prevention',
         ),
       ),
     ),
@@ -2441,13 +2385,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'gröna jobb',
           'format' => NULL,
           'safe_value' => 'gröna jobb',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Green jobs',
-          'format' => NULL,
-          'safe_value' => 'Green jobs',
         ),
       ),
     ),
@@ -2954,13 +2891,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Företagens sociala ansvar',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Corporate Social Responsibility',
-          'format' => NULL,
-          'safe_value' => 'Corporate Social Responsibility',
-        ),
-      ),
     ),
     'name_original' => 'Corporate Social Responsibility',
     'translations' => array(
@@ -3292,13 +3222,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '5: Networking knowledge',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '5: Networking knowledge',
-          'format' => NULL,
-          'safe_value' => '5: Networking knowledge',
-        ),
-      ),
     ),
     'name_original' => '5: Networking knowledge',
     'translations' => array(
@@ -3352,13 +3275,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => 'Emerging risks',
-          'format' => NULL,
-          'safe_value' => 'Emerging risks',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => 'Emerging risks',
           'format' => NULL,
@@ -3426,13 +3342,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '2.5. Costs and benefits of OSH',
-          'format' => NULL,
-          'safe_value' => '2.5. Costs and benefits of OSH',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '2.5. Costs and benefits of OSH',
           'format' => NULL,
@@ -3691,13 +3600,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Städpersonal',
           'format' => NULL,
           'safe_value' => 'Städpersonal',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Cleaning workers',
-          'format' => NULL,
-          'safe_value' => 'Cleaning workers',
         ),
       ),
     ),
@@ -4191,13 +4093,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Nanomaterial',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Nanomaterials',
-          'format' => NULL,
-          'safe_value' => 'Nanomaterials',
-        ),
-      ),
     ),
     'name_original' => 'Nanomaterials',
     'translations' => array(
@@ -4683,13 +4578,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
       'sv' => array(
-        0 => array(
-          'value' => 'ESENER',
-          'format' => NULL,
-          'safe_value' => 'ESENER',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => 'ESENER',
           'format' => NULL,
@@ -5211,13 +5099,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Transporter',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Transport',
-          'format' => NULL,
-          'safe_value' => 'Transport',
-        ),
-      ),
     ),
     'name_original' => 'Transport',
     'translations' => array(
@@ -5541,13 +5422,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Work related diseases',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Work related diseases',
-          'format' => NULL,
-          'safe_value' => 'Work related diseases',
-        ),
-      ),
     ),
     'name_original' => 'Work related diseases',
     'translations' => array(
@@ -5601,13 +5475,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => 'OSH and young people',
-          'format' => NULL,
-          'safe_value' => 'OSH and young people',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => 'OSH and young people',
           'format' => NULL,
@@ -5899,13 +5766,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Underhåll',
           'format' => NULL,
           'safe_value' => 'Underhåll',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Maintenance',
-          'format' => NULL,
-          'safe_value' => 'Maintenance',
         ),
       ),
     ),
@@ -6239,13 +6099,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '4: Raising awareness',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '4: Raising awareness',
-          'format' => NULL,
-          'safe_value' => '4: Raising awareness',
-        ),
-      ),
     ),
     'name_original' => '4: Raising awareness',
     'translations' => array(
@@ -6477,13 +6330,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Lagstiftning',
           'format' => NULL,
           'safe_value' => 'Lagstiftning',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Legislation',
-          'format' => NULL,
-          'safe_value' => 'Legislation',
         ),
       ),
     ),
@@ -7016,13 +6862,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Riskbedömning',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Risk assessment',
-          'format' => NULL,
-          'safe_value' => 'Risk assessment',
-        ),
-      ),
     ),
     'name_original' => 'Risk assessment',
     'translations' => array(
@@ -7337,13 +7176,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Disabled people',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Disabled people',
-          'format' => NULL,
-          'safe_value' => 'Disabled people',
-        ),
-      ),
     ),
     'name_original' => 'Disabled people',
     'translations' => array(
@@ -7432,13 +7264,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
       'fr' => array(
-        0 => array(
-          'value' => 'Leadership',
-          'format' => NULL,
-          'safe_value' => 'Leadership',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => 'Leadership',
           'format' => NULL,
@@ -7567,13 +7392,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '5.2. Other networking knowledge actions',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '5.2. Other networking knowledge actions',
-          'format' => NULL,
-          'safe_value' => '5.2. Other networking knowledge actions',
-        ),
-      ),
     ),
     'name_original' => '5.2. Other networking knowledge actions',
     'translations' => array(
@@ -7680,13 +7498,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '6: Networking and Corporate Communications',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '6: Networking and Corporate Communications',
-          'format' => NULL,
-          'safe_value' => '6: Networking and Corporate Communications',
-        ),
-      ),
     ),
     'name_original' => '6: Networking and Corporate Communications',
     'translations' => array(
@@ -7748,13 +7559,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '5.1 OSHwiki',
-          'format' => NULL,
-          'safe_value' => '5.1 OSHwiki',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '5.1 OSHwiki',
           'format' => NULL,
@@ -7831,13 +7635,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '2.3. OSH overview: Micro and small enterprises',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '2.3. OSH overview: Micro and small enterprises',
-          'format' => NULL,
-          'safe_value' => '2.3. OSH overview: Micro and small enterprises',
-        ),
-      ),
     ),
     'name_original' => '2.3. OSH overview: Micro and small enterprises',
     'translations' => array(
@@ -7902,13 +7699,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '3.2. Tool for implementing OSH solutions',
-          'format' => NULL,
-          'safe_value' => '3.2. Tool for implementing OSH solutions',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '3.2. Tool for implementing OSH solutions',
           'format' => NULL,
@@ -8143,13 +7933,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Stress och psykosociala risker',
           'format' => NULL,
           'safe_value' => 'Stress och psykosociala risker',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Psychosocial risks and stress',
-          'format' => NULL,
-          'safe_value' => 'Psychosocial risks and stress',
         ),
       ),
     ),
@@ -8483,13 +8266,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '2.2. OSH overview: Older workers',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '2.2. OSH overview: Older workers',
-          'format' => NULL,
-          'safe_value' => '2.2. OSH overview: Older workers',
-        ),
-      ),
     ),
     'name_original' => '2.2. OSH overview: Older workers',
     'translations' => array(
@@ -8554,13 +8330,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '3.1. Online interactive Risk Assessment (OiRA) tool',
-          'format' => NULL,
-          'safe_value' => '3.1. Online interactive Risk Assessment (OiRA) tool',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '3.1. Online interactive Risk Assessment (OiRA) tool',
           'format' => NULL,
@@ -8812,13 +8581,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Arbetstagarnas medverkan',
           'format' => NULL,
           'safe_value' => 'Arbetstagarnas medverkan',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Worker Participation',
-          'format' => NULL,
-          'safe_value' => 'Worker Participation',
         ),
       ),
     ),
@@ -9323,13 +9085,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Hälsovård',
           'format' => NULL,
           'safe_value' => 'Hälsovård',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Health Care',
-          'format' => NULL,
-          'safe_value' => 'Health Care',
         ),
       ),
     ),
@@ -9847,13 +9602,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Gästarbetare',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Migrant workers',
-          'format' => NULL,
-          'safe_value' => 'Migrant workers',
-        ),
-      ),
     ),
     'name_original' => 'Migrant workers',
     'translations' => array(
@@ -10185,13 +9933,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '6.2. Operational Networking',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '6.2. Operational Networking',
-          'format' => NULL,
-          'safe_value' => '6.2. Operational Networking',
-        ),
-      ),
     ),
     'name_original' => '6.2. Operational Networking',
     'translations' => array(
@@ -10256,13 +9997,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '4.1. Healthy Workplace Campaign (HWC): Working together for risk prevention',
-          'format' => NULL,
-          'safe_value' => '4.1. Healthy Workplace Campaign (HWC): Working together for risk prevention',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '4.1. Healthy Workplace Campaign (HWC): Working together for risk prevention',
           'format' => NULL,
@@ -10476,13 +10210,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Integrera arbetsmiljön i utbildningen',
           'format' => NULL,
           'safe_value' => 'Integrera arbetsmiljön i utbildningen',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Mainstreaming OSH into education',
-          'format' => NULL,
-          'safe_value' => 'Mainstreaming OSH into education',
         ),
       ),
     ),
@@ -10775,13 +10502,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Women and OSH',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Women and OSH',
-          'format' => NULL,
-          'safe_value' => 'Women and OSH',
-        ),
-      ),
     ),
     'name_original' => 'Women and OSH',
     'translations' => array(
@@ -10843,13 +10563,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '1.1. Foresight of new and emerging OSH risks  associated with new technologies in green jobs',
-          'format' => NULL,
-          'safe_value' => '1.1. Foresight of new and emerging OSH risks  associated with new technologies in green jobs',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '1.1. Foresight of new and emerging OSH risks  associated with new technologies in green jobs',
           'format' => NULL,
@@ -10920,13 +10633,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '4.4. Awareness raising actions',
-          'format' => NULL,
-          'safe_value' => '4.4. Awareness raising actions',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '4.4. Awareness raising actions',
           'format' => NULL,
@@ -11163,13 +10869,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
       'sv' => array(
-        0 => array(
-          'value' => 'Napo',
-          'format' => NULL,
-          'safe_value' => 'Napo',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => 'Napo',
           'format' => NULL,
@@ -11684,13 +11383,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Hälsofrämjande insatser på arbetsplatsen',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Workplace Health Promotion',
-          'format' => NULL,
-          'safe_value' => 'Workplace Health Promotion',
-        ),
-      ),
     ),
     'name_original' => 'Workplace Health Promotion',
     'translations' => array(
@@ -12011,13 +11703,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '7.3. Human Resources',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '7.3. Human Resources',
-          'format' => NULL,
-          'safe_value' => '7.3. Human Resources',
-        ),
-      ),
     ),
     'name_original' => '7.3. Human Resources',
     'translations' => array(
@@ -12252,13 +11937,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Kampanj 2014–2015',
           'format' => NULL,
           'safe_value' => 'Kampanj 2014–2015',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Campaign 2014-2015',
-          'format' => NULL,
-          'safe_value' => 'Campaign 2014-2015',
         ),
       ),
     ),
@@ -12605,13 +12283,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Microîntreprinderi',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Microenterprises',
-          'format' => NULL,
-          'safe_value' => 'Microenterprises',
-        ),
-      ),
     ),
     'name_original' => 'Microenterprises',
     'translations' => array(
@@ -12712,13 +12383,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '4.2. Healthy Workplace Campaign (HWC): Healthy Workplaces manage stress',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '4.2. Healthy Workplace Campaign (HWC): Healthy Workplaces manage stress',
-          'format' => NULL,
-          'safe_value' => '4.2. Healthy Workplace Campaign (HWC): Healthy Workplaces manage stress',
-        ),
-      ),
     ),
     'name_original' => '4.2. Healthy Workplace Campaign (HWC): Healthy Workplaces manage stress',
     'translations' => array(
@@ -12783,13 +12447,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '2.4. OSH overview : Work-related diseases',
-          'format' => NULL,
-          'safe_value' => '2.4. OSH overview : Work-related diseases',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '2.4. OSH overview : Work-related diseases',
           'format' => NULL,
@@ -13044,13 +12701,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
       'sv' => array(
-        0 => array(
-          'value' => 'HORECA',
-          'format' => NULL,
-          'safe_value' => 'HORECA',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => 'HORECA',
           'format' => NULL,
@@ -13551,13 +13201,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Statistik',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Statistics',
-          'format' => NULL,
-          'safe_value' => 'Statistics',
-        ),
-      ),
     ),
     'name_original' => 'Statistics',
     'translations' => array(
@@ -14040,13 +13683,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Construction',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Construction',
-          'format' => NULL,
-          'safe_value' => 'Construction',
-        ),
-      ),
     ),
     'name_original' => 'Construction',
     'translations' => array(
@@ -14378,13 +14014,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '6.3. Corporate Communications',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '6.3. Corporate Communications',
-          'format' => NULL,
-          'safe_value' => '6.3. Corporate Communications',
-        ),
-      ),
     ),
     'name_original' => '6.3. Corporate Communications',
     'translations' => array(
@@ -14449,13 +14078,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '4.3. Healthy Workplace Campaign (HWC): 2016-17',
-          'format' => NULL,
-          'safe_value' => '4.3. Healthy Workplace Campaign (HWC): 2016-17',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '4.3. Healthy Workplace Campaign (HWC): 2016-17',
           'format' => NULL,
@@ -14714,13 +14336,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Jordbruk',
           'format' => NULL,
           'safe_value' => 'Jordbruk',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Agriculture',
-          'format' => NULL,
-          'safe_value' => 'Agriculture',
         ),
       ),
     ),
@@ -15054,13 +14669,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '6.1. Strategic Networking',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '6.1. Strategic Networking',
-          'format' => NULL,
-          'safe_value' => '6.1. Strategic Networking',
-        ),
-      ),
     ),
     'name_original' => '6.1. Strategic Networking',
     'translations' => array(
@@ -15125,13 +14733,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '8: Operational Management and Support',
-          'format' => NULL,
-          'safe_value' => '8: Operational Management and Support',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '8: Operational Management and Support',
           'format' => NULL,
@@ -15205,13 +14806,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '1.2. Large-scale foresight',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '1.2. Large-scale foresight',
-          'format' => NULL,
-          'safe_value' => '1.2. Large-scale foresight',
-        ),
-      ),
     ),
     'name_original' => '1.2. Large-scale foresight',
     'translations' => array(
@@ -15268,13 +14862,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => 'Ageing and OSH',
-          'format' => NULL,
-          'safe_value' => 'Ageing and OSH',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => 'Ageing and OSH',
           'format' => NULL,
@@ -15342,13 +14929,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '2: Facts and figures',
-          'format' => NULL,
-          'safe_value' => '2: Facts and figures',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '2: Facts and figures',
           'format' => NULL,
@@ -15583,13 +15163,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'Buller på arbetet',
           'format' => NULL,
           'safe_value' => 'Buller på arbetet',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Noise',
-          'format' => NULL,
-          'safe_value' => 'Noise',
         ),
       ),
     ),
@@ -16029,13 +15602,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => 'Belastningsbesvär',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => 'Musculoskeletal disorders',
-          'format' => NULL,
-          'safe_value' => 'Musculoskeletal disorders',
-        ),
-      ),
     ),
     'name_original' => 'Musculoskeletal disorders',
     'translations' => array(
@@ -16334,13 +15900,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'safe_value' => '7: Governance',
         ),
       ),
-      'und' => array(
-        0 => array(
-          'value' => '7: Governance',
-          'format' => NULL,
-          'safe_value' => '7: Governance',
-        ),
-      ),
     ),
     'name_original' => '7: Governance',
     'translations' => array(
@@ -16566,13 +16125,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'value' => 'En bra arbetsmiljö är bra för affärerna',
           'format' => NULL,
           'safe_value' => 'En bra arbetsmiljö är bra för affärerna',
-        ),
-      ),
-      'und' => array(
-        0 => array(
-          'value' => 'Good OSH is good for business',
-          'format' => NULL,
-          'safe_value' => 'Good OSH is good for business',
         ),
       ),
     ),
@@ -16900,13 +16452,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
     'name_field' => array(
       'en' => array(
-        0 => array(
-          'value' => '7.5. Documentation',
-          'format' => NULL,
-          'safe_value' => '7.5. Documentation',
-        ),
-      ),
-      'und' => array(
         0 => array(
           'value' => '7.5. Documentation',
           'format' => NULL,
