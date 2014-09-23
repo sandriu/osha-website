@@ -77,3 +77,6 @@ features[variable][] = osha_newsletter_node_view_mode
 features[variable][] = osha_newsletter_term_ct_map
 features[views_view][] = newsletter_node_selection
 features[views_view][] = newsletters_overview
+features_exclude[taxonomy][tags] = tags
+features_exclude[taxonomy][activity] = activity
+features_exclude[taxonomy][article_types] = article_types
