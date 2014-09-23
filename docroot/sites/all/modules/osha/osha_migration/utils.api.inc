@@ -30,6 +30,7 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
     if (!empty($options['init-modules'])) {
 
       $modules = $options['init-modules'];
+      $modules[] = 'osha_taxonomies_uuid';
       unset($modules[array_search('file_entity', $modules)]);
 
       if (!module_enable($modules)) {
