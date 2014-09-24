@@ -31,6 +31,7 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
 
       $modules = $options['init-modules'];
       unset($modules[array_search('file_entity', $modules)]);
+      unset($modules[array_search('osha_search', $modules)]);
 
       if (!module_enable($modules)) {
         foreach ($modules as $module) {
