@@ -305,6 +305,8 @@ $options['init-modules'] = array(
   'tmgmt_file',
   'tmgmt_i18n_string',
 
+  'blockgroup',
+
   'i18n_menu',
   'i18n_block',
 
