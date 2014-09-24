@@ -37,10 +37,10 @@ function osha_migration_migrate_api() {
 //        'class_name' => 'MigrateOshaTaxonomyActivity',
 //        'file_name' => $migration_module_dir . '/data/activity.json',
 //      ),
-      OSHA_MIGRATION_TAXONOMY_TAGS => array(
-        'class_name' => 'MigrateOshaTaxonomyTags',
-        'file_name' => $migration_module_dir . '/data/tags.json',
-      ),
+//      OSHA_MIGRATION_TAXONOMY_TAGS => array(
+//        'class_name' => 'MigrateOshaTaxonomyTags',
+//        'file_name' => $migration_module_dir . '/data/tags.json',
+//      ),
       OSHA_MIGRATION_TAXONOMY_ESENER => array(
         'class_name' => 'MigrateOshaTaxonomyEsener',
         'file_name' => $migration_module_dir . '/data/esener.json',
@@ -49,10 +49,10 @@ function osha_migration_migrate_api() {
         'class_name' => 'MigrateOshaTaxonomyNaceCodes',
         'file_name' => $migration_module_dir . '/data/nace_codes.json',
       ),
-      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
-        'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
-        'file_name' => $migration_module_dir . '/data/publication_types.json',
-      ),
+//      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
+//        'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
+//        'file_name' => $migration_module_dir . '/data/publication_types.json',
+//      ),
       OSHA_MIGRATION_TAXONOMY_THESAURUS => array(
         'class_name' => 'MigrateOshaTaxonomyThesaurus',
         'file_name' => $migration_module_dir . '/data/thesaurus.json',
