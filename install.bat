@@ -68,6 +68,9 @@ IF NOT "%1"=="--migrate" GOTO DONE
     echo "Importing PressRelease content"
     call drush migrate-import PressRelease
 
+    echo "Importing Seminar Content"
+    call drush migrate-import Seminar
+
 :DONE
 call drush cc all
 cd ..
