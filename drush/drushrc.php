@@ -348,7 +348,7 @@ $options['init-modules'] = array(
   'workbench_moderation',
 
   'osha_taxonomies',
-  'osha_taxonomies_uuid',
+//  'osha_taxonomies_uuid',
   'osha',
   'osha_migration',
   'osha_news',
@@ -359,7 +359,7 @@ $options['init-modules'] = array(
   'osha_menu',
   'osha_wiki',
   'osha_workflow',
-  'osha_content',
+//  'osha_content',
 
   'search_api',
   'facetapi',
