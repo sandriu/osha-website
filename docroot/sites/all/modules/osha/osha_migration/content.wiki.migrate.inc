@@ -32,7 +32,6 @@ class OshaMigrateWiki extends DynamicMigration {
 
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('body', 'body');
-    #$this->addFieldMapping('title_field', 'title_field');
     #$this->addFieldMapping('created', 'created');
     #$this->addFieldMapping('field_updated', 'updated');
     $this->addFieldMapping('field_tags', 'categories');
@@ -102,12 +101,12 @@ class OshaMigrateWiki extends DynamicMigration {
       }
       if (!empty($row->ml_body[$language])) {
         $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->ml_body[$language]);
-        $entity->body[$language][0]['format'] = 'plain';
+        $entity->body[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
       if (!empty($row->ml_summary[$language])) {
         $entity->field_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->ml_summary[$language]);
-        $entity->field_summary[$language][0]['format'] = 'plain';
+        $entity->field_summary[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
       if (!empty($row->ml_url[$language])) {
@@ -258,6 +257,10 @@ class OshaMigrateSourceWiki extends MigrateSource {
                   $summary = explode(PHP_EOL, $body);
                   $summary = array_filter($summary);
                   $summary = array_slice($summary, 0, 5);
+                  foreach ($summary as &$line) {
+                    $line = preg_replace('/==/', '<h2>', $line, 1);
+                    $line = preg_replace('/==/', '</h2>', $line, 1);
+                  }
                   $summary = implode(PHP_EOL, $summary);
                 }
 
