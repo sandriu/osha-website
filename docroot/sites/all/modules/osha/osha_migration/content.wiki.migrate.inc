@@ -35,6 +35,8 @@ class OshaMigrateWiki extends DynamicMigration {
     #$this->addFieldMapping('title_field', 'title_field');
     #$this->addFieldMapping('created', 'created');
     #$this->addFieldMapping('field_updated', 'updated');
+    $this->addFieldMapping('field_tags', 'categories');
+    $this->addFieldMapping('field_tags:source_type', 'tid');
     $this->addFieldMapping('language', 'language');
     $this->addFieldMapping('field_wiki_page_url', 'url');
   }
@@ -46,6 +48,27 @@ class OshaMigrateWiki extends DynamicMigration {
     return OSHA_MIGRATION_CONTENT_TYPE_WIKI;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function prepareRow($row) {
+    // Decode categories.
+    foreach ($row->categories as $idx => &$cat_name) {
+      $term_id = MigrationUtil::findTermByFieldValue($cat_name, 'name', TRUE);
+      if ($term_id) {
+        $term = taxonomy_term_load($term_id);
+        if (!empty($term->field_tags[LANGUAGE_NONE][0]['tid'])) {
+          $cat_name = $term->field_tags[LANGUAGE_NONE][0]['tid'];
+        }
+        else {
+          unset($row->categories[$idx]);
+        }
+      }
+      else {
+        unset($row->categories[$idx]);
+      }
+    }
+  }
 
   /**
    * Called by destination right before saving.
@@ -63,6 +86,13 @@ class OshaMigrateWiki extends DynamicMigration {
 
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
     $entity->translations = $translation_handler->getTranslations();
+
+    if (!empty($row->categories)) {
+      //@todo: Remove manual assignment.
+      foreach ($row->categories as $cat) {
+        $entity->field_tags[LANGUAGE_NONE][0]['tid'] = $cat;
+      }
+    }
 
     foreach ($languages as $language) {
       $has_translation = FALSE;
@@ -184,9 +214,9 @@ class OshaMigrateSourceWiki extends MigrateSource {
         $base_url .= '&p%5Bprettyprint%5D=1';
       }
       // Result offset and page size.
-      $page_size = variable_get('osha_wiki_migration_pagesize', 25);
+      $page_size = variable_get('osha_wiki_migration_pagesize', 9);
       $base_url .= '&p%5Blimit%5D=' . $page_size;
-      $pages = 20;
+      $pages = 1;
 
       for ($i = 0; $i < $pages; $i++) {
         try {
@@ -230,6 +260,13 @@ class OshaMigrateSourceWiki extends MigrateSource {
                   $summary = implode(PHP_EOL, $summary);
                 }
 
+                $ob->categories = array();
+                if (!empty($data['printouts']['Category'])) {
+                  foreach ($data['printouts']['Category'] as $cat_data) {
+                    $cat_name = str_replace('Category:', '', $cat_data['fulltext']);
+                    $ob->categories[] = $cat_name;
+                  }
+                }
                 $ob->ml_summary[$language] = $summary;
                 $ob->ml_body[$language] = $body;
                 $ob->ml_title_field[$language] = $key;
