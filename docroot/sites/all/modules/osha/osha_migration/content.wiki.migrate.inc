@@ -31,6 +31,7 @@ class OshaMigrateWiki extends DynamicMigration {
     $this->destination = new MigrateDestinationNode(OSHA_WIKI_CONTENT_TYPE);
 
     $this->addFieldMapping('title', 'title');
+    $this->addFieldMapping('body', 'body');
     #$this->addFieldMapping('title_field', 'title_field');
     #$this->addFieldMapping('created', 'created');
     #$this->addFieldMapping('field_updated', 'updated');
@@ -65,12 +66,22 @@ class OshaMigrateWiki extends DynamicMigration {
 
     foreach ($languages as $language) {
       $has_translation = FALSE;
-      if (!empty($row->title_field[$language])) {
-        $entity->title_field[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->title_field[$language]);
+      if (!empty($row->ml_title_field[$language])) {
+        $entity->title_field[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->ml_title_field[$language]);
         $has_translation = TRUE;
       }
-      if (!empty($row->field_wiki_page_url[$language])) {
-        $entity->field_wiki_page_url[$language][0]['url'] = $row->url[$language];
+      if (!empty($row->ml_body[$language])) {
+        $entity->body[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->ml_body[$language]);
+        $entity->body[$language][0]['format'] = 'plain';
+        $has_translation = TRUE;
+      }
+      if (!empty($row->ml_summary[$language])) {
+        $entity->field_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->ml_summary[$language]);
+        $entity->field_summary[$language][0]['format'] = 'plain';
+        $has_translation = TRUE;
+      }
+      if (!empty($row->ml_url[$language])) {
+        $entity->field_wiki_page_url[$language][0]['url'] = $row->ml_url[$language];
         $has_translation = TRUE;
       }
       if ($has_translation) {
@@ -113,6 +124,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
     return array(
       'title' => t('Wiki english page title'),
       'title_field' => t('Wiki localized page title'),
+      'body' => t('Wiki page content localized'),
       'created' => t('Date when page was created'),
       'updated' => t('Date when page was last modified'),
       'parent' => t('English title of the parent page'),
@@ -174,7 +186,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
       // Result offset and page size.
       $page_size = variable_get('osha_wiki_migration_pagesize', 25);
       $base_url .= '&p%5Blimit%5D=' . $page_size;
-      $pages = 5;
+      $pages = 20;
 
       for ($i = 0; $i < $pages; $i++) {
         try {
@@ -189,6 +201,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
                 $language = $data['printouts']['Language code'][0];
                 $url = 'http:' . $data['fullurl'];
 
+                //@todo: Remove hard-coding
+                $page_id = str_replace('//oshwiki.eu/wiki/', '', $data['fullurl']);
                 // Deal with translations.
                 if ($language != 'en') {
                   if (array_key_exists($parent, $this->data)) {
@@ -207,13 +221,24 @@ class OshaMigrateSourceWiki extends MigrateSource {
                   $ob->title = $key;
                 }
 
-                $ob->title_field[$language] = $key;
+                $body = $this->getWikiPageContent($page_id);
+                $summary = '';
+                if (strlen($body)) {
+                  $summary = explode(PHP_EOL, $body);
+                  $summary = array_filter($summary);
+                  $summary = array_slice($summary, 0, 5);
+                  $summary = implode(PHP_EOL, $summary);
+                }
+
+                $ob->ml_summary[$language] = $summary;
+                $ob->ml_body[$language] = $body;
+                $ob->ml_title_field[$language] = $key;
                 $ob->updated = '';
                 if (!empty($data['printouts']['Modification date'][0])) {
                   $ob->updated = $data['printouts']['Modification date'][0];
                 }
                 $ob->parent = $parent;
-                $ob->url[$language] = $url;
+                $ob->ml_url[$language] = $url;
                 // @todo Add fields
                 $ob->created = '';
                 $ob->nace = '';
@@ -237,8 +262,20 @@ class OshaMigrateSourceWiki extends MigrateSource {
   }
 
 
-  function getPageHTMLContent() {
-
+  function getWikiPageContent($page_id) {
+    $url = sprintf('http://oshwiki.eu/api.php?action=parse&format=json&prop=wikitext&page=%s', $page_id);
+    $data = drupal_http_request($url);
+    if (isset($data) && $data->code == 200) {
+      $content = json_decode($data->data, TRUE);
+      if (!empty($content['parse']['wikitext']['*'])) {
+        $text = $content['parse']['wikitext']['*'];
+        if($pos = strpos($text, "==")) {
+          $text = substr($text, $pos);
+        }
+        return $text;
+      }
+    }
+    return '';
   }
 
   /**
