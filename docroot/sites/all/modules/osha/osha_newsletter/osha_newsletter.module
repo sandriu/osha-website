@@ -385,6 +385,10 @@ function osha_newsletter_subscribe_form() {
     '#size' => 30,
     '#required' => TRUE
   );
+  $form['captcha'] = array(
+    '#type' => 'captcha',
+    '#captcha_type' => 'image_captcha/Image',
+  );
   $link_label = variable_get('subscribe_block_details_link_label', t('How will EU-OSHA use my details?'));
   $link_url = variable_get('subscribe_block_details_link_url', 'https://osha.europa.eu/en/news/oshmail/');
   $form['details_link'] = array(
@@ -410,6 +414,10 @@ function osha_newsletter_unsubscribe_form() {
     '#title' => t('E-mail address'),
     '#size' => 30,
     '#required' => TRUE
+  );
+  $form['captcha'] = array(
+    '#type' => 'captcha',
+    '#captcha_type' => 'image_captcha/Image',
   );
   $form['submit'] = array(
     '#type' => 'submit',
