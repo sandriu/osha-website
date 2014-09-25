@@ -19,6 +19,9 @@ if [ "$1" == "--migrate" ]; then
 #    echo "Importing ESENER taxonomy"
 #    drush migrate-import --update TaxonomyEsener
 
+    echo "Importing Wiki articles"
+    drush migrate-import Wiki
+
     echo "Importing Publication types taxonomy"
     drush migrate-import --update TaxonomyPublicationTypes
 
