@@ -1,1 +1,209 @@
-[{"vid":"1070","uid":"1","title":"Ageing and OSH","log":"","status":"1","comment":"1","promote":"0","sticky":"0","vuuid":"8cc5aa5d-6497-44cc-9c0f-31205548218a","nid":"1067","type":"article","language":"en","created":"1409926863","changed":"1409926863","tnid":"0","translate":"0","uuid":"106bb0f7-5519-42a4-8310-5773d228a335","revision_timestamp":"1409926863","revision_uid":"1","body":[],"field_tags":[],"field_image":[],"title_field":{"en":[{"value":"Ageing and OSH","format":null,"safe_value":"Ageing and OSH"}]},"field_activity":[],"field_nace_codes":[],"field_project_manager":[],"field_publication_date":{"und":[{"value":"2014-09-05 00:00:00","timezone":"UTC","timezone_db":"UTC","date_type":"datetime"}]},"field_section":[],"field_summary":{"en":[{"value":"will be sent by Katalin by 12 Sept.","format":null,"safe_value":"will be sent by Katalin by 12 Sept."}]},"field_thesaurus":[],"field_workflow_status":[],"title_original":"Ageing and OSH","translations":{"original":"en","data":{"en":{"entity_type":"node","entity_id":"1067","language":"en","source":"","uid":"1","status":"1","translate":"0","created":"1409926863","changed":"1409926863"}},"#node_export_object":"1"},"metatags":[],"rdf_mapping":{"field_image":{"predicates":["og:image","rdfs:seeAlso"],"type":"rel"},"field_tags":{"predicates":["dc:subject"],"type":"rel"},"rdftype":["sioc:Item","foaf:Document"],"title":{"predicates":["dc:title"]},"created":{"predicates":["dc:date","dc:created"],"datatype":"xsd:dateTime","callback":"date_iso8601"},"changed":{"predicates":["dc:modified"],"datatype":"xsd:dateTime","callback":"date_iso8601"},"body":{"predicates":["content:encoded"]},"uid":{"predicates":["sioc:has_creator"],"type":"rel"},"name":{"predicates":["foaf:name"]},"comment_count":{"predicates":["sioc:num_replies"],"datatype":"xsd:integer"},"last_activity":{"predicates":["sioc:last_activity_date"],"datatype":"xsd:dateTime","callback":"date_iso8601"}},"cid":"0","last_comment_timestamp":"1409926863","last_comment_name":null,"last_comment_uid":"1","comment_count":"0","name":"admin","picture":"0","data":"b:0;","path":{"pid":"26183","source":"node\/1067","alias":"articles\/ageing-and-osh","language":"en"},"menu":{"link_title":"Ageing and OSH","mlid":0,"plid":"537","menu_name":"main-menu","weight":"-50","options":[],"module":"menu","expanded":"1","hidden":"0","has_children":"0","customized":0,"parent_depth_limit":8,"description":"","enabled":1},"node_export_drupal_version":"7","#node_export_object":"1"}]
+array(
+  (object) array(
+      'vid' => '1413',
+      'uid' => '1',
+      'title' => 'Ageing and OSH',
+      'log' => 'Edited by admin.',
+      'status' => '1',
+      'comment' => '1',
+      'promote' => '0',
+      'sticky' => '0',
+      'vuuid' => '4f18a82e-205b-4f55-9e62-65a6291d14b2',
+      'nid' => '1',
+      'type' => 'article',
+      'language' => 'en',
+      'created' => '1410859331',
+      'changed' => '1411297577',
+      'tnid' => '0',
+      'translate' => '0',
+      'uuid' => '106bb0f7-5519-42a4-8310-5773d228a335',
+      'revision_timestamp' => '1411297577',
+      'revision_uid' => '1',
+      'body' => array(),
+      'field_tags' => array(
+        'und' => array(
+          array(
+            'tid' => '2776',
+          ),
+        ),
+      ),
+      'field_image' => array(),
+      'title_field' => array(
+        'en' => array(
+          array(
+            'value' => 'Ageing and OSH',
+            'format' => NULL,
+            'safe_value' => 'Ageing and OSH',
+          ),
+        ),
+      ),
+      'field_activity' => array(),
+      'field_article_type' => array(
+        'und' => array(
+          array(
+            'tid' => '1046',
+          ),
+        ),
+      ),
+      'field_nace_codes' => array(),
+      'field_publication_date' => array(
+        'und' => array(
+          array(
+            'value' => '2014-09-05 00:00:00',
+            'timezone' => 'UTC',
+            'timezone_db' => 'UTC',
+            'date_type' => 'datetime',
+          ),
+        ),
+      ),
+      'field_related_oshwiki_articles' => array(),
+      'field_summary' => array(
+        'en' => array(
+          array(
+            'value' => 'will be sent by Katalin by 12 Sept.',
+            'format' => NULL,
+            'safe_value' => 'will be sent by Katalin by 12 Sept.',
+          ),
+        ),
+      ),
+      'field_thesaurus' => array(),
+      'field_workflow_status' => array(),
+      'title_original' => 'Ageing and OSH',
+      'translations' => (object) array(
+          'original' => 'en',
+          'data' => array(
+            'en' => array(
+              'entity_type' => 'node',
+              'entity_id' => '1',
+              'language' => 'en',
+              'source' => '',
+              'uid' => '1',
+              'status' => '1',
+              'translate' => '0',
+              'created' => '1410859331',
+              'changed' => '1411297577',
+            ),
+          ),
+        ),
+      'metatags' => array(),
+      'rdf_mapping' => array(
+        'field_image' => array(
+          'predicates' => array(
+            'og:image',
+            'rdfs:seeAlso',
+          ),
+          'type' => 'rel',
+        ),
+        'field_tags' => array(
+          'predicates' => array(
+            'dc:subject',
+          ),
+          'type' => 'rel',
+        ),
+        'rdftype' => array(
+          'sioc:Item',
+          'foaf:Document',
+        ),
+        'title' => array(
+          'predicates' => array(
+            'dc:title',
+          ),
+        ),
+        'created' => array(
+          'predicates' => array(
+            'dc:date',
+            'dc:created',
+          ),
+          'datatype' => 'xsd:dateTime',
+          'callback' => 'date_iso8601',
+        ),
+        'changed' => array(
+          'predicates' => array(
+            'dc:modified',
+          ),
+          'datatype' => 'xsd:dateTime',
+          'callback' => 'date_iso8601',
+        ),
+        'body' => array(
+          'predicates' => array(
+            'content:encoded',
+          ),
+        ),
+        'uid' => array(
+          'predicates' => array(
+            'sioc:has_creator',
+          ),
+          'type' => 'rel',
+        ),
+        'name' => array(
+          'predicates' => array(
+            'foaf:name',
+          ),
+        ),
+        'comment_count' => array(
+          'predicates' => array(
+            'sioc:num_replies',
+          ),
+          'datatype' => 'xsd:integer',
+        ),
+        'last_activity' => array(
+          'predicates' => array(
+            'sioc:last_activity_date',
+          ),
+          'datatype' => 'xsd:dateTime',
+          'callback' => 'date_iso8601',
+        ),
+      ),
+      'cid' => '0',
+      'last_comment_timestamp' => '1411243723',
+      'last_comment_name' => NULL,
+      'last_comment_uid' => '1',
+      'comment_count' => '0',
+      'name' => 'admin',
+      'picture' => '0',
+      'data' => 'b:0;',
+      'workbench_access' => array(
+        773 => '773',
+      ),
+      'path' => array(
+        'pid' => '1',
+        'source' => 'node/1',
+        'alias' => 'articles/ageing-and-osh',
+        'language' => 'en',
+      ),
+      'workbench_moderation' => array(
+        'current' => (object) array(
+            'hid' => '958',
+            'vid' => '1413',
+            'nid' => '1',
+            'from_state' => 'published',
+            'state' => 'published',
+            'uid' => '1',
+            'stamp' => '1411297577',
+            'published' => '1',
+            'current' => 1,
+            'title' => 'Ageing and OSH',
+            'timestamp' => '1411297577',
+          ),
+        'published' => 'recursion_export_node_132',
+        'my_revision' => 'recursion_export_node_132',
+      ),
+      'menu' => array(
+        'link_title' => 'Ageing and OSH',
+        'mlid' => 0,
+        'plid' => '745',
+        'menu_name' => 'main-menu',
+        'weight' => '-50',
+        'options' => array(),
+        'module' => 'menu',
+        'expanded' => '1',
+        'hidden' => '0',
+        'has_children' => '0',
+        'customized' => 0,
+        'parent_depth_limit' => 8,
+        'description' => '',
+        'enabled' => 1,
+      ),
+      'node_export_drupal_version' => '7',
+    ),
+)

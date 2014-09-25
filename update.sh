@@ -22,14 +22,11 @@ if [ "$1" == "--migrate" ]; then
     echo "Importing Publication types taxonomy"
     drush migrate-import --update TaxonomyPublicationTypes
 
-    echo "Importing Article types taxonomy"
-    drush migrate-import --update TaxonomyArticleTypes
-
     echo "Importing multilingual Thesaurus taxonomy"
     drush migrate-import --update TaxonomyThesaurus
 
-    echo "Importing Tags taxonomy"
-    drush migrate-import --update TaxonomyTags
+    #echo "Importing Tags taxonomy"
+    #drush migrate-import --update TaxonomyTags
 
     echo "Importing Files content"
     drush migrate-import --update Files
@@ -63,6 +60,9 @@ if [ "$1" == "--migrate" ]; then
     
     echo "Importing PressRelease content"
     drush migrate-import --update PressRelease
+
+    echo "Importing Seminar content"
+    drush migrate-import --update Seminar
 
 fi
 
