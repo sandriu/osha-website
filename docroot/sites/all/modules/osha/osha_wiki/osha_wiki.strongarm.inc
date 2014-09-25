@@ -122,6 +122,7 @@ function osha_wiki_strongarm() {
     'full' => 'full',
     'teaser' => 'teaser',
     'osha_slideshow' => 'osha_slideshow',
+    'osha_wiki' => 'osha_wiki',
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
