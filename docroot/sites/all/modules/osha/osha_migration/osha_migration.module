@@ -15,6 +15,7 @@ define('OSHA_MIGRATION_CONTENT_TYPE_HIGHLIGHT', 'Highlight');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
 define('OSHA_MIGRATION_CONTENT_TYPE_SEMINAR', 'Seminar');
+define('OSHA_MIGRATION_CONTENT_TYPE_WIKI', 'Wiki');
 define('OSHA_MIGRATION_FILES', 'Files');
 define('OSHA_MIGRATION_IMAGES', 'Images');
 define('OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE', 'PressRelease');
@@ -105,6 +106,9 @@ function osha_migration_migrate_api() {
       OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE => array(
         'class_name' => 'MigrateOshaPressRelease',
         'file_name' => osha_migration_get_data_dir() . '/export/press_release.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_WIKI => array(
+        'class_name' => 'OshaMigrateWiki',
       ),
     ),
     // Declare osha migrate handlers to add some specific functionality.
