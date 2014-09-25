@@ -6,6 +6,8 @@
 
 include_once 'osha_wiki.features.inc';
 
+define('OSHA_WIKI_CONTENT_TYPE', 'wiki_page');
+
 /**
  * Implements hook_feeds_after_parse().
  */
