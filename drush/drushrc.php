@@ -360,6 +360,7 @@ $options['init-modules'] = array(
   'osha_menu',
   'osha_wiki',
   'osha_workflow',
+  'osha_blocks',
 //  'osha_content',
 
   'search_api',
