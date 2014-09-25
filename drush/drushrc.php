@@ -373,6 +373,10 @@ $options['init-modules'] = array(
   'entity_collection_db',
   'osha_newsletter',
 
+  // Captcha
+  'captcha',
+  'image_captcha',
+
   // Social share
   'addtoany',
 
