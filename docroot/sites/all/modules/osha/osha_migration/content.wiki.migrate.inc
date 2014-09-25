@@ -255,14 +255,14 @@ class OshaMigrateSourceWiki extends MigrateSource {
                 $body = $this->getWikiPageContent($page_id);
                 $summary = '';
                 if (strlen($body)) {
-                  $summary = explode(PHP_EOL, $body);
+                  $summary = explode('\n', $body);
                   $summary = array_filter($summary);
                   $summary = array_slice($summary, 0, 5);
                   foreach ($summary as &$line) {
                     $line = preg_replace('/==/', '<h2>', $line, 1);
                     $line = preg_replace('/==/', '</h2>', $line, 1);
                   }
-                  $summary = implode(PHP_EOL, $summary);
+                  $summary = implode('\n', $summary);
                 }
 
                 $ob->categories = array();
