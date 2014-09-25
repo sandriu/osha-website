@@ -279,6 +279,7 @@ $options['init-modules'] = array(
   'taxonomy_access_fix',
   'date',
   'migrate',
+  'migrate_ui',
   'features',
 
   'field_group',
