@@ -34,7 +34,7 @@ class OshaMigrateWiki extends DynamicMigration {
     $this->addFieldMapping('body', 'body');
     #$this->addFieldMapping('created', 'created');
     #$this->addFieldMapping('field_updated', 'updated');
-    $this->addFieldMapping('field_tags', 'categories');
+    #$this->addFieldMapping('field_tags', 'categories');
     $this->addFieldMapping('field_tags:source_type', 'tid');
     $this->addFieldMapping('language', 'language');
     $this->addFieldMapping('field_wiki_page_url', 'url');
@@ -52,21 +52,22 @@ class OshaMigrateWiki extends DynamicMigration {
    */
   public function prepareRow($row) {
     // Decode categories.
-    foreach ($row->categories as $idx => &$cat_name) {
+    $categories = array();
+    foreach ($row->categories as $cat_name) {
       $term_id = MigrationUtil::findTermByFieldValue($cat_name, 'name', TRUE);
       if ($term_id) {
         $term = taxonomy_term_load($term_id);
         if (!empty($term->field_tags[LANGUAGE_NONE][0]['tid'])) {
-          $cat_name = $term->field_tags[LANGUAGE_NONE][0]['tid'];
-        }
-        else {
-          unset($row->categories[$idx]);
+          foreach ($term->field_tags[LANGUAGE_NONE] as $v) {
+            $categories[] = $v['tid'];
+          }
         }
       }
       else {
-        unset($row->categories[$idx]);
+        $this->currentMigration()->queueMessage('Could not find term from wiki_categories: ' . $cat_name);
       }
     }
+    $row->categories = $categories;
   }
 
   /**
@@ -88,8 +89,8 @@ class OshaMigrateWiki extends DynamicMigration {
 
     if (!empty($row->categories)) {
       //@todo: Remove manual assignment.
-      foreach ($row->categories as $cat) {
-        $entity->field_tags[LANGUAGE_NONE][0]['tid'] = $cat;
+      foreach ($row->categories as $i => $cat) {
+        $entity->field_tags[LANGUAGE_NONE][$i]['tid'] = $cat;
       }
     }
 
