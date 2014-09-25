@@ -284,6 +284,7 @@ $options['init-modules'] = array(
   'feeds_ui',
   'feeds_crawler',
 
+  'field_group',
   'entityreference',
   'link',
   'title',
