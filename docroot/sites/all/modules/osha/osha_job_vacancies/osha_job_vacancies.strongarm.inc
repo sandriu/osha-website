@@ -117,6 +117,12 @@ function osha_job_vacancies_strongarm() {
         'language' => array(
           'weight' => '0',
         ),
+        'metatags' => array(
+          'weight' => '17',
+        ),
+        'workbench_access' => array(
+          'weight' => '1',
+        ),
       ),
       'display' => array(),
     ),

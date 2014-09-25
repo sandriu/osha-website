@@ -79,6 +79,9 @@ function osha_job_vacancies_views_default_views() {
 
   /* Display: Open */
   $handler = $view->new_display('block', 'Open', 'block');
+
+  /* Display: Ongoing */
+  $handler = $view->new_display('block', 'Ongoing', 'block_1');
   $translatables['vacancies'] = array(
     t('Master'),
     t('Current job vacancies'),
@@ -89,6 +92,7 @@ function osha_job_vacancies_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Open'),
+    t('Ongoing'),
   );
   $export['vacancies'] = $view;
 
