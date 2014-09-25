@@ -214,9 +214,10 @@ class OshaMigrateSourceWiki extends MigrateSource {
         $base_url .= '&p%5Bprettyprint%5D=1';
       }
       // Result offset and page size.
-      $page_size = variable_get('osha_wiki_migration_pagesize', 9);
+      $page_size = variable_get('osha_wiki_migration_pagesize', 100);
       $base_url .= '&p%5Blimit%5D=' . $page_size;
-      $pages = 1;
+      // @todo: implement pagination
+      $pages = 4;
 
       for ($i = 0; $i < $pages; $i++) {
         try {
