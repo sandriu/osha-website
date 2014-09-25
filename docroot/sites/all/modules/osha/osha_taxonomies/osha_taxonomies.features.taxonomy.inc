@@ -159,6 +159,31 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'wiki_categories' => array(
+      'name' => 'Wiki Categories',
+      'machine_name' => 'wiki_categories',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'language' => 'und',
+      'i18n_mode' => 1,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'workflow_status' => array(
       'name' => 'Workflow status',
       'machine_name' => 'workflow_status',
