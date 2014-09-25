@@ -97,7 +97,9 @@ oshnews
 highlights
 highlight/*
 teaser/*
-news/*',
+news/*
+seminar/*
+seminars/*',
     'cache' => DRUPAL_NO_CACHE,
     'weight' => -30
   );
