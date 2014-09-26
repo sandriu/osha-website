@@ -4,7 +4,8 @@ if (function_exists('drush_log')) {
   drush_log('Executing post-install tasks ...', 'ok');
 }
 
-osha_configure_solr_entities();
+osha_configure_default_themes();
+//osha_configure_solr_entities();
 osha_change_field_size();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
@@ -197,7 +198,7 @@ function osha_configure_addtoany_social_share() {
   variable_set('addtoany_image', 'text');
   variable_set('addtoany_custom_image', '');
   variable_set('addtoany_image_attributes', 'Share');
-  
+
   variable_set('addtoany_nodetypes', array(
     'news' => 'news',
     'article' => 0,
