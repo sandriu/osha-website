@@ -279,10 +279,8 @@ $options['init-modules'] = array(
   'taxonomy_access_fix',
   'date',
   'migrate',
+  'migrate_ui',
   'features',
-  'feeds',
-  'feeds_ui',
-  'feeds_crawler',
 
   'field_group',
   'entityreference',

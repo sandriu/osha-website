@@ -39,8 +39,8 @@ do
         echo "Importing NACE codes taxonomy"
         drush migrate-import TaxonomyNaceCodes
 
-        echo "Importing ESENER taxonomy"
-        drush migrate-import TaxonomyEsener
+    #   echo "Importing ESENER taxonomy"
+    #   drush migrate-import TaxonomyEsener
 
     #   echo "Importing Publication types taxonomy"
     #   drush migrate-import TaxonomyPublicationTypes
@@ -50,6 +50,9 @@ do
 
     #   echo "Importing Tags taxonomy"
     #   drush migrate-import TaxonomyTags
+
+        echo "Importing Wiki articles"
+        drush migrate-import Wiki
 
         echo "Importing Files content"
         drush migrate-import Files
