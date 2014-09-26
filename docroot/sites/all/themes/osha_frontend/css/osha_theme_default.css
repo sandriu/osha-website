@@ -381,10 +381,11 @@ a{
     color: #fff;
     display: block;
     float: right;
-    margin-left: 64.6em;
-    margin-top: 2.7em;
+    margin-left: 64.5em;
+    margin-top: 1.7em;
     position: absolute;
     width: 140px!important;
+	padding-left:0.6em;
 }
 
 
@@ -400,9 +401,14 @@ a{
 	padding-left: 0.8em;
 }
 
+#block-lang-dropdown-language-content{
+	margin-bottom: 0.5em!important;
+}
+
 #languagesAndSearch img{
   vertical-align:middle;
   right:1em;
+  margin-top:-2.5em;
 }
 #languagesAndSearch input[type="text"] {
  background:#002f9d;
@@ -1188,6 +1194,15 @@ font-weight: normal;
 
 /*SLIDESHOW*/
 
+
+#block-block-1 p{
+	color:#003399;
+	font-weight:bold;
+	line-height:1.3em;
+	height:4em;
+}
+
+
 #views_slideshow_cycle_div_publications-slidehow_2{
 	width:100%;
 }
@@ -1260,7 +1275,7 @@ font-weight: normal;
 	width:60px;
     height: 220px;
     position: absolute;
-    top: 20.2em;
+    top: 27.2em;
     z-index: 999999999;
 	background: url('../images/slideshow-left.png') no-repeat;
 	color:#cbd9ec;
@@ -1482,7 +1497,7 @@ font-weight: normal;
 
 #block-views-exp-publications-page{
 	border-top:5px solid #aab7d9;
-	margin-top:7.8em;
+	margin-top:28em;
 }
 
 
@@ -1505,7 +1520,7 @@ font-weight: normal;
 	font-weight: bold;
 	font-family: arial;
 	position: absolute;
-	top: 47.4em;
+	top: 56.4em;
 	margin-left: 12em;
 	text-decoration: underline;
 }
@@ -1625,11 +1640,14 @@ font-weight: normal;
 	background-position: bottom left;
 }
 
-		/*OSHMail Newsletter*/
+		/*OSHMail Newsletter Section*/
 
 		#block-osha-newsletter-osha-newsletter-subscribe-extra{
-			background-color: #A6B8DB;
-			padding: 0em 1em 1em 1em;
+			background-color: #a6b8db;
+			float: left;
+			margin-right: 1.1em;
+			padding: 0 1em 0em;
+			width: 43%;
 		}
 
 		#block-osha-newsletter-osha-newsletter-subscribe-extra h2{
@@ -1670,7 +1688,50 @@ font-weight: normal;
 			font-family: arial;
 			
 		}
-
+		
+		#block-osha-newsletter-osha-newsletter-subscribe-extra #edit-submit--3 {
+			background: url("../images/flecha.png") no-repeat scroll right center transparent;
+			border: 0 none;
+			color: #003399;
+			float: none;
+			font-family: 'Oswald',sans-serif;
+			font-size: 1.2em;
+			font-weight: bold;
+			margin-top: 0em;
+			padding-right: 1.3em;
+			text-align: right;
+			width: 100%;
+		}
+		
+		hr{
+			background: url("../images/separator_white.png") repeat-x scroll 100% 100% transparent;
+			border: 0 none;
+			height: 1px;
+			margin: 0.5em 0;
+			padding: 0;
+		}
+		
+		#block-osha-newsletter-osha-newsletter-subscribe-extra #edit-unsubscribe {
+			border: 0 none;
+			color: #003399;
+			float: none;
+			font-family: arial;
+			font-size: 1em;
+			font-weight: bold;
+			margin-top: 0.1em;
+			text-align: right;
+			width: auto;
+			border-bottom:1px solid red;
+			background:none;
+			float:right;
+		}
+		
+		#subscribe-extra  span{
+			font-size:0.8em;
+			color:#565759;
+			font-weight:bold;
+		}
+		
 		#edit-submit--4{
 			margin-top:1em;
 		}
@@ -1826,6 +1887,10 @@ font-weight: normal;
 .view-id-highlight .view-content{
 	clear:both;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0% 0% rgba(0, 0, 0, 0);
+}
+
+.view-id-highlight .view-content table tbody tr td .views-field-title{
+	height:55px;
 }
 
 .view-id-highlight .view-content table tbody tr td{
@@ -2053,7 +2118,7 @@ font-weight: normal;
 /* END OSHMail Newsletter home*/
 
 
-/**/
+/*SHARE LINKS*/
 ul.links.inline{
 	float: right;
     text-align: right;
@@ -2095,4 +2160,4 @@ ul.links.inline a{
 	width:20px!important;
 }
 
-/**/
+/*END SHARE LINKS*/
