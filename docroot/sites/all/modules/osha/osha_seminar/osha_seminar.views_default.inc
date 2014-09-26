@@ -68,7 +68,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['fields']['field_seminar_start_date_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['settings'] = array(
-    'format_type' => 'year_only',
+    'format_type' => 'year_seminar',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -97,8 +97,9 @@ function osha_seminar_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['style_options']['grouping'] = array(
     0 => array(
       'field' => 'field_seminar_start_date_1',
@@ -106,7 +107,6 @@ function osha_seminar_views_default_views() {
       'rendered_strip' => 1,
     ),
   );
-  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -135,6 +135,7 @@ function osha_seminar_views_default_views() {
       'rendered_strip' => 1,
     ),
   );
+  $handler->display->display_options['style_options']['wrapper_class'] = 'item-list wysiwyg_accordion';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -177,7 +178,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['settings'] = array(
-    'format_type' => 'year_only',
+    'format_type' => 'year_seminar',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
