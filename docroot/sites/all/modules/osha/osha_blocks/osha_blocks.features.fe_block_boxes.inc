@@ -22,7 +22,7 @@ function osha_blocks_default_fe_block_boxes() {
   $fe_block_boxes->info = 'Link on seminar content type to refference seminars page';
   $fe_block_boxes->format = 'full_html';
   $fe_block_boxes->machine_name = 'seminar_back_to_seminars_link';
-  $fe_block_boxes->body = '<div><a class="seminar_back-to-seminars back-to-link" href="#">Back to seminars</a></div>';
+  $fe_block_boxes->body = '<div><a class="seminar_back-to-seminars back-to-link" href="/articles/EU-OSHA-seminars">Back to seminars</a></div>';
 
   $export['seminar_back_to_seminars_link'] = $fe_block_boxes;
 
