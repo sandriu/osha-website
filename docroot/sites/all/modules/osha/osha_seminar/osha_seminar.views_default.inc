@@ -141,6 +141,13 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['label'] = '';
+  $handler->display->display_options['fields']['type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
   /* Field: Content: Start date */
   $handler->display->display_options['fields']['field_seminar_start_date']['id'] = 'field_seminar_start_date';
   $handler->display->display_options['fields']['field_seminar_start_date']['table'] = 'field_data_field_seminar_start_date';
@@ -148,7 +155,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['fields']['field_seminar_start_date']['label'] = '';
   $handler->display->display_options['fields']['field_seminar_start_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_seminar_start_date']['settings'] = array(
-    'format_type' => 'long',
+    'format_type' => 'short',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -176,9 +183,10 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['fields']['field_seminar_start_date_1']['label'] = '';
   $handler->display->display_options['fields']['field_seminar_start_date_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['text'] = '[field_seminar_start_date_1] - [type]';
   $handler->display->display_options['fields']['field_seminar_start_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['settings'] = array(
-    'format_type' => 'year_seminar',
+    'format_type' => 'year',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -204,6 +212,7 @@ function osha_seminar_views_default_views() {
     t('Desc'),
     t('Page'),
     t('Block'),
+    t('[field_seminar_start_date_1] - [type]'),
   );
   $export['seminars'] = $view;
 
