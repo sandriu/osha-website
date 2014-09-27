@@ -206,7 +206,9 @@ class OshaMigrateSourceWiki extends MigrateSource {
     if (empty($this->data)) {
       $this->pullRemoteData();
     }
-    return next($this->data);
+    $item = current($this->data);
+    next($this->data);
+    return $item;
   }
 
   /**
@@ -228,15 +230,17 @@ class OshaMigrateSourceWiki extends MigrateSource {
 
       $page = 0;
       while (TRUE) {
-        $page++;
         try {
           $this->setMessage("Processing results page $page", MigrationBase::MESSAGE_INFORMATIONAL);
           $url = $base_url . '&p%5Boffset%5D=' . ($page * $page_size);
-          $content = file_get_contents($url);
-          $content = json_decode($content, TRUE);
+          $content = '';
+          $data = drupal_http_request($url);
+          if (isset($data) && $data->code == 200) {
+            $content = json_decode($data->data, TRUE);
+          }
           if (!empty($content['results'])) {
             if (!$this->processRemoteResultsPage($content['results'])) {
-              $this->setMessage("Finished at page #$page because we hit the oldest item", MigrationBase::MESSAGE_WARNING);
+              $this->setMessage("Finished at page #$page, we hit the oldest item", MigrationBase::MESSAGE_WARNING);
               break;
             }
           }
@@ -244,6 +248,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
             $this->setMessage("Finished at page #$page due to empty results", MigrationBase::MESSAGE_WARNING);
             break;
           }
+          $page++;
         }
         catch(Exception $e) {
           $msg = sprintf('Exception while retrieving remote wiki data for page %s (%s) ', $page, $e->getMessage());
