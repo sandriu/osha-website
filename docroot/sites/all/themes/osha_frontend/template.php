@@ -105,7 +105,7 @@ function osha_frontend_process_node(&$vars) {
       $limit = 2 - $wiki_articles_no;
       // get 2-$wiki_articles_no tagged wiki
       $tags_tids = array();
-      if (isset($vars['field_tags'])) {
+      if (!empty($vars['field_tags'])) {
         $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
       }
 
