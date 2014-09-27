@@ -334,15 +334,20 @@ class OshaMigrateSourceWiki extends MigrateSource {
   protected function getWikiSummaryFromBody($body) {
     $osh_wiki_prefix = 'http://oshwiki.eu/wiki/';
 
-    // Remove categories and other junk from the start of the page.
     $patterns = array();
-    // Remove {{...}} [[Category]] <categorytree>..</categorytree>.
-    $patterns[0] = '/({{[^}]*}}\s*)*(\[\[[^\]]*\]\]\s*)*(<categorytree.*<\/categorytree>\s*)*/s';
     $replacements = array();
+    // Remove {{...}} [[Category]] <categorytree>..</categorytree>
+    $patterns[0] = '/({{[^}]*}}\s*)*(\[\[[^\]]*\]\]\s*)*(<categorytree.*<\/categorytree>\s*)*/s';
     $replacements[0] = '';
     // Use limit because there are other [[wiki links]] in the text.
     $wiki_text = preg_replace($patterns, $replacements, $body, 1);
 
+    $patterns[0] = '/(<ref[^<]*<\/ref>)/s';
+    $replacements[0] = '';
+    // Don't use limit for removal of <ref>..</ref>, there are many
+    $wiki_text = preg_replace($patterns, $replacements, $wiki_text);
+
+    // split in lines which will become <p>..</p>
     $lines = preg_split('/\n/', $wiki_text);
 
     // Replace wiki formatting with HTML.
@@ -352,24 +357,21 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[1] = '/===\s*([^=]*)\s*===/';
     $patterns[2] = '/==\s*([^=]*)\s*==/';
     // Internal [[Wiki Links]]
-    $patterns[3] = '/\[\[([^\]]*)\]\]/';
+    $patterns[3] = '/\[\[([^\]\|]*)\|*([^\]]*)\]\]/';
     // '''''bold+italic''''', '''bold''', ''italic''
     $patterns[4] = "/'''([^']*)'''/";
     $patterns[5] = "/''([^']*)''/";
     // Replace http links.
     $patterns[6] = "/\[([^\s\[]*)\s([^\[]*)\]/";
-    // Remove unwanted <ref/>
-    $patterns[7] = "/<ref.*\/>/";
 
     $replacements = array();
     $replacements[0] = '<h4>${1}</h5>';
     $replacements[1] = '<h3>${1}</h4>';
     $replacements[2] = '<h2>${1}</h3>';
-    $replacements[3] = '<a href="' . $osh_wiki_prefix . '${1}">${1}</a>';
+    $replacements[3] = '<a href="' . $osh_wiki_prefix . '${1}">${2}</a>';
     $replacements[4] = '<b>${1}</b>';
     $replacements[5] = '<i>${1}</i>';
     $replacements[6] = '<a href="${1}">${2}</a>';
-    $replacements[7] = '${1}';
 
     $summary = '';
     $char_count = 0;
