@@ -193,7 +193,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
         $base_url .= '&p%5Bprettyprint%5D=1';
       }
       // Result offset and page size.
-      $page_size = variable_get('osha_wiki_migration_pagesize', 25);
+      $page_size = variable_get('osha_wiki_migration_pagesize', 10);
       $base_url .= '&p%5Blimit%5D=' . $page_size;
 
       $page = 0;
@@ -334,7 +334,10 @@ class OshaMigrateSourceWiki extends MigrateSource {
       $latest = node_load($latest_id->nid);
       if (!empty($latest->field_updated[LANGUAGE_NONE][0]['value'])) {
         $ret = $latest->field_updated[LANGUAGE_NONE][0]['value'];
+        $default_tz = date_default_timezone_get();
+        date_default_timezone_set('UTC');
         $ret = strtotime($ret);
+        date_default_timezone_set($default_tz);
       }
     }
     return $ret;
