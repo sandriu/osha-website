@@ -19,7 +19,6 @@ class OshaMigrateWiki extends DynamicMigration {
         'skip_count' => TRUE,
       )
     );
-
     $this->map = new MigrateSQLMap($this->machineName,
       array(
         'title' => array(
@@ -35,13 +34,14 @@ class OshaMigrateWiki extends DynamicMigration {
     $this->destination = new MigrateDestinationNode(OSHA_WIKI_CONTENT_TYPE);
 
     $this->addFieldMapping('title', 'title');
-    $this->addFieldMapping('body', 'body');
-    #$this->addFieldMapping('created', 'created');
-    #$this->addFieldMapping('field_updated', 'updated');
-    #$this->addFieldMapping('field_tags', 'categories');
-    $this->addFieldMapping('field_tags:source_type', 'tid');
+    $this->addFieldMapping('title_field', 'title');
     $this->addFieldMapping('language', 'language');
+    $this->addFieldMapping('field_summary', 'summary');
+    $this->addFieldMapping('body', 'body');
     $this->addFieldMapping('field_wiki_page_url', 'url');
+    $this->addFieldMapping('field_wiki_categories', 'categories');
+    $this->addFieldMapping('field_wiki_categories:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_updated', 'updated');
   }
 
   /**
@@ -55,23 +55,8 @@ class OshaMigrateWiki extends DynamicMigration {
    * {@inheritdoc}
    */
   public function prepareRow($row) {
-    // Decode categories.
-    $categories = array();
-    foreach ($row->categories as $cat_name) {
-      $term_id = MigrationUtil::findTermByFieldValue($cat_name, 'name', TRUE);
-      if ($term_id) {
-        $term = taxonomy_term_load($term_id);
-        if (!empty($term->field_tags[LANGUAGE_NONE][0]['tid'])) {
-          foreach ($term->field_tags[LANGUAGE_NONE] as $v) {
-            $categories[] = $v['tid'];
-          }
-        }
-      }
-      else {
-        $this->currentMigration()->queueMessage('Could not find term from wiki_categories: ' . $cat_name);
-      }
-    }
-    $row->categories = $categories;
+    $row->categories = MigrationUtil::findTidByTaxonomyField($row->categories, 'name_field', OSHA_TAXONOMIES_WIKI_CATEGORIES, 'en');
+    return TRUE;
   }
 
   /**
@@ -83,20 +68,12 @@ class OshaMigrateWiki extends DynamicMigration {
    *   Source row
    */
   public function prepare($entity, $row) {
-
     $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
     $entity_type = $migration->getDestination()->getEntityType();
 
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
     $entity->translations = $translation_handler->getTranslations();
-
-    if (!empty($row->categories)) {
-      //@todo: Remove manual assignment.
-      foreach ($row->categories as $i => $cat) {
-        $entity->field_tags[LANGUAGE_NONE][$i]['tid'] = $cat;
-      }
-    }
 
     foreach ($languages as $language) {
       $has_translation = FALSE;
@@ -157,15 +134,14 @@ class OshaMigrateSourceWiki extends MigrateSource {
   public function fields() {
     return array(
       'title' => t('Wiki english page title'),
-      'title_field' => t('Wiki localized page title'),
-      'body' => t('Wiki page content localized'),
-      'created' => t('Date when page was created'),
-      'updated' => t('Date when page was last modified'),
-      'parent' => t('English title of the parent page'),
       'language' => t('Language code'),
-      'nace' => t('Nace codes'),
-      'thesaurus' => t('Thesaurus codes'),
+      'summary' => t('Wiki page summary'),
+      'body' => t('Wiki page content localized'),
       'url' => t('Page URL'),
+      'categories' => t('Wiki categories'),
+      'updated' => t('Date when page was last modified'),
+      // 'nace' => t('Nace codes'),
+      // 'thesaurus' => t('Thesaurus codes'),
     );
   }
 
@@ -211,101 +187,161 @@ class OshaMigrateSourceWiki extends MigrateSource {
     if (!$this->serviceQueried) {
       $this->data = array();
       $this->serviceQueried = TRUE;
+      $local_latest_date = $this->getLatestItemDate();
+
       $pretty_print = TRUE;
       $base_url = $this->url;
       if ($pretty_print) {
         $base_url .= '&p%5Bprettyprint%5D=1';
       }
       // Result offset and page size.
-      $page_size = variable_get('osha_wiki_migration_pagesize', 100);
+      $page_size = variable_get('osha_wiki_migration_pagesize', 25);
       $base_url .= '&p%5Blimit%5D=' . $page_size;
-      // @todo: implement pagination
-      $pages = 4;
 
-      for ($i = 0; $i < $pages; $i++) {
+      $page = 0;
+      while (TRUE) {
+        $page++;
         try {
-          $this->setMessage("Processing results page $i", MigrationBase::MESSAGE_INFORMATIONAL);
-          $url = $base_url . $base_url .= '&p%5Boffset%5D=' . ($i * $page_size);
+          $this->setMessage("Processing results page $page", MigrationBase::MESSAGE_INFORMATIONAL);
+          $url = $base_url . '&p%5Boffset%5D=' . ($page * $page_size);
           $content = file_get_contents($url);
           $content = json_decode($content, TRUE);
-          if (isset($content['results'])) {
-            foreach ($content['results'] as $key => $data) {
-              if ($this->validateDataRow($key, $data)) {
-                $parent = $data['printouts']['Master page'][0]['fulltext'];
-                $language = $data['printouts']['Language code'][0];
-                $url = 'http:' . $data['fullurl'];
-
-                //@todo: Remove hard-coding
-                $page_id = str_replace('//oshwiki.eu/wiki/', '', $data['fullurl']);
-                // Deal with translations.
-                if ($language != 'en') {
-                  if (array_key_exists($parent, $this->data)) {
-                    $ob = $this->data[$parent];
-                  }
-                  else {
-                    $ob = new stdClass();
-                    $ob->title = $key;
-                    $ob->language = $language;
-                    $ob->translations[] = $language;
-                  }
-                }
-                else {
-                  $ob = new stdClass();
-                  $ob->language = 'en';
-                  $ob->title = $key;
-                }
-
-                $body = $this->getWikiPageContent($page_id);
-                $summary = '';
-                if (strlen($body)) {
-                  $summary = explode('\n', $body);
-                  $summary = array_filter($summary);
-                  $summary = array_slice($summary, 0, 5);
-                  foreach ($summary as &$line) {
-                    $line = preg_replace('/==/', '<h2>', $line, 1);
-                    $line = preg_replace('/==/', '</h2>', $line, 1);
-                  }
-                  $summary = implode('\n', $summary);
-                }
-
-                $ob->categories = array();
-                if (!empty($data['printouts']['Category'])) {
-                  foreach ($data['printouts']['Category'] as $cat_data) {
-                    $cat_name = str_replace('Category:', '', $cat_data['fulltext']);
-                    $ob->categories[] = $cat_name;
-                  }
-                }
-                $ob->ml_summary[$language] = $summary;
-                $ob->ml_body[$language] = $body;
-                $ob->ml_title_field[$language] = $key;
-                $ob->updated = '';
-                if (!empty($data['printouts']['Modification date'][0])) {
-                  $ob->updated = $data['printouts']['Modification date'][0];
-                }
-                $ob->parent = $parent;
-                $ob->ml_url[$language] = $url;
-                // @todo Add fields
-                $ob->created = '';
-                $ob->nace = '';
-                $ob->thesaurus = '';
-                if ($language == 'en') {
-                  $this->data[$parent] = $ob;
-                }
-              }
+          if (!empty($content['results'])) {
+            if (!$this->processRemoteResultsPage($content['results'], $local_latest_date)) {
+              $this->setMessage("Finished at page #$page because we hit the oldest item", MigrationBase::MESSAGE_WARNING);
+              break;
             }
           }
           else {
-            continue;
+            $this->setMessage("Finished at page #$page due to empty results", MigrationBase::MESSAGE_WARNING);
+            break;
           }
         }
         catch(Exception $e) {
-          $msg = sprintf('Error retrieving remote wiki data for page %s (%s) ', $i, $e->getMessage());
+          $msg = sprintf('Exception while retrieving remote wiki data for page %s (%s) ', $page, $e->getMessage());
           $this->setMessage($msg, MigrationBase::MESSAGE_ERROR);
+          break;
         }
       }
     }
   }
 
+  /**
+   * Process the list of results from the remote service.
+   *
+   * @param array $results
+   *   List of JSON objects.
+   *
+   * @return bool
+   *   Return FALSE if we hit the oldest item
+   */
+  protected function processRemoteResultsPage($results, $local_latest_date) {
+    $ret = TRUE;
+    foreach ($results as $key => $data) {
+      if ($this->validateDataRow($key, $data)) {
+        $page_id = str_replace('//oshwiki.eu/wiki/', '', $data['fullurl']);
+        $url = 'http:' . $data['fullurl'];
+        $parent = $data['printouts']['Master page'][0]['fulltext'];
+        $language = $data['printouts']['Language code'][0];
+
+        // Deal with translations.
+        if ($language != 'en') {
+          if (array_key_exists($parent, $this->data)) {
+            $ob = $this->data[$parent];
+          }
+          else {
+            $ob = new stdClass();
+            $ob->title = $key;
+            $ob->language = $language;
+            $ob->translations[] = $language;
+          }
+        }
+        else {
+          $ob = new stdClass();
+          $ob->language = 'en';
+          $ob->title = $key;
+        }
+        $body = $this->getWikiPageContent($page_id);
+        $ob->ml_body[$language] = $body;
+        $ob->ml_summary[$language] = $this->getWikiSummaryFromBody($body);
+        $ob->categories = array();
+        if ($language == 'en' && !empty($data['printouts']['Category'])) {
+          foreach ($data['printouts']['Category'] as $cat_data) {
+            $cat_name = str_replace('Category:', '', $cat_data['fulltext']);
+            $ob->categories[] = $cat_name;
+          }
+        }
+        $ob->ml_title_field[$language] = $key;
+
+        $ob->updated = '';
+        if (!empty($data['printouts']['Modification date'][0])) {
+          $updated = $data['printouts']['Modification date'][0];
+          $ob->updated = $updated;
+          if ($updated < $local_latest_date) {
+            $ret = FALSE;
+          }
+        }
+        $ob->ml_url[$language] = $url;
+        // @todo Add fields
+        // $ob->nace = '';
+        // $ob->thesaurus = '';
+        if ($language == 'en') {
+          if ($ob->updated > $local_latest_date) {
+            $this->data[$parent] = $ob;
+          }
+        }
+      }
+    }
+    return $ret;
+  }
+
+  /**
+   * Extract the summary text for the wiki page from the body.
+   *
+   * @param string $body
+   *   Text containing the body.
+   *
+   * @return string
+   *   Summary text to add into field_summary
+   */
+  protected function getWikiSummaryFromBody($body) {
+    $summary = '';
+    if (strlen($body)) {
+      $summary = explode('\n', $body);
+      $summary = array_filter($summary);
+      $summary = array_slice($summary, 0, 5);
+      foreach ($summary as &$line) {
+        $line = preg_replace('/==/', '<h2>', $line, 1);
+        $line = preg_replace('/==/', '</h2>', $line, 1);
+      }
+      $summary = implode('\n', $summary);
+    }
+    return $summary;
+  }
+
+  /**
+   * Retrieve the latest timestamp for wiki pages from field_updated.
+   * @return string
+   *   Returns empty or date to filter the content by.
+   * @throws EntityFieldQueryException
+   */
+  public function getLatestItemDate() {
+    $ret = NULL;
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'wiki_page')
+      ->fieldOrderBy('field_updated', 'value', 'DESC')
+      ->execute();
+    if (isset($result['node'])) {
+      $latest_id = current($result['node']);
+      $latest = node_load($latest_id->nid);
+      if (!empty($latest->field_updated[LANGUAGE_NONE][0]['value'])) {
+        $ret = $latest->field_updated[LANGUAGE_NONE][0]['value'];
+        $ret = strtotime($ret);
+      }
+    }
+    return $ret;
+  }
 
   function getWikiPageContent($page_id) {
     $url = sprintf('http://oshwiki.eu/api.php?action=parse&format=json&prop=wikitext&page=%s', $page_id);
