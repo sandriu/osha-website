@@ -43,6 +43,8 @@ class OshaMigrateWiki extends DynamicMigration {
     $this->addFieldMapping('field_wiki_categories:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_updated', 'updated');
     $this->addFieldMapping('field_updated:timezone')->defaultValue('GMT');
+    $this->addFieldMapping('field_tags', 'tags');
+    $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
 
     $this->addUnmigratedDestinations(array(
       'uid', 'created', 'changed', 'status', 'promote', 'sticky',
@@ -60,6 +62,7 @@ class OshaMigrateWiki extends DynamicMigration {
       'metatag_author', 'metatag_original-source', 'metatag_revisit-after',
       'metatag_content-language',
       'comment',
+      'field_tags:create_term', 'field_tags:ignore_case',
     ));
   }
 
@@ -75,6 +78,15 @@ class OshaMigrateWiki extends DynamicMigration {
    */
   public function prepareRow($row) {
     $row->categories = MigrationUtil::findTidByTaxonomyField($row->categories, 'name_field', OSHA_TAXONOMIES_WIKI_CATEGORIES, 'en');
+    // Decode categories.
+    $tags = array();
+    foreach ($row->categories as &$tid) {
+      $category = taxonomy_term_load($tid);
+      if (!empty($category->field_tags[LANGUAGE_NONE][0]['tid'])) {
+        $tags[] = $category->field_tags[LANGUAGE_NONE][0]['tid'];
+      }
+    }
+    $row->tags = $tags;
     return TRUE;
   }
 
@@ -160,6 +172,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
       'body' => t('Wiki page content localized'),
       'url' => t('Page URL'),
       'categories' => t('Wiki categories'),
+      'tags' => t('Wiki page tags'),
       'updated' => t('Date when page was last modified'),
       // 'nace' => t('Nace codes'),
       // 'thesaurus' => t('Thesaurus codes'),
@@ -170,7 +183,6 @@ class OshaMigrateSourceWiki extends MigrateSource {
    * Return the number of available source records.
    */
   public function computeCount() {
-    // @todo pre-search for all records without fields to compute all nodes for pagination.
     return 0;
   }
 
