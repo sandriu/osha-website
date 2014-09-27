@@ -336,9 +336,9 @@ class OshaMigrateSourceWiki extends MigrateSource {
     // Replace wiki formatting with HTML.
     $patterns = array();
     // == Headings ==
-    $patterns[0] = '/==== ([^=]*) ====/';
-    $patterns[1] = '/=== ([^=]*) ===/';
-    $patterns[2] = '/== ([^=]*) ==/';
+    $patterns[0] = '/====\s*([^=]*)\s*====/';
+    $patterns[1] = '/===\s*([^=]*)\s*===/';
+    $patterns[2] = '/==\s*([^=]*)\s*==/';
     // Internal [[Wiki Links]]
     $patterns[3] = '/\[\[([^\]]*)\]\]/';
     // '''''bold+italic''''', '''bold''', ''italic''
