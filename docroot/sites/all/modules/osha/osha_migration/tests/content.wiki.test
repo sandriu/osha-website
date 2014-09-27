@@ -51,9 +51,9 @@ class WikiParseTest extends DrupalUnitTestCase {
     
     
     $replacements = array();
-    $replacements[0] = '<h4>${1}</h4>';
-    $replacements[1] = '<h3>${1}</h3>';
-    $replacements[2] = '<h2>${1}</h2>';
+    $replacements[0] = '<h4>${1}</h5>';
+    $replacements[1] = '<h3>${1}</h4>';
+    $replacements[2] = '<h2>${1}</h3>';
     $replacements[3] = '<a href="'.$OSHWIKI_PREFIX.'${1}">${1}</a>';
     $replacements[4] = '<b>${1}</b>';
     $replacements[5] = '<i>${1}</i>';
@@ -64,7 +64,11 @@ class WikiParseTest extends DrupalUnitTestCase {
     foreach ($lines as $line) {
       if ($length = strlen($line)) {
         $char_count += $length;
-        $summary .= "<p>".preg_replace($patterns, $replacements, $line)."</p>\n";
+        $html_line = preg_replace($patterns, $replacements, $line);
+        if ($html_line[0] != '<') {
+            $html_line = '<p>'.$html_line.'</p>';
+        }
+        $summary .= $html_line."\n";
         // limit maximum char length
         if ($char_count > 700) {
           break;
