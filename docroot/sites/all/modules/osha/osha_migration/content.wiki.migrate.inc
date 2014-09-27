@@ -43,6 +43,24 @@ class OshaMigrateWiki extends DynamicMigration {
     $this->addFieldMapping('field_wiki_categories:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_updated', 'updated');
     $this->addFieldMapping('field_updated:timezone')->defaultValue('GMT');
+
+    $this->addUnmigratedDestinations(array(
+      'uid', 'created', 'changed', 'status', 'promote', 'sticky',
+      'revision', 'log', 'tnid', 'translate', 'revision_uid',
+      'is_new', 'body:summary', 'body:format', 'body:language',
+      'field_summary:format', 'field_summary:language',
+      'field_updated:rrule', 'field_updated:to',
+      'field_wiki_categories:create_term', 'field_wiki_categories:ignore_case',
+      'field_wiki_page_url:title', 'field_wiki_page_url:attributes',
+      'field_wiki_page_url:language', 'title_field:language',
+      'path', 'metatag_title', 'metatag_description', 'metatag_abstract',
+      'metatag_keywords', 'metatag_robots', 'metatag_news_keywords',
+      'metatag_standout', 'metatag_generator', 'metatag_rights', 'metatag_image_src',
+      'metatag_canonical', 'metatag_shortlink', 'metatag_publisher',
+      'metatag_author', 'metatag_original-source', 'metatag_revisit-after',
+      'metatag_content-language',
+      'comment',
+    ));
   }
 
   /**
