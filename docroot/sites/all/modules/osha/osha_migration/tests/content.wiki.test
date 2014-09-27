@@ -26,10 +26,14 @@ class WikiParseTest extends DrupalUnitTestCase {
     $text = $json['parse']['wikitext']['*'];
 
     // Remove categories and other junk from the start of the page.
-    $pattern = '/{{.*}}(\n\[\[[^\]]*\]\])*(\n<[^\n]*)*\n(.*)/s';
-    $matches = array();
-    preg_match_all($pattern, $text, $matches);
-    $wiki_text = $matches[3][0];
+    $patterns = array();
+    // remove {{...}} [[Category]] <categorytree>..</categorytree>
+    $patterns[0] = '/({{[^}]*}}\s*)*(\[\[[^\]]*\]\]\s*)*(<categorytree.*<\/categorytree>\s*)*/s';
+    $replacements = array();
+    $replacements[0] = '';
+    // use limit because there are other [[wiki links]] in the text
+    $wiki_text = preg_replace($patterns, $replacements, $text, 1);
+    
     $lines = preg_split('/\n/', $wiki_text);
 
     // Replace wiki formatting with HTML.
@@ -69,10 +73,11 @@ class WikiParseTest extends DrupalUnitTestCase {
         }
         $summary .= $html_line . "\n";
         // Limit maximum char length.
-        if ($char_count > 700) {
+        if ($char_count > 7000) {
           break;
         }
       }
     }
+    print $summary;
   }
 }

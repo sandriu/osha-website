@@ -80,6 +80,7 @@ features[field_instance][] = node-article-field_related_oshwiki_articles
 features[field_instance][] = node-article-field_summary
 features[field_instance][] = node-article-field_tags
 features[field_instance][] = node-article-field_thesaurus
+features[field_instance][] = node-article-field_wiki_categories
 features[field_instance][] = node-article-field_workflow_status
 features[field_instance][] = node-article-title_field
 features[field_instance][] = node-page-body

@@ -95,7 +95,7 @@
       <td align="left" width="5%" style="padding-left: 0px; padding-right: 0px; vertical-align: top; padding-top: 5px;">
         <?php
           $directory = drupal_get_path('module','osha_newsletter');
-          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+          $site_url = variable_get('site_base_url', 'http://osha.europa.eu');
           print l(theme('image', array(
           'path' => $directory . '/images/link-arrow.png',
           'width' => 7,

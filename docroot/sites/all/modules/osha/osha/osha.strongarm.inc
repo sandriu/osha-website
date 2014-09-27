@@ -289,20 +289,23 @@ function osha_strongarm() {
       'newsletter_item' => array(
         'custom_settings' => TRUE,
       ),
+      'osha_wiki' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'language' => array(
           'weight' => '2',
         ),
         'redirect' => array(
-          'weight' => '15',
+          'weight' => '16',
         ),
         'metatags' => array(
-          'weight' => '16',
+          'weight' => '17',
         ),
         'workbench_access' => array(
           'weight' => '1',
