@@ -37,10 +37,12 @@ function osha_content_path_breadcrumbs_settings_info() {
   $path_breadcrumb->path = 'publications';
   $path_breadcrumb->data = array(
     'titles' => array(
-      0 => 'Publications',
+      0 => 'Tools and resources',
+      1 => 'Publications',
     ),
     'paths' => array(
-      0 => '<none>',
+      0 => 'articles/tools-and-resources',
+      1 => '<none>',
     ),
     'home' => 1,
     'translatable' => 1,
