@@ -43,7 +43,8 @@ function osha_news_fe_nodequeue_export_fields() {
     'i18n' => 1,
     'subqueues' => 1,
     'types' => array(
-      0 => 'news',
+      0 => 'highlight',
+      1 => 'news',
     ),
     'roles' => array(),
     'count' => 0,
