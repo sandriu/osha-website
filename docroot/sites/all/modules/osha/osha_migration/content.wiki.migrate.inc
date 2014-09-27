@@ -247,10 +247,11 @@ class OshaMigrateSourceWiki extends MigrateSource {
             $ob = $this->data[$parent];
           }
           else {
+            // Create a stub for english and attach this translation.
             $ob = new stdClass();
-            $ob->title = $key;
-            $ob->language = $language;
-            $ob->translations[] = $language;
+            // Create new stub for translation with the english title.
+            $ob->title = $parent;
+            $ob->language = 'en';
           }
         }
         else {
