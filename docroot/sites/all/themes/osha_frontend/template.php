@@ -104,24 +104,33 @@ function osha_frontend_process_node(&$vars) {
     if ($wiki_articles_no < 2) {
       $limit = 2 - $wiki_articles_no;
       // get 2-$wiki_articles_no tagged wiki
-      $tags_tids = array();
-      if (!empty($vars['field_tags'])) {
-        $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
+      $wiki_categories_tids = array();
+      if (!empty($vars['field_wiki_categories'])) {
+        $wiki_categories_tids = $vars['field_wiki_categories'][LANGUAGE_NONE];
       }
 
-      if (!empty($tags_tids)) {
+      if (!empty($wiki_categories_tids)) {
+        // query all wiki articles in the same category or its children
         $tids = array();
-        foreach ($tags_tids as $tid) {
+        $voc = taxonomy_vocabulary_machine_name_load('wiki_categories');
+        foreach ($wiki_categories_tids as $tid) {
+          // normally only one $tid, but just in case
           array_push($tids, $tid['tid']);
+          // load and push also children
+          $terms = taxonomy_get_tree($voc->vid, $tid['tid']);
+          foreach ($terms as $term) {
+            array_push($tids, $term->tid);
+          }
         }
 
         $query = new EntityFieldQuery();
         $result = $query->entityCondition('entity_type', 'node')
           ->entityCondition('bundle', 'wiki_page')
-          ->fieldCondition('field_tags', 'tid', $tids, 'IN')
-          ->propertyOrderBy('changed', 'DESC')
+          ->fieldCondition('field_wiki_categories', 'tid', $tids, 'IN')
+          ->fieldOrderBy('field_updated', 'value', 'DESC')
           ->pager($limit)
           ->execute();
+
         if (!empty($result)) {
           $vars['total_wiki'] = sizeof($result['node']);
           $vars['tagged_wiki'] = array();
