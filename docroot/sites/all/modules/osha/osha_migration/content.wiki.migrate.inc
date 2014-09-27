@@ -334,18 +334,20 @@ class OshaMigrateSourceWiki extends MigrateSource {
   protected function getWikiSummaryFromBody($body) {
     $osh_wiki_prefix = 'http://oshwiki.eu/wiki/';
 
-    // Remove categories and other junk from the start of the page.
     $patterns = array();
-    // Remove {{...}} [[Category]] <categorytree>..</categorytree>.
-    $patterns[0] = '/({{[^}]*}}\s*)*(\[\[[^\]]*\]\]\s*)*(<categorytree.*<\/categorytree>\s*)*/s';
-    // Remove unwanted <ref/>
-    $patterns[1] = '/<ref[^<]*<\/ref>/s';
     $replacements = array();
+    // Remove {{...}} [[Category]] <categorytree>..</categorytree>
+    $patterns[0] = '/({{[^}]*}}\s*)*(\[\[[^\]]*\]\]\s*)*(<categorytree.*<\/categorytree>\s*)*/s';
     $replacements[0] = '';
-    $replacements[1] = '';
     // Use limit because there are other [[wiki links]] in the text.
     $wiki_text = preg_replace($patterns, $replacements, $body, 1);
 
+    $patterns[0] = '/(<ref[^<]*<\/ref>)/s';
+    $replacements[0] = '';
+    // Don't use limit for removal of <ref>..</ref>, there are many
+    $wiki_text = preg_replace($patterns, $replacements, $wiki_text);
+
+    // split in lines which will become <p>..</p>
     $lines = preg_split('/\n/', $wiki_text);
 
     // Replace wiki formatting with HTML.
