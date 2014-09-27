@@ -38,7 +38,7 @@
                           <?php print l(t('View the blog'), 'https://osha.europa.eu/en/about/director_corner/blog', array('attributes' => array('style' => 'color: #144989; text-decoration: none;'), 'external' => TRUE)); ?>
                           <?php
                           $directory = drupal_get_path('module','osha_newsletter');
-                          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+                          $site_url = variable_get('site_base_url', 'http://osha.europa.eu');
                           print l(theme('image', array(
                             'path' => $directory . '/images/pink-arrow.png',
                             'width' => 19,
@@ -73,7 +73,7 @@
                           <?php print l(t('More news'), 'https://osha.europa.eu/en/news', array('attributes' => array('style' => 'color: #144989; text-decoration: none;'), 'external' => TRUE)); ?>
                           <?php
                           $directory = drupal_get_path('module','osha_newsletter');
-                          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+                          $site_url = variable_get('site_base_url', 'http://osha.europa.eu');
                           print l(theme('image', array(
                             'path' => $directory . '/images/pink-arrow.png',
                             'width' => 19,
@@ -107,7 +107,7 @@
                           <?php print l(t('More events'), 'https://osha.europa.eu/en/news', array('attributes' => array('style' => 'color: #144989; text-decoration: none;'), 'external' => TRUE)); ?>
                           <?php
                           $directory = drupal_get_path('module','osha_newsletter');
-                          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+                          $site_url = variable_get('site_base_url', 'http://osha.europa.eu');
                           print l(theme('image', array(
                             'path' => $directory . '/images/pink-arrow.png',
                             'width' => 19,
