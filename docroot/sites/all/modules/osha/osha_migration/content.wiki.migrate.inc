@@ -42,6 +42,7 @@ class OshaMigrateWiki extends DynamicMigration {
     $this->addFieldMapping('field_wiki_categories', 'categories');
     $this->addFieldMapping('field_wiki_categories:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_updated', 'updated');
+    $this->addFieldMapping('field_updated:timezone')->defaultValue('GMT');
   }
 
   /**
@@ -109,6 +110,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
   protected $url;
   protected $serviceQueried = FALSE;
   protected $data = array();
+  protected $newestItemDate = NULL;
 
   /**
    * {@inheritdoc}
@@ -116,6 +118,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
   public function __construct($url, array $options = array()) {
     parent::__construct($options);
     $this->url = $url;
+    $this->newestItemDate = $this->getNewestItemDate();
   }
 
   /**
@@ -180,14 +183,9 @@ class OshaMigrateSourceWiki extends MigrateSource {
    * Query the remote source and pull the data.
    */
   protected function pullRemoteData() {
-    /* @todo Implement remote filtering
-     * $last = variable_get('osha_wiki_last_migration', FALSE)
-     * Send this filter so only pull the content created/updated after this date
-     */
     if (!$this->serviceQueried) {
       $this->data = array();
       $this->serviceQueried = TRUE;
-      $local_latest_date = $this->getLatestItemDate();
 
       $pretty_print = TRUE;
       $base_url = $this->url;
@@ -207,7 +205,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
           $content = file_get_contents($url);
           $content = json_decode($content, TRUE);
           if (!empty($content['results'])) {
-            if (!$this->processRemoteResultsPage($content['results'], $local_latest_date)) {
+            if (!$this->processRemoteResultsPage($content['results'])) {
               $this->setMessage("Finished at page #$page because we hit the oldest item", MigrationBase::MESSAGE_WARNING);
               break;
             }
@@ -235,8 +233,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
    * @return bool
    *   Return FALSE if we hit the oldest item
    */
-  protected function processRemoteResultsPage($results, $local_latest_date) {
-    $ret = TRUE;
+  protected function processRemoteResultsPage($results) {
     foreach ($results as $key => $data) {
       if ($this->validateDataRow($key, $data)) {
         $page_id = str_replace('//oshwiki.eu/wiki/', '', $data['fullurl']);
@@ -261,6 +258,16 @@ class OshaMigrateSourceWiki extends MigrateSource {
           $ob->language = 'en';
           $ob->title = $key;
         }
+
+        $ob->updated = '';
+        if (!empty($data['printouts']['Modification date'][0])) {
+          $updated = $data['printouts']['Modification date'][0];
+          $ob->updated = $updated;
+          if ($updated <= $this->newestItemDate) {
+            // We hit the oldest updated item, end the migration.
+            return FALSE;
+          }
+        }
         $body = $this->getWikiPageContent($page_id);
         $ob->ml_body[$language] = $body;
         $ob->ml_summary[$language] = $this->getWikiSummaryFromBody($body);
@@ -272,27 +279,16 @@ class OshaMigrateSourceWiki extends MigrateSource {
           }
         }
         $ob->ml_title_field[$language] = $key;
-
-        $ob->updated = '';
-        if (!empty($data['printouts']['Modification date'][0])) {
-          $updated = $data['printouts']['Modification date'][0];
-          $ob->updated = $updated;
-          if ($updated < $local_latest_date) {
-            $ret = FALSE;
-          }
-        }
         $ob->ml_url[$language] = $url;
         // @todo Add fields
         // $ob->nace = '';
         // $ob->thesaurus = '';
         if ($language == 'en') {
-          if ($ob->updated > $local_latest_date) {
-            $this->data[$parent] = $ob;
-          }
+          $this->data[$parent] = $ob;
         }
       }
     }
-    return $ret;
+    return TRUE;
   }
 
   /**
@@ -325,13 +321,14 @@ class OshaMigrateSourceWiki extends MigrateSource {
    *   Returns empty or date to filter the content by.
    * @throws EntityFieldQueryException
    */
-  public function getLatestItemDate() {
+  public function getNewestItemDate() {
     $ret = NULL;
+    cache_clear_all();
     $query = new EntityFieldQuery();
-    $result = $query->entityCondition('entity_type', 'node')
+    $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'wiki_page')
-      ->fieldOrderBy('field_updated', 'value', 'DESC')
-      ->execute();
+      ->fieldOrderBy('field_updated', 'value', 'DESC');
+    $result = $query->execute();
     if (isset($result['node'])) {
       $latest_id = current($result['node']);
       $latest = node_load($latest_id->nid);
@@ -343,16 +340,22 @@ class OshaMigrateSourceWiki extends MigrateSource {
     return $ret;
   }
 
-  function getWikiPageContent($page_id) {
+  /**
+   * Get the content of a Wiki page body. Does a remote HTTP call.
+   *
+   * @param string $page_id
+   *   Name of the wiki page (i.e. Sektoren_und_Berufe).
+   *
+   * @return string
+   *   Text with body
+   */
+  protected function getWikiPageContent($page_id) {
     $url = sprintf('http://oshwiki.eu/api.php?action=parse&format=json&prop=wikitext&page=%s', $page_id);
     $data = drupal_http_request($url);
     if (isset($data) && $data->code == 200) {
       $content = json_decode($data->data, TRUE);
       if (!empty($content['parse']['wikitext']['*'])) {
         $text = $content['parse']['wikitext']['*'];
-        if($pos = strpos($text, "==")) {
-          $text = substr($text, $pos);
-        }
         return $text;
       }
     }
