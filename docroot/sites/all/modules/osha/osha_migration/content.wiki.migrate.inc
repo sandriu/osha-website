@@ -312,9 +312,9 @@ class OshaMigrateSourceWiki extends MigrateSource {
             return FALSE;
           }
         }
-        #$body = $this->getWikiPageContent($page_id);
-        #$ob->ml_body[$language] = $body;
-        #$ob->ml_summary[$language] = $this->getWikiSummaryFromBody($body);
+        $body = $this->getWikiPageContent($page_id);
+        $ob->ml_body[$language] = $body;
+        $ob->ml_summary[$language] = $this->getWikiSummaryFromBody($body);
         $ob->ml_title_field[$language] = $key;
         $ob->ml_url[$language] = $url;
 
@@ -368,10 +368,10 @@ class OshaMigrateSourceWiki extends MigrateSource {
 
     $patterns[0] = '/(<ref[^<]*<\/ref>)/s';
     $replacements[0] = '';
-    // Don't use limit for removal of <ref>..</ref>, there are many
+    // Don't use limit for removal of <ref>..</ref>, there are many.
     $wiki_text = preg_replace($patterns, $replacements, $wiki_text);
 
-    // split in lines which will become <p>..</p>
+    // Split in lines which will become <p>..</p>.
     $lines = preg_split('/\n/', $wiki_text);
 
     // Replace wiki formatting with HTML.
