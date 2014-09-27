@@ -45,6 +45,10 @@ class OshaMigrateWiki extends DynamicMigration {
     $this->addFieldMapping('field_updated:timezone')->defaultValue('GMT');
     $this->addFieldMapping('field_tags', 'tags');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_nace_codes', 'nace');
+    $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_thesaurus', 'thesaurus');
+    $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
 
     $this->addUnmigratedDestinations(array(
       'uid', 'created', 'changed', 'status', 'promote', 'sticky',
@@ -63,6 +67,8 @@ class OshaMigrateWiki extends DynamicMigration {
       'metatag_content-language',
       'comment',
       'field_tags:create_term', 'field_tags:ignore_case',
+      'field_nace_codes:create_term', 'field_nace_codes:ignore_case',
+      'field_thesaurus:create_term', 'field_thesaurus:ignore_case',
     ));
   }
 
@@ -87,6 +93,8 @@ class OshaMigrateWiki extends DynamicMigration {
       }
     }
     $row->tags = $tags;
+    $row->nace = MigrationUtil::findTidByTaxonomyField($row->nace, 'field_nace_code', OSHA_TAXONOMIES_NACE_CODES);
+    $row->thesaurus = MigrationUtil::findTidByTaxonomyField($row->thesaurus, 'field_thesaurus_code', OSHA_TAXONOMIES_THESAURUS);
     return TRUE;
   }
 
@@ -174,8 +182,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
       'categories' => t('Wiki categories'),
       'tags' => t('Wiki page tags'),
       'updated' => t('Date when page was last modified'),
-      // 'nace' => t('Nace codes'),
-      // 'thesaurus' => t('Thesaurus codes'),
+      'nace' => t('Nace codes'),
+      'thesaurus' => t('Thesaurus codes'),
     );
   }
 
@@ -304,27 +312,38 @@ class OshaMigrateSourceWiki extends MigrateSource {
             return FALSE;
           }
         }
-        $body = $this->getWikiPageContent($page_id);
-        $ob->ml_body[$language] = $body;
-        $ob->ml_summary[$language] = $this->getWikiSummaryFromBody($body);
-        $ob->categories = array();
-        if ($language == 'en' && !empty($data['printouts']['Category'])) {
-          foreach ($data['printouts']['Category'] as $cat_data) {
-            $cat_name = str_replace('Category:', '', $cat_data['fulltext']);
-            $ob->categories[] = $cat_name;
-          }
-        }
+        #$body = $this->getWikiPageContent($page_id);
+        #$ob->ml_body[$language] = $body;
+        #$ob->ml_summary[$language] = $this->getWikiSummaryFromBody($body);
         $ob->ml_title_field[$language] = $key;
         $ob->ml_url[$language] = $url;
-        // @todo Add fields
-        // $ob->nace = '';
-        // $ob->thesaurus = '';
+
         if ($language == 'en') {
+          $ob->categories = array();
+          if (!empty($data['printouts']['Category'])) {
+            foreach ($data['printouts']['Category'] as $cat_data) {
+              $cat_name = str_replace('Category:', '', $cat_data['fulltext']);
+              $ob->categories[] = $cat_name;
+            }
+          }
+          $ob->nace = array();
+          if (!empty($data['printouts']['NP'])) {
+            foreach ($data['printouts']['NP'] as $np) {
+              $ob->nace[] = str_replace('Property:NACE ', '', $np['fulltext']);
+            }
+          }
+          $ob->thesaurus = array();
+          if (!empty($data['printouts']['OP'])) {
+            foreach ($data['printouts']['OP'] as $op) {
+              $ob->thesaurus[] = str_replace('Property:OSHA ', '', $op['fulltext']);
+            }
+          }
+
           $this->data[$parent] = $ob;
         }
       }
     }
-    return TRUE;
+    return FALSE;
   }
 
   /**
