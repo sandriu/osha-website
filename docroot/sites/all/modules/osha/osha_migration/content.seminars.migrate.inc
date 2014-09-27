@@ -263,6 +263,9 @@ class SeminarsListCSV extends MigrateList {
   protected function parseSourceFile() {
     $handle = fopen($this->file, 'r');
     $fields = $raw_data = fgetcsv($handle, NULL, ';');
+    if(empty($fields)) {
+      return;
+    }
     $work_flow_key = array_search('workflow_state', $fields);
 
     self::$data = array();
