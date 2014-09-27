@@ -302,16 +302,59 @@ class OshaMigrateSourceWiki extends MigrateSource {
    *   Summary text to add into field_summary
    */
   protected function getWikiSummaryFromBody($body) {
+    $osh_wiki_prefix = 'http://oshwiki.eu/wiki/';
+
+    // Remove categories and other junk from the start of the page.
+    $patterns = array();
+    // Remove {{...}} [[Category]] <categorytree>..</categorytree>.
+    $patterns[0] = '/({{[^}]*}}\s*)*(\[\[[^\]]*\]\]\s*)*(<categorytree.*<\/categorytree>\s*)*/s';
+    $replacements = array();
+    $replacements[0] = '';
+    // Use limit because there are other [[wiki links]] in the text.
+    $wiki_text = preg_replace($patterns, $replacements, $body, 1);
+
+    $lines = preg_split('/\n/', $wiki_text);
+    // Replace wiki formatting with HTML.
+    $patterns = array();
+    // == Headings ==
+    $patterns[0] = '/==== ([^=]*) ====/';
+    $patterns[1] = '/=== ([^=]*) ===/';
+    $patterns[2] = '/== ([^=]*) ==/';
+    // Internal [[Wiki Links]]
+    $patterns[3] = '/\[\[([^\]]*)\]\]/';
+    // '''''bold+italic''''', '''bold''', ''italic''
+    $patterns[4] = "/'''([^']*)'''/";
+    $patterns[5] = "/''([^']*)''/";
+    // Replace http links.
+    $patterns[6] = "/\[([^\s\[]*)\s([^\[]*)\]/";
+    // Remove unwanted <ref/>
+    $patterns[7] = "/<ref.*\/>/";
+
+    $replacements = array();
+    $replacements[0] = '<h4>${1}</h5>';
+    $replacements[1] = '<h3>${1}</h4>';
+    $replacements[2] = '<h2>${1}</h3>';
+    $replacements[3] = '<a href="' . $osh_wiki_prefix . '${1}">${1}</a>';
+    $replacements[4] = '<b>${1}</b>';
+    $replacements[5] = '<i>${1}</i>';
+    $replacements[6] = '<a href="${1}">${2}</a>';
+    $replacements[7] = '${1}';
+
     $summary = '';
-    if (strlen($body)) {
-      $summary = explode('\n', $body);
-      $summary = array_filter($summary);
-      $summary = array_slice($summary, 0, 5);
-      foreach ($summary as &$line) {
-        $line = preg_replace('/==/', '<h2>', $line, 1);
-        $line = preg_replace('/==/', '</h2>', $line, 1);
+    $char_count = 0;
+    foreach ($lines as $line) {
+      if ($length = strlen($line)) {
+        $char_count += $length;
+        $html_line = preg_replace($patterns, $replacements, $line);
+        if ($html_line[0] != '<') {
+          $html_line = '<p>' . $html_line . '</p>';
+        }
+        $summary .= $html_line . "\n";
+        // Limit maximum char length.
+        if ($char_count > 7000) {
+          break;
+        }
       }
-      $summary = implode('\n', $summary);
     }
     return $summary;
   }
