@@ -19,57 +19,56 @@ class WikiParseTest extends DrupalUnitTestCase {
   }
 
   public function testWikiParse() {
-  
-    $OSHWIKI_PREFIX = 'http://oshwiki.eu/wiki/';
-  
+    $osh_wiki_prefix = 'http://oshwiki.eu/wiki/';
+
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/wiki.json';
-    $json = json_decode(file_get_contents($source_file), TRUE); 
+    $json = json_decode(file_get_contents($source_file), TRUE);
     $text = $json['parse']['wikitext']['*'];
-    
+
+    // Remove categories and other junk from the start of the page.
     $pattern = '/{{.*}}(\n\[\[[^\]]*\]\])*(\n<[^\n]*)*\n(.*)/s';
     $matches = array();
     preg_match_all($pattern, $text, $matches);
     $wiki_text = $matches[3][0];
     $lines = preg_split('/\n/', $wiki_text);
-    $char_count = 0;
-    
-    // replace wiki formatting with HTML
+
+    // Replace wiki formatting with HTML.
     $patterns = array();
     // == Headings ==
     $patterns[0] = '/==== ([^=]*) ====/';
     $patterns[1] = '/=== ([^=]*) ===/';
     $patterns[2] = '/== ([^=]*) ==/';
-    // internal [[Wiki Links]]
+    // Internal [[Wiki Links]]
     $patterns[3] = '/\[\[([^\]]*)\]\]/';
     // '''''bold+italic''''', '''bold''', ''italic''
     $patterns[4] = "/'''([^']*)'''/";
     $patterns[5] = "/''([^']*)''/";
-    // replace http links
+    // Replace http links.
     $patterns[6] = "/\[([^\s\[]*)\s([^\[]*)\]/";
-    // remove unwanted <ref/>
+    // Remove unwanted <ref/>
     $patterns[7] = "/<ref.*\/>/";
-    
-    
+
     $replacements = array();
     $replacements[0] = '<h4>${1}</h5>';
     $replacements[1] = '<h3>${1}</h4>';
     $replacements[2] = '<h2>${1}</h3>';
-    $replacements[3] = '<a href="'.$OSHWIKI_PREFIX.'${1}">${1}</a>';
+    $replacements[3] = '<a href="' . $osh_wiki_prefix . '${1}">${1}</a>';
     $replacements[4] = '<b>${1}</b>';
     $replacements[5] = '<i>${1}</i>';
     $replacements[6] = '<a href="${1}">${2}</a>';
     $replacements[7] = '${1}';
 
     $summary = '';
+    $char_count = 0;
     foreach ($lines as $line) {
       if ($length = strlen($line)) {
         $char_count += $length;
         $html_line = preg_replace($patterns, $replacements, $line);
         if ($html_line[0] != '<') {
-            $html_line = '<p>'.$html_line.'</p>';
+          $html_line = '<p>' . $html_line . '</p>';
         }
-        $summary .= $html_line."\n";
-        // limit maximum char length
+        $summary .= $html_line . "\n";
+        // Limit maximum char length.
         if ($char_count > 700) {
           break;
         }
