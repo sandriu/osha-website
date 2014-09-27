@@ -23,17 +23,17 @@ class WikiParseTest extends DrupalUnitTestCase {
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/wiki.json';
     $json = json_decode(file_get_contents($source_file), TRUE);
-    $text = $json['parse']['wikitext']['*'];
+    $body = $json['parse']['wikitext']['*'];
 
     // Remove categories and other junk from the start of the page.
     $patterns = array();
-    // remove {{...}} [[Category]] <categorytree>..</categorytree>
+    // Remove {{...}} [[Category]] <categorytree>..</categorytree>
     $patterns[0] = '/({{[^}]*}}\s*)*(\[\[[^\]]*\]\]\s*)*(<categorytree.*<\/categorytree>\s*)*/s';
     $replacements = array();
     $replacements[0] = '';
-    // use limit because there are other [[wiki links]] in the text
-    $wiki_text = preg_replace($patterns, $replacements, $text, 1);
-    
+    // Use limit because there are other [[wiki links]] in the text.
+    $wiki_text = preg_replace($patterns, $replacements, $body, 1);
+
     $lines = preg_split('/\n/', $wiki_text);
 
     // Replace wiki formatting with HTML.
@@ -72,8 +72,8 @@ class WikiParseTest extends DrupalUnitTestCase {
           $html_line = '<p>' . $html_line . '</p>';
         }
         $summary .= $html_line . "\n";
-        // Limit maximum char length.
-        if ($char_count > 7000) {
+        // Import hard-limit maximum char length.
+        if ($char_count > 700) {
           break;
         }
       }

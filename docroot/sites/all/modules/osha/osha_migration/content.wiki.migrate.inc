@@ -328,10 +328,11 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[0] = '/({{[^}]*}}\s*)*(\[\[[^\]]*\]\]\s*)*(<categorytree.*<\/categorytree>\s*)*/s';
     $replacements = array();
     $replacements[0] = '';
-    // Use limit because there are other [[wiki links]] in the text.
+    // Use limit because there are other [[wiki links]] in the text
     $wiki_text = preg_replace($patterns, $replacements, $body, 1);
 
     $lines = preg_split('/\n/', $wiki_text);
+
     // Replace wiki formatting with HTML.
     $patterns = array();
     // == Headings ==
@@ -368,8 +369,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
           $html_line = '<p>' . $html_line . '</p>';
         }
         $summary .= $html_line . "\n";
-        // Limit maximum char length.
-        if ($char_count > 7000) {
+        // Import hard-limit maximum char length.
+        if ($char_count > 700) {
           break;
         }
       }
