@@ -10,7 +10,11 @@ class OshaMigrateWiki extends DynamicMigration {
     $this->arguments = $arguments;
     $this->description = 'Import wiki articles from oshawiki.eu';
 
-    $url = 'http://oshwiki.eu/index.php?title=Special%3AAsk&q=%5B%5B%3A%2B%5D%5D&po=%3FModification+date%0D%0A%3FCategory%0D%0A%3FMaster+page%0D%0A%3FModification+date%0D%0A%3FLanguage+code%0D%0A%3FNP%0D%0A%3FOP%0D%0A&eq=yes&p%5Bformat%5D=json&sort_num=&order_num=ASC&p%5Blink%5D=subject&p%5Bsort%5D=Modification+date&p%5Border%5D%5Bdesc%5D=1&p%5Bheaders%5D=show&p%5Bmainlabel%5D=&p%5Bintro%5D=&p%5Boutro%5D=&p%5Bsearchlabel%5D=&p%5Bdefault%5D=&p%5Bsyntax%5D=standard&eq=yes';
+    $url = variable_get('wiki_query_url', FALSE);
+    if (!$url) {
+      drupal_set_message('Wiki migration disabled due missing "wiki_query_url" variable. Check config.json, use now drush vset to set the variable', 'error');
+      $this->enabled = FALSE;
+    }
     $this->source = new OshaMigrateSourceWiki($url, array(
         'skip_count' => TRUE,
       )
@@ -142,7 +146,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
    */
   public function __toString() {
     return t(
-      "Extract pages from wiki using semantic search. Handles pagination. Query example: <a target='_blank' href='!url'>Open</a>",
+      "Extract pages from wiki using semantic search and JSON export. Handles pagination. Query example: <a target='_blank' href='!url'>Open</a>",
       array('!url' => self::$templateUrl)
     );
   }
@@ -207,9 +211,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
     if (!$this->serviceQueried) {
       $this->data = array();
       $this->serviceQueried = TRUE;
-
       $pretty_print = TRUE;
-      $base_url = 'http://oshwiki.eu/index.php?title=Special%3AAsk&q=%5B%5B%3A%2B%5D%5D&po=%3FModification+date%0D%0A%3FCategory%0D%0A%3FMaster+page%0D%0A%3FModification+date%0D%0A%3FLanguage+code%0D%0A%3FNP%0D%0A%3FOP%0D%0A&eq=yes&p%5Bformat%5D=json&sort_num=&order_num=ASC&p%5Blink%5D=subject&p%5Bsort%5D=Modification+date&p%5Border%5D%5Bdesc%5D=1&p%5Bheaders%5D=show&p%5Bmainlabel%5D=&p%5Bintro%5D=&p%5Boutro%5D=&p%5Bsearchlabel%5D=&p%5Bdefault%5D=&p%5Bsyntax%5D=standard&eq=yes';
+      $base_url = $this->url;
       if ($pretty_print) {
         $base_url .= '&p%5Bprettyprint%5D=1';
       }
