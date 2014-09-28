@@ -141,13 +141,13 @@ function osha_highlight_strongarm() {
           'weight' => '12',
         ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '2',
         ),
         'metatags' => array(
           'weight' => '14',
         ),
         'workbench_access' => array(
-          'weight' => '2',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
