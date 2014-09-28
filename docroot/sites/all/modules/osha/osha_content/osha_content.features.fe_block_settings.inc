@@ -39,7 +39,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -27,
+        'weight' => -16,
       ),
       'seven' => array(
         'region' => '',
@@ -79,7 +79,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -9,
+        'weight' => -7,
       ),
       'seven' => array(
         'region' => '',
@@ -119,10 +119,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_second',
+        'region' => 'blockgroup_related',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -23,
+        'weight' => -29,
       ),
       'seven' => array(
         'region' => '',
@@ -164,7 +164,7 @@ function osha_content_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -24,
+        'weight' => -26,
       ),
       'seven' => array(
         'region' => '',
@@ -203,10 +203,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => -6,
       ),
       'seven' => array(
         'region' => '',
@@ -245,10 +245,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_second',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -25,
+        'weight' => -5,
       ),
       'seven' => array(
         'region' => '',
@@ -287,10 +287,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 2,
+        'weight' => -4,
       ),
       'seven' => array(
         'region' => '',

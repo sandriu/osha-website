@@ -12,6 +12,16 @@ List of patches (most recent first)
   * features_extra-invalid-argument-foreach-2018515-1.patch
   * https://www.drupal.org/files/features_extra-invalid-argument-foreach-2018515-1.patch
 
+* blockgroup
+  * Allow feature revert
+  * https://www.drupal.org/node/2189393
+  * https://www.drupal.org/files/issues/blockgroup-7.x-1.x-features-revert-bug.diff
+
+* blockgroup
+  * Allow region theme hook
+  * https://www.drupal.org/node/2043743
+  * https://www.drupal.org/files/issues/blockgroup-region_template_suggestion-2043743-2.patch
+
 * workbench_moderation
   * Added patch for node_export
   * https://www.drupal.org/node/2176841
