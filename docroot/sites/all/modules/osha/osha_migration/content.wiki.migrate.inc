@@ -343,7 +343,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
         }
       }
     }
-    return FALSE;
+    return TRUE;
   }
 
   /**
