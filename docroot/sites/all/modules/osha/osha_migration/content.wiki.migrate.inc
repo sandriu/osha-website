@@ -8,12 +8,13 @@ class OshaMigrateWiki extends DynamicMigration {
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Wiki'));
     $this->arguments = $arguments;
-    $this->description = 'Import wiki articles from oshawiki.eu';
+    $this->description = 'Import wiki articles from oshawiki.eu. Set <b>osha_wiki_hostname</b> variable to override wiki server hostname';
+    $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'oshwiki.eu');
 
-    $url = variable_get('wiki_query_url', FALSE);
+    $url = variable_get('osha_wiki_query_url', FALSE);
     if (!$url) {
       drupal_set_message('Wiki migration: Query URL variable set to default. Use drush vset to override the value');
-      $url = 'http://oshwiki.eu/index.php?title=Special%3AAsk&q=%5B%5B%3A%2B%5D%5D&po=%3FModification+date%0D%0A%3FCategory%0D%0A%3FMaster+page%0D%0A%3FModification+date%0D%0A%3FLanguage+code%0D%0A%3FNP%0D%0A%3FOP%0D%0A&eq=yes&p%5Bformat%5D=json&p%5Blink%5D=subject&p%5Bsort%5D=Modification+date&p%5Border%5D%5Bdesc%5D=1&p%5Bheaders%5D=show&p%5Bmainlabel%5D=&p%5Bintro%5D=&p%5Boutro%5D=&p%5Bsearchlabel%5D=&p%5Bdefault%5D=&p%5Bsyntax%5D=standard&eq=yes';
+      $url = 'http://' . $osha_wiki_hostname . '/index.php?title=Special%3AAsk&q=%5B%5B%3A%2B%5D%5D&po=%3FModification+date%0D%0A%3FCategory%0D%0A%3FMaster+page%0D%0A%3FModification+date%0D%0A%3FLanguage+code%0D%0A%3FNP%0D%0A%3FOP%0D%0A&eq=yes&p%5Bformat%5D=json&p%5Blink%5D=subject&p%5Bsort%5D=Modification+date&p%5Border%5D%5Bdesc%5D=1&p%5Bheaders%5D=show&p%5Bmainlabel%5D=&p%5Bintro%5D=&p%5Boutro%5D=&p%5Bsearchlabel%5D=&p%5Bdefault%5D=&p%5Bsyntax%5D=standard&eq=yes';
     }
     $this->source = new OshaMigrateSourceWiki($url, array(
         'skip_count' => TRUE,
@@ -279,7 +280,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
   protected function processRemoteResultsPage($results) {
     foreach ($results as $key => $data) {
       if ($this->validateDataRow($key, $data)) {
-        $page_id = str_replace('//oshwiki.eu/wiki/', '', $data['fullurl']);
+        $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'oshwiki.eu');
+        $page_id = str_replace('//' . $osha_wiki_hostname . '/wiki/', '', $data['fullurl']);
         $url = 'http:' . $data['fullurl'];
         $parent = $data['printouts']['Master page'][0]['fulltext'];
         $language = $data['printouts']['Language code'][0];
@@ -356,7 +358,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
    *   Summary text to add into field_summary
    */
   protected function getWikiSummaryFromBody($body) {
-    $osh_wiki_prefix = 'http://oshwiki.eu/wiki/';
+    $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'oshwiki.eu');
+    $osh_wiki_prefix = 'http://' . $osha_wiki_hostname . '/wiki/';
 
     $patterns = array();
     $replacements = array();
@@ -454,7 +457,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
    *   Text with body
    */
   protected function getWikiPageContent($page_id) {
-    $url = sprintf('http://oshwiki.eu/api.php?action=parse&format=json&prop=wikitext&page=%s', $page_id);
+    $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'oshwiki.eu');
+    $url = sprintf('http://' . $osha_wiki_hostname . '/api.php?action=parse&format=json&prop=wikitext&page=%s', $page_id);
     $data = drupal_http_request($url);
     if (isset($data) && $data->code == 200) {
       $content = json_decode($data->data, TRUE);
