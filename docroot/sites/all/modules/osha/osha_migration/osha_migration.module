@@ -82,86 +82,87 @@ function osha_migration_migrate_api() {
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/pages.txt')) {
+  $external_data_dir = osha_migration_get_data_dir();
+  if (is_readable($external_data_dir . '/export/pages.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_ARTICLE] = array(
       'class_name' => 'OshaMigrateArticles',
-      'file_name' => osha_migration_get_data_dir() . '/export/pages.txt',
+      'file_name' => $external_data_dir . '/export/pages.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/blog.txt')) {
+  if (is_readable($external_data_dir . '/export/blog.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_BLOG] = array(
       'class_name' => 'MigrateOshaBlog',
-      'file_name' => osha_migration_get_data_dir() . '/export/blog.txt',
+      'file_name' => $external_data_dir . '/export/blog.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/call_for_contractors.txt')) {
+  if (is_readable($external_data_dir . '/export/call_for_contractors.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_CALLS] = array(
       'class_name' => 'MigrateOshaCalls',
-      'file_name' => osha_migration_get_data_dir() . '/export/call_for_contractors.txt',
+      'file_name' => $external_data_dir . '/export/call_for_contractors.txt',
     );
   }
-  if (is_readable($migration_module_dir . '/export/case_studies.txt')) {
+  if (is_readable($external_data_dir . '/export/case_studies.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY] = array(
       'class_name' => 'MigrateOshaCaseStudy',
-      'file_name' => osha_migration_get_data_dir() . '/export/case_studies.txt',
+      'file_name' => $external_data_dir . '/export/case_studies.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/news.txt')) {
+  if (is_readable($external_data_dir . '/export/news.txt')) {
     $migrations[OSHA_HIGHLIGHT_CONTENT_TYPE_HIGHLIGHT] = array(
       'class_name' => 'MigrateOshaHighlight',
-      'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
+      'file_name' => $external_data_dir . '/export/news.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/job_vacancies.txt')) {
+  if (is_readable($external_data_dir . '/export/job_vacancies.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES] = array(
       'class_name' => 'OshaMigrateJobVacancies',
-      'file_name' => osha_migration_get_data_dir() . '/export/job_vacancies.txt',
+      'file_name' => $external_data_dir . '/export/job_vacancies.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/news.txt')) {
+  if (is_readable($external_data_dir . '/export/news.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_NEWS] = array(
       'class_name' => 'MigrateOshaNews',
-      'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
+      'file_name' => $external_data_dir . '/export/news.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/publications.txt')) {
+  if (is_readable($external_data_dir . '/export/publications.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION] = array(
       'class_name' => 'OshaMigratePublications',
-      'file_name' => osha_migration_get_data_dir() . '/export/publications.txt',
+      'file_name' => $external_data_dir . '/export/publications.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/seminars.txt')) {
+  if (is_readable($external_data_dir . '/export/seminars.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_SEMINAR] = array(
       'class_name' => 'OshaMigrateSeminars',
-      'file_name' => osha_migration_get_data_dir() . '/export/seminars.txt',
+      'file_name' => $external_data_dir . '/export/seminars.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/files.txt')) {
+  if (is_readable($external_data_dir . '/export/files.txt')) {
     $migrations[OSHA_MIGRATION_FILES] = array(
       'class_name' => 'OshaMigrateFiles',
-      'file_name' => osha_migration_get_data_dir() . '/export/files.txt',
+      'file_name' => $external_data_dir . '/export/files.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/images.txt')) {
+  if (is_readable($external_data_dir . '/export/images.txt')) {
     $migrations[OSHA_MIGRATION_IMAGES] = array(
       'class_name' => 'OshaMigrateImages',
-      'file_name' => osha_migration_get_data_dir() . '/export/images.txt',
+      'file_name' => $external_data_dir . '/export/images.txt',
     );
   }
 
-  if (is_readable($migration_module_dir . '/export/press_release.txt')) {
+  if (is_readable($external_data_dir . '/export/press_release.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE] = array(
       'class_name' => 'MigrateOshaPressRelease',
-      'file_name' => osha_migration_get_data_dir() . '/export/press_release.txt',
+      'file_name' => $external_data_dir . '/export/press_release.txt',
     );
   }
 
