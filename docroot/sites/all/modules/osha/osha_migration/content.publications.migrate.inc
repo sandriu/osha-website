@@ -436,7 +436,9 @@ class PublicationMigrateList extends MigrateList {
             else {
               self::$data[$path]['related_resources'] = array();
             }
-            self::$data[$path]['paths'] = $items['paths'];
+            if (isset($items['paths'])) {
+                self::$data[$path]['paths'] = $items['paths'];
+            }
             break;
 
           default:
