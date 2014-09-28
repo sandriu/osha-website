@@ -117,6 +117,12 @@ function osha_job_vacancies_strongarm() {
         'language' => array(
           'weight' => '0',
         ),
+        'metatags' => array(
+          'weight' => '17',
+        ),
+        'workbench_access' => array(
+          'weight' => '1',
+        ),
       ),
       'display' => array(),
     ),
@@ -151,7 +157,8 @@ function osha_job_vacancies_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_job_vacancies';
   $strongarm->value = array(
-    0 => 'status',
+    0 => 'moderation',
+    1 => 'revision',
   );
   $export['node_options_job_vacancies'] = $strongarm;
 
