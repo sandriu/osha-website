@@ -271,6 +271,7 @@ $options['init-modules'] = array(
   'views',
   'views_ui',
   'views_bulk_operations',
+  'date_views',
   'better_exposed_filters',
 
   'mailsystem',
@@ -302,6 +303,8 @@ $options['init-modules'] = array(
   'tmgmt_ui',
   'tmgmt_file',
   'tmgmt_i18n_string',
+
+  'blockgroup',
 
   'i18n_menu',
   'i18n_block',
