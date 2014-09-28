@@ -150,10 +150,10 @@ function osha_news_strongarm() {
           'weight' => '12',
         ),
         'workbench_access' => array(
-          'weight' => '8',
+          'weight' => '0',
         ),
         'language' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'redirect' => array(
           'weight' => '13',
