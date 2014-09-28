@@ -164,7 +164,7 @@ function osha_content_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -26,
+        'weight' => -28,
       ),
       'seven' => array(
         'region' => '',
@@ -245,10 +245,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'sidebar_second',
+        'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -5,
+        'weight' => -29,
       ),
       'seven' => array(
         'region' => '',
