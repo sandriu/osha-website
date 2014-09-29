@@ -20,7 +20,7 @@ function osha_calls_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'articles/doing-business-us',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -36,10 +36,10 @@ function osha_calls_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'content',
+        'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'seven' => array(
         'region' => '',
@@ -49,7 +49,7 @@ function osha_calls_default_fe_block_settings() {
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['views-calls-block_1'] = array(
@@ -60,7 +60,7 @@ function osha_calls_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'articles/doing-business-us',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -76,10 +76,10 @@ function osha_calls_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'content',
+        'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'seven' => array(
         'region' => '',
@@ -89,7 +89,7 @@ function osha_calls_default_fe_block_settings() {
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['views-calls-block_2'] = array(
