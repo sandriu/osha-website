@@ -22,7 +22,7 @@ function osha_calls_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 0,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -97,7 +97,7 @@ function osha_calls_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -162,10 +162,9 @@ function osha_calls_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
+        'type' => 'hidden',
+        'weight' => 13,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -231,11 +230,11 @@ function osha_calls_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'file',
+        'label' => 'hidden',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 8,
+        'type' => 'custom_formatters_call_contract_notice',
+        'weight' => 6,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -304,11 +303,11 @@ function osha_calls_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'file',
+        'label' => 'hidden',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 7,
+        'type' => 'custom_formatters_call_contract_notice',
+        'weight' => 5,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -377,11 +376,11 @@ function osha_calls_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'file',
+        'label' => 'hidden',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 12,
+        'type' => 'custom_formatters_call_contract_notice',
+        'weight' => 8,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -450,11 +449,11 @@ function osha_calls_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'file',
+        'label' => 'hidden',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 9,
+        'type' => 'custom_formatters_call_contract_notice',
+        'weight' => 7,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -523,11 +522,11 @@ function osha_calls_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'file',
+        'label' => 'hidden',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 10,
+        'type' => 'custom_formatters_call_contract_notice',
+        'weight' => 3,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -596,11 +595,11 @@ function osha_calls_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'file',
+        'label' => 'hidden',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 6,
+        'type' => 'custom_formatters_call_contract_notice',
+        'weight' => 2,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -756,10 +755,9 @@ function osha_calls_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
+        'type' => 'hidden',
+        'weight' => 11,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -825,11 +823,11 @@ function osha_calls_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'file',
+        'label' => 'hidden',
+        'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 11,
+        'type' => 'custom_formatters_call_contract_notice',
+        'weight' => 4,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -899,17 +897,9 @@ function osha_calls_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'osha_date_theme' => '',
-        ),
-        'type' => 'date_default',
-        'weight' => 17,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -978,17 +968,9 @@ function osha_calls_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'osha_date_theme' => '',
-        ),
-        'type' => 'date_default',
-        'weight' => 2,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1072,10 +1054,9 @@ function osha_calls_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 12,
       ),
       'highlights_item' => array(
         'label' => 'hidden',
@@ -1213,7 +1194,7 @@ function osha_calls_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'highlights_item' => array(
         'label' => 'hidden',
