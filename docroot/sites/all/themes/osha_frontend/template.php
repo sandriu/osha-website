@@ -94,7 +94,7 @@ function osha_frontend_apachesolr_sort_list($vars) {
  */
 function osha_frontend_process_node(&$vars) {
   // Change default text of the read more link.
-  if ($vars['type'] == 'article') {
+  if ($vars['type'] == 'article' || $vars['type'] == 'publication') {
     $wiki_articles_no = 0;
     if (isset($vars['field_related_oshwiki_articles'])) {
       $wiki_articles_no = sizeof($vars['field_related_oshwiki_articles']);
