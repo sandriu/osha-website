@@ -63,7 +63,6 @@ features[field_instance][] = node-seminar-field_workflow_status
 features[field_instance][] = node-seminar-title_field
 features[node][] = seminar
 features[taxonomy][] = tags
-features[uuid_node][] = e4f3c794-16cc-4148-a7d1-dc8fdb0d5c8c
 features[variable][] = comment_anonymous_seminar
 features[variable][] = comment_default_mode_seminar
 features[variable][] = comment_default_per_page_seminar
