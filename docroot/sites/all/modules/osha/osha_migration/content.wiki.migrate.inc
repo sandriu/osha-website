@@ -392,9 +392,9 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[6] = "/\[([^\s\[]*)\s([^\[]*)\]/";
 
     $replacements = array();
-    $replacements[0] = '<h4>${1}</h5>';
-    $replacements[1] = '<h3>${1}</h4>';
-    $replacements[2] = '<h2>${1}</h3>';
+    $replacements[0] = '';
+    $replacements[1] = '';
+    $replacements[2] = '';
     $replacements[3] = '<a href="' . $osh_wiki_prefix . '${1}">${2}</a>';
     $replacements[4] = '<b>${1}</b>';
     $replacements[5] = '<i>${1}</i>';
@@ -406,12 +406,12 @@ class OshaMigrateSourceWiki extends MigrateSource {
       if ($length = strlen($line)) {
         $char_count += $length;
         $html_line = preg_replace($patterns, $replacements, $line);
-        if ($html_line[0] != '<') {
+        if (!empty($html_line) && $html_line[0] != '<h') {
           $html_line = '<p>' . $html_line . '</p>';
         }
         $summary .= $html_line . "\n";
         // Import hard-limit maximum char length.
-        if ($char_count > 700) {
+        if ($char_count > 500) {
           break;
         }
       }
