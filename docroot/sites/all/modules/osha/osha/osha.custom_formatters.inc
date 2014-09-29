@@ -101,5 +101,34 @@ return $output;
   $formatter->fapi = '';
   $export['publication_related_res'] = $formatter;
 
+  $formatter = new stdClass();
+  $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
+  $formatter->api_version = 2;
+  $formatter->name = 'seminar_related_resources';
+  $formatter->label = 'Seminar related resources';
+  $formatter->description = '';
+  $formatter->mode = 'php';
+  $formatter->field_types = 'file';
+  $formatter->code = '$output = \'<ul id="seminar_related_resources">\';
+global $language ;
+$curr_lang = $language->language;
+$object = isset($variables[\'#object\']->field_file[$curr_lang]) ? $variables[\'#object\']->field_file[$curr_lang] :$variables[\'#object\']->field_file[\'en\'];
+foreach ($object as $obj) {
+	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $obj[\'filename\'];
+	$output .= \' - \';
+        $output .= theme_file_icon(
+           array(
+               "file" => file_load($obj[\'fid\']),
+               "icon_directory" => NULL
+           ));
+	$output .= \'<span>\' . format_size(filesize($obj[\'uri\'])) . \'</span>\';
+	$output .= \'</a></li>\'; 
+}
+$output .= \'</ul>\';
+
+return $output;';
+  $formatter->fapi = '';
+  $export['seminar_related_resources'] = $formatter;
+
   return $export;
 }
