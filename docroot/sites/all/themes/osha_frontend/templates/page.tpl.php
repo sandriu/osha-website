@@ -56,7 +56,7 @@
       $sidebar_first  = render($page['sidebar_first']);
       // andrei: remove sidebar_second from introduction pages
       $node = menu_get_object();
-      if (isset($node) && isset($node->article_type_code) && $node->article_type_code == 'introduction') {
+      if (isset($node) && isset($node->article_type_code) && $node->article_type_code != 'section') {
         unset($page['sidebar_second']);
       }
       $sidebar_second = render($page['sidebar_second']);
