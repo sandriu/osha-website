@@ -144,6 +144,29 @@ function osha_change_field_size() {
 }
 
 
+function osha_block_view_alter(&$data, $block) {
+  if ($block->delta == 4) {
+    $wiki_page_url = 'http://oshwiki.eu/wiki/Main_Page';
+    $find_more = t('Find more information on our OSHWiki');
+    $node =& menu_get_object();
+    if (!empty($node->field_wiki_categories[LANGUAGE_NONE][0]['tid'])) {
+      $category_id = $node->field_wiki_categories[LANGUAGE_NONE][0]['tid'];
+      $category = taxonomy_term_load($category_id);
+      $category_en_name = $category->name_original;
+      $wiki_page_url = 'http://oshwiki.eu/wiki/Category:' . str_replace(' ', '_', $category_en_name);
+      $find_more = t('Find OSHwiki articles on this theme');
+    }
+    $content = t('<div class="OSHWiki"><div class="separatorOsHWiki">&nbsp;</div><div id="OSHWikiDivTit"><div class="imgOSHWiki"><img src="/sites/all/themes/osha_frontend/images/OSHwiki.png" alt="" width="26" height="26" /></div><div class="OSHWikiTitle">OSHWiki</div></div><div class="p2">!find_more<span><br /></span></div><div class="p3"><a href="!wiki_page_url" target="_blank">Go to OSHWiki <img src="/sites/all/themes/osha_frontend/images/flecha.png" alt="Go to OSHWiki" width="19" height="11" /></a></div></div>',
+      array(
+        '!wiki_page_url' => $wiki_page_url,
+        '!find_more' => $find_more,
+      )
+    );
+    $data['content'] = $content;
+  }
+}
+
+
 /**
  * Function to retrive the size of a MySQL varchar column from a table.
  *

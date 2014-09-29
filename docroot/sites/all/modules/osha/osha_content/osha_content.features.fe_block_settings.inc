@@ -15,6 +15,7 @@ function osha_content_default_fe_block_settings() {
   $export['block-osha_wiki_intro'] = array(
     'cache' => -1,
     'custom' => 0,
+    'delta' => 'osha_wiki_intro_block',
     'i18n_block_language' => array(),
     'i18n_mode' => 1,
     'machine_name' => 'osha_wiki_intro',
@@ -36,10 +37,10 @@ function osha_content_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'sidebar_second',
+        'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -16,
+        'weight' => 1,
       ),
       'seven' => array(
         'region' => '',
