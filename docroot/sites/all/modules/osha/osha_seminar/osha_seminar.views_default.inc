@@ -183,7 +183,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['fields']['field_seminar_start_date_1']['label'] = '';
   $handler->display->display_options['fields']['field_seminar_start_date_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['text'] = '[field_seminar_start_date_1] - [type]';
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['text'] = '[field_seminar_start_date_1] - [type]s';
   $handler->display->display_options['fields']['field_seminar_start_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['settings'] = array(
     'format_type' => 'year',
@@ -212,7 +212,6 @@ function osha_seminar_views_default_views() {
     t('Desc'),
     t('Page'),
     t('Block'),
-    t('[field_seminar_start_date_1] - [type]'),
   );
   $export['seminars'] = $view;
 
