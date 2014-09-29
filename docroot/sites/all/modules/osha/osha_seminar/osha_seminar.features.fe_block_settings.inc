@@ -20,7 +20,7 @@ function osha_seminar_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => 'articles/eu-osha-seminars',
+    'pages' => 'articles/seminars',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -39,7 +39,7 @@ function osha_seminar_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -22,
+        'weight' => 1,
       ),
       'seven' => array(
         'region' => '',

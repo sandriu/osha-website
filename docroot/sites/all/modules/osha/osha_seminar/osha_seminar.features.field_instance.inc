@@ -76,7 +76,7 @@ function osha_seminar_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -143,7 +143,7 @@ function osha_seminar_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 20,
+      'weight' => 9,
     ),
   );
 
@@ -215,7 +215,7 @@ function osha_seminar_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -286,7 +286,7 @@ function osha_seminar_field_default_field_instances() {
         'year_range' => '2005:+3',
       ),
       'type' => 'date_select',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -355,7 +355,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 29,
+      'weight' => 10,
     ),
   );
 
@@ -421,7 +421,7 @@ function osha_seminar_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 36,
+      'weight' => 19,
     ),
   );
 
@@ -490,7 +490,7 @@ function osha_seminar_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 31,
+      'weight' => 12,
     ),
   );
 
@@ -559,7 +559,7 @@ function osha_seminar_field_default_field_instances() {
         'rows' => 10,
       ),
       'type' => 'text_textarea',
-      'weight' => 37,
+      'weight' => 20,
     ),
   );
 
@@ -628,7 +628,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 35,
+      'weight' => 18,
     ),
   );
 
@@ -697,7 +697,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 33,
+      'weight' => 16,
     ),
   );
 
@@ -766,7 +766,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 34,
+      'weight' => 17,
     ),
   );
 
@@ -845,7 +845,7 @@ function osha_seminar_field_default_field_instances() {
         'year_range' => '2000:+3',
       ),
       'type' => 'date_select',
-      'weight' => 32,
+      'weight' => 15,
     ),
   );
 
@@ -928,7 +928,7 @@ function osha_seminar_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 32,
+      'weight' => 14,
     ),
   );
 
@@ -997,7 +997,7 @@ function osha_seminar_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 38,
+      'weight' => 21,
     ),
   );
 
@@ -1072,7 +1072,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 30,
+      'weight' => 11,
     ),
   );
 
@@ -1141,7 +1141,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 39,
+      'weight' => 22,
     ),
   );
 
@@ -1228,7 +1228,7 @@ function osha_seminar_field_default_field_instances() {
         'year_range' => '2000:+3',
       ),
       'type' => 'date_select',
-      'weight' => 31,
+      'weight' => 13,
     ),
   );
 
@@ -1297,7 +1297,7 @@ function osha_seminar_field_default_field_instances() {
         'rows' => 10,
       ),
       'type' => 'text_textarea',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -1358,7 +1358,7 @@ function osha_seminar_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -1422,7 +1422,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -1556,7 +1556,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 

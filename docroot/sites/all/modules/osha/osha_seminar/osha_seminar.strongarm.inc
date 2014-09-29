@@ -102,22 +102,22 @@ function osha_seminar_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '26',
+          'weight' => '24',
         ),
         'title' => array(
           'weight' => '2',
         ),
         'path' => array(
-          'weight' => '24',
-        ),
-        'redirect' => array(
           'weight' => '25',
         ),
+        'redirect' => array(
+          'weight' => '26',
+        ),
         'workbench_access' => array(
-          'weight' => '22',
+          'weight' => '0',
         ),
         'language' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
       ),
       'display' => array(),

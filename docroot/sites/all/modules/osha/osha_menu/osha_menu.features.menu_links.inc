@@ -1125,6 +1125,29 @@ function osha_menu_menu_default_menu_links() {
     'menu_links_customized' => 1,
     'parent_identifier' => 'main-menu_tools--resources:node/18',
   );
+  // Exported menu link: main-menu_seminars:node/21
+  $menu_links['main-menu_seminars:node/21'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'node/21',
+    'router_path' => 'node/%',
+    'link_title' => 'Seminars',
+    'options' => array(
+      'attributes' => array(),
+      'alter' => TRUE,
+      'identifier' => 'main-menu_seminars:node/21',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+    'language' => 'und',
+    'menu_links_customized' => 1,
+    'item_uuid' => '6b2a8603-bc31-4f72-9e95-fd22f4206e82',
+    'parent_identifier' => 'main-menu_what-we-do:node/11',
+  );
   // Exported menu link: main-menu_surveys--statistics:<nolink>
   $menu_links['main-menu_surveys--statistics:<nolink>'] = array(
     'menu_name' => 'main-menu',
@@ -1285,7 +1308,7 @@ function osha_menu_menu_default_menu_links() {
     'module' => 'menu',
     'hidden' => 0,
     'external' => 0,
-    'has_children' => 0,
+    'has_children' => 1,
     'expanded' => 1,
     'weight' => -44,
     'customized' => 1,
@@ -1418,6 +1441,7 @@ function osha_menu_menu_default_menu_links() {
   t('Procurement');
   t('Psychosocial risks and stress');
   t('Publications');
+  t('Seminars');
   t('Surveys & Statistics');
   t('Themes');
   t('Tools & Resources');
