@@ -148,7 +148,7 @@ function osha_block_view_alter(&$data, $block) {
   if ($block->delta == 4) {
     $wiki_page_url = 'http://oshwiki.eu/wiki/Main_Page';
     $find_more = t('Find more information on our OSHWiki');
-    $node =& menu_get_object();
+    $node = menu_get_object();
     if (!empty($node->field_wiki_categories[LANGUAGE_NONE][0]['tid'])) {
       $category_id = $node->field_wiki_categories[LANGUAGE_NONE][0]['tid'];
       $category = taxonomy_term_load($category_id);
