@@ -32,37 +32,43 @@
   hide($content['comments']);
   hide($content['links']);
   // unset to render below after a div
+  if (isset($content['field_related_man_pubs'])) {
+    hide($content['field_related_man_pubs']);
+  }
   if (isset($content['field_related_oshwiki_articles'])) {
     hide($content['field_related_oshwiki_articles']);
   }
   print render($content);
-  if (!empty($field_related_oshwiki_articles)) { ?>
+  // render related publications(both manual + dynamic from template preprocess_node
+  if ( $view_mode == 'full') {
+    if (!empty($field_related_man_pubs) || $total_related_publications > 0) { ?>
+      <div id="related-publications">
+        <div class="related_publications_head"><span><?php print t('Related publications');?><span></div>
+      <div>
+    <?php
+      print render($content['field_related_man_pubs']);
+      if ($total_related_publications > 0) {
+        foreach ($tagged_related_publications as $related_pub) {
+          print render($related_pub);
+        }
+      }
+    }?>
+
+  <?php
+  // render related wiki articles (both manual + dynamic from template preprocess_node
+    if ( !empty($field_related_oshwiki_articles) || $total_wiki > 0) { ?>
       <div id="related-wiki">
         <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
       <div>
-  <?php
+    <?php
       print render($content['field_related_oshwiki_articles']);
       if ($total_wiki > 0) {
         foreach ($tagged_wiki as $wiki) {
           print render($wiki);
         }
       }
-    } else if ($total_wiki > 0) {?>
-        <div id="related-wiki">
-          <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
-        <div>
-    <?php
-      foreach ($tagged_wiki as $wiki) {
-        print render($wiki);
-      }
-    } else { ?>
-    <div id="related-wiki">
-      <span><?php print t('Get more info about this topic on OSHWiki');?></span>
-      <a href="http://oshwiki.eu/"><?php print t('Open');?></a>
-    <div>
-    <?php
-  }
- ?>
+    }
+  } ?>
 
   <?php print render($content['links']); ?>
 

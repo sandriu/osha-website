@@ -90,58 +90,121 @@ function osha_frontend_apachesolr_sort_list($vars) {
 }
 
 /**
+ * Called from hook_preprocess_node
+ */
+function fill_related_publications(&$vars) {
+  $num_related_publications = 0;
+  if (isset($vars['field_related_man_pubs'])) {
+    $num_related_publications = sizeof($vars['field_related_man_pubs']);
+  }
+
+  $vars['total_related_publications'] = 0;
+  if ($num_related_publications < 3) {
+    $limit = 3 - $num_related_publications;
+    // get 3-$num_related_publications tagged publications
+    $tags_tids = array();
+    if (!empty($vars['field_tags'])) {
+      $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
+    }
+
+    if (!empty($tags_tids)) {
+      // query all publications with the same tags
+      $tids = array();
+      foreach ($tags_tids as $tid) {
+        array_push($tids, $tid['tid']);
+      }
+
+      $query = new EntityFieldQuery();
+      // exclude self and manually related
+      $excluded_nids = array();
+      array_push($excluded_nids, $vars['node']->nid);
+      if (!empty($vars['field_related_man_pubs'])) {
+        foreach ($vars['field_related_man_pubs'] as $related_pub) {
+          array_push($excluded_nids, $related_pub['entity']->nid);
+        }
+      }
+      $result = $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'publication')
+        ->entityCondition('entity_id', $excluded_nids, 'NOT IN')
+        ->fieldCondition('field_tags', 'tid', $tids, 'IN')
+        ->propertyOrderBy('changed', 'DESC')
+        ->pager($limit)
+        ->execute();
+
+      if (!empty($result)) {
+        $vars['total_related_publications'] = sizeof($result['node']);
+        $vars['tagged_related_publications'] = array();
+        foreach ($result['node'] as $n) {
+          $node = node_load($n->nid);
+          $vars['tagged_related_publications'][] = node_view($node,'teaser');
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Called from hook_preprocess_node
+ */
+function fill_related_wiki(&$vars) {
+  $wiki_articles_no = 0;
+  if (isset($vars['field_related_oshwiki_articles'])) {
+    $wiki_articles_no = sizeof($vars['field_related_oshwiki_articles']);
+  }
+
+  $vars['total_wiki'] = 0;
+  if ($wiki_articles_no < 2) {
+    $limit = 2 - $wiki_articles_no;
+    // get 2-$wiki_articles_no tagged wiki
+    $wiki_categories_tids = array();
+    if (!empty($vars['field_wiki_categories'])) {
+      $wiki_categories_tids = $vars['field_wiki_categories'][LANGUAGE_NONE];
+    }
+
+    if (!empty($wiki_categories_tids)) {
+      // query all wiki articles in the same category or its children
+      $tids = array();
+      $voc = taxonomy_vocabulary_machine_name_load('wiki_categories');
+      foreach ($wiki_categories_tids as $tid) {
+        // normally only one $tid, but just in case
+        array_push($tids, $tid['tid']);
+        // load and push also children
+        $terms = taxonomy_get_tree($voc->vid, $tid['tid']);
+        foreach ($terms as $term) {
+          array_push($tids, $term->tid);
+        }
+      }
+
+      $query = new EntityFieldQuery();
+      $result = $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'wiki_page')
+        ->fieldCondition('field_wiki_categories', 'tid', $tids, 'IN')
+        ->fieldOrderBy('field_updated', 'value', 'DESC')
+        ->pager($limit)
+        ->execute();
+
+      if (!empty($result)) {
+        $vars['total_wiki'] = sizeof($result['node']);
+        $vars['tagged_wiki'] = array();
+        foreach ($result['node'] as $n) {
+          $node = node_load($n->nid);
+          $vars['tagged_wiki'][] = node_view($node,'osha_wiki');
+        }
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_node().
  */
 function osha_frontend_process_node(&$vars) {
   // Change default text of the read more link.
-  if ($vars['type'] == 'article' || $vars['type'] == 'publication') {
-    $wiki_articles_no = 0;
-    if (isset($vars['field_related_oshwiki_articles'])) {
-      $wiki_articles_no = sizeof($vars['field_related_oshwiki_articles']);
-    }
-
-    $vars['total_wiki'] = 0;
-    if ($wiki_articles_no < 2) {
-      $limit = 2 - $wiki_articles_no;
-      // get 2-$wiki_articles_no tagged wiki
-      $wiki_categories_tids = array();
-      if (!empty($vars['field_wiki_categories'])) {
-        $wiki_categories_tids = $vars['field_wiki_categories'][LANGUAGE_NONE];
-      }
-
-      if (!empty($wiki_categories_tids)) {
-        // query all wiki articles in the same category or its children
-        $tids = array();
-        $voc = taxonomy_vocabulary_machine_name_load('wiki_categories');
-        foreach ($wiki_categories_tids as $tid) {
-          // normally only one $tid, but just in case
-          array_push($tids, $tid['tid']);
-          // load and push also children
-          $terms = taxonomy_get_tree($voc->vid, $tid['tid']);
-          foreach ($terms as $term) {
-            array_push($tids, $term->tid);
-          }
-        }
-
-        $query = new EntityFieldQuery();
-        $result = $query->entityCondition('entity_type', 'node')
-          ->entityCondition('bundle', 'wiki_page')
-          ->fieldCondition('field_wiki_categories', 'tid', $tids, 'IN')
-          ->fieldOrderBy('field_updated', 'value', 'DESC')
-          ->pager($limit)
-          ->execute();
-
-        if (!empty($result)) {
-          $vars['total_wiki'] = sizeof($result['node']);
-          $vars['tagged_wiki'] = array();
-          foreach ($result['node'] as $n) {
-            $node = node_load($n->nid);
-            $vars['tagged_wiki'][] = node_view($node,'osha_wiki');
-          }
-        }
-      }
-    }
-
+  if ($vars['type'] == 'publication' && $vars['view_mode'] == 'full' ) {
+    fill_related_publications($vars);
+  }
+  if ($vars['type'] == 'article' || $vars['type'] == 'publication' && $vars['view_mode'] == 'full') {
+    fill_related_wiki($vars);
   }
   if (isset($vars['content']['links']['node']['#links']['node-readmore'])) {
     $vars['content']['links']['node']['#links']['node-readmore']['title'] = t('Show details');

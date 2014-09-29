@@ -817,7 +817,7 @@ function osha_publication_field_default_field_instances() {
     'description' => 'Use comma ( , ) to assign multiple terms',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,

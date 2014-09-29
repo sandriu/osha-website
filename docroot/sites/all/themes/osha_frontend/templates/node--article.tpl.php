@@ -38,8 +38,8 @@
     hide($content['field_related_oshwiki_articles']);
   }
   print render($content);
-  if ( $node->article_type_code == 'section' ) {
-    if (!empty($field_related_oshwiki_articles)) { ?>
+  if ( $view_mode == 'full' && $node->article_type_code == 'section' ) {
+    if (!empty($field_related_oshwiki_articles) || $total_wiki > 0) { ?>
         <div id="related-wiki">
           <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
         <div>
@@ -49,14 +49,6 @@
           foreach ($tagged_wiki as $wiki) {
             print render($wiki);
           }
-        }
-      } else if ($total_wiki > 0) {?>
-          <div id="related-wiki">
-            <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
-          <div>
-      <?php
-        foreach ($tagged_wiki as $wiki) {
-          print render($wiki);
         }
       } else { ?>
       <div id="related-wiki">
