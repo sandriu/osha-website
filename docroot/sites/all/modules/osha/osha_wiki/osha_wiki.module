@@ -45,6 +45,7 @@ function osha_wiki_block_info() {
     'status' => 1,
     'region' => 'sidebar_second',
     'visibility' => BLOCK_VISIBILITY_NOTLISTED,
+    'weight' => -30,
   );
   return $blocks;
 }
