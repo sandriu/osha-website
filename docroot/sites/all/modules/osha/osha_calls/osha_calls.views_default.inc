@@ -22,7 +22,7 @@ function osha_calls_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Calls';
+  $handler->display->display_options['title'] = 'Archived Calls';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -82,9 +82,13 @@ function osha_calls_views_default_views() {
 
   /* Display: Open */
   $handler = $view->new_display('block', 'Open', 'block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Open Calls';
 
   /* Display: Ongoing */
   $handler = $view->new_display('block', 'Ongoing', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Ongoing Calls';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -150,7 +154,7 @@ function osha_calls_views_default_views() {
   $handler->display->display_options['filters']['published']['group'] = 1;
   $translatables['calls'] = array(
     t('Master'),
-    t('Calls'),
+    t('Archived Calls'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -158,7 +162,9 @@ function osha_calls_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Open'),
+    t('Open Calls'),
     t('Ongoing'),
+    t('Ongoing Calls'),
     t('Archive'),
   );
   $export['calls'] = $view;
