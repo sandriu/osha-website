@@ -188,11 +188,11 @@ function osha_newsletter_create_taxonomy() {
  * Assign required permissions to roles - newsletter.
  */
 function osha_configure_newsletter_permissions() {
-  user_role_change_permissions(DRUPAL_ANONYMOUS_RID, array(
-    'view newsletter_content_collection entity collections' => TRUE
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
+    'view newsletter_content_collection entity collections',
   ));
-  user_role_change_permissions(DRUPAL_AUTHENTICATED_RID, array(
-    'view newsletter_content_collection entity collections' => TRUE
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
+    'view newsletter_content_collection entity collections',
   ));
 }
 
