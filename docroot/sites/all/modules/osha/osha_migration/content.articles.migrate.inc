@@ -150,7 +150,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
 
     $row->multilingual_thesaurus = MigrationUtil::findTidByTaxonomyField(
       explode(',', $row->multilingual_thesaurus),
-      'field_thesaurus',
+      'field_thesaurus_code',
       OSHA_TAXONOMIES_THESAURUS
     );
     if (!empty($row->nace) || $row->nace == '0') {
