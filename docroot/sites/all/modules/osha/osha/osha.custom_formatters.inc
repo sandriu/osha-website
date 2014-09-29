@@ -13,6 +13,29 @@ function osha_custom_formatters_defaults() {
   $formatter = new stdClass();
   $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
   $formatter->api_version = 2;
+  $formatter->name = 'call_contract_notice';
+  $formatter->label = 'Call special file';
+  $formatter->description = '';
+  $formatter->mode = 'php';
+  $formatter->field_types = 'file';
+  $formatter->code = 'global $language;
+$curr_lang = $language->language ;
+$output = \'\';
+$field_name =$variables[\'#field\'][\'field_name\'];
+$field = $variables[\'#object\']->{$field_name};
+$file= isset($field[$curr_lang]) ? $field[$curr_lang] : NULL;
+
+if (isset($file[0])) {
+    $output .= \' <a href = "\' . file_create_url($file[0][\'uri\']) . \'"><span>\' . t($variables[\'#instance\'][\'label\']) . \'</span> - <span>\' . format_size(filesize($file[0][\'uri\'])). \'</span></a>\'; 
+}
+
+return $output;';
+  $formatter->fapi = '';
+  $export['call_contract_notice'] = $formatter;
+
+  $formatter = new stdClass();
+  $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
+  $formatter->api_version = 2;
   $formatter->name = 'publication_bookshop_id';
   $formatter->label = 'publication_bookshop_id';
   $formatter->description = '';
