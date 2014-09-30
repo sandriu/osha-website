@@ -153,6 +153,74 @@ function osha_calls_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-calls-field_archived'
+  $field_instances['node-calls-field_archived'] = array(
+    'bundle' => 'calls',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 17,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_archived',
+    'label' => 'Archived',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 18,
+    ),
+  );
+
   // Exported field_instance: 'node-calls-field_author'
   $field_instances['node-calls-field_author'] = array(
     'bundle' => 'calls',
@@ -1179,7 +1247,7 @@ function osha_calls_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -1272,6 +1340,7 @@ function osha_calls_field_default_field_instances() {
   t('Activity');
   t('Agency Responses');
   t('Amendments');
+  t('Archived');
   t('Author');
   t('Award Notice');
   t('Award Notice Corrigendum');
