@@ -135,7 +135,8 @@ global $language ;
 $curr_lang = $language->language;
 $object = isset($variables[\'#object\']->field_file[$curr_lang]) ? $variables[\'#object\']->field_file[$curr_lang] :$variables[\'#object\']->field_file[\'en\'];
 foreach ($object as $obj) {
-	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $obj[\'filename\'];
+        $description = !empty($obj[\'description\']) ? $obj[\'description\'] : $obj[\'filename\'];
+	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $description;
 	$output .= \' - \';
         $output .= theme_file_icon(
            array(
