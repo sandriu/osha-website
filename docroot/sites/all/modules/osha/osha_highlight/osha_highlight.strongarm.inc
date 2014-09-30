@@ -135,16 +135,16 @@ function osha_highlight_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '13',
+          'weight' => '15',
         ),
         'redirect' => array(
-          'weight' => '12',
+          'weight' => '14',
         ),
         'language' => array(
           'weight' => '2',
         ),
         'metatags' => array(
-          'weight' => '14',
+          'weight' => '16',
         ),
         'workbench_access' => array(
           'weight' => '0',
