@@ -57,6 +57,7 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
 
     $this->addFieldMapping('field_file', 'files');
     $this->addFieldMapping('field_file:file_class')->defaultValue('OSHAMigrateFileUri');
+    $this->addFieldMapping('field_file:description', 'file_descriptions');
     $this->addFieldmapping('field_file:preserve_files')->defaultValue(TRUE);
     $this->addFieldMapping('field_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldMapping('field_file:source_dir')->defaultValue($data_path . '/export/');
@@ -308,7 +309,34 @@ class SeminarsListCSV extends MigrateList {
             break;
 
           case 'files':
-            self::$data[$path][$field][$language] = array_map('trim', explode(",", $raw_data[$key]));
+            $files_with_description = array_map('trim', explode(",", $raw_data[$key]));
+            $files = array();
+            $descriptions = array();
+            foreach ($files_with_description as $file_with_desc) {
+              if (empty($file_with_desc)) {
+                continue;
+              }
+              $details = array_map('trim', explode("|", $file_with_desc));
+              if (count($details) < 2) {
+                $files[] = $details[0];
+                $descriptions[] = '';
+              }
+              elseif (count($details) == 2) {
+                $files[] = $details[1];
+                $descriptions[] = $details[0];
+              }
+              else {
+                drupal_set_message(
+                  t('Please check that the files for @path have at most 2 elements splited by "|")',
+                    array('@input' => $path)
+                  ),
+                  'warning'
+                );
+                continue;
+              }
+            }
+            self::$data[$path][$field][$language] = $files;
+            self::$data[$path]['file_descriptions'][$language] = $descriptions;
             break;
 
           case 'path':
