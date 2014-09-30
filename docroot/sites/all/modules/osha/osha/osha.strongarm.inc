@@ -304,16 +304,16 @@ function osha_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '15',
+          'weight' => '17',
         ),
         'language' => array(
           'weight' => '2',
         ),
         'redirect' => array(
-          'weight' => '16',
+          'weight' => '18',
         ),
         'metatags' => array(
-          'weight' => '17',
+          'weight' => '19',
         ),
         'workbench_access' => array(
           'weight' => '1',
