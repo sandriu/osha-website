@@ -105,12 +105,18 @@ function osha_blog_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'redirect' => array(
-          'weight' => '13',
+          'weight' => '14',
         ),
         'language' => array(
+          'weight' => '1',
+        ),
+        'metatags' => array(
+          'weight' => '16',
+        ),
+        'workbench_access' => array(
           'weight' => '0',
         ),
       ),
