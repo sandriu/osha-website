@@ -31,6 +31,7 @@ features[field_base][] = field_calls_info
 features[field_base][] = field_calls_technical_specs
 features[field_instance][] = node-calls-body
 features[field_instance][] = node-calls-field_activity
+features[field_instance][] = node-calls-field_archived
 features[field_instance][] = node-calls-field_author
 features[field_instance][] = node-calls-field_calls_agency_responses
 features[field_instance][] = node-calls-field_calls_amendments
