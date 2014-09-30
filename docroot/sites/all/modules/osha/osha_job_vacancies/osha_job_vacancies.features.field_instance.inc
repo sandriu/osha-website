@@ -152,6 +152,74 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-job_vacancies-field_archived'
+  $field_instances['node-job_vacancies-field_archived'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 14,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_archived',
+    'label' => 'Archived',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 14,
+    ),
+  );
+
   // Exported field_instance: 'node-job_vacancies-field_author'
   $field_instances['node-job_vacancies-field_author'] = array(
     'bundle' => 'job_vacancies',
@@ -901,7 +969,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -991,6 +1059,7 @@ function osha_job_vacancies_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
+  t('Archived');
   t('Author');
   t('Body');
   t('Deadline');
