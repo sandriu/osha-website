@@ -23,6 +23,7 @@ features[field_base][] = field_job_vacancies_deadline
 features[field_base][] = field_job_vacancies_shortlisted
 features[field_instance][] = node-job_vacancies-body
 features[field_instance][] = node-job_vacancies-field_activity
+features[field_instance][] = node-job_vacancies-field_archived
 features[field_instance][] = node-job_vacancies-field_author
 features[field_instance][] = node-job_vacancies-field_expiration_date
 features[field_instance][] = node-job_vacancies-field_job_vacancies_deadline
