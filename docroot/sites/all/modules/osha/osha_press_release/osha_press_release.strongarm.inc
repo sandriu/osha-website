@@ -102,13 +102,19 @@ function osha_press_release_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '15',
-        ),
-        'redirect' => array(
           'weight' => '16',
         ),
+        'redirect' => array(
+          'weight' => '17',
+        ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '2',
+        ),
+        'metatags' => array(
+          'weight' => '18',
+        ),
+        'workbench_access' => array(
+          'weight' => '0',
         ),
       ),
       'display' => array(),
