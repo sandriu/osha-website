@@ -19,7 +19,6 @@ features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[fe_block_settings][] = views-vacancies-block
 features[features_api][] = api:2
-features[field_base][] = field_expiration_date
 features[field_base][] = field_job_vacancies_deadline
 features[field_base][] = field_job_vacancies_shortlisted
 features[field_instance][] = node-job_vacancies-body

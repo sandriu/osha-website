@@ -50,6 +50,7 @@ features[field_base][] = field_archived
 features[field_base][] = field_article_type
 features[field_base][] = field_author
 features[field_base][] = field_cover_image
+features[field_base][] = field_expiration_date
 features[field_base][] = field_file
 features[field_base][] = field_file_description
 features[field_base][] = field_language
