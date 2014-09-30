@@ -76,6 +76,153 @@ function osha_seminar_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-seminar-field_archived'
+  $field_instances['node-seminar-field_archived'] = array(
+    'bundle' => 'seminar',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 21,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_archived',
+    'label' => 'Archived',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance: 'node-seminar-field_expiration_date'
+  $field_instances['node-seminar-field_expiration_date'] = array(
+    'bundle' => 'seminar',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 20,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_expiration_date',
+    'label' => 'Expiration Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_select',
       'weight' => 6,
     ),
   );
@@ -143,7 +290,7 @@ function osha_seminar_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -355,7 +502,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -421,7 +568,7 @@ function osha_seminar_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -490,7 +637,7 @@ function osha_seminar_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -559,7 +706,7 @@ function osha_seminar_field_default_field_instances() {
         'rows' => 10,
       ),
       'type' => 'text_textarea',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -628,7 +775,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -697,7 +844,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -766,7 +913,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -845,7 +992,7 @@ function osha_seminar_field_default_field_instances() {
         'year_range' => '2000:+3',
       ),
       'type' => 'date_select',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -928,7 +1075,7 @@ function osha_seminar_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -997,7 +1144,7 @@ function osha_seminar_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -1072,7 +1219,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -1141,7 +1288,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -1228,7 +1375,7 @@ function osha_seminar_field_default_field_instances() {
         'year_range' => '2000:+3',
       ),
       'type' => 'date_select',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -1358,7 +1505,7 @@ function osha_seminar_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -1422,7 +1569,7 @@ function osha_seminar_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -1483,7 +1630,7 @@ function osha_seminar_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 23,
+      'weight' => 25,
     ),
   );
 
@@ -1562,6 +1709,7 @@ function osha_seminar_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Archived');
   t('Attachment');
   t('Attendees');
   t('Body');
@@ -1572,6 +1720,7 @@ function osha_seminar_field_default_field_instances() {
   t('Date to be confirmed');
   t('End date');
   t('Event url');
+  t('Expiration Date');
   t('Further actions');
   t('Image');
   t('Location');

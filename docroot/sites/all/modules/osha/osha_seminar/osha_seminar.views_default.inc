@@ -212,6 +212,7 @@ function osha_seminar_views_default_views() {
     t('Desc'),
     t('Page'),
     t('Block'),
+    t('[field_seminar_start_date_1] - [type]s'),
   );
   $export['seminars'] = $view;
 
