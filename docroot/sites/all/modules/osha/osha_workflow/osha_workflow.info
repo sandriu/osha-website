@@ -1,7 +1,7 @@
 name = Osha Workflow
 core = 7.x
 package = OSHA
-version = 7.x-1.0
+version = 7.x-1.1
 project = osha_workflow
 dependencies[] = ctools
 dependencies[] = strongarm
@@ -29,6 +29,7 @@ features[variable][] = workbench_access_node_type_publication
 features[variable][] = workbench_access_node_type_simplenews
 features[variable][] = workbench_access_taxonomy
 features[variable][] = workbench_moderation_default_state_article
+features[variable][] = workbench_moderation_default_state_calls
 features[variable][] = workbench_moderation_default_state_news
 features[variable][] = workbench_moderation_default_state_page
 features[variable][] = workbench_moderation_default_state_press_release

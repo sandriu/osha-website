@@ -15,7 +15,7 @@ function osha_news_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'News';
+  $view->human_name = 'OSH News';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -74,12 +74,12 @@ function osha_news_views_default_views() {
   $handler->display->display_options['filters']['published']['relationship'] = 'nid';
   $handler->display->display_options['filters']['published']['value'] = '1';
 
-  /* Display: News */
-  $handler = $view->new_display('page', 'News', 'page');
+  /* Display: OSH News list */
+  $handler = $view->new_display('page', 'OSH News list', 'page');
   $handler->display->display_options['path'] = 'oshnews';
 
-  /* Display: Latest News */
-  $handler = $view->new_display('block', 'Latest News', 'latest_news_block');
+  /* Display: OSH News block */
+  $handler = $view->new_display('block', 'OSH News block', 'latest_news_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'OSH News';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
@@ -90,7 +90,8 @@ function osha_news_views_default_views() {
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -137,6 +138,29 @@ function osha_news_views_default_views() {
     'title_class' => '',
   );
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'highlight' => 'highlight',
+    'news' => 'news',
+  );
+  /* Filter criterion: Workbench Moderation: Published */
+  $handler->display->display_options['filters']['published']['id'] = 'published';
+  $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['block_description'] = 'OSH News';
   $translatables['news'] = array(
     t('Master'),
@@ -155,8 +179,8 @@ function osha_news_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Get the actual content from a content revision.'),
-    t('News'),
-    t('Latest News'),
+    t('OSH News list'),
+    t('OSH News block'),
     t('View all'),
     t('queue'),
   );

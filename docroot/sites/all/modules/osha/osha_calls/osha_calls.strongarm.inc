@@ -98,6 +98,18 @@ function osha_calls_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'osha_slideshow' => array(
+        'custom_settings' => TRUE,
+      ),
+      'highlights_item' => array(
+        'custom_settings' => TRUE,
+      ),
+      'newsletter_item' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_wiki' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -108,6 +120,12 @@ function osha_calls_strongarm() {
           'weight' => '19',
         ),
         'language' => array(
+          'weight' => '1',
+        ),
+        'metatags' => array(
+          'weight' => '21',
+        ),
+        'workbench_access' => array(
           'weight' => '0',
         ),
       ),
@@ -144,7 +162,8 @@ function osha_calls_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_calls';
   $strongarm->value = array(
-    0 => 'status',
+    0 => 'moderation',
+    1 => 'revision',
   );
   $export['node_options_calls'] = $strongarm;
 
@@ -159,7 +178,7 @@ function osha_calls_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_calls';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_calls'] = $strongarm;
 
   return $export;

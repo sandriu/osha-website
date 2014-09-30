@@ -140,6 +140,9 @@ function osha_publication_strongarm() {
       'newsletter_item' => array(
         'custom_settings' => TRUE,
       ),
+      'osha_wiki' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -147,19 +150,19 @@ function osha_publication_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '19',
-        ),
-        'workbench_access' => array(
-          'weight' => '17',
-        ),
-        'language' => array(
-          'weight' => '0',
-        ),
-        'redirect' => array(
           'weight' => '20',
         ),
-        'metatags' => array(
+        'workbench_access' => array(
+          'weight' => '0',
+        ),
+        'language' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
           'weight' => '21',
+        ),
+        'metatags' => array(
+          'weight' => '22',
         ),
       ),
       'display' => array(),

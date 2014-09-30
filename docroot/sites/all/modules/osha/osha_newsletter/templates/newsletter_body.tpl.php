@@ -8,8 +8,17 @@
             <tr>
               <td width="396" style="padding-top: 0px;" class="left-column">
                 <?php
-                  foreach ($items as $item) {
-                    print(render($item));
+                  $elements_no = sizeof($items);
+                  foreach ($items as $idx => $item) {
+                    if ($item['#entity_type'] == 'taxonomy_term' && ($idx+1 < $elements_no)) {
+                      if ($items[$idx+1]['#entity_type'] == 'taxonomy_term') {
+                        continue;
+                      } else {
+                        print(render($item));
+                      }
+                    } else {
+                      print(render($item));
+                    }
                   }
                 ?>
               </td>
@@ -29,7 +38,7 @@
                           <?php print l(t('View the blog'), 'https://osha.europa.eu/en/about/director_corner/blog', array('attributes' => array('style' => 'color: #144989; text-decoration: none;'), 'external' => TRUE)); ?>
                           <?php
                           $directory = drupal_get_path('module','osha_newsletter');
-                          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+                          $site_url = variable_get('site_base_url', 'http://osha.europa.eu');
                           print l(theme('image', array(
                             'path' => $directory . '/images/pink-arrow.png',
                             'width' => 19,
@@ -64,7 +73,7 @@
                           <?php print l(t('More news'), 'https://osha.europa.eu/en/news', array('attributes' => array('style' => 'color: #144989; text-decoration: none;'), 'external' => TRUE)); ?>
                           <?php
                           $directory = drupal_get_path('module','osha_newsletter');
-                          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+                          $site_url = variable_get('site_base_url', 'http://osha.europa.eu');
                           print l(theme('image', array(
                             'path' => $directory . '/images/pink-arrow.png',
                             'width' => 19,
@@ -98,7 +107,7 @@
                           <?php print l(t('More events'), 'https://osha.europa.eu/en/news', array('attributes' => array('style' => 'color: #144989; text-decoration: none;'), 'external' => TRUE)); ?>
                           <?php
                           $directory = drupal_get_path('module','osha_newsletter');
-                          $site_url = variable_get('site_base_url', 'http://osha.localhost');
+                          $site_url = variable_get('site_base_url', 'http://osha.europa.eu');
                           print l(theme('image', array(
                             'path' => $directory . '/images/pink-arrow.png',
                             'width' => 19,

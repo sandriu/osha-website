@@ -125,6 +125,13 @@ function osha_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'date_format_year';
+  $strongarm->value = 'Y';
+  $export['date_format_year'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_comment_filter_page';
   $strongarm->value = FALSE;
   $export['entity_translation_comment_filter_page'] = $strongarm;
@@ -137,6 +144,7 @@ function osha_strongarm() {
     'node' => 'node',
     'taxonomy_term' => 'taxonomy_term',
     'comment' => 0,
+    'file' => 0,
     'user' => 0,
   );
   $export['entity_translation_entity_types'] = $strongarm;
@@ -289,20 +297,23 @@ function osha_strongarm() {
       'newsletter_item' => array(
         'custom_settings' => TRUE,
       ),
+      'osha_wiki' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'language' => array(
           'weight' => '2',
         ),
         'redirect' => array(
-          'weight' => '15',
+          'weight' => '16',
         ),
         'metatags' => array(
-          'weight' => '16',
+          'weight' => '17',
         ),
         'workbench_access' => array(
           'weight' => '1',
@@ -713,6 +724,18 @@ function osha_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'uuid_features_entity_file';
+  $strongarm->value = array(
+    'image' => 'image',
+    'video' => 0,
+    'audio' => 0,
+    'document' => 0,
+  );
+  $export['uuid_features_entity_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'uuid_features_entity_node';
   $strongarm->value = array(
     'article' => 'article',
@@ -725,6 +748,7 @@ function osha_strongarm() {
     'newsletter_article' => 0,
     'press_release' => 0,
     'publication' => 0,
+    'seminar' => 0,
     'wiki_page' => 0,
   );
   $export['uuid_features_entity_node'] = $strongarm;
@@ -735,6 +759,18 @@ function osha_strongarm() {
   $strongarm->name = 'uuid_features_file_assets_path';
   $strongarm->value = '';
   $export['uuid_features_file_assets_path'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'uuid_features_file_file';
+  $strongarm->value = array(
+    'image' => 0,
+    'video' => 0,
+    'audio' => 0,
+    'document' => 0,
+  );
+  $export['uuid_features_file_file'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -758,6 +794,7 @@ function osha_strongarm() {
     'newsletter_article' => 0,
     'press_release' => 0,
     'publication' => 0,
+    'seminar' => 0,
     'wiki_page' => 0,
   );
   $export['uuid_features_file_node'] = $strongarm;
