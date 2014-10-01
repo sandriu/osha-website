@@ -41,6 +41,8 @@ class OshaMigrateArticles extends OSHADynamicMigration {
         'multilingual_thesaurus' => 'Item Tesaurus tags merged into tags',
         'nace' => 'Item NACE Codes',
         'article_type' => 'Article type taxonomy',
+        'archived' => '',
+        'expiration_date' => '',
       )
     );
 
@@ -70,6 +72,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
     $this->addFieldMapping('field_image:destination_file', 'relatedItems');
     $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
     $this->addFieldMapping('field_archived', 'archived');
+    $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');

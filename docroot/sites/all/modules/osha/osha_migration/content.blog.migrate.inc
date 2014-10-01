@@ -54,6 +54,7 @@ class MigrateOshaBlog extends OSHADynamicMigration {
     $this->addFieldMapping('field_image:destination_file', 'image');
     $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
     $this->addFieldMapping('field_archived', 'archived');
+    $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -218,6 +219,8 @@ class MigrateOshaBlog extends OSHADynamicMigration {
       'subcategory' => 'Merged into categories',
       'multilingual_thesaurus' => '',
       'nace' => 'Nace codes taxonomy',
+      'archived' => '',
+      'expiration_date' => '',
     );
   }
 }
