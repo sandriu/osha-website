@@ -286,6 +286,7 @@ class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
             // The $source->destinationFile must be string, default array given
             //   on $instance_arguments['destination_file'].
             $current_instance_arguments['destination_file'] = $instance_arguments['destination_file'][$index];
+            $current_instance_arguments['description'] = $instance_arguments['description'][$index];
             $source = new $file_class($current_instance_arguments);
             $this->addFile($source, $path, $owner, $language, $delta, $current_instance_arguments, $return);
           }
