@@ -69,6 +69,7 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_pr_release_date', 'releaseDate');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+    $this->addFieldMapping('field_archived', 'archived');
 
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');

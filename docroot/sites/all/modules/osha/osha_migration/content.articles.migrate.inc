@@ -69,6 +69,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
     $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_image:destination_file', 'relatedItems');
     $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
+    $this->addFieldMapping('field_archived', 'archived');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');

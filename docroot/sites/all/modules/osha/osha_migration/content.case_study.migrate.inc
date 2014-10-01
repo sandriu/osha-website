@@ -55,6 +55,7 @@ class MigrateOshaCaseStudy extends OSHADynamicMigration {
     $this->addFieldMapping('field_file:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_file:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'files');
     $this->addFieldMapping('field_file:multilingual')->defaultValue(TRUE);
+    $this->addFieldMapping('field_archived', 'archived');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');

@@ -42,6 +42,7 @@ class MigrateOshaCalls extends OSHADynamicMigration {
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('field_calls_deadline', 'deadline');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+    $this->addFieldMapping('field_archived', 'archived');
 
     $this->addMultilingualFileFieldMapping('field_calls_contract_notice', 'contract_notice');
     $this->addMultilingualFileFieldMapping('field_calls_contract_n_corrig', 'contract_notice_corrigendum');

@@ -78,6 +78,7 @@ class OshaMigratePublications extends OSHADynamicMigration {
     $this->addFieldMapping('field_publication_type:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_author', 'author');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+    $this->addFieldMapping('field_archived', 'archived');
 
     $this->addFieldMapping('field_cover_image', 'cover_image');
     $this->addFieldMapping('field_cover_image:source_dir')->defaultValue($data_export_path . DIRECTORY_SEPARATOR);
