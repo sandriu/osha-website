@@ -51,7 +51,7 @@
           }
         }
       } else { ?>
-      <div id="related-wiki">
+      <div id="related-wiki-get-more">
         <span><?php print t('Get more info about this topic on OSHWiki');?></span>
         <a href="http://oshwiki.eu/"><?php print t('Open');?></a>
       <div>

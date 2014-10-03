@@ -57,7 +57,7 @@
   <?php
   // render related wiki articles (both manual + dynamic from template preprocess_node
     if ( !empty($field_related_oshwiki_articles) || $total_wiki > 0) { ?>
-      <div id="related-wiki">
+      <div id="related-wiki-publications">
         <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
       <div>
     <?php
