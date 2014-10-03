@@ -9,8 +9,8 @@ function osha_workflow_install() {
   $form_state = array();
   $form = workbench_moderation_admin_transitions_form(array(), $form_state);
   unset($form['transitions']['#tree']);
-  foreach($form['transitions'] as $transition) {
-    $form_state['values']['transitions'] [] = array(
+  foreach ($form['transitions'] as $transition) {
+    $form_state['values']['transitions'][] = array(
       'transition' => (object) $transition,
       'delete' => 1,
     );

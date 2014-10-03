@@ -6,6 +6,8 @@
 
 /**
  * Implements hook_ctools_plugin_api().
+ *
+ * {@inheritdoc}
  */
 function osha_workflow_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "strongarm" && $api == "strongarm") {
