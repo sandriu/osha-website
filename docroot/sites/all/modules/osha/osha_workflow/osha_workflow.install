@@ -34,7 +34,7 @@ function osha_workflow_install() {
   // Assign administrator to main menu sections.
   workbench_access_role_section_save(3, 'main-menu', 'menu');
 
-  // @todo Submit the form instead f using direct function.
+  // @todo Submit the form instead of using direct function.
   /*$form_state = array();
   $form_state['build_info']['args'] = array('menu', 'main-menu');
   drupal_build_form('workbench_access_role_form', $form_state);
