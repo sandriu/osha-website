@@ -7,6 +7,55 @@
 include_once 'osha_workflow.features.inc';
 
 /**
+ * Implements hook_permission().
+ *
+ * We need this to define permissions granted to content moderators.
+ */
+function osha_workflow_permission() {
+  $permissions = array();
+  $all_node_types = node_type_get_types();
+  $moderated_types = array();
+  foreach (array_keys($all_node_types) as $node_type) {
+    if (variable_get('workbench_access_node_type_' . $node_type, 0)) {
+      $moderated_types[] = $node_type;
+    }
+  }
+  // Per state permissions. Used by workbench_moderation_node_access().
+  $states = workbench_moderation_states();
+  foreach ($states as $state) {
+    $permissions['edit any content in ' . $state->name] = array(
+      'title' => t('Edit any content in @state', array('@state' => $state->label)),
+    );
+  }
+  foreach ($states as $state) {
+    if (variable_get('workbench_moderation_per_node_type', FALSE)) {
+      foreach ($moderated_types as $node_type) {
+        $permissions["edit $node_type in " . $state->name] = array(
+          'title' => t('Edit @node_type in @state', array('@node_type' => node_type_get_name($node_type), '@state' => $state->label)),
+        );
+      }
+    }
+  }
+  return $permissions;
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * {@inheritdoc}
+ * @see http://openmonkey.blogspot.ro/2011/10/add-permissions-to-workbench-moderation.html
+ */
+function osha_workflow_node_access($node, $operation, $user) {
+  if (isset($node->workbench_moderation) && $operation == 'update') {
+    if (variable_get('workbench_moderation_per_node_type', FALSE) &&
+        !user_access('edit ' . $node->type . ' in ' . $node->workbench_moderation['current']->state, $user)) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
  * This method creates the user roles required by the workflow.
  */
 function osha_workflow_create_roles() {

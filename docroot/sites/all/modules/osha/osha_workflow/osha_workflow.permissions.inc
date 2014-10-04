@@ -95,5 +95,6 @@ function osha_workflow_editor_permissions() {
     "view revisions",
     "view the administration theme",
     "view workbench access information",
+    "edit any content in draft",
   );
 }
