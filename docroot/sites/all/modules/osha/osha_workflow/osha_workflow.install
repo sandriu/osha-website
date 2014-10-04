@@ -43,14 +43,6 @@ function osha_workflow_install() {
 }
 
 /**
- * Implements hook_enable().
- */
-function osha_workflow_enable() {
-  variable_set('workbench_moderation_per_node_type', 1);
-  osha_workflow_create_roles();
-}
-
-/**
  * Implements hook_update_n().
  */
 function osha_workflow_update_7001() {

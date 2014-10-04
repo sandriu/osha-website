@@ -59,6 +59,11 @@ function osha_configure_permissions() {
   }
 }
 
+// @todo: Workflow configuration - hook_enable throws errors.
+variable_set('workbench_moderation_per_node_type', 1);
+osha_workflow_create_roles();
+
+
 module_disable(array('overlay'));
 
 /**

@@ -60,7 +60,6 @@ function osha_workflow_node_access($node, $operation, $user) {
  */
 function osha_workflow_create_roles() {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.permissions');
-
   $roles = array(
     'Editor' => osha_workflow_editor_permissions(),
     'Review Manager' => array(),
