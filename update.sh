@@ -22,8 +22,8 @@ if [ "$1" == "--migrate" ]; then
     echo "Importing Wiki articles"
     drush migrate-import Wiki
 
-    echo "Importing Publication types taxonomy"
-    drush migrate-import --update TaxonomyPublicationTypes
+#    echo "Importing Publication types taxonomy"
+#    drush migrate-import --update TaxonomyPublicationTypes
 
     echo "Importing multilingual Thesaurus taxonomy"
     drush migrate-import --update TaxonomyThesaurus

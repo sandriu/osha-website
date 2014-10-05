@@ -39,8 +39,8 @@ GOTO DONE
     rem echo "Importing ESENER taxonomy"
     rem call drush migrate-import TaxonomyEsener
 
-    echo "Importing Publication types taxonomy"
-    call drush migrate-import TaxonomyPublicationTypes
+    rem echo "Importing Publication types taxonomy"
+    rem call drush migrate-import TaxonomyPublicationTypes
 
     echo "Importing multilingual Thesaurus taxonomy"
     call drush migrate-import TaxonomyThesaurus
