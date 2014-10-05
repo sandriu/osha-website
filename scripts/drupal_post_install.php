@@ -4,7 +4,6 @@ if (function_exists('drush_log')) {
   drush_log('Executing post-install tasks ...', 'ok');
 }
 
-osha_configure_default_themes();
 osha_configure_solr_entities();
 osha_change_field_size();
 osha_configure_mailsystem();
@@ -118,16 +117,6 @@ function osha_configure_imce() {
     // Role administrator not found.
     throw new Exception('Cannot assign IMCE profile User-1 to administrator - role administrator not found.');
   }
-}
-
-/**
- * Sets default themes for OSHA project.
- */
-function osha_configure_default_themes() {
-  drupal_set_message('Configuring Drupal default themes ...');
-
-  variable_set('admin_theme', 'osha_admin');
-  variable_set('theme_default', 'osha_frontend');
 }
 
 /**
