@@ -80,6 +80,7 @@ class WikiParseTest extends DrupalUnitTestCase {
         }
       }
     }
-    print $summary;
+    // print $summary;
+    // @todo: finish this test
   }
 }
