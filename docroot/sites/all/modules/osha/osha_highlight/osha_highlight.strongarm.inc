@@ -71,8 +71,8 @@ function osha_highlight_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'exclude_node_title_content_type_modes_highlight';
   $strongarm->value = array(
+    'full' => 'full',
     'teaser' => 'teaser',
-    'full' => 0,
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
@@ -80,6 +80,7 @@ function osha_highlight_strongarm() {
     'osha_slideshow' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
+    'osha_wiki' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
