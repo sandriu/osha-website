@@ -739,6 +739,7 @@ function osha_strongarm() {
   $strongarm->name = 'uuid_features_entity_node';
   $strongarm->value = array(
     'article' => 'article',
+    'banner' => 'banner',
     'page' => 'page',
     'blog' => 0,
     'calls' => 0,
@@ -785,6 +786,7 @@ function osha_strongarm() {
   $strongarm->name = 'uuid_features_file_node';
   $strongarm->value = array(
     'article' => 'article',
+    'banner' => 'banner',
     'page' => 'page',
     'blog' => 0,
     'calls' => 0,
