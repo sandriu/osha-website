@@ -75,23 +75,21 @@ function osha_news_views_default_views() {
   $handler->display->display_options['filters']['published']['value'] = '1';
 
   /* Display: OSH News list */
-  $handler = $view->new_display('page', 'OSH News list', 'page');
+  $handler = $view->new_display('page', 'OSH News list', 'oshnews_list');
   $handler->display->display_options['path'] = 'oshnews';
 
   /* Display: OSH News - nodequeue */
-  $handler = $view->new_display('block', 'OSH News - nodequeue', 'latest_news_block');
+  $handler = $view->new_display('block', 'OSH News - nodequeue', 'oshnews_queue');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'OSH News';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
-  $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_always'] = TRUE;
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -164,7 +162,7 @@ function osha_news_views_default_views() {
   $handler->display->display_options['block_description'] = 'OSH News - nodequeue';
 
   /* Display: OSH News - latest */
-  $handler = $view->new_display('block', 'OSH News - latest', 'block_1');
+  $handler = $view->new_display('block', 'OSH News - latest', 'oshnews_latest');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'OSH News';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
@@ -176,7 +174,7 @@ function osha_news_views_default_views() {
   $handler->display->display_options['use_more_text'] = 'View all';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';

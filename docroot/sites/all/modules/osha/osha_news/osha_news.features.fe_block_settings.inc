@@ -12,10 +12,10 @@ function osha_news_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['views-news-block_1'] = array(
+  $export['views-news-oshnews_latest'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'news-block_1',
+    'delta' => 'news-oshnews_latest',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'views',
@@ -49,13 +49,13 @@ function osha_news_default_fe_block_settings() {
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
-  $export['views-news-latest_news_block'] = array(
+  $export['views-news-oshnews_queue'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'news-latest_news_block',
+    'delta' => 'news-oshnews_queue',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'views',
