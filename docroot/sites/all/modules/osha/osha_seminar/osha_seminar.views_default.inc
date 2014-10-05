@@ -207,7 +207,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = '';
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['view_node']['text'] = 'Show details';
+  $handler->display->display_options['fields']['view_node']['text'] = 'See details';
   $translatables['seminars'] = array(
     t('Master'),
     t('EU-OSHA Seminars'),
@@ -220,7 +220,7 @@ function osha_seminar_views_default_views() {
     t('Page'),
     t('Block'),
     t('[field_seminar_start_date_1] - [type]s'),
-    t('Show details'),
+    t('See details'),
   );
   $export['seminars'] = $view;
 
