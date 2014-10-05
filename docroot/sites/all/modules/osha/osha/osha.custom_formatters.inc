@@ -45,9 +45,7 @@ return $output;';
 $curr_lang = $language->language;
 $object = isset($variables[\'#object\']->field_publication_bookshop_id[$curr_lang]) ? $variables[\'#object\']->field_publication_bookshop_id[$curr_lang] :$variables[\'#object\']->field_publication_bookshop_id[\'en\'];
 $code = $object[0][\'value\'];
-
-$output = \'<span>Order a printed copy <a href="http://bookshop.europa.eu/is-bin/INTERSHOP.enfinity/WFS/EU-Bookshop-Site/en_GB/-/EUR/ViewPublication-Start?PublicationKey=\' . $code . \'"><img src="\' . $GLOBALS[\'base_url\'] . \'/sites/all/themes/osha_frontend/images/content/eu_bookshop.gif" alt="EU Bookshop: You can order a printed copy of this document" title="EU Bookshop: You can order a printed copy of this document"></a></span>\';
-return $output;';
+return empty($code)?\'\':\'<span>\'.t(\'Order a printed copy\').\'<a href="http://bookshop.europa.eu/is-bin/INTERSHOP.enfinity/WFS/EU-Bookshop-Site/en_GB/-/EUR/ViewPublication-Start?PublicationKey=\' . $code . \'"><img src="\' . $GLOBALS[\'base_url\'] . \'/sites/all/themes/osha_frontend/images/content/eu_bookshop.gif" alt="\'.t(\'EU Bookshop: You can order a printed copy of this document\').\'" title="\'.t(\'EU Bookshop: You can order a printed copy of this document\').\'"></a></span>\';';
   $formatter->fapi = '';
   $export['publication_bookshop_id'] = $formatter;
 
