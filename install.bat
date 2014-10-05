@@ -39,17 +39,17 @@ GOTO DONE
     rem echo "Importing ESENER taxonomy"
     rem call drush migrate-import TaxonomyEsener
 
-    echo "Importing Wiki articles"
-    drush migrate-import Wiki
-
     echo "Importing Publication types taxonomy"
     call drush migrate-import TaxonomyPublicationTypes
 
     echo "Importing multilingual Thesaurus taxonomy"
     call drush migrate-import TaxonomyThesaurus
 
-    echo "Importing Tags taxonomy"
-    call drush migrate-import TaxonomyTags
+    echo "Importing Wiki articles"
+    call drush migrate-import Wiki
+
+    rem echo "Importing Tags taxonomy"
+    rem call drush migrate-import TaxonomyTags
 
     echo "Importing Files content"
     call drush migrate-import Files
