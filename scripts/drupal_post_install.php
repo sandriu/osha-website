@@ -6,7 +6,6 @@ if (function_exists('drush_log')) {
 
 osha_configure_solr_entities();
 osha_change_field_size();
-osha_configure_imce();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
 osha_configure_newsletter_permissions();
@@ -50,45 +49,6 @@ function osha_configure_solr_entities() {
 }
 
 
-/**
- * Configure IMCE contrib module - Alter User-1 profile and assign User-1 profile to the administrator role.
- */
-function osha_configure_imce() {
-  drupal_set_message('Configuring Drupal IMCE module ...');
-  // /admin/config/media/imce
-  if (!module_load_include('inc', 'imce', 'inc/imce.admin')) {
-    throw new Exception('Cannot load inc/imce.admin.inc');
-  }
-
-  // Alter profile User-1.
-  $profiles = variable_get('imce_profiles', array());
-
-  if (isset($profiles[1])) {
-    $profiles[1]['directories'][0]['name'] = "sites/default/files";
-    variable_set('imce_profiles', $profiles);
-  }
-  else {
-    throw new Exception('Cannot load IMCE profile User-1.');
-  }
-
-  $roles = user_roles();
-
-  if (in_array("administrator", $roles)) {
-    // Role administrator found - assign User-1 profile to administrator.
-    $roles_profiles = variable_get('imce_roles_profiles', array());
-    $admin_role = user_role_load_by_name("administrator");
-
-    $roles_profiles[$admin_role->rid]['public_pid'] = 1;
-    $roles_profiles[$admin_role->rid]['private_pid'] = 1;
-    $roles_profiles[$admin_role->rid]['weight'] = 0;
-
-    variable_set('imce_roles_profiles', $roles_profiles);
-  }
-  else {
-    // Role administrator not found.
-    throw new Exception('Cannot assign IMCE profile User-1 to administrator - role administrator not found.');
-  }
-}
 
 /**
  * Config file translator not available during osha_tmgmt installation.
