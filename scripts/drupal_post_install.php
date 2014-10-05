@@ -11,7 +11,6 @@ osha_newsletter_create_taxonomy();
 osha_configure_newsletter_permissions();
 osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
-osha_disable_blocks();
 
 module_disable(array('overlay'));
 
@@ -181,29 +180,3 @@ function osha_configure_addtoany_social_share() {
 }
 
 
-/**
- * Disable drupal default blocks
- */
-function osha_disable_blocks(){
-  drupal_set_message('Disable navigation block on osha_frontend theme');
-
-  db_update('block')
-  ->fields(array('status' => 0))
-  ->condition('module', 'system')
-  ->condition('delta', 'navigation')
-  ->condition('theme', 'osha_frontend')
-  ->execute();
-
-  db_update('block')
-  ->fields(array('status' => 0))
-  ->condition('module', 'user')
-  ->condition('delta', 'login')
-  ->condition('theme', 'osha_frontend')
-  ->execute();
-
-  // we could also use drush
-  // block-configure --module=user --delta=login --region=-1 --theme=osha_frontend
-
-  // Flush cache
-  cache_clear_all();
-}
