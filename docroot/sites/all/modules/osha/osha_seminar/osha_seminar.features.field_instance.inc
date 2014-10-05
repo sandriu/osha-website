@@ -918,7 +918,7 @@ function osha_seminar_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -1293,7 +1293,7 @@ function osha_seminar_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
