@@ -43,6 +43,7 @@ class MigrateOshaCalls extends OSHADynamicMigration {
     $this->addFieldMapping('field_calls_deadline', 'deadline');
     $this->addFieldMapping('field_publication_date', 'publication_date');
     $this->addFieldMapping('field_archived', 'archived');
+    $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
     $this->addMultilingualFileFieldMapping('field_calls_contract_notice', 'contract_notice');
     $this->addMultilingualFileFieldMapping('field_calls_contract_n_corrig', 'contract_notice_corrigendum');
@@ -244,6 +245,8 @@ class MigrateOshaCalls extends OSHADynamicMigration {
       'agency_responses' => '',
       'award_notice' => '',
       'award_notice_corrigendum' => '',
+      'archived' => '',
+      'expiration_date' => '',
     );
   }
 }

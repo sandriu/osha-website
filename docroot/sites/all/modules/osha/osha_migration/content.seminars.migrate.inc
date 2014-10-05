@@ -47,6 +47,7 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
     $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
     $this->addFieldMapping('field_archived', 'archived');
+    $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
     $this->addFieldMapping('field_image', 'logo');
     $this->addFieldMapping('field_image:file_class')->defaultValue('OSHAMigrateFileUri');
@@ -235,6 +236,8 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
       'furtherActions' => '',
       'showRosterHour' => '',
       'files' => '',
+      'archived' => '',
+      'expiration_date' => '',
     );
   }
 }
