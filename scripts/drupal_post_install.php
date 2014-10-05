@@ -6,7 +6,6 @@ if (function_exists('drush_log')) {
 
 osha_configure_solr_entities();
 osha_change_field_size();
-osha_configure_htmlmail();
 osha_configure_imce();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
@@ -48,18 +47,6 @@ function osha_configure_solr_entities() {
     );
     drupal_form_submit('apachesolr_index_config_form', $form_state, $env_id);
   }
-}
-
-/**
- * Configure the drupal htmlmail module with proper settings.
- */
-function osha_configure_htmlmail() {
-  drupal_set_message('Configuring Drupal HTML Mail module ...');
-
-  $site_default_theme = variable_get('theme_default', 'bartik');
-
-  variable_set('htmlmail_theme', $site_default_theme);
-  variable_set('htmlmail_postfilter', 'full_html');
 }
 
 
