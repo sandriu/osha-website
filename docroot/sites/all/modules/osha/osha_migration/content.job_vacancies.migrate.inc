@@ -41,6 +41,8 @@ class OshaMigrateJobVacancies extends OSHADynamicMigration {
         'shortlisted' => 'Shortlisted (boolean)',
         'multilingual_thesaurus' => 'Item Thesaurus tags merged into tags',
         'nace' => 'Item NACE Codes',
+        'archived' => '',
+        'expiration_date' => '',
       )
     );
 
@@ -74,6 +76,7 @@ class OshaMigrateJobVacancies extends OSHADynamicMigration {
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
     $this->addFieldMapping('field_archived', 'archived');
+    $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
     $this->addFieldMapping('path', 'id');
     $this->addFieldMapping('created', 'creation_date');

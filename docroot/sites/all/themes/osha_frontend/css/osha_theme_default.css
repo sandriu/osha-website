@@ -141,6 +141,10 @@ header{
 	float:left;
 }
 
+article.node-article.view-mode-full .field-name-field-image.field-type-image .field-items .field-item  img {
+	width:100%;
+}
+
 
 /* MENU */
 
@@ -815,6 +819,17 @@ span.date-display-single{
 #related-publications .field-name-field-file .field-items .field-item{
 	width:100%;
 }
+
+.node-publication.view-mode-full .field-name-field-publication-related-res #publication_related_res {
+	list-style:none;
+	margin-left:10em;
+} 
+
+.node-publication.view-mode-full .field-name-field-publication-related-res #publication_related_res li a{
+	font-family:arial;
+	font-weight:bold;
+	font-size:0.9em;
+} 
 
 /*END PUBLICATIONS twin_publications*/
 
@@ -2368,3 +2383,67 @@ font-weight: normal;
 }
 
 /*END SHARE LINKS HIGHLIGHS*/
+
+/*HIGHLIGHS SECTION*/
+
+.node-highlight.view-mode-full .field-name-field-summary p{
+	color:#000000;
+	font-size:1em;
+	font-weight:normal;
+}
+
+.node-highlight.view-mode-full .field-name-field-summary a{
+	color:#000000;
+	font-size:0.9em;
+	font-weight:bold;
+	font-family:arial!important;
+}
+
+/*END HIGHLIGHS SECTION*/
+
+
+/*Publication tein detail OSHWiki featured articles*/
+
+
+
+#related-wiki-publications .related_wiki_head{
+	background-color: #e9edf6;
+    color: #003399;
+    font-family: Oswald;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
+    padding-top: 0.2em;
+}
+
+#related-wiki-publications .related_wiki_head span{
+	 color: #003399;
+    font-family: Oswald;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+#related-wiki-publications div article{
+	padding-left:0em;
+}
+
+#related-wiki-publications .field-name-title-field{
+	margin:0;
+	padding:0.5em 0 0 0.4em;
+}
+
+#related-wiki-publications .field-name-field-summary{
+	padding:0;
+	margin:0;
+}
+
+#related-wiki-publications .field-name-field-summary p{
+	padding:0 0 0.5em 0.8em;
+	margin:0;
+	color:#000000;
+	font-size:0.9em;
+	font-weight:normal;
+}
+
+/*End Publication tein detail OSHWiki featured articles*/
