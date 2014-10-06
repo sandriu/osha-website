@@ -47,12 +47,24 @@ function osha_workflow_permission() {
  */
 function osha_workflow_node_access($node, $operation, $user) {
   if (isset($node->workbench_moderation) && $operation == 'update') {
-    if (variable_get('workbench_moderation_per_node_type', FALSE) &&
-        !user_access('edit ' . $node->type . ' in ' . $node->workbench_moderation['current']->state, $user)) {
+    if (variable_get('workbench_moderation_per_node_type', FALSE)
+        && !user_access('edit ' . $node->type . ' in ' . $node->workbench_moderation['current']->state, $user)
+        && !user_access('edit any content in ' . $node->workbench_moderation['current']->state, $user)) {
       return NODE_ACCESS_DENY;
     }
   }
   return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_workbench_moderation_access_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
+  if ($op == 'view revisions' && user_access('view revisions')) {
+    $access = 1;
+  }
 }
 
 /**
