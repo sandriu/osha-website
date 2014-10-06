@@ -70,7 +70,7 @@ function osha_menu_post_features_revert($component) {
       return;
     }
     if (!file_prepare_directory($image_dest_dir)) {
-      drupal_set_message('Could not create menuimage directory', 'warning');
+      drupal_set_message("Could not create menuimage directory ($image_dest_dir)", 'warning');
       return;
     }
     $types = str_replace(' ', '|', $types);

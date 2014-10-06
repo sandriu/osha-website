@@ -1,7 +1,18 @@
 <?php
 
 /**
- * Implements hook_install().
+ * Implements hook_module_enable().
  */
-function osha_newsletter_install() {
+function osha_newsletter_enable() {
+  $mail_system = array(
+    'default-system' => 'HTMLMailSystem',
+    'htmlmail' => 'DefaultMailSystem',
+  );
+
+  variable_set('mail_system', $mail_system);
+  variable_set('mailsystem_theme', 'default');
+
+  $site_default_theme = variable_get('theme_default', 'bartik');
+  variable_set('htmlmail_theme', $site_default_theme);
+  variable_set('htmlmail_postfilter', 'full_html');
 }

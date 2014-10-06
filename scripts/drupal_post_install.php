@@ -4,18 +4,60 @@ if (function_exists('drush_log')) {
   drush_log('Executing post-install tasks ...', 'ok');
 }
 
-osha_configure_default_themes();
 osha_configure_solr_entities();
 osha_change_field_size();
-osha_configure_mailsystem();
-osha_configure_htmlmail();
-osha_configure_imce();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
-osha_configure_newsletter_permissions();
 osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
-osha_disable_blocks();
+osha_configure_permissions();
+
+
+/**
+ * Configure permissions.
+ *
+ * @todo this is here because I cannot add it inside module due to SQL error:
+ * SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'module' cannot
+ * be null.
+ *
+ * {@inheritdoc}
+ */
+function osha_configure_permissions() {
+  if ($role = user_role_load_by_name('administrator')) {
+    $vocabularies = array(
+      'activity',
+      'article_types',
+      'esener',
+      'nace_codes',
+      'section',
+      'thesaurus',
+      'wiki_categories',
+      'workflow_status',
+
+      'publication_types',
+      'newsletter_sections',
+    );
+    $permissions = array();
+    foreach ($vocabularies as $voc_name) {
+      if ($voc = taxonomy_vocabulary_machine_name_load($voc_name)) {
+        $permissions[] = 'add terms in ' . $voc_name;
+        $permissions[] = 'edit terms in ' . $voc->vid;
+        $permissions[] = 'delete terms in ' . $voc->vid;
+      }
+    }
+
+    $permissions[] = 'translate taxonomy_term entities';
+
+    $permissions[] = 'moderate content from draft to final_draft';
+    $permissions[] = 'moderate content from final_draft to draft';
+    $permissions[] = 'moderate content from final_draft to needs_review';
+    $permissions[] = 'moderate content from needs_review to to_be_approved';
+    $permissions[] = 'moderate content from to_be_approved to rejected';
+    $permissions[] = 'moderate content from to_be_approved to approved';
+
+    user_role_grant_permissions($role->rid, $permissions);
+  }
+}
 
 module_disable(array('overlay'));
 
@@ -52,83 +94,7 @@ function osha_configure_solr_entities() {
   }
 }
 
-/**
- * Configure the drupal mailsystem module with proper settings.
- */
-function osha_configure_mailsystem() {
-  drupal_set_message('Configuring Drupal Mailsystem module ...');
 
-  $mail_system = array(
-    'default-system' => 'HTMLMailSystem',
-    'htmlmail' => 'DefaultMailSystem',
-  );
-
-  variable_set('mail_system', $mail_system);
-  variable_set('mailsystem_theme', 'default');
-}
-
-/**
- * Configure the drupal htmlmail module with proper settings.
- */
-function osha_configure_htmlmail() {
-  drupal_set_message('Configuring Drupal HTML Mail module ...');
-
-  $site_default_theme = variable_get('theme_default', 'bartik');
-
-  variable_set('htmlmail_theme', $site_default_theme);
-  variable_set('htmlmail_postfilter', 'full_html');
-}
-
-
-/**
- * Configure IMCE contrib module - Alter User-1 profile and assign User-1 profile to the administrator role.
- */
-function osha_configure_imce() {
-  drupal_set_message('Configuring Drupal IMCE module ...');
-  // /admin/config/media/imce
-  if (!module_load_include('inc', 'imce', 'inc/imce.admin')) {
-    throw new Exception('Cannot load inc/imce.admin.inc');
-  }
-
-  // Alter profile User-1.
-  $profiles = variable_get('imce_profiles', array());
-
-  if (isset($profiles[1])) {
-    $profiles[1]['directories'][0]['name'] = "sites/default/files";
-    variable_set('imce_profiles', $profiles);
-  }
-  else {
-    throw new Exception('Cannot load IMCE profile User-1.');
-  }
-
-  $roles = user_roles();
-
-  if (in_array("administrator", $roles)) {
-    // Role administrator found - assign User-1 profile to administrator.
-    $roles_profiles = variable_get('imce_roles_profiles', array());
-    $admin_role = user_role_load_by_name("administrator");
-
-    $roles_profiles[$admin_role->rid]['public_pid'] = 1;
-    $roles_profiles[$admin_role->rid]['private_pid'] = 1;
-    $roles_profiles[$admin_role->rid]['weight'] = 0;
-
-    variable_set('imce_roles_profiles', $roles_profiles);
-  }
-  else {
-    // Role administrator not found.
-    throw new Exception('Cannot assign IMCE profile User-1 to administrator - role administrator not found.');
-  }
-}
-
-/**
- * Sets default themes for OSHA project.
- */
-function osha_configure_default_themes() {
-  drupal_set_message('Configuring Drupal default themes ...');
-
-  variable_set('admin_theme', 'osha_admin');
-  variable_set('theme_default', 'osha_frontend');
-}
 
 /**
  * Config file translator not available during osha_tmgmt installation.
@@ -183,18 +149,6 @@ function osha_newsletter_create_taxonomy() {
   }
 }
 
-
-/**
- * Assign required permissions to roles - newsletter.
- */
-function osha_configure_newsletter_permissions() {
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
-    'view newsletter_content_collection entity collections',
-  ));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
-    'view newsletter_content_collection entity collections',
-  ));
-}
 
 /**
  * Set-up the search_autocomplete module.
@@ -261,29 +215,3 @@ function osha_configure_addtoany_social_share() {
 }
 
 
-/**
- * Disable drupal default blocks
- */
-function osha_disable_blocks(){
-  drupal_set_message('Disable navigation block on osha_frontend theme');
-
-  db_update('block')
-  ->fields(array('status' => 0))
-  ->condition('module', 'system')
-  ->condition('delta', 'navigation')
-  ->condition('theme', 'osha_frontend')
-  ->execute();
-
-  db_update('block')
-  ->fields(array('status' => 0))
-  ->condition('module', 'user')
-  ->condition('delta', 'login')
-  ->condition('theme', 'osha_frontend')
-  ->execute();
-
-  // we could also use drush
-  // block-configure --module=user --delta=login --region=-1 --theme=osha_frontend
-
-  // Flush cache
-  cache_clear_all();
-}

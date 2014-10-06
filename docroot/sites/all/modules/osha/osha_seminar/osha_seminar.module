@@ -7,3 +7,26 @@
 include_once 'osha_seminar.features.inc';
 
 define('OSHA_SEMINAR_CONTENT_TYPE_SEMINAR', 'seminar');
+
+/**
+ * Implements hook_post_features_enable_feature().
+ *
+ * {@inheritdoc}
+ */
+function osha_seminar_post_features_enable_feature($component) {
+  // After the field_instance ...
+  if ($component == 'variable') {
+    menu_rebuild();
+    drupal_static_reset();
+    if ($role = user_role_load_by_name('administrator')) {
+      $permissions = array(
+        'create seminar content',
+        'edit own seminar content',
+        'edit any seminar content',
+        'delete own seminar content',
+        'delete any seminar content',
+      );
+      user_role_grant_permissions($role->rid, $permissions);
+    }
+  }
+}

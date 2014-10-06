@@ -7,3 +7,26 @@
 include_once 'osha_news.features.inc';
 
 define('OSHA_NEWS_CONTENT_TYPE_NEWS', 'news');
+
+/**
+ * Implements hook_post_features_enable_feature().
+ *
+ * {@inheritdoc}
+ */
+function osha_news_post_features_enable_feature($component) {
+  // After the field_instance ...
+  if ($component == 'variable') {
+    menu_rebuild();
+    drupal_static_reset();
+    if ($role = user_role_load_by_name('administrator')) {
+      $permissions = array(
+        'create news content',
+        'edit own news content',
+        'edit any news content',
+        'delete own news content',
+        'delete any news content',
+      );
+      user_role_grant_permissions($role->rid, $permissions);
+    }
+  }
+}

@@ -7,3 +7,26 @@
 include_once 'osha_job_vacancies.features.inc';
 
 define('OSHA_JOB_VACANCIES_CONTENT_TYPE_JOB_VACANCIES', 'job_vacancies');
+
+/**
+ * Implements hook_post_features_enable_feature().
+ *
+ * {@inheritdoc}
+ */
+function osha_job_vacancies_post_features_enable_feature($component) {
+  // After the field_instance ...
+  if ($component == 'variable') {
+    menu_rebuild();
+    drupal_static_reset();
+    if ($role = user_role_load_by_name('administrator')) {
+      $permissions = array(
+        'create job_vacancies content',
+        'edit own job_vacancies content',
+        'edit any job_vacancies content',
+        'delete own job_vacancies content',
+        'delete any job_vacancies content',
+      );
+      user_role_grant_permissions($role->rid, $permissions);
+    }
+  }
+}
