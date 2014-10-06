@@ -1,0 +1,25 @@
+<?php
+
+
+/**
+ * Implements hook_post_features_enable_feature().
+ *
+ * {@inheritdoc}
+ */
+function osha_blog_post_features_enable_feature($component) {
+  // After the field_instance ...
+  if ($component == 'variable') {
+    menu_rebuild();
+    drupal_static_reset();
+    if ($role = user_role_load_by_name('administrator')) {
+      $permissions = array(
+        'create blog content',
+        'edit own blog content',
+        'edit any blog content',
+        'delete own blog content',
+        'delete any blog content',
+      );
+      user_role_grant_permissions($role->rid, $permissions);
+    }
+  }
+}
