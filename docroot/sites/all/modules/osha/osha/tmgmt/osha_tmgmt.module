@@ -217,6 +217,32 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#empty' => t('There are no items in your cart.'),
         '#options' => $options,
       );
+
+      #add JS file
+      $form['#attached']['js'][] = drupal_get_path('module', 'osha_tmgmt') . '/js/osha_tmgmt.js';
+
+      #select all languages
+      $form['select_all_lng'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Select all languages'),
+      );
+
+      #select some languages
+      $form['select_some_lng'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Select some languages'),
+      );
+
+      #order form elements
+      $form['tmgmt-ui-cart-content']['#weight'] = 0;
+      $form['priority']['#weight'] = 1;
+      $form['target_language']['#weight'] = 2;
+      $form['select_all_lng']['#weight'] = 3;
+      $form['select_some_lng']['#weight'] = 3;
+      $form['empty_cart']['#weight']['#weight'] = 4;
+      $form['remove_selected']['#weight']['#weight'] = 4;
+      $form['request_translation']['#weight']['#weight'] = 4;
+
       $form['request_translation']['#submit'] = array('osha_tmgmt_tmgmt_ui_cart_content_submit');
       $form['priority'] = array(
         '#title' => t('Job priority'),
