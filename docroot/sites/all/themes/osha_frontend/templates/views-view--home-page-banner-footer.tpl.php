@@ -32,7 +32,7 @@
 jQuery(document).ready(function ($) {
     var options = {
         $AutoPlay: false,
-        $AutoPlaySteps: 4,
+        $AutoPlaySteps: 1,
         $SlideDuration: 160,
         $SlideWidth: 200,
         $SlideHeight: 150,
@@ -48,7 +48,7 @@ jQuery(document).ready(function ($) {
             $Class: $JssorArrowNavigator$,
             $ChanceToShow: 1,
             $AutoCenter: 2,
-            $Steps: 4
+            $Steps: 1
         }
     };
     var jssor_slider1 = new $JssorSlider$("recommended_resources", options);
