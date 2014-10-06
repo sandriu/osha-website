@@ -21,6 +21,41 @@ function osha_newsletter_permission() {
 }
 
 /**
+ * Implements hook_post_features_enable_feature().
+ *
+ * {@inheritdoc}
+ */
+function osha_newsletter_post_features_enable_feature($component) {
+  // After the field_instance ...
+  if ($component == 'variable') {
+    drupal_static_reset();
+    // Permissions.
+    user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
+      'view newsletter_content_collection entity collections',
+    ));
+    user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
+      'view newsletter_content_collection entity collections',
+    ));
+    if ($role = user_role_load_by_name('administrator')) {
+      $permissions = array(
+        'create newsletter_article content',
+        'edit own newsletter_article content',
+        'edit any newsletter_article content',
+        'delete own newsletter_article content',
+        'delete any newsletter_article content',
+
+        'create newsletter_content_collection entity collections',
+        'edit newsletter_content_collection entity collections',
+        'delete newsletter_content_collection entity collections',
+        'add content to newsletter_content_collection entity collections',
+        'manage content in newsletter_content_collection entity collections',
+      );
+      user_role_grant_permissions($role->rid, $permissions);
+    }
+  }
+}
+
+/**
  * Implements hook_menu().
  */
 function osha_newsletter_menu() {

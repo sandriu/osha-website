@@ -10,6 +10,54 @@ osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
 osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
+osha_configure_permissions();
+
+
+/**
+ * Configure permissions.
+ *
+ * @todo this is here because I cannot add it inside module due to SQL error:
+ * SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'module' cannot
+ * be null.
+ *
+ * {@inheritdoc}
+ */
+function osha_configure_permissions() {
+  if ($role = user_role_load_by_name('administrator')) {
+    $vocabularies = array(
+      'activity',
+      'article_types',
+      'esener',
+      'nace_codes',
+      'section',
+      'thesaurus',
+      'wiki_categories',
+      'workflow_status',
+
+      'publication_types',
+      'newsletter_sections',
+    );
+    $permissions = array();
+    foreach ($vocabularies as $voc_name) {
+      if ($voc = taxonomy_vocabulary_machine_name_load($voc_name)) {
+        $permissions[] = 'add terms in ' . $voc_name;
+        $permissions[] = 'edit terms in ' . $voc->vid;
+        $permissions[] = 'delete terms in ' . $voc->vid;
+      }
+    }
+
+    $permissions[] = 'translate taxonomy_term entities';
+
+    $permissions[] = 'moderate content from draft to final_draft';
+    $permissions[] = 'moderate content from final_draft to draft';
+    $permissions[] = 'moderate content from final_draft to needs_review';
+    $permissions[] = 'moderate content from needs_review to to_be_approved';
+    $permissions[] = 'moderate content from to_be_approved to rejected';
+    $permissions[] = 'moderate content from to_be_approved to approved';
+
+    user_role_grant_permissions($role->rid, $permissions);
+  }
+}
 
 module_disable(array('overlay'));
 

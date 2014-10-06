@@ -7,3 +7,26 @@
 include_once 'osha_publication.features.inc';
 
 define('OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION', 'publication');
+
+/**
+ * Implements hook_post_features_enable_feature().
+ *
+ * {@inheritdoc}
+ */
+function osha_publication_post_features_enable_feature($component) {
+  // After the field_instance ...
+  if ($component == 'variable') {
+    menu_rebuild();
+    drupal_static_reset();
+    if ($role = user_role_load_by_name('administrator')) {
+      $permissions = array(
+        'create publication content',
+        'edit own publication content',
+        'edit any publication content',
+        'delete own publication content',
+        'delete any publication content',
+      );
+      user_role_grant_permissions($role->rid, $permissions);
+    }
+  }
+}
