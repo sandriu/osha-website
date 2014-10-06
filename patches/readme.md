@@ -7,6 +7,11 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* entity_collection
+  * Fixed bug when using autocomplete for entities
+  * https://www.drupal.org/node/2351417
+  * entity_collection/entity_collection-disable_bundle_query-2351417-1-D7.patch
+
 * features_extra
   * Fix tests error for nodequeue
   * features_extra-invalid-argument-foreach-2018515-1.patch
