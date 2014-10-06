@@ -8,7 +8,6 @@ osha_configure_solr_entities();
 osha_change_field_size();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
-osha_configure_newsletter_permissions();
 osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
 
@@ -102,18 +101,6 @@ function osha_newsletter_create_taxonomy() {
   }
 }
 
-
-/**
- * Assign required permissions to roles - newsletter.
- */
-function osha_configure_newsletter_permissions() {
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
-    'view newsletter_content_collection entity collections',
-  ));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
-    'view newsletter_content_collection entity collections',
-  ));
-}
 
 /**
  * Set-up the search_autocomplete module.
