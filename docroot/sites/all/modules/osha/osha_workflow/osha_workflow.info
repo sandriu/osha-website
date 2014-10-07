@@ -57,3 +57,4 @@ features[workbench_moderation_transitions][] = needs_review:draft
 features[workbench_moderation_transitions][] = needs_review:to_be_approved
 features[workbench_moderation_transitions][] = to_be_approved:approved
 features[workbench_moderation_transitions][] = to_be_approved:rejected
+files[] = osha_workflow.admin.inc

@@ -7,6 +7,35 @@
 include_once 'osha_workflow.features.inc';
 
 /**
+ * Implements hook_menu().
+ */
+function osha_workflow_menu() {
+  $items = array();
+  $items['node/%node/approve'] = array(
+    'title' => 'Approve',
+    'description' => 'Approval page for the OSHA approval workflow.',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'osha_workflow_node_approval_form',
+    'page arguments' => array(1),
+    'access callback' => '_workbench_moderation_access',
+    'access arguments' => array('moderate content from needs_review to to_be_approved', 1),
+    'file' => 'osha_workflow.admin.inc',
+    'weight' => 10,
+  );
+  $items['node/%node/review'] = array(
+    'title' => 'Review',
+    'description' => 'Review page for the OSHA reviewing workflow.',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'osha_workflow_node_review_form',
+    'page arguments' => array(1),
+    'access callback' => '_workbench_moderation_access',
+    'access arguments' => array('moderate content from final_draft to needs_review', 1),
+    'file' => 'osha_workflow.admin.inc',
+    'weight' => 9,
+  );
+  return $items;
+}
+
 /**
  * Implements hook_entity_info().
  */
