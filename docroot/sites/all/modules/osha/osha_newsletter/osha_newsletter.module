@@ -758,6 +758,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
       $query = new EntityFieldQuery();
       $rows = $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', $allowed_bundles, 'IN')
+        ->entityCondition('bundle', array('article','newsletter_article'), 'NOT IN')
         ->propertyCondition('created', $after, '>=')
         ->execute();
       if (isset($rows['node'])) {
