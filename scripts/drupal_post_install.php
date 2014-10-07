@@ -4,7 +4,6 @@ if (function_exists('drush_log')) {
   drush_log('Executing post-install tasks ...', 'ok');
 }
 
-osha_configure_default_themes();
 //osha_configure_solr_entities();
 osha_change_field_size();
 osha_configure_file_translator();
