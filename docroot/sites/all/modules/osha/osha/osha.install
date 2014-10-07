@@ -37,7 +37,8 @@ function osha_configure_imce() {
   $profiles = variable_get('imce_profiles', array());
 
   if (isset($profiles[1])) {
-    $profiles[1]['directories'][0]['name'] = "sites/default/files";
+    $profiles[1]['directories'][0]['name'] = ".";
+    $profiles[1]['directories'][0]['subnav'] = "1";
     variable_set('imce_profiles', $profiles);
   }
   else {
