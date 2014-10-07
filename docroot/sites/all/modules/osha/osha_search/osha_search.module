@@ -6,6 +6,71 @@
 
 include_once 'osha_search.features.inc';
 
-/**
- * {@inheritdoc}
+
+function osha_search_menu() {
+  $items = array();
+  $items['search-autocomplete/%'] = array(
+    'page callback' => 'osha_search_autocomplete_callback',
+    'access callback' => TRUE,
+    'page arguments' => array(1),
+  );
+  return $items;
+}
+
+/*
+ * NOT IMPLEMENTED
+ * TODO Get this function done for CW-220
  */
+
+function osha_search_autocomplete_callback($search = '*') {
+  $search = check_plain($search);
+  global $language;
+  $response = drupal_http_request('http://localhost:8983/solr/osha/select?q=' .
+    $search . '&wt=json&group=true&group.field=bundle&group.limit=3'
+    . '&ss_search_api_language=' . $language->language);
+
+  if ($response->code != 200) {
+    var_dump($response->code);
+    exit;
+  }
+
+  $data = json_decode($response->data);
+  $total = $data->grouped->bundle->matches;
+  $groups = array();
+  $return = array();
+
+  $showing_categ = 3;
+  $showing_items = 3;
+  $count_categ = 0;
+
+  foreach ($data->grouped->bundle->groups as &$group) {
+    if ($count_categ++ == $showing_categ) {
+      break;
+    }
+    $count_items = 0;
+    foreach ($group->doclist->docs as &$item) {
+      if ($count_items++ == $showing_items) {
+        // TODO append item show more link
+        break;
+      }
+
+      $ac_item = array();
+      $ac_item = array(
+        "link" => url($item->path),
+        "value" => "Factsheet 31 - Practical Advice for Workers on Tackling Work-related Stress and its Causes",
+        "fields" => array(
+          "title_field" => current($item->sm_title_field),
+        ),
+      );
+      if ($count_items == 1) {
+        $ac_item["group"] = array(
+          "group_id" => $item->bundle,
+          "group_name" => $item->bundle_name,
+        );
+      }
+      $return[] = $ac_item;
+    }
+  }
+  print_r(json_encode($return));
+  exit;
+}
