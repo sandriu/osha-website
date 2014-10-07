@@ -13,6 +13,7 @@ dependencies[] = workbench_moderation
 features[ctools][] = entity_collection:entity_collection_bundles_default:1
 features[ctools][] = strongarm:strongarm:1
 features[entity_collection][] = approvers
+features[entity_collection][] = reviewers
 features[entity_collection_bundles][] = moderators_group
 features[features_api][] = api:2
 features[variable][] = workbench_access
