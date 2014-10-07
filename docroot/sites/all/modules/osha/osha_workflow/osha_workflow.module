@@ -7,6 +7,25 @@
 include_once 'osha_workflow.features.inc';
 
 /**
+/**
+ * Implements hook_entity_info().
+ */
+function osha_workflow_entity_info() {
+  return array(
+    'moderation_item' => array(
+      'label' => t('Moderation item'),
+      'module' => 'osha_workflow',
+      'entity class' => 'Entity',
+      'controller class' => 'EntityAPIController',
+      'base_table' => 'moderation_item',
+      'entity keys' => array(
+        'id' => 'miid',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_permission().
  *
  * We need this to define permissions granted to content moderators.
@@ -94,4 +113,41 @@ function osha_workflow_create_roles() {
     // Grant workbench access for this role.
     workbench_access_role_section_save($role->rid, 'main-menu', 'menu');
   }
+}
+
+/**
+ * Load a single moderation_item entity.
+ *
+ * @param int $id
+ *   Primary key
+ * @param bool $reset
+ *   Whether to reset the internal cache for the requested entity type.
+ *
+ * @return mixed
+ *   An array of entity objects indexed by their ids. When no results are
+ *   found, an empty array is returned.
+ */
+function osha_workflow_moderation_item_load($id, $reset = FALSE) {
+  return osha_workflow_moderation_item_load_multiple(array($id), array(), $reset);
+}
+
+/**
+ * Load moderation_item entities from database.
+ *
+ * @param array $ids
+ *   An array of entity IDs, or FALSE to load all entities.
+ * @param array $conditions
+ *   (deprecated) An associative array of conditions on the base table, where
+ *   the keys are the database fields and the values are the values those
+ *   fields must have. Instead, it is preferable to use EntityFieldQuery to
+ *   retrieve a list of entity IDs loadable by this function.
+ * @param bool $reset
+ *   Whether to reset the internal cache for the requested entity type.
+ *
+ * @return mixed
+ *   An array of entity objects indexed by their ids. When no results are
+ *   found, an empty array is returned.
+ */
+function osha_workflow_moderation_item_load_multiple($ids = array(), $conditions = array(), $reset = FALSE) {
+  return entity_load('moderation_item', $ids, $conditions, $reset);
 }
