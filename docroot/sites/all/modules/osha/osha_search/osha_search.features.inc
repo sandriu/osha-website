@@ -8,9 +8,6 @@
  * Implements hook_ctools_plugin_api().
  */
 function osha_search_ctools_plugin_api($module = NULL, $api = NULL) {
-  if ($module == "apachesolr_search" && $api == "apachesolr_search_defaults") {
-    return array("version" => "3");
-  }
   if ($module == "facetapi" && $api == "facetapi_defaults") {
     return array("version" => "1");
   }
@@ -156,10 +153,6 @@ function osha_search_default_search_api_index() {
         "field_activity" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_article_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_author" : { "type" : "text" },
-        "field_cover_image:file" : { "type" : "integer", "entity_type" : "file" },
-        "field_file:description" : { "type" : "list\\u003Ctext\\u003E" },
-        "field_file:file" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "file" },
-        "field_file:file:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_nace_codes" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_publication_date" : { "type" : "date" },
         "field_publication_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
@@ -167,6 +160,7 @@ function osha_search_default_search_api_index() {
         "field_tags" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_tags:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_thesaurus" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_wiki_categories" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_workflow_status" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "language" : { "type" : "string" },
         "nid" : { "type" : "integer" },
@@ -176,6 +170,7 @@ function osha_search_default_search_api_index() {
         "source" : { "type" : "integer", "entity_type" : "node" },
         "status" : { "type" : "integer" },
         "title" : { "type" : "text" },
+        "title_field" : { "type" : "text" },
         "type" : { "type" : "string" },
         "url" : { "type" : "uri" },
         "uuid" : { "type" : "text" },

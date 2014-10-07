@@ -23,13 +23,53 @@ function osha_search_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Publications';
-  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+    ),
+    'search_api_views_fulltext' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'search_api_language' => array(
+      'bef_format' => 'bef',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+  );
+  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
+  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
@@ -56,11 +96,8 @@ function osha_search_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
     'body:summary' => 'body:summary',
     'body:value' => 'body:value',
-    'field_file:description' => 'field_file:description',
-    'field_file:file:name' => 'field_file:file:name',
     'field_summary' => 'field_summary',
-    'field_tags:name' => 'field_tags:name',
-    'title' => 'title',
+    'title_field' => 'title_field',
   );
   /* Filter criterion: Indexed Multilingual Node: Item language */
   $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
@@ -97,10 +134,9 @@ function osha_search_views_default_views() {
   );
   $handler->display->display_options['filters']['search_api_language']['exposed'] = TRUE;
   $handler->display->display_options['filters']['search_api_language']['expose']['operator_id'] = 'search_api_language_op';
-  $handler->display->display_options['filters']['search_api_language']['expose']['label'] = 'Language';
+  $handler->display->display_options['filters']['search_api_language']['expose']['label'] = 'Item language';
   $handler->display->display_options['filters']['search_api_language']['expose']['operator'] = 'search_api_language_op';
   $handler->display->display_options['filters']['search_api_language']['expose']['identifier'] = 'search_api_language';
-  $handler->display->display_options['filters']['search_api_language']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['search_api_language']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -136,6 +172,7 @@ function osha_search_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
+    t('Select any filter and click on Apply to see results'),
     t('Items per page'),
     t('- All -'),
     t('Offset'),
@@ -145,7 +182,6 @@ function osha_search_views_default_views() {
     t('last »'),
     t('Multilingual ID'),
     t('Search'),
-    t('Language'),
     t('Item language'),
     t('Page'),
   );
@@ -164,7 +200,6 @@ function osha_search_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Search';
-  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -254,11 +289,8 @@ function osha_search_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
     'body:summary' => 'body:summary',
     'body:value' => 'body:value',
-    'field_file:description' => 'field_file:description',
-    'field_file:file:name' => 'field_file:file:name',
     'field_summary' => 'field_summary',
-    'field_tags:name' => 'field_tags:name',
-    'title' => 'title',
+    'title_field' => 'title_field',
   );
   /* Filter criterion: Indexed Multilingual Node: Item language */
   $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
@@ -271,13 +303,16 @@ function osha_search_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'site');
   $handler->display->display_options['exposed_block'] = TRUE;
-  $handler->display->display_options['path'] = 'site-search';
+  $handler->display->display_options['path'] = 'search/site';
+  $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Site';
   $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['name'] = 'menu-search';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $handler->display->display_options['tab_options']['weight'] = '0';
+  $handler->display->display_options['tab_options']['type'] = 'tab';
+  $handler->display->display_options['tab_options']['title'] = 'Site';
+  $handler->display->display_options['tab_options']['weight'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'wiki');
@@ -323,10 +358,11 @@ function osha_search_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'wiki_page' => 'wiki_page',
   );
-  $handler->display->display_options['path'] = 'wiki-search';
-  $handler->display->display_options['menu']['title'] = 'Site';
+  $handler->display->display_options['path'] = 'search/wiki';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Wiki';
   $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['name'] = 'menu-search';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $handler->display->display_options['tab_options']['weight'] = '0';
