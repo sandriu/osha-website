@@ -249,32 +249,32 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-function osha_workflow_form_moderate_reject_submit($form, $form_state) {
-  dpm($form_state);
+/**
+ * Submit form hook for vote - when approved.
+ */
+function osha_workflow_form_moderate_approve_submit($form, $form_state) {
   $values = $form_state['values'];
   $node = $values['node'];
   $state = $node->workbench_moderation['current']->state;
-  $moderation_type = NULL;
   if ($state == 'needs_review') {
-    $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_REVIEW;
+    osha_workflow_moderate($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
   }
   elseif ($state == 'to_be_approved') {
-    $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_APPROVE;
+    osha_workflow_moderate($node, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
   }
-  osha_workflow_moderate($node, $moderation_type, OSHA_WORKFLOW_MODERATION_REJECT);
 }
 
-function osha_workflow_form_moderate_approve_submit($form, $form_state) {
-  dpm($form_state);
+/**
+ * Submit form hook for vote - when rejecting.
+ */
+function osha_workflow_form_moderate_reject_submit($form, $form_state) {
   $values = $form_state['values'];
   $node = $values['node'];
   $state = $node->workbench_moderation['current']->state;
-  $moderation_type = NULL;
   if ($state == 'needs_review') {
-    $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_REVIEW;
+    osha_workflow_moderate($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW, OSHA_WORKFLOW_MODERATION_REJECT);
   }
   elseif ($state == 'to_be_approved') {
-    $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_APPROVE;
+    osha_workflow_moderate($node, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE, OSHA_WORKFLOW_MODERATION_REJECT);
   }
-  osha_workflow_moderate($node, $moderation_type, OSHA_WORKFLOW_MODERATION_ACCEPT);
 }

@@ -207,7 +207,68 @@ function osha_workflow_get_next_moderator($node, $moderation_type) {
   return $ret;
 }
 
-
-function osha_workflow_moderate($node, $moderation_type, $vote) {
-  //@todo: Implement
+/**
+ * Record the user's vote and move the record to the next in queue.
+ *
+ * @param object $node
+ *   Node object
+ * @param string $moderation_type
+ *   Type of moderation
+ * @param integer $vote
+ *   User's vote (1 - Accept, 0 - Reject)
+ * @param string $message
+ *   User's message
+ * @param object $voter
+ *   User who vote, if NULL assuming current user.
+ *
+ * @return bool
+ *   Returns TRUE if this was the last user in the moderation process.
+ */
+function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL, $voter = NULL) {
+  if (empty($voter)) {
+    global $user;
+    $voter = $user;
+  }
+  $transaction = db_transaction();
+  try {
+    $query = new EntityFieldQuery();
+    $miids = $query->entityCondition('entity_type', 'moderation_item')
+      ->propertyCondition('nid', $node->nid)
+      ->propertyCondition('vid', $node->vid)
+      ->propertyCondition('moderation_type', $moderation_type)
+      ->propertyOrderBy('weight')
+      ->execute();
+    if (isset($miids['moderation_item'])) {
+      $rows = osha_workflow_moderation_item_load_multiple(array_keys($miids['moderation_item']));
+      $last = end($rows);
+      reset($rows);
+      $mark_next = FALSE;
+      foreach ($rows as $row) {
+        if ($row->uid == $voter->uid && $row->next == 1) {
+          $mark_next = TRUE;
+          $row->next = 0;
+          $row->approved = intval($vote);
+          $row->mesage = $message;
+          drupal_set_message('Saving ' . $row->miid);
+          if ($last->uid == $row->uid) {
+            return TRUE;
+          }
+          continue;
+        }
+        if ($mark_next) {
+          $row->next = 1;
+          entity_save('moderation_item', $row);
+          if ($last->uid == $row->uid) {
+            return TRUE;
+          }
+          break;
+        }
+      }
+    }
+  }
+  catch(Exception $e) {
+    $transaction->rollback();
+    drupal_set_message($e->getMessage(), 'error');
+  }
+  return FALSE;
 }
