@@ -20,8 +20,8 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
     );
     $form['name'][$uid] = array('#markup' => check_plain($row->name));
     $form['mail'][$uid] = array('#markup' => check_plain($row->mail));
-    if (!empty($row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW])) {
-      $moderation = $row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW];
+    if (!empty($row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_APPROVE])) {
+      $moderation = $row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_APPROVE];
       $form['next'][$uid] = array('#markup' => !empty($moderation->next) ? t('Yes') : '');
       if ($moderation->approved === NULL) {
         $status = t('Waiting approval');
