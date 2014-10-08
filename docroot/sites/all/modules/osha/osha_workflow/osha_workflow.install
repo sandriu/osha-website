@@ -66,19 +66,22 @@ function osha_workflow_schema() {
       'miid' => array(
         'description' => 'Identifier for the moderation item',
         'type' => 'serial',
+        'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'nid' => array(
         'description' => 'Moderated node ID (nid)',
         'type' => 'int',
+        'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'vid' => array(
         'description' => 'Moderated node version ID (vid)',
         'type' => 'int',
+        'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'type' => array(
+      'moderation_type' => array(
         'description' => 'Workflow type: ie. review or approve',
         'type' => 'varchar',
         'length' => 128,
@@ -93,7 +96,8 @@ function osha_workflow_schema() {
       'approved' => array(
         'description' => 'NULL - pending, 1 - approved, 0 - rejected',
         'type' => 'int',
-        'not null' => TRUE,
+        'default' => NULL,
+        'not null' => FALSE,
       ),
       'weight' => array(
         'description' => 'Order of moderation, lowest first',
@@ -101,13 +105,18 @@ function osha_workflow_schema() {
         'default' => 0,
         'not null' => TRUE,
       ),
+      'message' => array(
+        'description' => 'Message left by the moderator',
+        'type' => 'text',
+        'size' => 'medium',
+      ),
     ),
     'primary key' => array('miid'),
     'indexes' => array(
       'moderator_uid' => array('uid'),
     ),
     'unique keys' => array(
-      'moderation_unique' => array('nid', 'vid', 'type', 'uid'),
+      'moderation_unique' => array('nid', 'vid', 'moderation_type', 'uid'),
     ),
     'foreign keys' => array(
       'uid' => array(
