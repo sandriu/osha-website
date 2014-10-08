@@ -334,8 +334,16 @@ function _osha_newsletter_latest_block_content(){
   $newsletters_no = variable_get('newsletters_no', 2);
   $newsletter_items_no = variable_get('newsletter_items_no', 3);
   $items = array();
+  $collections = array();
 
-  $collections = entity_load_multiple_by_name('entity_collection');
+  $entity_collections = entity_load_multiple_by_name('entity_collection');
+
+  foreach ($entity_collections as $element) {
+    if ($element->bundle == 'newsletter_content_collection') {
+      $collections[] = $element;
+    }
+  }
+
   usort($collections, function($a, $b){
     $a_date = strtotime($a->field_created[LANGUAGE_NONE][0]['value']);
     $b_date = strtotime($b->field_created[LANGUAGE_NONE][0]['value']);
@@ -365,8 +373,8 @@ function _osha_newsletter_latest_block_content(){
               break;
             }
           }
+          $count_newsletters++;
         }
-        $count_newsletters++;
       }
     }
   }
