@@ -141,6 +141,12 @@ function osha_change_field_size() {
       array('type' => 'varchar','length' => $column_size)
     );
   }
+
+  drupal_set_message("Changing block.delta size to 255");
+  db_change_field('block', 'delta', 'delta',
+    array('type' => 'varchar','length' => 255)
+  );
+
 }
 
 
