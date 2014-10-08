@@ -13,6 +13,32 @@ function osha_search_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@default_multilingual_node_index::field_publication_type';
+  $facet->searcher = 'search_api@default_multilingual_node_index';
+  $facet->realm = '';
+  $facet->facet = 'field_publication_type';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'bundle' => 'none',
+      'bundle_selected' => array(),
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_multilingual_node_index::field_publication_type'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@default_multilingual_node_index::field_tags';
   $facet->searcher = 'search_api@default_multilingual_node_index';
   $facet->realm = '';

@@ -22,6 +22,7 @@ dependencies[] = views
 features[ctools][] = facetapi:facetapi_defaults:1
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
+features[facetapi][] = search_api@default_multilingual_node_index::field_publication_type
 features[facetapi][] = search_api@default_multilingual_node_index::field_tags
 features[facetapi][] = search_api@default_multilingual_node_index::type
 features[facetapi][] = search_api@default_multilingual_node_index:block:body:summary
