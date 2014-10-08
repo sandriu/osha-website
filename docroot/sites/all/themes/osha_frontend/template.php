@@ -221,6 +221,15 @@ function osha_frontend_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for theme_file_icon().
+ *
+ * Change the icon directory to use icons from this theme.
+ */
+function osha_frontend_preprocess_file_icon(&$variables) {
+  $variables['icon_directory'] = drupal_get_path('theme', 'osha_frontend') . '/images/file_icons';
+}
+
+/**
  * @todo @Ivan: Edit only below
  */
 
