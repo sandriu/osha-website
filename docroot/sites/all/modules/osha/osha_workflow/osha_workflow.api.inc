@@ -249,7 +249,7 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
           $row->next = 0;
           $row->approved = intval($vote);
           $row->mesage = $message;
-          drupal_set_message('Saving ' . $row->miid);
+          entity_save('moderation_item', $row);
           if ($last->uid == $row->uid) {
             return TRUE;
           }
