@@ -21,8 +21,8 @@ function osha_workflow_menu() {
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_workflow_node_approval_form', 1),
-    'access callback' => '_workbench_moderation_access',
-    'access arguments' => array('moderate content from needs_review to to_be_approved', 1),
+    'access callback' => 'osha_workflow_moderation_access',
+    'access arguments' => array(OSHA_WORKFLOW_MODERATION_TYPE_APPROVE, 1),
     'file' => 'osha_workflow.admin.inc',
     'weight' => 10,
   );
@@ -32,12 +32,37 @@ function osha_workflow_menu() {
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_workflow_node_review_form', 1),
-    'access callback' => '_workbench_moderation_access',
-    'access arguments' => array('moderate content from final_draft to needs_review', 1),
+    'access callback' => 'osha_workflow_moderation_access',
+    'access arguments' => array(OSHA_WORKFLOW_MODERATION_TYPE_REVIEW, 1),
     'file' => 'osha_workflow.admin.inc',
     'weight' => 9,
   );
   return $items;
+}
+
+/**
+ * Permission access to moderation menu local tasks.
+ *
+ * @param string $moderation_type
+ *   Type of moderation
+ * @param object $node
+ *   Moderated node
+ *
+ * @return null|string
+ *   Access permission to the screen.
+ */
+function osha_workflow_moderation_access($moderation_type, $node) {
+  if (isset($node->workbench_moderation)) {
+    $current = $node->workbench_moderation['current'];
+    $state = $current->state;
+    if ($moderation_type == OSHA_WORKFLOW_MODERATION_TYPE_REVIEW && $state == 'needs_review') {
+      return NODE_ACCESS_ALLOW;
+    }
+    if ($moderation_type == OSHA_WORKFLOW_MODERATION_TYPE_APPROVE && $state == 'to_be_approved') {
+      return NODE_ACCESS_ALLOW;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
 }
 
 /**
