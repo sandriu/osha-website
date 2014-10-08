@@ -99,6 +99,12 @@ function osha_workflow_schema() {
         'default' => NULL,
         'not null' => FALSE,
       ),
+      'next' => array(
+        'description' => '0 - no, 1 - yes',
+        'type' => 'int',
+        'default' => 0,
+        'not null' => TRUE,
+      ),
       'weight' => array(
         'description' => 'Order of moderation, lowest first',
         'type' => 'int',

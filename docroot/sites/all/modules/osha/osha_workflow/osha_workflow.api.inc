@@ -151,16 +151,19 @@ function osha_workflow_set_node_moderators($node, $moderators, $moderation_type)
     db_delete('moderation_item')->condition($and)->execute();
 
     $query = db_insert('moderation_item')
-      ->fields(array('nid', 'vid', 'moderation_type', 'uid', 'weight'));
+      ->fields(array('nid', 'vid', 'moderation_type', 'uid', 'next', 'weight'));
+    $i = 0;
     foreach ($moderators as $weight => $uid) {
       $record = array(
         'nid' => $node->nid,
         'vid' => $node->vid,
         'moderation_type' => $moderation_type,
         'uid' => $uid,
+        'next' => $i == 0 ? 1 : 0,
         'weight' => $weight,
       );
       $query->values($record);
+      $i++;
     }
     $query->execute();
   }
