@@ -177,3 +177,37 @@ function osha_workflow_set_node_moderators($node, $moderators, $moderation_type)
     drupal_set_message($e->getMessage(), 'error');
   }
 }
+
+/**
+ * Find the next moderator in the line for a node/revision.
+ *
+ * @param object $node
+ *   Node to retrieve info.
+ * @param string $moderation_type
+ *   Type of moderation.
+ *
+ * @return mixed|null
+ *   User account
+ */
+function osha_workflow_get_next_moderator($node, $moderation_type) {
+  $ret = NULL;
+  $query = new EntityFieldQuery();
+  $moderators = $query->entityCondition('entity_type', 'moderation_item')
+    ->propertyCondition('nid', $node->nid)
+    ->propertyCondition('vid', $node->vid)
+    ->propertyCondition('next', 1)
+    ->propertyCondition('moderation_type', $moderation_type)
+    ->range(0, 1)
+    ->execute();
+  if (!empty($moderators['moderation_item'])) {
+    $rows = osha_workflow_moderation_item_load_multiple(array_keys($moderators['moderation_item']));
+    $task = current($rows);
+    $ret = user_load($task->uid);
+  }
+  return $ret;
+}
+
+
+function osha_workflow_moderate($node, $moderation_type, $vote) {
+  //@todo: Implement
+}

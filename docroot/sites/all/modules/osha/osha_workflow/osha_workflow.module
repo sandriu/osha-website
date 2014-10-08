@@ -10,6 +10,9 @@ include_once 'osha_workflow.api.inc';
 define('OSHA_WORKFLOW_MODERATION_TYPE_REVIEW', 'review');
 define('OSHA_WORKFLOW_MODERATION_TYPE_APPROVE', 'approve');
 
+define('OSHA_WORKFLOW_MODERATION_ACCEPT', 'accept');
+define('OSHA_WORKFLOW_MODERATION_REJECT', 'reject');
+
 /**
  * Implements hook_menu().
  */
@@ -195,4 +198,82 @@ function disabled_osha_workflow_moderation_item_load($id, $reset = FALSE) {
  */
 function osha_workflow_moderation_item_load_multiple($ids = array(), $conditions = array(), $reset = FALSE) {
   return entity_load('moderation_item', $ids, $conditions, $reset);
+}
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'workbench_moderation_moderate_form') {
+    $node = $form['node']['#value'];
+    $state = $node->workbench_moderation['current']->state;
+    $moderation_type = NULL;
+    if ($state == 'needs_review') {
+      $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_REVIEW;
+    }
+    elseif ($state == 'to_be_approved') {
+      $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_APPROVE;
+    }
+    if ($moderation_type) {
+      global $user;
+      $next = osha_workflow_get_next_moderator($node, $moderation_type);
+      if ($user->uid == $next->uid) {
+        // Hijack the form & modify for voting purposes.
+        hide($form['state']);
+        $form['submit'] = array(
+          '#type' => 'submit',
+          '#value' => t('Approve'),
+          '#submit' => array('osha_workflow_form_moderate_approve_submit'),
+        );
+        $form['reject'] = array(
+          '#type' => 'submit',
+          '#value' => t('Reject'),
+          '#submit' => array('osha_workflow_form_moderate_reject_submit'),
+        );
+        $form['message'] = array(
+          '#type' => 'textfield',
+          '#prefix' => '<div>',
+          '#title' => t('Leave a moderation message'),
+          '#resizable' => FALSE,
+          '#required' => FALSE,
+          '#attributes' => array(
+            'placeholder' => t('You can leave a note here'),
+          ),
+          '#suffix' => '<div>',
+        );
+        unset($form['message']);
+      }
+    }
+  }
+}
+
+function osha_workflow_form_moderate_reject_submit($form, $form_state) {
+  dpm($form_state);
+  $values = $form_state['values'];
+  $node = $values['node'];
+  $state = $node->workbench_moderation['current']->state;
+  $moderation_type = NULL;
+  if ($state == 'needs_review') {
+    $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_REVIEW;
+  }
+  elseif ($state == 'to_be_approved') {
+    $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_APPROVE;
+  }
+  osha_workflow_moderate($node, $moderation_type, OSHA_WORKFLOW_MODERATION_REJECT);
+}
+
+function osha_workflow_form_moderate_approve_submit($form, $form_state) {
+  dpm($form_state);
+  $values = $form_state['values'];
+  $node = $values['node'];
+  $state = $node->workbench_moderation['current']->state;
+  $moderation_type = NULL;
+  if ($state == 'needs_review') {
+    $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_REVIEW;
+  }
+  elseif ($state == 'to_be_approved') {
+    $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_APPROVE;
+  }
+  osha_workflow_moderate($node, $moderation_type, OSHA_WORKFLOW_MODERATION_ACCEPT);
 }
