@@ -12,15 +12,15 @@ function osha_job_vacancies_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['views-vacancies-block'] = array(
+  $export['block-vacancies_link_to_closed'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'vacancies-block',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
-    'module' => 'views',
+    'machine_name' => 'vacancies_link_to_closed',
+    'module' => 'block',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'articles/careers',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -36,10 +36,50 @@ function osha_job_vacancies_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => -25,
+      ),
+      'seven' => array(
         'region' => '',
         'status' => 0,
-        'theme' => 'osha_frontend',
+        'theme' => 'seven',
         'weight' => 0,
+      ),
+    ),
+    'title' => 'Closed vacancies',
+    'visibility' => 1,
+  );
+
+  $export['views-vacancies-block'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'vacancies-block',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'articles/careers',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => -27,
       ),
       'seven' => array(
         'region' => '',
@@ -49,7 +89,87 @@ function osha_job_vacancies_default_fe_block_settings() {
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
+  );
+
+  $export['views-vacancies-block_1'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'vacancies-block_1',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'articles/careers',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => -28,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-vacancies-block_2'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'vacancies-block_2',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'articles/careers',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => -26,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
   );
 
   return $export;
