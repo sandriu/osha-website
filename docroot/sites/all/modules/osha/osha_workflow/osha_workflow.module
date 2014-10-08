@@ -76,6 +76,7 @@ function osha_workflow_entity_info() {
     'moderation_item' => array(
       'label' => t('Moderation item'),
       'module' => 'osha_workflow',
+      'controller class' => 'OshaWorkflowModerationItemController',
       'base table' => 'moderation_item',
       'entity keys' => array(
         'id' => 'miid',

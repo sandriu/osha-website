@@ -60,4 +60,5 @@ features[workbench_moderation_transitions][] = to_be_approved:approved
 features[workbench_moderation_transitions][] = to_be_approved:rejected
 files[] = osha_workflow.admin.inc
 files[] = osha_workflow.api.inc
+files[] = osha_workflow.entity.inc
 
