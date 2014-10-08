@@ -562,7 +562,7 @@ class MigrationUtil {
       }
       else {
         drupal_set_message(
-          "File path larger than 255 characters, replacing " . $old_path . "with " . $data[$old_path],
+          "File path larger than 255 characters, replacing " . $old_path . " with " . $data[$old_path],
           'status'
         );
 
