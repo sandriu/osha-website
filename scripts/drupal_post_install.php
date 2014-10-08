@@ -47,13 +47,28 @@ function osha_configure_permissions() {
     }
 
     $permissions[] = 'translate taxonomy_term entities';
+    $permissions[] = 'edit any content in rejected';
+    $permissions[] = 'edit any content in approved';
+    $permissions[] = 'edit any content in final_draft';
+    $permissions[] = 'edit any content in to_be_approved';
 
-    $permissions[] = 'moderate content from draft to final_draft';
-    $permissions[] = 'moderate content from final_draft to draft';
-    $permissions[] = 'moderate content from final_draft to needs_review';
-    $permissions[] = 'moderate content from needs_review to to_be_approved';
-    $permissions[] = 'moderate content from to_be_approved to rejected';
-    $permissions[] = 'moderate content from to_be_approved to approved';
+    // Workbench access permissions.
+
+    $moderated_types = workbench_moderation_moderate_node_types();
+    $transitions = workbench_moderation_transitions();
+    foreach ($transitions as $transition) {
+      $permissions[] = "moderate content from {$transition->from_name} to {$transition->to_name}";
+      foreach ($moderated_types as $node_type) {
+        //@todo: $permissions[] = "moderate $node_type state from {$transition->from_name} to {$transition->to_name}";
+      }
+    }
+
+    $permissions[] = 'create moderators_group entity collections';
+    $permissions[] = 'edit moderators_group entity collections';
+    $permissions[] = 'view moderators_group entity collections';
+    $permissions[] = 'delete moderators_group entity collections';
+    $permissions[] = 'add content to moderators_group entity collections';
+    $permissions[] = 'manage content in moderators_group entity collections';
 
     user_role_grant_permissions($role->rid, $permissions);
   }
