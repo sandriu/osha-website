@@ -127,6 +127,16 @@ function theme_osha_workflow_moderation_form($variables) {
   return $output;
 }
 
+function osha_workflow_node_review_form_validate($form, $form_state) {
+  $data = array_filter(
+    $form_state['values']['enabled'],
+    function($uid) { return $uid > 0; }
+  );
+  if (empty($data)) {
+    form_set_error('enabled', t('Cannot have an empty moderation queue! Add at least one user or switch to another state!'));
+  }
+}
+
 /**
  * Implements hook_form_submit().
  */
@@ -142,6 +152,17 @@ function osha_workflow_node_review_form_submit($form, $form_state) {
   $node = $form_state['node'];
   ksort($users);
   osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
+}
+
+
+function osha_workflow_node_approval_form_validate($form, $form_state) {
+  $data = array_filter(
+    $form_state['values']['enabled'],
+    function($uid) { return $uid > 0; }
+  );
+  if (empty($data)) {
+    form_set_error('enabled', t('Cannot have an empty moderation queue! Add at least one user or switch to another state!'));
+  }
 }
 
 /**
