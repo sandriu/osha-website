@@ -49,7 +49,6 @@ features[field_instance][] = node-calls-field_summary
 features[field_instance][] = node-calls-field_workflow_status
 features[field_instance][] = node-calls-title_field
 features[node][] = calls
-features[uuid_node][] = 7cd1b860-8554-45db-8f30-237e09ff614e
 features[variable][] = comment_anonymous_calls
 features[variable][] = comment_calls
 features[variable][] = comment_default_mode_calls

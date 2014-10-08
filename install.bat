@@ -22,6 +22,7 @@ GOTO DONE
     echo "Installing osha_content and osha_taxonomies_uuid"
     call drush en -y osha_taxonomies_uuid
     call drush cc all
+    call drush en -y osha_content_edw
     call drush en -y osha_content
     echo "Reverting osha_menu"
     call drush fr osha_menu -y
