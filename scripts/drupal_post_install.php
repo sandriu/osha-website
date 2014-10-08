@@ -161,14 +161,24 @@ function osha_configure_search_autocomplete() {
     ))
     ->condition('selector', '#edit-search-block-form--2', '<>')
     ->execute();
-  db_update('search_autocomplete_forms')
-    ->fields(array(
-      'data_view' => '',
-      'theme' => 'basic-blue.css',
-      'data_callback' => 'search/site/autocomplete',
-    ))
+  // Configure the search form.
+  $fid = db_select('search_autocomplete_forms', 'f')
+    ->fields('f', array('fid'))
     ->condition('selector', '#edit-search-block-form--2')
-    ->execute();
+    ->execute()->fetchField(0);
+  if ($fid) {
+    db_update('search_autocomplete_forms')
+      ->fields(array(
+        'data_view' => '',
+        'theme' => 'basic-blue.css',
+        'data_callback' => 'search/site/autocomplete/',
+      ))
+      ->condition('selector', '#edit-search-block-form--2')
+      ->execute();
+  }
+  else {
+    drupal_set_message('Failed to configure search_autocomplete form', 'error');
+  }
 }
 
 /**
