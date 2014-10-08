@@ -93,37 +93,46 @@ function theme_osha_workflow_moderation_form($variables) {
   $form = $variables['form'];
 
   $rows = array();
-  foreach (element_children($form['name']) as $uid) {
-    $form['enabled'][$uid]['#title'] = t('Mark as reviewer');
-    $form['enabled'][$uid]['#title_display'] = 'invisible';
-    $rows[] = array(
-      'data' => array(
-        array('data' => drupal_render($form['enabled'][$uid]), 'align' => 'center'),
-        drupal_render($form['name'][$uid]),
-        drupal_render($form['mail'][$uid]),
-        check_plain($uid),
-        drupal_render($form['weight'][$uid]),
+  if (!empty($form['name'])) {
+    foreach (element_children($form['name']) as $uid) {
+      $form['enabled'][$uid]['#title'] = t('Mark as reviewer');
+      $form['enabled'][$uid]['#title_display'] = 'invisible';
+      $rows[] = array(
+        'data' => array(
+          array(
+            'data' => drupal_render($form['enabled'][$uid]),
+            'align' => 'center',
+          ),
+          drupal_render($form['name'][$uid]),
+          drupal_render($form['mail'][$uid]),
+          check_plain($uid),
+          drupal_render($form['weight'][$uid]),
+        ),
+        'class' => array('draggable'),
+      );
+    }
+    $table = array(
+      'header' => array(
+        t('Moderate'),
+        t('Username'),
+        t('Mail'),
+        t('UID'),
+        t('Order of notification'),
       ),
-      'class' => array('draggable'),
+      'attributes' => array(
+        'id' => 'osha_workflow_moderation_table',
+      ),
+      'rows' => $rows,
     );
+    $output .= theme('table', $table);
+    $output .= drupal_render($form['help']);
+    $output .= drupal_render($form['actions']);
+    $output .= drupal_render_children($form);
+    drupal_add_tabledrag('osha_workflow_moderation_table', 'order', 'sibling', 'user-weight');
   }
-  $table = array(
-    'header' => array(
-      t('Moderate'), t('Username'), t('Mail'), t('UID'), t('Order of notification'),
-    ),
-    'attributes' => array(
-      'id' => 'osha_workflow_moderation_table',
-    ),
-    'rows' => $rows,
-  );
-
-  $output .= theme('table', $table);
-  $output .= drupal_render($form['help']);
-  $output .= drupal_render($form['actions']);
-  $output .= drupal_render_children($form);
-
-  drupal_add_tabledrag('osha_workflow_moderation_table', 'order', 'sibling', 'user-weight');
-
+  else {
+    $output = t('No users available to select for moderation. Please check user assignments for Default approvers/reviewers, or contact technical support.');
+  }
   return $output;
 }
 
