@@ -102,15 +102,6 @@ function osha_workflow_permission() {
       'title' => t('Edit any content in @state', array('@state' => $state->label)),
     );
   }
-  foreach ($states as $state) {
-    if (variable_get('workbench_moderation_per_node_type', FALSE)) {
-      foreach ($moderated_types as $node_type) {
-        $permissions["edit $node_type in " . $state->name] = array(
-          'title' => t('Edit @node_type in @state', array('@node_type' => node_type_get_name($node_type), '@state' => $state->label)),
-        );
-      }
-    }
-  }
   return $permissions;
 }
 
