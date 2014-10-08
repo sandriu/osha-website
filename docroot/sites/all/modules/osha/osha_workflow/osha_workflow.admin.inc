@@ -20,6 +20,24 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
     );
     $form['name'][$uid] = array('#markup' => check_plain($row->name));
     $form['mail'][$uid] = array('#markup' => check_plain($row->mail));
+    if (!empty($row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW])) {
+      $moderation = $row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW];
+      $form['next'][$uid] = array('#markup' => !empty($moderation->next) ? t('Yes') : '');
+      if ($moderation->approved === NULL) {
+        $status = t('Waiting approval');
+      }
+      elseif ($moderation->approved == 1) {
+        $status = t('Approved');
+      }
+      else {
+        $status = t('Rejected');
+      }
+      $form['status'][$uid] = array('#markup' => $status);
+    }
+    else {
+      $form['next'][$uid] = array('#markup' => '');
+      $form['status'][$uid] = array('#markup' => '');
+    }
     $weight++;
   }
   $form['enabled'] = array(
@@ -68,7 +86,7 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
       $moderation = $row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW];
       $form['next'][$uid] = array('#markup' => !empty($moderation->next) ? t('Yes') : '');
       if ($moderation->approved === NULL) {
-        $status = t('Waiting moderation');
+        $status = t('Waiting for review');
       }
       elseif ($moderation->approved == 1) {
         $status = t('Approved');
