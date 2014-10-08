@@ -1,12 +1,20 @@
 <?php
 
 function osha_workflow_node_approval_form($form, &$form_state, $node) {
+  global $user;
+
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   $form_state['node'] = $node;
   $rows = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
   $weight = 0;
   $options = array();
   $enabled = array();
+
+  $form['moderation'] = array('#type' => 'fieldset', '#title' => t('Approval process'));
+  $form['moderation']['help'] = array('#markup' => '<p>' . t('Please moderate this item') . '</p>');
+  $form['moderation']['approve'] = array('#type' => 'submit', '#value' => t('Approve'));
+  $form['moderation']['reject'] = array('#type' => 'submit', '#value' => t('Reject'));
+
   $form['weight'] = array('#tree' => TRUE);
   foreach ($rows as $uid => $row) {
     $options[$uid] = '';
@@ -69,6 +77,12 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
   $weight = 0;
   $options = array();
   $enabled = array();
+
+  $form['moderation'] = array('#type' => 'fieldset', '#title' => t('Review process'));
+  $form['moderation']['help'] = array('#markup' => '<p>' . t('Please moderate this item') . '</p>');
+  $form['moderation']['approve'] = array('#type' => 'submit', '#value' => t('Approve'));
+  $form['moderation']['reject'] = array('#type' => 'submit', '#value' => t('Reject'));
+
   $form['weight'] = array('#tree' => TRUE);
   foreach ($rows as $uid => $row) {
     $options[$uid] = '';
@@ -164,6 +178,9 @@ function theme_osha_workflow_moderation_form($variables) {
       ),
       'rows' => $rows,
     );
+    if (isset($form['moderation'])) {
+      $output .= drupal_render($form['moderation']);
+    }
     $output .= theme('table', $table);
     $output .= drupal_render($form['help']);
     $output .= drupal_render($form['actions']);
@@ -190,17 +207,31 @@ function osha_workflow_node_review_form_validate($form, $form_state) {
  * Implements hook_form_submit().
  */
 function osha_workflow_node_review_form_submit($form, $form_state) {
-  $data = $form_state['values'];
-  $users = array();
-  foreach ($data['enabled'] as $k => $v) {
-    if (!empty($v)) {
-      $weight = $data['weight'][$k];
-      $users[$weight] = $v;
-    }
+  $trigger = $form_state['triggering_element'];
+
+  switch ($trigger['#value']) {
+    case t('Approve'):
+      drupal_set_message('Ignoring your request ...');
+      break;
+
+    case t('Reject'):
+      drupal_set_message('Talk to the hand ...');
+      break;
+
+    case t('Save configuration'):
+      $data = $form_state['values'];
+      $users = array();
+      foreach ($data['enabled'] as $k => $v) {
+        if (!empty($v)) {
+          $weight = $data['weight'][$k];
+          $users[$weight] = $v;
+        }
+      }
+      $node = $form_state['node'];
+      ksort($users);
+      osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
+      break;
   }
-  $node = $form_state['node'];
-  ksort($users);
-  osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
 }
 
 
@@ -218,15 +249,29 @@ function osha_workflow_node_approval_form_validate($form, $form_state) {
  * Implements hook_form_submit().
  */
 function osha_workflow_node_approval_form_submit($form, $form_state) {
-  $data = $form_state['values'];
-  $users = array();
-  foreach ($data['enabled'] as $k => $v) {
-    if (!empty($v)) {
-      $weight = $data['weight'][$k];
-      $users[$weight] = $v;
-    }
+  $trigger = $form_state['triggering_element'];
+
+  switch ($trigger['#value']) {
+    case t('Approve'):
+      drupal_set_message('Ignoring your request ...');
+      break;
+
+    case t('Reject'):
+      drupal_set_message('Talk to the hand ...');
+      break;
+
+    case t('Save configuration'):
+      $data = $form_state['values'];
+      $users = array();
+      foreach ($data['enabled'] as $k => $v) {
+        if (!empty($v)) {
+          $weight = $data['weight'][$k];
+          $users[$weight] = $v;
+        }
+      }
+      $node = $form_state['node'];
+      ksort($users);
+      osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
+      break;
   }
-  $node = $form_state['node'];
-  ksort($users);
-  osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
 }
