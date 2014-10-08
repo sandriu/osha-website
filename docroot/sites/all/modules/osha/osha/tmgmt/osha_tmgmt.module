@@ -230,7 +230,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       #select some languages
       $form['select_some_lng'] = array(
           '#type' => 'checkbox',
-          '#title' => t('Select some languages'),
+          '#title' => t('Select EU-OSHA default languages (24)'),
       );
 
       #order form elements

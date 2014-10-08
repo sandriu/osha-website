@@ -7,7 +7,8 @@ jQuery(document).ready(function() {
     });
     //select a list of languages in the cart form
     jQuery('#edit-select-some-lng').change(function(){
-        select_values('#edit-select-some-lng', '#edit-target-language', [ "bg", "en", "ro"]);
+        select_values('#edit-select-some-lng', '#edit-target-language',
+          ["da", "de", "et", "es", "fr", "hr", "it", "lv", "lt", "hu", "mt", "nl", "no", "pl", "pt", "ro", "sk", "sl", "fi", "sv", "is", "cs", "el", "bg"]);
         jQuery('#edit-select-all-lng').attr('checked', '');
     });
 });
