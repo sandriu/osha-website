@@ -362,19 +362,20 @@ function _osha_newsletter_latest_block_content(){
         $elements = entity_collection_load_content($item->bundle, $item)->children;
         if (sizeof($elements)>0) {
           $count_items = 0;
-          foreach($elements as $child){
+          foreach($elements as $child) {
             if ($newsletter_items_no - $count_items > 0) {
               if ($child->type == 'node') {
-                $node = node_view($child->content,'newsletter_item');
+                $node = node_view($child->content, 'newsletter_item');
                 $items[$item->name]['items'][] = $node;
                 $count_items++;
               }
-            } else {
+            }
+            else {
               break;
             }
           }
-          $count_newsletters++;
         }
+        $count_newsletters++;
       }
     }
   }
