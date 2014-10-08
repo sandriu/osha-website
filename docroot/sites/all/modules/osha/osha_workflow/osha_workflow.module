@@ -218,7 +218,7 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
     }
     if ($moderation_type) {
       global $user;
-      if($next = osha_workflow_get_next_moderator($node, $moderation_type)) {
+      if ($next = osha_workflow_get_next_moderator($node, $moderation_type)) {
         if ($user->uid == $next->uid) {
           // Hijack the form & modify for voting purposes.
           hide($form['state']);
