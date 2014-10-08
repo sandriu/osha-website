@@ -122,7 +122,12 @@ function osha_workflow_get_node_moderators($node, $moderation_type, $default = T
     foreach ($rows as $row) {
       $uids[] = $row->uid;
     }
-    return user_load_multiple($uids);
+    $users = user_load_multiple($uids);
+    foreach ($rows as $row) {
+      $user = &$users[$row->uid];
+      $user->moderation = array($moderation_type => $row);
+    }
+    return $users;
   }
   elseif ($default) {
     $ret = osha_workflow_get_moderators('reviewers');

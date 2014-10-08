@@ -64,6 +64,24 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
     );
     $form['name'][$uid] = array('#markup' => check_plain($row->name));
     $form['mail'][$uid] = array('#markup' => check_plain($row->mail));
+    if (!empty($row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW])) {
+      $moderation = $row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW];
+      $form['next'][$uid] = array('#markup' => !empty($moderation->next) ? t('Yes') : '');
+      if ($moderation->approved === NULL) {
+        $status = t('Waiting moderation');
+      }
+      elseif ($moderation->approved == 1) {
+        $status = t('Approved');
+      }
+      else {
+        $status = t('Rejected');
+      }
+      $form['status'][$uid] = array('#markup' => $status);
+    }
+    else {
+      $form['next'][$uid] = array('#markup' => '');
+      $form['status'][$uid] = array('#markup' => '');
+    }
     $weight++;
   }
   $form['enabled'] = array(
@@ -106,6 +124,8 @@ function theme_osha_workflow_moderation_form($variables) {
           drupal_render($form['name'][$uid]),
           drupal_render($form['mail'][$uid]),
           check_plain($uid),
+          drupal_render($form['status'][$uid]),
+          drupal_render($form['next'][$uid]),
           drupal_render($form['weight'][$uid]),
         ),
         'class' => array('draggable'),
@@ -117,6 +137,8 @@ function theme_osha_workflow_moderation_form($variables) {
         t('Username'),
         t('Mail'),
         t('UID'),
+        t('Status'),
+        t('Next in line'),
         t('Order of notification'),
       ),
       'attributes' => array(
