@@ -403,7 +403,7 @@ function osha_publication_views_default_views() {
     3 => 0,
   );
   $handler->display->display_options['filters']['language_1']['expose']['reduce'] = TRUE;
-  $handler->display->display_options['path'] = 'publications';
+  $handler->display->display_options['path'] = 'publications-page';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'slidehow');
