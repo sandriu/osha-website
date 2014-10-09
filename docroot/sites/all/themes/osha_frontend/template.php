@@ -20,6 +20,37 @@ function osha_frontend_menu_tree__main_menu($variables) {
 }
 
 /**
+ * Implements theme_menu_tree__search_menu().
+ *
+ * Add classes to search menu to style like tabs.
+ */
+function osha_frontend_menu_tree__menu_search($variables) {
+  return '<ul id="search_menu_tabs" class="tabs-primary tabs primary">'
+  . $variables['tree'] . '</ul>';
+}
+
+/**
+ * Implements hook_menu_link__menu_search().
+ *
+ * Add classes to search menu to style like tabs.
+ */
+function osha_frontend_menu_link__menu_search($variables) {
+  $element = $variables['element'];
+  $active = '';
+  if (in_array('active-trail', $element['#attributes']['class'])) {
+    $active = 'is-active active';
+  }
+  $element['#attributes']['class'] = array(
+    'tabs-primary__tab', $active,
+  );
+  $element['#localized_options']['attributes']['class'] = array(
+    'tabs-primary__tab-link', $active,
+  );
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . "</li>\n";
+}
+
+/**
  * Implements theme_menu_link__menu_block().
  */
 function osha_frontend_menu_link__menu_block($variables) {
@@ -88,6 +119,8 @@ function osha_frontend_apachesolr_sort_list($vars) {
   unset($items['sort_name']);
   return theme('item_list', array('items' => $vars['items']));
 }
+
+
 
 /**
  * Called from hook_preprocess_node
