@@ -25,4 +25,5 @@ features[uuid_node][] = 7cd1b860-8554-45db-8f30-237e09ff614e
 features[uuid_node][] = df711256-ced1-45ec-9878-5d3a491e225a
 features[uuid_node][] = e78930ab-55aa-4f1c-be2b-d1dd82d95a82
 features[uuid_node][] = e9364c32-88bb-4ab4-bba0-26380c511930
+features[uuid_node][] = 6b2a8603-bc31-4f72-9e95-fd22f4206e82
 project path = sites/all/modules/osha
