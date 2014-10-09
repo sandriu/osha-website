@@ -6,39 +6,91 @@
 
 include_once 'osha_search.features.inc';
 
-/**
- * {@inheritdoc}
+
+function osha_search_menu() {
+  $items = array();
+  $items['search-autocomplete/%'] = array(
+    'page callback' => 'osha_search_autocomplete_callback',
+    'access callback' => TRUE,
+    'page arguments' => array(1),
+  );
+  return $items;
+}
+
+/*
+ * NOT IMPLEMENTED
+ * TODO Get this function done for CW-220
  */
-function osha_search_menu_alter(&$items) {
-  $items['search/wiki']['weight'] = '2';
-  $items['search/site']['weight'] = '1';
+
+function osha_search_autocomplete_callback($search = '*') {
+  $search = check_plain($search);
+  global $language;
+  $response = drupal_http_request('http://localhost:8983/solr/osha/select?q=' .
+    $search . '&wt=json&group=true&group.field=bundle&group.limit=3'
+    . '&ss_search_api_language=' . $language->language);
+
+  if ($response->code != 200) {
+    var_dump($response->code);
+    exit;
+  }
+
+  $data = json_decode($response->data);
+  $total = $data->grouped->bundle->matches;
+  $groups = array();
+  $return = array();
+
+  $showing_categ = 3;
+  $showing_items = 3;
+  $count_categ = 0;
+
+  foreach ($data->grouped->bundle->groups as &$group) {
+    if ($count_categ++ == $showing_categ) {
+      break;
+    }
+    $count_items = 0;
+    foreach ($group->doclist->docs as &$item) {
+      if ($count_items++ == $showing_items) {
+        // TODO append item show more link
+        break;
+      }
+
+      $ac_item = array();
+      $ac_item = array(
+        "link" => url($item->path),
+        "value" => "Factsheet 31 - Practical Advice for Workers on Tackling Work-related Stress and its Causes",
+        "fields" => array(
+          "title_field" => current($item->sm_title_field),
+        ),
+      );
+      if ($count_items == 1) {
+        $ac_item["group"] = array(
+          "group_id" => $item->bundle,
+          "group_name" => $item->bundle_name,
+        );
+      }
+      $return[] = $ac_item;
+    }
+  }
+  print_r(json_encode($return));
+  exit;
 }
 
 /**
- * Implements hook_apachesolr_index_document_build().
- *
- * We use it to index the field_image so we can have it in the search results.
+ * Implements hook_form_views_exposed_form_alter().
  */
-function disabled_osha_search_apachesolr_index_documents_alter(array $documents, $entity, $entity_type, $env_id) {
-  if (!empty($entity->field_image)) {
-    global $base_url;
-    foreach ($documents as $document) {
-      foreach ($entity->field_image as $language => $values) {
-        $flang = $document->getField('ss_language');
-        if ($flang['value'] == $language) {
-          $url = image_style_url('thumbnail', $values['0']['uri']);
-          // TODO: Is this OK?
-          $url = str_replace($base_url, '', $url);
-          $document->addField('ss_field_image_url_' . $language, $url);
-        }
-      }
+function osha_search_form_views_exposed_form_alter(&$form, &$form_state) {
+  // Set default language current language.
+  if (!empty($form['search_api_language'])) {
+    global $language;
+    if ($language->language != LANGUAGE_NONE) {
+      $form['search_api_language']['#default_value'] = $language->language;
     }
   }
 }
 
-function osha_search_apachesolr_query_alter($query) {
-  $query->addParam('fl', 'dm_field_publication_date');
-  foreach (array_keys(language_list()) as $language) {
-    $query->addParam('fl', 'ss_field_image_url_' . $language);
-  }
+/**
+ * Implements hook_post_features_enable_feature().
+ */
+function osha_search_post_features_enable_feature($component) {
+  features_revert_module('osha_search');
 }

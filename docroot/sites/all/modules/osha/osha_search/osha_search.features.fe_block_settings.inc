@@ -12,15 +12,15 @@ function osha_search_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['apachesolr_search-sort'] = array(
+  $export['facetapi-3wdzGmfuaWV8dFrp0unV5StIH22e8cRK'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'sort',
+    'delta' => '3wdzGmfuaWV8dFrp0unV5StIH22e8cRK',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
-    'module' => 'apachesolr_search',
+    'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -36,10 +36,10 @@ function osha_search_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_second',
+        'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -24,
+        'weight' => -37,
       ),
       'seven' => array(
         'region' => '',
@@ -48,21 +48,19 @@ function osha_search_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => '',
-    'visibility' => 0,
+    'title' => 'Type',
+    'visibility' => 1,
   );
 
-  $export['facetapi-8o8kdtP8CKjahDIu1Wy5LGxnDHg3ZYnT'] = array(
+  $export['facetapi-H521BlbvKT4VvBQ0eUjaRB22CnF0x2vm'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => '8o8kdtP8CKjahDIu1Wy5LGxnDHg3ZYnT',
+    'delta' => 'H521BlbvKT4VvBQ0eUjaRB22CnF0x2vm',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'publications
-publications/*
-search
 search/*',
     'roles' => array(),
     'themes' => array(
@@ -82,7 +80,7 @@ search/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -22,
+        'weight' => -36,
       ),
       'seven' => array(
         'region' => '',
@@ -91,20 +89,19 @@ search/*',
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => 'Topics',
     'visibility' => 1,
   );
 
-  $export['facetapi-GiIy4zr9Gu0ZSa0bumw1Y9qIIpIDf1wu'] = array(
+  $export['facetapi-bhmRHTzU2n0ejKZP9wDI0S1oi2DgbSDm'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'GiIy4zr9Gu0ZSa0bumw1Y9qIIpIDf1wu',
+    'delta' => 'bhmRHTzU2n0ejKZP9wDI0S1oi2DgbSDm',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'search
-search/*',
+    'pages' => 'search/site',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -120,10 +117,10 @@ search/*',
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_second',
+        'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -23,
+        'weight' => -38,
       ),
       'seven' => array(
         'region' => '',
@@ -136,16 +133,15 @@ search/*',
     'visibility' => 1,
   );
 
-  $export['facetapi-QfTyFeGb1KbQrR93nh7XrYogoI6d76aY'] = array(
+  $export['menu-menu-search'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'QfTyFeGb1KbQrR93nh7XrYogoI6d76aY',
+    'delta' => 'menu-search',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
-    'module' => 'facetapi',
+    'module' => 'menu',
     'node_types' => array(),
-    'pages' => 'search
-search/*',
+    'pages' => 'search/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -161,10 +157,10 @@ search/*',
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_first',
+        'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -23,
+        'weight' => -39,
       ),
       'seven' => array(
         'region' => '',
@@ -173,49 +169,7 @@ search/*',
         'weight' => 0,
       ),
     ),
-    'title' => 'NACE Codes',
-    'visibility' => 1,
-  );
-
-  $export['facetapi-hNfrGJrhQCkJN130wM9Uvc23hGV71MDl'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'delta' => 'hNfrGJrhQCkJN130wM9Uvc23hGV71MDl',
-    'i18n_block_language' => array(),
-    'i18n_mode' => 0,
-    'module' => 'facetapi',
-    'node_types' => array(),
-    'pages' => 'publications/*
-publications
-solr-publications',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 0,
-      ),
-      'osha_admin' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osha_admin',
-        'weight' => 0,
-      ),
-      'osha_frontend' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'osha_frontend',
-        'weight' => -24,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 0,
-      ),
-    ),
-    'title' => 'Publication type',
+    'title' => '<none>',
     'visibility' => 1,
   );
 
@@ -249,14 +203,134 @@ solr-publications',
         'weight' => -1,
       ),
       'seven' => array(
-        'region' => 'dashboard_inactive',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'seven',
         'weight' => -10,
       ),
     ),
     'title' => '',
     'visibility' => 0,
+  );
+
+  $export['views--exp-publications_index-page'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => '-exp-publications_index-page',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'publications',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => -39,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views--exp-search-site'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => '-exp-search-site',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'search/site',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => -36,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views--exp-search-wiki'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => '-exp-search-wiki',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'search/wiki',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => -35,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
   );
 
   return $export;
