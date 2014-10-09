@@ -1,0 +1,31 @@
+<?php
+/**
+ * @file
+ * Code for the OSHA Breadcrumbs feature.
+ */
+
+include_once 'osha_breadcrumbs.features.inc';
+
+/**
+ * Alter built breadcrumbs.
+ *
+ * This hook is invoked after breadcrumbs were built or after they were loaded from cache.
+ *
+ * @param array $breadcrumbs
+ *    Alterable array of build breadcrumbs.
+ * @param object $path_breadcrumbs
+ *    Unalterable object contains both processed and raw titles and paths.
+ * @param array $contexts
+ *    Ctools contexts from current URL.
+ */
+function osha_breadcrumbs_path_breadcrumbs_view_alter(&$breadcrumbs, $path_breadcrumbs, $contexts) {
+  // remove fake links form menu (menu items with <nolink>)
+
+  if (!empty($breadcrumbs)) {
+    foreach($breadcrumbs as $idx => $item){
+      if (strpos($item,'class="nolink"')) {
+        array_splice($breadcrumbs,$idx,1);
+      }
+    }
+  }
+}
