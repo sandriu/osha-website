@@ -11,6 +11,7 @@ osha_newsletter_create_taxonomy();
 osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
 osha_configure_permissions();
+osha_configure_recaptcha();
 
 
 /**
@@ -214,4 +215,13 @@ function osha_configure_addtoany_social_share() {
   );
 }
 
+/**
+ * Add configuration for recaptcha contrib module.
+ */
+function osha_configure_recaptcha() {
+  drupal_set_message('Configuring reCaptcha contrib module ...');
 
+  variable_set('captcha_default_challenge', 'recaptcha/reCAPTCHA');
+  variable_set('captcha_default_validation', 1);
+  variable_set('recaptcha_theme', 'custom');
+}
