@@ -10,6 +10,7 @@ osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
 osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
+osha_disable_blocks();
 osha_configure_permissions();
 osha_configure_recaptcha();
 
@@ -226,4 +227,31 @@ function osha_configure_recaptcha() {
   variable_set('captcha_default_challenge', 'recaptcha/reCAPTCHA');
   variable_set('captcha_default_validation', 1);
   variable_set('recaptcha_theme', 'custom');
+}
+
+/**
+ * Disable drupal default blocks
+ */
+function osha_disable_blocks(){
+  drupal_set_message('Disable navigation block on osha_frontend theme');
+
+  db_update('block')
+  ->fields(array('status' => 0))
+  ->condition('module', 'system')
+  ->condition('delta', 'navigation')
+  ->condition('theme', 'osha_frontend')
+  ->execute();
+
+  db_update('block')
+  ->fields(array('status' => 0))
+  ->condition('module', 'user')
+  ->condition('delta', 'login')
+  ->condition('theme', 'osha_frontend')
+  ->execute();
+
+  // we could also use drush
+  // block-configure --module=user --delta=login --region=-1 --theme=osha_frontend
+
+  // Flush cache
+  cache_clear_all();
 }
