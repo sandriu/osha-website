@@ -536,8 +536,8 @@ function osha_content_edw_uuid_features_default_content() {
   'field_article_type' => array(
     'und' => array(
       0 => array(
-        'tid' => '01207304-f92c-4964-9c37-af3b27565c80',
-        'uuid' => '01207304-f92c-4964-9c37-af3b27565c80',
+        'tid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
+        'uuid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
       ),
     ),
   ),
