@@ -4,43 +4,11 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   $form_state['node'] = $node;
   $rows = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
-  $weight = 0;
   $options = array();
   $enabled = array();
 
   $form['weight'] = array('#tree' => TRUE);
-  foreach ($rows as $uid => $row) {
-    $options[$uid] = '';
-    $enabled[] = $uid;
-    $form['weight'][$uid] = array(
-      '#type' => 'weight',
-      '#title' => t('Weight'),
-      '#title_display' => 'invisible',
-      '#default_value' => (-10 + $weight),
-      '#attributes' => array('class' => array('user-weight')),
-    );
-    $form['name'][$uid] = array('#markup' => check_plain($row->name));
-    $form['mail'][$uid] = array('#markup' => check_plain($row->mail));
-    if (!empty($row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_APPROVE])) {
-      $moderation = $row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_APPROVE];
-      $form['next'][$uid] = array('#markup' => !empty($moderation->next) ? t('Yes') : '');
-      if ($moderation->approved === NULL) {
-        $status = t('Waiting approval');
-      }
-      elseif ($moderation->approved == 1) {
-        $status = t('Approved');
-      }
-      else {
-        $status = t('Rejected');
-      }
-      $form['status'][$uid] = array('#markup' => $status);
-    }
-    else {
-      $form['next'][$uid] = array('#markup' => '');
-      $form['status'][$uid] = array('#markup' => '');
-    }
-    $weight++;
-  }
+  osha_workflow_admin_build_users_table($form, $rows, $enabled, $options, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
   $form['enabled'] = array(
     '#type' => 'checkboxes',
     '#title' => t('List of moderators'),
@@ -62,48 +30,26 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
 
 /**
  * Form builder for workflow_moderation_form.
+ *
+ * @param array $form
+ *   Form to modify
+ * @param array $form_state
+ *   Form state
+ * @param object $node
+ *   Current node
+ *
+ * @return array
+ *   Form array
  */
 function osha_workflow_node_review_form($form, &$form_state, $node) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   $form_state['node'] = $node;
   $rows = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
-  $weight = 0;
   $options = array();
   $enabled = array();
 
   $form['weight'] = array('#tree' => TRUE);
-  foreach ($rows as $uid => $row) {
-    $options[$uid] = '';
-    $enabled[] = $uid;
-    $form['weight'][$uid] = array(
-      '#type' => 'weight',
-      '#title' => t('Weight'),
-      '#title_display' => 'invisible',
-      '#default_value' => (-10 + $weight),
-      '#attributes' => array('class' => array('user-weight')),
-    );
-    $form['name'][$uid] = array('#markup' => check_plain($row->name));
-    $form['mail'][$uid] = array('#markup' => check_plain($row->mail));
-    if (!empty($row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW])) {
-      $moderation = $row->moderation[OSHA_WORKFLOW_MODERATION_TYPE_REVIEW];
-      $form['next'][$uid] = array('#markup' => !empty($moderation->next) ? t('Yes') : '');
-      if ($moderation->approved === NULL) {
-        $status = t('Waiting for review');
-      }
-      elseif ($moderation->approved == 1) {
-        $status = t('Approved');
-      }
-      else {
-        $status = t('Rejected');
-      }
-      $form['status'][$uid] = array('#markup' => $status);
-    }
-    else {
-      $form['next'][$uid] = array('#markup' => '');
-      $form['status'][$uid] = array('#markup' => '');
-    }
-    $weight++;
-  }
+  osha_workflow_admin_build_users_table($form, $rows, $enabled, $options, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
   $form['enabled'] = array(
     '#type' => 'checkboxes',
     '#title' => t('List of moderators'),
@@ -124,7 +70,63 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
 }
 
 /**
+ * Build the table with moderators.
+ *
+ * @param array $form
+ *   Form to alter
+ * @param array $rows
+ *   Array of user objects
+ * @param array $enabled
+ *   Array with enabled users
+ * @param array $options
+ *   Array with items checked in the table
+ * @param string $moderation_type
+ *   Type of moderation
+ */
+function osha_workflow_admin_build_users_table(&$form, $rows, &$enabled, &$options, $moderation_type) {
+  $weight = 0;
+  foreach ($rows as $uid => $row) {
+    $options[$uid] = '';
+    $enabled[] = $uid;
+    $form['weight'][$uid] = array(
+      '#type' => 'weight',
+      '#title' => t('Weight'),
+      '#title_display' => 'invisible',
+      '#default_value' => (-10 + $weight),
+      '#attributes' => array('class' => array('user-weight')),
+    );
+    $form['name'][$uid] = array('#markup' => check_plain($row->name));
+    $form['mail'][$uid] = array('#markup' => check_plain($row->mail));
+    if (!empty($row->moderation[$moderation_type])) {
+      $moderation = $row->moderation[$moderation_type];
+      $form['next'][$uid] = array('#markup' => !empty($moderation->next) ? t('Yes') : '');
+      if ($moderation->approved === NULL) {
+        $status = t('Waiting approval');
+      }
+      elseif ($moderation->approved == 1) {
+        $status = t('Approved');
+      }
+      else {
+        $status = t('Rejected');
+      }
+      $form['status'][$uid] = array('#markup' => $status);
+    }
+    else {
+      $form['next'][$uid] = array('#markup' => '');
+      $form['status'][$uid] = array('#markup' => '');
+    }
+    $weight++;
+  }
+}
+
+/**
  * Themes the workflow_moderation_form form.
+ *
+ * @param array $variables
+ *   Form variables
+ *
+ * @return string
+ *   Form HTML
  */
 function theme_osha_workflow_moderation_form($variables) {
   $output = '';
@@ -181,10 +183,15 @@ function theme_osha_workflow_moderation_form($variables) {
   return $output;
 }
 
+/**
+ * Implements hook_form_validate().
+ */
 function osha_workflow_node_review_form_validate($form, $form_state) {
   $data = array_filter(
     $form_state['values']['enabled'],
-    function($uid) { return $uid > 0; }
+    function($uid) {
+    return $uid > 0;
+    }
   );
   if (empty($data)) {
     form_set_error('enabled', t('Cannot have an empty moderation queue! Add at least one user or switch to another state!'));
@@ -208,11 +215,15 @@ function osha_workflow_node_review_form_submit($form, $form_state) {
   osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
 }
 
-
+/**
+ * Implements hook_form_validate().
+ */
 function osha_workflow_node_approval_form_validate($form, $form_state) {
   $data = array_filter(
     $form_state['values']['enabled'],
-    function($uid) { return $uid > 0; }
+    function($uid) {
+    return $uid > 0;
+    }
   );
   if (empty($data)) {
     form_set_error('enabled', t('Cannot have an empty moderation queue! Add at least one user or switch to another state!'));
