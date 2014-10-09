@@ -25,8 +25,16 @@ $field_name =$variables[\'#field\'][\'field_name\'];
 $field = $variables[\'#object\']->{$field_name};
 $file= isset($field[$curr_lang]) ? $field[$curr_lang] : NULL;
 
-if (isset($file[0])) {
-    $output .= \' <a href = "\' . file_create_url($file[0][\'uri\']) . \'"><span>\' . t($variables[\'#instance\'][\'label\']) . \'</span> - <span>\' . format_size(filesize($file[0][\'uri\'])). \'</span></a>\'; 
+if (isset($file[0])) {   
+    $output .= \' <a href = "\' . file_create_url($file[0][\'uri\']) . \'">\';
+    $output .= \'<span>\' . t($variables[\'#instance\'][\'label\']) . \'</span> - \';
+    $output .= theme_file_icon(
+		   array(
+		       "file" => file_load($file[0][\'fid\']),
+		       "icon_directory" => NULL
+		   ));
+    $output .= \'<span>\' . format_size(filesize($file[0][\'uri\'])). \'</span>\';
+    $output .= \'</a>\'; 
 }
 
 return $output;';
@@ -111,12 +119,17 @@ $curr_lang = $language->language;
 $object = isset($variables[\'#object\']->field_publication_related_res[$curr_lang]) ? $variables[\'#object\']->field_publication_related_res[$curr_lang] :$variables[\'#object\']->field_publication_related_res[\'en\'];
 foreach ($object as $obj) {
 	$name = ($obj[\'description\'] != NULL) ? $obj[\'description\'] : $obj[\'filename\'];
-	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $name . \' - \' . format_size(filesize($obj[\'uri\'])) . \'</a></li>\';
+	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $name . \' - \';
+	$output .= theme_file_icon(
+		   array(
+		       "file" => file_load($obj[\'fid\']),
+		       "icon_directory" => NULL
+		   ));
+	$output .=  format_size(filesize($obj[\'uri\'])) . \'</a></li>\';
 }
 $output .= \'</ul>\';
 
-return $output;
-';
+return $output;';
   $formatter->fapi = '';
   $export['publication_related_res'] = $formatter;
 

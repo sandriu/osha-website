@@ -172,12 +172,6 @@ function osha_calls_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Ongoing calls for contractors';
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Footer: Global: Unfiltered text */
-  $handler->display->display_options['footer']['area_text_custom']['id'] = 'area_text_custom';
-  $handler->display->display_options['footer']['area_text_custom']['table'] = 'views';
-  $handler->display->display_options['footer']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['footer']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['footer']['area_text_custom']['content'] = '<br /><a href="/calls_archive">Archive</a>';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -286,7 +280,6 @@ function osha_calls_views_default_views() {
     t('Current calls for contractors'),
     t('Ongoing'),
     t('Ongoing calls for contractors'),
-    t('<br /><a href="/calls_archive">Archive</a>'),
     t('Archived calls page'),
     t('<a href="/articles/procurement">Procurement</a>'),
   );

@@ -649,7 +649,8 @@ span.date-display-single{
 }
 
 
-.view-publications  .view-content .views-row .views-field-field-file a{
+.view-publications  .view-content .views-row .views-field-field-file a,
+.node-publication .field-type-file a {
 	background: url("../images/down_arrow.jpg") no-repeat scroll 100% 29% transparent;
     color: #02339a !important;
     font-family: arial !important;
@@ -2681,11 +2682,6 @@ font-weight: normal;
 	color:#000000;
 	font-size:0.9em;
 	font-weight:normal;
-}
-
-#content .view-calls .view-footer a{
-    text-decoration: underline;
-    font-size: 1.3em;
 }
 
 /*End Publication tein detail OSHWiki featured articles*/
