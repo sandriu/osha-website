@@ -13,6 +13,8 @@ osha_configure_addtoany_social_share();
 osha_configure_permissions();
 osha_configure_recaptcha();
 
+variable_set('admin_theme', 'osha_admin');
+variable_set('theme_default', 'osha_frontend');
 
 /**
  * Configure permissions.
