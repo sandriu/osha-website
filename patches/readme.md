@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* workbench_moderation
+  * Fix bug CW-438 when URL in original language is lost when adding a new translation
+  * workbench_moderation/workbench_moderation/cw_438_workbench_moderation_url_1_D7.patch.patch
+
 * features_extra
   * Fix tests error for nodequeue
   * features_extra-invalid-argument-foreach-2018515-1.patch

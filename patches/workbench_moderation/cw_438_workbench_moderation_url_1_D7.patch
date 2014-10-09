@@ -1,0 +1,21 @@
+diff --git a/workbench_moderation.module b/workbench_moderation.module
+index 76ef052..3957ff6 100644
+--- a/workbench_moderation.module
++++ b/workbench_moderation.module
+@@ -1031,6 +1031,7 @@ function workbench_moderation_state_allowed($account, $from_state, $to_state, $n
+  *   The node being acted upon.
+  */
+ function workbench_moderation_node_data($node) {
++  global $language;
+   // Make sure that this node type is moderated.
+   if (!workbench_moderation_node_type_moderated($node->type)) {
+     return;
+@@ -1041,7 +1042,7 @@ function workbench_moderation_node_data($node) {
+     $path = array();
+     $conditions = array('source' => 'node/' . $node->nid);
+     if ($node->language != LANGUAGE_NONE) {
+-      $conditions['language'] = $node->language;
++      $conditions['language'] = $language->language;
+     }
+     $path = path_load($conditions);
+     if ($path === FALSE) {
