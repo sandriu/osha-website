@@ -1,6 +1,7 @@
 jQuery(document).ready(function () {
     hoverThemes();
 	zoomMedium();
+	hoverSlideHome();
 });
 
 
@@ -36,6 +37,25 @@ function hoverThemes() {
 		obj.find(".introduction-title a").css("background","none");
 		});
 	});
+}
+
+
+function hoverSlideHome() {
+
+	jQuery("#num_slides div").each(function() {
+		jQuery(this).mouseover(function() {
+		jQuery("span",this).addClass('text_white');
+		jQuery("span",this).removeClass('text_blue');
+		});
+	});
+	
+	jQuery("#num_slides div").each(function() {
+		jQuery(this).mouseout(function() {
+		jQuery("span",this).addClass('text_blue');
+		jQuery("span",this).removeClass('text_white');
+		});
+	});	
+	
 }
 
         
