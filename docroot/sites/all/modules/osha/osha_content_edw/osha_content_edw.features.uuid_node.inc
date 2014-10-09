@@ -11,7 +11,7 @@ function osha_content_edw_uuid_features_default_content() {
   $nodes = array();
 
   $nodes[] = array(
-  'title' => 'Privacy Statement for the OSHMail from',
+  'title' => 'Privacy Statement for the OSHMail form',
   'log' => 'Edited by admin.',
   'status' => 1,
   'comment' => 1,
