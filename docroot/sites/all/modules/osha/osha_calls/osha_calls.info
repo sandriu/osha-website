@@ -19,6 +19,7 @@ dependencies[] = views
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[fe_block_boxes][] = calls_link_to_archive
+features[fe_block_settings][] = block-calls_link_to_archive
 features[fe_block_settings][] = views-calls-block
 features[fe_block_settings][] = views-calls-block_1
 features[features_api][] = api:2

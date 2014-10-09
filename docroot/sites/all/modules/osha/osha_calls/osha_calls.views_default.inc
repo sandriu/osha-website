@@ -171,7 +171,6 @@ function osha_calls_views_default_views() {
   $handler = $view->new_display('block', 'Ongoing', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Ongoing calls for contractors';
-  $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -229,7 +228,8 @@ function osha_calls_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="/articles/procurement">Procurement</a>';
+  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="/articles/procurement">Back to calls</a>
+';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -281,7 +281,8 @@ function osha_calls_views_default_views() {
     t('Ongoing'),
     t('Ongoing calls for contractors'),
     t('Archived calls page'),
-    t('<a href="/articles/procurement">Procurement</a>'),
+    t('<a href="/articles/procurement">Back to calls</a>
+'),
   );
   $export['calls'] = $view;
 
