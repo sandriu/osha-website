@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Form builder for workflow_moderation_form (approval).
+ *
+ * @param array $form
+ *   Form to modify
+ * @param array $form_state
+ *   Form state
+ * @param object $node
+ *   Current node
+ *
+ * @return array
+ *   Form array
+ */
 function osha_workflow_node_approval_form($form, &$form_state, $node) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   $form_state['node'] = $node;
@@ -29,7 +42,7 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
 }
 
 /**
- * Form builder for workflow_moderation_form.
+ * Form builder for workflow_moderation_form (review).
  *
  * @param array $form
  *   Form to modify
