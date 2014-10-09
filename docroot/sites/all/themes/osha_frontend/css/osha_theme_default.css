@@ -1948,7 +1948,7 @@ font-weight: normal;
 	float: right;
 	font-family: "Oswald",sans-serif;
 	font-size: 1em;
-	padding-right:2em;
+	padding-right:2.1em;
 	text-decoration:none;
 }
 
@@ -2342,7 +2342,7 @@ font-weight: normal;
 	
 }
 
-.node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items span{ 
+.node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items span{
 	color: #003399!important;
     font-family: arial!important;
 	font-weight:normal;
@@ -2350,6 +2350,16 @@ font-weight: normal;
 	padding-right:2em;
 	padding-top:0.2em;
 	padding-left:0.3em;
+}
+
+.node-calls .field-type-file a{
+    color: #003399!important;
+    font-family: arial!important;
+    font-weight:normal;
+    background: url("../images/down_arrow.jpg") no-repeat scroll 100% 29% transparent;
+    padding-right:2em;
+    padding-top:0.2em;
+    padding-left:0.3em;
 }
 
 #block-block-4 div a{
@@ -2444,6 +2454,11 @@ font-weight: normal;
 	color:#000000;
 	font-size:0.9em;
 	font-weight:normal;
+}
+
+#content .view-calls .view-footer a{
+    text-decoration: underline;
+    font-size: 1.3em;
 }
 
 /*End Publication tein detail OSHWiki featured articles*/
