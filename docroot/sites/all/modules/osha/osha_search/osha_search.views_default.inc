@@ -227,6 +227,8 @@ function osha_search_views_default_views() {
   $handler->display->display_options['sorts']['changed']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['sorts']['changed']['field'] = 'changed';
   $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['changed']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['changed']['expose']['label'] = 'Date';
   /* Sort criterion: Search: Relevance */
   $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -464,6 +466,7 @@ function osha_search_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('Date'),
     t('Relevance'),
     t('Page'),
     t('OSHWiki Search'),

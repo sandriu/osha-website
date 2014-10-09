@@ -39,7 +39,7 @@ function osha_search_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -33,
+        'weight' => -37,
       ),
       'seven' => array(
         'region' => '',
@@ -60,7 +60,8 @@ function osha_search_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'publications',
+    'pages' => 'publications
+search/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -79,7 +80,7 @@ function osha_search_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -31,
+        'weight' => -36,
       ),
       'seven' => array(
         'region' => '',
@@ -116,10 +117,10 @@ function osha_search_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_second',
+        'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -32,
+        'weight' => -38,
       ),
       'seven' => array(
         'region' => '',
@@ -239,7 +240,7 @@ function osha_search_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -34,
+        'weight' => -39,
       ),
       'seven' => array(
         'region' => '',
