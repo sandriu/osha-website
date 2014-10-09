@@ -11,6 +11,211 @@ function osha_content_edw_uuid_features_default_content() {
   $nodes = array();
 
   $nodes[] = array(
+  'title' => 'Privacy Statement for the OSHMail from',
+  'log' => 'Edited by admin.',
+  'status' => 1,
+  'comment' => 1,
+  'promote' => 0,
+  'sticky' => 0,
+  'type' => 'article',
+  'language' => 'en',
+  'created' => 1412862056,
+  'tnid' => 0,
+  'translate' => 0,
+  'uuid' => '02ec2b0c-b53f-409d-95f5-56c0b247d8be',
+  'body' => array(
+    'en' => array(
+      0 => array(
+        'value' => '<p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>Organizational part of the Agency entrusted with the processing of personal data</strong></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span>Andrew Smith, Head of Communication and Promotion Unit</span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span><strong>Purpose of processing</strong></span></p><p class="western" style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;"><span lang="en">The data requested on this form is collected for the purpose of sending the monthly EU-OSHA newsletter, and occasionally, a survey to obtain feedback on the Agency’s performance in relation to the Annual Management Plan and the Multi-annual Strategic Programme. The submitted email addresses are stored in our automated mailing list management application, Listserv, hosted in servers located in EU territory.</span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>Type of data processed</strong></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;">E-mail address</span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>Legal basis</strong></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;">Council Regulation (EC) No. 2062/94 of 18/07/1994 establishing the European Agency for Safety and Health at Work and subsequent amendments.</span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>Lawfulness of processing</strong></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;">The processing is based on</span><span style="color: #000000;">Article 5(a) of </span><a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2001:008:0001:0022:en:PDF"><span style="color: #0000ff;"><span style="text-decoration: underline;">Regulation (EC) No. 45/2001 of the European Parliament and the Council of 18 December 2000 on the protection of individuals with regard to the processing of personal data by the Community institutions and bodies and on the free movement of such data</span></span></a><span style="color: #000000;"> (hereinafter, Regulation (EC) No. 45/2001).</span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>Data recipients</strong></span></p><p class="western" style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;"><span lang="en">Access to the personal data is granted on the basis of the role and responsibilities of the subjects involved (“need to know” principle):</span></p><ul><li><p style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;"><span style="color: #000000;"><span lang="en">Duly appointed EU-OSHA staff</span></span></p></li><li><p style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;"><span style="color: #000000;"><span lang="en">External provider hosting and maintaining EU-OSHA’s server</span></span></p></li><li><p style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;"><span style="color: #000000;"><span lang="en">Legal Service, Civil Service Tribunal, the European Data Protection Supervisor, the European Anti-Fraud Office (OLAF), the European Ombudsman, the Court of Auditors, the Internal Audit Service, if applicable.</span></span></p></li></ul><p class="western" style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;"><span lang="en">All the recipients mentioned above are bound by <a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2001:008:0001:0022:en:PDF">Regulation (EC) Nº 45/2001 of the European Parliament and of the Council of 18 December 2000</a> on the protection of individuals with regard to the processing of personal data by the Community institutions and bodies and on the free movement of such data. EU-OSHA will not disclose personal data to third parties. EU-OSHA will not divulge personal data for direct marketing for commercial purposes.</span></p><p class="western" style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;" lang="en"><a name="_GoBack"></a> <br /><br /></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>The data subject’s rights</strong></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;">Data subjects have the right to access, rectify and block their information (in case of inaccuracy of data), request their cancellation and object about their processing on the cases foreseen in Articles 13,14,15, 16 and 18 of Regulation (EC) N. 45/2001.</span></p><p class="western" style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;"><span lang="en">You can cancel your subscription to the EU-OSHA newsletter at any time, by using the form at the bottom of this page <a href="https://osha.europa.eu/en/news/oshmail/">https://osha.europa.eu/en/news/oshmail/</a>, or by clicking on the link at the bottom of any EU-OSHA newsletter in your inbox.</span></p><p class="western" style="margin-top: 0.08in; margin-bottom: 0.08in; line-height: 0.17in;"><span lang="en">Should you have queries or complaints regarding the collecting, processing or use of your personal data, please contact us at: </span><a href="mailto:information@osha.europa.eu">information@osha.europa.eu</a><span lang="en">, including in the subject the words “data protection”.</span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>Information on the conservation period of data</strong></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;">The data will be kept by the Agency as long as this is necessary for the submission of the newsletter.</span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="en">&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>Request for information </strong></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;">For any further information regarding the handling of their personal data, data subjects can address their request to EU-OSHA Data Protection Officer at: </span><a href="mailto:dpo@osha.europa.eu"><span style="color: #0000ff;"><span style="text-decoration: underline;">dpo@osha.europa.eu</span></span></a><span style="color: #000000;">.</span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;"><strong>Recourse to the EDPS</strong></span>&nbsp;</p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="color: #000000;">Data subjects are entitled to make recourse to the European Data Protection Supervisor: </span><a href="http://www.edps.europa.eu"><span style="color: #0000ff;"><span style="text-decoration: underline;">http://www.edps.europa.eu</span></span></a>, should they consider that the processing operations do not comply with Regulation (EC) No. 45/2001.</p>',
+        'summary' => '',
+        'format' => 'full_html',
+        'safe_summary' => '',
+      ),
+    ),
+  ),
+  'field_tags' => array(),
+  'field_image' => array(),
+  'title_field' => array(
+    'en' => array(
+      0 => array(
+        'value' => 'Privacy Statement for the OSHMail from',
+        'format' => NULL,
+      ),
+    ),
+  ),
+  'field_activity' => array(),
+  'field_archived' => array(
+    'und' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+  ),
+  'field_article_type' => array(
+    'und' => array(
+      0 => array(
+        'tid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
+        'uuid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
+      ),
+    ),
+  ),
+  'field_expiration_date' => array(),
+  'field_nace_codes' => array(),
+  'field_publication_date' => array(
+    'und' => array(
+      0 => array(
+        'value' => '2014-10-09 00:00:00',
+        'timezone' => 'UTC',
+        'timezone_db' => 'UTC',
+        'date_type' => 'datetime',
+      ),
+    ),
+  ),
+  'field_related_oshwiki_articles' => array(),
+  'field_summary' => array(),
+  'field_thesaurus' => array(),
+  'field_workflow_status' => array(),
+  'field_wiki_categories' => array(),
+  'metatags' => array(),
+  'rdf_mapping' => array(
+    'field_image' => array(
+      'predicates' => array(
+        0 => 'og:image',
+        1 => 'rdfs:seeAlso',
+      ),
+      'type' => 'rel',
+    ),
+    'field_tags' => array(
+      'predicates' => array(
+        0 => 'dc:subject',
+      ),
+      'type' => 'rel',
+    ),
+    'rdftype' => array(
+      0 => 'sioc:Item',
+      1 => 'foaf:Document',
+    ),
+    'title' => array(
+      'predicates' => array(
+        0 => 'dc:title',
+      ),
+    ),
+    'created' => array(
+      'predicates' => array(
+        0 => 'dc:date',
+        1 => 'dc:created',
+      ),
+      'datatype' => 'xsd:dateTime',
+      'callback' => 'date_iso8601',
+    ),
+    'changed' => array(
+      'predicates' => array(
+        0 => 'dc:modified',
+      ),
+      'datatype' => 'xsd:dateTime',
+      'callback' => 'date_iso8601',
+    ),
+    'body' => array(
+      'predicates' => array(
+        0 => 'content:encoded',
+      ),
+    ),
+    'uid' => array(
+      'predicates' => array(
+        0 => 'sioc:has_creator',
+      ),
+      'type' => 'rel',
+    ),
+    'name' => array(
+      'predicates' => array(
+        0 => 'foaf:name',
+      ),
+    ),
+    'comment_count' => array(
+      'predicates' => array(
+        0 => 'sioc:num_replies',
+      ),
+      'datatype' => 'xsd:integer',
+    ),
+    'last_activity' => array(
+      'predicates' => array(
+        0 => 'sioc:last_activity_date',
+      ),
+      'datatype' => 'xsd:dateTime',
+      'callback' => 'date_iso8601',
+    ),
+  ),
+  'translations' => array(
+    'original' => 'en',
+    'data' => array(
+      'en' => array(
+        'entity_type' => 'node',
+        'language' => 'en',
+        'source' => '',
+        'status' => 1,
+        'translate' => 0,
+        'created' => 1412862056,
+        'entity_uuid' => '02ec2b0c-b53f-409d-95f5-56c0b247d8be',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
+      ),
+    ),
+  ),
+  'comment_count' => 0,
+  'workbench_access' => array(
+    774 => 774,
+  ),
+  'path' => array(
+    'pid' => 285,
+    'source' => 'node/80',
+    'alias' => 'articles/privacy-statement-oshmail',
+    'language' => 'en',
+  ),
+  'workbench_moderation' => array(
+    'current' => array(
+      'hid' => 61,
+      'vid' => 81,
+      'nid' => 80,
+      'from_state' => 'published',
+      'state' => 'published',
+      'uid' => 1,
+      'stamp' => 1412862230,
+      'published' => 1,
+      'current' => 1,
+      'title' => 'Privacy Statement for the OSHMail from',
+      'timestamp' => 1412862230,
+    ),
+    'published' => array(
+      'hid' => 61,
+      'vid' => 81,
+      'nid' => 80,
+      'from_state' => 'published',
+      'state' => 'published',
+      'uid' => 1,
+      'stamp' => 1412862230,
+      'published' => 1,
+      'current' => 1,
+      'title' => 'Privacy Statement for the OSHMail from',
+      'timestamp' => 1412862230,
+    ),
+    'my_revision' => array(
+      'hid' => 61,
+      'vid' => 81,
+      'nid' => 80,
+      'from_state' => 'published',
+      'state' => 'published',
+      'uid' => 1,
+      'stamp' => 1412862230,
+      'published' => 1,
+      'current' => 1,
+      'title' => 'Privacy Statement for the OSHMail from',
+      'timestamp' => 1412862230,
+    ),
+  ),
+  'pathauto_perform_alias' => FALSE,
+  'date' => '2014-10-09 13:40:56 +0000',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
+);
+  $nodes[] = array(
   'title' => 'Healthy Workplaces Campaign',
   'log' => '',
   'status' => 1,
@@ -122,13 +327,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412551785,
         'entity_uuid' => '0e63681d-c269-4c31-9341-11543b3df00f',
-        'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 23:29:45 +0000',
-  'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
 );
   $nodes[] = array(
   'title' => 'OiRA',
@@ -250,13 +455,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412515908,
         'entity_uuid' => '261d7273-32ed-4458-9b82-b3c6643cd9f2',
-        'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 13:31:48 +0000',
-  'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
 );
   $nodes[] = array(
   'title' => 'OSHMail newsletter',
@@ -357,13 +562,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1411633981,
         'entity_uuid' => '5976d8f5-cd3a-4b9c-9b25-16e6333530f6',
-        'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-09-16 15:25:10 +0000',
-  'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
 );
   $nodes[] = array(
   'title' => 'E-Guide on Managing Stress',
@@ -477,13 +682,223 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412551529,
         'entity_uuid' => '5a2cfca1-c5d4-46ba-8519-f77f036d5f98',
-        'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 23:25:29 +0000',
-  'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
+);
+  $nodes[] = array(
+  'title' => 'Seminars',
+  'log' => 'Edited by admin.',
+  'status' => 1,
+  'comment' => 1,
+  'promote' => 0,
+  'sticky' => 0,
+  'type' => 'article',
+  'language' => 'en',
+  'created' => 1412006677,
+  'tnid' => 0,
+  'translate' => 0,
+  'uuid' => '6b2a8603-bc31-4f72-9e95-fd22f4206e82',
+  'body' => array(
+    'en' => array(
+      0 => array(
+        'value' => '<p>Even at our largest events, we cannot possibly invite everyone who would be interested, so the aim of this section is to offer you the opportunity to participate \'virtually\': you will find the presentations made by the speakers, a summary of the discussions that took place after each presentation and the overall conclusions from the event. Wherever our resources allow, the summaries are presented in all EU official languages.</p>',
+        'summary' => '',
+        'format' => 'full_html',
+        'safe_summary' => '',
+      ),
+    ),
+  ),
+  'field_tags' => array(),
+  'field_image' => array(),
+  'title_field' => array(
+    'en' => array(
+      0 => array(
+        'value' => 'Seminars',
+        'format' => NULL,
+      ),
+    ),
+  ),
+  'field_activity' => array(),
+  'field_archived' => array(
+    'und' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+  ),
+  'field_article_type' => array(
+    'und' => array(
+      0 => array(
+        'tid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
+        'uuid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
+      ),
+    ),
+  ),
+  'field_expiration_date' => array(),
+  'field_nace_codes' => array(),
+  'field_publication_date' => array(
+    'und' => array(
+      0 => array(
+        'value' => '2014-09-29 00:00:00',
+        'timezone' => 'UTC',
+        'timezone_db' => 'UTC',
+        'date_type' => 'datetime',
+      ),
+    ),
+  ),
+  'field_related_oshwiki_articles' => array(),
+  'field_summary' => array(
+    'en' => array(
+      0 => array(
+        'value' => 'As part of our mission to raise awareness and share information, good practice and advice with a wide range of audiences, we organise many events throughout the year. They range from small seminars that bring together our stakeholders with occupational safety and health experts to present and debate the findings from our publications, to events at Member State level co-organised with our focal points, symposia at large international conferences such as the World Congress, or our European Summits, which mark the end of our Healthy Workplace Campaigns.',
+        'format' => NULL,
+      ),
+    ),
+  ),
+  'field_thesaurus' => array(),
+  'field_workflow_status' => array(),
+  'field_wiki_categories' => array(),
+  'metatags' => array(),
+  'rdf_mapping' => array(
+    'field_image' => array(
+      'predicates' => array(
+        0 => 'og:image',
+        1 => 'rdfs:seeAlso',
+      ),
+      'type' => 'rel',
+    ),
+    'field_tags' => array(
+      'predicates' => array(
+        0 => 'dc:subject',
+      ),
+      'type' => 'rel',
+    ),
+    'rdftype' => array(
+      0 => 'sioc:Item',
+      1 => 'foaf:Document',
+    ),
+    'title' => array(
+      'predicates' => array(
+        0 => 'dc:title',
+      ),
+    ),
+    'created' => array(
+      'predicates' => array(
+        0 => 'dc:date',
+        1 => 'dc:created',
+      ),
+      'datatype' => 'xsd:dateTime',
+      'callback' => 'date_iso8601',
+    ),
+    'changed' => array(
+      'predicates' => array(
+        0 => 'dc:modified',
+      ),
+      'datatype' => 'xsd:dateTime',
+      'callback' => 'date_iso8601',
+    ),
+    'body' => array(
+      'predicates' => array(
+        0 => 'content:encoded',
+      ),
+    ),
+    'uid' => array(
+      'predicates' => array(
+        0 => 'sioc:has_creator',
+      ),
+      'type' => 'rel',
+    ),
+    'name' => array(
+      'predicates' => array(
+        0 => 'foaf:name',
+      ),
+    ),
+    'comment_count' => array(
+      'predicates' => array(
+        0 => 'sioc:num_replies',
+      ),
+      'datatype' => 'xsd:integer',
+    ),
+    'last_activity' => array(
+      'predicates' => array(
+        0 => 'sioc:last_activity_date',
+      ),
+      'datatype' => 'xsd:dateTime',
+      'callback' => 'date_iso8601',
+    ),
+  ),
+  'translations' => array(
+    'original' => 'en',
+    'data' => array(
+      'en' => array(
+        'entity_type' => 'node',
+        'language' => 'en',
+        'source' => '',
+        'status' => 1,
+        'translate' => 0,
+        'created' => 1412006677,
+        'entity_uuid' => '6b2a8603-bc31-4f72-9e95-fd22f4206e82',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
+      ),
+    ),
+  ),
+  'comment_count' => 0,
+  'workbench_access' => array(),
+  'path' => array(
+    'pid' => 193,
+    'source' => 'node/9',
+    'alias' => 'articles/seminars',
+    'language' => 'en',
+  ),
+  'workbench_moderation' => array(
+    'current' => array(
+      'hid' => 2,
+      'vid' => 9,
+      'nid' => 9,
+      'from_state' => 'draft',
+      'state' => 'published',
+      'uid' => 0,
+      'stamp' => 1412842010,
+      'published' => 1,
+      'current' => 1,
+      'title' => 'Seminars',
+      'timestamp' => 1412842010,
+    ),
+    'published' => array(
+      'hid' => 2,
+      'vid' => 9,
+      'nid' => 9,
+      'from_state' => 'draft',
+      'state' => 'published',
+      'uid' => 0,
+      'stamp' => 1412842010,
+      'published' => 1,
+      'current' => 1,
+      'title' => 'Seminars',
+      'timestamp' => 1412842010,
+    ),
+    'my_revision' => array(
+      'hid' => 2,
+      'vid' => 9,
+      'nid' => 9,
+      'from_state' => 'draft',
+      'state' => 'published',
+      'uid' => 0,
+      'stamp' => 1412842010,
+      'published' => 1,
+      'current' => 1,
+      'title' => 'Seminars',
+      'timestamp' => 1412842010,
+    ),
+  ),
+  'pathauto_perform_alias' => FALSE,
+  'date' => '2014-09-29 16:04:37 +0000',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
 );
   $nodes[] = array(
   'title' => 'Procurement',
@@ -638,7 +1053,7 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412670137,
         'entity_uuid' => '7cd1b860-8554-45db-8f30-237e09ff614e',
-        'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
       ),
     ),
   ),
@@ -647,55 +1062,55 @@ function osha_content_edw_uuid_features_default_content() {
     824 => 824,
   ),
   'path' => array(
-    'pid' => 120,
-    'source' => 'node/55',
+    'pid' => 188,
+    'source' => 'node/5',
     'alias' => 'articles/procurement',
     'language' => 'en',
   ),
   'workbench_moderation' => array(
     'current' => array(
-      'hid' => 58,
-      'vid' => 64,
-      'nid' => 55,
+      'hid' => 1,
+      'vid' => 5,
+      'nid' => 5,
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412776844,
+      'stamp' => 1412842010,
       'published' => 1,
       'current' => 1,
       'title' => 'Procurement',
-      'timestamp' => 1412776844,
+      'timestamp' => 1412842010,
     ),
     'published' => array(
-      'hid' => 58,
-      'vid' => 64,
-      'nid' => 55,
+      'hid' => 1,
+      'vid' => 5,
+      'nid' => 5,
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412776844,
+      'stamp' => 1412842010,
       'published' => 1,
       'current' => 1,
       'title' => 'Procurement',
-      'timestamp' => 1412776844,
+      'timestamp' => 1412842010,
     ),
     'my_revision' => array(
-      'hid' => 58,
-      'vid' => 64,
-      'nid' => 55,
+      'hid' => 1,
+      'vid' => 5,
+      'nid' => 5,
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412776844,
+      'stamp' => 1412842010,
       'published' => 1,
       'current' => 1,
       'title' => 'Procurement',
-      'timestamp' => 1412776844,
+      'timestamp' => 1412842010,
     ),
   ),
   'pathauto_perform_alias' => FALSE,
   'date' => '2014-10-07 08:22:17 +0000',
-  'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
 );
   $nodes[] = array(
   'title' => 'Making Europe a more productive place to work',
@@ -817,13 +1232,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412515498,
         'entity_uuid' => 'df711256-ced1-45ec-9878-5d3a491e225a',
-        'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 13:24:58 +0000',
-  'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
 );
   $nodes[] = array(
   'title' => 'OSHWiki',
@@ -945,13 +1360,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412515872,
         'entity_uuid' => 'e78930ab-55aa-4f1c-be2b-d1dd82d95a82',
-        'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 13:31:12 +0000',
-  'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
 );
   $nodes[] = array(
   'title' => 'Napo',
@@ -1065,217 +1480,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412551810,
         'entity_uuid' => 'e9364c32-88bb-4ab4-bba0-26380c511930',
-        'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
+        'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 23:30:10 +0000',
-  'user_uuid' => 'd515948d-5953-4803-853a-6966fc6cdc58',
-);
-  $nodes[] = array(
-  'title' => 'Seminars',
-  'log' => 'Edited by admin.',
-  'status' => 1,
-  'comment' => 1,
-  'promote' => 0,
-  'sticky' => 0,
-  'type' => 'article',
-  'language' => 'en',
-  'created' => 1412006677,
-  'tnid' => 0,
-  'translate' => 0,
-  'uuid' => '6b2a8603-bc31-4f72-9e95-fd22f4206e82',
-  'body' => array(
-    'en' => array(
-      0 => array(
-        'value' => '<p>Even at our largest events, we cannot possibly invite everyone who would be interested, so the aim of this section is to offer you the opportunity to participate \'virtually\': you will find the presentations made by the speakers, a summary of the discussions that took place after each presentation and the overall conclusions from the event. Wherever our resources allow, the summaries are presented in all EU official languages.</p>',
-        'summary' => '',
-        'format' => 'full_html',
-        'safe_summary' => '',
-      ),
-    ),
-  ),
-  'field_tags' => array(),
-  'field_image' => array(),
-  'title_field' => array(
-    'en' => array(
-      0 => array(
-        'value' => 'Seminars',
-        'format' => NULL,
-      ),
-    ),
-  ),
-  'field_activity' => array(),
-  'field_article_type' => array(
-    'und' => array(
-      0 => array(
-        'tid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
-        'uuid' => '4d106060-5ea2-448e-92b8-3cd649f867a9',
-      ),
-    ),
-  ),
-  'field_nace_codes' => array(),
-  'field_publication_date' => array(
-    'und' => array(
-      0 => array(
-        'value' => '2014-09-29 00:00:00',
-        'timezone' => 'UTC',
-        'timezone_db' => 'UTC',
-        'date_type' => 'datetime',
-      ),
-    ),
-  ),
-  'field_related_oshwiki_articles' => array(),
-  'field_summary' => array(
-    'en' => array(
-      0 => array(
-        'value' => 'As part of our mission to raise awareness and share information, good practice and advice with a wide range of audiences, we organise many events throughout the year. They range from small seminars that bring together our stakeholders with occupational safety and health experts to present and debate the findings from our publications, to events at Member State level co-organised with our focal points, symposia at large international conferences such as the World Congress, or our European Summits, which mark the end of our Healthy Workplace Campaigns.',
-        'format' => NULL,
-      ),
-    ),
-  ),
-  'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
-  'field_wiki_categories' => array(),
-  'metatags' => array(),
-  'rdf_mapping' => array(
-    'field_image' => array(
-      'predicates' => array(
-        0 => 'og:image',
-        1 => 'rdfs:seeAlso',
-      ),
-      'type' => 'rel',
-    ),
-    'field_tags' => array(
-      'predicates' => array(
-        0 => 'dc:subject',
-      ),
-      'type' => 'rel',
-    ),
-    'rdftype' => array(
-      0 => 'sioc:Item',
-      1 => 'foaf:Document',
-    ),
-    'title' => array(
-      'predicates' => array(
-        0 => 'dc:title',
-      ),
-    ),
-    'created' => array(
-      'predicates' => array(
-        0 => 'dc:date',
-        1 => 'dc:created',
-      ),
-      'datatype' => 'xsd:dateTime',
-      'callback' => 'date_iso8601',
-    ),
-    'changed' => array(
-      'predicates' => array(
-        0 => 'dc:modified',
-      ),
-      'datatype' => 'xsd:dateTime',
-      'callback' => 'date_iso8601',
-    ),
-    'body' => array(
-      'predicates' => array(
-        0 => 'content:encoded',
-      ),
-    ),
-    'uid' => array(
-      'predicates' => array(
-        0 => 'sioc:has_creator',
-      ),
-      'type' => 'rel',
-    ),
-    'name' => array(
-      'predicates' => array(
-        0 => 'foaf:name',
-      ),
-    ),
-    'comment_count' => array(
-      'predicates' => array(
-        0 => 'sioc:num_replies',
-      ),
-      'datatype' => 'xsd:integer',
-    ),
-    'last_activity' => array(
-      'predicates' => array(
-        0 => 'sioc:last_activity_date',
-      ),
-      'datatype' => 'xsd:dateTime',
-      'callback' => 'date_iso8601',
-    ),
-  ),
-  'translations' => array(
-    'original' => 'en',
-    'data' => array(
-      'en' => array(
-        'entity_type' => 'node',
-        'language' => 'en',
-        'source' => '',
-        'status' => 1,
-        'translate' => 0,
-        'created' => 1412006677,
-        'entity_uuid' => '6b2a8603-bc31-4f72-9e95-fd22f4206e82',
-        'user_uuid' => '7b6f4ec2-d89a-41f1-af2c-4ea0eade1418',
-      ),
-    ),
-  ),
-  'comment_count' => 0,
-  'workbench_access' => array(
-    659 => 659,
-  ),
-  'path' => array(
-    'pid' => 193,
-    'source' => 'node/10',
-    'alias' => 'articles/seminars',
-    'language' => 'en',
-  ),
-  'workbench_moderation' => array(
-    'current' => array(
-      'hid' => 9,
-      'vid' => 10,
-      'nid' => 10,
-      'from_state' => 'draft',
-      'state' => 'published',
-      'uid' => 0,
-      'stamp' => 1412011914,
-      'published' => 1,
-      'current' => 1,
-      'title' => 'Seminars',
-      'timestamp' => 1412011914,
-    ),
-    'published' => array(
-      'hid' => 9,
-      'vid' => 10,
-      'nid' => 10,
-      'from_state' => 'draft',
-      'state' => 'published',
-      'uid' => 0,
-      'stamp' => 1412011914,
-      'published' => 1,
-      'current' => 1,
-      'title' => 'Seminars',
-      'timestamp' => 1412011914,
-    ),
-    'my_revision' => array(
-      'hid' => 9,
-      'vid' => 10,
-      'nid' => 10,
-      'from_state' => 'draft',
-      'state' => 'published',
-      'uid' => 0,
-      'stamp' => 1412011914,
-      'published' => 1,
-      'current' => 1,
-      'title' => 'Seminars',
-      'timestamp' => 1412011914,
-    ),
-  ),
-  'pathauto_perform_alias' => FALSE,
-  'date' => '2014-09-29 16:04:37 +0000',
-  'user_uuid' => '7b6f4ec2-d89a-41f1-af2c-4ea0eade1418',
+  'user_uuid' => '1f3ca3fc-0faa-4432-b300-6820d4692b9c',
 );
   return $nodes;
 }
