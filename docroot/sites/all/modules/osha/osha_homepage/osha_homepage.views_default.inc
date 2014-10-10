@@ -179,18 +179,6 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_type'] = 'span';
-  $handler->display->display_options['fields']['title']['element_class'] = 'carousel_link_title';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: link_url */
   $handler->display->display_options['fields']['field_banner_link_1']['id'] = 'field_banner_link_1';
   $handler->display->display_options['fields']['field_banner_link_1']['table'] = 'field_data_field_banner_link';
@@ -200,13 +188,25 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_banner_link_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_banner_link_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_banner_link_1']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['field_banner_link_1']['type'] = 'link_url';
+  $handler->display->display_options['fields']['field_banner_link_1']['type'] = 'link_plain';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['label'] = '';
-  $handler->display->display_options['fields']['field_image']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_image']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a target="_blank" href="[field_banner_link_1]">
+<div class="views-field-title"><span>[title_field]</span></div>
+[field_image]
+</a>';
   $handler->display->display_options['fields']['field_image']['alter']['path'] = '[field_banner_link_1]';
   $handler->display->display_options['fields']['field_image']['alter']['alt'] = '[title]';
   $handler->display->display_options['fields']['field_image']['alter']['link_class'] = 'carousel_link';
@@ -256,6 +256,10 @@ function osha_homepage_views_default_views() {
 <span class="views-field-field-banner-link">[field_banner_link]</span>
 </a>'),
     t('Home page banner footer'),
+    t('<a target="_blank" href="[field_banner_link_1]">
+<div class="views-field-title"><span>[title_field]</span></div>
+[field_image]
+</a>'),
     t('[title]'),
   );
   $export['osha_home_banner_top'] = $view;
