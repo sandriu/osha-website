@@ -24,6 +24,11 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'to_name' => 'needs_review',
       'name' => 'Reviewing Final Draft',
     ),
+    'final_draft:ready_to_publish' => array(
+      'from_name' => 'final_draft',
+      'to_name' => 'ready_to_publish',
+      'name' => 'Skip review and approval, ready to publish',
+    ),
     'final_draft:to_be_approved' => array(
       'from_name' => 'final_draft',
       'to_name' => 'to_be_approved',
@@ -34,6 +39,11 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'to_name' => 'draft',
       'name' => 'Rejecting Final Draft',
     ),
+    'needs_review:ready_to_publish' => array(
+      'from_name' => 'needs_review',
+      'to_name' => 'ready_to_publish',
+      'name' => 'Finish review, skip approval',
+    ),
     'needs_review:to_be_approved' => array(
       'from_name' => 'needs_review',
       'to_name' => 'to_be_approved',
@@ -43,6 +53,11 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'from_name' => 'to_be_approved',
       'to_name' => 'approved',
       'name' => 'Approving',
+    ),
+    'to_be_approved:ready_to_publish' => array(
+      'from_name' => 'to_be_approved',
+      'to_name' => 'ready_to_publish',
+      'name' => 'Content approved and ready to publish',
     ),
     'to_be_approved:rejected' => array(
       'from_name' => 'to_be_approved',
