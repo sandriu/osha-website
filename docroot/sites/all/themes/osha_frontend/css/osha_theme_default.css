@@ -650,7 +650,8 @@ span.date-display-single{
 
 
 .view-publications  .view-content .views-row .views-field-field-file a,
-.node-publication .field-type-file a {
+.node-publication .field-type-file a,
+.node-job-vacancies .field-type-file a{
 	background: url("../images/down_arrow.jpg") no-repeat scroll 100% 29% transparent;
     color: #02339a !important;
     font-family: arial !important;
