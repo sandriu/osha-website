@@ -131,7 +131,7 @@ function osha_search_default_search_api_index() {
             "prefix" : "\\u003Cstrong\\u003E",
             "suffix" : "\\u003C\\/strong\\u003E",
             "excerpt" : 1,
-            "excerpt_length" : "256",
+            "excerpt_length" : "200",
             "exclude_fields" : {
               "field_author" : "field_author",
               "field_tags:name" : "field_tags:name",
