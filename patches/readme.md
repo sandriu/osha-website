@@ -9,7 +9,9 @@ List of patches (most recent first)
 
 * workbench_moderation
   * Fix bug CW-438 when URL in original language is lost when adding a new translation
-  * workbench_moderation/workbench_moderation/cw_438_workbench_moderation_url_1_D7.patch.patch
+  * -workbench_moderation/workbench_moderation/cw_438_workbench_moderation_url_1_D7.patch.patch-
+  * Bug report: https://www.drupal.org/node/1946392
+  * Applied patch from here: https://www.drupal.org/files/et_language-1946392-1.patch
 
 * features_extra
   * Fix tests error for nodequeue

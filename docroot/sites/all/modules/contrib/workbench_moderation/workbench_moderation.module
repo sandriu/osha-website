@@ -1031,7 +1031,6 @@ function workbench_moderation_state_allowed($account, $from_state, $to_state, $n
  *   The node being acted upon.
  */
 function workbench_moderation_node_data($node) {
-  global $language;
   // Make sure that this node type is moderated.
   if (!workbench_moderation_node_type_moderated($node->type)) {
     return;
@@ -1041,9 +1040,11 @@ function workbench_moderation_node_data($node) {
   if (module_exists('path') && isset($node->nid)) {
     $path = array();
     $conditions = array('source' => 'node/' . $node->nid);
-    if ($node->language != LANGUAGE_NONE) {
-      $conditions['language'] = $language->language;
+    $langcode = entity_language('node', $node);
+    if ($langcode != LANGUAGE_NONE) {
+      $conditions['language'] = $langcode;
     }
+
     $path = path_load($conditions);
     if ($path === FALSE) {
       $path = array();
