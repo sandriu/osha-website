@@ -31,7 +31,6 @@ function osha_workflow_create_roles() {
     'Review Manager' => array(),
     'Project Manager' => array(),
     'Approver' => array(),
-    'Final Approver' => array(),
     'Content Administrator' => array(),
   );
 
