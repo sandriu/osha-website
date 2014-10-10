@@ -84,17 +84,12 @@ function osha_workflow_admin_build_moderators_table(&$form, $rows) {
       '#type' => 'hidden',
       '#value' => $uid,
     );
-    if (count($rows) > 1) {
-      $form['rows'][$uid]['remove'] = array(
-        '#type' => 'submit',
-        '#name' => $uid,
-        '#value' => t('Remove'),
-        '#submit' => array('osha_workflow_admin_moderators_table_remove_row'),
-      );
-    }
-    else {
-      $form['rows'][$uid]['remove'] = array('#markup' => '');
-    }
+    $form['rows'][$uid]['remove'] = array(
+      '#type' => 'submit',
+      '#name' => $uid,
+      '#value' => t('Remove'),
+      '#submit' => array('osha_workflow_admin_moderators_table_remove_row'),
+    );
     $weight++;
   }
   $form['add']['uid'] = array(
@@ -237,48 +232,52 @@ function theme_osha_workflow_moderation_form($variables) {
  * Implements hook_form_validate().
  */
 function osha_workflow_node_review_form_validate($form, $form_state) {
-  if (empty($form_state['rows']) && $form_state['triggering_element']['#name'] != 'adduser') {
-    form_set_error('enabled', t('Cannot have an empty moderation queue. Add at least one user or switch to another state!'));
-  }
+  //if (empty($form_state['rows']) && $form_state['triggering_element']['#name'] != 'adduser') {
+  //  form_set_error('enabled', t('Cannot have an empty moderation queue. Add at least one user or switch to another state!'));
+  //}
 }
 
 /**
  * Implements hook_form_submit().
  */
 function osha_workflow_node_review_form_submit($form, $form_state) {
-  $data = $form_state['values']['rows'];
-  $users = array();
-  foreach ($data as $uid => $cfg) {
-    $weight = $cfg['weight'];
-    $users[$weight] = $uid;
+  if (!empty($form_state['values']['rows'])) {
+    $data = $form_state['values']['rows'];
+    $users = array();
+    foreach ($data as $uid => $cfg) {
+      $weight = $cfg['weight'];
+      $users[$weight] = $uid;
+    }
+    ksort($users);
+    $node = $form_state['node'];
+    osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
   }
-  ksort($users);
-  $node = $form_state['node'];
-  osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
 }
 
 /**
  * Implements hook_form_validate().
  */
 function osha_workflow_node_approval_form_validate($form, $form_state) {
-  if (empty($form_state['rows']) && $form_state['triggering_element']['#name'] != 'adduser') {
-    form_set_error('enabled', t('Cannot have an empty moderation queue. Add at least one user or switch to another state!'));
-  }
+  //if (empty($form_state['rows']) && $form_state['triggering_element']['#name'] != 'adduser') {
+  //  form_set_error('enabled', t('Cannot have an empty moderation queue. Add at least one user or switch to another state!'));
+  //}
 }
 
 /**
  * Implements hook_form_submit().
  */
 function osha_workflow_node_approval_form_submit($form, $form_state) {
-  $data = $form_state['values']['rows'];
-  $users = array();
-  foreach ($data as $uid => $cfg) {
-    $weight = $cfg['weight'];
-    $users[$weight] = $uid;
+  if (!empty($form_state['values']['rows'])) {
+    $data = $form_state['values']['rows'];
+    $users = array();
+    foreach ($data as $uid => $cfg) {
+      $weight = $cfg['weight'];
+      $users[$weight] = $uid;
+    }
+    ksort($users);
+    $node = $form_state['node'];
+    osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
   }
-  ksort($users);
-  $node = $form_state['node'];
-  osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
 }
 
 /**

@@ -253,6 +253,27 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
+    else {
+      // Add our own validation hook for transitions check
+      $form['#validate'][] = 'osha_workflow_workbench_moderation_moderate_form_validate';
+    }
+  }
+}
+
+function osha_workflow_workbench_moderation_moderate_form_validate($form, $form_state) {
+  $node = $form_state['values']['node'];
+  $state = $form_state['values']['state'];
+  if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+    $moderators = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW, FALSE);
+    if (empty($moderators)) {
+      form_set_error('', t('The moderation state could not be changed because the review queue is empty. Use the review tab to add moderators to the queue'));
+    }
+  }
+  elseif ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    $moderators = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE, FALSE);
+    if (empty($moderators)) {
+      form_set_error('', t('The moderation state could not be changed because the review queue is empty. Use the approve tab to add moderators to the queue'));
+    }
   }
 }
 
