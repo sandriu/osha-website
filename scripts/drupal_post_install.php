@@ -173,9 +173,9 @@ function osha_configure_search_autocomplete() {
   if ($fid) {
     db_update('search_autocomplete_forms')
       ->fields(array(
-        'data_view' => '',
+        'data_view' => 'search_autocomplete',
         'theme' => 'basic-blue.css',
-        'data_callback' => 'search/site/autocomplete/',
+        'data_callback' => 'search_autocomplete/autocomplete/' . $fid . '/',
       ))
       ->condition('selector', '#edit-search-block-form--2')
       ->execute();
