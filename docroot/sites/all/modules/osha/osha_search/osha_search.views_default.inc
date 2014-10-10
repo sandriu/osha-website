@@ -465,11 +465,8 @@ function osha_search_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
     'body:summary' => 'body:summary',
     'body:value' => 'body:value',
-    'field_file:description' => 'field_file:description',
-    'field_file:file:name' => 'field_file:file:name',
     'field_summary' => 'field_summary',
-    'field_tags:name' => 'field_tags:name',
-    'title' => 'title',
+    'title_field' => 'title_field',
   );
   /* Filter criterion: Indexed Multilingual Node: Item language */
   $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
