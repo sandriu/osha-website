@@ -148,7 +148,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -215,7 +215,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -286,7 +286,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -358,6 +358,73 @@ function osha_job_vacancies_field_default_field_instances() {
       ),
       'type' => 'date_select',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-job_vacancies-field_file'
+  $field_instances['node-job_vacancies-field_file'] = array(
+    'bundle' => 'job_vacancies',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 14,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_file',
+    'label' => 'Related resources',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 1,
+      'entity_translation_sync' => 0,
+      'file_directory' => 'job-vacancies/documents',
+      'file_extensions' => 'pdf doc docx ppt pptx html odp odt txt',
+      'max_filesize' => '50MB',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 8,
     ),
   );
 
@@ -515,7 +582,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -586,7 +653,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -822,7 +889,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -893,7 +960,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -960,7 +1027,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -1057,6 +1124,7 @@ function osha_job_vacancies_field_default_field_instances() {
   t('Expiration Date');
   t('Nace');
   t('Publication Date');
+  t('Related resources');
   t('Shortlisted');
   t('Summary');
   t('Tags');

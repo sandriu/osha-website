@@ -39,7 +39,7 @@ function osha_job_vacancies_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -25,
+        'weight' => 4,
       ),
       'seven' => array(
         'region' => '',
@@ -48,7 +48,7 @@ function osha_job_vacancies_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => 'Closed vacancies',
+    'title' => '',
     'visibility' => 1,
   );
 
@@ -79,7 +79,7 @@ function osha_job_vacancies_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -27,
+        'weight' => 1,
       ),
       'seven' => array(
         'region' => '',
@@ -119,7 +119,7 @@ function osha_job_vacancies_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -28,
+        'weight' => 2,
       ),
       'seven' => array(
         'region' => '',
@@ -159,7 +159,7 @@ function osha_job_vacancies_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -26,
+        'weight' => 3,
       ),
       'seven' => array(
         'region' => '',
