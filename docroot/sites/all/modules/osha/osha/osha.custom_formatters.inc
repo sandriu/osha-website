@@ -31,7 +31,7 @@ if (isset($file[0])) {
     $output .= theme_file_icon(
 		   array(
 		       "file" => file_load($file[0][\'fid\']),
-		       "icon_directory" => NULL
+		       "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
 		   ));
     $output .= \'<span>\' . format_size(filesize($file[0][\'uri\'])). \'</span>\';
     $output .= \'</a>\'; 
@@ -123,7 +123,7 @@ foreach ($object as $obj) {
 	$output .= theme_file_icon(
 		   array(
 		       "file" => file_load($obj[\'fid\']),
-		       "icon_directory" => NULL
+		       "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
 		   ));
 	$output .=  format_size(filesize($obj[\'uri\'])) . \'</a></li>\';
 }
@@ -152,7 +152,7 @@ foreach ($object as $obj) {
         $output .= theme_file_icon(
            array(
                "file" => file_load($obj[\'fid\']),
-               "icon_directory" => NULL
+               "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
            ));
 	$output .= \'<span>\' . format_size(filesize($obj[\'uri\'])) . \'</span>\';
 	$output .= \'</a></li>\'; 
@@ -162,6 +162,36 @@ $output .= \'</ul>\';
 return $output;';
   $formatter->fapi = '';
   $export['seminar_related_resources'] = $formatter;
+
+  $formatter = new stdClass();
+  $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
+  $formatter->api_version = 2;
+  $formatter->name = 'vacancies_related_resources';
+  $formatter->label = 'Vacancies related resources';
+  $formatter->description = '';
+  $formatter->mode = 'php';
+  $formatter->field_types = 'file';
+  $formatter->code = 'global $language;
+$curr_lang = $language->language ;
+$output = \'\';
+$field_name = $variables[\'#field\'][\'field_name\'];
+$field = $variables[\'#object\']->{$field_name};
+$file= isset($field[$curr_lang]) ? $field[$curr_lang] : NULL;
+
+if (isset($file[0])) {   
+    $output .= \' <a href = "\' . file_create_url($file[0][\'uri\']) . \'">\';
+    $output .= \'<span>\' . $file[0][\'filename\'] . \'</span> - \';
+    $output .= theme_file_icon(
+		   array(
+		       "file" => file_load($file[0][\'fid\']),
+		       "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
+		   ));
+    $output .= \'<span>\' . format_size(filesize($file[0][\'uri\'])). \'</span>\';
+    $output .= \'</a>\'; 
+}
+return $output;';
+  $formatter->fapi = '';
+  $export['vacancies_related_resources'] = $formatter;
 
   return $export;
 }

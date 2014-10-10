@@ -1,7 +1,7 @@
 name = osha
 core = 7.x
 package = OSHA
-version = 7.x-1.8
+version = 7.x-1.9
 project = osha
 dependencies[] = admin_views
 dependencies[] = ctools
@@ -111,6 +111,7 @@ features[formatters][] = publication_file
 features[formatters][] = publication_related_publications
 features[formatters][] = publication_related_res
 features[formatters][] = seminar_related_resources
+features[formatters][] = vacancies_related_resources
 features[language][] = bg
 features[language][] = cs
 features[language][] = da

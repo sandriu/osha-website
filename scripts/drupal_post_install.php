@@ -13,6 +13,7 @@ osha_configure_addtoany_social_share();
 osha_disable_blocks();
 osha_configure_permissions();
 osha_configure_recaptcha();
+osha_add_menu_position_rules();
 
 variable_set('admin_theme', 'osha_admin');
 variable_set('theme_default', 'osha_frontend');
@@ -227,6 +228,32 @@ function osha_configure_recaptcha() {
   variable_set('captcha_default_challenge', 'recaptcha/reCAPTCHA');
   variable_set('captcha_default_validation', 1);
   variable_set('recaptcha_theme', 'custom');
+}
+
+/**
+  * Add menu position rules for publication content type
+  */
+function osha_add_menu_position_rules(){
+  if (module_exists('menu_position') && module_load_include('inc', 'menu_position', 'menu_position.admin')) {
+    drupal_set_message('Create menu position rules ...');
+
+    // config menu_position contrib module
+    variable_set('menu_position_active_link_display','parent');
+
+    $options = menu_parent_options(menu_get_menus(), array('mlid' => 0));
+    $publications_menu_entry = array_search('------ Publications', $options);
+
+    $form_state = array(
+      'values' => array(
+        'admin_title' => 'Publications Menu Rule',
+        'plid' => $publications_menu_entry !== NULL ? $publications_menu_entry : 'main-menu:0',
+        'content_type' => array('publication' => 'publication'),
+        'op' => 'Save'
+      )
+    );
+
+    drupal_form_submit('menu_position_add_rule_form', $form_state);
+  }
 }
 
 /**

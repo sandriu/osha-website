@@ -2,6 +2,7 @@ jQuery(document).ready(function () {
     hoverThemes();
 	zoomMedium();
 	hoverSlideHome();
+	displayCaptcha();
 });
 
 
@@ -55,6 +56,14 @@ function hoverSlideHome() {
 		jQuery("span",this).removeClass('text_white');
 		});
 	});	
+	
+}
+
+function displayCaptcha() {
+	
+	jQuery( "#edit-email" ).click(function() {
+		jQuery(".captcha").show(300);
+	});
 	
 }
 

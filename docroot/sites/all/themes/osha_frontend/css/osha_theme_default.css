@@ -518,6 +518,11 @@ span.date-display-single{
 	font-size: 0.8em;
 }
 
+.node-publication .field-name-field-publication-type.field-type-taxonomy-term-reference .field-items{
+	padding-top: 0.3em;
+	padding-right: 0.3em;
+}
+
 .node-publication.node-teaser .links {
 	background: url("../images/flecha.png") no-repeat scroll right center transparent;
     color: #003399;
@@ -650,7 +655,8 @@ span.date-display-single{
 
 
 .view-publications  .view-content .views-row .views-field-field-file a,
-.node-publication .field-type-file a {
+.node-publication .field-type-file a,
+.node-job-vacancies .field-type-file a{
 	background: url("../images/down_arrow.jpg") no-repeat scroll 100% 29% transparent;
     color: #02339a !important;
     font-family: arial !important;
@@ -986,6 +992,11 @@ span.date-display-single{
 	margin:0;
 	overflow:hidden!important;
 	line-height: 1.7em;
+}
+
+.ui-accordion .ui-accordion-content p{
+	margin-top:0.5em;
+	margin-bottom:0.5em;
 }
 
 
@@ -1643,6 +1654,7 @@ font-weight: normal;
 	position: absolute;
 	margin-left: 64.5em;
     margin-top: 3em;
+	z-index:999999999;
 }
 
 #edit-search-block-form--2{
@@ -1692,16 +1704,16 @@ font-weight: normal;
 		/*OSHMail Newsletter Section*/
 
 		#block-osha-newsletter-osha-newsletter-subscribe-extra{
-			background-color: #a6b8db;
+			background-color: #e9edf6;
 			float: left;
 			margin-right: 1.1em;
 			padding: 0 1em 0em;
 			width: 43%;
-			height:240px;
+			height:auto;
 		}
 
 		#block-osha-newsletter-osha-newsletter-subscribe-extra h2{
-			background-color: #a6b8db;
+			background-color: #e9edf6;
 			color: #003399;
 			font-family: "Oswald",sans-serif;
 			font-size: 1.5em;
@@ -1736,11 +1748,12 @@ font-weight: normal;
 			color: #003399;
 			font-weight:bold;
 			font-family: arial;
+			font-size:0.8em;
 			
 		}
 		
 		#block-osha-newsletter-osha-newsletter-subscribe-extra #edit-submit--3 {
-			background: url("../images/flecha.png") no-repeat scroll right center transparent;
+			background: url("../images/flecha.png") no-repeat scroll 96% center #b7c6e3;
 			border: 0 none;
 			color: #003399;
 			float: none;
@@ -1748,16 +1761,17 @@ font-weight: normal;
 			font-size: 1.2em;
 			font-weight: bold;
 			margin-top: 0em;
-			padding-right: 1.3em;
+			padding-right: 2.3em;
 			text-align: right;
 			width: 100%;
+			margin-top: 0.5em;
 		}
 		
 		hr{
 			background: url("../images/separator_white.png") repeat-x scroll 100% 100% transparent;
 			border: 0 none;
 			height: 1px;
-			margin: 0.5em 0 12px;
+			margin: 0.5em 0 6px;
 			padding: 0 0 5px;
 		}
 		
@@ -1897,7 +1911,7 @@ font-weight: normal;
 	height:295px;
 }
 
-.view-osha-home-banner-top{
+.view-osha-home-banner-top.view-display-id-home_page_banner_top{
 	border-bottom:5px solid #003399;
 }
 
@@ -1914,7 +1928,7 @@ font-weight: normal;
 
 .view-osha-home-banner-top .views-field-title span{ 
 	display: block;
-    padding: 0.6em 1em 1em;
+    padding: 0.6em 0.5em 0.5em;
 }
 
 .view-osha-home-banner-top .views-field-field-banner-link{
@@ -1922,12 +1936,15 @@ font-weight: normal;
     color: #ffffff;
     font-family: "Oswald",sans-serif;
     font-size: 1.2em;
-    margin-left: 37em;
+    margin-left: 39em;
     margin-top: -3em;
     position: absolute;
     text-align: center;
-    width: 10%;
+    width: auto;
 	border-radius: 5px;
+	display:block;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 
 .view-osha-home-banner-top table{
@@ -1952,6 +1969,7 @@ font-weight: normal;
 
 .text_white{
 	color: #FFFFFF!important;
+	z-index:999999999999999999;
 }
 
 .text_blue{
@@ -1964,6 +1982,10 @@ font-weight: normal;
 }
 
 #recommended_resources a img:hover{
+	opacity: 1;
+}
+
+#recommended_resources a:hover{
 	opacity: 1;
 }
 
@@ -2173,6 +2195,7 @@ font-weight: normal;
 	background: url("../images/flecha.png") no-repeat scroll right center transparent;
 	padding-right:1.5em;
 	text-decoration:none;
+	padding-left:0em;
 }
 
 /*END PAGE FRONT*/
@@ -2348,6 +2371,11 @@ font-weight: normal;
 
 
 /*SHARE LINKS*/
+
+#a2apage_dropdown{ 
+	display:none!important; /*Display none to others social pages*/
+}
+
 .node-news ul.links.inline{
 	float: right;
     text-align: right;
@@ -2434,6 +2462,7 @@ font-weight: normal;
 	padding: 1px;
 	width: 99.2%;
 	margin-bottom:2em;
+	clear:both;
 }
 
 #block-block-2 div ul li {
@@ -2586,8 +2615,14 @@ font-weight: normal;
 	font-weight:bold;
 }
 
+#block-views-seminars-block .view-seminars ul li  .views-field-title span{
+	display:block;
+	clear:both;
+}
+
 #block-views-seminars-block .view-seminars ul li  .views-field-title span a{
 	font-size:1.6em;
+	 font-family: "Oswald",sans-serif!important;
 }
 
 #block-views-seminars-block .view-seminars ul li .views-field-view-node span a{
@@ -2624,10 +2659,21 @@ font-weight: normal;
 
 /*HIGHLIGHS SECTION*/
 
+.node-highlight.view-mode-full .field-name-field-publication-date span{
+		display: block;
+		 padding-top: 1em;
+}
+
+.node-highlight.view-mode-full .field-name-title-field h1 {
+	margin:0;
+	padding:0;
+}
+
 .node-highlight.view-mode-full .field-name-field-summary p{
 	color:#000000;
 	font-size:1em;
 	font-weight:normal;
+	margin-top:0em;
 }
 
 .node-highlight.view-mode-full .field-name-field-summary a{
@@ -2635,6 +2681,14 @@ font-weight: normal;
 	font-size:0.9em;
 	font-weight:bold;
 	font-family:arial!important;
+}
+
+.node-highlight.view-mode-full  .field-name-field-image img{
+	max-width:300px;
+	max-height:200px;
+	float:left;
+	margin-right:1em;
+	margin-top:1.5em;
 }
 
 /*END HIGHLIGHS SECTION*/
@@ -2684,4 +2738,143 @@ font-weight: normal;
 	font-weight:normal;
 }
 
+#content .view-calls .view-footer a{
+    text-decoration: underline;
+    font-size: 1.3em;
+}
+
 /*End Publication tein detail OSHWiki featured articles*/
+
+/*CAPTCHA */
+
+.captcha{
+	display:none;
+}
+
+#recaptcha_challenge_image{
+	width:225px!important;
+}
+
+#recaptcha_response_field{
+	margin-bottom:1em;
+}
+
+.recaptcha_only_if_audio{
+	font-size:1.2em!important;
+}
+
+.recaptcha_only_if_image {
+	font-size:1.2em!important;
+}
+
+.recaptcha_get_another_captcha a{
+	font-size:1.3em!important;
+}
+
+.recaptcha_only_if_image a{
+	font-size:1em!important;
+}
+
+.recaptcha_only_if_audio a{
+	font-size:1em!important;
+}
+
+.recaptcha_help a{
+	font-size:1.3em!important;
+}
+
+#recaptcha_image span a {
+	font-size:1.3em!important;
+}
+
+/*end CAPTCHA */
+
+/*CALLS*/
+
+.view-calls .view-content .views-row{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	padding-bottom:0.5em;
+	padding-top:0.5em;
+	padding-left: 0.8em;
+}
+
+.view-calls.view-id-calls .views-field-title-field{
+	margin-bottom:1em;
+}
+
+.view-calls.view-id-calls .views-field-title-field a{
+	color: #003399!important;
+	font-family: 'Oswald',sans-serif!important;
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: -0.75px;
+	margin-bottom:1em;
+}
+
+.view-calls.view-id-calls .view-footer a{
+	background: url("../images/flecha.png") no-repeat scroll right center transparent;
+	color: #003399;
+	float: right;
+	font-family: "Oswald",sans-serif!important;
+	font-size: 1.1em;
+	margin: 0;
+	padding-bottom: 0.3em;
+	text-align: right;
+	width: 100%;
+	padding-right:1.5em;
+	text-decoration:none!important;
+}
+
+/*END CALLS*/
+
+
+/*VACANCIES - CAREES*/
+
+.view-vacancies .view-content .views-row{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	padding-bottom:0.5em;
+	padding-top:0.5em;
+	padding-left: 0.8em;
+}
+
+.view-vacancies .views-field-title{
+	margin-bottom:1em;
+}
+
+.view-vacancies .views-field-title a{
+	color: #003399!important;
+	font-family: 'Oswald',sans-serif!important;
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: -0.75px;
+	margin-bottom:1em;
+}
+
+#block-block-5 {
+	text-align: right;
+	width: 100%;
+}
+
+#block-block-5 a{
+	padding-right: 1.5em;
+	font-family: "Oswald",sans-serif!important;
+	background: url("../images/flecha.png") no-repeat scroll right center transparent;
+	color: #003399;
+	font-size: 1.1em;
+	margin: 0;
+	padding-bottom: 0.3em;
+}
+
+.view-vacancies.view-id-vacancies .view-header a{
+  background: url("../images/flecha-izq.png") no-repeat scroll 21% center transparent;
+    color: #003399;
+    float: right;
+    font-family: "Oswald",sans-serif!important;
+    font-size: 1.1em;
+    margin: 0;
+    padding-bottom: 0.3em;
+    padding-right: 0;
+    text-align: right;
+    width: 100%;
+}
+/*END VACANCIES - CAREES*/

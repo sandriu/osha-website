@@ -38,6 +38,7 @@ jQuery(document).ready(function ($) {
         $SlideHeight: 150,
         $SlideSpacing: 3,
         $DisplayPieces: 5,
+		$HWA: false,
         $BulletNavigatorOptions: {
             $Class: $JssorBulletNavigator$,
             $ChanceToShow: 1,
