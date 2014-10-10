@@ -360,8 +360,45 @@ function osha_search_views_default_views() {
   $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';
   $handler->display->display_options['filters']['search_api_language']['value'] = array(
-    'current' => 'current',
+    'en' => 'en',
+    'bg' => 'bg',
+    'cs' => 'cs',
+    'da' => 'da',
+    'de' => 'de',
+    'el' => 'el',
+    'es' => 'es',
+    'et' => 'et',
+    'fi' => 'fi',
+    'hr' => 'hr',
+    'fr' => 'fr',
+    'hu' => 'hu',
+    'is' => 'is',
+    'it' => 'it',
+    'lv' => 'lv',
+    'lt' => 'lt',
+    'nl' => 'nl',
+    'mt' => 'mt',
+    'no' => 'no',
+    'pl' => 'pl',
+    'pt' => 'pt',
+    'ro' => 'ro',
+    'ru' => 'ru',
+    'sk' => 'sk',
+    'sl' => 'sl',
+    'sv' => 'sv',
+    'tr' => 'tr',
   );
+  $handler->display->display_options['filters']['search_api_language']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_language']['expose']['operator_id'] = 'search_api_language_op';
+  $handler->display->display_options['filters']['search_api_language']['expose']['label'] = 'Language';
+  $handler->display->display_options['filters']['search_api_language']['expose']['operator'] = 'search_api_language_op';
+  $handler->display->display_options['filters']['search_api_language']['expose']['identifier'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['search_api_language']['expose']['reduce'] = 1;
   /* Filter criterion: Indexed Multilingual Node: Content type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -508,6 +545,7 @@ function osha_search_views_default_views() {
     t('Date'),
     t('Relevance'),
     t('Site Search'),
+    t('Language'),
     t('Wiki Search'),
     t('OSHWiki Search'),
   );
