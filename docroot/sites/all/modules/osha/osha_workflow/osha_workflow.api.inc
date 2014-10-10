@@ -271,3 +271,46 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
   }
   return FALSE;
 }
+
+
+class OshaWorkflowPermissions {
+
+  /**
+   * Implemented rules.
+   *
+   * REV_RM_US_02
+   * REV_RM_US_03
+   * REV_RM_US_04
+   * REV_RM_US_05
+   * REV_RM_US_07
+   *
+   * @return bool
+   *   TRUE if the user has permission.
+   */
+  public static function userCanAccessReviewScreen($node, $user = NULL) {
+    if (!$user) {
+      global $user;
+    }
+    if (isset($node->workbench_moderation)) {
+      // $current = $node->workbench_moderation['current'];
+      // $state = $current->state;
+      return
+        self::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user)
+        || self::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user);
+    }
+    return FALSE;
+  }
+
+  /**
+   * Check user has a specified role.
+   *
+   * @param string $role
+   *   Existing user role
+   *
+   * @return bool
+   *   TRUE if user has role
+   */
+  public static function userHasRole($role, $user) {
+    return in_array($role, $user->roles);
+  }
+}

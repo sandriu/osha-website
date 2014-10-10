@@ -10,8 +10,26 @@ include_once 'osha_workflow.api.inc';
 define('OSHA_WORKFLOW_MODERATION_TYPE_REVIEW', 'review');
 define('OSHA_WORKFLOW_MODERATION_TYPE_APPROVE', 'approve');
 
+/* Publishing workflow roles */
+define('OSHA_WORKFLOW_ROLE_EDITOR', 'Editor');
+define('OSHA_WORKFLOW_ROLE_REVIEW_MANAGER', 'Review Manager');
+define('OSHA_WORKFLOW_ROLE_PROJECT_MANAGER', 'Project Manager');
+define('OSHA_WORKFLOW_ROLE_APPROVER', 'Approver');
+// Drupal administrator.
+define('OSHA_WORKFLOW_ROLE_ADMINISTRATOR', 'administrator');
+
 define('OSHA_WORKFLOW_MODERATION_ACCEPT', 1);
 define('OSHA_WORKFLOW_MODERATION_REJECT', 0);
+
+/* Workflow states */
+define('OSHA_WORKFLOW_STATE_DRAFT', 'draft');
+define('OSHA_WORKFLOW_STATE_FINAL_DRAFT', 'final_draft');
+define('OSHA_WORKFLOW_STATE_REJECTED', 'rejected');
+define('OSHA_WORKFLOW_STATE_APPROVED', 'approved');
+define('OSHA_WORKFLOW_STATE_TO_BE_REVIEWED', 'needs_review');
+define('OSHA_WORKFLOW_STATE_TO_BE_APPROVED', 'to_be_approved');
+define('OSHA_WORKFLOW_STATE_READY_TO_PUBLISH', 'ready_to_publish');
+define('OSHA_WORKFLOW_STATE_PUBLISHED', 'published');
 
 /**
  * Implements hook_menu().
@@ -55,15 +73,8 @@ function osha_workflow_menu() {
  *   Access permission to the screen.
  */
 function osha_workflow_moderation_access($moderation_type, $node) {
-  if (isset($node->workbench_moderation)) {
-    $current = $node->workbench_moderation['current'];
-    $state = $current->state;
-    if ($moderation_type == OSHA_WORKFLOW_MODERATION_TYPE_REVIEW && $state == 'needs_review') {
-      return NODE_ACCESS_ALLOW;
-    }
-    if ($moderation_type == OSHA_WORKFLOW_MODERATION_TYPE_APPROVE && $state == 'to_be_approved') {
-      return NODE_ACCESS_ALLOW;
-    }
+  if (OshaWorkflowPermissions::userCanAccessReviewScreen($node)) {
+    return NODE_ACCESS_ALLOW;
   }
   return NODE_ACCESS_IGNORE;
 }

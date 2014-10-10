@@ -161,8 +161,8 @@ function theme_osha_workflow_moderation_form($variables) {
   $output = '';
   $form = $variables['form'];
   $rows = array();
+  $moderation_type = $form['#moderation_type'];
   if (!empty($form['rows'])) {
-    $moderation_type = $form['#moderation_type'];
     foreach (element_children($form['rows']) as $uid) {
       $moderator = $form['rows'][$uid]['#row'];
       $status = t('Waiting moderation');
@@ -175,12 +175,10 @@ function theme_osha_workflow_moderation_form($variables) {
           $status = t('Approved');
         }
       }
-      $next = isset($moderator->moderation[$moderation_type]->next) && $moderator->moderation[$moderation_type]->next == 1;
       $row = array();
       $row[] = check_plain($moderator->name) . drupal_render($form['rows'][$uid]['uid']);
       $row[] = check_plain($moderator->mail);
       $row[] = $status;
-      $row[] = '<span class="next">' . ($next ? t('Yes') : '&nbsp;') . '</span>';
       $row[] = drupal_render($form['rows'][$uid]['remove']);
       $row[] = drupal_render($form['rows'][$uid]['weight']);
       $rows[] = array('data' => $row, 'class' => array('draggable'));
@@ -192,28 +190,37 @@ function theme_osha_workflow_moderation_form($variables) {
     '',
     '',
     '',
-    '',
   );
   $rows[] = $row;
 
+  $caption = '';
+  switch ($moderation_type) {
+    case OSHA_WORKFLOW_MODERATION_TYPE_REVIEW:
+      $caption = t('List of project managers');
+      break;
+
+    case OSHA_WORKFLOW_MODERATION_TYPE_APPROVE:
+      $caption = t('List of approvers');
+  }
   $table = array(
-    'header' => array(
+    '#theme' => 'table',
+    '#caption' => $caption,
+    '#header' => array(
       t('User'),
       t('Mail'),
       t('Status'),
-      t('Next in line'),
       '',
       t('Order of notification'),
     ),
-    'attributes' => array(
+    '#attributes' => array(
       'id' => 'osha_workflow_moderation_table',
     ),
-    'rows' => $rows,
+    '#rows' => $rows,
   );
   if (isset($form['moderation'])) {
     $output .= drupal_render($form['moderation']);
   }
-  $output .= theme('table', $table);
+  $output .= drupal_render($table);
   $output .= drupal_render_children($form);
   drupal_add_tabledrag('osha_workflow_moderation_table', 'order', 'sibling', 'user-weight');
   return $output;
