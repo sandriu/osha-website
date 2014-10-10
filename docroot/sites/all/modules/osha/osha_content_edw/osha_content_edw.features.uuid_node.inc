@@ -156,7 +156,7 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412862056,
         'entity_uuid' => '02ec2b0c-b53f-409d-95f5-56c0b247d8be',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
@@ -178,11 +178,11 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Privacy Statement for the OSHMail form',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
     'published' => array(
       'hid' => 1,
@@ -191,11 +191,11 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Privacy Statement for the OSHMail form',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
     'my_revision' => array(
       'hid' => 1,
@@ -204,16 +204,16 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Privacy Statement for the OSHMail form',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
   ),
   'pathauto_perform_alias' => FALSE,
   'date' => '2014-10-09 13:40:56 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'Healthy Workplaces Campaign',
@@ -240,7 +240,7 @@ function osha_content_edw_uuid_features_default_content() {
   'field_image' => array(
     'en' => array(
       0 => array(
-        'file_uuid' => '3f1b3940-7699-4e24-9012-8ffb68ae40ca',
+        'file_uuid' => '15d82a55-ffed-4faf-83a9-fa3f1d081610',
         'width' => 195,
         'height' => 160,
       ),
@@ -335,13 +335,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412551785,
         'entity_uuid' => '0e63681d-c269-4c31-9341-11543b3df00f',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 23:29:45 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'Occupational safety and health is good for you; it’s good for business',
@@ -463,13 +463,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412877697,
         'entity_uuid' => '12b2e53f-c369-4e98-94c8-1cc0830f5ccf',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-09 18:01:37 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'OiRA',
@@ -496,7 +496,7 @@ function osha_content_edw_uuid_features_default_content() {
   'field_image' => array(
     'en' => array(
       0 => array(
-        'file_uuid' => '6e61e86d-72ab-480c-9815-96e875278458',
+        'file_uuid' => '9e3c7341-5b81-4fef-82f6-7421becb9149',
         'width' => 195,
         'height' => 160,
       ),
@@ -591,13 +591,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412515908,
         'entity_uuid' => '261d7273-32ed-4458-9b82-b3c6643cd9f2',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 13:31:48 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'Everyone has a fundamental right to safe and healthy workplaces',
@@ -719,13 +719,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412877724,
         'entity_uuid' => '519cf306-05dc-4652-ac55-af025f2f6a28',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-09 18:02:04 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'OSHMail newsletter',
@@ -826,13 +826,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1411633981,
         'entity_uuid' => '5976d8f5-cd3a-4b9c-9b25-16e6333530f6',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-09-16 15:25:10 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'E-Guide on Managing Stress',
@@ -859,7 +859,7 @@ function osha_content_edw_uuid_features_default_content() {
   'field_image' => array(
     'en' => array(
       0 => array(
-        'file_uuid' => '264ed26f-a731-48b0-9f23-5d224b537f63',
+        'file_uuid' => '570f3cda-b735-4381-a742-8a656315d069',
         'width' => 195,
         'height' => 160,
       ),
@@ -954,13 +954,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412551529,
         'entity_uuid' => '5a2cfca1-c5d4-46ba-8519-f77f036d5f98',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 23:25:29 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'Seminars',
@@ -1115,7 +1115,7 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412006677,
         'entity_uuid' => '6b2a8603-bc31-4f72-9e95-fd22f4206e82',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
@@ -1135,11 +1135,11 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Seminars',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
     'published' => array(
       'hid' => 2,
@@ -1148,11 +1148,11 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Seminars',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
     'my_revision' => array(
       'hid' => 2,
@@ -1161,16 +1161,16 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Seminars',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
   ),
   'pathauto_perform_alias' => FALSE,
   'date' => '2014-09-29 16:04:37 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'Procurement',
@@ -1325,7 +1325,7 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412670137,
         'entity_uuid' => '7cd1b860-8554-45db-8f30-237e09ff614e',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
@@ -1345,11 +1345,11 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Procurement',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
     'published' => array(
       'hid' => 3,
@@ -1358,11 +1358,11 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Procurement',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
     'my_revision' => array(
       'hid' => 3,
@@ -1371,16 +1371,16 @@ function osha_content_edw_uuid_features_default_content() {
       'from_state' => 'draft',
       'state' => 'published',
       'uid' => 0,
-      'stamp' => 1412881358,
+      'stamp' => 1412883952,
       'published' => 1,
       'current' => 1,
       'title' => 'Procurement',
-      'timestamp' => 1412881358,
+      'timestamp' => 1412883952,
     ),
   ),
   'pathauto_perform_alias' => FALSE,
   'date' => '2014-10-07 08:22:17 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'Safety and health at work is everyone’s concern',
@@ -1502,13 +1502,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412877665,
         'entity_uuid' => 'c1f32041-abac-448c-a5cb-10c329c6e4d8',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-09 18:01:05 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'Making Europe a safer, healthier and more productive place to work',
@@ -1630,13 +1630,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412515498,
         'entity_uuid' => 'df711256-ced1-45ec-9878-5d3a491e225a',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 13:24:58 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'OSHWiki',
@@ -1663,7 +1663,7 @@ function osha_content_edw_uuid_features_default_content() {
   'field_image' => array(
     'en' => array(
       0 => array(
-        'file_uuid' => 'd07b95bc-a53b-4d55-8ac1-da18a2833107',
+        'file_uuid' => '0640042d-fd0d-40e7-9e09-d4ef4b8dc62b',
         'width' => 195,
         'height' => 160,
       ),
@@ -1758,13 +1758,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412515872,
         'entity_uuid' => 'e78930ab-55aa-4f1c-be2b-d1dd82d95a82',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 13:31:12 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   $nodes[] = array(
   'title' => 'Napo',
@@ -1791,7 +1791,7 @@ function osha_content_edw_uuid_features_default_content() {
   'field_image' => array(
     'en' => array(
       0 => array(
-        'file_uuid' => 'cfeca8e6-f668-428c-b613-f4d2c6b3cd47',
+        'file_uuid' => 'c33d2b55-5734-4e33-aabc-70de0147ff1a',
         'width' => 195,
         'height' => 160,
       ),
@@ -1886,13 +1886,13 @@ function osha_content_edw_uuid_features_default_content() {
         'translate' => 0,
         'created' => 1412551810,
         'entity_uuid' => 'e9364c32-88bb-4ab4-bba0-26380c511930',
-        'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+        'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
       ),
     ),
   ),
   'comment_count' => 0,
   'date' => '2014-10-05 23:30:10 +0000',
-  'user_uuid' => '4ce93d4b-f1bf-4da8-a5ec-8b270036e99f',
+  'user_uuid' => '9d9b0f8d-fa92-40fb-b253-159119a80ad3',
 );
   return $nodes;
 }
