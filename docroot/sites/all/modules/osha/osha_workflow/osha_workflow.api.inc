@@ -18,7 +18,11 @@ function osha_workflow_get_moderators($type) {
   foreach ($rows as $row) {
     $uids[] = $row->entity_id;
   }
-  return user_load_multiple($uids);
+  $users = user_load_multiple($uids);
+  foreach ($users as &$user) {
+    $user->moderation_temporary = TRUE;
+  }
+  return $users;
 }
 
 /**

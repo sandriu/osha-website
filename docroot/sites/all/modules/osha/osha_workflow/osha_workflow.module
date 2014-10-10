@@ -149,17 +149,12 @@ function osha_workflow_theme() {
  */
 function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   // Review workflow.
-  if ($new == 'needs_review') {
-    drupal_set_message(t('Use the Review tab to manage the list of users which approve the content'), 'info');
-    osha_workflow_assign_users($node, 'review');
-    drupal_goto(sprintf('node/%s/review', $node->nid));
+  if ($new == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+    //
   }
-
   // Approval workflow.
-  if ($new == 'to_be_approved') {
-    drupal_set_message(t('Use the Approve tab to manage the list of users which approve the content'), 'info');
-    osha_workflow_assign_users($node, 'approve');
-    drupal_goto(sprintf('node/%s/approve', $node->nid));
+  if ($new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    //
   }
 }
 
@@ -221,10 +216,10 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
     $node = $form['node']['#value'];
     $state = $node->workbench_moderation['current']->state;
     $moderation_type = NULL;
-    if ($state == 'needs_review') {
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
       $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_REVIEW;
     }
-    elseif ($state == 'to_be_approved') {
+    elseif ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
       $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_APPROVE;
     }
     if ($moderation_type) {

@@ -55,6 +55,7 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
   else {
     $rows = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
   }
+
   $form_state['rows'] = $rows;
   osha_workflow_admin_build_moderators_table($form, $rows);
   return $form;
@@ -112,7 +113,8 @@ function osha_workflow_admin_build_moderators_table(&$form, $rows) {
   );
   $form['help'] = array(
     '#type' => 'markup',
-    '#markup' => t('<div><strong>Tip:</strong> Use the drag handlers to sort the users in the order you want them to have the content reviewed.</div>'),
+    '#markup' =>
+      t('<div><strong>Tip:</strong> Use the drag handlers to sort the users in the order you want them to have the content reviewed. <br />** - Temporary, not yet saved</div>'),
   );
   $form['content'] = array(
     'actions' => array(
@@ -142,6 +144,7 @@ function osha_workflow_admin_moderators_table_remove_row($form, &$form_state) {
 function osha_workflow_admin_moderators_table_add_row($form, &$form_state) {
   if (!empty($form_state['input']['add']['uid'])) {
     $moderator = user_load($form_state['input']['add']['uid']);
+    $moderator->moderation_temporary = TRUE;
     $form_state['rows'][$moderator->uid] = $moderator;
     drupal_set_message(t('Changes made in this table will not be saved until you press Save'), 'warning');
     $form_state['rebuild'] = TRUE;
@@ -176,7 +179,11 @@ function theme_osha_workflow_moderation_form($variables) {
         }
       }
       $row = array();
-      $row[] = check_plain($moderator->name) . drupal_render($form['rows'][$uid]['uid']);
+      $name = check_plain($moderator->name);
+      if (isset($moderator->moderation_temporary)) {
+        $name .= '<sup>**</sup>';
+      }
+      $row[] = $name;
       $row[] = check_plain($moderator->mail);
       $row[] = $status;
       $row[] = drupal_render($form['rows'][$uid]['remove']);
@@ -239,13 +246,13 @@ function osha_workflow_node_review_form_validate($form, $form_state) {
  * Implements hook_form_submit().
  */
 function osha_workflow_node_review_form_submit($form, $form_state) {
-  $data = $form_state['rows'];
+  $data = $form_state['values']['rows'];
   $users = array();
-  $weight = -10;
-  foreach ($data as $user) {
-    $users[$weight] = $user->uid;
-    $weight += 1;
+  foreach ($data as $uid => $cfg) {
+    $weight = $cfg['weight'];
+    $users[$weight] = $uid;
   }
+  ksort($users);
   $node = $form_state['node'];
   osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
 }
@@ -263,13 +270,13 @@ function osha_workflow_node_approval_form_validate($form, $form_state) {
  * Implements hook_form_submit().
  */
 function osha_workflow_node_approval_form_submit($form, $form_state) {
-  $data = $form_state['rows'];
+  $data = $form_state['values']['rows'];
   $users = array();
-  $weight = -10;
-  foreach ($data as $user) {
-    $users[$weight] = $user->uid;
-    $weight += 1;
+  foreach ($data as $uid => $cfg) {
+    $weight = $cfg['weight'];
+    $users[$weight] = $uid;
   }
+  ksort($users);
   $node = $form_state['node'];
   osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE);
 }
