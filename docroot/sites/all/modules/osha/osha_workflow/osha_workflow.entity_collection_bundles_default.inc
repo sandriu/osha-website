@@ -17,9 +17,7 @@ function osha_workflow_entity_collection_bundles_default() {
   $preset->storage = 'entity_collection_storage_db';
   $preset->label = 'Moderators Group';
   $preset->description = 'Group of users that can be assigned to the content publishing workflow';
-  $preset->settings = array(
-    'store_entity' => 0,
-  );
+  $preset->settings = array();
   $export['moderators_group'] = $preset;
 
   return $export;

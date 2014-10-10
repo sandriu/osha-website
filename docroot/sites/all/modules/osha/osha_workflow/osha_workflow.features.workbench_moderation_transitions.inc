@@ -24,6 +24,11 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'to_name' => 'needs_review',
       'name' => 'Reviewing Final Draft',
     ),
+    'final_draft:to_be_approved' => array(
+      'from_name' => 'final_draft',
+      'to_name' => 'to_be_approved',
+      'name' => 'Skip Review process',
+    ),
     'needs_review:draft' => array(
       'from_name' => 'needs_review',
       'to_name' => 'draft',
