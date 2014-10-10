@@ -1,11 +1,13 @@
 name = Job vacancies
 core = 7.x
 package = OSHA
-version = 7.x-1.0
+version = 7.x-1.1
 project = osha_job_vacancies
 dependencies[] = ctools
+dependencies[] = custom_formatters
 dependencies[] = date
 dependencies[] = features
+dependencies[] = file
 dependencies[] = i18n_taxonomy
 dependencies[] = list
 dependencies[] = options
