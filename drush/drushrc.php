@@ -392,6 +392,9 @@ $options['init-modules'] = array(
   // Social share
   'addtoany',
 
+  // Link content types with main menu items
+  'menu_position',
+
   'devel',
   'diff',
   'simpletest'
