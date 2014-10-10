@@ -46,20 +46,46 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
 function osha_workflow_node_review_form($form, &$form_state, $node) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   $form_state['node'] = $node;
-  $form['#tree'] = TRUE;
-  $form['#theme'] = 'osha_workflow_moderation_form';
-  $form['#moderation_type'] = OSHA_WORKFLOW_MODERATION_TYPE_REVIEW;
-  if (isset($form_state['rows'])) {
-    $rows = $form_state['rows'];
+  $section = current($node->workbench_access);
+  $project_manager = osha_workflow_get_project_manager($node->nid);
+  if (!$project_manager) {
+    $project_manager = osha_workflow_get_default_project_manager($section);
   }
-  else {
-    $rows = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
+  $users = osha_workflow_users_get_list_options();
+  if (!$project_manager) {
+    array_unshift($users, array('' => t('-- Please select --')));
   }
 
-  $form_state['rows'] = $rows;
-  osha_workflow_admin_build_moderators_table($form, $rows);
+
+  $form['#attributes'] = array('class' => array('container-inline'));
+  $form['#submit'] = array('osha_workflow_node_review_form_submit');
+  $form['project_manager'] = array(
+    '#type' => 'select',
+    '#title' => t('Current project manager'),
+    '#options' => $users,
+    '#default_value' => isset($project_manager->uid) ? $project_manager->uid : '',
+  );
+  $form['actions'] = array(
+    '#type' => 'actions',
+    '#weight' => 20,
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => t('Change'),
+    ),
+  );
   return $form;
 }
+
+/**
+ * Implements hook_form_submit().
+ */
+function osha_workflow_node_review_form_submit($form, $form_state) {
+  $node = $form_state['node'];
+  $uid = $form_state['values']['project_manager'];
+  osha_workflow_set_project_manager($node->nid, $uid);
+}
+
+
 
 /**
  * Build the table with moderators.
@@ -226,32 +252,6 @@ function theme_osha_workflow_moderation_form($variables) {
   $output .= drupal_render_children($form);
   drupal_add_tabledrag('osha_workflow_moderation_table', 'order', 'sibling', 'user-weight');
   return $output;
-}
-
-/**
- * Implements hook_form_validate().
- */
-function osha_workflow_node_review_form_validate($form, $form_state) {
-  //if (empty($form_state['rows']) && $form_state['triggering_element']['#name'] != 'adduser') {
-  //  form_set_error('enabled', t('Cannot have an empty moderation queue. Add at least one user or switch to another state!'));
-  //}
-}
-
-/**
- * Implements hook_form_submit().
- */
-function osha_workflow_node_review_form_submit($form, $form_state) {
-  if (!empty($form_state['values']['rows'])) {
-    $data = $form_state['values']['rows'];
-    $users = array();
-    foreach ($data as $uid => $cfg) {
-      $weight = $cfg['weight'];
-      $users[$weight] = $uid;
-    }
-    ksort($users);
-    $node = $form_state['node'];
-    osha_workflow_set_node_moderators($node, $users, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW);
-  }
 }
 
 /**

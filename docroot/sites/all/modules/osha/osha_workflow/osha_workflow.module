@@ -93,6 +93,15 @@ function osha_workflow_entity_info() {
         'id' => 'miid',
       ),
     ),
+    'osha_workflow_reviewer' => array(
+      'label' => t('Node project manager'),
+      'module' => 'osha_workflow',
+      'controller class' => 'OshaWorkflowProjectManagerEntityController',
+      'base table' => 'osha_workflow_node_project_managers',
+      'entity keys' => array(
+        'id' => 'npmid',
+      ),
+    ),
   );
 }
 

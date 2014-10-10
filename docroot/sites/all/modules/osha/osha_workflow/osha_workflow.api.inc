@@ -25,6 +25,53 @@ function osha_workflow_get_moderators($type) {
   return $users;
 }
 
+function osha_workflow_get_default_project_manager($section) {
+  return user_load(5);
+  //@todo: Add real code here - one project manager per section. similar to admin/config/workbench/access.
+}
+
+/**
+ * Assign project manager to a node.
+ *
+ * @param object $nid
+ *   Node ID
+ * @param int $uid
+ *   User account
+ */
+function osha_workflow_set_project_manager($nid, $uid) {
+  try {
+    db_merge('osha_workflow_node_project_managers')
+      ->key(array(
+        'nid' => $nid,
+      ))
+      ->fields(array(
+        'nid' => $nid,
+        'uid' => $uid,
+      ))->execute();
+  }
+  catch(Exception $e) {
+    drupal_set_message($e->getMessage(), 'error');
+  }
+}
+
+/**
+ * Get the current project manager of a node.
+ * @param int $nid
+ *   Node ID
+ *
+ * @return object
+ *   User object
+ */
+function osha_workflow_get_project_manager($nid) {
+  $result = db_query('SELECT a.* FROM {osha_workflow_node_project_managers} a WHERE a.nid = :nid', array(':nid' => $nid));
+  if ($row = $result->fetchAssoc()) {
+    $user = user_load($row['uid']);
+    $user->osha_workflow['project_manager'][$nid] = (object) $row;
+    return $user;
+  }
+  return NULL;
+}
+
 /**
  * This method creates the user roles required by the workflow.
  */

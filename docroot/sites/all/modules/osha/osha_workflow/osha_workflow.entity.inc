@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Controller class for the job entity.
+ * Controller class for the approval workflow.
  *
- * @ingroup tmgmt_job
+ * {@inheritdoc}
  */
 class OshaWorkflowModerationItemController extends EntityAPIController {
 
@@ -11,7 +11,29 @@ class OshaWorkflowModerationItemController extends EntityAPIController {
    * {@inheritdoc}
    */
   public function save($entity, DatabaseTransaction $transaction = NULL) {
-    return parent::save($entity, $transaction);
+    parent::save($entity, $transaction);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function delete($ids, $transaction = NULL) {
+    parent::delete($ids, $transaction);
+  }
+}
+
+/**
+ * Controller class for the ProjectManager entity.
+ *
+ * {@inheritdoc}
+ */
+class OshaWorkflowProjectManagerEntityController extends EntityAPIController {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function save($entity, DatabaseTransaction $transaction = NULL) {
+    parent::save($entity, $transaction);
   }
 
   /**
