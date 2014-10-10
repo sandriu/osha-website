@@ -36,6 +36,17 @@ define('OSHA_WORKFLOW_STATE_PUBLISHED', 'published');
  */
 function osha_workflow_menu() {
   $items = array();
+  $items['admin/config/workbench/access/managers'] = array(
+    'title' => 'Project Managers',
+    'description' => 'Assignment of project managers for each website section.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_workflow_workbench_project_managers_form', 1),
+    'access arguments' => array('assign workbench access'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -12,
+    'file' => 'osha_workflow.admin.inc',
+  );
+
   $items['node/%node/approve'] = array(
     'title' => 'Approve',
     'description' => 'Approval page for the OSHA approval workflow.',

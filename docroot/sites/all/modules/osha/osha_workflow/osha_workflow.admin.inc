@@ -1,6 +1,62 @@
 <?php
 
 /**
+ * @param $form
+ * @param $form_state
+ * @return array
+ */
+function osha_workflow_workbench_project_managers_form($form, $form_state) {
+  // Set proper breadcrumb trails.
+  $breadcrumb[] = t('Project Managers');
+  $current = drupal_get_breadcrumb();
+  $current = array_merge($current, $breadcrumb);
+  drupal_set_breadcrumb($current);
+  $form = array(
+    '#submit' => array('osha_workflow_workbench_project_managers_form_submit'),
+  );
+
+  // Ensure that we have configured access controls.
+  if (!$active = workbench_access_get_active_tree()) {
+    $form['error'] = array('#markup' => workbench_access_configuration_needed_message());
+    return $form;
+  }
+
+  $form['help'] = array(
+    '#markup' => '<h1>' . t('Default project managers') . '</h1>' . '<p>' . t('Use this form to assign the default project managers to each section.') . '<p>',
+    '#weight' => -10,
+    '#attributes' => array('class' => array('container-inline')),
+  );
+  foreach ($active['tree'] as $access_id => $section) {
+    if (!isset($active['active'][$access_id])) {
+      continue;
+    }
+    $options = array('' => '-- Please select --') + osha_workflow_users_get_list_options();
+    $form['rows'][$section['access_type_id']][$access_id] = array(
+      '#title' => str_repeat('-', $section['depth']) . ' ' . $section['name'],
+      '#title_display' => 'after',
+      '#type' => 'select',
+      '#name' => $access_id,
+      '#options' => $options,
+    );
+  }
+  $form['actions'] = array(
+    '#type' => 'actions',
+    '#attributes' => array('class' => array('container-inline')),
+    '#weight' => 20,
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => t('Save changes'),
+    ),
+  );
+  return $form;
+}
+
+function osha_workflow_workbench_project_managers_form_submit($form, $form_state) {
+  drupal_set_message('Saving not implemented', 'error');
+}
+
+
+/**
  * Form builder for workflow_moderation_form (approval).
  *
  * @param array $form
