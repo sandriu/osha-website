@@ -57,6 +57,20 @@ function hoverSlideHome() {
 		});
 	});	
 	
+	jQuery("#num_slides div").each(function() {
+		jQuery(this).mouseover(function() {
+		jQuery("img",this).addClass('img_opac');
+		jQuery("img",this).removeClass('img_no_opac');
+		});
+	});	
+	
+	jQuery("#num_slides div").each(function() {
+		jQuery(this).mouseout(function() {
+		jQuery("img",this).addClass('img_no_opac');
+		jQuery("img",this).removeClass('img_opac');
+		});
+	});	
+	
 }
 
 function displayCaptcha() {
