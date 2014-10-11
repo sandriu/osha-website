@@ -611,7 +611,7 @@ span.date-display-single{
 
 /*PUBLICATIONS LIST*/
 
-.view.view-publications.view-id-publications.view-display-id-page{
+.view-publications-index.view-id-publications_index{
 	border-top:5px solid #aab7d9;
 	margin-top:2.5em;
 }
@@ -1251,7 +1251,7 @@ font-weight: normal;
 /*SLIDESHOW*/
 
 
-#block-block-3 p{
+#block-block-5 p{
 	color:#003399;
 	font-weight:normal;
 	line-height:1.7em;
@@ -1555,13 +1555,70 @@ font-weight: normal;
 
 /*SIDEBAR FIRST FILTERS*/
 
-#block-views-exp-publications-page{
-	border-top:5px solid #aab7d9;
-	margin-top:202px;
+.facetapi-facetapi-checkbox-links{
+	list-style:none;
+	padding:0;
+	margin:0;
 }
 
 
-#block-views-exp-publications-page h2{
+.facetapi-facetapi-checkbox-links a{
+	color:#57565b!important;
+	text-decoration:none;
+}
+
+#edit-search-api-views-fulltext-wrapper{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	padding-top:1em;
+}
+
+#edit-search-api-views-fulltext-wrapper label{
+	color: #003399;
+	font-size: 0.8em;
+	font-weight: bold;
+	font-family: arial;
+	padding-bottom: 0.2em;
+
+}
+
+#edit-search-api-views-fulltext-wrapper input{
+	margin-bottom:2em;
+
+}
+
+#edit-search-api-language-wrapper label{
+	color: #003399;
+	font-size: 0.8em;
+	font-weight: bold;
+	font-family: arial;
+	padding-bottom: 0.2em;
+}
+
+
+#edit-search-api-language-wrapper{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	padding-top:1em;
+	width:100%;
+}
+
+#edit-search-api-language-wrapper select{
+	margin-bottom:2em;
+}
+.block-facetapi h2{
+	color: #003399!important;
+	font-size: 0.9em!important;
+	font-weight: bold!important;
+	font-family: arial!important;
+	padding-bottom: 0.2em;
+}
+
+#block-views-exp-publications-index-page{
+	border-top:5px solid #aab7d9;
+	margin-top:200px;
+}
+
+
+#block-views-exp-publications-index-page h2{
 	display: table-cell;
 	color: #000;
 	font-size: 1.3em;
@@ -1585,7 +1642,7 @@ font-weight: normal;
 	text-decoration: underline;
 }
 
-#block-views-exp-publications-page label{
+#block-views-exp-publications-index-page label a{
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
@@ -1969,7 +2026,6 @@ font-weight: normal;
 
 .text_white{
 	color: #FFFFFF!important;
-	z-index:999999999999999999;
 }
 
 .text_blue{
@@ -1985,12 +2041,17 @@ font-weight: normal;
 	opacity: 1;
 }
 
-#recommended_resources a:hover{
-	opacity: 1;
-}
-
 .opacity_true{
 	opacity: 1!important;
+}
+
+.img_opac{
+	opacity: 1!important;
+}
+
+.img_no_opac{
+	opacity: 0.2;
+
 }
 
 .jssora03l{
@@ -2276,6 +2337,15 @@ font-weight: normal;
 
 /*NEWS DETAIL*/
 
+.node-news img{
+	max-width:300px;
+	max-height:200px;
+	float:left;
+	margin-right:1em;
+	margin-top:0.2em;
+}
+
+
 .node-news.view-mode-full{
 	margin-top:1em;
 }
@@ -2456,7 +2526,7 @@ font-weight: normal;
 
 /*OSHMail newsletter Section Block Down*/
 
-#block-block-2 div{
+#block-block-4 div{
 	background-color: #ecf1fb;
 	font-family: Arial,sans-serif;
 	padding: 1px;
@@ -2465,7 +2535,7 @@ font-weight: normal;
 	clear:both;
 }
 
-#block-block-2 div ul li {
+#block-block-4 div ul li {
 	list-style-type: none;
 	width: auto; 
 	color: #585858; 
@@ -2787,6 +2857,39 @@ font-weight: normal;
 	font-size:1.3em!important;
 }
 
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra .recaptcha_only_if_audio{
+	font-size:0.8em!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra .recaptcha_only_if_image {
+	font-size:0.8em!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra .recaptcha_get_another_captcha a{
+	font-size:0.8em!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra .recaptcha_only_if_image a{
+	font-size:1em!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra .recaptcha_only_if_audio a{
+	font-size:1em!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra .recaptcha_help a{
+	font-size:0.8em!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra #recaptcha_audio_play_again{
+	font-size:1em!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra #recaptcha_audio_download{
+	font-size:1em!important;
+}
+
 /*end CAPTCHA */
 
 /*CALLS*/
@@ -2825,6 +2928,21 @@ font-weight: normal;
 	text-decoration:none!important;
 }
 
+.view-calls.view-id-calls .view-header a{
+	background: url("../images/flecha-izq.png") no-repeat scroll left center transparent;
+	color: #003399;
+	float: right;
+	font-family: "Oswald",sans-serif!important;
+	font-size: 1.1em;
+	margin: 0;
+	padding-bottom: 0.3em;
+	text-align: right;
+	width: 100%;
+	padding-left:1.5em;
+	padding-right:0em;
+	text-decoration:none!important;
+}
+
 /*END CALLS*/
 
 
@@ -2850,12 +2968,27 @@ font-weight: normal;
 	margin-bottom:1em;
 }
 
-#block-block-5 {
+#block-block-7 {
 	text-align: right;
 	width: 100%;
 }
 
-#block-block-5 a{
+#block-block-7 a{
+	padding-right: 1.5em;
+	font-family: "Oswald",sans-serif!important;
+	background: url("../images/flecha.png") no-repeat scroll right center transparent;
+	color: #003399;
+	font-size: 1.1em;
+	margin: 0;
+	padding-bottom: 0.3em;
+}
+
+#block-block-1{
+	text-align: right;
+	width: 100%;
+}
+
+#block-block-1 a{
 	padding-right: 1.5em;
 	font-family: "Oswald",sans-serif!important;
 	background: url("../images/flecha.png") no-repeat scroll right center transparent;
