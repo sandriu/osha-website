@@ -181,11 +181,11 @@ function osha_workflow_set_node_approvers($nid, $moderators) {
  * @return mixed|null
  *   User account
  */
-function osha_workflow_get_next_approver($node) {
+function osha_workflow_get_next_approver($nid) {
   $ret = NULL;
   $query = new EntityFieldQuery();
   $moderators = $query->entityCondition('entity_type', 'node_approval')
-    ->propertyCondition('nid', $node->nid)
+    ->propertyCondition('nid', $nid)
     ->propertyCondition('next', 1)
     ->range(0, 1)
     ->execute();

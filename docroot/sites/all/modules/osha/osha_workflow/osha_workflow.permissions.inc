@@ -171,8 +171,12 @@ function osha_workflow_permissions_role_review_manager() {
 function osha_workflow_permissions_role_project_manager() {
   $ret = array_merge(
     array(
+      'edit any content in needs_review',
       'use workbench_moderation needs review tab',
 
+      'moderate content from needs_review to to_be_approved',
+      'moderate content from needs_review to ready_to_publish',
+      'moderate content from needs_review to to_be_approved',
       'moderate content from approved to ready_to_publish',
       'moderate content from approved to final_draft',
     ),
@@ -192,6 +196,7 @@ function osha_workflow_permissions_role_project_manager() {
 function osha_workflow_permissions_role_approver() {
   $ret = array_merge(
     array(
+      'edit any content in to_be_approved',
       'use workbench_moderation needs review tab',
 
       'moderate content from to_be_approved to approved',

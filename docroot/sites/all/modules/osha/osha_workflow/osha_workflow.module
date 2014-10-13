@@ -225,6 +225,49 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
 }
 
 /**
+ * Implements hook_workbench_moderation_states_next_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_workbench_moderation_states_next_alter(&$states, $current_state, $context) {
+  if ($current_state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    $node = $context['node'];
+    // Approver cannot change state of the current revision (which is TBA).
+    if ($next_approver = osha_workflow_get_next_approver($node->nid)) {
+      // Last approver needs the edit form for Accept/Reject
+      if (!osha_workflow_is_last_approver($node)) {
+        $user = $context['account'];
+        if ($user->uid == $next_approver->uid) {
+          $states = array();
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_node_presave($node) {
+  $state_current = isset($node->workbench_moderation_state_current) ? $node->workbench_moderation_state_current : NULL;
+  $state_new = isset($node->workbench_moderation_state_new) ? $node->workbench_moderation_state_new : NULL;
+  if ($state_new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED && $state_current == $state_new) {
+    if ($next_approver = osha_workflow_get_next_approver($node->nid)) {
+      if ($next_approver != osha_workflow_is_last_approver($node)) {
+        global $user;
+        if ($user->uid == $next_approver->uid) {
+          drupal_set_message('The control is passed to the next approver');
+          osha_workflow_approve($node, OSHA_WORKFLOW_STATE_APPROVED);
+        }
+      }
+    }
+  }
+}
+
+
+/**
  * Implements hook_workbench_moderation_access_alter().
  *
  * {@inheritdoc}
@@ -282,39 +325,45 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
     $node = $form['node']['#value'];
     $state = $node->workbench_moderation['current']->state;
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-      global $user;
-      if ($next = osha_workflow_get_next_approver($node)) {
-        if ($user->uid == $next->uid) {
-          // Hijack the form & modify for voting purposes.
-          hide($form['state']);
-          $form['submit'] = array(
-            '#type' => 'submit',
-            '#value' => t('Approve'),
-            '#submit' => array('osha_workflow_form_moderate_approve_submit'),
-          );
-          $form['reject'] = array(
-            '#type' => 'submit',
-            '#value' => t('Reject'),
-            '#submit' => array('osha_workflow_form_moderate_reject_submit'),
-          );
-          $form['message'] = array(
-            '#type' => 'textfield',
-            '#prefix' => '<div>',
-            '#title' => t('Leave a moderation message'),
-            '#resizable' => FALSE,
-            '#required' => FALSE,
-            '#attributes' => array(
-              'placeholder' => t('You can leave a note here'),
-            ),
-            '#suffix' => '<div>',
-          );
-          unset($form['message']);
+      if ($current_moderator = osha_workflow_is_last_approver($node)) {
+        global $user;
+        if ($next = osha_workflow_get_next_approver($node->nid)) {
+          if ($user->uid == $next->uid) {
+            // Hijack the form & modify for voting purposes.
+            hide($form['state']);
+            $form['submit'] = array(
+              '#type' => 'submit',
+              '#value' => t('Approve'),
+              '#submit' => array('osha_workflow_form_moderate_approve_submit'),
+            );
+            $form['reject'] = array(
+              '#type' => 'submit',
+              '#value' => t('Reject'),
+              '#submit' => array('osha_workflow_form_moderate_reject_submit'),
+            );
+            $form['message'] = array(
+              '#type' => 'textfield',
+              '#prefix' => '<div>',
+              '#title' => t('Leave a moderation message'),
+              '#resizable' => FALSE,
+              '#required' => FALSE,
+              '#attributes' => array(
+                'placeholder' => t('You can leave a note here'),
+              ),
+              '#suffix' => '<div>',
+            );
+            unset($form['message']);
+          }
         }
       }
-    }
-    else {
-      // Add our own validation hook for transitions check.
-      $form['#validate'][] = 'osha_workflow_workbench_moderation_approval_form_validate';
+      else {
+        $form['state']['#access'] = FALSE;
+        $form['submit']['#access'] = FALSE;
+      }
+//      else {
+//        // Add our own validation hook for transitions check.
+//        $form['#validate'][] = 'osha_workflow_workbench_moderation_approval_form_validate';
+//      }
     }
   }
 }

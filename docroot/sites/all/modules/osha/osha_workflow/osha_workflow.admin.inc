@@ -252,14 +252,11 @@ function theme_osha_workflow_approval_form($variables) {
       if (isset($moderator->osha_workflow_node_approval)) {
         $val = $moderator->osha_workflow_node_approval->approved;
         if ($val === NULL) {
-          // NULL - not voted yet.
-          // $status = t('Waiting for approval');
+          // NULL - not reviewed yet.
+          // $status = t('Waiting to approve');
         }
-        elseif ($val == OSHA_WORKFLOW_STATE_APPROVED) {
-          $status = t('Approved');
-        }
-        elseif ($val == OSHA_WORKFLOW_STATE_REJECTED) {
-          $status = t('Rejected');
+        else {
+          $status = t('User created a new revision');
         }
       }
       $row = array();
