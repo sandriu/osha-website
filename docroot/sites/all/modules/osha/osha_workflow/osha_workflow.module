@@ -177,6 +177,12 @@ function osha_workflow_theme() {
  */
 function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   // Review workflow.
+  if ($old == OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
+    OshaWorkflowNotifications::notifyOnChangeFromDraftToFinalDraft($node);
+  }
+  if ($old != OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_DRAFT) {
+    OshaWorkflowNotifications::notifyOnChangeToDraft($node);
+  }
   if ($new == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
     //
   }

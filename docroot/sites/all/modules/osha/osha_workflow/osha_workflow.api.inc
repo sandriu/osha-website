@@ -349,10 +349,36 @@ class OshaWorkflowNotifications {
   /**
    * Notify Review Manager and Project Manager the node was approved/rejected.
    *
-   * @param $node
-   * @param $vote
+   * @param object $node
+   *   Affected node
+   * @param string $vote
+   *   User vote
    */
   public static function notifyOnAcceptOrReject($node, $vote) {
     drupal_set_message("NOT IMPLEMENTED: Notify 'Review Manager' and the PM about node/{$node->nid} being $vote");
+  }
+
+  /**
+   * Notify Review Manager the content was set to final draft.
+   *
+   * REV_EE_US_03
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyOnChangeFromDraftToFinalDraft($node) {
+    drupal_set_message("NOT IMPLEMENTED (REV_EE_US_03): Notify corresponding 'Review Manager' that node/{$node->nid} is now in final draft");
+  }
+
+  /**
+   * Notify Editor the content was set to Draft.
+   *
+   * REV_EE_US_05
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyOnChangeToDraft($node) {
+    drupal_set_message("NOT IMPLEMENTED (REV_EE_US_05): Notify Editors the node/{$node->nid} is back in draft");
   }
 }
