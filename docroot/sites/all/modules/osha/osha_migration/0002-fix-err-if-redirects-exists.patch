@@ -1,0 +1,54 @@
+From f5a19b50d131ae738425c6573f1442dac0c13da4 Mon Sep 17 00:00:00 2001
+From: Claudia Ifrim <ifrim.claudia@gmail.com>
+Date: Mon, 13 Oct 2014 17:49:31 +0300
+Subject: [PATCH] fix err if redirects exists
+
+---
+ .../content.publications.migrate.inc               | 31 +++++++++++++---------
+ 1 file changed, 19 insertions(+), 12 deletions(-)
+
+diff --git a/docroot/sites/all/modules/osha/osha_migration/content.publications.migrate.inc b/docroot/sites/all/modules/osha/osha_migration/content.publications.migrate.inc
+index a6acddf..fa6e495 100644
+--- a/docroot/sites/all/modules/osha/osha_migration/content.publications.migrate.inc
++++ b/docroot/sites/all/modules/osha/osha_migration/content.publications.migrate.inc
+@@ -360,18 +360,25 @@ class OshaMigratePublications extends OSHADynamicMigration {
+ 
+     foreach ($languages as $language) {
+       if (isset($row->path[$language])) {
+-        // create redirect from publication's/view path to publication's path
+-        $redirect = new stdClass();
+-        $redirect->source = $row->path[$language] . '/view';           // From URL
+-        $redirect->source_options = array();
+-        $redirect->redirect = 'node/'.$entity->nid;                    // To URL
+-        $redirect->redirect_options = array();
+-        $redirect->status_code = 0;                                    // Redirect Status
+-        $redirect->type = 'redirect';
+-        $redirect->language = $language;
+-
+-        // Create the redirect
+-        redirect_save($redirect);
++
++        //check if source redirect exists
++        $source = $row->path[$language] . '/view';
++        $source_redirects = redirect_load_by_source($source,$language);
++
++        if ($source_redirects == FALSE) {
++          // create redirect from publication's/view path to publication's path
++          $redirect = new stdClass();
++          $redirect->source = $source;                                   // From URL
++          $redirect->source_options = array();
++          $redirect->redirect = 'node/'.$entity->nid;                    // To URL
++          $redirect->redirect_options = array();
++          $redirect->status_code = 0;                                    // Redirect Status
++          $redirect->type = 'redirect';
++          $redirect->language = $language;
++
++          // Create the redirect
++          redirect_save($redirect);
++        }
+       }
+     }
+   }
+-- 
+1.8.4.msysgit.0
+
