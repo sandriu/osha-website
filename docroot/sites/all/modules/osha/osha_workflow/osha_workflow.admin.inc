@@ -245,10 +245,10 @@ function theme_osha_workflow_approval_form($variables) {
           // NULL - not voted yet.
           $status = t('Waiting for approval');
         }
-        elseif ($val == 1) {
+        elseif ($val == OSHA_WORKFLOW_STATE_APPROVED) {
           $status = t('Approved');
         }
-        else {
+        elseif ($val == OSHA_WORKFLOW_STATE_REJECTED) {
           $status = t('Rejected');
         }
       }

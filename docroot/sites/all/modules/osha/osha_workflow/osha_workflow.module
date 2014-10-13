@@ -15,9 +15,6 @@ define('OSHA_WORKFLOW_ROLE_APPROVER', 'Approver');
 // Drupal administrator.
 define('OSHA_WORKFLOW_ROLE_ADMINISTRATOR', 'administrator');
 
-define('OSHA_WORKFLOW_MODERATION_ACCEPT', 1);
-define('OSHA_WORKFLOW_MODERATION_REJECT', 0);
-
 /* Workflow states */
 define('OSHA_WORKFLOW_STATE_DRAFT', 'draft');
 define('OSHA_WORKFLOW_STATE_FINAL_DRAFT', 'final_draft');
@@ -279,18 +276,18 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
     }
     else {
       // Add our own validation hook for transitions check.
-      $form['#validate'][] = 'osha_workflow_workbench_moderation_moderate_form_validate';
+      $form['#validate'][] = 'osha_workflow_workbench_moderation_approval_form_validate';
     }
   }
 }
 
-function osha_workflow_workbench_moderation_moderate_form_validate($form, $form_state) {
+function osha_workflow_workbench_moderation_approval_form_validate($form, $form_state) {
   $node = $form_state['values']['node'];
   $state = $form_state['values']['state'];
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
     $approvers = osha_workflow_get_node_approvers($node, FALSE);
     if (empty($approvers)) {
-      form_set_error('', t('The moderation state could not be changed because the review queue is empty. Use the approve tab to add moderators to the queue'));
+      form_set_error('', t('Cannot change state because the approval queue is empty. Use the approve tab to set the approver list'));
     }
   }
 }
@@ -303,9 +300,10 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
   $node = $values['node'];
   $state = $node->workbench_moderation['current']->state;
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-    osha_workflow_approve($node, OSHA_WORKFLOW_MODERATION_ACCEPT);
+    osha_workflow_approve($node, OSHA_WORKFLOW_STATE_APPROVED);
     // This was the last approver, approve.
     if (osha_workflow_is_last_approver($node)) {
+      OshaWorkflowNotifications::notifyOnAcceptOrReject($node, OSHA_WORKFLOW_STATE_APPROVED);
       workbench_moderation_moderate($node, OSHA_WORKFLOW_STATE_APPROVED);
     }
   }
@@ -319,9 +317,10 @@ function osha_workflow_form_moderate_reject_submit($form, $form_state) {
   $node = $values['node'];
   $state = $node->workbench_moderation['current']->state;
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-    osha_workflow_approve($node, OSHA_WORKFLOW_MODERATION_REJECT);
+    osha_workflow_approve($node, OSHA_WORKFLOW_STATE_REJECTED);
     if (osha_workflow_is_last_approver($node)) {
       // This was the last approver, reject.
+      OshaWorkflowNotifications::notifyOnAcceptOrReject($node, OSHA_WORKFLOW_STATE_REJECTED);
       workbench_moderation_moderate($node, OSHA_WORKFLOW_STATE_REJECTED);
     }
   }

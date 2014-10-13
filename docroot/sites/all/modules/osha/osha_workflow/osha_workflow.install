@@ -120,8 +120,9 @@ function osha_workflow_schema() {
         'not null' => TRUE,
       ),
       'approved' => array(
-        'description' => 'NULL - pending, 1 - approved, 0 - rejected',
-        'type' => 'int',
+        'description' => 'NULL not voted, approved or rejected',
+        'type' => 'varchar',
+        'length' => 64,
         'default' => NULL,
         'not null' => FALSE,
       ),

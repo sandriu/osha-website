@@ -228,7 +228,7 @@ function osha_workflow_is_last_approver($node, $user = NULL) {
  * @param object $node
  *   Node object
  * @param int $vote
- *   User's vote (1 - Accept, 0 - Reject)
+ *   User's vote (accepted, rejected)
  * @param string $message
  *   User's message
  * @param object $voter
@@ -254,7 +254,7 @@ function osha_workflow_approve($node, $vote, $message = NULL, $voter = NULL) {
         if ($row->uid == $voter->uid && $row->next == 1) {
           $mark_next = TRUE;
           $row->next = 0;
-          $row->approved = intval($vote);
+          $row->approved = $vote;
           $row->mesage = $message;
           entity_save('node_approval', $row);
           continue;
@@ -340,5 +340,19 @@ class OshaWorkflowPermissions {
    */
   public static function userHasRole($role, $user) {
     return in_array($role, $user->roles);
+  }
+}
+
+
+class OshaWorkflowNotifications {
+
+  /**
+   * Notify Review Manager and Project Manager the node was approved/rejected.
+   *
+   * @param $node
+   * @param $vote
+   */
+  public static function notifyOnAcceptOrReject($node, $vote) {
+    drupal_set_message("NOT IMPLEMENTED: Notify 'Review Manager' and the PM about node/{$node->nid} being $vote");
   }
 }
