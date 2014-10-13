@@ -1,22 +1,20 @@
 <?php
 
-/**
- * Array of permissions for the Editor role.
- * @return array
- *   Permissions
- */
-function osha_workflow_editor_permissions() {
+function osha_workflow_permissions_download_file_entities() {
   return array(
-    "access administration pages",
-    "access comments",
-    "access content",
-    "access content overview",
-    "access contextual links",
-    "access dashboard",
-    "access media browser",
-    "access toolbar",
-    "access workbench",
-    "access workbench access by role",
+    "download any audio files",
+    "download any document files",
+    "download any image files",
+    "download any video files",
+    "download own audio files",
+    "download own document files",
+    "download own image files",
+    "download own video files",
+  );
+}
+
+function osha_workflow_permissions_manage_content() {
+  return array(
     "create article content",
     "create blog content",
     "create calls content",
@@ -35,14 +33,6 @@ function osha_workflow_editor_permissions() {
     "delete own document files",
     "delete own image files",
     "delete own video files",
-    "download any audio files",
-    "download any document files",
-    "download any image files",
-    "download any video files",
-    "download own audio files",
-    "download own document files",
-    "download own image files",
-    "download own video files",
     "edit any article content",
     "edit any audio files",
     "edit any blog content",
@@ -76,28 +66,112 @@ function osha_workflow_editor_permissions() {
     "edit own seminar content",
     "edit own video files",
     "edit own wiki_page content",
-    "moderate content from draft to final_draft",
-    "post comments",
+
+    "access media browser",
+
+    "view files",
+    "view own files",
+
+    "view private files",
+    "view own private files",
+  );
+}
+
+function osha_workflow_permissions_common() {
+  return array(
+    "access content",
+
     "search content",
     "use advanced search",
     "use Search Autocomplete",
+
     "use text format filtered_html",
     "use text format full_html",
-    "use workbench_moderation my drafts tab",
-    "use workbench_moderation needs review tab",
-    "view all unpublished content",
-    "view files",
-    "view moderation messages",
-    "view own files",
-    "view own private files",
-    "view own unpublished content",
-    "view private files",
-    "view revisions",
-    "view the administration theme",
-    "view workbench access information",
 
-    "edit any content in draft",
-    "edit any content in published",
-    "view moderation history",
   );
+}
+
+function osha_worfklow_permissions_moderator() {
+  return array(
+    "access administration pages",
+    "access contextual links",
+    "access dashboard",
+    "access content overview",
+    "access toolbar",
+    "view the administration theme",
+
+    "access workbench",
+    "access workbench access by role",
+    "use workbench_moderation my drafts tab",
+    "view moderation messages",
+    "view revisions",
+    "view workbench access information",
+    "view moderation history",
+
+    "view own unpublished content",
+    "view all unpublished content",
+  );
+}
+
+/**
+ * Array of permissions for the Editor role.
+ * @return array
+ *   Permissions
+ */
+function osha_workflow_permissions_role_editor() {
+  return array(
+    "edit any content in draft",
+    "moderate content from draft to final_draft",
+    "edit any content in published",
+  )
+  + osha_workflow_permissions_common()
+  + osha_workflow_permissions_manage_content()
+  + osha_workflow_permissions_download_file_entities()
+  + osha_worfklow_permissions_moderator();
+}
+
+/**
+ * Array of permissions for the Review Manager role.
+ * @return array
+ *   Permissions
+ */
+function osha_workflow_permissions_role_review_manager() {
+  return array(
+    "use workbench_moderation needs review tab",
+  )
+  + osha_workflow_permissions_common()
+  + osha_workflow_permissions_manage_content()
+  + osha_workflow_permissions_download_file_entities()
+  + osha_worfklow_permissions_moderator();
+}
+
+
+/**
+ * Array of permissions for the Project Manager role.
+ * @return array
+ *   Permissions
+ */
+function osha_workflow_permissions_role_project_manager() {
+  return array(
+    "use workbench_moderation needs review tab",
+  )
+  + osha_workflow_permissions_common()
+  + osha_workflow_permissions_manage_content()
+  + osha_workflow_permissions_download_file_entities()
+  + osha_worfklow_permissions_moderator();
+}
+
+/**
+ * Array of permissions for the Approver role.
+ * @return array
+ *   Permissions
+ */
+function osha_workflow_permissions_role_approver() {
+  return array(
+    "use workbench_moderation needs review tab",
+  )
+  + osha_workflow_permissions_common()
+  + osha_workflow_permissions_manage_content()
+  + osha_workflow_permissions_download_file_entities()
+  + osha_worfklow_permissions_moderator();
 }

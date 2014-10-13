@@ -75,11 +75,10 @@ function osha_workflow_get_project_manager($nid) {
 function osha_workflow_create_roles() {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.permissions');
   $roles = array(
-    'Editor' => osha_workflow_editor_permissions(),
-    'Review Manager' => array(),
-    'Project Manager' => array(),
-    'Approver' => array(),
-    'Content Administrator' => array(),
+    'Editor' => osha_workflow_permissions_role_editor(),
+    'Review Manager' => osha_workflow_permissions_role_review_manager(),
+    'Project Manager' => osha_workflow_permissions_role_project_manager(),
+    'Approver' => osha_workflow_permissions_role_approver(),
   );
 
   foreach ($roles as $role_name => $permissions) {
