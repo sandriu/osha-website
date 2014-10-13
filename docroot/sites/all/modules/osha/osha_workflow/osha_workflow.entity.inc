@@ -5,7 +5,7 @@
  *
  * {@inheritdoc}
  */
-class OshaWorkflowModerationItemController extends EntityAPIController {
+class OshaWorkflowApprovalItemController extends EntityAPIController {
 
   /**
    * {@inheritdoc}

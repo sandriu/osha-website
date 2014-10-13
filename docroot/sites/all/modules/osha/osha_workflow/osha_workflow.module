@@ -7,9 +7,6 @@
 include_once 'osha_workflow.features.inc';
 include_once 'osha_workflow.api.inc';
 
-define('OSHA_WORKFLOW_MODERATION_TYPE_REVIEW', 'review');
-define('OSHA_WORKFLOW_MODERATION_TYPE_APPROVE', 'approve');
-
 /* Publishing workflow roles */
 define('OSHA_WORKFLOW_ROLE_EDITOR', 'Editor');
 define('OSHA_WORKFLOW_ROLE_REVIEW_MANAGER', 'Review Manager');
@@ -53,8 +50,8 @@ function osha_workflow_menu() {
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_workflow_node_approval_form', 1),
-    'access callback' => 'osha_workflow_moderation_access',
-    'access arguments' => array(OSHA_WORKFLOW_MODERATION_TYPE_APPROVE, 1),
+    'access callback' => 'osha_workflow_node_approval_access',
+    'access arguments' => array(1),
     'file' => 'osha_workflow.admin.inc',
     'weight' => 10,
   );
@@ -64,8 +61,8 @@ function osha_workflow_menu() {
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_workflow_node_review_form', 1),
-    'access callback' => 'osha_workflow_moderation_access',
-    'access arguments' => array(OSHA_WORKFLOW_MODERATION_TYPE_REVIEW, 1),
+    'access callback' => 'osha_workflow_node_review_access',
+    'access arguments' => array(1),
     'file' => 'osha_workflow.admin.inc',
     'weight' => 9,
   );
@@ -73,17 +70,32 @@ function osha_workflow_menu() {
 }
 
 /**
- * Permission access to moderation menu local tasks.
+ * Permission access to approval local task.
  *
- * @param string $moderation_type
- *   Type of moderation
  * @param object $node
- *   Moderated node
+ *   Approved node
  *
  * @return null|string
  *   Access permission to the screen.
  */
-function osha_workflow_moderation_access($moderation_type, $node) {
+function osha_workflow_node_approval_access($node) {
+  if (OshaWorkflowPermissions::userCanAccessApprovalScreen($node)) {
+    return NODE_ACCESS_ALLOW;
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+
+/**
+ * Permission access to review local task.
+ *
+ * @param object $node
+ *   Reviewed node
+ *
+ * @return null|string
+ *   Access permission to the screen.
+ */
+function osha_workflow_node_review_access($node) {
   if (OshaWorkflowPermissions::userCanAccessReviewScreen($node)) {
     return NODE_ACCESS_ALLOW;
   }
@@ -105,9 +117,9 @@ function osha_workflow_entity_info() {
       ),
     ),
     'node_approval' => array(
-      'label' => t('Moderation item'),
+      'label' => t('Node approval'),
       'module' => 'osha_workflow',
-      'controller class' => 'OshaWorkflowModerationItemController',
+      'controller class' => 'OshaWorkflowApprovalItemController',
       'base table' => 'osha_workflow_node_approval',
       'entity keys' => array(
         'id' => 'apid',
@@ -142,7 +154,6 @@ function osha_workflow_permission() {
 function osha_workflow_node_access($node, $operation, $user) {
   if (isset($node->workbench_moderation) && $operation == 'update') {
     if (variable_get('workbench_moderation_per_node_type', FALSE)
-        && !user_access('edit ' . $node->type . ' in ' . $node->workbench_moderation['current']->state, $user)
         && !user_access('edit any content in ' . $node->workbench_moderation['current']->state, $user)) {
       return NODE_ACCESS_DENY;
     }
@@ -155,7 +166,7 @@ function osha_workflow_node_access($node, $operation, $user) {
  */
 function osha_workflow_theme() {
   return array(
-    'osha_workflow_moderation_form' => array(
+    'osha_workflow_approval_form' => array(
       'render element' => 'form',
       'file' => 'osha_workflow.admin.inc',
     ),
@@ -235,16 +246,9 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'workbench_moderation_moderate_form') {
     $node = $form['node']['#value'];
     $state = $node->workbench_moderation['current']->state;
-    $moderation_type = NULL;
-    if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
-      $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_REVIEW;
-    }
-    elseif ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-      $moderation_type = OSHA_WORKFLOW_MODERATION_TYPE_APPROVE;
-    }
-    if ($moderation_type) {
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
       global $user;
-      if ($next = osha_workflow_get_next_moderator($node, $moderation_type)) {
+      if ($next = osha_workflow_get_next_approver($node)) {
         if ($user->uid == $next->uid) {
           // Hijack the form & modify for voting purposes.
           hide($form['state']);
@@ -283,15 +287,9 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
 function osha_workflow_workbench_moderation_moderate_form_validate($form, $form_state) {
   $node = $form_state['values']['node'];
   $state = $form_state['values']['state'];
-  if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
-    $moderators = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW, FALSE);
-    if (empty($moderators)) {
-      form_set_error('', t('The moderation state could not be changed because the review queue is empty. Use the review tab to add moderators to the queue'));
-    }
-  }
-  elseif ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-    $moderators = osha_workflow_get_node_moderators($node, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE, FALSE);
-    if (empty($moderators)) {
+  if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    $approvers = osha_workflow_get_node_approvers($node, FALSE);
+    if (empty($approvers)) {
       form_set_error('', t('The moderation state could not be changed because the review queue is empty. Use the approve tab to add moderators to the queue'));
     }
   }
@@ -304,11 +302,8 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
   $values = $form_state['values'];
   $node = $values['node'];
   $state = $node->workbench_moderation['current']->state;
-  if ($state == 'needs_review') {
-    osha_workflow_moderate($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW, OSHA_WORKFLOW_MODERATION_ACCEPT);
-  }
-  elseif ($state == 'to_be_approved') {
-    osha_workflow_moderate($node, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE, OSHA_WORKFLOW_MODERATION_ACCEPT);
+  if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    osha_workflow_approve($node, OSHA_WORKFLOW_MODERATION_ACCEPT);
   }
 }
 
@@ -319,10 +314,7 @@ function osha_workflow_form_moderate_reject_submit($form, $form_state) {
   $values = $form_state['values'];
   $node = $values['node'];
   $state = $node->workbench_moderation['current']->state;
-  if ($state == 'needs_review') {
-    osha_workflow_moderate($node, OSHA_WORKFLOW_MODERATION_TYPE_REVIEW, OSHA_WORKFLOW_MODERATION_REJECT);
-  }
-  elseif ($state == 'to_be_approved') {
-    osha_workflow_moderate($node, OSHA_WORKFLOW_MODERATION_TYPE_APPROVE, OSHA_WORKFLOW_MODERATION_REJECT);
+  if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    osha_workflow_approve($node, OSHA_WORKFLOW_MODERATION_REJECT);
   }
 }

@@ -3,14 +3,11 @@
 /**
  * Retrieve the list of default moderators stored in entity_collection.
  *
- * @param string $type
- *   Type of moderators (see osha_workflow_node_approval.type)
- *
  * @return mixed
  *   Array of user accounts, ordered by weight in the collection.
  */
-function osha_workflow_get_moderators($type) {
-  $entity_collection = entity_collection_load($type);
+function osha_workflow_get_default_approvers() {
+  $entity_collection = entity_collection_load('approvers');
   $contexts = _entity_collection_get_contexts($entity_collection);
   $tree = EntityCollectionStorage::getBundleStorage($entity_collection->bundle)->retrieve($entity_collection, $contexts);
   $rows = $tree->getFlat();
@@ -20,7 +17,7 @@ function osha_workflow_get_moderators($type) {
   }
   $users = user_load_multiple($uids);
   foreach ($users as &$user) {
-    $user->moderation_temporary = TRUE;
+    $user->osha_workflow_node_approval_saved = FALSE;
   }
   return $users;
 }
@@ -101,86 +98,41 @@ function osha_workflow_create_roles() {
 }
 
 /**
- * Assign users to the node workflow.
- *
- * Users are assigned from the default entity_collection or if already assigned,
- * their status is reset.
- *
- * @param object $node
- *   Node object
- * @param string $moderation_type
- *   Type of moderation
- */
-function osha_workflow_assign_users($node, $moderation_type) {
-  $moderators = osha_workflow_get_node_moderators($node, $moderation_type, TRUE);
-  $weight = 0;
-  $transaction = db_transaction();
-  try {
-    foreach ($moderators as $user) {
-      $data = array(
-        'nid' => $node->nid,
-        'vid' => $node->vid,
-        'moderation_type' => $moderation_type,
-        'uid' => $user->uid,
-        'approved' => NULL,
-        'weight' => $weight,
-      );
-      db_merge('osha_workflow_node_approval')
-        ->key(array(
-          'nid' => $node->nid,
-          'vid' => $node->vid,
-          'moderation_type' => $moderation_type,
-          'uid' => $user->uid,
-        ))
-        ->fields($data)
-        ->execute();
-      $weight++;
-    }
-  }
-  catch (Exception $e) {
-    $transaction->rollback();
-    drupal_set_message($e->getMessage(), 'error');
-  }
-}
-
-/**
  * Retrieve the list of moderators for a node.
  *
  * @param object $node
  *   Node object to get the data
- * @param string $moderation_type
- *   Type of moderation (i.e. approve)
  * @param bool $default
  *   If not set yet, return the default values stored in the entity collection.
  *
  * @return array|mixed
  *   Array of users.
  */
-function osha_workflow_get_node_moderators($node, $moderation_type, $default = TRUE) {
+function osha_workflow_get_node_approvers($node, $default = TRUE) {
   $ret = array();
   $query = new EntityFieldQuery();
-  $moderators = $query->entityCondition('entity_type', 'osha_workflow_node_approval')
+  $moderators = $query->entityCondition('entity_type', 'node_approval')
     ->propertyCondition('nid', $node->nid)
-    ->propertyCondition('vid', $node->vid)
-    ->propertyCondition('moderation_type', $moderation_type)
     ->propertyOrderBy('weight')
     ->execute();
-  if (!empty($moderators['osha_workflow_node_approval'])) {
-    $ids = array_keys($moderators['osha_workflow_node_approval']);
+  if (!empty($moderators['node_approval'])) {
+    $ids = array_keys($moderators['node_approval']);
     $rows = osha_workflow_node_approval_load_multiple($ids);
     $uids = array();
+    $rows_by_uid = array();
     foreach ($rows as $row) {
+      $rows_by_uid[$row->uid] = $row;
       $uids[] = $row->uid;
     }
     $users = user_load_multiple($uids);
-    foreach ($rows as $row) {
-      $user = &$users[$row->uid];
-      $user->moderation = array($moderation_type => $row);
+    foreach ($users as &$user) {
+      $user->osha_workflow_node_approval = $rows_by_uid[$user->uid];
+      $user->osha_workflow_node_approval_saved = TRUE;
     }
     return $users;
   }
   elseif ($default) {
-    $ret = osha_workflow_get_moderators('reviewers');
+    $ret = osha_workflow_get_default_approvers();
   }
   return $ret;
 }
@@ -192,27 +144,20 @@ function osha_workflow_get_node_moderators($node, $moderation_type, $default = T
  *   Node to assign
  * @param array $moderators
  *   Associative array of user accounts. Keys are weights, values are uids.
- * @param $moderation_type
- *   Type of moderation (approve, review).
  */
-function osha_workflow_set_node_moderators($node, $moderators, $moderation_type) {
+function osha_workflow_set_node_approvers($node, $moderators) {
   $transaction = db_transaction();
   try {
     // Delete old records for this node.
-    $and = db_and()
+    db_delete('osha_workflow_node_approval')
       ->condition('nid', $node->nid)
-      ->condition('vid', $node->vid)
-      ->condition('moderation_type', $moderation_type);
-    db_delete('osha_workflow_node_approval')->condition($and)->execute();
-
+      ->execute();
     $query = db_insert('osha_workflow_node_approval')
-      ->fields(array('nid', 'vid', 'moderation_type', 'uid', 'next', 'weight'));
+      ->fields(array('nid', 'uid', 'next', 'weight'));
     $i = 0;
     foreach ($moderators as $weight => $uid) {
       $record = array(
         'nid' => $node->nid,
-        'vid' => $node->vid,
-        'moderation_type' => $moderation_type,
         'uid' => $uid,
         'next' => $i == 0 ? 1 : 0,
         'weight' => $weight,
@@ -233,26 +178,46 @@ function osha_workflow_set_node_moderators($node, $moderators, $moderation_type)
  *
  * @param object $node
  *   Node to retrieve info.
- * @param string $moderation_type
- *   Type of moderation.
  *
  * @return mixed|null
  *   User account
  */
-function osha_workflow_get_next_moderator($node, $moderation_type) {
+function osha_workflow_get_next_approver($node) {
   $ret = NULL;
   $query = new EntityFieldQuery();
-  $moderators = $query->entityCondition('entity_type', 'osha_workflow_node_approval')
+  $moderators = $query->entityCondition('entity_type', 'node_approval')
     ->propertyCondition('nid', $node->nid)
-    ->propertyCondition('vid', $node->vid)
     ->propertyCondition('next', 1)
-    ->propertyCondition('moderation_type', $moderation_type)
     ->range(0, 1)
     ->execute();
-  if (!empty($moderators['osha_workflow_node_approval'])) {
-    $rows = osha_workflow_node_approval_load_multiple(array_keys($moderators['osha_workflow_node_approval']));
+  if (!empty($moderators['node_approval'])) {
+    $rows = osha_workflow_node_approval_load_multiple(array_keys($moderators['node_approval']));
     $task = current($rows);
     $ret = user_load($task->uid);
+  }
+  return $ret;
+}
+
+/**
+ * Check if the user is the last approver.
+ *
+ * @param object $node
+ *   Node to check
+ * @param object $user
+ *   User to check. If NULL, assuming current user.
+ *
+ * @return bool
+ *   TRUE if it's the last in the queue.
+ */
+function osha_workflow_is_last_approver($node, $user = NULL) {
+  $ret = FALSE;
+  if (empty($user)) {
+    global $user;
+  }
+  $all_users = osha_workflow_get_node_approvers($node, FALSE);
+  if (!empty($all_users)) {
+    $last = array_pop($all_users);
+    $ret = $user->uid == $last->uid;
   }
   return $ret;
 }
@@ -262,9 +227,7 @@ function osha_workflow_get_next_moderator($node, $moderation_type) {
  *
  * @param object $node
  *   Node object
- * @param string $moderation_type
- *   Type of moderation
- * @param integer $vote
+ * @param int $vote
  *   User's vote (1 - Accept, 0 - Reject)
  * @param string $message
  *   User's message
@@ -272,9 +235,9 @@ function osha_workflow_get_next_moderator($node, $moderation_type) {
  *   User who vote, if NULL assuming current user.
  *
  * @return bool
- *   Returns TRUE if this was the last user in the moderation process.
+ *   Returns TRUE if this was the last user in the approval process.
  */
-function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL, $voter = NULL) {
+function osha_workflow_approve($node, $vote, $message = NULL, $voter = NULL) {
   if (empty($voter)) {
     global $user;
     $voter = $user;
@@ -282,14 +245,12 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
   $transaction = db_transaction();
   try {
     $query = new EntityFieldQuery();
-    $miids = $query->entityCondition('entity_type', 'osha_workflow_node_approval')
+    $miids = $query->entityCondition('entity_type', 'node_approval')
       ->propertyCondition('nid', $node->nid)
-      ->propertyCondition('vid', $node->vid)
-      ->propertyCondition('moderation_type', $moderation_type)
       ->propertyOrderBy('weight')
       ->execute();
-    if (isset($miids['osha_workflow_node_approval'])) {
-      $rows = osha_workflow_node_approval_load_multiple(array_keys($miids['osha_workflow_node_approval']));
+    if (isset($miids['node_approval'])) {
+      $rows = osha_workflow_node_approval_load_multiple(array_keys($miids['node_approval']));
       $last = end($rows);
       reset($rows);
       $mark_next = FALSE;
@@ -299,7 +260,7 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
           $row->next = 0;
           $row->approved = intval($vote);
           $row->mesage = $message;
-          entity_save('osha_workflow_node_approval', $row);
+          entity_save('node_approval', $row);
           if ($last->uid == $row->uid) {
             return TRUE;
           }
@@ -307,7 +268,7 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
         }
         if ($mark_next) {
           $row->next = 1;
-          entity_save('osha_workflow_node_approval', $row);
+          entity_save('node_approval', $row);
           if ($last->uid == $row->uid) {
             return TRUE;
           }
@@ -323,7 +284,9 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
   return FALSE;
 }
 
-
+/**
+ * Class OshaWorkflowPermissions handles permission check for the workflow.
+ */
 class OshaWorkflowPermissions {
 
   /**
@@ -339,6 +302,31 @@ class OshaWorkflowPermissions {
    *   TRUE if the user has permission.
    */
   public static function userCanAccessReviewScreen($node, $user = NULL) {
+    if (!$user) {
+      global $user;
+    }
+    if (isset($node->workbench_moderation)) {
+      // $current = $node->workbench_moderation['current'];
+      // $state = $current->state;
+      return
+        self::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user)
+        || self::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user);
+    }
+    return FALSE;
+  }
+
+  /**
+   * User has access to the approval screen (tab on node).
+   *
+   * @param object $node
+   *   Node to check
+   * @param null $user
+   *   User to check. If NULL assuming current user
+   *
+   * @return bool
+   *   TRUE if user has access.
+   */
+  public static function userCanAccessApprovalScreen($node, $user = NULL) {
     if (!$user) {
       global $user;
     }
