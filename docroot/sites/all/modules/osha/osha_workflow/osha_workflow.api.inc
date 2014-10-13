@@ -233,9 +233,6 @@ function osha_workflow_is_last_approver($node, $user = NULL) {
  *   User's message
  * @param object $voter
  *   User who vote, if NULL assuming current user.
- *
- * @return bool
- *   Returns TRUE if this was the last user in the approval process.
  */
 function osha_workflow_approve($node, $vote, $message = NULL, $voter = NULL) {
   if (empty($voter)) {
@@ -251,7 +248,6 @@ function osha_workflow_approve($node, $vote, $message = NULL, $voter = NULL) {
       ->execute();
     if (isset($miids['node_approval'])) {
       $rows = osha_workflow_node_approval_load_multiple(array_keys($miids['node_approval']));
-      $last = end($rows);
       reset($rows);
       $mark_next = FALSE;
       foreach ($rows as $row) {
@@ -261,17 +257,11 @@ function osha_workflow_approve($node, $vote, $message = NULL, $voter = NULL) {
           $row->approved = intval($vote);
           $row->mesage = $message;
           entity_save('node_approval', $row);
-          if ($last->uid == $row->uid) {
-            return TRUE;
-          }
           continue;
         }
         if ($mark_next) {
           $row->next = 1;
           entity_save('node_approval', $row);
-          if ($last->uid == $row->uid) {
-            return TRUE;
-          }
           break;
         }
       }
@@ -281,7 +271,6 @@ function osha_workflow_approve($node, $vote, $message = NULL, $voter = NULL) {
     $transaction->rollback();
     drupal_set_message($e->getMessage(), 'error');
   }
-  return FALSE;
 }
 
 /**

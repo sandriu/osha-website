@@ -385,6 +385,7 @@ $options['init-modules'] = array(
   'addtoany',
 
   'devel',
+  'devel_node_access',
   'diff',
   'simpletest'
 );

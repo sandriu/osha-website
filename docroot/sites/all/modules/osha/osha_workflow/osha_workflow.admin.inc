@@ -238,17 +238,18 @@ function theme_osha_workflow_approval_form($variables) {
   if (!empty($form['rows'])) {
     foreach (element_children($form['rows']) as $uid) {
       $moderator = $form['rows'][$uid]['#row'];
+      $status = '';
       if (isset($moderator->osha_workflow_node_approval)) {
         $val = $moderator->osha_workflow_node_approval->approved;
-        if ($val === 0) {
-          $status = t('Rejected');
+        if ($val === NULL) {
+          // NULL - not voted yet.
+          $status = t('Waiting for approval');
         }
         elseif ($val == 1) {
           $status = t('Approved');
         }
         else {
-          // NULL - not voted yet.
-          $status = t('Waiting for approval');
+          $status = t('Rejected');
         }
       }
       $row = array();

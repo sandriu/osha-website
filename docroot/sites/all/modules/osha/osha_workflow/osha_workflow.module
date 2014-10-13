@@ -243,7 +243,7 @@ function osha_workflow_node_approval_load_multiple($ids = array(), $conditions =
  * Implements hook_form_alter().
  */
 function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'workbench_moderation_moderate_form') {
+  if ($form_id == 'workbench_moderation_moderate_form' && isset($form['node']['#value'])) {
     $node = $form['node']['#value'];
     $state = $node->workbench_moderation['current']->state;
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
@@ -278,7 +278,7 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
       }
     }
     else {
-      // Add our own validation hook for transitions check
+      // Add our own validation hook for transitions check.
       $form['#validate'][] = 'osha_workflow_workbench_moderation_moderate_form_validate';
     }
   }
@@ -304,6 +304,10 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
   $state = $node->workbench_moderation['current']->state;
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
     osha_workflow_approve($node, OSHA_WORKFLOW_MODERATION_ACCEPT);
+    // This was the last approver, approve.
+    if (osha_workflow_is_last_approver($node)) {
+      workbench_moderation_moderate($node, OSHA_WORKFLOW_STATE_APPROVED);
+    }
   }
 }
 
@@ -316,5 +320,9 @@ function osha_workflow_form_moderate_reject_submit($form, $form_state) {
   $state = $node->workbench_moderation['current']->state;
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
     osha_workflow_approve($node, OSHA_WORKFLOW_MODERATION_REJECT);
+    if (osha_workflow_is_last_approver($node)) {
+      // This was the last approver, reject.
+      workbench_moderation_moderate($node, OSHA_WORKFLOW_STATE_REJECTED);
+    }
   }
 }
