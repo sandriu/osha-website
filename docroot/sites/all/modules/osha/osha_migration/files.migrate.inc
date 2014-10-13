@@ -155,25 +155,23 @@ class OshaMigrateFiles extends DynamicMigration {
     );
     path_save($alias);
 
-    if ($path != '') {
-      //check if source redirect exists
-      $source = $path . '/view';
-      $source_redirects = redirect_load_by_source($source,$language);
+    //check if source redirect exists
+    $source = $path . '/view';
+    $source_redirects = redirect_load_by_source($source,$language);
 
-      if ($source_redirects == FALSE) {
-        // create redirect from file's/view path to file's path
-        $redirect = new stdClass();
-        $redirect->source = $source;                                   // From URL
-        $redirect->source_options = array();
-        $redirect->redirect = 'file/'.$entity->fid;                    // To URL
-        $redirect->redirect_options = array();
-        $redirect->status_code = 0;                                    // Redirect Status
-        $redirect->type = 'redirect';
-        $redirect->language = $language;
+    if ($source_redirects == FALSE) {
+      // create redirect from file's/view path to file's path
+      $redirect = new stdClass();
+      $redirect->source = $source;                                   // From URL
+      $redirect->source_options = array();
+      $redirect->redirect = 'file/'.$entity->fid;                    // To URL
+      $redirect->redirect_options = array();
+      $redirect->status_code = 0;                                    // Redirect Status
+      $redirect->type = 'redirect';
+      $redirect->language = $language;
 
-        // Create the redirect
-        redirect_save($redirect);
-      }
+      // Create the redirect
+      redirect_save($redirect);
     }
   }
 }
