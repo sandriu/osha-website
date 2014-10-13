@@ -189,13 +189,34 @@ function osha_workflow_theme() {
 function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   // Review workflow.
   if ($old == OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
+    // Assign the default PM, if none assigned.
+    if (!osha_workflow_get_project_manager($node->nid)) {
+      $section = current($node->workbench_access);
+      $project_manager = osha_workflow_get_default_project_manager($section);
+      if ($project_manager) {
+        drupal_set_message('Assigned default project manager of this section to the review process');
+        osha_workflow_set_project_manager($node->nid, $project_manager->uid);
+      }
+    }
+    // Assign the default approver list, if none assigned.
+    if (!osha_workflow_get_node_approvers($node->nid, FALSE)) {
+      $approvers = osha_workflow_get_node_approvers($node->nid);
+      if ($approvers) {
+        drupal_set_message('Assigned the default list of approvers for the approval process');
+        $approvers_ids = array_map(function($user) { return $user->uid; }, $approvers);
+        osha_workflow_set_node_approvers($node->nid, $approvers_ids);
+      }
+      else {
+        drupal_set_message('No default approvers defined. Ask administrator to correcrly define the list of approvers.');
+      }
+    }
     OshaWorkflowNotifications::notifyOnChangeFromDraftToFinalDraft($node);
   }
   if ($old != OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_DRAFT) {
     OshaWorkflowNotifications::notifyOnChangeToDraft($node);
   }
-  if ($new == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
-    //
+  if (($old == OSHA_WORKFLOW_STATE_DRAFT || $old == OSHA_WORKFLOW_STATE_FINAL_DRAFT) && $new == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+    OshaWorkflowNotifications::notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node);
   }
   // Approval workflow.
   if ($new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
@@ -302,7 +323,7 @@ function osha_workflow_workbench_moderation_approval_form_validate($form, $form_
   $node = $form_state['values']['node'];
   $state = $form_state['values']['state'];
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-    $approvers = osha_workflow_get_node_approvers($node, FALSE);
+    $approvers = osha_workflow_get_node_approvers($node->nid, FALSE);
     if (empty($approvers)) {
       form_set_error('', t('Cannot change state because the approval queue is empty. Use the approve tab to set the approver list'));
     }

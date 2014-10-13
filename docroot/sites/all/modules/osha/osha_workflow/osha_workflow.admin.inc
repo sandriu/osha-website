@@ -71,23 +71,33 @@ function osha_workflow_workbench_project_managers_form_submit($form, $form_state
 function osha_workflow_node_review_form($form, &$form_state, $node) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   $form_state['node'] = $node;
-  $section = current($node->workbench_access);
   $project_manager = osha_workflow_get_project_manager($node->nid);
-  if (!$project_manager) {
-    $project_manager = osha_workflow_get_default_project_manager($section);
-  }
   $users = osha_workflow_users_get_list_options();
-  if (!$project_manager) {
-    $users = array('' => t('-- Please select --')) + $users;
-  }
-
+  $users = array('' => t('-- Please select --')) + $users;
   $form['#attributes'] = array('class' => array('container-inline'));
-  $form['project_manager'] = array(
-    '#type' => 'select',
-    '#title' => t('Current project manager'),
-    '#options' => $users,
-    '#default_value' => isset($project_manager->uid) ? $project_manager->uid : '',
-  );
+  if ($project_manager) {
+    $form['current'] = array(
+      '#markup' => t(
+        'Current project manager is set to <strong>!pm</strong>.',
+        array('!pm' => $project_manager->name)
+      ),
+    );
+    $form['project_manager'] = array(
+      '#type' => 'select',
+      '#title' => t('Change to'),
+      '#options' => $users,
+      '#default_value' => isset($project_manager->uid) ? $project_manager->uid : '',
+    );
+  }
+  else {
+    $form['current'] = array('#markup' => t('No project manager set.'));
+    $form['project_manager'] = array(
+      '#type' => 'select',
+      '#title' => t('Set to'),
+      '#options' => $users,
+      '#default_value' => isset($project_manager->uid) ? $project_manager->uid : '',
+    );
+  }
   $form['actions'] = array(
     '#type' => 'actions',
     '#weight' => 20,
@@ -140,7 +150,7 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
     $rows = $form_state['rows'];
   }
   else {
-    $rows = osha_workflow_get_node_approvers($node);
+    $rows = osha_workflow_get_node_approvers($node->nid, FALSE);
   }
   $form_state['rows'] = $rows;
 
@@ -243,7 +253,7 @@ function theme_osha_workflow_approval_form($variables) {
         $val = $moderator->osha_workflow_node_approval->approved;
         if ($val === NULL) {
           // NULL - not voted yet.
-          $status = t('Waiting for approval');
+          // $status = t('Waiting for approval');
         }
         elseif ($val == OSHA_WORKFLOW_STATE_APPROVED) {
           $status = t('Approved');
@@ -321,7 +331,7 @@ function osha_workflow_node_approval_form_submit($form, $form_state) {
     }
     ksort($users);
   }
-  osha_workflow_set_node_approvers($node, $users);
+  osha_workflow_set_node_approvers($node->nid, $users);
 }
 
 /**

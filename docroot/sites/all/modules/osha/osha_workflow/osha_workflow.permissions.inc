@@ -110,6 +110,9 @@ function osha_worfklow_permissions_moderator() {
 
     'view own unpublished content',
     'view all unpublished content',
+
+    // Temporary for debugging
+    'access devel information',
   );
 }
 
@@ -142,8 +145,11 @@ function osha_workflow_permissions_role_editor() {
 function osha_workflow_permissions_role_review_manager() {
   $ret = array_merge(
     array(
-      'use workbench_moderation needs review tab',
+      'edit any content in draft',
+      'edit any content in final_draft',
+      'moderate content from draft to final_draft',
 
+      'use workbench_moderation needs review tab',
       'moderate content from final_draft to draft',
       'moderate content from final_draft to needs_review',
       'moderate content from final_draft to to_be_approved',

@@ -99,19 +99,19 @@ function osha_workflow_create_roles() {
 /**
  * Retrieve the list of moderators for a node.
  *
- * @param object $node
- *   Node object to get the data
+ * @param int $nid
+ *   Node ID
  * @param bool $default
  *   If not set yet, return the default values stored in the entity collection.
  *
  * @return array|mixed
  *   Array of users.
  */
-function osha_workflow_get_node_approvers($node, $default = TRUE) {
+function osha_workflow_get_node_approvers($nid, $default = TRUE) {
   $ret = array();
   $query = new EntityFieldQuery();
   $moderators = $query->entityCondition('entity_type', 'node_approval')
-    ->propertyCondition('nid', $node->nid)
+    ->propertyCondition('nid', $nid)
     ->propertyOrderBy('weight')
     ->execute();
   if (!empty($moderators['node_approval'])) {
@@ -139,24 +139,24 @@ function osha_workflow_get_node_approvers($node, $default = TRUE) {
 /**
  * Assign the list of moderators to a node.
  *
- * @param object $node
- *   Node to assign
+ * @param object $nid
+ *   Node ID
  * @param array $moderators
  *   Associative array of user accounts. Keys are weights, values are uids.
  */
-function osha_workflow_set_node_approvers($node, $moderators) {
+function osha_workflow_set_node_approvers($nid, $moderators) {
   $transaction = db_transaction();
   try {
     // Delete old records for this node.
     db_delete('osha_workflow_node_approval')
-      ->condition('nid', $node->nid)
+      ->condition('nid', $nid)
       ->execute();
     $query = db_insert('osha_workflow_node_approval')
       ->fields(array('nid', 'uid', 'next', 'weight'));
     $i = 0;
     foreach ($moderators as $weight => $uid) {
       $record = array(
-        'nid' => $node->nid,
+        'nid' => $nid,
         'uid' => $uid,
         'next' => $i == 0 ? 1 : 0,
         'weight' => $weight,
@@ -213,7 +213,7 @@ function osha_workflow_is_last_approver($node, $user = NULL) {
   if (empty($user)) {
     global $user;
   }
-  $all_users = osha_workflow_get_node_approvers($node, FALSE);
+  $all_users = osha_workflow_get_node_approvers($node->nid, FALSE);
   if (!empty($all_users)) {
     $last = array_pop($all_users);
     $ret = $user->uid == $last->uid;
@@ -354,7 +354,7 @@ class OshaWorkflowNotifications {
    *   User vote
    */
   public static function notifyOnAcceptOrReject($node, $vote) {
-    drupal_set_message("NOT IMPLEMENTED: Notify 'Review Manager' and the PM about node/{$node->nid} being $vote");
+    drupal_set_message("Notify 'Review Manager' and the PM about node/{$node->nid} being $vote");
   }
 
   /**
@@ -366,7 +366,7 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeFromDraftToFinalDraft($node) {
-    drupal_set_message("NOT IMPLEMENTED (REV_EE_US_03): Notify corresponding 'Review Manager' that node/{$node->nid} is now in final draft");
+    drupal_set_message("(REV_EE_US_03): Notify corresponding 'Review Manager' that node/{$node->nid} is now in final draft");
   }
 
   /**
@@ -378,6 +378,18 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeToDraft($node) {
-    drupal_set_message("NOT IMPLEMENTED (REV_EE_US_05): Notify Editors the node/{$node->nid} is back in draft");
+    drupal_set_message("(REV_EE_US_05): Notify Editors the node/{$node->nid} is back in draft");
+  }
+
+  /**
+   * Notify Editor the content was set to Draft.
+   *
+   * REV_EE_US_05
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
+    drupal_set_message("Notify the Project Manager the node/{$node->nid} is needs to be reviewed");
   }
 }
