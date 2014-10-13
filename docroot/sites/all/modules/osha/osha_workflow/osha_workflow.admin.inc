@@ -113,7 +113,6 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
   }
 
   $form['#attributes'] = array('class' => array('container-inline'));
-  $form['#submit'] = array('osha_workflow_node_review_form_submit');
   $form['project_manager'] = array(
     '#type' => 'select',
     '#title' => t('Current project manager'),
@@ -132,15 +131,23 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
 }
 
 /**
- * Implements hook_form_submit().
+ * Form validation for osha_workflow_node_review_form.
+ */
+function osha_workflow_node_review_form_validate($form, $form_state) {
+  if (empty($form_state['values']['project_manager'])) {
+    form_set_error('', t('Please assign a project manager'));
+  }
+}
+
+
+/**
+ * Form submission for osha_workflow_node_review_form.
  */
 function osha_workflow_node_review_form_submit($form, $form_state) {
   $node = $form_state['node'];
   $uid = $form_state['values']['project_manager'];
   osha_workflow_set_project_manager($node->nid, $uid);
 }
-
-
 
 /**
  * Build the table with moderators.
