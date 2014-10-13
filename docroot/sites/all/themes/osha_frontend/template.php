@@ -243,8 +243,8 @@ function osha_frontend_process_node(&$vars) {
     $vars['content']['links']['node']['#links']['node-readmore']['title'] = t('Show details');
   }
 
-  //insert views blocks
-  add_blocks_inside_content($vars);
+  /*insert views blocks - disabled for the moment
+  add_blocks_inside_content($vars);*/
 }
 
 /**
