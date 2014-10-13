@@ -38,7 +38,6 @@ function drush_osha_workflow_osha_create_users() {
     'review_manager' => 'Review Manager',
     'project_manager' => 'Project Manager',
     'approver' => 'Approver',
-    'final_approver' => 'Final Approver',
     'content_administrator' => 'Content Administrator',
   );
 
@@ -58,6 +57,7 @@ function drush_osha_workflow_osha_create_users() {
         $role->rid => $role_name,
       ),
     );
+    drush_log('Users created ...');
     user_save(NULL, $fields);
   }
 }
