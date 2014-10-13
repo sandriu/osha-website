@@ -95,22 +95,22 @@ function osha_workflow_moderation_access($moderation_type, $node) {
  */
 function osha_workflow_entity_info() {
   return array(
-    'moderation_item' => array(
-      'label' => t('Moderation item'),
-      'module' => 'osha_workflow',
-      'controller class' => 'OshaWorkflowModerationItemController',
-      'base table' => 'moderation_item',
-      'entity keys' => array(
-        'id' => 'miid',
-      ),
-    ),
-    'osha_workflow_reviewer' => array(
+    'node_project_managers' => array(
       'label' => t('Node project manager'),
       'module' => 'osha_workflow',
       'controller class' => 'OshaWorkflowProjectManagerEntityController',
       'base table' => 'osha_workflow_node_project_managers',
       'entity keys' => array(
         'id' => 'npmid',
+      ),
+    ),
+    'node_approval' => array(
+      'label' => t('Moderation item'),
+      'module' => 'osha_workflow',
+      'controller class' => 'OshaWorkflowModerationItemController',
+      'base table' => 'osha_workflow_node_approval',
+      'entity keys' => array(
+        'id' => 'apid',
       ),
     ),
   );
@@ -190,7 +190,7 @@ function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
 }
 
 /**
- * Load a single moderation_item entity.
+ * Load a single node_approval entity.
  *
  * @param int $id
  *   Primary key
@@ -201,13 +201,13 @@ function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
  *   An array of entity objects indexed by their ids. When no results are
  *   found, an empty array is returned.
  */
-function disabled_osha_workflow_moderation_item_load($id, $reset = FALSE) {
-  $ret = entity_load('moderation_item', array($id), array(), $reset);
+function disabled_osha_workflow_node_approval_load($id, $reset = FALSE) {
+  $ret = entity_load('node_approval', array($id), array(), $reset);
   return reset($ret);
 }
 
 /**
- * Load moderation_item entities from database.
+ * Load node_approval entities from database.
  *
  * @param array $ids
  *   An array of entity IDs, or FALSE to load all entities.
@@ -223,8 +223,8 @@ function disabled_osha_workflow_moderation_item_load($id, $reset = FALSE) {
  *   An array of entity objects indexed by their ids. When no results are
  *   found, an empty array is returned.
  */
-function osha_workflow_moderation_item_load_multiple($ids = array(), $conditions = array(), $reset = FALSE) {
-  return entity_load('moderation_item', $ids, $conditions, $reset);
+function osha_workflow_node_approval_load_multiple($ids = array(), $conditions = array(), $reset = FALSE) {
+  return entity_load('node_approval', $ids, $conditions, $reset);
 }
 
 

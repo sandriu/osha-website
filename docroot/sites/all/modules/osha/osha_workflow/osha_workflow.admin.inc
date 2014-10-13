@@ -112,7 +112,6 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
     array_unshift($users, array('' => t('-- Please select --')));
   }
 
-
   $form['#attributes'] = array('class' => array('container-inline'));
   $form['#submit'] = array('osha_workflow_node_review_form_submit');
   $form['project_manager'] = array(

@@ -98,11 +98,11 @@ function osha_workflow_schema() {
     ),
   );
 
-  $schema['moderation_item'] = array(
-    'description' => 'Base table for moderation_item entity',
+  $schema['osha_workflow_node_approval'] = array(
+    'description' => 'Base table for node approval entity',
     'fields' => array(
-      'miid' => array(
-        'description' => 'Identifier for the moderation item',
+      'apid' => array(
+        'description' => 'Identifier for the approved item',
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
@@ -111,18 +111,6 @@ function osha_workflow_schema() {
         'description' => 'Moderated node ID (nid)',
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'vid' => array(
-        'description' => 'Moderated node version ID (vid)',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'moderation_type' => array(
-        'description' => 'Workflow type: ie. review or approve',
-        'type' => 'varchar',
-        'length' => 128,
         'not null' => TRUE,
       ),
       'uid' => array(
@@ -155,12 +143,12 @@ function osha_workflow_schema() {
         'size' => 'medium',
       ),
     ),
-    'primary key' => array('miid'),
+    'primary key' => array('apid'),
     'indexes' => array(
       'moderator_uid' => array('uid'),
     ),
     'unique keys' => array(
-      'moderation_unique' => array('nid', 'vid', 'moderation_type', 'uid'),
+      'moderation_unique' => array('nid', 'uid'),
     ),
     'foreign keys' => array(
       'uid' => array(
@@ -170,10 +158,6 @@ function osha_workflow_schema() {
       'nid' => array(
         'table' => 'node',
         'columns' => array('nid' => 'nid'),
-      ),
-      'vid' => array(
-        'table' => 'node_revision',
-        'columns' => array('vid' => 'vid'),
       ),
     ),
   );
