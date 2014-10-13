@@ -109,7 +109,7 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
   }
   $users = osha_workflow_users_get_list_options();
   if (!$project_manager) {
-    array_unshift($users, array('' => t('-- Please select --')));
+    $users = array('' => t('-- Please select --')) + $users;
   }
 
   $form['#attributes'] = array('class' => array('container-inline'));

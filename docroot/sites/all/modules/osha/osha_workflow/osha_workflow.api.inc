@@ -4,7 +4,7 @@
  * Retrieve the list of default moderators stored in entity_collection.
  *
  * @param string $type
- *   Type of moderators (see moderation_item.type)
+ *   Type of moderators (see osha_workflow_node_approval.type)
  *
  * @return mixed
  *   Array of user accounts, ordered by weight in the collection.
@@ -125,7 +125,7 @@ function osha_workflow_assign_users($node, $moderation_type) {
         'approved' => NULL,
         'weight' => $weight,
       );
-      db_merge('moderation_item')
+      db_merge('osha_workflow_node_approval')
         ->key(array(
           'nid' => $node->nid,
           'vid' => $node->vid,
@@ -159,15 +159,15 @@ function osha_workflow_assign_users($node, $moderation_type) {
 function osha_workflow_get_node_moderators($node, $moderation_type, $default = TRUE) {
   $ret = array();
   $query = new EntityFieldQuery();
-  $moderators = $query->entityCondition('entity_type', 'moderation_item')
+  $moderators = $query->entityCondition('entity_type', 'osha_workflow_node_approval')
     ->propertyCondition('nid', $node->nid)
     ->propertyCondition('vid', $node->vid)
     ->propertyCondition('moderation_type', $moderation_type)
     ->propertyOrderBy('weight')
     ->execute();
-  if (!empty($moderators['moderation_item'])) {
-    $ids = array_keys($moderators['moderation_item']);
-    $rows = osha_workflow_moderation_item_load_multiple($ids);
+  if (!empty($moderators['osha_workflow_node_approval'])) {
+    $ids = array_keys($moderators['osha_workflow_node_approval']);
+    $rows = osha_workflow_node_approval_load_multiple($ids);
     $uids = array();
     foreach ($rows as $row) {
       $uids[] = $row->uid;
@@ -203,9 +203,9 @@ function osha_workflow_set_node_moderators($node, $moderators, $moderation_type)
       ->condition('nid', $node->nid)
       ->condition('vid', $node->vid)
       ->condition('moderation_type', $moderation_type);
-    db_delete('moderation_item')->condition($and)->execute();
+    db_delete('osha_workflow_node_approval')->condition($and)->execute();
 
-    $query = db_insert('moderation_item')
+    $query = db_insert('osha_workflow_node_approval')
       ->fields(array('nid', 'vid', 'moderation_type', 'uid', 'next', 'weight'));
     $i = 0;
     foreach ($moderators as $weight => $uid) {
@@ -242,15 +242,15 @@ function osha_workflow_set_node_moderators($node, $moderators, $moderation_type)
 function osha_workflow_get_next_moderator($node, $moderation_type) {
   $ret = NULL;
   $query = new EntityFieldQuery();
-  $moderators = $query->entityCondition('entity_type', 'moderation_item')
+  $moderators = $query->entityCondition('entity_type', 'osha_workflow_node_approval')
     ->propertyCondition('nid', $node->nid)
     ->propertyCondition('vid', $node->vid)
     ->propertyCondition('next', 1)
     ->propertyCondition('moderation_type', $moderation_type)
     ->range(0, 1)
     ->execute();
-  if (!empty($moderators['moderation_item'])) {
-    $rows = osha_workflow_moderation_item_load_multiple(array_keys($moderators['moderation_item']));
+  if (!empty($moderators['osha_workflow_node_approval'])) {
+    $rows = osha_workflow_node_approval_load_multiple(array_keys($moderators['osha_workflow_node_approval']));
     $task = current($rows);
     $ret = user_load($task->uid);
   }
@@ -282,14 +282,14 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
   $transaction = db_transaction();
   try {
     $query = new EntityFieldQuery();
-    $miids = $query->entityCondition('entity_type', 'moderation_item')
+    $miids = $query->entityCondition('entity_type', 'osha_workflow_node_approval')
       ->propertyCondition('nid', $node->nid)
       ->propertyCondition('vid', $node->vid)
       ->propertyCondition('moderation_type', $moderation_type)
       ->propertyOrderBy('weight')
       ->execute();
-    if (isset($miids['moderation_item'])) {
-      $rows = osha_workflow_moderation_item_load_multiple(array_keys($miids['moderation_item']));
+    if (isset($miids['osha_workflow_node_approval'])) {
+      $rows = osha_workflow_node_approval_load_multiple(array_keys($miids['osha_workflow_node_approval']));
       $last = end($rows);
       reset($rows);
       $mark_next = FALSE;
@@ -299,7 +299,7 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
           $row->next = 0;
           $row->approved = intval($vote);
           $row->mesage = $message;
-          entity_save('moderation_item', $row);
+          entity_save('osha_workflow_node_approval', $row);
           if ($last->uid == $row->uid) {
             return TRUE;
           }
@@ -307,7 +307,7 @@ function osha_workflow_moderate($node, $moderation_type, $vote, $message = NULL,
         }
         if ($mark_next) {
           $row->next = 1;
-          entity_save('moderation_item', $row);
+          entity_save('osha_workflow_node_approval', $row);
           if ($last->uid == $row->uid) {
             return TRUE;
           }
