@@ -9,6 +9,16 @@
  */
 function osha_workflow_workbench_moderation_export_transitions() {
   $items = array(
+    'approved:ready_to_publish' => array(
+      'from_name' => 'approved',
+      'to_name' => 'ready_to_publish',
+      'name' => 'Content approved and ready to publish',
+    ),
+    'approved:final_draft' => array(
+      'from_name' => 'approved',
+      'to_name' => 'final_draft',
+      'name' => 'Content rejected by the Project Manager',
+    ),
     'draft:final_draft' => array(
       'from_name' => 'draft',
       'to_name' => 'final_draft',
@@ -53,11 +63,6 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'from_name' => 'to_be_approved',
       'to_name' => 'approved',
       'name' => 'Approving',
-    ),
-    'to_be_approved:ready_to_publish' => array(
-      'from_name' => 'to_be_approved',
-      'to_name' => 'ready_to_publish',
-      'name' => 'Content approved and ready to publish',
     ),
     'to_be_approved:rejected' => array(
       'from_name' => 'to_be_approved',

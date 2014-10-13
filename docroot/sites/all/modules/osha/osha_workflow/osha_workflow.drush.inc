@@ -38,7 +38,6 @@ function drush_osha_workflow_osha_create_users() {
     'review_manager' => 'Review Manager',
     'project_manager' => 'Project Manager',
     'approver' => 'Approver',
-    'content_administrator' => 'Content Administrator',
   );
 
   foreach ($users as $username => $role_name) {

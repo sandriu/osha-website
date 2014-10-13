@@ -119,15 +119,19 @@ function osha_worfklow_permissions_moderator() {
  *   Permissions
  */
 function osha_workflow_permissions_role_editor() {
-  return array(
-    'edit any content in draft',
-    'moderate content from draft to final_draft',
-    'edit any content in published',
-  )
-  + osha_workflow_permissions_common()
-  + osha_workflow_permissions_manage_content()
-  + osha_workflow_permissions_download_file_entities()
-  + osha_worfklow_permissions_moderator();
+  $ret = array_merge(
+    array(
+      'edit any content in draft',
+      'edit any content in published',
+
+      'moderate content from draft to final_draft',
+    ),
+    osha_workflow_permissions_common(),
+    osha_workflow_permissions_manage_content(),
+    osha_workflow_permissions_download_file_entities(),
+    osha_worfklow_permissions_moderator()
+  );
+  return $ret;
 }
 
 /**
@@ -136,13 +140,20 @@ function osha_workflow_permissions_role_editor() {
  *   Permissions
  */
 function osha_workflow_permissions_role_review_manager() {
-  return array(
-    'use workbench_moderation needs review tab',
-  )
-  + osha_workflow_permissions_common()
-  + osha_workflow_permissions_manage_content()
-  + osha_workflow_permissions_download_file_entities()
-  + osha_worfklow_permissions_moderator();
+  $ret = array_merge(
+    array(
+      'use workbench_moderation needs review tab',
+
+      'moderate content from final_draft to draft',
+      'moderate content from final_draft to needs_review',
+      'moderate content from final_draft to to_be_approved',
+    ),
+    osha_workflow_permissions_common(),
+    osha_workflow_permissions_manage_content(),
+    osha_workflow_permissions_download_file_entities(),
+    osha_worfklow_permissions_moderator()
+  );
+  return $ret;
 }
 
 
@@ -152,13 +163,19 @@ function osha_workflow_permissions_role_review_manager() {
  *   Permissions
  */
 function osha_workflow_permissions_role_project_manager() {
-  return array(
-    'use workbench_moderation needs review tab',
-  )
-  + osha_workflow_permissions_common()
-  + osha_workflow_permissions_manage_content()
-  + osha_workflow_permissions_download_file_entities()
-  + osha_worfklow_permissions_moderator();
+  $ret = array_merge(
+    array(
+      'use workbench_moderation needs review tab',
+
+      'moderate content from approved to ready_to_publish',
+      'moderate content from approved to final_draft',
+    ),
+    osha_workflow_permissions_common(),
+    osha_workflow_permissions_manage_content(),
+    osha_workflow_permissions_download_file_entities(),
+    osha_worfklow_permissions_moderator()
+  );
+  return $ret;
 }
 
 /**
@@ -167,11 +184,17 @@ function osha_workflow_permissions_role_project_manager() {
  *   Permissions
  */
 function osha_workflow_permissions_role_approver() {
-  return array(
-    'use workbench_moderation needs review tab',
-  )
-  + osha_workflow_permissions_common()
-  + osha_workflow_permissions_manage_content()
-  + osha_workflow_permissions_download_file_entities()
-  + osha_worfklow_permissions_moderator();
+  $ret = array_merge(
+    array(
+      'use workbench_moderation needs review tab',
+
+      'moderate content from to_be_approved to approved',
+      'moderate content from to_be_approved to rejected',
+    ),
+    osha_workflow_permissions_common(),
+    osha_workflow_permissions_manage_content(),
+    osha_workflow_permissions_download_file_entities(),
+    osha_worfklow_permissions_moderator()
+  );
+  return $ret;
 }
