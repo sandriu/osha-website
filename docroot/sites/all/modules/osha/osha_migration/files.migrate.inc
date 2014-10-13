@@ -161,7 +161,7 @@ class OshaMigrateFiles extends DynamicMigration {
       $source_redirects = redirect_load_by_source($source,$language);
 
       if ($source_redirects == FALSE) {
-        // create redirect from publication's/view path to publication's path
+        // create redirect from file's/view path to file's path
         $redirect = new stdClass();
         $redirect->source = $source;                                   // From URL
         $redirect->source_options = array();
