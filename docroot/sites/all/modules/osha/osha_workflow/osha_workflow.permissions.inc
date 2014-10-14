@@ -174,6 +174,7 @@ function osha_workflow_permissions_role_project_manager() {
       'use osh needs review tab',
 
       'moderate content from needs_review to final_draft',
+      'edit any content in approved',
 
       'moderate content from needs_review to to_be_approved',
       'moderate content from needs_review to ready_to_publish',

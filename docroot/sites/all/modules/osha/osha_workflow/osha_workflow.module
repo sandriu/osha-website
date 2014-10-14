@@ -210,12 +210,12 @@ function osha_workflow_permission() {
  */
 function osha_workflow_node_access($node, $operation, $user) {
   if (isset($node->workbench_moderation) && $operation == 'update') {
+    $state = $node->workbench_moderation['current']->state;
     if (variable_get('workbench_moderation_per_node_type', FALSE)
         && !user_access('edit any content in ' . $node->workbench_moderation['current']->state, $user)) {
       return NODE_ACCESS_DENY;
     }
     // Do not allow edit for approvers that already reviewed.
-    $state = $node->workbench_moderation['current']->state;
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
       $approvers = osha_workflow_get_node_approvers($node->nid, FALSE);
       foreach ($approvers as $approver) {
