@@ -26,17 +26,6 @@ define('OSHA_WORKFLOW_STATE_READY_TO_PUBLISH', 'ready_to_publish');
 define('OSHA_WORKFLOW_STATE_PUBLISHED', 'published');
 
 /**
- * Implements hook_views_api().
- */
-function osha_workflow_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'osha_workflow'),
-    'template path' => drupal_get_path('module', 'osha_workflow'),
-  );
-}
-
-/**
  * Implements hook_menu().
  */
 function osha_workflow_menu() {
@@ -209,6 +198,10 @@ function osha_workflow_permission() {
       'title' => t('Edit any content in @state', array('@state' => $state->label)),
     );
   }
+
+  $permissions['use osh needs review tab'] = array('title' => t('Use OSHA Workflow Needs Review tab in Workbench dashboard'));
+  $permissions['use osh approvals tab'] = array('title' => t('Use OSHA Workflow My Approvals tab in Workbench dashboard'));
+
   return $permissions;
 }
 

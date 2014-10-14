@@ -17,6 +17,13 @@ function osha_workflow_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function osha_workflow_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
  * Implements hook_default_entity_collection().
  */
 function osha_workflow_default_entity_collection() {
