@@ -53,6 +53,9 @@ function osha_workflow_install() {
 function osha_workflow_update_7001() {
   module_load_include('module', 'osha_workflow');
   osha_workflow_create_roles();
+  if ($role = user_role_load_by_name('administrator')) {
+    user_role_revoke_permissions($role->rid, array('use workbench_moderation needs review tab'));
+  }
 }
 
 /**

@@ -71,6 +71,7 @@ function osha_configure_permissions() {
     $permissions[] = 'manage content in moderators_group entity collections';
 
     user_role_grant_permissions($role->rid, $permissions);
+    user_role_revoke_permissions($role->rid, array('use workbench_moderation needs review tab'));
   }
 }
 

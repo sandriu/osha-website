@@ -473,7 +473,7 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
-    drupal_set_message("Notify the Project Manager the node/{$node->nid} is needs to be reviewed");
+    drupal_set_message("Notify the Project Manager of {SECTION} the node/{$node->nid} is needs to be reviewed");
   }
 
   /**

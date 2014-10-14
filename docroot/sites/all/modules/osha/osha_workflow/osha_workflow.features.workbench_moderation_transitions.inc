@@ -44,10 +44,10 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'to_name' => 'to_be_approved',
       'name' => 'Skip Review process',
     ),
-    'needs_review:draft' => array(
+    'needs_review:final_draft' => array(
       'from_name' => 'needs_review',
-      'to_name' => 'draft',
-      'name' => 'Rejecting Final Draft',
+      'to_name' => 'final_draft',
+      'name' => 'Content reviewed rejected by the Project Manager',
     ),
     'needs_review:ready_to_publish' => array(
       'from_name' => 'needs_review',
