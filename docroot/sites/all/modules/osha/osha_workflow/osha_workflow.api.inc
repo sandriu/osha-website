@@ -437,7 +437,9 @@ class OshaWorkflowPermissions {
   }
 }
 
-
+/**
+ * Class OshaWorkflowNotifications sends notifications for workflow transitions.
+ */
 class OshaWorkflowNotifications {
 
   /**
@@ -449,7 +451,7 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeFromDraftToFinalDraft($node) {
-    drupal_set_message("(REV_EE_US_03): Notify corresponding 'Review Manager' that node/{$node->nid} is now in final draft");
+    drupal_set_message("[[EMAIL]@to:all RM] (REV_EE_US_03): Notify 'Review Manager' node/{$node->nid} is now in FinalDraft");
   }
 
   /**
@@ -461,7 +463,7 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeToDraft($node) {
-    drupal_set_message("(REV_EE_US_05): Notify Editors the node/{$node->nid} is back in draft");
+    drupal_set_message("[[EMAIL]@to:Node author] (REV_EE_US_05): Notify Editor {$node->uid}(?) the node/{$node->nid} is back in Draft");
   }
 
   /**
@@ -473,7 +475,7 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
-    drupal_set_message("Notify the Project Manager of {SECTION} the node/{$node->nid} is needs to be reviewed");
+    drupal_set_message("[[EMAIL]@to:PM] Notify the Project Manager of [[SECTION]] the node/{$node->nid} is needs to be reviewed");
   }
 
   /**
@@ -484,26 +486,54 @@ class OshaWorkflowNotifications {
    */
   public static function notifyNextApproverToTakeAction($node) {
     $next = osha_workflow_get_next_approver($node->nid);
-    drupal_set_message("(REV_EE_US_05): Notify next approver <b>{$next->name}</b>, the <b>node/{$node->nid}</b> is was reviewed and is his turn");
+    drupal_set_message("[[EMAIL]@to:next Approver] (REV_EE_US_05): Notify next approver <b>{$next->name}</b>, the <b>node/{$node->nid}</b> is was reviewed and is his turn");
   }
 
   /**
-   * Send notification to the next approver.
+   * Notification sent when Node was accepted by the last approver.
+   *
+   * (ToBeApproved => Approved)
    *
    * @param object $node
    *   Affected node
    */
   public static function notifyOnNodeApproved($node) {
-    drupal_set_message("Notify 'Review Manager' and the PM about node/{$node->nid} being approved");
+    drupal_set_message("[[EMAIL]@to:RMs, PM for that section] LastApprover set node/{$node->nid} to Approved");
   }
 
   /**
-   * Send notification to the next approver.
+   * Notification sent when Node was rejected by the last approver.
+   *
+   * (ToBeApproved => Rejected)
    *
    * @param object $node
    *   Affected node
    */
   public static function notifyOnNodeRejected($node) {
-    drupal_set_message("Notify 'Review Manager' and the PM about node/{$node->nid} being rejected");
+    drupal_set_message("[[EMAIL]@to:RMs, PM for that section] LastApprover set node/{$node->nid} to Rejected");
+  }
+
+  /**
+   * Notification sent when the node was rejected by PM.
+   *
+   * (Approved => FinalDraft)
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyNodeRejectedFromApprovedToFinalDraft($node) {
+    drupal_set_message("[[EMAIL]@to:RMs] Notify 'Review Managers' that PM rejected node/{$node->nid} in Final Draft");
+  }
+
+  /**
+   * Notification sent when the node is ready to be published.
+   *
+   * (Approved => ReadyToPublish)
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyNodeIsReadyToPublish($node) {
+    drupal_set_message("[[EMAIL]@to:Administrators] Notify 'Administators' (WebTeam) that PM set node/{$node->nid} in ReadyToPublish");
   }
 }

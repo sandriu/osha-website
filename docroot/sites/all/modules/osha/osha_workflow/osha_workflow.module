@@ -291,6 +291,12 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
       OshaWorkflowNotifications::notifyOnNodeRejected($node);
     }
   }
+  if ($old == OSHA_WORKFLOW_STATE_APPROVED && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
+    OshaWorkflowNotifications::notifyNodeRejectedFromApprovedToFinalDraft($node);
+  }
+  if ($old == OSHA_WORKFLOW_STATE_APPROVED && $new == OSHA_WORKFLOW_STATE_READY_TO_PUBLISH) {
+    OshaWorkflowNotifications::notifyNodeIsReadyToPublish($node);
+  }
 }
 
 /**
