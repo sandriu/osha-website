@@ -227,7 +227,11 @@ function osha_workflow_node_access($node, $operation, $user) {
         }
       }
     }
+    if ($state == OSHA_WORKFLOW_STATE_DRAFT && $node->revision_uid != $user->uid) {
+      return NODE_ACCESS_DENY;
+    }
   }
+
   return NODE_ACCESS_IGNORE;
 }
 
@@ -265,8 +269,7 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
       $approvers = osha_workflow_get_node_approvers($node->nid);
       if ($approvers) {
         drupal_set_message('Assigned the default list of approvers for the approval process');
-        $approvers_ids = array_map(function($user) { return $user->uid; }, $approvers);
-        osha_workflow_set_node_approvers($node->nid, $approvers_ids);
+        osha_workflow_set_node_approvers($node->nid, array_keys($approvers));
       }
       else {
         drupal_set_message('No default approvers defined. Ask administrator to correcrly define the list of approvers.');
