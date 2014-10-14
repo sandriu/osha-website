@@ -165,6 +165,16 @@ function osha_workflow_node_access($node, $operation, $user) {
         && !user_access('edit any content in ' . $node->workbench_moderation['current']->state, $user)) {
       return NODE_ACCESS_DENY;
     }
+    // Do not allow edit for approvers that already reviewed.
+    $state = $node->workbench_moderation['current']->state;
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      $approvers = osha_workflow_get_node_approvers($node->nid, FALSE);
+      foreach ($approvers as $approver) {
+        if ($user->uid == $approver->uid && $approver->osha_workflow_node_approval->next != 1) {
+          return NODE_ACCESS_DENY;
+        }
+      }
+    }
   }
   return NODE_ACCESS_IGNORE;
 }
@@ -209,6 +219,9 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
       else {
         drupal_set_message('No default approvers defined. Ask administrator to correcrly define the list of approvers.');
       }
+    } else {
+      // Reset existing users.
+      osha_workflow_reset_node_approvers($node->nid);
     }
     OshaWorkflowNotifications::notifyOnChangeFromDraftToFinalDraft($node);
   }
@@ -218,9 +231,13 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   if (($old == OSHA_WORKFLOW_STATE_DRAFT || $old == OSHA_WORKFLOW_STATE_FINAL_DRAFT) && $new == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
     OshaWorkflowNotifications::notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node);
   }
-  // Approval workflow.
-  if ($new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-    //
+  if ($old == OSHA_WORKFLOW_STATE_TO_BE_APPROVED && ($new == OSHA_WORKFLOW_STATE_APPROVED || $new == OSHA_WORKFLOW_STATE_REJECTED)) {
+    if ($new == OSHA_WORKFLOW_STATE_APPROVED) {
+      OshaWorkflowNotifications::notifyOnNodeApproved($node);
+    }
+    else {
+      OshaWorkflowNotifications::notifyOnNodeRejected($node);
+    }
   }
 }
 
@@ -232,40 +249,22 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
 function osha_workflow_workbench_moderation_states_next_alter(&$states, $current_state, $context) {
   if ($current_state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
     $node = $context['node'];
+    $user = $context['account'];
     // Approver cannot change state of the current revision (which is TBA).
-    if ($next_approver = osha_workflow_get_next_approver($node->nid)) {
-      // Last approver needs the edit form for Accept/Reject
-      if (!osha_workflow_is_last_approver($node)) {
-        $user = $context['account'];
-        if ($user->uid == $next_approver->uid) {
-          $states = array();
-        }
+    $next_approver = osha_workflow_get_next_approver($node->nid);
+    $is_next_approver = isset($next_approver->uid) && $user->uid == $next_approver->uid;
+    $is_last_approver = osha_workflow_is_last_approver($node);
+    // Hide form for next approver (but not for last).
+    if ($is_next_approver && !$is_last_approver) {
+//      $states = array();
+    }
+    else {
+      if ($is_last_approver && !$is_next_approver) {
+  //      $states = array();
       }
     }
   }
 }
-
-/**
- * Implements hook_node_presave().
- *
- * {@inheritdoc}
- */
-function osha_workflow_node_presave($node) {
-  $state_current = isset($node->workbench_moderation_state_current) ? $node->workbench_moderation_state_current : NULL;
-  $state_new = isset($node->workbench_moderation_state_new) ? $node->workbench_moderation_state_new : NULL;
-  if ($state_new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED && $state_current == $state_new) {
-    if ($next_approver = osha_workflow_get_next_approver($node->nid)) {
-      if ($next_approver != osha_workflow_is_last_approver($node)) {
-        global $user;
-        if ($user->uid == $next_approver->uid) {
-          drupal_set_message('The control is passed to the next approver');
-          osha_workflow_approve($node, OSHA_WORKFLOW_STATE_APPROVED);
-        }
-      }
-    }
-  }
-}
-
 
 /**
  * Implements hook_workbench_moderation_access_alter().
@@ -275,6 +274,32 @@ function osha_workflow_node_presave($node) {
 function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
   if ($op == 'view revisions' && user_access('view revisions')) {
     $access = 1;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'workbench_moderation_moderate_form' && isset($form['node']['#value'])) {
+    $node = $form['node']['#value'];
+    $state = $node->workbench_moderation['current']->state;
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      if (!osha_workflow_is_last_approver($node)) {
+        global $user;
+        if ($next = osha_workflow_get_next_approver($node->nid)) {
+          if ($user->uid == $next->uid) {
+            // Hijack the form & add Done button
+            hide($form['state']);
+            $form['submit'] = array(
+              '#type' => 'submit',
+              '#value' => t('Done'),
+              '#submit' => array('osha_workflow_form_moderate_approve_submit'),
+            );
+          }
+        }
+      }
+    }
   }
 }
 
@@ -316,58 +341,6 @@ function osha_workflow_node_approval_load_multiple($ids = array(), $conditions =
   return entity_load('node_approval', $ids, $conditions, $reset);
 }
 
-
-/**
- * Implements hook_form_alter().
- */
-function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'workbench_moderation_moderate_form' && isset($form['node']['#value'])) {
-    $node = $form['node']['#value'];
-    $state = $node->workbench_moderation['current']->state;
-    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-      if ($current_moderator = osha_workflow_is_last_approver($node)) {
-        global $user;
-        if ($next = osha_workflow_get_next_approver($node->nid)) {
-          if ($user->uid == $next->uid) {
-            // Hijack the form & modify for voting purposes.
-            hide($form['state']);
-            $form['submit'] = array(
-              '#type' => 'submit',
-              '#value' => t('Approve'),
-              '#submit' => array('osha_workflow_form_moderate_approve_submit'),
-            );
-            $form['reject'] = array(
-              '#type' => 'submit',
-              '#value' => t('Reject'),
-              '#submit' => array('osha_workflow_form_moderate_reject_submit'),
-            );
-            $form['message'] = array(
-              '#type' => 'textfield',
-              '#prefix' => '<div>',
-              '#title' => t('Leave a moderation message'),
-              '#resizable' => FALSE,
-              '#required' => FALSE,
-              '#attributes' => array(
-                'placeholder' => t('You can leave a note here'),
-              ),
-              '#suffix' => '<div>',
-            );
-            unset($form['message']);
-          }
-        }
-      }
-      else {
-        $form['state']['#access'] = FALSE;
-        $form['submit']['#access'] = FALSE;
-      }
-//      else {
-//        // Add our own validation hook for transitions check.
-//        $form['#validate'][] = 'osha_workflow_workbench_moderation_approval_form_validate';
-//      }
-    }
-  }
-}
-
 function osha_workflow_workbench_moderation_approval_form_validate($form, $form_state) {
   $node = $form_state['values']['node'];
   $state = $form_state['values']['state'];
@@ -388,27 +361,6 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
   $state = $node->workbench_moderation['current']->state;
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
     osha_workflow_approve($node, OSHA_WORKFLOW_STATE_APPROVED);
-    // This was the last approver, approve.
-    if (osha_workflow_is_last_approver($node)) {
-      OshaWorkflowNotifications::notifyOnAcceptOrReject($node, OSHA_WORKFLOW_STATE_APPROVED);
-      workbench_moderation_moderate($node, OSHA_WORKFLOW_STATE_APPROVED);
-    }
-  }
-}
-
-/**
- * Submit form hook for vote - when rejecting.
- */
-function osha_workflow_form_moderate_reject_submit($form, $form_state) {
-  $values = $form_state['values'];
-  $node = $values['node'];
-  $state = $node->workbench_moderation['current']->state;
-  if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-    osha_workflow_approve($node, OSHA_WORKFLOW_STATE_REJECTED);
-    if (osha_workflow_is_last_approver($node)) {
-      // This was the last approver, reject.
-      OshaWorkflowNotifications::notifyOnAcceptOrReject($node, OSHA_WORKFLOW_STATE_REJECTED);
-      workbench_moderation_moderate($node, OSHA_WORKFLOW_STATE_REJECTED);
-    }
+    OshaWorkflowNotifications::notifyNextApproverToTakeAction($node);
   }
 }

@@ -128,6 +128,7 @@ function osha_workflow_get_node_approvers($nid, $default = TRUE) {
       $user->osha_workflow_node_approval = $rows_by_uid[$user->uid];
       $user->osha_workflow_node_approval_saved = TRUE;
     }
+    reset($users);
     return $users;
   }
   elseif ($default) {
@@ -165,6 +166,46 @@ function osha_workflow_set_node_approvers($nid, $moderators) {
       $i++;
     }
     $query->execute();
+  }
+  catch(Exception $e) {
+    $transaction->rollback();
+    drupal_set_message($e->getMessage(), 'error');
+  }
+}
+
+/**
+ * Reset voting status and next in line approval queue.
+ *
+ * @param int $nid
+ *   Affected node ID
+ */
+function osha_workflow_reset_node_approvers($nid) {
+  $transaction = db_transaction();
+  try {
+    $rows = osha_workflow_get_node_approvers($nid, FALSE);
+    $first = NULL;
+    if (!empty($rows)) {
+      $first = current($rows);
+    }
+    // Reset all of them to defaults.
+    db_update('osha_workflow_node_approval')
+      ->fields(array(
+        'approved' => NULL,
+        'next' => 0,
+      ))
+      ->condition('nid', $nid)
+      ->execute();
+
+    if ($first) {
+      // Assign 'next' to first one in line.
+      db_update('osha_workflow_node_approval')
+        ->fields(array(
+          'next' => 1,
+        ))
+        ->condition('nid', $nid)
+        ->condition('uid', $first->uid)
+        ->execute();
+    }
   }
   catch(Exception $e) {
     $transaction->rollback();
@@ -220,6 +261,23 @@ function osha_workflow_is_last_approver($node, $user = NULL) {
   }
   return $ret;
 }
+
+/**
+ * Verifies if user has approved the workflow.
+ * @param $nid
+ * @param $uid
+ * @return bool
+ */
+function osha_workflow_has_approved($nid, $uid) {
+  $query = new EntityFieldQuery();
+  $rows = $query->entityCondition('entity_type', 'node_approval')
+    ->propertyCondition('nid', $nid)
+    ->propertyCondition('uid', $uid)
+    ->propertyCondition('approved', array(OSHA_WORKFLOW_STATE_APPROVED, OSHA_WORKFLOW_STATE_REJECTED))
+    ->execute();
+  return !empty($rows['node_approval']);
+}
+
 
 /**
  * Record the user's vote and move the record to the next in queue.
@@ -303,6 +361,7 @@ class OshaWorkflowPermissions {
     return FALSE;
   }
 
+
   /**
    * User has access to the approval screen (tab on node).
    *
@@ -346,18 +405,6 @@ class OshaWorkflowPermissions {
 class OshaWorkflowNotifications {
 
   /**
-   * Notify Review Manager and Project Manager the node was approved/rejected.
-   *
-   * @param object $node
-   *   Affected node
-   * @param string $vote
-   *   User vote
-   */
-  public static function notifyOnAcceptOrReject($node, $vote) {
-    drupal_set_message("Notify 'Review Manager' and the PM about node/{$node->nid} being $vote");
-  }
-
-  /**
    * Notify Review Manager the content was set to final draft.
    *
    * REV_EE_US_03
@@ -391,5 +438,36 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
     drupal_set_message("Notify the Project Manager the node/{$node->nid} is needs to be reviewed");
+  }
+
+  /**
+   * Send notification to the next approver.
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyNextApproverToTakeAction($node) {
+    $next = osha_workflow_get_next_approver($node->nid);
+    drupal_set_message("(REV_EE_US_05): Notify next approver <b>{$next->name}</b>, the <b>node/{$node->nid}</b> is was reviewed and is his turn");
+  }
+
+  /**
+   * Send notification to the next approver.
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyOnNodeApproved($node) {
+    drupal_set_message("Notify 'Review Manager' and the PM about node/{$node->nid} being approved");
+  }
+
+  /**
+   * Send notification to the next approver.
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyOnNodeRejected($node) {
+    drupal_set_message("Notify 'Review Manager' and the PM about node/{$node->nid} being rejected");
   }
 }
