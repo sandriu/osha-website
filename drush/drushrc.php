@@ -268,6 +268,9 @@ $options['init-modules'] = array(
   'i18n_taxonomy',
   'variable',
 
+  // contrib module that add email field
+  'email',
+
   'views',
   'views_ui',
   'views_bulk_operations',
