@@ -1,18 +1,17 @@
 <?php
 
 /**
- * Class OshaMigrateArticles migrates articles data
+ * Class OshaMigrateLegislation migrates legislation articles data
  */
-class OshaMigrateArticles extends OSHADynamicMigration {
+class OshaMigrateLegislation extends OSHADynamicMigration {
 
   /**
    * {@inheritdoc}
    */
   public function __construct($arguments = array()) {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
-    $this->description = 'Import "Articles" contents from CSV file';
+    $this->description = 'Import "Legislation" pages as Articles from CSV file';
     $this->dependencies = array(
-//      OSHA_MIGRATION_TAXONOMY_TAGS,
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
     );
@@ -42,6 +41,8 @@ class OshaMigrateArticles extends OSHADynamicMigration {
         'multilingual_thesaurus' => 'Item Tesaurus tags merged into tags',
         'nace' => 'Item NACE Codes',
         'article_type' => 'Article type taxonomy',
+        'archived' => '',
+        'expiration_date' => '',
       )
     );
 
@@ -49,7 +50,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
       array(
         'id' => array(
           'type' => 'varchar',
-          'length' => 200,
+          'length' => 255,
           'not null' => TRUE,
           'description' => 'Item code',
         ),
@@ -70,6 +71,8 @@ class OshaMigrateArticles extends OSHADynamicMigration {
     $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_image:destination_file', 'relatedItems');
     $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
+    $this->addFieldMapping('field_archived', 'archived');
+    $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -127,7 +130,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
    * {@inheritdoc}
    */
   protected function generateMachineName() {
-    return OSHA_MIGRATION_CONTENT_TYPE_ARTICLE;
+    return OSHA_MIGRATION_CONTENT_TYPE_LEGISLATION;
   }
 
 
@@ -176,9 +179,8 @@ class OshaMigrateArticles extends OSHADynamicMigration {
    */
   public function prepare($entity, $row) {
     parent::prepare($entity, $row);
-
-    $migration = Migration::currentMigration();
     $languages = array_keys(language_list());
+    $migration = Migration::currentMigration();
     $entity_type = $migration->getDestination()->getEntityType();
 
     $translation_handler = entity_translation_get_handler($entity_type, $entity);
@@ -207,118 +209,5 @@ class OshaMigrateArticles extends OSHADynamicMigration {
         MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
       }
     }
-  }
-}
-
-class ArticleMigrateList extends MigrateList {
-  protected $file = '';
-  public $data = array();
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct($file) {
-    parent::__construct();
-    $this->file = $file;
-    $this->parseSourceFile();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __toString() {
-    return $this->file;
-  }
-
-  /**
-   * Parse the CSV file and populate the local cache.
-   */
-  protected function parseSourceFile() {
-    $handle = fopen($this->file, 'r');
-    $fields = $raw_data = fgetcsv($handle, NULL, ';');
-    $work_flow_key = array_search('workflow_state', $fields);
-
-    $this->data = array();
-    while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
-      $path = MigrationUtil::getIDFromSourceRow($raw_data);
-      $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
-      $this->data[$path]['id'] = $path;
-      // Assign the workflow state of the row from english entry.
-      if ($language == 'en') {
-        $this->data[$path]['workflow_state'] = $raw_data[$work_flow_key];
-      }
-      // Skip the private translations.
-      if (!in_array($raw_data[$work_flow_key],
-          array('published', 'checked', 'to_amend'))) {
-        continue;
-      }
-
-      $path_parts = explode('/', $path);
-      if (!empty($path_parts[0]) && $path_parts[0] == 'topics') {
-        $this->data[$path]['article_type'] = 'section';
-      } else {
-        $this->data[$path]['article_type'] = 'page';
-      }
-      foreach ($fields as $key => $field) {
-        switch ($field) {
-          case 'title':
-            if ($language == 'en') {
-              $this->data[$path]['title'] = $raw_data[$key];
-            }
-            $this->data[$path]['title_field'][$language] = $raw_data[$key];
-            break;
-
-          case 'relatedItems':
-          case 'description':
-          case 'text':
-            $this->data[$path][$field][$language] = $raw_data[$key];
-            break;
-
-          default:
-            if ($language == 'en') {
-              $this->data[$path][$field] = $raw_data[$key];
-            }
-            break;
-        }
-      }
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getIdList() {
-    if ($this->data) {
-      return array_keys($this->data);
-    }
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function computeCount() {
-    return count($this->data);
-  }
-
-}
-
-class ArticleMigrateItem extends MigrateItem {
-
-  public function __construct( $data = NULL ) {
-    $this->data = $data;
-  }
-  
-  /**
-   * {@inheritdoc}
-   */
-  public function getItem($item_id) {
-    //if (!empty(ArticleMigrateList::$data[$item_id])) {
-    //  return (object) ArticleMigrateList::$data[$item_id];
-    //}
-    if (!empty($this->data[$item_id])) {
-      return (object) $this->data[$item_id];
-    }
-    return NULL;
   }
 }
