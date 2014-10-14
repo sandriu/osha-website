@@ -76,10 +76,7 @@ function osha_workflow_menu() {
  *   Access permission to the screen.
  */
 function osha_workflow_node_approval_access($node) {
-  if (OshaWorkflowPermissions::userCanAccessApprovalScreen($node)) {
-    return NODE_ACCESS_ALLOW;
-  }
-  return NODE_ACCESS_IGNORE;
+  return OshaWorkflowPermissions::userCanAccessApprovalScreen($node);
 }
 
 

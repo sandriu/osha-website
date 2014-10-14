@@ -380,12 +380,48 @@ class OshaWorkflowPermissions {
     if (isset($node->workbench_moderation)) {
       // $current = $node->workbench_moderation['current'];
       // $state = $current->state;
-      return
-        self::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user)
-        || self::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user);
+
+      if (self::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user)
+          || self::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user)) {
+        return TRUE;
+      }
     }
     return FALSE;
   }
+
+  /**
+   * User can manage the approvers.
+   *
+   * @param object $node
+   *   Node to check
+   * @param null $user
+   *   User to check. If NULL assuming current user
+   *
+   * @return bool
+   *   TRUE if user has access.
+   */
+  public static function userCanEditApprovers($node, $user = NULL) {
+    if (!$user) {
+      global $user;
+    }
+    if (isset($node->workbench_moderation)) {
+      $current = $node->workbench_moderation['current'];
+      $state = $current->state;
+
+      if (self::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user)) {
+        return TRUE;
+      }
+      return
+        self::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user)
+        &&
+        (
+          $state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED
+          || $state == OSHA_WORKFLOW_STATE_FINAL_DRAFT
+        );
+    }
+    return FALSE;
+  }
+
 
   /**
    * Check user has a specified role.

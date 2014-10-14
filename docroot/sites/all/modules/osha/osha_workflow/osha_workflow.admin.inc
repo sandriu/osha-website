@@ -143,7 +143,9 @@ function osha_workflow_node_review_form_submit($form, $form_state) {
  */
 function osha_workflow_node_approval_form($form, &$form_state, $node) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
+  $can_edit = OshaWorkflowPermissions::userCanEditApprovers($node);
   $form_state['node'] = $node;
+  $form['#can_edit']  = $can_edit;
   $form['#tree'] = TRUE;
   $form['#theme'] = 'osha_workflow_approval_form';
   if (isset($form_state['rows'])) {
@@ -153,7 +155,6 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
     $rows = osha_workflow_get_node_approvers($node->nid, FALSE);
   }
   $form_state['rows'] = $rows;
-
   $weight = 0;
   foreach ($rows as $uid => $row) {
     $form['rows'][$uid]['#row'] = $row;
@@ -162,6 +163,7 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
       '#title' => t('Weight'),
       '#title_display' => 'invisible',
       '#default_value' => (-10 + $weight),
+      '#access' => $can_edit,
       '#attributes' => array('class' => array('user-weight')),
     );
     $form['rows'][$uid]['uid'] = array(
@@ -172,6 +174,7 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
       '#type' => 'submit',
       '#name' => $uid,
       '#value' => t('Remove'),
+      '#access' => $can_edit,
       '#submit' => array('osha_workflow_admin_approvers_remove_row'),
     );
     $weight++;
@@ -180,13 +183,15 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
     '#type' => 'select',
     '#multiple' => FALSE,
     '#options' => osha_workflow_users_get_list_options(),
-    '#title' => t('Add another moderator'),
+    '#title' => t('Add another approver'),
     '#title_display' => 'invisible',
+    '#access' => $can_edit,
   );
   $form['add']['submit'] = array(
     '#type' => 'submit',
     '#name' => 'adduser',
     '#value' => t('Add to queue'),
+    '#access' => $can_edit,
     '#attributes' => array('class' => array('container-inline')),
     '#submit' => array('osha_workflow_admin_approvers_add_row'),
   );
@@ -202,10 +207,10 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
       'submit' => array(
         '#type' => 'submit',
         '#value' => t('Save'),
+        '#access' => $can_edit,
       ),
     ),
   );
-
   return $form;
 }
 
@@ -281,16 +286,20 @@ function theme_osha_workflow_approval_form($variables) {
   );
   $rows[] = $row;
   $caption = t('List of approvers');
+
+  $header = array(
+    t('User'),
+    t('Mail'),
+    t('Status'),
+    '',
+  );
+  if ($form['#can_edit']) {
+    array_push($header, t('Order of notification'));
+  }
   $table = array(
     '#theme' => 'table',
     '#caption' => $caption,
-    '#header' => array(
-      t('User'),
-      t('Mail'),
-      t('Status'),
-      '',
-      t('Order of notification'),
-    ),
+    '#header' => $header,
     '#attributes' => array(
       'id' => 'approvers_table',
     ),
@@ -300,8 +309,12 @@ function theme_osha_workflow_approval_form($variables) {
     $output .= drupal_render($form['moderation']);
   }
   $output .= drupal_render($table);
+  //$form['content']['actions']['submit']['#access'] = FALSE;
+  //hide($form['content']['actions']['submit']);
   $output .= drupal_render_children($form);
-  drupal_add_tabledrag('approvers_table', 'order', 'sibling', 'user-weight');
+  if ($form['#can_edit']) {
+    drupal_add_tabledrag('approvers_table', 'order', 'sibling', 'user-weight');
+  }
   return $output;
 }
 
