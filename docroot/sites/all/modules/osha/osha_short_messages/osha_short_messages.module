@@ -1,0 +1,126 @@
+<?php
+/**
+ * Short Messages
+ * Generate Html from node content to be used in Vocus system
+ * The generated Html is composed of a fix header and footer and
+ * the node's body
+ */
+
+/**
+ * Implements hook_menu()
+ */
+function osha_short_messages_menu(){
+  $items = array();
+
+  $items['node/%node/short_message'] = array(
+    'title' => 'Short Message',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_short_messages_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_IS_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
+ * Page callback: Form
+ * @see random_species_menu()
+ */
+function osha_short_messages_form($form, &$form_state){
+  //get the node object
+  $node = osha_short_messages_node();
+  if(isset($form_state['triggering_element']['#ajax']))
+    $node = $form_state['triggering_element']['#ajax']['parameters']['node'];
+
+  //get the list of languages
+  $languages = language_list();
+  usort($languages, function ($a, $b) {
+    return strcmp($a->name, $b->name);
+  });
+
+  //get header and footer
+  $header = theme('short_messages_header', array(
+    'languages' => $languages,
+    'node_title' => $node->title,
+    'node_id' => $node->nid,
+    'published_date' => $node->field_publication_date[LANGUAGE_NONE][0]['value']));
+  $footer = theme('short_messages_footer');
+
+  $form['short_messages_content'] = array(
+    '#type' => 'text_format',
+    '#format' => 'full_html',
+    '#title' => t('Content'),
+    '#description' => t('Click on the Disable rich-text link to get the HTML code'),
+    '#default_value' => $node->body['en'][0]['value'],
+  );
+
+  $form['short_messages_preview'] = array(
+    '#type' => 'button',
+    '#value' => t('Preview message'),
+    '#ajax' => array(
+      'callback' => 'osha_short_messages_preview_message',
+      'parameters' => array('node' => $node),
+      'wrapper' => 'preview_message',
+      'method' => 'replace',
+      'effect' => 'fade',
+    ),
+  );
+
+  $form['short_messages_markup'] = array(
+    '#type' => 'markup',
+    '#prefix' => '<div id="preview_message">',
+    //'#markup' => osha_short_messages_node_content(),
+    '#suffix' => '</div>',
+  );
+
+  //Rebuild form on Ajax request
+  if(isset($form_state['values']['short_messages_content'])) {
+    $form['short_messages_markup']['#markup'] =
+      $header.
+      $form_state['values']['short_messages_content']['value'].
+      $footer;
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_short_messages_theme() {
+  $theme = array();
+  $path = drupal_get_path('module', 'osha_short_messages');
+
+  $theme['short_messages_header'] = array(
+    'template' => 'short_messages_header',
+    'variables' => array(
+      'languages' => NULL,
+      'newsletter_title' => NULL,
+      'newsletter_id' => NULL,
+      'newsletter_date' => NULL
+    ),
+    'path' => $path . '/templates'
+  );
+
+  $theme['short_messages_footer'] = array(
+    'template' => 'short_messages_footer',
+    'path' => $path . '/templates'
+  );
+
+  return $theme;
+}
+
+/**
+ * Get the node content
+ */
+function osha_short_messages_node(){
+  $node = menu_get_object();
+  return $node;
+}
+
+/**
+ *
+ */
+function osha_short_messages_preview_message($form, $form_state){
+  return $form['short_messages_markup'];
+}
