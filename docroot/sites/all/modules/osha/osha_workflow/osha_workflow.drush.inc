@@ -40,6 +40,7 @@ function drush_osha_workflow_osha_create_users() {
     'approver1' => 'Approver',
     'approver2' => 'Approver',
     'approver3' => 'Approver',
+    'administrator' => 'administrator',
   );
 
   foreach ($users as $username => $role_name) {
