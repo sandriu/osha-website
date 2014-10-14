@@ -132,10 +132,69 @@ function osha_workflow_entity_info() {
       'entity keys' => array(
         'id' => 'apid',
       ),
+      'views controller class' => 'EntityDefaultViewsController',
     ),
   );
 }
 
+function osha_workflow_entity_property_info() {
+  $info = array();
+
+  // Add meta-data for node_approval entity.
+  $properties = &$info['node_approval']['properties'];
+  $properties['user'] = array(
+    'label' => t("User"),
+    'type' => 'user',
+    'description' => t("The User that can review the node."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'uid',
+  );
+  $properties['node'] = array(
+    'label' => t("Node"),
+    'type' => 'node',
+    'description' => t("The Node that needs review."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'nid',
+  );
+  $properties['next'] = array(
+    'label' => t("Next"),
+    'type' => 'integer',
+    'description' => t("If the user is next who needs to approve"),
+    'getter callback' => 'entity_property_verbatim_get',
+    'schema field' => 'next',
+  );
+
+  // Add meta-data for node_project_managers entity.
+  $properties = &$info['node_project_managers']['properties'];
+  $properties['user'] = array(
+    'label' => t("User"),
+    'type' => 'user',
+    'description' => t("The User that is Project Manager for the node."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'uid',
+  );
+  $properties['node'] = array(
+    'label' => t("Node"),
+    'type' => 'node',
+    'description' => t("The Project Manager's node."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'nid',
+  );
+
+  return $info;
+}
 /**
  * Implements hook_permission().
  *
