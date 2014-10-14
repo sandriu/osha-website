@@ -536,4 +536,20 @@ class OshaWorkflowNotifications {
   public static function notifyNodeIsReadyToPublish($node) {
     drupal_set_message("[[EMAIL]@to:Administrators] Notify 'Administators' (WebTeam) that PM set node/{$node->nid} in ReadyToPublish");
   }
+
+  /**
+   * Check user preference to receive notifications from the workflow.
+   *
+   * @param mixed $user
+   *   User account or User ID
+   *
+   * @return bool
+   *   TRUE if user has checked out the option
+   */
+  public static function userAllowsEmailNotifications($user) {
+    if (is_int($user)) {
+      $user = user_load($user);
+    }
+    return !empty($user->field_cmw_mail_notifications[LANGUAGE_NONE][0]['value']);
+  }
 }
