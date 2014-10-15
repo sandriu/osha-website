@@ -279,7 +279,7 @@ function osha_blocks_default_fe_block_settings() {
       ),
       'osha_frontend' => array(
         'region' => '',
-        'status' => 0,
+        'status' => 1,
         'theme' => 'osha_frontend',
         'weight' => 4,
       ),
