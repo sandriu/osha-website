@@ -37,7 +37,7 @@ function osha_job_vacancies_default_fe_block_settings() {
       ),
       'osha_frontend' => array(
         'region' => '',
-        'status' => 0,
+        'status' => 1,
         'theme' => 'osha_frontend',
         'weight' => 1,
       ),
@@ -77,7 +77,7 @@ function osha_job_vacancies_default_fe_block_settings() {
       ),
       'osha_frontend' => array(
         'region' => '',
-        'status' => 0,
+        'status' => 1,
         'theme' => 'osha_frontend',
         'weight' => 2,
       ),
