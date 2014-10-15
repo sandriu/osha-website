@@ -370,11 +370,9 @@ $options['init-modules'] = array(
   'osha_breadcrumbs',
 //  'osha_content',
 
-  'search_api',
   'facetapi',
   'search_api_facetapi',
   'search_autocomplete',
-  'search_api_solr',
   'search_api_et',
   'search_api_et_solr',
   'search_api_views',

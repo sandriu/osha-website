@@ -242,6 +242,37 @@ function osha_frontend_process_node(&$vars) {
   if (isset($vars['content']['links']['node']['#links']['node-readmore'])) {
     $vars['content']['links']['node']['#links']['node-readmore']['title'] = t('Show details');
   }
+
+  /*insert views blocks - disabled for the moment
+  add_blocks_inside_content($vars);*/
+}
+
+/**
+ * Called from hook_preprocess_node()
+ * Insert view or custom blocks in node when meet a specific markup
+ * The markup is like <!--[name-of-the-block]-->
+ */
+function add_blocks_inside_content(&$vars){
+  $body = $vars['content']['body'][0]['#markup'];
+  $pattern = '/(<!--\[)([(\w+)(\-+)(\_+)(\d+)]+)(\]-->)/';
+
+  if(preg_match_all($pattern, $body, $matches)){
+    $blocks = $matches[2];
+
+    foreach($blocks as $block){
+      //try load a view block
+      $block_object = block_load('views', $block);
+      //load a custom block
+      if(!isset($block_object->bid))
+        $block_object = block_load('block', $block);
+
+      if(isset($block_object->bid)){
+        $render_array =  _block_get_renderable_array(_block_render_blocks(array($block_object)));
+        $body = str_replace('<!--['.$block.']-->', render($render_array), $body);
+      }
+    }
+    $vars['content']['body'][0]['#markup'] = $body;
+  }
 }
 
 /**

@@ -32,7 +32,7 @@ function osha_search_default_search_api_index() {
     "name" : "Default multilingual node index",
     "machine_name" : "default_multilingual_node_index",
     "description" : "An automatically created search index for indexing multilingual node data. Might be configured to specific needs.",
-    "server" : "default_server",
+    "server" : "solr_server",
     "item_type" : "search_api_et_node",
     "options" : {
       "index_directly" : 1,
@@ -68,9 +68,7 @@ function osha_search_default_search_api_index() {
               "field_author" : true,
               "body:value" : true,
               "body:summary" : true,
-              "field_tags:name" : true,
-              "field_file:description" : true,
-              "field_file:file:name" : true
+              "field_tags:name" : true
             }
           }
         },
@@ -85,9 +83,7 @@ function osha_search_default_search_api_index() {
               "field_author" : true,
               "body:value" : true,
               "body:summary" : true,
-              "field_tags:name" : true,
-              "field_file:description" : true,
-              "field_file:file:name" : true
+              "field_tags:name" : true
             },
             "title" : 0,
             "alt" : 1,
@@ -105,9 +101,7 @@ function osha_search_default_search_api_index() {
               "field_author" : true,
               "body:value" : true,
               "body:summary" : true,
-              "field_tags:name" : true,
-              "field_file:description" : true,
-              "field_file:file:name" : true
+              "field_tags:name" : true
             },
             "spaces" : "[^\\\\p{L}\\\\p{N}]",
             "ignorable" : "[-]"
@@ -124,9 +118,7 @@ function osha_search_default_search_api_index() {
               "field_author" : true,
               "body:value" : true,
               "body:summary" : true,
-              "field_tags:name" : true,
-              "field_file:description" : true,
-              "field_file:file:name" : true
+              "field_tags:name" : true
             },
             "file" : "",
             "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
@@ -139,8 +131,15 @@ function osha_search_default_search_api_index() {
             "prefix" : "\\u003Cstrong\\u003E",
             "suffix" : "\\u003C\\/strong\\u003E",
             "excerpt" : 1,
-            "excerpt_length" : "256",
-            "exclude_fields" : [],
+            "excerpt_length" : "200",
+            "exclude_fields" : {
+              "field_author" : "field_author",
+              "field_tags:name" : "field_tags:name",
+              "field_wiki_page_url:title" : "field_wiki_page_url:title",
+              "title" : "title",
+              "title_field" : "title_field",
+              "uuid" : "uuid"
+            },
             "highlight" : "always"
           }
         }
@@ -166,6 +165,7 @@ function osha_search_default_search_api_index() {
         "field_workflow_status" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "language" : { "type" : "string" },
         "nid" : { "type" : "integer" },
+        "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_et_id" : { "type" : "string" },
         "search_api_language" : { "type" : "string" },
         "search_api_url" : { "type" : "uri" },
@@ -181,38 +181,6 @@ function osha_search_default_search_api_index() {
     },
     "enabled" : "1",
     "read_only" : "0",
-    "rdf_mapping" : []
-  }');
-  return $items;
-}
-
-/**
- * Implements hook_default_search_api_server().
- */
-function osha_search_default_search_api_server() {
-  $items = array();
-  $items['default_server'] = entity_import('search_api_server', '{
-    "name" : "Default Server",
-    "machine_name" : "default_server",
-    "description" : "",
-    "class" : "search_api_solr_service",
-    "options" : {
-      "clean_ids" : true,
-      "site_hash" : true,
-      "scheme" : "http",
-      "host" : "localhost",
-      "port" : "8983",
-      "path" : "\\/solr\\/osha",
-      "http_user" : "",
-      "http_pass" : "",
-      "excerpt" : 0,
-      "retrieve_data" : 0,
-      "highlight_data" : 0,
-      "skip_schema_check" : 0,
-      "solr_version" : "",
-      "http_method" : "AUTO"
-    },
-    "enabled" : "1",
     "rdf_mapping" : []
   }');
   return $items;

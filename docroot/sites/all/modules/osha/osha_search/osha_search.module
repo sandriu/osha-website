@@ -17,6 +17,21 @@ function osha_search_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_form_alter().
+ */
+function osha_search_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'search_block_form') {
+    // Overwrite the search page default url.
+    // Unset the form elements - the search view needs just the search param.
+    $form['#action'] = url('search/site');
+    $form['#method'] = 'get';
+    unset($form['#submit']);
+    unset($form['form_build_id']);
+    unset($form['form_id']);
+  }
+}
+
 /*
  * NOT IMPLEMENTED
  * TODO Get this function done for CW-220
