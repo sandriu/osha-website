@@ -155,6 +155,7 @@ function osha_search_default_search_api_index() {
         "field_nace_codes" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_publication_date" : { "type" : "date" },
         "field_publication_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "field_seminar_start_date" : { "type" : "date" },
         "field_summary" : { "type" : "text" },
         "field_tags" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_tags:name" : { "type" : "list\\u003Ctext\\u003E" },

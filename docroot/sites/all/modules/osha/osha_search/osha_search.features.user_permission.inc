@@ -41,6 +41,10 @@ function osha_search_user_default_permissions() {
   $permissions['search content'] = array(
     'name' => 'search content',
     'roles' => array(
+      'Approver' => 'Approver',
+      'Editor' => 'Editor',
+      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
@@ -52,6 +56,10 @@ function osha_search_user_default_permissions() {
   $permissions['use Search Autocomplete'] = array(
     'name' => 'use Search Autocomplete',
     'roles' => array(
+      'Approver' => 'Approver',
+      'Editor' => 'Editor',
+      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
@@ -63,6 +71,10 @@ function osha_search_user_default_permissions() {
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
     'roles' => array(
+      'Approver' => 'Approver',
+      'Editor' => 'Editor',
+      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'search',
