@@ -284,7 +284,7 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   if ($old != OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_DRAFT) {
     OshaWorkflowNotifications::notifyOnChangeToDraft($node);
   }
-  if (($old == OSHA_WORKFLOW_STATE_FINAL_DRAFT || $old == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) && $new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+  if ($new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
     osha_workflow_reset_node_approvers($node->nid);
     OshaWorkflowNotifications::notifyFirstApprover($node);
   }
