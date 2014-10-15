@@ -448,6 +448,26 @@ class OshaWorkflowPermissions {
   public static function userHasRole($role, $user) {
     return in_array($role, $user->roles);
   }
+
+  /**
+   * Get the users by role name.
+   *
+   * @param string $role_name
+   *   Role name
+   *
+   * @return mixed
+   *   FALSE or array of user object.
+   */
+  public static function getUsersByRole($role_name) {
+    $role = user_role_load_by_name($role_name);
+    $query = db_select('users', 'u');
+    $query->fields('u', array('uid'));
+    $query->join('users_roles', 'ur', 'ur.uid = u.uid');
+    $query->condition('ur.rid', $role->rid);
+    $result = $query->execute()->fetchAllAssoc('uid');
+    $uids = array_keys($result);
+    return user_load_multiple($uids);
+  }
 }
 
 /**
@@ -456,7 +476,19 @@ class OshaWorkflowPermissions {
 class OshaWorkflowNotifications {
 
   /**
-   * Notify Review Manager the content was set to final draft.
+   * Notify Review Manager and Project Manager the node was approved/rejected.
+   *
+   * @param object $node
+   *   Affected node
+   * @param string $vote
+   *   User vote
+   */
+  public static function notifyOnAcceptOrReject($node, $vote) {
+    drupal_set_message("Notify 'Review Manager' and the PM about node/{$node->nid} being $vote");
+  }
+
+  /**
+   * Notify Review Manager the content was set to Final Draft.
    *
    * REV_EE_US_03
    *
@@ -464,7 +496,8 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeFromDraftToFinalDraft($node) {
-    drupal_set_message("[[EMAIL]@to:all RM] (REV_EE_US_03): Notify 'Review Manager' node/{$node->nid} is now in FinalDraft");
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
+    OshaWorkflowNotifications::sendEmail($users, $node);
   }
 
   /**
@@ -476,7 +509,8 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeToDraft($node) {
-    drupal_set_message("[[EMAIL]@to:Node author] (REV_EE_US_05): Notify Editor {$node->uid}(?) the node/{$node->nid} is back in Draft");
+    $user = user_load($node->uid);
+    OshaWorkflowNotifications::sendEmail($user, $node);
   }
 
   /**
@@ -492,26 +526,31 @@ class OshaWorkflowNotifications {
   }
 
   /**
-   * Send notification to the next approver.
+   * Send notification to the next approver (after the previous marked as done)
    *
    * @param object $node
    *   Affected node
    */
   public static function notifyNextApproverToTakeAction($node) {
-    $next = osha_workflow_get_next_approver($node->nid);
-    drupal_set_message("[[EMAIL]@to:next Approver] (REV_EE_US_05): Notify next approver <b>{$next->name}</b>, the <b>node/{$node->nid}</b> is was reviewed and is his turn");
+    $next_approval = osha_workflow_get_next_approver($node->nid);
+    OshaWorkflowNotifications::sendEmail($next_approval, $node);
   }
 
   /**
    * Notification sent when Node was accepted by the last approver.
    *
+   * Notify RMs, PM for that section
    * (ToBeApproved => Approved)
    *
    * @param object $node
    *   Affected node
    */
   public static function notifyOnNodeApproved($node) {
-    drupal_set_message("[[EMAIL]@to:RMs, PM for that section] LastApprover set node/{$node->nid} to Approved");
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
+    // TODO get project manager.
+    $project_manager = array();
+    $users[] = $project_manager;
+    OshaWorkflowNotifications::sendEmail($users, $node);
   }
 
   /**
@@ -541,13 +580,16 @@ class OshaWorkflowNotifications {
   /**
    * Notification sent when the node is ready to be published.
    *
+   * Notify Administrators (web team) that PM set in ReadyToPublish
+   *
    * (Approved => ReadyToPublish)
    *
    * @param object $node
    *   Affected node
    */
   public static function notifyNodeIsReadyToPublish($node) {
-    drupal_set_message("[[EMAIL]@to:Administrators] Notify 'Administators' (WebTeam) that PM set node/{$node->nid} in ReadyToPublish");
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR);
+    OshaWorkflowNotifications::sendEmail($users, $node);
   }
 
   /**
@@ -559,7 +601,8 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyFirstApprover($node) {
-    drupal_set_message("[[EMAIL]@to:approver] Notify FIRST 'Approver' that node/{$node->nid} needs his attention");
+    $next_approval = osha_workflow_get_next_approver($node->nid);
+    OshaWorkflowNotifications::sendEmail($next_approval, $node);
   }
 
   /**
@@ -577,4 +620,54 @@ class OshaWorkflowNotifications {
     }
     return !empty($user->field_cmw_mail_notifications[LANGUAGE_NONE][0]['value']);
   }
+
+  public static function sendEmail($users, $node) {
+    if (empty($users)) {
+      drupal_set_message("No users to send emails to.");
+    }
+    if (!is_array($users)) {
+      $users = array($users);
+    }
+    $params = array(
+      'node' => $node,
+    );
+    foreach ($users as $user) {
+      if (self::userAllowsEmailNotifications($user)) {
+        $params['user'] = $user;
+        drupal_mail('osha_workflow', 'notification', $user->mail, user_preferred_language($user), $params);
+      }
+    }
+  }
+}
+
+/**
+ * Email callback for Workflow Notification System.
+ */
+function osha_workflow_mail($key, &$message, $params) {
+  $subject = variable_get('osha_workflow_notice_subject',
+    '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
+
+  $message['subject'] = osha_workflow_replace_tokens($subject, $params['node'], $params['user']);
+
+  $msg = variable_get('osha_workflow_notice_body',
+    'Dear [user:name],
+
+    You have a content to be reviewed [node:url].
+
+    Thank you,
+    ');
+
+  $message['body'][] = osha_workflow_replace_tokens($msg, $params['node'], $params['user']);
+}
+
+/**
+ * Replace tokens for notification emails.
+ */
+function osha_workflow_replace_tokens($string, $node, $user) {
+  return token_replace($string,
+    array(
+      'node' => $node,
+      'user' => $user,
+    )
+  );
 }
