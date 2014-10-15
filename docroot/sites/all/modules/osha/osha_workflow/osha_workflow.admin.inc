@@ -30,7 +30,7 @@ function osha_workflow_workbench_project_managers_form($form, $form_state) {
     if (!isset($active['active'][$access_id])) {
       continue;
     }
-    $options = array('' => '-- Please select --') + osha_workflow_users_get_list_options();
+    $options = array('' => '-- Please select --') + osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER);
     $form['rows'][$section['access_type_id']][$access_id] = array(
       '#title' => str_repeat('-', $section['depth']) . ' ' . $section['name'],
       '#title_display' => 'after',
@@ -72,7 +72,7 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   $form_state['node'] = $node;
   $project_manager = osha_workflow_get_project_manager($node->nid);
-  $users = osha_workflow_users_get_list_options();
+  $users = osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
   $users = array('' => t('-- Please select --')) + $users;
   $form['#attributes'] = array('class' => array('container-inline'));
   if ($project_manager) {
@@ -182,7 +182,7 @@ function osha_workflow_node_approval_form($form, &$form_state, $node) {
   $form['add']['uid'] = array(
     '#type' => 'select',
     '#multiple' => FALSE,
-    '#options' => osha_workflow_users_get_list_options(),
+    '#options' => osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_APPROVER),
     '#title' => t('Add another approver'),
     '#title_display' => 'invisible',
     '#access' => $can_edit,
@@ -312,8 +312,6 @@ function theme_osha_workflow_approval_form($variables) {
     $output .= drupal_render($form['moderation']);
   }
   $output .= drupal_render($table);
-  //$form['content']['actions']['submit']['#access'] = FALSE;
-  //hide($form['content']['actions']['submit']);
   $output .= drupal_render_children($form);
   if ($form['#can_edit']) {
     drupal_add_tabledrag('approvers_table', 'order', 'sibling', 'user-weight');
@@ -348,19 +346,43 @@ function osha_workflow_node_approval_form_submit($form, $form_state) {
 }
 
 /**
- * Build the list of users as options for select.
+ * Make an HTML select options from the list of users assigned to a role.
+ *
+ * @param string $role_name
+ *   Name of the Role
+ *
+ * @see osha_workflow_users_get_review_managers
  * @return array
- *   Array of user accounts.
+ *   HTML select options
  */
-function osha_workflow_users_get_list_options() {
+function osha_workflow_users_get_users_from_role_as_options($role_name) {
+  $users = osha_workflow_users_get_users_from_role($role_name);
   $ret = array();
-  $results = db_select('users', 'u')
-    ->fields('u', array('uid', 'name'))
-    ->condition('uid', 0, '!=')
-    ->orderBy('name')
-    ->execute();
-  while ($record = $results->fetchAssoc()) {
-    $ret[$record['uid']] = $record['name'];
-  };
+  foreach ($users as $uid => $u) {
+    $ret[$uid] = $u->name;
+  }
+  return $ret;
+}
+
+/**
+ * Retrieve the list of users from a role, ordered by name.
+ *
+ * @param string $role_name
+ *   Name of the Role
+ *
+ * @return array
+ *   Array of user objects
+ */
+function osha_workflow_users_get_users_from_role($role_name) {
+  $ret = array();
+  if ($role = user_role_load_by_name($role_name)) {
+    $query = db_select('users', 'u')->fields('u', array('uid'));
+    $query->join('users_roles', 'ur', 'ur.uid = u.uid');
+    $uids = $query->condition('ur.rid', $role->rid)
+      ->orderBy('u.name')
+      ->groupBy('u.uid')
+      ->execute()->fetchCol();
+    $ret = user_load_multiple($uids);
+  }
   return $ret;
 }
