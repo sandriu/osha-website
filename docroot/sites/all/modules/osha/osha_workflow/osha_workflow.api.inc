@@ -551,6 +551,18 @@ class OshaWorkflowNotifications {
   }
 
   /**
+   * Notification First approver that the approval workflow begins.
+   *
+   * (Approved => ReadyToPublish)
+   *
+   * @param object $node
+   *   Affected node
+   */
+  public static function notifyFirstApprover($node) {
+    drupal_set_message("[[EMAIL]@to:approver] Notify FIRST 'Approver' that node/{$node->nid} needs his attention");
+  }
+
+  /**
    * Check user preference to receive notifications from the workflow.
    *
    * @param mixed $user

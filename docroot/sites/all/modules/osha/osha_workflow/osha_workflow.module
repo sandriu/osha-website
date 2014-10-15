@@ -278,23 +278,26 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
       else {
         drupal_set_message('No default approvers defined. Ask administrator to correcrly define the list of approvers.');
       }
-    } else {
-      // Reset existing users.
-      osha_workflow_reset_node_approvers($node->nid);
     }
     OshaWorkflowNotifications::notifyOnChangeFromDraftToFinalDraft($node);
   }
   if ($old != OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_DRAFT) {
     OshaWorkflowNotifications::notifyOnChangeToDraft($node);
   }
+  if (($old == OSHA_WORKFLOW_STATE_FINAL_DRAFT || $old == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) && $new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    osha_workflow_reset_node_approvers($node->nid);
+    OshaWorkflowNotifications::notifyFirstApprover($node);
+  }
   if (($old == OSHA_WORKFLOW_STATE_DRAFT || $old == OSHA_WORKFLOW_STATE_FINAL_DRAFT) && $new == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
     OshaWorkflowNotifications::notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node);
   }
   if ($old == OSHA_WORKFLOW_STATE_TO_BE_APPROVED && ($new == OSHA_WORKFLOW_STATE_APPROVED || $new == OSHA_WORKFLOW_STATE_REJECTED)) {
     if ($new == OSHA_WORKFLOW_STATE_APPROVED) {
+      osha_workflow_approve($node, OSHA_WORKFLOW_STATE_APPROVED);
       OshaWorkflowNotifications::notifyOnNodeApproved($node);
     }
     else {
+      osha_workflow_approve($node, OSHA_WORKFLOW_STATE_REJECTED);
       OshaWorkflowNotifications::notifyOnNodeRejected($node);
     }
   }

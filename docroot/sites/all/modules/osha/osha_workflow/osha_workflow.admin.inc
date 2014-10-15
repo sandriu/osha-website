@@ -251,7 +251,10 @@ function theme_osha_workflow_approval_form($variables) {
   $form = $variables['form'];
   $rows = array();
   if (!empty($form['rows'])) {
-    foreach (element_children($form['rows']) as $uid) {
+    $items = element_children($form['rows']);
+    $last = end($items);
+    reset($items);
+    foreach ($items as $uid) {
       $moderator = $form['rows'][$uid]['#row'];
       $status = '';
       if (isset($moderator->osha_workflow_node_approval)) {
@@ -261,7 +264,7 @@ function theme_osha_workflow_approval_form($variables) {
           // $status = t('Waiting to approve');
         }
         else {
-          $status = t('User created a new revision');
+          $status = ($last == $uid) ? ucfirst($val) : t('User created a new revision');
         }
       }
       $row = array();
