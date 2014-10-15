@@ -176,6 +176,8 @@ function osha_workflow_permissions_role_project_manager() {
       'moderate content from needs_review to final_draft',
       'edit any content in approved',
       'edit any content in rejected',
+      'moderate content from rejected to draft',
+      'moderate content from rejected to to_be_approved',
       'moderate content from needs_review to to_be_approved',
       'moderate content from needs_review to ready_to_publish',
       'moderate content from needs_review to to_be_approved',
