@@ -709,6 +709,37 @@ class MigrationUtil {
       path_save($args);
     }
   }
+
+  /**
+   *   Create redirects /<language>/$base_path for all languages
+   */
+  public static function createRedirects($entity, $base_path) {
+    $languages = array_keys($entity->translations->data);
+    // add original language if not already there
+    if (!in_array($entity->language, $languages)) {
+      $languages[] = $entity->language;
+    }
+
+    foreach ($languages as $language) {
+      //check if source redirect exists
+      $source = $base_path;
+      $source_redirects = redirect_load_by_source($source,$language);
+
+      if ($source_redirects == FALSE) {
+        $redirect = new stdClass();
+        $redirect->source = $source;
+        $redirect->source_options = array();
+        $redirect->redirect = 'node/'.$entity->nid;
+        $redirect->redirect_options = array();
+        $redirect->status_code = 0;
+        $redirect->type = 'redirect';
+        $redirect->language = $language;
+
+        // Create the redirect
+        redirect_save($redirect);
+      }
+    }
+  }
 }
 
 class OSHAMigrationListJSON extends MigrateListJSON {

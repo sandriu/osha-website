@@ -207,6 +207,25 @@ class OshaMigrateArticles extends OSHADynamicMigration {
       }
     }
   }
+
+  /**
+   * Sets the node aliases after the migration, nid is available.
+   *
+   * @param object $entity
+   *   Entity to be saved
+   * @param object $row
+   *   Source row
+   */
+  public function complete($entity, $row) {
+    // call MigrationUtil::createAliases
+    parent::complete($entity, $row);
+
+    // create redirects for pages with is_default_page=1
+    if (!empty($row->is_default_page) && $row->is_default_page) {
+      $base_path = pathinfo($entity->path["alias"])["dirname"];
+      MigrationUtil::createRedirects($entity, $base_path);
+    }
+  }
 }
 
 class ArticleMigrateList extends MigrateList {
