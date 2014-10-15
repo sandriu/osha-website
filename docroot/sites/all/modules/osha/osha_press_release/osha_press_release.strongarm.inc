@@ -183,7 +183,8 @@ function osha_press_release_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_press_release';
   $strongarm->value = array(
-    0 => 'status',
+    0 => 'moderation',
+    1 => 'revision',
   );
   $export['node_options_press_release'] = $strongarm;
 
@@ -198,7 +199,7 @@ function osha_press_release_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_press_release';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_press_release'] = $strongarm;
 
   return $export;
