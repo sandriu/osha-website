@@ -239,7 +239,7 @@ function osha_workflow_node_access($node, $operation, $user) {
         return NODE_ACCESS_DENY;
       }
     }
-    if ($state == OSHA_WORKFLOW_STATE_DRAFT && $node->revision_uid != $user->uid) {
+    if ($state == OSHA_WORKFLOW_STATE_DRAFT && !osha_workflow_user_has_access($node)) {
       return NODE_ACCESS_DENY;
     }
   }
@@ -296,7 +296,7 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   if ($old != OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_DRAFT) {
     OshaWorkflowNotifications::notifyOnChangeToDraft($node);
   }
-  if (($old == OSHA_WORKFLOW_STATE_FINAL_DRAFT || $old == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) && $new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+  if ($new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
     osha_workflow_reset_node_approvers($node->nid);
     OshaWorkflowNotifications::notifyFirstApprover($node);
   }
@@ -316,7 +316,7 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   if ($old == OSHA_WORKFLOW_STATE_APPROVED && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
     OshaWorkflowNotifications::notifyNodeRejectedFromApprovedToFinalDraft($node);
   }
-  if ($old == OSHA_WORKFLOW_STATE_APPROVED && $new == OSHA_WORKFLOW_STATE_READY_TO_PUBLISH) {
+  if ($new == OSHA_WORKFLOW_STATE_READY_TO_PUBLISH) {
     OshaWorkflowNotifications::notifyNodeIsReadyToPublish($node);
   }
 }
@@ -367,7 +367,7 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
         global $user;
         if ($next = osha_workflow_get_next_approver($node->nid)) {
           if ($user->uid == $next->uid) {
-            // Hijack the form & add Done button
+            // Hijack the form & add Done button.
             hide($form['state']);
             $form['submit'] = array(
               '#type' => 'submit',
@@ -381,6 +381,9 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
 function osha_workflow_form_node_form_alter(&$form, $form_state) {
   // This must be a node form and a node that has moderation enabled.
   // Extended to include moderation check on the individual node.

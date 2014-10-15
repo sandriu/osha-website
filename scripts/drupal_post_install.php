@@ -46,6 +46,8 @@ function osha_configure_permissions() {
       }
     }
 
+    $permissions[] = 'access workbench access by role';
+
     $permissions[] = 'translate taxonomy_term entities';
     $permissions[] = 'edit any content in rejected';
     $permissions[] = 'edit any content in approved';

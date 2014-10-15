@@ -59,6 +59,16 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'to_name' => 'to_be_approved',
       'name' => 'Requesting Approval',
     ),
+    'rejected:draft' => array(
+      'from_name' => 'rejected',
+      'to_name' => 'draft',
+      'name' => 'Review manager rejects Rejected content',
+    ),
+    'rejected:to_be_approved' => array(
+      'from_name' => 'rejected',
+      'to_name' => 'to_be_approved',
+      'name' => 'Review manager accepts Rejected content',
+    ),
     'to_be_approved:approved' => array(
       'from_name' => 'to_be_approved',
       'to_name' => 'approved',

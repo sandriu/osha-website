@@ -96,12 +96,10 @@ function osha_worfklow_permissions_moderator() {
     'access administration pages',
     'access contextual links',
     'access dashboard',
-    'access content overview',
     'access toolbar',
     'view the administration theme',
 
     'access workbench',
-    'access workbench access by role',
     'use workbench_moderation my drafts tab',
     'view moderation messages',
     'view revisions',
@@ -124,6 +122,8 @@ function osha_worfklow_permissions_moderator() {
 function osha_workflow_permissions_role_editor() {
   $ret = array_merge(
     array(
+      'access workbench access by role',
+
       'edit any content in draft',
       'edit any content in published',
 
@@ -145,10 +145,13 @@ function osha_workflow_permissions_role_editor() {
 function osha_workflow_permissions_role_review_manager() {
   $ret = array_merge(
     array(
+      'access workbench access by role',
+      'access content overview',
+
       'edit any content in draft',
       'edit any content in final_draft',
       'moderate content from draft to final_draft',
-
+      'moderate content from final_draft to ready_to_publish',
       'moderate content from final_draft to draft',
       'moderate content from final_draft to needs_review',
       'moderate content from final_draft to to_be_approved',
@@ -175,7 +178,9 @@ function osha_workflow_permissions_role_project_manager() {
 
       'moderate content from needs_review to final_draft',
       'edit any content in approved',
-
+      'edit any content in rejected',
+      'moderate content from rejected to draft',
+      'moderate content from rejected to to_be_approved',
       'moderate content from needs_review to to_be_approved',
       'moderate content from needs_review to ready_to_publish',
       'moderate content from needs_review to to_be_approved',

@@ -34,7 +34,10 @@ function osha_workflow_drush_help($section) {
  */
 function drush_osha_workflow_osha_create_users() {
   $users = array(
-    'editor' => 'Editor',
+    'editor1' => 'Editor',
+    'editor2' => 'Editor',
+    'editor3' => 'Editor',
+    'editor4' => 'Editor',
     'review_manager' => 'Review Manager',
     'project_manager' => 'Project Manager',
     'approver1' => 'Approver',

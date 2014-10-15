@@ -97,6 +97,22 @@ function osha_workflow_create_roles() {
 }
 
 /**
+ * Check if user has access to the node.
+ *
+ * This function matches node section(s) against user sections.
+ *
+ * @param object $node
+ *   Queried node
+ *
+ * @return bool
+ *   TRUE if at least one section is matched
+ */
+function osha_workflow_user_has_access($node) {
+  $user_sections = workbench_access_get_user_tree();
+  return count(array_intersect(array_keys($user_sections), $node->workbench_access)) > 0;
+}
+
+/**
  * Retrieve the list of moderators for a node.
  *
  * @param int $nid
