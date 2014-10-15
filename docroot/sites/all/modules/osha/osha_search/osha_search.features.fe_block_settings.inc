@@ -200,7 +200,7 @@ search/*',
         'region' => 'header',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'seven' => array(
         'region' => 'dashboard_inactive',
