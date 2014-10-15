@@ -355,7 +355,7 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
         global $user;
         if ($next = osha_workflow_get_next_approver($node->nid)) {
           if ($user->uid == $next->uid) {
-            // Hijack the form & add Done button
+            // Hijack the form & add Done button.
             hide($form['state']);
             $form['submit'] = array(
               '#type' => 'submit',
@@ -369,6 +369,9 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
 function osha_workflow_form_node_form_alter(&$form, $form_state) {
   // This must be a node form and a node that has moderation enabled.
   // Extended to include moderation check on the individual node.
