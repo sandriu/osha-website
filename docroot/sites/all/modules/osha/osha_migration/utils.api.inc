@@ -591,7 +591,12 @@ class MigrationUtil {
    */
   public static function getIDFromSourceRow($row) {
     $url = !empty($row[2]) ? $row[2] : $row[0];
-    return substr($url, 4);
+    $url = substr($url, 4);
+    if (strlen($url) > 255) {
+      drupal_set_message(sprintf('Truncating path longer than 255: %s', $url), 'warning');
+      $url= substr($url, 0, 255);
+    }
+    return $url;
   }
 
   /**
@@ -605,14 +610,14 @@ class MigrationUtil {
    *   TRUE if row is valid, FALSE otherwise
    */
   public static function entityRowValidator($row, $class) {
-    if (empty($row->title)) {
-      $class->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
-      return FALSE;
-    }
     if (!in_array($row->workflow_state, array('published', 'checked', 'to_amend'))) {
       $class->saveMessage(
         sprintf('Skipping node with workflow_state: %s', $row->workflow_state),
         MigrationBase::MESSAGE_WARNING);
+      return FALSE;
+    }
+    if (empty($row->title)) {
+      $class->saveMessage('Skipping node without english title', MigrationBase::MESSAGE_WARNING);
       return FALSE;
     }
     foreach ($row->title_field as $language => $value) {
@@ -700,6 +705,11 @@ class MigrationUtil {
       }
       else {
         $path = $row->id;
+      }
+      if (strlen($path) > 255) {
+        $migration = Migration::currentMigration();
+        $migration->saveMessage(sprintf('Truncating path longer than 255 (%s)', $path), Migration::MESSAGE_WARNING);
+        $path = substr($path, 0, 255);
       }
       $args = array(
         'source' => $entity_type . '/' . $entity->{$id_key},
