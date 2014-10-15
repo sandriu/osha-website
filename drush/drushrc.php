@@ -268,6 +268,9 @@ $options['init-modules'] = array(
   'i18n_taxonomy',
   'variable',
 
+  // contrib module that add email field
+  'email',
+
   'views',
   'views_ui',
   'views_bulk_operations',
@@ -362,6 +365,7 @@ $options['init-modules'] = array(
   'osha_blog',
   'osha_tmgmt',
   'osha_highlight',
+  'osha_press_contact',
   'osha_homepage',
   'osha_menu',
   'osha_wiki',
