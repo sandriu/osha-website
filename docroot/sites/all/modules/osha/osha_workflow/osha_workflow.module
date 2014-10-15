@@ -227,11 +227,8 @@ function osha_workflow_node_access($node, $operation, $user) {
     }
     // Do not allow edit for approvers that already reviewed.
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-      $approvers = osha_workflow_get_node_approvers($node->nid, FALSE);
-      foreach ($approvers as $approver) {
-        if ($user->uid == $approver->uid && $approver->osha_workflow_node_approval->next != 1) {
-          return NODE_ACCESS_DENY;
-        }
+      if (!osha_workflow_is_next_approver($node->nid)) {
+        return NODE_ACCESS_DENY;
       }
     }
     if ($state == OSHA_WORKFLOW_STATE_DRAFT && $node->revision_uid != $user->uid) {
@@ -310,36 +307,34 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
 }
 
 /**
- * Implements hook_workbench_moderation_states_next_alter().
- *
- * {@inheritdoc}
- */
-function osha_workflow_workbench_moderation_states_next_alter(&$states, $current_state, $context) {
-  if ($current_state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-    $node = $context['node'];
-    $user = $context['account'];
-    // Approver cannot change state of the current revision (which is TBA).
-    $next_approver = osha_workflow_get_next_approver($node->nid);
-    $is_next_approver = isset($next_approver->uid) && $user->uid == $next_approver->uid;
-    $is_last_approver = osha_workflow_is_last_approver($node);
-    // Hide form for next approver (but not for last).
-    if ($is_next_approver && !$is_last_approver) {
-//      $states = array();
-    }
-    else {
-      if ($is_last_approver && !$is_next_approver) {
-  //      $states = array();
-      }
-    }
-  }
-}
-
-/**
  * Implements hook_workbench_moderation_access_alter().
  *
  * {@inheritdoc}
  */
 function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
+  global $user;
+  if ($op == 'update') {
+    $access = 1;
+    $state = $node->workbench_moderation['current']->state;
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      $next_approver = osha_workflow_get_next_approver($node->nid);
+      $is_next_approver = isset($next_approver->uid) && $user->uid == $next_approver->uid;
+      // Check the user is next to take action. Otherwise deny change.
+      if (!$is_next_approver && OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user)) {
+        $access = 0;
+      }
+    }
+  }
+  if ($op == 'view history') {
+    if (OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user)
+      || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EDITOR, $user)
+      || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user)
+      || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $user)
+      || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user)
+    ) {
+      $access = 1;
+    }
+  }
   if ($op == 'view revisions' && user_access('view revisions')) {
     $access = 1;
   }
@@ -366,6 +361,24 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
             );
           }
         }
+      }
+    }
+  }
+}
+
+function osha_workflow_form_node_form_alter(&$form, $form_state) {
+  // This must be a node form and a node that has moderation enabled.
+  // Extended to include moderation check on the individual node.
+  if (!workbench_moderation_node_moderated($form['#node'])) {
+    return;
+  }
+  if (isset($form['#node']->workbench_moderation['current']->state)) {
+    global $user;
+    $node = $form['#node'];
+    $state = $form['#node']->workbench_moderation['current']->state;
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      if (osha_workflow_is_next_approver($node->nid) && OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user)) {
+        $form['revision_information']['workbench_moderation_state_new']['#access'] = FALSE;
       }
     }
   }

@@ -238,6 +238,19 @@ function osha_workflow_get_next_approver($nid) {
   return $ret;
 }
 
+function osha_workflow_is_next_approver($nid, $user=NULL) {
+  if (empty($user)) {
+    global $user;
+  }
+  $query = new EntityFieldQuery();
+  $rows = $query->entityCondition('entity_type', 'node_approval')
+    ->propertyCondition('nid', $nid)
+    ->propertyCondition('uid', $user->uid)
+    ->propertyCondition('next', 1)
+    ->execute();
+  return !empty($rows['node_approval']);
+}
+
 /**
  * Check if the user is the last approver.
  *
