@@ -256,7 +256,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['text'] = '[field_seminar_start_date_1] - Seminars';
   $handler->display->display_options['fields']['field_seminar_start_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['settings'] = array(
-    'format_type' => 'long',
+    'format_type' => 'year',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
