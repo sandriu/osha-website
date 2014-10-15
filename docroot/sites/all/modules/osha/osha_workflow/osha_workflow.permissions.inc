@@ -96,7 +96,6 @@ function osha_worfklow_permissions_moderator() {
     'access administration pages',
     'access contextual links',
     'access dashboard',
-    'access content overview',
     'access toolbar',
     'view the administration theme',
 
@@ -147,6 +146,7 @@ function osha_workflow_permissions_role_review_manager() {
   $ret = array_merge(
     array(
       'access workbench access by role',
+      'access content overview',
 
       'edit any content in draft',
       'edit any content in final_draft',
