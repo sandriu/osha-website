@@ -231,7 +231,7 @@ function osha_workflow_node_access($node, $operation, $user) {
         return NODE_ACCESS_DENY;
       }
     }
-    if ($state == OSHA_WORKFLOW_STATE_DRAFT && $node->revision_uid != $user->uid) {
+    if ($state == OSHA_WORKFLOW_STATE_DRAFT && !osha_workflow_user_has_access($node)) {
       return NODE_ACCESS_DENY;
     }
   }
