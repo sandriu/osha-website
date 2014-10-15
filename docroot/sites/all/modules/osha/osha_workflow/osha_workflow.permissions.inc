@@ -101,7 +101,6 @@ function osha_worfklow_permissions_moderator() {
     'view the administration theme',
 
     'access workbench',
-    'access workbench access by role',
     'use workbench_moderation my drafts tab',
     'view moderation messages',
     'view revisions',
@@ -124,6 +123,8 @@ function osha_worfklow_permissions_moderator() {
 function osha_workflow_permissions_role_editor() {
   $ret = array_merge(
     array(
+      'access workbench access by role',
+
       'edit any content in draft',
       'edit any content in published',
 
@@ -145,6 +146,8 @@ function osha_workflow_permissions_role_editor() {
 function osha_workflow_permissions_role_review_manager() {
   $ret = array_merge(
     array(
+      'access workbench access by role',
+
       'edit any content in draft',
       'edit any content in final_draft',
       'moderate content from draft to final_draft',
