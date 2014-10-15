@@ -353,8 +353,6 @@ $options['init-modules'] = array(
   'workbench_moderation',
 
 
-
-
   'osha_taxonomies',
 //  'osha_taxonomies_uuid',
   'osha',
@@ -393,6 +391,7 @@ $options['init-modules'] = array(
 
   // Social share
   'addtoany',
+  'on_the_web',
 
   // Link content types with main menu items
   'menu_position',
