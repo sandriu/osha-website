@@ -350,6 +350,7 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'workbench_moderation_moderate_form' && isset($form['node']['#value'])) {
     $node = $form['node']['#value'];
     $state = $node->workbench_moderation['current']->state;
+    $form['#validate'][] = 'osha_workflow_workbench_moderation_approval_form_validate';
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
       if (!osha_workflow_is_last_approver($node)) {
         global $user;
@@ -428,9 +429,18 @@ function osha_workflow_node_approval_load_multiple($ids = array(), $conditions =
   return entity_load('node_approval', $ids, $conditions, $reset);
 }
 
+/**
+ * Form validator.
+ */
 function osha_workflow_workbench_moderation_approval_form_validate($form, $form_state) {
   $node = $form_state['values']['node'];
   $state = $form_state['values']['state'];
+  if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+    $reviewer = osha_workflow_get_project_manager($node->nid);
+    if (empty($reviewer)) {
+      form_set_error('', t('Cannot change state because there is no Project Manager assigned to this node. Use the Review tab to assign one first.'));
+    }
+  }
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
     $approvers = osha_workflow_get_node_approvers($node->nid, FALSE);
     if (empty($approvers)) {
