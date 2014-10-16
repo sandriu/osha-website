@@ -145,11 +145,6 @@ function osha_workflow_access_pm_form($form, &$form_state, $access_type, $access
   $query->condition('wau.access_scheme', $access_type)
     ->condition('wau.access_id', $access_type_id)
     ->extend('PagerDefault')->limit(25);
-  // If all authorized users are not allowed, JOIN to user_roles.
-  if (!isset($roles[DRUPAL_AUTHENTICATED_RID])) {
-    $query->join('users_roles', 'ur', 'u.uid = ur.uid');
-    $query->condition('ur.rid', array_keys($roles), 'IN');
-  }
   $result = $query->execute();
   $form['users']['#tree'] = TRUE;
   foreach ($result as $account) {
@@ -205,16 +200,6 @@ function osha_workflow_access_pm_form_validate($form, &$form_state) {
       }
     }
   }
-}
-
-function osha_workflow_access_pm_get_pm($access_id, $access_scheme) {
-  $users = db_select('osha_workflow_access_pm', 'owa')
-    ->fields('owa', array('uid'))
-    ->condition('access_id', $access_id)
-    ->condition('access_scheme', $access_scheme)
-    ->execute()
-    ->fetchAllAssoc('uid');
-  return user_load_multiple(array_keys($users));
 }
 
 /**
