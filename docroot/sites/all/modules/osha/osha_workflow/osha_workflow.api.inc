@@ -53,6 +53,7 @@ function osha_workflow_set_project_manager($nid, $uid) {
 
 /**
  * Get the current project manager of a node.
+ *
  * @param int $nid
  *   Node ID
  *
@@ -67,6 +68,23 @@ function osha_workflow_get_project_manager($nid) {
     return $user;
   }
   return NULL;
+}
+
+/**
+ * Get the current project manager of a node.
+ *
+ * @param int $nid
+ *   Node ID
+ *
+ * @return object
+ *   User object
+ */
+function osha_workflow_is_assigned_project_manager($nid) {
+  if ($project_manager = osha_workflow_get_project_manager($nid)) {
+    global $user;
+    return $project_manager->uid == $user->uid;
+  }
+  return FALSE;
 }
 
 /**
