@@ -150,6 +150,23 @@ function osha_workflow_get_project_manager($nid) {
 }
 
 /**
+ * Get the current project manager of a node.
+ *
+ * @param int $nid
+ *   Node ID
+ *
+ * @return object
+ *   User object
+ */
+function osha_workflow_is_assigned_project_manager($nid) {
+  if ($project_manager = osha_workflow_get_project_manager($nid)) {
+    global $user;
+    return $project_manager->uid == $user->uid;
+  }
+  return FALSE;
+}
+
+/**
  * This method creates the user roles required by the workflow.
  */
 function osha_workflow_create_roles() {
@@ -543,6 +560,19 @@ class OshaWorkflowPermissions {
    */
   public static function userHasRole($role, $user) {
     return in_array($role, $user->roles);
+  }
+
+  /**
+   * Check the user has Administrator role or is user/1.
+   *
+   * @param object $user
+   *   User to check
+   *
+   * @return bool
+   *   TRUE if user is admin or Administrator role.
+   */
+  public static function userIsAdministrator($user) {
+    return self::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user) || $user->uid == 1;
   }
 
   /**
