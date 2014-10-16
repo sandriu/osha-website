@@ -93,6 +93,10 @@ function osha_workflow_permissions_common() {
 
 function osha_worfklow_permissions_moderator() {
   return array(
+    // Important for everyone (editor ... to ... admin) to have it, otherwise
+    // they cannot access unpublished content.
+    'access workbench access by role',
+
     'access administration pages',
     'access contextual links',
     'access dashboard',
@@ -122,8 +126,6 @@ function osha_worfklow_permissions_moderator() {
 function osha_workflow_permissions_role_editor() {
   $ret = array_merge(
     array(
-      'access workbench access by role',
-
       'edit any content in draft',
       'edit any content in published',
 
@@ -145,7 +147,6 @@ function osha_workflow_permissions_role_editor() {
 function osha_workflow_permissions_role_review_manager() {
   $ret = array_merge(
     array(
-      'access workbench access by role',
       'access content overview',
 
       'edit any content in draft',
