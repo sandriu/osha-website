@@ -563,6 +563,19 @@ class OshaWorkflowPermissions {
   }
 
   /**
+   * Check the user has Administrator role or is user/1.
+   *
+   * @param object $user
+   *   User to check
+   *
+   * @return bool
+   *   TRUE if user is admin or Administrator role.
+   */
+  public static function userIsAdministrator($user) {
+    return self::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user) || $user->uid == 1;
+  }
+
+  /**
    * Get the users by role name.
    *
    * @param string $role_name

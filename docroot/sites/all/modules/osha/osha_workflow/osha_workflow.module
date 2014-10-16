@@ -241,7 +241,7 @@ function osha_workflow_node_access($node, $operation, $user) {
     }
     // Do not allow edit for project managers that is not assigned for review.
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
-      if (!osha_workflow_is_assigned_project_manager($node->nid)) {
+      if (!osha_workflow_is_assigned_project_manager($node->nid) && !OshaWorkflowPermissions::userIsAdministrator($user)) {
         return NODE_ACCESS_DENY;
       }
     }
@@ -347,7 +347,7 @@ function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
     }
     // Do not allow edit for project managers that is not assigned for review.
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
-      if (!osha_workflow_is_assigned_project_manager($node->nid)) {
+      if (!osha_workflow_is_assigned_project_manager($node->nid) && !OshaWorkflowPermissions::userIsAdministrator($user)) {
         return $access = 0;
       }
     }
