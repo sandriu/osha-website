@@ -22,11 +22,90 @@ function osha_workflow_get_default_approvers() {
   return $users;
 }
 
+/**
+ * Function to retrieve default Project Manager for a section.
+ *
+ *   It searches UP in the section tree for an assigned PM.
+ *
+ * @param int|string $section
+ *   Section ID
+ *
+ * @return object|FALSE
+ *   User Object
+ */
 function osha_workflow_get_default_project_manager($section) {
-  return user_load(5);
-  //@todo: Add real code here - one project manager per section. similar to admin/config/workbench/access.
+  $section_tree = workbench_access_get_active_tree();
+  if (osha_workflow_access_pm_check_root()) {
+    if (!empty($section_tree['tree'])) {
+      $users = osha_workflow_access_find_pm($section_tree, $section);
+      if (!empty($users)) {
+        return current($users);
+      }
+    }
+  }
+  return FALSE;
 }
 
+/**
+ * Recursion Function to get the project manager from sections tree.
+ *
+ * @param array $section_tree
+ *   active tree array
+ * @param int|string $section_id
+ *   Id of the section to search PM for
+ *
+ * @return array
+ *   Array of Users Objects
+ */
+function osha_workflow_access_find_pm(&$section_tree, $section_id) {
+  $access = $section_tree['tree'][$section_id];
+  $users = array();
+  $users = osha_workflow_access_pm_get_pm($access['access_id'],
+    $section_tree['access_scheme']['access_scheme']);
+  if (empty($users)&& !empty($access['parent'])) {
+    $users = osha_workflow_access_find_pm($section_tree, $access['parent']);
+  }
+  else {
+    return $users;
+  }
+  return $users;
+}
+
+/**
+ * Get PM of a section.
+ */
+function osha_workflow_access_pm_get_pm($access_id, $access_scheme) {
+  $users = db_select('osha_workflow_access_pm', 'owa')
+    ->fields('owa', array('uid'))
+    ->condition('access_id', $access_id)
+    ->condition('access_scheme', $access_scheme)
+    ->execute()
+    ->fetchAllAssoc('uid');
+  return user_load_multiple(array_keys($users));
+}
+
+/**
+ * Checks for PM to be assigned to root Section.
+ *
+ * @return bool
+ *   If a PM is assigned for root Section or not.
+ */
+function osha_workflow_access_pm_check_root() {
+  $section_tree = workbench_access_get_active_tree();
+  $access = current($section_tree['tree']);
+  if (!empty($access)) {
+    $users = osha_workflow_access_pm_get_pm($access['access_id'],
+      $section_tree['access_scheme']['access_scheme']);
+    if (!empty($users)) {
+      return TRUE;
+    }
+    else {
+      drupal_set_message(t("Workflow: You haven\'t assigned a PM for root Section"), 'error');
+      return FALSE;
+    }
+  }
+  return FALSE;
+}
 /**
  * Assign project manager to a node.
  *
@@ -53,6 +132,7 @@ function osha_workflow_set_project_manager($nid, $uid) {
 
 /**
  * Get the current project manager of a node.
+ *
  * @param int $nid
  *   Node ID
  *
