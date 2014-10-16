@@ -283,7 +283,7 @@ function osha_workflow_node_review_form($form, &$form_state, $node) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   $form_state['node'] = $node;
   $project_manager = osha_workflow_get_project_manager($node->nid);
-  $users = osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
+  $users = osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER);
   $users = array('' => t('-- Please select --')) + $users;
   $form['#attributes'] = array('class' => array('container-inline'));
   if ($project_manager) {

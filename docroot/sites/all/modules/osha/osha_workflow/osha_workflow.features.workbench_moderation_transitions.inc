@@ -64,6 +64,11 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'to_name' => 'draft',
       'name' => 'Review manager rejects Rejected content',
     ),
+    'rejected:ready_to_publish' => array(
+      'from_name' => 'rejected',
+      'to_name' => 'ready_to_publish',
+      'name' => 'Approve rejected content',
+    ),
     'rejected:to_be_approved' => array(
       'from_name' => 'rejected',
       'to_name' => 'to_be_approved',
