@@ -395,6 +395,11 @@ $options['init-themes'] = array(
   'osha_frontend'
 );
 
+// Add the modules for development/testing.
+if ($cfg->variables->environment == 'development') {
+  $options['init-modules'][] = 'reroute_email';
+}
+
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
   include_once dirname(__FILE__) . '/drushrc.local.php';
 }
