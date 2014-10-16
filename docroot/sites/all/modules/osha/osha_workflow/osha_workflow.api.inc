@@ -572,18 +572,6 @@ class OshaWorkflowPermissions {
 class OshaWorkflowNotifications {
 
   /**
-   * Notify Review Manager and Project Manager the node was approved/rejected.
-   *
-   * @param object $node
-   *   Affected node
-   * @param string $vote
-   *   User vote
-   */
-  public static function notifyOnAcceptOrReject($node, $vote) {
-    drupal_set_message("Notify 'Review Manager' and the PM about node/{$node->nid} being $vote");
-  }
-
-  /**
    * Notify Review Manager the content was set to Final Draft.
    *
    * REV_EE_US_03
@@ -610,7 +598,7 @@ class OshaWorkflowNotifications {
   }
 
   /**
-   * Notify Editor the content was set to Draft.
+   * Notify PM that content was set to ToBeReviewd..
    *
    * REV_EE_US_05
    *
@@ -618,7 +606,8 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
-    drupal_set_message("[[EMAIL]@to:PM] Notify the Project Manager of [[SECTION]] the node/{$node->nid} is needs to be reviewed");
+    $user = osha_workflow_get_project_manager($node->nid);
+    OshaWorkflowNotifications::sendEmail($user, $node);
   }
 
   /**
@@ -643,9 +632,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnNodeApproved($node) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
-    // TODO get project manager.
-    $project_manager = array();
-    $users[] = $project_manager;
+    $users[] = osha_workflow_get_project_manager($node->nid);
     OshaWorkflowNotifications::sendEmail($users, $node);
   }
 
@@ -658,11 +645,13 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnNodeRejected($node) {
-    drupal_set_message("[[EMAIL]@to:RMs, PM for that section] LastApprover set node/{$node->nid} to Rejected");
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
+    $users[] = osha_workflow_get_project_manager($node->nid);
+    OshaWorkflowNotifications::sendEmail($users, $node);
   }
 
   /**
-   * Notification sent when the node was rejected by PM.
+   * Notification sent when the node was rejected by PM (set in FinalDraft)
    *
    * (Approved => FinalDraft)
    *
@@ -670,7 +659,8 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyNodeRejectedFromApprovedToFinalDraft($node) {
-    drupal_set_message("[[EMAIL]@to:RMs] Notify 'Review Managers' that PM rejected node/{$node->nid} in Final Draft");
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
+    OshaWorkflowNotifications::sendEmail($users, $node);
   }
 
   /**
