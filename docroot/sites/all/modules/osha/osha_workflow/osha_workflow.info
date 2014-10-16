@@ -1,7 +1,7 @@
 name = Osha Workflow
 core = 7.x
 package = OSHA
-version = 7.x-1.6
+version = 7.x-1.7
 project = osha_workflow
 dependencies[] = ctools
 dependencies[] = entity
@@ -63,6 +63,7 @@ features[workbench_moderation_transitions][] = needs_review:final_draft
 features[workbench_moderation_transitions][] = needs_review:ready_to_publish
 features[workbench_moderation_transitions][] = needs_review:to_be_approved
 features[workbench_moderation_transitions][] = rejected:draft
+features[workbench_moderation_transitions][] = rejected:ready_to_publish
 features[workbench_moderation_transitions][] = rejected:to_be_approved
 features[workbench_moderation_transitions][] = to_be_approved:approved
 features[workbench_moderation_transitions][] = to_be_approved:rejected
