@@ -159,10 +159,13 @@ function osha_workflow_access_pm_form($form, &$form_state, $access_type, $access
       '#title' => t('Remove'),
     );
   }
+  $options = array('' => "Select a Project Manager");
+  $options += osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER);
   $form['add_user'] = array(
-    '#type' => 'textfield',
+    '#type' => 'select',
     '#title' => t('Add Project Manager'),
-    '#autocomplete_path' => 'workbench_access/autocomplete/' . $access_type . '/' . $access_type_id,
+    '#options' => $options,
+    '#default_value' => "",
   );
   $form['workbench_access'] = array(
     '#type' => 'value',
@@ -182,19 +185,18 @@ function osha_workflow_access_pm_form_validate($form, &$form_state) {
   $values = $form_state['values'];
   // User handling.
   if (!empty($values['add_user'])) {
-    $account = user_load_by_name($values['add_user']);
+    $account = user_load($values['add_user']);
+    $existing_users = osha_workflow_access_pm_get_pm($values['workbench_access']['access_id'],
+      $values['workbench_access']['access_scheme']);
     if (empty($account)) {
       form_set_error('add_user', t('The selected user does not exist.'));
     }
-    elseif (!user_access('access workbench access by role', $account)) {
-      form_set_error('add_user', t('The selected user does not have permission to be added as an PM.'));
-    }
-
-    // Only one PM per Section.
-    if (!empty ($values['add_user'])) {
-      $existing_users = osha_workflow_access_pm_get_pm($values['workbench_access']['access_id'],
-        $values['workbench_access']['access_scheme']);
-      if (!empty($existing_users)) {
+    else {
+      if (!OshaWorkflowPermissions::userHasRole(
+        OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $account)) {
+        form_set_error('add_user', t('You can assign here only Project Managers.'));
+      }
+      elseif (!empty($existing_users)) {
         foreach ($values['users'] as $user) {
           if (empty($user['remove'])) {
             form_set_error('add_user', t('You can assign only one PM per section.'));
@@ -222,7 +224,7 @@ function osha_workflow_access_pm_form_submit($form, &$form_state) {
   $values = $form_state['values'];
   // User handling.
   if (!empty($values['add_user'])) {
-    $account = user_load_by_name($values['add_user']);
+    $account = user_load($values['add_user']);
     $sections = $account->workbench_access;
     if (!empty($account->workbench_access_by_role)) {
       foreach ($account->workbench_access_by_role as $key) {
