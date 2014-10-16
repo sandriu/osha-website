@@ -4,6 +4,8 @@ if (function_exists('drush_log')) {
   drush_log('Executing post-install tasks ...', 'ok');
 }
 
+require_once 'utils.php';
+
 osha_configure_solr_entities();
 osha_change_field_size();
 osha_configure_file_translator();
@@ -11,6 +13,7 @@ osha_newsletter_create_taxonomy();
 osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
 osha_configure_permissions();
+osha_config_development();
 
 
 /**
@@ -220,7 +223,7 @@ function osha_configure_addtoany_social_share() {
   variable_set('addtoany_image', 'text');
   variable_set('addtoany_custom_image', '');
   variable_set('addtoany_image_attributes', 'Share');
-  
+
   variable_set('addtoany_nodetypes', array(
     'news' => 'news',
     'article' => 0,
@@ -237,4 +240,19 @@ function osha_configure_addtoany_social_share() {
   );
 }
 
+/**
+ * Set specific configuration for development environment.
+ */
+function osha_config_development() {
+  $config = osha_get_config();
+  if (in_array($config['variables']['environment'], array('production'))) {
+    return;
+  }
 
+  // Enables email rerouting.
+  if (module_exists('reroute_email') && isset($config['variables']['site_mail'])) {
+    variable_set(REROUTE_EMAIL_ENABLE, 1);
+    variable_set(REROUTE_EMAIL_ADDRESS, $config['variables']['site_mail']);
+    variable_set(REROUTE_EMAIL_ENABLE_MESSAGE, 1);
+  }
+}
