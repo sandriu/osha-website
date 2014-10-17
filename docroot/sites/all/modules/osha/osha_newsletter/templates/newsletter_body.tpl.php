@@ -14,6 +14,19 @@
                       if ($items[$idx+1]['#entity_type'] == 'taxonomy_term') {
                         continue;
                       } else {
+                        if ($idx != 0) {?>
+                          <table border="0" cellpadding="0" cellspacing="0" class="blue-line" width="100%">
+                            <tbody>
+                            <tr>
+                              <td style="padding-top: 15px;" class="space-above-blue-line"></td>
+                            </tr>
+                            <tr>
+                              <td width="100%" style="background-color:#003399; height: 4px;" valign="top"></td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        <?php
+                        }
                         print(render($item));
                       }
                     } else {
@@ -61,7 +74,18 @@
 
 
                 <?php
-                  if (!empty($news) && sizeof($news) > 1) {
+                  if (!empty($news) && sizeof($news) > 1) {?>
+                    <table border="0" cellpadding="0" cellspacing="0" class="blue-line" width="100%">
+                      <tbody>
+                      <tr>
+                        <td style="padding-top: 15px;" class="space-above-blue-line"></td>
+                      </tr>
+                      <tr>
+                        <td width="100%" style="background-color:#003399; height: 4px;" valign="top"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <?php
                     foreach ($news as $item) {
                       print(render($item));
                     }?>
@@ -95,7 +119,18 @@
 
 
                 <?php
-                  if (!empty($events) && sizeof($events) > 1) {
+                  if (!empty($events) && sizeof($events) > 1) {?>
+                    <table border="0" cellpadding="0" cellspacing="0" class="blue-line" width="100%">
+                      <tbody>
+                      <tr>
+                        <td style="padding-top: 15px;" class="space-above-blue-line"></td>
+                      </tr>
+                      <tr>
+                        <td width="100%" style="background-color:#003399; height: 4px;" valign="top"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <?php
                     foreach ($events as $item) {
                       print(render($item));
                     }?>
