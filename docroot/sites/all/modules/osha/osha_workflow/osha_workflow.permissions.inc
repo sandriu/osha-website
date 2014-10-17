@@ -80,6 +80,7 @@ function osha_workflow_permissions_manage_content() {
 function osha_workflow_permissions_common() {
   return array(
     'access content',
+    'use osh content tab',
 
     'search content',
     'use advanced search',
