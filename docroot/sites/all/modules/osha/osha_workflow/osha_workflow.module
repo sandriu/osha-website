@@ -88,6 +88,18 @@ function osha_workflow_menu() {
 function osha_workflow_menu_alter(&$items) {
   // Disable Section Menu from Workbench Dashboard.
   $items['admin/workbench/sections']['access callback'] = FALSE;
+
+  // Hide Editors tab from Workbench Access config.
+  $items['admin/config/workbench/access']['page callback'] = 'workbench_access_roles';
+  $items['admin/config/workbench/access/editors']['access callback'] = FALSE;
+
+}
+
+function osha_workflow_editor_page() {
+  $output = array(
+    '#markup' => 'Workflow Administration',
+  );
+  return drupal_render($output);
 }
 /**
  * Permission access to approval local task.
@@ -252,9 +264,43 @@ function osha_workflow_node_access($node, $operation, $user) {
     if ($state == OSHA_WORKFLOW_STATE_DRAFT && !osha_workflow_user_has_access($node)) {
       return NODE_ACCESS_DENY;
     }
+
+    global $user;
+    if (osha_workflow_get_node_owner($node) != $user->uid && $state != OSHA_WORKFLOW_STATE_PUBLISHED) {
+      return NODE_ACCESS_DENY;
+    }
   }
 
   return NODE_ACCESS_IGNORE;
+}
+
+function osha_workflow_get_node_owner($node) {
+  $result = db_select('workbench_moderation_node_history', 'wmnh')
+    ->fields('wmnh');
+  $draft_to_draft = db_and()
+    ->condition('from_state', OSHA_WORKFLOW_STATE_DRAFT)
+    ->condition('state', OSHA_WORKFLOW_STATE_DRAFT);
+  $draft_to_final = db_and()
+    ->condition('from_state', OSHA_WORKFLOW_STATE_DRAFT)
+    ->condition('state', OSHA_WORKFLOW_STATE_FINAL_DRAFT);
+  $publ_to_draft = db_and()
+    ->condition('from_state', OSHA_WORKFLOW_STATE_PUBLISHED)
+    ->condition('state', OSHA_WORKFLOW_STATE_DRAFT);
+  $or = db_or()
+    ->condition($draft_to_draft)
+    ->condition($draft_to_final)
+    ->condition($publ_to_draft);
+  $result->condition($or);
+  $result->orderBy('hid', 'DESC');
+  $result->range(0, 1);
+  $result = $result->execute();
+  $result = $result->fetchAllAssoc('uid');
+  if (!empty($result)) {
+    return current(array_keys($result));
+  }
+  else {
+    return $node->uid;
+  }
 }
 
 /**
@@ -398,8 +444,8 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
   }
   elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'osh_workflow_admin'
     && $form_state['view']->current_display == 'content') {
-    $form['access_id']['#multiple'] = FALSE;
-    unset($form['access_id']['#size']);
+//    $form['access_id']['#multiple'] = TRUE;
+//    $form['access_id']['#size'] = 1;
   }
 }
 
