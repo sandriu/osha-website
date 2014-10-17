@@ -240,10 +240,8 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Needs Review';
   $handler->display->display_options['defaults']['access'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    5 => '5',
-  );
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'use osh needs review tab';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Workbench Moderation: Node */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -297,13 +295,8 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Content';
   $handler->display->display_options['defaults']['access'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    3 => '3',
-    4 => '4',
-    6 => '6',
-    5 => '5',
-  );
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'use osh content tab';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Workbench Moderation: Node */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -396,7 +389,7 @@ function osha_workflow_views_default_views() {
     7 => 0,
   );
   $handler->display->display_options['filters']['access_id']['access_id'] = array();
-  $handler->display->display_options['filters']['access_id']['size'] = '50';
+  $handler->display->display_options['filters']['access_id']['size'] = '1';
   $handler->display->display_options['path'] = 'admin/workbench/contents';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Content';

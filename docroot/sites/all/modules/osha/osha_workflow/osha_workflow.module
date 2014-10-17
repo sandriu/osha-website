@@ -232,6 +232,7 @@ function osha_workflow_permission() {
 
   $permissions['use osh needs review tab'] = array('title' => t('Use OSHA Workflow Needs Review tab in Workbench dashboard'));
   $permissions['use osh approvals tab'] = array('title' => t('Use OSHA Workflow My Approvals tab in Workbench dashboard'));
+  $permissions['use osh content tab'] = array('title' => t('Use OSHA Workflow Content tab in Workbench dashboard'));
 
   return $permissions;
 }
