@@ -372,6 +372,7 @@ $options['init-modules'] = array(
   'osha_blocks',
   'osha_breadcrumbs',
 //  'osha_content',
+  'osha_legislation',
 
   'facetapi',
   'search_api_facetapi',
