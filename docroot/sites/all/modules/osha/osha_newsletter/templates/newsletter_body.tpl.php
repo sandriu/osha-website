@@ -30,6 +30,19 @@
                         print(render($item));
                       }
                     } else {
+                      if ($idx != 1 && $item["#view_mode"] == "highlights_item") {?>
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%"">
+                          <tbody>
+                          <tr>
+                            <td style="border-style: dotted; border-top-width: 2px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px; border-color: #CFDDEE; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="dotted-line"></td>
+                          </tr>
+                          <tr>
+                            <td style="padding-bottom: 20px;" class="space-beyond-dotted-line"></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      <?php
+                      }
                       print(render($item));
                     }
                   }
