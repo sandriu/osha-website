@@ -100,7 +100,7 @@ function osha_workflow_access_pm_check_root() {
       return TRUE;
     }
     else {
-      drupal_set_message(t("Workflow: You haven\'t assigned a PM for root Section"), 'error');
+      drupal_set_message(t("Workflow: You haven't assigned a PM for root Section"), 'error');
       return FALSE;
     }
   }

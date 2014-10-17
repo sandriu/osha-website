@@ -53,6 +53,11 @@ function osha_workflow_install() {
     ->fields(array('weight' => 10))
     ->condition('name', 'osha_workflow')
     ->execute();
+
+  // Disable workbench default views.
+  $status = variable_get('views_defaults', array());
+  $status['workbench_moderation'] = TRUE;
+  variable_set('views_defaults', $status);
 }
 
 /**

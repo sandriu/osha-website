@@ -85,6 +85,10 @@ function osha_workflow_menu() {
   return $items;
 }
 
+function osha_workflow_menu_alter(&$items) {
+  // Disable Section Menu from Workbench Dashboard.
+  $items['admin/workbench/sections']['access callback'] = FALSE;
+}
 /**
  * Permission access to approval local task.
  *
@@ -391,6 +395,11 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
+  }
+  elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'osh_workflow_admin'
+    && $form_state['view']->current_display == 'content') {
+    $form['access_id']['#multiple'] = FALSE;
+    unset($form['access_id']['#size']);
   }
 }
 
