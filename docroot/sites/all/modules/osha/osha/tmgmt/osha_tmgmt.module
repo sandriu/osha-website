@@ -366,7 +366,50 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
       break;
 
+    case 'views_form_tmgmt_node_selection_view_tmgmt_node_selection_view_page':
+      if ($form['#id'] == 'views-form-tmgmt-node-selection-view-tmgmt-node-selection-view-page') {
+        if (isset($form['select']['rules_component::tmgmt_node_ui_tmgmt_nodes_add_items_to_cart'])) {
+          /* Hijack submit button to call our own method to add items to cart - with integrity check */
+          $form['select']['rules_component::tmgmt_node_ui_tmgmt_nodes_add_items_to_cart']['#submit'] = array(
+            'osha_tmgmt_node_ui_tmgmt_nodes_add_items_to_cart',
+          );
+        }
+      }
+      break;
   }
+}
+
+/**
+ * Overrides views_bulk_operations action that add items to cart.
+ * This methods checks and reports duplicate items that are already in the cart.
+ *
+ * @param $form
+ * @param $form_state
+ */
+function osha_tmgmt_node_ui_tmgmt_nodes_add_items_to_cart($form, &$form_state) {
+  $vbo = _views_bulk_operations_get_field($form_state['build_info']['args'][0]);
+  $source_items = _views_bulk_operations_get_selection($vbo, $form_state);
+  $existing = array();
+  $cart = tmgmt_ui_cart_get();
+  foreach ($cart->getJobItemsFromCart() as $item) {
+    if ($item->plugin == 'entity' && $item->item_type == 'node') {
+      $existing[] = $item->item_id;
+    }
+  }
+  $i = 0;
+  foreach ($source_items as $source_id) {
+    if (!in_array($source_id, $existing)) {
+      if (tmgmt_ui_cart_get()->addJobItem('entity', 'node', $source_id)) {
+        $i++;
+      }
+    }
+    else {
+      $node = node_load($source_id);
+      drupal_set_message("<a href='node/{$source_id}'><strong>{$node->title}</strong></a> is already in the cart");
+    }
+  }
+  drupal_set_message(format_plural($i, '@count content source was added into the <a href="@url">cart</a>.',
+    '@count content sources were added into the <a href="@url">cart</a>.', array('@url' => url('admin/tmgmt/cart'))));
 }
 
 /**
