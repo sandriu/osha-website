@@ -19,3 +19,16 @@ function osha_workflow_views_query_alter(&$view, &$query) {
     }
   }
 }
+
+/**
+ * Implements hook_views_post_execute().
+ */
+function osha_workflow_views_post_execute(&$view) {
+  if ($view->name == 'osh_workflow_admin') {
+    // Add correct author of the node.
+    foreach ($view->result as &$row) {
+      $row->users_node_uid = osha_workflow_get_node_owner($row->nid, $row->users_node_uid);
+      $row->users_node_name = user_load($row->users_node_uid)->name;
+    }
+  }
+}

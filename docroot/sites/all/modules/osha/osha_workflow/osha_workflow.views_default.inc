@@ -129,6 +129,7 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Author';
   /* Field: Workbench Moderation: State */
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
@@ -418,7 +419,7 @@ function osha_workflow_views_default_views() {
     t('Title'),
     t('Type'),
     t('Section'),
-    t('Name'),
+    t('Author'),
     t('State'),
     t('Operations'),
     t('All'),

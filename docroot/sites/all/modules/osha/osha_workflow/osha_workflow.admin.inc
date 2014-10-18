@@ -539,6 +539,7 @@ function osha_workflow_node_approval_form_validate($form, $form_state) {
   }
 }
 
+
 /**
  * Implements hook_form_submit().
  */

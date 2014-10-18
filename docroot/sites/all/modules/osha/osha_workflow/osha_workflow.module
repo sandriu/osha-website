@@ -268,7 +268,7 @@ function osha_workflow_node_access($node, $operation, $user) {
 
     global $user;
     if (OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EDITOR, $user) &&
-      osha_workflow_get_node_owner($node) != $user->uid
+      osha_workflow_get_node_owner($node->nid, $node->uid) != $user->uid
       && $state != OSHA_WORKFLOW_STATE_PUBLISHED) {
       return NODE_ACCESS_DENY;
     }
@@ -277,7 +277,7 @@ function osha_workflow_node_access($node, $operation, $user) {
   return NODE_ACCESS_IGNORE;
 }
 
-function osha_workflow_get_node_owner($node) {
+function osha_workflow_get_node_owner($nid, $uid = NULL) {
   $result = db_select('workbench_moderation_node_history', 'wmnh')
     ->fields('wmnh');
   $draft_to_draft = db_and()
@@ -294,6 +294,7 @@ function osha_workflow_get_node_owner($node) {
     ->condition($draft_to_final)
     ->condition($publ_to_draft);
   $result->condition($or);
+  $result->condition('wmnh.nid', $nid);
   $result->orderBy('hid', 'DESC');
   $result->range(0, 1);
   $result = $result->execute();
@@ -302,7 +303,11 @@ function osha_workflow_get_node_owner($node) {
     return current(array_keys($result));
   }
   else {
-    return $node->uid;
+    if (!$uid) {
+      $node = node_load($nid);
+      $uid = $node->uid;
+    }
+    return $uid;
   }
 }
 
