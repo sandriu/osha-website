@@ -146,6 +146,7 @@ features[language][] = tr
 features[linkit_profiles][] = osha_linkit_profile
 features[node][] = article
 features[node][] = page
+features[user_role][] = Translation Validator
 features[variable][] = apachesolr_cron_limit
 features[variable][] = comment_anonymous_article
 features[variable][] = comment_anonymous_page
