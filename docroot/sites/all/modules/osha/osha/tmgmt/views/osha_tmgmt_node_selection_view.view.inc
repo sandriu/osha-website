@@ -37,12 +37,13 @@ $handler->display->display_options['style_options']['columns'] = array(
   'title' => 'title',
   'type' => 'type',
   'state' => 'state',
-  'name' => 'name',
+  'section' => 'section',
+  'field_page_count' => 'field_page_count',
+  'field_character_count' => 'field_character_count',
   'changed' => 'changed',
+  'name' => 'name',
+  'field_activity' => 'field_activity',
   'edit_node' => 'edit_node',
-  'body' => 'body',
-  'field_publication_bookshop_id' => 'field_publication_bookshop_id',
-  'field_summary' => 'field_summary',
 );
 $handler->display->display_options['style_options']['default'] = 'changed';
 $handler->display->display_options['style_options']['info'] = array(
@@ -52,7 +53,7 @@ $handler->display->display_options['style_options']['info'] = array(
     'empty_column' => 0,
   ),
   'title' => array(
-    'sortable' => 0,
+    'sortable' => 1,
     'default_sort_order' => 'asc',
     'align' => '',
     'separator' => '',
@@ -72,7 +73,19 @@ $handler->display->display_options['style_options']['info'] = array(
     'separator' => '',
     'empty_column' => 0,
   ),
-  'name' => array(
+  'section' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_page_count' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_character_count' => array(
     'sortable' => 1,
     'default_sort_order' => 'asc',
     'align' => '',
@@ -86,28 +99,21 @@ $handler->display->display_options['style_options']['info'] = array(
     'separator' => '',
     'empty_column' => 0,
   ),
+  'name' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_activity' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
   'edit_node' => array(
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'body' => array(
-    'sortable' => 0,
-    'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'field_publication_bookshop_id' => array(
-    'sortable' => 0,
-    'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'field_summary' => array(
-    'sortable' => 0,
-    'default_sort_order' => 'asc',
     'align' => '',
     'separator' => '',
     'empty_column' => 0,
@@ -316,6 +322,24 @@ $handler->display->display_options['fields']['state']['machine_name'] = 0;
 $handler->display->display_options['fields']['section']['id'] = 'section';
 $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
 $handler->display->display_options['fields']['section']['field'] = 'section';
+/* Field: Content: Page count */
+$handler->display->display_options['fields']['field_page_count']['id'] = 'field_page_count';
+$handler->display->display_options['fields']['field_page_count']['table'] = 'field_data_field_page_count';
+$handler->display->display_options['fields']['field_page_count']['field'] = 'field_page_count';
+$handler->display->display_options['fields']['field_page_count']['settings'] = array(
+  'thousand_separator' => ' ',
+  'decimal_separator' => '.',
+  'scale' => '2',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Character count */
+$handler->display->display_options['fields']['field_character_count']['id'] = 'field_character_count';
+$handler->display->display_options['fields']['field_character_count']['table'] = 'field_data_field_character_count';
+$handler->display->display_options['fields']['field_character_count']['field'] = 'field_character_count';
+$handler->display->display_options['fields']['field_character_count']['settings'] = array(
+  'thousand_separator' => ' ',
+  'prefix_suffix' => 1,
+);
 /* Field: Content: Updated date */
 $handler->display->display_options['fields']['changed']['id'] = 'changed';
 $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -509,6 +533,8 @@ $translatables['tmgmt_node_selection_view'] = array(
   t('Type of content'),
   t('Status'),
   t('Section'),
+  t('Page count'),
+  t('Character count'),
   t('Updated'),
   t('Author'),
   t('Activity'),
