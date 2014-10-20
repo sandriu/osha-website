@@ -31,7 +31,6 @@
         if($published_date) {
           $newsletter_ready_date = date('M Y', strtotime($published_date));
         }?>
-        <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>
         <div class="newsletter-number" style="color: #003399; font-size: 24px; font-weight: 300; text-align: right;"><?php print $node_title?></div>
       </td>
     </tr>
