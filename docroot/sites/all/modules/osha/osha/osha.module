@@ -346,15 +346,19 @@ function osha_date_field_formatter_settings_summary_alter(&$summary, $context) {
 
 /**
  * Implements hook_node_view().
+ *
+ * {@inheritdoc}
  */
 function osha_node_view($node, $view_mode, $langcode) {
-    if ($node->type == 'article') {
-      $node->article_type_code = FALSE;
-      if (!empty($node->field_article_type[LANGUAGE_NONE][0]['taxonomy_term'])) {
-        $node->article_type_code = $node->field_article_type[LANGUAGE_NONE][0]['taxonomy_term']->
-            field_article_type_code[LANGUAGE_NONE][0]['value'];
+  if ($node->type == 'article') {
+    $node->article_type_code = FALSE;
+    if (!empty($node->field_article_type[LANGUAGE_NONE][0]['taxonomy_term'])) {
+      $article_type = $node->field_article_type[LANGUAGE_NONE][0]['taxonomy_term'];
+      if (!empty($article_type->field_article_type_code[LANGUAGE_NONE][0]['value'])) {
+        $node->article_type_code = $article_type->field_article_type_code[LANGUAGE_NONE][0]['value'];
       }
     }
+  }
 }
 
 /**
