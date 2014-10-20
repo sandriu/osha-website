@@ -436,10 +436,12 @@ function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
 function osha_workflow_workbench_moderation_states_next_alter(&$access, $op, $node) {
   $the_node = $node['node'];
   $the_user = $node['account'];
-  $state = $the_node->workbench_moderation['current']->state;
-  if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-    if (osha_workflow_has_approved($the_node->nid, $the_user->uid)) {
-      $access = array();
+  if(isset($the_node->workbench_moderation['current']->state)) {
+    $state = $the_node->workbench_moderation['current']->state;
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      if (osha_workflow_has_approved($the_node->nid, $the_user->uid)) {
+        $access = array();
+      }
     }
   }
 }
