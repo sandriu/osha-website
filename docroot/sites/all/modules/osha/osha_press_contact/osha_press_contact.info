@@ -14,6 +14,7 @@ dependencies[] = title
 dependencies[] = views
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = views-press_contacts-block
 features[features_api][] = api:2
 features[field_base][] = field_press_contact_email
 features[field_base][] = field_press_contact_job_title

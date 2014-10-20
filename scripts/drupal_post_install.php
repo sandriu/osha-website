@@ -254,6 +254,19 @@ function osha_add_menu_position_rules(){
     );
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
+
+    $press_menu_entry = array_search('------ Press room', $options);
+
+    $form_state = array(
+      'values' => array(
+        'admin_title' => 'Press room Menu Rule',
+        'plid' => $press_menu_entry !== NULL ? $press_menu_entry : 'main-menu:0',
+        'content_type' => array('press_release' => 'press_release'),
+        'op' => 'Save'
+      )
+    );
+
+    drupal_form_submit('menu_position_add_rule_form', $form_state);
   }
 }
 
