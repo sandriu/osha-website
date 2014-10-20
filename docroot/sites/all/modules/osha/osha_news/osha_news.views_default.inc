@@ -169,9 +169,8 @@ function osha_news_views_default_views() {
     t('last »'),
     t('Get the actual content from a content revision.'),
     t('OSH News list'),
-    t('View all'),
-    t('queue'),
     t('OSH News - latest'),
+    t('View all'),
   );
   $export['news'] = $view;
 

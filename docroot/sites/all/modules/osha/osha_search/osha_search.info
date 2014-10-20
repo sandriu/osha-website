@@ -43,7 +43,6 @@ features[facetapi][] = search_api@default_multilingual_node_index:block:field_su
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_tags
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_tags:name
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_thesaurus
-features[facetapi][] = search_api@default_multilingual_node_index:block:field_workflow_status
 features[facetapi][] = search_api@default_multilingual_node_index:block:language
 features[facetapi][] = search_api@default_multilingual_node_index:block:nid
 features[facetapi][] = search_api@default_multilingual_node_index:block:search_api_et_id

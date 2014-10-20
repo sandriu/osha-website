@@ -956,6 +956,71 @@ function osha_calls_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-calls-field_character_count'
+  $field_instances['node-calls-field_character_count'] = array(
+    'bundle' => 'calls',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Automatically calculated when saving. The count of characters found in the default language text (English).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_character_count',
+    'label' => 'Character count',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 24,
+    ),
+  );
+
   // Exported field_instance: 'node-calls-field_expiration_date'
   $field_instances['node-calls-field_expiration_date'] = array(
     'bundle' => 'calls',
@@ -1024,6 +1089,71 @@ function osha_calls_field_default_field_instances() {
       ),
       'type' => 'date_select',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-calls-field_page_count'
+  $field_instances['node-calls-field_page_count'] = array(
+    'bundle' => 'calls',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Automatically calculated when saving. The count of pages of text in the default language (English).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_page_count',
+    'label' => 'Page count',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 26,
     ),
   );
 
@@ -1183,73 +1313,6 @@ function osha_calls_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-calls-field_workflow_status'
-  $field_instances['node-calls-field_workflow_status'] = array(
-    'bundle' => 'calls',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 17,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_workflow_status',
-    'label' => 'Workflow status',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 19,
-    ),
-  );
-
   // Exported field_instance: 'node-calls-title_field'
   $field_instances['node-calls-title_field'] = array(
     'bundle' => 'calls',
@@ -1341,19 +1404,22 @@ function osha_calls_field_default_field_instances() {
   t('Amendments');
   t('Archived');
   t('Author');
+  t('Automatically calculated when saving. The count of characters found in the default language text (English).');
+  t('Automatically calculated when saving. The count of pages of text in the default language (English).');
   t('Award Notice');
   t('Award Notice Corrigendum');
   t('Body');
+  t('Character count');
   t('Contract Notice Corrigendum');
   t('Contract notice');
   t('Deadline');
   t('Expiration Date');
   t('Info');
+  t('Page count');
   t('Publication Date');
   t('Summary');
   t('Technical Specs');
   t('Title');
-  t('Workflow status');
 
   return $field_instances;
 }
