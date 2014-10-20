@@ -8,6 +8,10 @@ define('OSHA_TMGMT_JOB_PRIORITY_HIGH', 2);
 define('OSHA_TMGMT_JOB_PRIORITY_LOW', 1);
 define('OSHA_TMGMT_JOB_PRIORITY_NORMAL', 0);
 
+define('OSHA_TMGMT_TRANS_VALID_GROUP', 'translators_group');
+
+module_load_include('inc', 'osha_tmgmt', 'osha_tmgmt.workflow');
+
 /**
  * Implements hook_schema_alter().
  */
@@ -326,14 +330,16 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       $entity_language = entity_language($form_state['entity_type'], $form_state['entity']);
       $items = osha_tmgmt_job_item_load_latest('entity', $form_state['entity_type'], $id, $entity_language);
 
+      $pt_col_index = 4;
+
       // Remove all previously disabled checkboxes - we override that.
       $languages = language_list();
 
       foreach ($languages as $langcode => $language) {
         // Reset the pending column and ordering, rebuild based on job item.
         unset($form['languages'][$langcode]);
-        //@TODO:EDW Improve handling of column index below
-        $form['languages']['#options'][$langcode][4] = t('None');
+        // @TODO:EDW Improve handling of column index below.
+        $form['languages']['#options'][$langcode][$pt_col_index] = t('None');
 
         if ($langcode == $entity_language) {
           $form['languages'][$langcode] = array(
@@ -350,16 +356,72 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           // translation in progress that has not yet been finished. This way we
           // make sure that we don't stack multiple active translations for the
           // same item on top of each other.
-          //@TODO:EDW Improve handling of column index below
-          $form['languages']['#options'][$langcode][4] = $additional;
+          // @TODO:EDW Improve handling of column index below.
+          $form['languages']['#options'][$langcode][$pt_col_index] = $additional;
           $form['languages'][$langcode] = array(
             '#type' => 'checkbox',
             '#disabled' => TRUE,
           );
         }
       }
-      break;
 
+      // Translation Validators Group Form.
+      if (!empty($items)) {
+        $form['translation_validators'] = array(
+          '#type' => 'fieldset',
+          '#title' => 'Translation Validators',
+          '#collapsible' => TRUE,
+          '#tree' => TRUE,
+          '#weight' => -1,
+        );
+
+        $tjid = current($items)->tjid;
+        $form['translation_validators']['existing_group'] = array(
+          '#type' => 'markup',
+          '#markup' => t('No group of Translation Validators is not set.'),
+        );
+        if ($group = osha_tmgmt_get_job_translation_validators_group($tjid)) {
+          $form['translation_validators']['existing_group']['#markup']
+            = t('<b>@name</b> is assigned for this node. If you assign another group, it will override the current reviews.',
+                array('@name' => $group->name));
+        }
+
+        $form['translation_validators']['translation_group'] = array(
+          '#type' => 'select',
+          '#title' => 'Translation group',
+          '#options' => osha_tmgmt_get_translators_groups_as_options(),
+        );
+        $form['translation_validators']['submit'] = array(
+          '#type' => 'submit',
+          '#submit' => array('osha_tmgmt_translation_validators_submit'),
+          '#validate' => array(),
+          '#value' => 'Apply',
+        );
+
+        $form_state['validators_group'] = $group;
+        $form_state['tmgmt_job'] = tmgmt_job_load($tjid);
+        $form_state['tmgmt_job_items'] = $items;
+
+
+        // Translation Validators Reviews.
+        $reviews = osha_tmgmt_get_translation_reviews($tjid);
+        $trans_w_col_index = 5;
+        array_splice($form['languages']['#header'], $trans_w_col_index, 0,
+          array(t('Translation Workflow Status')));
+
+        foreach ($form['languages']['#options'] as $lang => &$row) {
+          if (!isset($items[$lang])) {
+            array_splice($row, $trans_w_col_index, 0, array(t('None')));
+            continue;
+          }
+          $status = t('To be Review');
+          if (!empty($reviews[$lang]->approved)) {
+            $status = t($reviews[$lang]->approved);
+          }
+          array_splice($row, $trans_w_col_index, 0, $status);
+        }
+      }
+      break;
   }
 }
 
@@ -714,4 +776,95 @@ class OshaTMGMTStatistics {
 
     return array_unique($target_languages);
   }
+}
+
+
+/**
+ * Implements hook_update_N().
+ *
+ * Creates osha_tmgmt_job_trans_validators table.
+ */
+function osha_tmgmt_update_7001() {
+  $schema = array();
+  $schema['osha_tmgmt_job_trans_validators'] = array(
+    'description' => 'Base table for the tmgmt job translation validators - translation workflow',
+    'fields' => array(
+      'tvid' => array(
+        'description' => 'Identifier',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Node under translation',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'eid' => array(
+        'description' => 'Translation Validators groups',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Translation Validator',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'tjid' => array(
+        'description' => 'Translation Job',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'tjiid' => array(
+        'description' => 'Translation Job Item',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'approved' => array(
+        'description' => 'NULL not voted, approved or rejected',
+        'type' => 'varchar',
+        'length' => 64,
+        'default' => NULL,
+        'not null' => FALSE,
+      ),
+      'language' => array(
+        'description' => 'The translation language the user is set for.',
+        'type' => 'char',
+        'length' => 2,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('tvid'),
+    'indexes' => array(
+      'osha_tmgmt_validator_uid' => array('uid'),
+      'osha_tmgmt_validator_group_eid' => array('eid'),
+      'osha_tmgmt_translated_node_nid' => array('nid'),
+      'osha_tmgmt_job_id' => array('tjid'),
+      'osha_tmgmt_job_item_id' => array('tjiid'),
+    ),
+    'foreign keys' => array(
+      'uid' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+      'nid' => array(
+        'table' => 'node',
+        'columns' => array('nid' => 'nid'),
+      ),
+      'tjid' => array(
+        'table' => 'tmgmt_job',
+        'columns' => array('tjid' => 'tjid'),
+      ),
+      'tjiid' => array(
+        'table' => 'tmgmt_job_item',
+        'columns' => array('tjiid' => 'tjiid'),
+      ),
+    ),
+  );
+  db_create_table('osha_tmgmt_job_trans_validators', $schema['osha_tmgmt_job_trans_validators']);
 }
