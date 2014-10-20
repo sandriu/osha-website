@@ -7,6 +7,11 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* workbench_moderation
+  * Added patch for hard-coded label
+  * https://www.drupal.org/node/2360059
+  * https://www.drupal.org/files/issues/workbench_moderation_hardcoded_set_moderation_state-2360059-1.patch
+
 * entity_collection
   * Fixed bug when using autocomplete for entities
   * https://www.drupal.org/node/2351417
