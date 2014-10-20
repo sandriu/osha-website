@@ -72,7 +72,7 @@ function osha_workflow_views_default_views() {
       'empty_column' => 0,
     ),
     'state' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -89,6 +89,7 @@ function osha_workflow_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  $handler->display->display_options['style_options']['empty_table'] = TRUE;
   /* Relationship: Content: Node approval */
   $handler->display->display_options['relationships']['osha_workflow_node_approval']['id'] = 'osha_workflow_node_approval';
   $handler->display->display_options['relationships']['osha_workflow_node_approval']['table'] = 'node';
@@ -188,7 +189,7 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
   /* Display: Project Manager NR */
-  $handler = $view->new_display('page', 'Project Manager NR', 'page_2');
+  $handler = $view->new_display('page', 'Project Manager NR', 'page_pm_review');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Needs Project Manager Review';
   $handler->display->display_options['defaults']['access'] = FALSE;
@@ -229,6 +230,31 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['current']['field'] = 'current';
   $handler->display->display_options['filters']['current']['value'] = '1';
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'rejected' => 'rejected',
+    'approved' => 'approved',
+    'needs_review' => 'needs_review',
+  );
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'State';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+  );
+  $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'admin/workbench/manager';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Needs PM Review';
