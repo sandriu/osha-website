@@ -1,5 +1,12 @@
 <?php
 
+function osha_tmgmt_translation_validation_options(){
+  return array(
+    'approved' => 'Approved',
+    'rejected' => 'Rejected',
+  );
+}
+
 /**
  * Get Groups of Translation Validators.
  */
