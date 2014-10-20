@@ -391,7 +391,7 @@ function osha_workflow_views_default_views() {
   );
   $handler->display->display_options['filters']['access_id']['access_id'] = array();
   $handler->display->display_options['filters']['access_id']['size'] = '1';
-  $handler->display->display_options['path'] = 'admin/workbench/contents';
+  $handler->display->display_options['path'] = 'admin/workbench/osha-content';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Content';
   $handler->display->display_options['menu']['weight'] = '0';
