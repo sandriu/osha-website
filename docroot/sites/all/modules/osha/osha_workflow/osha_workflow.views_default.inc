@@ -193,7 +193,7 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['title'] = 'Needs Project Manager Review';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'view osh review manager needs review tab';
+  $handler->display->display_options['access']['perm'] = 'view osh project manager needs review tab';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Node project manager */
   $handler->display->display_options['relationships']['osha_workflow_node_project_managers']['id'] = 'osha_workflow_node_project_managers';
@@ -242,7 +242,7 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['title'] = 'Needs Review Manager Review';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'view osh project manager needs review tab';
+  $handler->display->display_options['access']['perm'] = 'view osh review manager needs review tab';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Workbench Moderation: Node */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';

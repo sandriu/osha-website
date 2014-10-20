@@ -231,8 +231,8 @@ function osha_workflow_permission() {
   }
 
   $permissions['view osh approver needs review tab'] = array('title' => t("View Approver's 'Needs Aproval' tab in My Workbench"));
-  $permissions['view osh review manager needs review tab'] = array('title' => t("View Review Manager's 'Needs PM Review' tab in My Workbench"));
-  $permissions['view osh project manager needs review tab'] = array('title' => t("View Project Manager's 'Needs RM Review' tab in My Workbench"));
+  $permissions['view osh review manager needs review tab'] = array('title' => t("View Review Manager's 'Needs RM Review' tab in My Workbench"));
+  $permissions['view osh project manager needs review tab'] = array('title' => t("View Project Manager's 'Needs PM Review' tab in My Workbench"));
   $permissions['view osh content tab'] = array('title' => t("View 'Content' tab in My Workbench"));
 
   return $permissions;
