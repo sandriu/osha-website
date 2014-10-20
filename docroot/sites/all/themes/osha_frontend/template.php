@@ -208,14 +208,22 @@ function fill_related_wiki(&$vars) {
         }
       }
 
+      // exclude manually related
+      $excluded_nids = array();
+      array_push($excluded_nids, 0); // avoid empty NOT IN clause
+      if (!empty($vars['field_related_oshwiki_articles'])) {
+        foreach ($vars['field_related_oshwiki_articles'] as $related_wiki) {
+          array_push($excluded_nids, $related_wiki['entity']->nid);
+        }
+      }
       $query = new EntityFieldQuery();
       $result = $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'wiki_page')
+        ->entityCondition('entity_id', $excluded_nids, 'NOT IN')
         ->fieldCondition('field_wiki_categories', 'tid', $tids, 'IN')
         ->fieldOrderBy('field_updated', 'value', 'DESC')
         ->pager($limit)
         ->execute();
-
       if (!empty($result)) {
         $vars['total_wiki'] = sizeof($result['node']);
         $vars['tagged_wiki'] = array();
