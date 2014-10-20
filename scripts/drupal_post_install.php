@@ -13,6 +13,7 @@ osha_configure_addtoany_social_share();
 osha_disable_blocks();
 osha_configure_permissions();
 osha_configure_recaptcha();
+osha_configure_on_the_web();
 osha_add_menu_position_rules();
 
 variable_set('admin_theme', 'osha_admin');
@@ -253,7 +254,32 @@ function osha_add_menu_position_rules(){
     );
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
+
+    $press_menu_entry = array_search('------ Press room', $options);
+
+    $form_state = array(
+      'values' => array(
+        'admin_title' => 'Press room Menu Rule',
+        'plid' => $press_menu_entry !== NULL ? $press_menu_entry : 'main-menu:0',
+        'content_type' => array('press_release' => 'press_release'),
+        'op' => 'Save'
+      )
+    );
+
+    drupal_form_submit('menu_position_add_rule_form', $form_state);
   }
+}
+
+/**
+ * Add configuration for on_the_web contrib module.
+ */
+function osha_configure_on_the_web() {
+  drupal_set_message('Configuring on_the_web contrib module ...');
+
+  variable_set('on_the_web_sitename', 0);
+  variable_set('on_the_web_facebook_page', 'https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork');
+  variable_set('on_the_web_flickr_page', 'www.flickr.com/photos/euosha/');
+  variable_set('on_the_web_twitter_page', 'https://twitter.com/eu_osha');
 }
 
 /**
