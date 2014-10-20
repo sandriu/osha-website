@@ -560,6 +560,7 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
   $node = $values['node'];
   $state = $node->workbench_moderation['current']->state;
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    workbench_moderation_moderate($node, OSHA_WORKFLOW_STATE_TO_BE_APPROVED);
     osha_workflow_approve($node, OSHA_WORKFLOW_STATE_APPROVED);
     OshaWorkflowNotifications::notifyNextApproverToTakeAction($node);
   }
