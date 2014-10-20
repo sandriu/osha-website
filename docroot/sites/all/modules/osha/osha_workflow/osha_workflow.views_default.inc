@@ -181,6 +181,26 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'view osh approver needs review tab';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Node approval: Next */
+  $handler->display->display_options['filters']['next']['id'] = 'next';
+  $handler->display->display_options['filters']['next']['table'] = 'osha_workflow_node_approval';
+  $handler->display->display_options['filters']['next']['field'] = 'next';
+  $handler->display->display_options['filters']['next']['relationship'] = 'osha_workflow_node_approval';
+  $handler->display->display_options['filters']['next']['value']['value'] = '1';
+  /* Filter criterion: Workbench Moderation: Current */
+  $handler->display->display_options['filters']['current']['id'] = 'current';
+  $handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['current']['field'] = 'current';
+  $handler->display->display_options['filters']['current']['value'] = '1';
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'to_be_approved' => 'to_be_approved',
+  );
   $handler->display->display_options['path'] = 'admin/workbench/approve';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Needs Approval';
