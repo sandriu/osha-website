@@ -42,8 +42,6 @@ function osha_short_messages_admin_paths() {
 function osha_short_messages_form($form, &$form_state){
   //get the node object
   $node = osha_short_messages_node();
-  if(isset($form_state['triggering_element']['#ajax']))
-    $node = $form_state['triggering_element']['#ajax']['parameters']['node'];
 
   //get the list of languages
   $languages = language_list();
@@ -58,8 +56,20 @@ function osha_short_messages_form($form, &$form_state){
     'node_id' => $node->nid,
     'published_date' => $node->field_publication_date[LANGUAGE_NONE][0]['value']));
   $footer = theme('short_messages_footer');
+
+  //get a content type display mode
+  $display = node_view($node, 'default', 'en');
+
+  //remove links
+  $display['links'] = FALSE;
+  $display['#contextual_links'] = FALSE;
+
+  //remove some fields from default view
+  $display['title_field'] = FALSE;
+  $display['field_publication_date'] = FALSE;
+  
   $body = theme('short_messages_body', array(
-    'body_content' => $node->body['en'][0]['value'],
+    'body_content' => drupal_render($display),
   ));
 
   //content textarea
@@ -133,11 +143,4 @@ function osha_short_messages_theme() {
 function osha_short_messages_node(){
   $node = menu_get_object();
   return $node;
-}
-
-/**
- * Ajax response
- */
-function osha_short_messages_preview_message($form, $form_state){
-  return $form['short_messages_markup'];
 }

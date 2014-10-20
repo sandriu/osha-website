@@ -15,8 +15,13 @@ function displayDialog(){
     var $frm = jQuery("#preview_content");
     var $doc = $frm[0].contentWindow ? $frm[0].contentWindow.document : $frm[0].contentDocument;
     var $body = jQuery($doc.body);
-    $body.html(''); // clear iFrame contents <- I'm using this...
+    $body.html(''); // clear iFrame contents
     $body.append(editorContent); // use this to write something into the iFrame
+
+    //add css to html head
+    jQuery($doc.head).append('<style>' +
+        '.field-name-field-image{float: left;min-height: 95px;min-width: 100px;padding-bottom: 1em;padding-right: 1em;}' +
+        '</style>');
 
     //display dialog
     jQuery( "#preview_message" ).dialog({
