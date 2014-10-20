@@ -353,7 +353,7 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
         osha_workflow_set_node_approvers($node->nid, array_keys($approvers));
       }
       else {
-        drupal_set_message('No default approvers defined. Ask administrator to correcrly define the list of approvers.');
+        drupal_set_message('No default approvers defined. Ask administrator to define the default list of approvers.');
       }
     }
     OshaWorkflowNotifications::notifyOnChangeFromDraftToFinalDraft($node);
