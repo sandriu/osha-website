@@ -80,7 +80,7 @@ function osha_workflow_permissions_manage_content() {
 function osha_workflow_permissions_common() {
   return array(
     'access content',
-    'use osh content tab',
+    'view osh content tab',
 
     'search content',
     'use advanced search',
@@ -148,6 +148,7 @@ function osha_workflow_permissions_role_editor() {
 function osha_workflow_permissions_role_review_manager() {
   $ret = array_merge(
     array(
+      'view osh review manager needs review tab',
       'access content overview',
 
       'edit any content in draft',
@@ -178,7 +179,7 @@ function osha_workflow_permissions_role_project_manager() {
   $ret = array_merge(
     array(
       'edit any content in needs_review',
-      'use osh needs review tab',
+      'view osh project manager needs review tab',
 
       'moderate content from needs_review to final_draft',
       'edit any content in approved',
@@ -208,7 +209,7 @@ function osha_workflow_permissions_role_approver() {
   $ret = array_merge(
     array(
       'edit any content in to_be_approved',
-      'use osh approvals tab',
+      'view osh approver needs review tab',
 
       'moderate content from to_be_approved to approved',
       'moderate content from to_be_approved to rejected',

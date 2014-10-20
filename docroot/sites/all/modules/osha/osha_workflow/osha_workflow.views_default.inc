@@ -173,27 +173,27 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['filters']['current']['field'] = 'current';
   $handler->display->display_options['filters']['current']['value'] = '1';
 
-  /* Display: Approval NR */
-  $handler = $view->new_display('page', 'Approval NR', 'page_1');
+  /* Display: Approver NR */
+  $handler = $view->new_display('page', 'Approver NR', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'My Approvals';
+  $handler->display->display_options['title'] = 'Needs Approval';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'use osh approvals tab';
+  $handler->display->display_options['access']['perm'] = 'view osh approver needs review tab';
   $handler->display->display_options['path'] = 'admin/workbench/approve';
   $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Needs Review';
+  $handler->display->display_options['menu']['title'] = 'Needs Approval';
   $handler->display->display_options['menu']['weight'] = '5';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: PM NR */
-  $handler = $view->new_display('page', 'PM NR', 'page_2');
+  /* Display: Project Manager NR */
+  $handler = $view->new_display('page', 'Project Manager NR', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Needs Review';
+  $handler->display->display_options['title'] = 'Needs Project Manager Review';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'use osh needs review tab';
+  $handler->display->display_options['access']['perm'] = 'view osh review manager needs review tab';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Node project manager */
   $handler->display->display_options['relationships']['osha_workflow_node_project_managers']['id'] = 'osha_workflow_node_project_managers';
@@ -231,7 +231,7 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['filters']['current']['value'] = '1';
   $handler->display->display_options['path'] = 'admin/workbench/manager';
   $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Needs Review';
+  $handler->display->display_options['menu']['title'] = 'Needs PM Review';
   $handler->display->display_options['menu']['weight'] = '5';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
@@ -239,10 +239,10 @@ function osha_workflow_views_default_views() {
   /* Display: Review Manager NR */
   $handler = $view->new_display('page', 'Review Manager NR', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Needs Review';
+  $handler->display->display_options['title'] = 'Needs Review Manager Review';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'use osh needs review tab';
+  $handler->display->display_options['access']['perm'] = 'view osh project manager needs review tab';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Workbench Moderation: Node */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -286,7 +286,7 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'admin/workbench/review-manager';
   $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Needs Review';
+  $handler->display->display_options['menu']['title'] = 'Needs RM Review';
   $handler->display->display_options['menu']['weight'] = '3';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
@@ -297,7 +297,7 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['title'] = 'Content';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'use osh content tab';
+  $handler->display->display_options['access']['perm'] = 'view osh content tab';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Workbench Moderation: Node */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -423,11 +423,13 @@ function osha_workflow_views_default_views() {
     t('State'),
     t('Operations'),
     t('All'),
-    t('Approval NR'),
-    t('PM NR'),
-    t('Needs Review'),
+    t('Approver NR'),
+    t('Needs Approval'),
+    t('Project Manager NR'),
+    t('Needs Project Manager Review'),
     t('Node project manager'),
     t('Review Manager NR'),
+    t('Needs Review Manager Review'),
     t('Content'),
     t('Search'),
   );
