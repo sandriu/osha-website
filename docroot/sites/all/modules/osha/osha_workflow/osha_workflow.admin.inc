@@ -216,7 +216,7 @@ function osha_workflow_access_pm_form_submit($form, &$form_state) {
         unset($sections[$key]);
       }
     }
-    if (!empty($account->status) && !in_array($values['workbench_access']['access_id'], array_keys($sections))) {
+    if (!empty($account->status)) {
       // Add the access section.
       $record['uid'] = $account->uid;
       $record['access_id'] = $values['workbench_access']['access_id'];
