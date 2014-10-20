@@ -27,12 +27,12 @@
       </td>
       <td>
         <?php
-        $newsletter_ready_date = date('F Y');
-        if($newsletter_date) {
-          $newsletter_ready_date = date('F Y', strtotime($newsletter_date));
+        $newsletter_ready_date = date('M Y');
+        if($published_date) {
+          $newsletter_ready_date = date('M Y', strtotime($published_date));
         }?>
         <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>
-        <div class="newsletter-number" style="color: #003399; font-size: 24px; font-weight: 300; text-align: right;"><?php print $newsletter_title?></div>
+        <div class="newsletter-number" style="color: #003399; font-size: 24px; font-weight: 300; text-align: right;"><?php print $node_title?></div>
       </td>
     </tr>
   </tbody>
@@ -47,9 +47,7 @@
             <tr class="blue-line">
               <td style="background-color:#003399; width: 100%; height: 4px;"></td>
             </tr>
-            <tr>
-              <td style="background-color: #A6B8DB; width: 100%; height: 36px; text-align: center; font-size: 24px; font-weight: 300; color: #003399; font-family: Oswald, Arial,sans-serif;">Occupational Safety and Health News - Europe</td>
-            </tr>
+
             <tr>
               <td>
                 <table border="0" cellpadding="15" cellspacing="0" width="100%">
@@ -60,7 +58,13 @@
                          if ($languages) {
                             $last_lang = array_pop($languages);
                             foreach ($languages as $language):?>
-                            <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $language));?>" style="text-decoration: none; color: #003399;"><?php print $language->native . ' | ';?></a><?php  endforeach; ?> <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $last_lang));?>" style="text-decoration: none; color: #003399;"><?php print $last_lang->native;?></a>
+                              <a href="<?php echo url('node/' . $node_id, array('absolute' => TRUE, 'language' => $language));?>" style="text-decoration: none; color: #003399;">
+                                <?php print $language->native . ' | ';?>
+                              </a>
+                            <?php  endforeach; ?>
+                            <a href="<?php echo url('node/' . $node_id, array('absolute' => TRUE, 'language' => $last_lang));?>" style="text-decoration: none; color: #003399;">
+                              <?php print $last_lang->native;?>
+                            </a>
                          <?php
                          }
                         ?>
