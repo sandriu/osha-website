@@ -338,6 +338,7 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   if ($old == OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
     // Assign the default PM, if none assigned.
     if (!osha_workflow_get_project_manager($node->nid)) {
+      reset($node->workbench_access);
       $section = current($node->workbench_access);
       $project_manager = osha_workflow_get_default_project_manager($section);
       if ($project_manager) {

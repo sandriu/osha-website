@@ -59,7 +59,6 @@ function osha_workflow_get_default_project_manager($section) {
  */
 function osha_workflow_access_find_pm(&$section_tree, $section_id) {
   $access = $section_tree['tree'][$section_id];
-  $users = array();
   $users = osha_workflow_access_pm_get_pm($access['access_id'],
     $section_tree['access_scheme']['access_scheme']);
   if (empty($users)&& !empty($access['parent'])) {
