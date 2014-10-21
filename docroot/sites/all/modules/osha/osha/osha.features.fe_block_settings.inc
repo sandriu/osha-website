@@ -102,7 +102,8 @@ function osha_default_fe_block_settings() {
     'node_types' => array(),
     'pages' => 'press-releases
 press-release/*
-press/press-releases/*',
+press/press-releases/*
+press-room',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
