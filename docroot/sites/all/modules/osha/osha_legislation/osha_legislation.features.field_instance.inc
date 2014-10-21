@@ -1633,8 +1633,8 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-legislation_category-field_legislation_category_code'
-  $field_instances['taxonomy_term-legislation_category-field_legislation_category_code'] = array(
+  // Exported field_instance: 'taxonomy_term-legislation_category-field_directive_category_code'
+  $field_instances['taxonomy_term-legislation_category-field_directive_category_code'] = array(
     'bundle' => 'legislation_category',
     'default_value' => NULL,
     'deleted' => 0,
@@ -1645,25 +1645,71 @@ function osha_legislation_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'taxonomy_term',
-    'field_name' => 'field_legislation_category_code',
-    'label' => 'Legislation Category Code',
-    'required' => FALSE,
+    'field_name' => 'field_directive_category_code',
+    'label' => 'Directive Category Code',
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 41,
+      'weight' => 42,
+    ),
+  );
+
+  // Exported field_instance: 'taxonomy_term-legislation_category-field_guideline_category_code'
+  $field_instances['taxonomy_term-legislation_category-field_guideline_category_code'] = array(
+    'bundle' => 'legislation_category',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_guideline_category_code',
+    'label' => 'Guideline Category Code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
     ),
   );
 
@@ -1674,10 +1720,11 @@ function osha_legislation_field_default_field_instances() {
   t('Available in languages');
   t('Body');
   t('Date of directive');
+  t('Directive Category Code');
   t('Directive Type');
   t('Directive_code');
   t('External URL');
-  t('Legislation Category Code');
+  t('Guideline Category Code');
   t('Legislation category');
   t('Nace');
   t('Publication Date');

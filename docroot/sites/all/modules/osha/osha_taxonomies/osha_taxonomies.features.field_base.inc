@@ -130,6 +130,36 @@ function osha_taxonomies_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_directive_category_code'
+  $field_bases['field_directive_category_code'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_directive_category_code',
+    'foreign keys' => array(
+      'format' => array(
+        'columns' => array(
+          'format' => 'format',
+        ),
+        'table' => 'filter_format',
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_directive_code'
   $field_bases['field_directive_code'] = array(
     'active' => 1,
@@ -222,13 +252,13 @@ function osha_taxonomies_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_legislation_category_code'
-  $field_bases['field_legislation_category_code'] = array(
+  // Exported field_base: 'field_guideline_category_code'
+  $field_bases['field_guideline_category_code'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_legislation_category_code',
+    'field_name' => 'field_guideline_category_code',
     'foreign keys' => array(
       'format' => array(
         'columns' => array(
