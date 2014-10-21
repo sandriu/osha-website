@@ -12,6 +12,8 @@ define('OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES', 'JobVacancies');
 define('OSHA_MIGRATION_CONTENT_TYPE_BLOG', 'Blog');
 define('OSHA_MIGRATION_CONTENT_TYPE_CALLS', 'Calls');
 define('OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY', 'CaseStudy');
+define('OSHA_MIGRATION_CONTENT_TYPE_DIRECTIVE', 'Directive');
+define('OSHA_MIGRATION_CONTENT_TYPE_GUIDELINE', 'Guideline');
 define('OSHA_MIGRATION_CONTENT_TYPE_HIGHLIGHT', 'Highlight');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
@@ -94,6 +96,20 @@ function osha_migration_migrate_api() {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY] = array(
       'class_name' => 'MigrateOshaCaseStudy',
       'file_name' => $external_data_dir . '/export/case_studies.txt',
+    );
+  }
+
+  if (is_readable($external_data_dir . '/export/legislation.txt')) {
+    $migrations[OSHA_MIGRATION_CONTENT_TYPE_DIRECTIVE] = array(
+      'class_name' => 'OshaMigrateDirectives',
+      'file_name' => $external_data_dir . '/export/legislation.txt',
+    );
+  }
+
+  if (is_readable($external_data_dir . '/export/legislation.txt')) {
+    $migrations[OSHA_MIGRATION_CONTENT_TYPE_GUIDELINE] = array(
+      'class_name' => 'OshaMigrateGuidelines',
+      'file_name' => $external_data_dir . '/export/legislation.txt',
     );
   }
 
