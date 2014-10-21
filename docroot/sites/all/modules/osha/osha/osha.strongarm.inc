@@ -206,7 +206,7 @@ function osha_strongarm() {
     'default_language' => 'xx-et-default',
     'hide_language_selector' => 0,
     'exclude_language_none' => 1,
-    'lock_language' => 0,
+    'lock_language' => 1,
     'shared_fields_original_only' => 1,
   );
   $export['entity_translation_settings_node__article'] = $strongarm;
@@ -219,7 +219,7 @@ function osha_strongarm() {
     'default_language' => 'xx-et-default',
     'hide_language_selector' => 0,
     'exclude_language_none' => 1,
-    'lock_language' => 0,
+    'lock_language' => 1,
     'shared_fields_original_only' => 1,
   );
   $export['entity_translation_settings_node__blog'] = $strongarm;
@@ -232,7 +232,7 @@ function osha_strongarm() {
     'default_language' => 'xx-et-default',
     'hide_language_selector' => 0,
     'exclude_language_none' => 1,
-    'lock_language' => 0,
+    'lock_language' => 1,
     'shared_fields_original_only' => 1,
   );
   $export['entity_translation_settings_node__news'] = $strongarm;
@@ -245,7 +245,7 @@ function osha_strongarm() {
     'default_language' => 'xx-et-default',
     'hide_language_selector' => 0,
     'exclude_language_none' => 1,
-    'lock_language' => 0,
+    'lock_language' => 1,
     'shared_fields_original_only' => 1,
   );
   $export['entity_translation_settings_node__page'] = $strongarm;
@@ -258,7 +258,7 @@ function osha_strongarm() {
     'default_language' => 'xx-et-default',
     'hide_language_selector' => 0,
     'exclude_language_none' => 1,
-    'lock_language' => 0,
+    'lock_language' => 1,
     'shared_fields_original_only' => 1,
   );
   $export['entity_translation_settings_node__publication'] = $strongarm;
