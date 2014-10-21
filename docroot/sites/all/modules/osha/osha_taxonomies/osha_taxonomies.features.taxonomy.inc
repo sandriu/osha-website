@@ -62,12 +62,12 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
     'directive_type' => array(
       'name' => 'Directive type',
       'machine_name' => 'directive_type',
-      'description' => 'Translation directive type',
+      'description' => 'Directive type',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => -8,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 1,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
