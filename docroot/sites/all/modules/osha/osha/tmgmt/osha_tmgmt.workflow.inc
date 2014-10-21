@@ -1,6 +1,47 @@
 <?php
 
 /**
+ * This method creates the user roles required by the workflow.
+ */
+function osha_tmgmt_workflow_create_roles() {
+  // module_load_include('inc', 'osha_workflow', 'osha_workflow.permissions');
+
+  // translate content
+  // translate any entity
+  // translate node entities
+  // translate taxonomy_term entities
+  // accept translation jobs
+
+  // Local Translator??
+
+  $roles = array(
+    'Translation Manager' => array(
+      'create translation jobs',
+      'submit translation jobs',
+    ),
+    'Translation Liaison' => array(),
+    'Layout Validator' => array(
+      'preview layout validation',
+    ),
+    'Content Validator' => array(),
+  );
+
+  foreach ($roles as $role_name => $permissions) {
+    if ($role = user_role_load_by_name($role_name)) {
+      // Nothing to do, really ...
+    }
+    else {
+      $role = new stdClass();
+      $role->name = $role_name;
+      user_role_save($role);
+    }
+    user_role_grant_permissions($role->rid, $permissions);
+    // Grant workbench access for this role.
+    workbench_access_role_section_save($role->rid, 'main-menu', 'menu');
+  }
+}
+
+/**
  * Hook menu that allows to see layout validation of a node from a job item.
  *
  * @param object $node

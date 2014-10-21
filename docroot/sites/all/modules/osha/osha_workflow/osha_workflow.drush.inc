@@ -51,6 +51,21 @@ function drush_osha_workflow_osha_create_users() {
     'approver3' => 'Approver',
     'approver4' => 'Approver',
     'administrator' => 'administrator',
+
+    'tmanager1' => 'Translation Manager',
+    'tmanager2' => 'Translation Manager',
+
+    'tliaison1' => 'Translation Liaison',
+    'tliaison2' => 'Translation Liaison',
+
+    'lvalidator1' => 'Layout Validator',
+    'lvalidator2' => 'Layout Validator',
+
+    'cvalidator1' => 'Content Validator',
+    'cvalidator2' => 'Content Validator',
+    'cvalidator3' => 'Content Validator',
+    'cvalidator4' => 'Content Validator',
+    'cvalidator5' => 'Content Validator',
   );
 
   foreach ($users as $username => $role_name) {
