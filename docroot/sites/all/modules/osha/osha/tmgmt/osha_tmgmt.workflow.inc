@@ -1,5 +1,23 @@
 <?php
 
+/**
+ * Hook menu that allows to see layout validation of a node from a job item.
+ *
+ * @param object $node
+ *   Node to render
+ * @param object $job_item
+ *   Associated job item
+ *
+ * @return string
+ *   Renderable array
+ */
+function osha_tmgmt_layout_validation_node_preview($node, $job_item) {
+  $target_language = $job_item->target_language;
+  tmgmt_field_populate_entity($node->type, $node, $target_language, $job_item->getData());
+  $renderable_node = node_view($node, 'full', $target_language);
+  return drupal_render($renderable_node);
+}
+
 function osha_tmgmt_translation_validation_options() {
   return array(
     'approved' => 'Approved',
