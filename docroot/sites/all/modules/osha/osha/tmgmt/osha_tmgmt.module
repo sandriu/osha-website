@@ -94,6 +94,75 @@ function osha_tmgmt_schema_alter(&$schema) {
 }
 
 /**
+ * Implements hook_entity_info().
+ */
+function osha_tmgmt_entity_info() {
+  return array(
+    'translation_validator' => array(
+      'label' => t('Translation Validators'),
+      'module' => 'osha_tmgmt',
+      'controller class' => 'OshaWorkflowApprovalItemController',
+      'base table' => 'osha_tmgmt_job_trans_validators',
+      'entity keys' => array(
+        'id' => 'tvid',
+      ),
+      'views controller class' => 'EntityDefaultViewsController',
+    ),
+  );
+}
+
+/**
+ * Implements hook_entity_property_info().
+ */
+function osha_tmgmt_entity_property_info() {
+  $info = array();
+
+  // Add meta-data for node_approval entity.
+  $properties = &$info['translation_validator']['properties'];
+  $properties['user'] = array(
+    'label' => t("User"),
+    'type' => 'user',
+    'description' => t("The User that must Validate the Translation"),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'uid',
+  );
+  $properties['node'] = array(
+    'label' => t("Node"),
+    'type' => 'node',
+    'description' => t("The Node that needs validation of the translation."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'nid',
+  );
+  $properties['approved'] = array(
+    'label' => t("Translation Validation Status"),
+    'type' => 'text',
+    'options list' => 'osha_tmgmt_translation_validation_options',
+    'description' => t("The review give by Translatoion Validator."),
+    'getter callback' => 'entity_property_verbatim_get',
+    'setter callback' => 'entity_property_verbatim_set',
+    'entity views field' => TRUE,
+//    'required' => TRUE,
+    'schema field' => 'approved',
+  );
+//  $properties['next'] = array(
+//    'label' => t("Next"),
+//    'type' => 'integer',
+//    'description' => t("If the user is next who needs to approve"),
+//    'getter callback' => 'entity_property_verbatim_get',
+//    'schema field' => 'next',
+//  );
+
+  return $info;
+}
+
+
+/**
  * Implements hook_tmgmt_file_format_info().
  */
 function osha_tmgmt_tmgmt_file_format_plugin_info() {
@@ -397,7 +466,6 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           '#tree' => TRUE,
           '#weight' => -1,
         );
-
         reset($items);
         $tjid = current($items)->tjid;
         $form['translation_validators']['existing_group'] = array(
@@ -442,11 +510,15 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           }
           $status = t('To be Reviewed');
           if (!empty($items[$lang]->approved)) {
-            $status = t($items[$lang]->approved);
+            $status = t('@status', array('@status' => $items[$lang]->approved));
           }
           if (!empty($items[$lang]->uid)) {
-            $status = t($status . ' by @name',
-              array('@name' => user_load($items[$lang]->uid)->name));
+            $user = user_load($items[$lang]->uid);
+            $status = t('@status by @name',
+              array(
+                '@name' => $user->name,
+                '@status' => $status)
+            );
           }
           array_splice($row, $trans_w_col_index, 0, $status);
         }
@@ -674,7 +746,6 @@ function osha_tmgmt_views_default_views_alter(&$views) {
 
   }
 }
-
 
 class OshaTMGMTStatistics {
 
