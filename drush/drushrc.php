@@ -400,6 +400,8 @@ $options['init-modules'] = array(
   // Link content types with main menu items
   'menu_position',
 
+  'r4032login',
+
   'devel',
   'diff',
   'simpletest'
