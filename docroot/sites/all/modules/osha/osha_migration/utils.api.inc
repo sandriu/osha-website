@@ -593,7 +593,7 @@ class MigrationUtil {
     $url = !empty($row[2]) ? $row[2] : $row[0];
     $url = substr($url, 4);
     if (strlen($url) > 255) {
-      drupal_set_message(sprintf('Truncating path longer than 255: %s', $url), 'warning');
+      //drupal_set_message(sprintf('Truncating path longer than 255: %s', $url), 'warning');
       $url= substr($url, 0, 255);
     }
     return $url;

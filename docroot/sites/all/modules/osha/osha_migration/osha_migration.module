@@ -3,6 +3,7 @@
 define('OSHA_MIGRATION_TAXONOMY_ACTIVITY', 'TaxonomyActivity');
 define('OSHA_MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
 define('OSHA_MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
+define('OSHA_MIGRATION_TAXONOMY_LEGISLATION_CATEGORIES', 'TaxonomyLegislationCategories');
 define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
 define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
 define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
@@ -44,6 +45,13 @@ function osha_migration_migrate_api() {
     $migrations[OSHA_MIGRATION_TAXONOMY_ESENER] = array(
       'class_name' => 'MigrateOshaTaxonomyEsener',
       'file_name' => $migration_module_dir . '/data/esener.json',
+    );
+  }
+
+  if (is_readable($migration_module_dir . '/data/legislation_category.json')) {
+    $migrations[OSHA_MIGRATION_TAXONOMY_LEGISLATION_CATEGORIES] = array(
+      'class_name' => 'MigrateOshaTaxonomyLegislationCategories',
+      'file_name' => $migration_module_dir . '/data/legislation_category.json',
     );
   }
 

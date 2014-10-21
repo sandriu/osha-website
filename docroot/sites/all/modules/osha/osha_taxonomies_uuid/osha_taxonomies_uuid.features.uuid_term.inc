@@ -2325,6 +2325,430 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
+    'name' => 'Provisions on workload, ergonomic and psychosocial risks',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 6,
+    'uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'provisions-on-workload-ergonomical-and-psychosocial-risks',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'provisions_workload',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Разпоредби относно риска, свързан с натоварване, ергономични и психо-социални рискове',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Ustanovení o pracovní zátěži a ergonomických a psychosociálních rizicích',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Bestemmelser om arbejdsmængderelaterede, ergonomiske og psykosociale risici',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Bestimmungen zur Arbeitsbelastung und zu den ergonomischen und psychosozialen Risiken',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Διατάξεις σχετικά με τους εργονομικούς και ψυχοκοινωνικούς κινδύνους καθώς και με τους κινδύνους που σχετίζονται με τον φόρτο εργασίας',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Provisions on workload, ergonomic and psychosocial risks',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Disposiciones en materia de riesgos relacionados con la carga de trabajo, riesgos ergonómicos y riesgos psicosociales',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Töökoormuse ja ergonoomiliste ning psühhosotsiaalsete ohtude sätted',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Työn kuormittavuutta sekä ergonomisia ja psykososiaalisia riskejä koskevat säännökset',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Dispositions relatives à la charge de travail et aux risques ergonomiques et psychosociaux',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Provisions on workload, ergonomic and psychosocial risks',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'A munkateherre, az ergonómiai és pszichoszociális kockázatokra vonatkozó rendelkezések',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Provisions on workload, ergonomic and psychosocial risks',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Disposizioni in materia di volume di lavoro, rischi psicosociali e di natura ergonomica',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Nuostatos dėl darbo krūvio, ergonominių aspektų ir psichosocialinių rizikos veiksnių',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Noteikumi par darba slodzi, ergonomiskajiem un psihosociālajiem riskiem',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Dispożizzjonijiet dwar ammont ta\' xogħol, riskji ergonomiċi u psikosoċjali',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Bepalingen inzake werklast, en ergonomische en psychosociale risico\'s',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Provisions on workload, ergonomic and psychosocial risks',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Przepisy dotyczące obciążenia pracą, zagrożeń ergonomicznych i psychospołecznych',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Disposições relativas aos riscos inerentes à carga de trabalho, aos riscos ergonómicos e aos riscos psicossociais',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Dispoziţii privind volumul de muncă, riscurile ergonomice şi psihosociale',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Ustanovenia o pracovnej záťaži, ergonomických a psychosociálnych rizikách',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Določbe o delovni obremenitvi ter ergonomskih in psihosocialnih tveganjih',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Bestämmelser om risker som har med arbetsbelastning att göra och ergonomiska och psykosociala risker',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
     'name' => '2.1. European Survey of Enterprises on New & Emerging Risks (ESENER)',
     'description' => NULL,
     'format' => 'plain_text',
@@ -7433,6 +7857,430 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
+    'name' => 'Sector specific and worker related provisions',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 7,
+    'uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'sector-specific-and-worker-related-provisions',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'sector_specific',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Разпоредби за различни сектори и във връзка с работниците',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Ustanovení specifická pro jednotlivá odvětví a týkající se pracovníků',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Sektorspecifikke og arbejdstagerrelevante bestemmelser',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Sektorspezifische und auf den Arbeitnehmer bezogene Bestimmungen',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Ειδικές διατάξεις για τους διάφορους τομείς και για τους εργαζόμενους',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Sector specific and worker related provisions',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Disposiciones sectoriales y relativas a los trabajadores',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Sektorispetsiifilised ja töötajatega seotud sätted',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Alakohtaiset ja työntekijöihin liittyvät säännökset',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Dispositions spécifiques au secteur et liées aux travailleurs',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Sector specific and worker related provisions',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Ágazatspecifikus és a munkavállalókkal kapcsolatos rendelkezések',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Sector specific and worker related provisions',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Disposizioni specifiche per settore e legate ai lavoratori',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Konkrečių sektorių ir su darbuotojais susijusios nuostatos',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'No nozares atkarīgi un ar darba ņēmējiem saistīti noteikumi',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Dispożizzjonijiet speċifiċi għas-settur u relatati mal-ħaddiema',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Sectorspecifieke en werknemergerelateerde bepalingen',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Sector specific and worker related provisions',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Przepisy branżowe i przepisy dotyczące pracowników',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Disposições específicas do sector e relacionadas com os trabalhadores',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Dispoziţii specifice sectorului şi privind lucrătorii',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Ustanovenia týkajúce sa konkrétnych odvetví a ustanovenia týkajúce sa pracovníkov',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Določbe, značilne za sektor in v zvezi z delavci',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Branschspecifika och arbetstagarrelaterade bestämmelser',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
     'name' => 'Introduction',
     'description' => NULL,
     'format' => 'plain_text',
@@ -9226,6 +10074,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
       0 => '8f36d40f-4400-432c-9067-2b5836ec2717',
     ),
   );
+
   $terms[] = array(
     'name' => 'Psychosocial risks and stress',
     'description' => NULL,
@@ -11685,6 +12534,430 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
+    'name' => 'Exposure to physical hazards',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 4,
+    'uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure-to-physical-hazards',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure_physical_hazards',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Излагане на въздействието на физически опасности',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Expozice fyzikálním rizikům',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Eksponering for fysiske farer',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Gefährdung durch physikalische Gefahren',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Έκθεση σε φυσικούς κινδύνους',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Exposure to physical hazards',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Exposición a peligros físicos',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Kokkupuude füüsikaliste ohuteguritega',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Altistuminen fysikaalisille vaaroille',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Exposition à des dangers physiques',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Exposure to physical hazards',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Fizikai veszélyeknek való kitettség',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Exposure to physical hazards',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Esposizione a rischi fisici',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Fizinių veiksnių poveikis',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Fizisks apdraudējums',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Esponiment għal perikli fiżiċi',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Blootstelling aan fysieke gevaren',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Exposure to physical hazards',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Narażenie na zagrożenia fizyczne',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Exposição a perigos físicos',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Expunerea la pericole fizice',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Vystavenie fyzickým nebezpečenstvám',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Izpostavljenost fizikalnim nevarnostim',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Exponering för fysiska faror',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
     'name' => 'Self-employed',
     'description' => NULL,
     'format' => 'full_html',
@@ -11731,6 +13004,430 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
+  );
+  $terms[] = array(
+    'name' => 'Exposure to chemical agents and chemical safety',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 3,
+    'uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure-to-chemical-agents-and-chemical-safety',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure_chemical_agents',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Излагане на въздействието на химични агенти и химическа безопасност',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Expozice chemickým činitelům a chemická bezpečnost',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Eksponering for kemiske stoffer og kemisk sikkerhed',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Gefährdung durch chemische Arbeitsstoffe und Stoffsicherheit',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Έκθεση σε χημικούς παράγοντες και χημική ασφάλεια',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Exposure to chemical agents and chemical safety',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Exposición a agentes químicos y seguridad química',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Kokkupuude kemikaalidega ja kemikaaliohutus',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Altistuminen kemiallisille tekijöille ja kemikaaliturvallisuus',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Exposition à des agents chimiques et sécurité chimique',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Exposure to chemical agents and chemical safety',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Vegyi anyagoknak való kitettség és kémiai biztonság',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Exposure to chemical agents and chemical safety',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Esposizione ad agenti chimici e sicurezza chimica',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Cheminių medžiagų poveikis ir cheminė sauga',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Ķimikāliju iedarbība un ķīmiskā drošība',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Esponiment għal sustanzi kimiċi u sikurezza kimika',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Blootstelling aan chemische agentia en chemische veiligheid',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Exposure to chemical agents and chemical safety',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Narażenie na czynniki chemiczne i bezpieczeństwo chemiczne',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Exposição a agentes químicos e segurança química',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Expunerea la agenţi chimici şi securitatea chimică',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Vystavenie chemickým látkam a chemická bezpečnosť',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Izpostavljenost kemičnim snovem in kemijska varnost',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Exponering för kemiska ämnen och kemikaliesäkerhet',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Mainstreaming OSH into education',
@@ -12782,6 +14479,430 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'translate' => 0,
           'created' => 1411328866,
           'entity_uuid' => '9c242673-d19b-4b53-8567-fd6e613f5f44',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
+    'name' => 'Workplaces, equipment, signs, personal protective equipment',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 2,
+    'uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'workplaces-equipment-signs-personal-protective-equipment',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'workplaces',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Работни места, оборудване, знаци, лични предпазни средства',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Pracoviště, zařízení, značky, osobní ochranné prostředky',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Arbejdspladser, udstyr, skilte, personlige værnemidler',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Arbeitsstätten, Arbeitsmittel, Kennzeichnung, persönliche Schutzausrüstung',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Χώροι εργασίας, εξοπλισμός, προειδοποιητικές πινακίδες, μέσα ατομικής προστασίας',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Workplaces, equipment, signs, personal protective equipment',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Lugares de trabajo, equipos, señalización, equipos de protección individual',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Töökohad, töövahendid, märgid, isikukaitsevahendid',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Työpaikat, laitteet, merkit, henkilönsuojaimet',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Lieux de travail, équipement, panneaux, équipement de protection individuelle',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Workplaces, equipment, signs, personal protective equipment',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Munkahelyek, eszközök, jelzések, egyéni védőeszközök',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Workplaces, equipment, signs, personal protective equipment',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Luoghi di lavoro, attrezzature, segnaletica, dispositivi di protezione individuale',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Darbo vietos, įranga, ženklai, asmeninės apsaugos priemonės',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Darbavietas, aprīkojums, zīmes, individuālās aizsardzības līdzekļi',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Postijiet tax-xogħol, tagħmir, sinjali, apparat ta\' protezzjoni personali',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Werkplaatsen, arbeidsmiddelen, signalering en persoonlijke beschermingsmiddelen',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Workplaces, equipment, signs, personal protective equipment',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Stanowiska pracy, wyposażenie, oznakowanie, środki ochrony indywidualnej',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Locais de trabalho, equipamento, sinalização, equipamento de protecção individual',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Locuri de muncă, echipamente, elemente de semnalizare, echipamente individuale de protecţie',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Pracoviská, zariadenia, značky, osobné ochranné prostriedky',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Delovna mesta, oprema, znaki, osebna varovalna oprema',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Arbetsplatser, utrustning, skyltar, personlig skyddsutrustning',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
           'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
         ),
       ),
@@ -17834,6 +19955,440 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
+    'name' => 'Exposure to biological agents',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 5,
+    'uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure-to-biological-agents',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure_biological_agents',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Излагане на въздействието на биологични агенти',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Expozice biologickým činitelům',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Eksponering for biologiske agenser',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Gefährdung durch biologische Arbeitsstoffe',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Έκθεση σε βιολογικούς παράγοντες',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Exposure to biological agents',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Exposición a agentes biológicos',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Kokkupuude bioloogiliste mõjuritega',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Altistuminen biologisille tekijöille',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Exposition à des agents biologiques',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Exposure to biological agents',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Biológiai anyagoknak való kitettség',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Exposure to biological agents',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Esposizione ad agenti biologici',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Biologinių veiksnių poveikis',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Bioloģisko aģentu iedarbība',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Esponiment għal sustanzi bioloġiċi',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Blootstelling aan biologische agentia',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Exposure to biological agents',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Narażenie na czynniki biologiczne',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Exposição a agentes biológicos',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Expunerea la agenţi biologici',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Vystavenie biologickým látkam',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Izpostavljenost biološkim dejavnikom',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Exponering för biologiska ämnen',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'en',
+          'source' => '',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906810,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
     'name' => '2: Facts and figures',
     'description' => NULL,
     'format' => 'plain_text',
@@ -19098,6 +21653,430 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
+  );
+  $terms[] = array(
+    'name' => 'The OSH Framework Directive',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 1,
+    'uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'the-osh-framework-directive',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'osh_framework_directive',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Рамкова директива за БЗР',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Rámcová směrnice o bezpečnosti a ochraně zdraví při práci',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Rammedirektivet om arbejdsmiljø',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Rahmenrichtlinie – Sicherheit und Gesundheitsschutz bei der Arbeit',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Οδηγία-πλαίσιο για την ασφάλεια και την υγεία κατά την εργασία',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'The OSH Framework Directive',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'La Directiva marco sobre salud y seguridad en el trabajo',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Tööohutuse ja töötervishoiu raamdirektiiv',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Työturvallisuutta ja työterveyttä koskeva puitedirektiivi',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'La directive-cadre sur la SST',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'The OSH Framework Directive',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'A munkahelyi biztonságról és egészségvédelemről szóló keretirányelv',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'The OSH Framework Directive',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'La direttiva quadro sulla SSL',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'DSS pagrindų direktyva',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'OSH pamatdirektīva',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Id-Direttiva Qafas dwar l-OHS',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'De kaderrichtlijn veiligheid en gezondheid op het werk',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'The OSH Framework Directive',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Dyrektywa ramowa dotycząca bezpieczeństwa i ochrony zdrowia w miejscu pracy',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Directiva-quadro relativa à SST',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Directiva-cadru privind securitatea şi sănătatea în muncă',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Rámcová smernica o bezpečnosti a ochrane zdravia pri práci',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Okvirna direktiva o varnosti in zdravju pri delu',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Ramdirektivet om arbetsmiljö',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Economic aspects',

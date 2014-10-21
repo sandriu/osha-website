@@ -43,6 +43,9 @@ do
     #   echo "Importing Publication types taxonomy"
     #   drush migrate-import TaxonomyPublicationTypes
 
+    #   echo "Importing legislation category taxonomy"
+    #   drush migrate-import TaxonomyLegislationCategories
+
         echo "Importing multilingual Thesaurus taxonomy"
         drush migrate-import TaxonomyThesaurus
 

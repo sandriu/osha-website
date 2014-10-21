@@ -46,6 +46,7 @@ features[field_instance][] = taxonomy_term-article_types-field_article_type_code
 features[field_instance][] = taxonomy_term-esener-description_field
 features[field_instance][] = taxonomy_term-esener-field_esener_code
 features[field_instance][] = taxonomy_term-esener-name_field
+features[field_instance][] = taxonomy_term-legislation_category-name_field
 features[field_instance][] = taxonomy_term-nace_codes-description_field
 features[field_instance][] = taxonomy_term-nace_codes-field_nace_changes
 features[field_instance][] = taxonomy_term-nace_codes-field_nace_code

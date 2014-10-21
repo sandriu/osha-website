@@ -45,6 +45,9 @@ GOTO DONE
     rem echo "Importing Publication types taxonomy"
     rem call drush migrate-import TaxonomyPublicationTypes
 
+    rem echo "Importing legislation category taxonomy"
+    rem call drush migrate-import TaxonomyLegislationCategories
+
     echo "Importing multilingual Thesaurus taxonomy"
     call drush migrate-import TaxonomyThesaurus
 
