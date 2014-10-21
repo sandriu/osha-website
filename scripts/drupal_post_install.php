@@ -15,6 +15,7 @@ osha_configure_permissions();
 osha_configure_recaptcha();
 osha_configure_on_the_web();
 osha_add_menu_position_rules();
+osha_add_agregator_rss_feeds();
 
 variable_set('admin_theme', 'osha_admin');
 variable_set('theme_default', 'osha_frontend');
@@ -267,6 +268,30 @@ function osha_add_menu_position_rules(){
     );
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
+  }
+}
+
+/**
+  * Add press releases rss feed
+  */
+function osha_add_agregator_rss_feeds(){
+  if (module_exists('aggregator') && module_load_include('inc', 'aggregator', 'aggregator.admin')) {
+    drupal_set_message('Add press releases rss feed ...');
+
+    $form_state = array(
+      'values' => array(
+        'title' => 'EU-OSHA in the media',
+        'url' => 'http://portal.kantarmedia.de/rss/index/1002043/100000063/1024803/9a7b629357e748080ff47e4d0db7ec57cffff3fe',
+        'refresh' => 900,
+        'block' => 2,
+        'op' => 'Save'
+      )
+    );
+
+    drupal_form_submit('aggregator_form_feed', $form_state);
+
+    drupal_cron_run();
+    cache_clear_all();
   }
 }
 
