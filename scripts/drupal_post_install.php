@@ -302,9 +302,9 @@ function osha_configure_on_the_web() {
   drupal_set_message('Configuring on_the_web contrib module ...');
 
   variable_set('on_the_web_sitename', 0);
-  variable_set('on_the_web_facebook_page', 'https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork');
-  variable_set('on_the_web_flickr_page', 'www.flickr.com/photos/euosha/');
-  variable_set('on_the_web_twitter_page', 'https://twitter.com/eu_osha');
+  variable_set('on_the_web_facebook_page', 'http://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork');
+  variable_set('on_the_web_flickr_page', 'http://www.flickr.com/photos/euosha/');
+  variable_set('on_the_web_twitter_page', 'http://twitter.com/eu_osha');
 }
 
 /**
