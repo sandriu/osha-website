@@ -14,6 +14,9 @@ drush build
 
 drush php-script ../scripts/drupal_post_install.php
 
+# Fix settings for OSHA in the media block (created in post_install)
+drush fr osha_press_release.fe_block_settings -y --force
+
 echo "Registering migrations ..."
 drush migrate-auto-register
 
