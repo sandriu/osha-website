@@ -42,11 +42,11 @@ class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
       'field' => array(),
     );
 
+    $data['tmgmt_job_item']['operations']['field']['handler'] = 'osha_tmgmt_handler_field_tmgmt_job_item_operations';
+
     return $data;
   }
-
 }
-
 
 class OshaTMGMTJobViewsController extends TMGMTJobViewsController {
 

@@ -1,5 +1,16 @@
 <?php
 
+function osha_tmgmt_workflow_permissions_common() {
+  return array(
+    'access dashboard',
+    'view the administration theme',
+    'access toolbar',
+
+    //@todo: remove
+    'access devel information',
+  );
+}
+
 /**
  * Define the permissions for Translation Manager role.
  *
@@ -27,8 +38,11 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
  *   Array of permissions
  */
 function osha_tmgmt_workflow_permissions_role_translation_liaison() {
-  return array(
-
+  return array_merge(
+    array(
+      'view translation job',
+    ),
+    osha_tmgmt_workflow_permissions_common()
   );
 }
 
