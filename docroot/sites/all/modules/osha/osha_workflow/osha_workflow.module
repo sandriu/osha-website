@@ -586,3 +586,21 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
     OshaWorkflowNotifications::notifyNextApproverToTakeAction($node);
   }
 }
+
+
+/**
+ * Implements hook_mail().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_mail($key, &$message, $params) {
+  $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
+  $body = variable_get('osha_mail_template_approval_body',
+    'Dear [user:name],
+      You have a content to be reviewed [node:url].
+
+      Thank you,'
+  );
+  $message['subject'] = token_replace($subject, $params);
+  $message['body'] = token_replace($body, $params);
+}

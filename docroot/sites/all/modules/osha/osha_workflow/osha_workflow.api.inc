@@ -610,7 +610,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnChangeFromDraftToFinalDraft($node) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
-    OshaWorkflowNotifications::sendEmail($users, $node);
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
   }
 
   /**
@@ -623,7 +623,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnChangeToDraft($node) {
     $user = user_load($node->uid);
-    OshaWorkflowNotifications::sendEmail($user, $node);
+    OshaWorkflowNotifications::sendEmail($user, array('node' => $node), 'osha_workflow');
   }
 
   /**
@@ -636,18 +636,18 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
     $user = osha_workflow_get_project_manager($node->nid);
-    OshaWorkflowNotifications::sendEmail($user, $node);
+    OshaWorkflowNotifications::sendEmail($user, array('node' => $node), 'osha_workflow');
   }
 
   /**
-   * Send notification to the next approver (after the previous marked as done)
+   * Send notification to the next approver (after the previous marked as done).
    *
    * @param object $node
    *   Affected node
    */
   public static function notifyNextApproverToTakeAction($node) {
     $next_approval = osha_workflow_get_next_approver($node->nid);
-    OshaWorkflowNotifications::sendEmail($next_approval, $node);
+    OshaWorkflowNotifications::sendEmail($next_approval, array('node' => $node), 'osha_workflow');
   }
 
   /**
@@ -662,7 +662,7 @@ class OshaWorkflowNotifications {
   public static function notifyOnNodeApproved($node) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
     $users[] = osha_workflow_get_project_manager($node->nid);
-    OshaWorkflowNotifications::sendEmail($users, $node);
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
   }
 
   /**
@@ -676,11 +676,11 @@ class OshaWorkflowNotifications {
   public static function notifyOnNodeRejected($node) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
     $users[] = osha_workflow_get_project_manager($node->nid);
-    OshaWorkflowNotifications::sendEmail($users, $node);
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
   }
 
   /**
-   * Notification sent when the node was rejected by PM (set in FinalDraft)
+   * Notification sent when the node was rejected by PM (set in FinalDraft).
    *
    * (Approved => FinalDraft)
    *
@@ -689,7 +689,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyNodeRejectedFromApprovedToFinalDraft($node) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
-    OshaWorkflowNotifications::sendEmail($users, $node);
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
   }
 
   /**
@@ -704,7 +704,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyNodeIsReadyToPublish($node) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR);
-    OshaWorkflowNotifications::sendEmail($users, $node);
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
   }
 
   /**
@@ -717,7 +717,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyFirstApprover($node) {
     $next_approval = osha_workflow_get_next_approver($node->nid);
-    OshaWorkflowNotifications::sendEmail($next_approval, $node);
+    OshaWorkflowNotifications::sendEmail($next_approval, array('node' => $node), 'osha_workflow');
   }
 
   /**
@@ -736,53 +736,29 @@ class OshaWorkflowNotifications {
     return !empty($user->field_cmw_mail_notifications[LANGUAGE_NONE][0]['value']);
   }
 
-  public static function sendEmail($users, $node) {
+  /**
+   * Send e-mails to recipients. Filters out users who opted out.
+   *
+   * @param array $users
+   *   Array of recipients accounts objects.
+   * @param array $params
+   *   Array of tokens to replace in the subject and body of the email
+   * @param string $module
+   *   Module name which builds the template (implements hook_mail).
+   */
+  public static function sendEmail($users, $params, $module) {
     if (empty($users)) {
-      drupal_set_message("No users to send emails to.");
+      drupal_set_message('There are no users to notify about your action. Please report this to system administrator.', 'warning');
+      return;
     }
     if (!is_array($users)) {
       $users = array($users);
     }
-    $params = array(
-      'node' => $node,
-    );
     foreach ($users as $user) {
       if (self::userAllowsEmailNotifications($user)) {
         $params['user'] = $user;
-        drupal_mail('osha_workflow', 'notification', $user->mail, user_preferred_language($user), $params);
+        drupal_mail($module, 'osha_workflow_notification', $user->mail, user_preferred_language($user), $params);
       }
     }
   }
-}
-
-/**
- * Email callback for Workflow Notification System.
- */
-function osha_workflow_mail($key, &$message, $params) {
-  $subject = variable_get('osha_workflow_notice_subject',
-    '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
-
-  $message['subject'] = osha_workflow_replace_tokens($subject, $params['node'], $params['user']);
-
-  $msg = variable_get('osha_workflow_notice_body',
-    'Dear [user:name],
-
-    You have a content to be reviewed [node:url].
-
-    Thank you,
-    ');
-
-  $message['body'][] = osha_workflow_replace_tokens($msg, $params['node'], $params['user']);
-}
-
-/**
- * Replace tokens for notification emails.
- */
-function osha_workflow_replace_tokens($string, $node, $user) {
-  return token_replace($string,
-    array(
-      'node' => $node,
-      'user' => $user,
-    )
-  );
 }
