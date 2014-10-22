@@ -25,6 +25,7 @@ dependencies[] = linkit
 dependencies[] = list
 dependencies[] = locale
 dependencies[] = media
+dependencies[] = media_wysiwyg
 dependencies[] = nodequeue
 dependencies[] = number
 dependencies[] = on_the_web
