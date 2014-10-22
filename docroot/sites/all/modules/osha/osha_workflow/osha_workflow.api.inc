@@ -705,6 +705,9 @@ class OshaWorkflowNotifications {
   public static function notifyNodeIsReadyToPublish($node) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR);
     OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
+
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_tmgmt', 'notifyNodeIsReadyToPublish');
   }
 
   /**
@@ -745,8 +748,10 @@ class OshaWorkflowNotifications {
    *   Array of tokens to replace in the subject and body of the email
    * @param string $module
    *   Module name which builds the template (implements hook_mail).
+   * @param string $key
+   *   (Optional) Identifier for email type  to allow choosing proper template.
    */
-  public static function sendEmail($users, $params, $module) {
+  public static function sendEmail($users, $params, $module, $key = 'osha_workflow_notification') {
     if (empty($users)) {
       drupal_set_message('There are no users to notify about your action. Please report this to system administrator.', 'warning');
       return;
@@ -757,7 +762,7 @@ class OshaWorkflowNotifications {
     foreach ($users as $user) {
       if (self::userAllowsEmailNotifications($user)) {
         $params['user'] = $user;
-        drupal_mail($module, 'osha_workflow_notification', $user->mail, user_preferred_language($user), $params);
+        drupal_mail($module, $key, $user->mail, user_preferred_language($user), $params);
       }
     }
   }

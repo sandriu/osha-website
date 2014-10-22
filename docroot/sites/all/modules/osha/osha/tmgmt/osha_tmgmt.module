@@ -772,6 +772,35 @@ function osha_tmgmt_views_default_views_alter(&$views) {
   }
 }
 
+/**
+ * Implements hook_mail().
+ *
+ * {@inheritdoc}
+ */
+function osha_tmgmt_mail($key, &$message, $params) {
+  if ($key == 'notifyNodeIsReadyToPublish') {
+    $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
+    $body = variable_get('osha_mail_template_approval_body',
+      'Dear [user:name],
+      There was new content published/ready to publish that can be translated [node:url].
+
+      Thank you,'
+    );
+  }
+  else {
+    $subject = variable_get('osha_mail_template_translation_subject', '[OSHA Website] CMW: [tmgmt_job:label]');
+    $body = variable_get('osha_mail_template_translation_body',
+      'Dear [user:name],
+      You have a translation task that needs your attention <a href="[site:url]/admin/tmgmt/jobs/[tmgmt_job:tjid]">[tmgmt_job:label]</a>.
+
+      Thank you,'
+    );
+  }
+  $message['subject'] = token_replace($subject, $params);
+  $message['body'] = token_replace($body, $params);
+}
+
+
 class OshaTMGMTStatistics {
 
   /**
