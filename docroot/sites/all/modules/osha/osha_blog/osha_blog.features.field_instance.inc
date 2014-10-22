@@ -332,7 +332,7 @@ function osha_blog_field_default_field_instances() {
     'label' => 'Expiration Date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
