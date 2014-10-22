@@ -12,7 +12,12 @@ define('OSHA_WORKFLOW_ROLE_EDITOR', 'Editor');
 define('OSHA_WORKFLOW_ROLE_REVIEW_MANAGER', 'Review Manager');
 define('OSHA_WORKFLOW_ROLE_PROJECT_MANAGER', 'Project Manager');
 define('OSHA_WORKFLOW_ROLE_APPROVER', 'Approver');
-// Drupal administrator.
+/* Translation workflow roles */
+define('OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER', 'Translation Manager');
+define('OSHA_WORKFLOW_ROLE_TRANSLATION_LIAISON', 'Translation Liaison');
+define('OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR', 'Layout Validator');
+define('OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR', 'Content Validator');
+/* Drupal administrator role */
 define('OSHA_WORKFLOW_ROLE_ADMINISTRATOR', 'administrator');
 
 /* Workflow states */

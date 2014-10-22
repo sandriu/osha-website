@@ -4,26 +4,13 @@
  * This method creates the user roles required by the workflow.
  */
 function osha_tmgmt_workflow_create_roles() {
-  // module_load_include('inc', 'osha_workflow', 'osha_workflow.permissions');
-
-  // translate content
-  // translate any entity
-  // translate node entities
-  // translate taxonomy_term entities
-  // accept translation jobs
-
-  // Local Translator??
+  module_load_include('inc', 'osha_tmgmt', 'osha_tmgmt.permissions');
 
   $roles = array(
-    'Translation Manager' => array(
-      'create translation jobs',
-      'submit translation jobs',
-    ),
-    'Translation Liaison' => array(),
-    'Layout Validator' => array(
-      'preview layout validation',
-    ),
-    'Content Validator' => array(),
+    OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER => osha_tmgmt_workflow_permissions_role_translation_manager(),
+    OSHA_WORKFLOW_ROLE_TRANSLATION_LIAISON => osha_tmgmt_workflow_permissions_role_translation_liaison(),
+    OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR => osha_tmgmt_workflow_permissions_role_layout_validator(),
+    OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR => osha_tmgmt_workflow_permissions_role_content_validator(),
   );
 
   foreach ($roles as $role_name => $permissions) {
