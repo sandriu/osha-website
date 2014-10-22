@@ -42,4 +42,5 @@ features[variable][] = menu_parent_press_contact
 features[variable][] = node_options_press_contact
 features[variable][] = node_preview_press_contact
 features[variable][] = node_submitted_press_contact
+features[variable][] = workbench_access_node_type_press_contact
 features[views_view][] = press_contacts

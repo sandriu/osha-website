@@ -30,4 +30,5 @@ features[variable][] = menu_parent_note_to_editor
 features[variable][] = node_options_note_to_editor
 features[variable][] = node_preview_note_to_editor
 features[variable][] = node_submitted_note_to_editor
+features[variable][] = workbench_access_node_type_note_to_editor
 features[views_view][] = notes_to_editor
