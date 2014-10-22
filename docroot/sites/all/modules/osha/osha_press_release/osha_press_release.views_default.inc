@@ -70,12 +70,12 @@ function osha_press_release_views_default_views() {
   $handler->display->display_options['filters']['published']['relationship'] = 'nid';
   $handler->display->display_options['filters']['published']['value'] = '1';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: All press releases */
+  $handler = $view->new_display('page', 'All press releases', 'page');
   $handler->display->display_options['path'] = 'press-releases';
 
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
+  /* Display: Press releases block */
+  $handler = $view->new_display('block', 'Press releases block', 'block');
   $handler->display->display_options['defaults']['use_more'] = FALSE;
   $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
@@ -87,8 +87,8 @@ function osha_press_release_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '2';
 
-  /* Display: Press room */
-  $handler = $view->new_display('page', 'Press room', 'page_1');
+  /* Display: Press room - featured */
+  $handler = $view->new_display('page', 'Press room - featured', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Press room';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
@@ -125,9 +125,10 @@ function osha_press_release_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Get the actual content from a content revision.'),
-    t('Page'),
-    t('Block'),
+    t('All press releases'),
+    t('Press releases block'),
     t('See all'),
+    t('Press room - featured'),
     t('Press room'),
     t('queue'),
   );
