@@ -1574,7 +1574,7 @@ function osha_seminar_field_default_field_instances() {
     'bundle' => 'seminar',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => 'You may select multiple items from the list by holding CTRL',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1797,6 +1797,7 @@ function osha_seminar_field_default_field_instances() {
   t('Thesaurus');
   t('Title');
   t('Use comma ( , ) to assign multiple terms');
+  t('You may select multiple items from the list by holding CTRL');
 
   return $field_instances;
 }

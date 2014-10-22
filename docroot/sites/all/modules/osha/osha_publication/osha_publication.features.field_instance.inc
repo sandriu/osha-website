@@ -1151,7 +1151,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1223,7 +1223,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => 'You may select multiple items from the list by holding CTRL',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1544,6 +1544,7 @@ function osha_publication_field_default_field_instances() {
   t('Twin publications');
   t('Twin resources');
   t('Use comma ( , ) to assign multiple terms');
+  t('You may select multiple items from the list by holding CTRL');
 
   return $field_instances;
 }
