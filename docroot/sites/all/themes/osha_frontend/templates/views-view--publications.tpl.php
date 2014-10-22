@@ -57,7 +57,7 @@ jQuery(document).ready(function ($) {
 </script>
 <div class="separator_recomended_resources_home">&nbsp;</div>
 <?php 
-$intNumberOfItems = substr_count($rows ,'<img typeof=');
+$intNumberOfItems = substr_count($rows ,'<article');
 ?>
 
 <div id="publication_slideshow" style="position: relative; top: 0px; left: 0px; width: 1138px; height: 230px; overflow: hidden;">
