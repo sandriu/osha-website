@@ -169,14 +169,6 @@ function osha_migration_migrate_api() {
     );
   }
 
-  if (is_readable($external_data_dir . '/export/legislation.txt')) {
-    $migrations[OSHA_MIGRATION_CONTENT_TYPE_LEGISLATION] = array(
-      'class_name' => 'OshaMigrateLegislation',
-      'file_name' => $external_data_dir . '/export/legislation.txt',
-    );
-  }
-
-
   $api = array(
     'api' => 2,
     'migrations' => $migrations,
