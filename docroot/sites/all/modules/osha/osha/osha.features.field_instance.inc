@@ -808,11 +808,7 @@ function osha_field_default_field_instances() {
   // Exported field_instance: 'node-article-field_article_type'
   $field_instances['node-article-field_article_type'] = array(
     'bundle' => 'article',
-    'default_value' => array(
-      0 => array(
-        'tid' => 1044,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -857,7 +853,7 @@ function osha_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_article_type',
     'label' => 'Article type',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
