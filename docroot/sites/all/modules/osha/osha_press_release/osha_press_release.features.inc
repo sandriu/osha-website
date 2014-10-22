@@ -21,6 +21,38 @@ function osha_press_release_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_fe_nodequeue_export_fields().
+ */
+function osha_press_release_fe_nodequeue_export_fields() {
+  $nodequeues = array();
+
+  // Exported nodequeues: featured_press_release
+  $nodequeues['featured_press_release'] = array(
+    'name' => 'featured_press_release',
+    'title' => 'Featured Press Release',
+    'subqueue_title' => '',
+    'size' => 1,
+    'link' => '',
+    'link_remove' => '',
+    'owner' => 'nodequeue',
+    'show_in_ui' => 1,
+    'show_in_tab' => 1,
+    'show_in_links' => 0,
+    'reference' => 0,
+    'reverse' => 0,
+    'i18n' => 0,
+    'subqueues' => 1,
+    'types' => array(
+      0 => 'press_release',
+    ),
+    'roles' => array(),
+    'count' => 0,
+  );
+
+  return $nodequeues;
+}
+
+/**
  * Implements hook_node_info().
  */
 function osha_press_release_node_info() {
