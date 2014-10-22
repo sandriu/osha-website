@@ -292,6 +292,7 @@ $options['init-modules'] = array(
   'redirect',
   'file_entity',
   'media',
+  'media_wysiwyg',
   'languagefield',
   'image_field_caption',
 
