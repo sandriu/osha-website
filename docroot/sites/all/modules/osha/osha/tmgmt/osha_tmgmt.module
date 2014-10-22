@@ -623,6 +623,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
       $job->priority = $values['priority'];
       OshaTMGMTStatistics::computeJobStatistics($job);
       $job->save();
+      OshaWorkflowNotifications::notifyTranslationJobCreated($job);
 
       // This whole block replaces tmgmt_ui_job_checkout_and_redirect().
       $redirects = tmgmt_ui_job_checkout_multiple(array($job));

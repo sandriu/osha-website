@@ -724,6 +724,17 @@ class OshaWorkflowNotifications {
   }
 
   /**
+   * TRANS_T_US_01 Notify Translation Liaison there is content to translate.
+   *
+   * @param TMGMTJob $tmgmt_job
+   *   Job created
+   */
+  public static function notifyTranslationJobCreated($tmgmt_job) {
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_LIAISON);
+    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job' => $tmgmt_job), 'osha_tmgmt');
+  }
+
+  /**
    * Check user preference to receive notifications from the workflow.
    *
    * @param mixed $user
