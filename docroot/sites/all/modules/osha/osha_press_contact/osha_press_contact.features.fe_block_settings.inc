@@ -42,7 +42,7 @@ press-room',
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -33,
+        'weight' => 1,
       ),
       'seven' => array(
         'region' => '',
