@@ -120,7 +120,7 @@ function osha_wiki_post_features_enable_feature($component) {
  * see CW-534
  */
 function osha_wiki_node_validate($node, $form, &$form_state) {
-  if (isset($node->field_related_oshwiki_articles)) {
+  if ($node->type == OSHA_ARTICLE_CONTENT_TYPE_ARTICLE && isset($node->field_related_oshwiki_articles)) {
     if (empty($node->field_wiki_categories[LANGUAGE_NONE][0]['tid']) && (
          !empty($node->field_related_oshwiki_articles[LANGUAGE_NONE][0]['target_id']) ||
          !empty($node->field_related_oshwiki_articles[LANGUAGE_NONE][1]['target_id']) 
