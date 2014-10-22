@@ -784,6 +784,7 @@ function osha_strongarm() {
     'article' => 'article',
     'banner' => 'banner',
     'page' => 'page',
+    'press-contact' => 'press-contact',
     'blog' => 0,
     'calls' => 0,
     'highlight' => 0,
