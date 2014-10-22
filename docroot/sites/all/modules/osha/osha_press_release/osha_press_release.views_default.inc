@@ -91,6 +91,12 @@ function osha_press_release_views_default_views() {
   $handler = $view->new_display('page', 'Press room - featured', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Press room';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Unfiltered text */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['content'] = 'What\'s new';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content revision: Content */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -130,6 +136,7 @@ function osha_press_release_views_default_views() {
     t('See all'),
     t('Press room - featured'),
     t('Press room'),
+    t('What\'s new'),
     t('queue'),
   );
   $export['press_releases'] = $view;
