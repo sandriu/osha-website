@@ -9,6 +9,18 @@ include_once 'osha_publication.features.inc';
 define('OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION', 'publication');
 
 /**
+ * Implements hook_views_pre_render().
+ */
+function osha_publication_views_pre_render(&$view) {
+  $jssor_path = libraries_get_path('jquery-slider-master');
+
+  if ($view->name == 'publications') {
+    drupal_add_js($jssor_path . '/jssor.slider.mini.js');
+    drupal_add_css($jssor_path . '/jssor.css');
+  }
+}
+
+/**
  * Implements hook_post_features_enable_feature().
  *
  * {@inheritdoc}

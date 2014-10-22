@@ -2110,6 +2110,30 @@ font-weight: normal;
 	left:60.4em!important;
 }
 
+#publication_slideshow .jssora03l{
+    background: url("../images/slideshow-left.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    color: #cbd9ec !important;
+    display: block !important;
+    height: 220px !important;
+    left: 12px !important;
+    position: absolute !important;
+    top: 0.1em !important;
+    width: 60px !important;
+    z-index: 999999999 !important;
+}
+
+#publication_slideshow .jssora03r {
+    background: url("../images/slideshow-right.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    color: #cbd9ec !important;
+    display: block !important;
+    height: 220px !important;
+    left: 52.8em !important;
+    position: absolute !important;
+    top: 0.1em !important;
+    width: 60px !important;
+    z-index: 999999999 !important;
+}
+
 .left_column{
 	float:left;
 	width:70%;
