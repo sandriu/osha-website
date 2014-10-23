@@ -589,7 +589,7 @@ function osha_publication_field_default_field_instances() {
       'module' => 'pdf_to_image',
       'settings' => array(
         'pdf_to_image' => array(
-          'density' => '25x25',
+          'density' => '50x50',
           'extra_args' => '',
           'hide_imagefield' => 0,
           'target_field' => 'field_cover_image',
