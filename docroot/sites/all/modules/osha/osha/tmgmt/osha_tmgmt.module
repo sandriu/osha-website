@@ -353,6 +353,9 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       list($id, $vid, $bundle) = entity_extract_ids($form_state['entity_type'], $form_state['entity']);
       $entity_language = entity_language($form_state['entity_type'], $form_state['entity']);
       $items = osha_tmgmt_job_item_load_latest('entity', $form_state['entity_type'], $id, $entity_language);
+      if (isset($form['actions']['request'])) {
+        hide($form['actions']['request']);
+      }
 
       // Remove all previously disabled checkboxes - we override that.
       $languages = language_list();
