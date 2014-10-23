@@ -39,6 +39,7 @@ function osha_tmgmt_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'osha_tmgmt.workflow.inc',
   );
+
   return $items;
 }
 
@@ -509,32 +510,23 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       foreach ($languages as $langcode => $language) {
         // Reset the pending column and ordering, rebuild based on job item.
         unset($form['languages'][$langcode]);
-        // @TODO:EDW Improve handling of column index below.
         $form['languages']['#options'][$langcode][$pt_col_index] = t('None');
 
-        if ($langcode == $entity_language) {
-          $form['languages'][$langcode] = array(
-            '#type' => 'checkbox',
-            '#disabled' => TRUE,
-          );
-        }
-        elseif (isset($items[$langcode])) {
+        if (isset($items[$langcode])) {
           $item = $items[$langcode];
           $uri = $item->uri();
           $wrapper = entity_metadata_wrapper('tmgmt_job_item', $item);
           $additional = l(osha_tmgmt_get_job_item_state_label($item->state), $uri['path'], array('query' => array('destination' => current_path())));
-          // Disable the checkbox for this row since there is already a
-          // translation in progress that has not yet been finished. This way we
-          // make sure that we don't stack multiple active translations for the
-          // same item on top of each other.
-          // @TODO:EDW Improve handling of column index below.
           $form['languages']['#options'][$langcode][$pt_col_index] = $additional;
-          $form['languages'][$langcode] = array(
-            '#type' => 'checkbox',
-            '#disabled' => TRUE,
-          );
         }
       }
+
+      // Change from table select to table.
+      $form['languages']['#type'] = 'table';
+      $form['languages']['#theme'] = 'table';
+      $form['languages']['#rows'] = $form['languages']['#options'];
+      unset($form['languages']['#options']);
+      unset($form['actions']);
 
       // Translation Content Validators Group Assign Form.
       if (!empty($items)) {
