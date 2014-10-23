@@ -199,14 +199,14 @@ class NoteToEditorMigrateList extends MigrateList {
             }
             self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;
-
-          case 'description':
-          case 'text':
           case 'path':
             $path_language = explode('/', $raw_data[$key], 3);
             self::$data[$path][$field][$language] = $path_language[2];
             continue;
-
+          case 'text':
+          case 'description':
+            self::$data[$path][$field][$language] = $raw_data[$key];
+            continue;
           default:
             self::$data[$path][$field] = $raw_data[$key];
         }
