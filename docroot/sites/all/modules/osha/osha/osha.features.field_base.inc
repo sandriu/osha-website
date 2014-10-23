@@ -255,7 +255,7 @@ function osha_field_default_field_bases() {
   // Exported field_base: 'field_file'
   $field_bases['field_file'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_file',
@@ -423,7 +423,7 @@ function osha_field_default_field_bases() {
         'hour' => 'hour',
         'minute' => 'minute',
         'month' => 'month',
-        'second' => 'second',
+        'second' => 0,
         'year' => 'year',
       ),
       'timezone_db' => '',
@@ -476,6 +476,40 @@ function osha_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_related_resources'
+  $field_bases['field_related_resources'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_related_resources',
+    'foreign keys' => array(
+      'fid' => array(
+        'columns' => array(
+          'fid' => 'fid',
+        ),
+        'table' => 'file_managed',
+      ),
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'file',
+    'settings' => array(
+      'display_default' => 1,
+      'display_field' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 1,
+    'type' => 'file',
   );
 
   // Exported field_base: 'field_summary'

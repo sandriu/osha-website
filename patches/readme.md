@@ -7,6 +7,11 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* pdf_to_imagefield
+  * Do not overwrite existing images
+  * https://www.drupal.org/node/2049725
+  * https://www.drupal.org/files/pdf_to_imagefield-allow-image-uploaded-2049725-4.patch
+
 * workbench_moderation
   * Fix bug CW-438 when URL in original language is lost when adding a new translation
   * -workbench_moderation/workbench_moderation/cw_438_workbench_moderation_url_1_D7.patch.patch-

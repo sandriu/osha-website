@@ -34,6 +34,12 @@ function osha_search_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'teaser';
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
   /* Field: Indexed Multilingual Node: Multilingual ID */
   $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
   $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -126,6 +132,19 @@ function osha_search_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'publication' => 'publication',
   );
+  /* Filter criterion: Indexed Multilingual Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
+  /* Filter criterion: Indexed Multilingual Node: Publication date */
+  $handler->display->display_options['filters']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date']['value'] = 'now';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -147,6 +166,7 @@ function osha_search_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('No results'),
     t('Multilingual ID'),
     t('Search'),
     t('Available in languages'),
@@ -178,6 +198,12 @@ function osha_search_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
   /* Field: Indexed Multilingual Node: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -412,6 +438,19 @@ function osha_search_views_default_views() {
     'banner' => 'banner',
     'wiki_page' => 'wiki_page',
   );
+  /* Filter criterion: Indexed Multilingual Node: Publication date */
+  $handler->display->display_options['filters']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date']['value'] = 'now';
+  /* Filter criterion: Indexed Multilingual Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'search/site';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Site';
@@ -546,6 +585,7 @@ function osha_search_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('No results'),
     t('Date'),
     t('Relevance'),
     t('Site Search'),

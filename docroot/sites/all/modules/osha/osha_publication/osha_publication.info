@@ -27,6 +27,7 @@ dependencies[] = osha_wiki
 dependencies[] = pdf_to_image
 dependencies[] = strongarm
 dependencies[] = taxonomy
+dependencies[] = term_reference_tree
 dependencies[] = text
 dependencies[] = title
 dependencies[] = uuid
