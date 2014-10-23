@@ -36,13 +36,9 @@ $handler->display->display_options['style_options']['columns'] = array(
   'views_bulk_operations' => 'views_bulk_operations',
   'title' => 'title',
   'type' => 'type',
-  'state' => 'state',
-  'section' => 'section',
-  'field_page_count' => 'field_page_count',
-  'field_character_count' => 'field_character_count',
-  'changed' => 'changed',
+  'field_workflow_status' => 'field_workflow_status',
   'name' => 'name',
-  'field_activity' => 'field_activity',
+  'changed' => 'changed',
   'edit_node' => 'edit_node',
 );
 $handler->display->display_options['style_options']['default'] = 'changed';
@@ -53,7 +49,7 @@ $handler->display->display_options['style_options']['info'] = array(
     'empty_column' => 0,
   ),
   'title' => array(
-    'sortable' => 1,
+    'sortable' => 0,
     'default_sort_order' => 'asc',
     'align' => '',
     'separator' => '',
@@ -66,35 +62,9 @@ $handler->display->display_options['style_options']['info'] = array(
     'separator' => '',
     'empty_column' => 0,
   ),
-  'state' => array(
+  'field_workflow_status' => array(
     'sortable' => 1,
     'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'section' => array(
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'field_page_count' => array(
-    'sortable' => 1,
-    'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'field_character_count' => array(
-    'sortable' => 1,
-    'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'changed' => array(
-    'sortable' => 1,
-    'default_sort_order' => 'desc',
     'align' => '',
     'separator' => '',
     'empty_column' => 0,
@@ -106,9 +76,9 @@ $handler->display->display_options['style_options']['info'] = array(
     'separator' => '',
     'empty_column' => 0,
   ),
-  'field_activity' => array(
-    'sortable' => 0,
-    'default_sort_order' => 'asc',
+  'changed' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'desc',
     'align' => '',
     'separator' => '',
     'empty_column' => 0,
@@ -130,31 +100,25 @@ $handler->display->display_options['empty']['area']['format'] = 'full_html';
 $handler->display->display_options['relationships']['uid']['id'] = 'uid';
 $handler->display->display_options['relationships']['uid']['table'] = 'node';
 $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-/* Relationship: Workbench Moderation: Node */
-$handler->display->display_options['relationships']['nid']['id'] = 'nid';
-$handler->display->display_options['relationships']['nid']['table'] = 'workbench_moderation_node_history';
-$handler->display->display_options['relationships']['nid']['field'] = 'nid';
-$handler->display->display_options['relationships']['nid']['required'] = TRUE;
+/* Relationship: Content: Entity translation: translations */
+$handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
+$handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
+$handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
+$handler->display->display_options['relationships']['entity_translations']['required'] = TRUE;
 /* Field: Bulk operations: Content */
 $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
 $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
 $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+$handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
+$handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
 $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
 $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
 $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
-$handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['skip_batching'] = 1;
 $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
   'rules_component::tmgmt_node_ui_tmgmt_nodes_add_items_to_cart' => array(
     'selected' => 1,
     'skip_confirmation' => 1,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::osha_newsletter_add_to_newsletter_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
     'override_label' => 0,
     'label' => '',
   ),
@@ -166,6 +130,13 @@ $handler->display->display_options['fields']['views_bulk_operations']['vbo_opera
     'label' => '',
   ),
   'action::node_assign_owner_action' => array(
+    'selected' => 0,
+    'postpone_processing' => 0,
+    'skip_confirmation' => 0,
+    'override_label' => 0,
+    'label' => '',
+  ),
+  'action::scs_views_create_newsletter_action' => array(
     'selected' => 0,
     'postpone_processing' => 0,
     'skip_confirmation' => 0,
@@ -271,13 +242,6 @@ $handler->display->display_options['fields']['views_bulk_operations']['vbo_opera
     'override_label' => 0,
     'label' => '',
   ),
-  'action::workbench_moderation_set_state_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
   'action::node_unpublish_action' => array(
     'selected' => 0,
     'postpone_processing' => 0,
@@ -316,30 +280,14 @@ $handler->display->display_options['fields']['type']['label'] = 'Type of content
 $handler->display->display_options['fields']['state']['id'] = 'state';
 $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
 $handler->display->display_options['fields']['state']['field'] = 'state';
-$handler->display->display_options['fields']['state']['label'] = 'Status';
+$handler->display->display_options['fields']['state']['label'] = 'Workflow state';
 $handler->display->display_options['fields']['state']['machine_name'] = 0;
-/* Field: Workbench Access: Section */
-$handler->display->display_options['fields']['section']['id'] = 'section';
-$handler->display->display_options['fields']['section']['table'] = 'workbench_access';
-$handler->display->display_options['fields']['section']['field'] = 'section';
-/* Field: Content: Page count */
-$handler->display->display_options['fields']['field_page_count']['id'] = 'field_page_count';
-$handler->display->display_options['fields']['field_page_count']['table'] = 'field_data_field_page_count';
-$handler->display->display_options['fields']['field_page_count']['field'] = 'field_page_count';
-$handler->display->display_options['fields']['field_page_count']['settings'] = array(
-  'thousand_separator' => ' ',
-  'decimal_separator' => '.',
-  'scale' => '2',
-  'prefix_suffix' => 1,
-);
-/* Field: Content: Character count */
-$handler->display->display_options['fields']['field_character_count']['id'] = 'field_character_count';
-$handler->display->display_options['fields']['field_character_count']['table'] = 'field_data_field_character_count';
-$handler->display->display_options['fields']['field_character_count']['field'] = 'field_character_count';
-$handler->display->display_options['fields']['field_character_count']['settings'] = array(
-  'thousand_separator' => ' ',
-  'prefix_suffix' => 1,
-);
+/* Field: User: Name */
+$handler->display->display_options['fields']['name']['id'] = 'name';
+$handler->display->display_options['fields']['name']['table'] = 'users';
+$handler->display->display_options['fields']['name']['field'] = 'name';
+$handler->display->display_options['fields']['name']['relationship'] = 'uid';
+$handler->display->display_options['fields']['name']['label'] = 'Author';
 /* Field: Content: Updated date */
 $handler->display->display_options['fields']['changed']['id'] = 'changed';
 $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -347,16 +295,6 @@ $handler->display->display_options['fields']['changed']['field'] = 'changed';
 $handler->display->display_options['fields']['changed']['label'] = 'Updated';
 $handler->display->display_options['fields']['changed']['date_format'] = 'short';
 $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-/* Field: User: Name */
-$handler->display->display_options['fields']['name']['id'] = 'name';
-$handler->display->display_options['fields']['name']['table'] = 'users';
-$handler->display->display_options['fields']['name']['field'] = 'name';
-$handler->display->display_options['fields']['name']['relationship'] = 'uid';
-$handler->display->display_options['fields']['name']['label'] = 'Author';
-/* Field: Content: Activity */
-$handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
-$handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
-$handler->display->display_options['fields']['field_activity']['field'] = 'field_activity';
 /* Field: Content: Edit link */
 $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
 $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -403,6 +341,7 @@ $handler->display->display_options['filters']['type']['value'] = array(
   'news' => 'news',
   'press_release' => 'press_release',
   'publication' => 'publication',
+  'seminar' => 'seminar',
 );
 $handler->display->display_options['filters']['type']['group'] = 1;
 $handler->display->display_options['filters']['type']['exposed'] = TRUE;
@@ -415,6 +354,38 @@ $handler->display->display_options['filters']['type']['expose']['remember_roles'
   2 => '2',
   1 => 0,
   3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+  7 => 0,
+  8 => 0,
+  9 => 0,
+  10 => 0,
+  11 => 0,
+);
+/* Filter criterion: Content: Title (title_field) */
+$handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
+$handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
+$handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
+$handler->display->display_options['filters']['title_field_value']['operator'] = 'contains';
+$handler->display->display_options['filters']['title_field_value']['group'] = 1;
+$handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
+$handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Title contains';
+$handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
+$handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
+$handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+  7 => 0,
+  8 => 0,
+  9 => 0,
+  10 => 0,
+  11 => 0,
 );
 /* Filter criterion: Content: Nid */
 $handler->display->display_options['filters']['nid']['id'] = 'nid';
@@ -474,17 +445,74 @@ $handler->display->display_options['filters']['changed']['expose']['remember_rol
   1 => 0,
   3 => 0,
 );
+/* Filter criterion: Entity translation: Translation exists */
+$handler->display->display_options['filters']['translation_exists']['id'] = 'translation_exists';
+$handler->display->display_options['filters']['translation_exists']['table'] = 'entity_translation';
+$handler->display->display_options['filters']['translation_exists']['field'] = 'translation_exists';
+$handler->display->display_options['filters']['translation_exists']['relationship'] = 'entity_translations';
+$handler->display->display_options['filters']['translation_exists']['operator'] = 'not in';
+$handler->display->display_options['filters']['translation_exists']['value'] = array(
+  'bg' => 'bg',
+  'cs' => 'cs',
+  'da' => 'da',
+  'de' => 'de',
+  'el' => 'el',
+  'es' => 'es',
+  'et' => 'et',
+  'fi' => 'fi',
+  'hr' => 'hr',
+  'fr' => 'fr',
+  'hu' => 'hu',
+  'is' => 'is',
+  'it' => 'it',
+  'lv' => 'lv',
+  'lt' => 'lt',
+  'nl' => 'nl',
+  'mt' => 'mt',
+  'no' => 'no',
+  'pl' => 'pl',
+  'pt' => 'pt',
+  'ro' => 'ro',
+  'ru' => 'ru',
+  'sk' => 'sk',
+  'sl' => 'sl',
+  'sv' => 'sv',
+  'tr' => 'tr',
+);
+$handler->display->display_options['filters']['translation_exists']['group'] = 1;
+$handler->display->display_options['filters']['translation_exists']['exposed'] = TRUE;
+$handler->display->display_options['filters']['translation_exists']['expose']['operator_id'] = 'translation_exists_op';
+$handler->display->display_options['filters']['translation_exists']['expose']['label'] = 'Not translated in';
+$handler->display->display_options['filters']['translation_exists']['expose']['operator'] = 'translation_exists_op';
+$handler->display->display_options['filters']['translation_exists']['expose']['identifier'] = 'translation_exists';
+$handler->display->display_options['filters']['translation_exists']['expose']['multiple'] = TRUE;
+$handler->display->display_options['filters']['translation_exists']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+  7 => 0,
+  8 => 0,
+  9 => 0,
+  10 => 0,
+  11 => 0,
+);
+$handler->display->display_options['filters']['translation_exists']['expose']['reduce'] = TRUE;
+$handler->display->display_options['filters']['translation_exists']['entity_type'] = 'node';
 /* Filter criterion: Workbench Moderation: State */
 $handler->display->display_options['filters']['state']['id'] = 'state';
 $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
 $handler->display->display_options['filters']['state']['field'] = 'state';
-$handler->display->display_options['filters']['state']['relationship'] = 'nid';
 $handler->display->display_options['filters']['state']['value'] = array(
+  'ready_to_publish' => 'ready_to_publish',
   'published' => 'published',
 );
+$handler->display->display_options['filters']['state']['group'] = 1;
 $handler->display->display_options['filters']['state']['exposed'] = TRUE;
 $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
-$handler->display->display_options['filters']['state']['expose']['label'] = 'State';
+$handler->display->display_options['filters']['state']['expose']['label'] = 'Workflow Status';
 $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
 $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
 $handler->display->display_options['filters']['state']['expose']['required'] = TRUE;
@@ -493,17 +521,20 @@ $handler->display->display_options['filters']['state']['expose']['remember_roles
   2 => '2',
   1 => 0,
   3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+  7 => 0,
+  8 => 0,
+  9 => 0,
+  10 => 0,
+  11 => 0,
 );
 $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
-/* Filter criterion: Workbench Moderation: Current */
-$handler->display->display_options['filters']['current']['id'] = 'current';
-$handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
-$handler->display->display_options['filters']['current']['field'] = 'current';
-$handler->display->display_options['filters']['current']['value'] = '1';
 
 /* Display: OSHA content selection */
 $handler = $view->new_display('page', 'OSHA content selection', 'tmgmt_node_selection_view_page');
-$handler->display->display_options['path'] = 'admin/tmgmt/sources/osha?type[]=press_release&type[]=publication';
+$handler->display->display_options['path'] = 'admin/tmgmt/sources/osha';
 $handler->display->display_options['menu']['type'] = 'tab';
 $handler->display->display_options['menu']['title'] = 'OSHA content';
 $handler->display->display_options['menu']['weight'] = '-30';
@@ -527,24 +558,22 @@ $translatables['tmgmt_node_selection_view'] = array(
   t('last »'),
   t('There are no results. Please broaden your filters above.'),
   t('author'),
-  t('Node'),
-  t('Content'),
+  t('Translations'),
   t('- Choose an operation -'),
   t('Type of content'),
-  t('Status'),
-  t('Section'),
-  t('Page count'),
-  t('Character count'),
-  t('Updated'),
+  t('Workflow state'),
   t('Author'),
-  t('Activity'),
+  t('Updated'),
   t('Edit'),
   t('Post date'),
   t('Updated date'),
   t('Author name'),
   t('Type'),
+  t('Title contains'),
   t('Node ID'),
+  t('Activity'),
   t('Activity (field_activity)'),
   t('Select an interval for filtering'),
-  t('State'),
+  t('Not translated in'),
+  t('Workflow Status'),
 );
