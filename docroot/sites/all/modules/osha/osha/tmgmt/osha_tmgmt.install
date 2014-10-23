@@ -1,5 +1,7 @@
 <?php
 
+include_once "osha_tmgmt.module";
+
 /**
  * Implements hook_uninstall().
  */
