@@ -485,3 +485,14 @@ function _languagefield_settings_options($usage = 'formatter') {
   );
   return $options;
 }
+
+/**
+ * Implements hook_migrate_api().
+ */
+function languagefield_migrate_api() {
+  $api = array(
+    'api' => 2,
+    'field handlers' => array('MigrateLanguagefieldFieldHandler'),
+  );
+  return $api;
+}
