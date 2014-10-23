@@ -53,6 +53,10 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
     $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_nace_codes', 'nace');
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_legislation_category', 'legislation_category');
+    $this->addFieldMapping('field_legislation_category:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_directive_type', 'directive_type');
+    $this->addFieldMapping('field_directive_type:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
 
     $this->addFieldMapping('created', 'creation_date');
@@ -132,6 +136,26 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
         OSHA_TAXONOMIES_NACE_CODES
       );
     }
+    //Term ID for Legislation Category Taxonomy
+    $pattern = '/\/([a-z]{2})\/legislation\/directives\/([\w\d-_]+)\//';
+    if(preg_match($pattern, $row->path, $matches)){
+      $row->legislation_category = MigrationUtil::findTidByEntityValue(
+        OSHA_TAXONOMIES_LEGISLATION_CATEGORY,
+        'field_directive_category_code',
+        array($matches[2])
+      );
+    }
+
+    //Term ID for Directive Type Taxonomy
+    $pattern = '/\/([a-z]{2})\/legislation\/directives\/([\w\d-_]+)\/([\w\d-_]+)/';
+    if(preg_match($pattern, $row->path, $matches)){
+      $row->directive_type = MigrationUtil::findTidByEntityValue(
+        OSHA_TAXONOMIES_DIRECTIVE_TYPE,
+        'field_directive_code',
+        array($matches[3])
+      );
+    }
+
     return TRUE;
   }
 
