@@ -4,6 +4,46 @@ include_once 'osha.features.inc';
 
 define('OSHA_ARTICLE_CONTENT_TYPE_ARTICLE', 'article');
 
+function osha_menu() {
+  $items = array();
+  $items['users/autocomplete/%'] = array(
+    'title' => 'Autocomplete for cities',
+    'page callback' => 'osha_users_autocomplete',
+    'page arguments' => array(2),
+    'access arguments' => array('access user profiles'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function osha_users_autocomplete($role_name, $name) {
+  $output = array();
+  $query = db_select('users', 'u')
+    ->fields('u');
+  $query->leftJoin('users_roles', 'ur', 'u.uid = ur.uid');
+  $query->condition('u.status', 1);
+  if (!empty($role_name) || $role_name != 'all') {
+    $role = user_role_load_by_name($role_name);
+    if ($role) {
+      $query->condition('ur.rid', $role->rid);
+    }
+    else {
+      $query->condition('ur.rid', 0);
+    }
+  }
+  $query->condition('u.name', '%' . $name . '%', 'LIKE');
+  $uids = $query->execute()
+    ->fetchAllAssoc('uid');
+  if (!empty($uids)) {
+    $uids = array_keys($uids);
+    $users = user_load_multiple($uids);
+    foreach ($users as $user) {
+      $output[$user->name] = $user->name;
+    }
+  }
+  drupal_json_output($output);
+}
+
 /**
  * Implements hook_schema_alter().
  */
