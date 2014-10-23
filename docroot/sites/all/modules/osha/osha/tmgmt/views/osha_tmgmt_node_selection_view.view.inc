@@ -506,7 +506,6 @@ $handler->display->display_options['filters']['state']['id'] = 'state';
 $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
 $handler->display->display_options['filters']['state']['field'] = 'state';
 $handler->display->display_options['filters']['state']['value'] = array(
-  'ready_to_publish' => 'ready_to_publish',
   'published' => 'published',
 );
 $handler->display->display_options['filters']['state']['group'] = 1;
