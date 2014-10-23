@@ -339,6 +339,7 @@ $options['init-modules'] = array(
   'custom_formatters',
 
   'taxonomy_manager',
+  'term_reference_tree',
   'node_export',
   'mpac',
   'linkit',

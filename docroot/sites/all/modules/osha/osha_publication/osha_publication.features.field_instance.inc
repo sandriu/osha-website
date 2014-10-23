@@ -606,7 +606,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -660,13 +660,20 @@ function osha_publication_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
+      'active' => 1,
+      'module' => 'term_reference_tree',
       'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
+        'cascading_selection' => 0,
+        'filter_view' => '',
+        'leaves_only' => 0,
+        'max_depth' => '',
+        'parent_term_id' => '',
+        'select_parents' => 1,
+        'start_minimized' => 1,
+        'token_display' => '[term:field-nace-code] [term:name]',
+        'track_list' => 1,
       ),
-      'type' => 'taxonomy_autocomplete',
+      'type' => 'term_reference_tree',
       'weight' => 10,
     ),
     'workbench_access_field' => 0,
@@ -1294,7 +1301,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1348,13 +1355,20 @@ function osha_publication_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
+      'active' => 1,
+      'module' => 'term_reference_tree',
       'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
+        'cascading_selection' => 0,
+        'filter_view' => '',
+        'leaves_only' => 0,
+        'max_depth' => '',
+        'parent_term_id' => '',
+        'select_parents' => 1,
+        'start_minimized' => 1,
+        'token_display' => '[term:field-thesaurus-code] [term:name]',
+        'track_list' => 1,
       ),
-      'type' => 'taxonomy_autocomplete',
+      'type' => 'term_reference_tree',
       'weight' => 9,
     ),
     'workbench_access_field' => 0,
@@ -1543,7 +1557,6 @@ function osha_publication_field_default_field_instances() {
   t('Title');
   t('Twin publications');
   t('Twin resources');
-  t('Use comma ( , ) to assign multiple terms');
   t('You may select multiple items from the list by holding CTRL');
 
   return $field_instances;
