@@ -750,6 +750,24 @@ class MigrationUtil {
       }
     }
   }
+
+  /**
+   * Find the taxonomy term ID if a taxonomy field value (entity) is provided
+   * @param $vocabulary_name
+   * @param $entity_field
+   * @param $entity_value
+   * @return mixed
+   */
+  public static function findTidByEntityValue($vocabulary_name, $entity_field, $entity_value){
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'taxonomy_term')
+      ->entityCondition('bundle', array($vocabulary_name))
+      ->fieldCondition($entity_field, 'value', $entity_value, '=');
+    $result = $query->execute();
+    $tid = array_keys($result['taxonomy_term']);
+
+    return $tid[0];
+  }
 }
 
 class OSHAMigrationListJSON extends MigrateListJSON {

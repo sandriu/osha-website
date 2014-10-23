@@ -53,6 +53,8 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
     $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_nace_codes', 'nace');
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
+    $this->addFieldMapping('field_legislation_category', 'legislation_category');
+    $this->addFieldMapping('field_legislation_category:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
 
     $this->addFieldMapping('created', 'creation_date');
@@ -132,6 +134,16 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
         OSHA_TAXONOMIES_NACE_CODES
       );
     }
+    //Term ID for Legislation Category Taxonomy
+    $pattern = '/\/([a-z]{2})\/legislation\/guidelines\/([\w-_]+)\//';
+    if(preg_match($pattern, $row->path, $matches)){
+      $row->legislation_category = MigrationUtil::findTidByEntityValue(
+        OSHA_TAXONOMIES_LEGISLATION_CATEGORY,
+        'field_guideline_category_code',
+        array($matches[2])
+      );
+    }
+
     return TRUE;
   }
 
