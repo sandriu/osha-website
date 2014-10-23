@@ -98,21 +98,100 @@ function osha_tmgmt_get_users_from_collection($tg_eid) {
 function osha_tmgmt_translation_validators_submit($form, &$form_state) {
   if (!empty($form_state['values']['translation_validators']['translation_group'])) {
     foreach ($form_state['tmgmt_job_items'] as $job_item) {
-      $group_id = $form_state['values']['translation_validators']['translation_group'];
-      $users = osha_tmgmt_get_users_from_collection($group_id);
-      $users = osha_workflow_users_group_by_lang_skills($users, $job_item->source_language);
-      if (!empty($users[$job_item->target_language])) {
-        $uid = current($users[$job_item->target_language])->uid;
-        $job_item->uid = $uid;
-        $job_item->approved = NULL;
+      if ($job_item->state != OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish) {
+        $group_id = $form_state['values']['translation_validators']['translation_group'];
+        $users = osha_tmgmt_get_users_from_collection($group_id);
+        $users = osha_workflow_users_group_by_lang_skills($users, $job_item->source_language);
+        // Cancel existing validators.
+        osha_tmgmt_remove_current_translation_validators($job_item);
+        if (!empty($users[$job_item->target_language])) {
+          foreach ($users[$job_item->target_language] as $idx => $user) {
+            $next = 0;
+            if ($idx == 0) {
+              $next = 1;
+            }
+            osha_tmgmt_add_translation_validator($user->uid, $job_item, $idx, $next);
+          }
+        }
+        else {
+          drupal_set_message(t('No user was found for language @language',
+            array('@language' => $job_item->target_language)));
+        }
+        $job_item->state = OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired;
+        $job_item->eid = $group_id;
+        $job_item->save();
       }
-      else {
-        $job_item->approved = OSHA_TMGMT_TRANS_VALID_APPROVED;
-      }
-      $job_item->eid = $group_id;
-      $job_item->save();
     }
   }
+}
+
+function osha_tmgmt_add_translation_validator($uid, $job_item, $weight, $next = 0) {
+  $validator = array(
+    'tjiid' => $job_item->tjiid,
+    'uid' => $uid,
+    'nid' => $job_item->item_id,
+    'next' => $next,
+    'weight' => $weight,
+  );
+  entity_save('translation_validator', (object) $validator);
+}
+
+function osha_tmgmt_remove_current_translation_validators($job_item, $uid = NULL){
+  $query = db_update('osha_tmgmt_job_trans_validators')
+    ->fields(array(
+      'deleted' => 1,
+    ))
+    ->condition('tjiid', $job_item->tjiid)
+    ->condition('deleted', 0);
+  if (!empty($uid)) {
+    $query->condition('uid', $uid);
+  }
+  $query->execute();
+  return;
+}
+
+function osha_tmgmt_translation_validators_reset_order($job_item){
+  db_update('osha_tmgmt_job_trans_validators')
+    ->fields(array(
+      'next' => 0,
+    ))
+    ->condition('tjiid', $job_item->tjiid)
+    ->condition('deleted', 0)
+    ->execute();
+  return;
+}
+
+function osha_tmgmt_load_validators_by_job_item($job_item) {
+  $entities = entity_load('translation_validator', FALSE, array(
+    'tjiid' => $job_item->tjiid,
+    'deleted' => 0,
+  ));
+  $uids = array();
+  foreach ($entities as $entity) {
+    $uids[] = $entity->uid;
+  }
+  $return = array();
+  $users = user_load_multiple($uids);
+  $weight = array();
+  foreach ($entities as &$entity) {
+    $weight[$entity->weight] = $entity;
+  }
+  ksort($weight);
+  foreach ($weight as &$entity) {
+    if (!empty($users[$entity->uid])) {
+      $return[$entity->uid] = (object) array_merge((array) $entity, (array) $users[$entity->uid]);
+    }
+  }
+  return $return;
+}
+
+function osha_tmgmt_load_validators_last($validators) {
+  $weight = array();
+  foreach ($validators as &$validator) {
+    $weight[$validator->weight] = $validator;
+  }
+  ksort($weight);
+  return end($weight);
 }
 
 /**
@@ -142,4 +221,298 @@ function osha_workflow_users_group_by_lang_skills($users, $from_lang = 'en') {
     }
   }
   return $return;
+}
+
+/**
+ * Form for Managing Content Validators of a Job Item.
+ */
+function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
+  module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
+  module_load_include('inc', 'osha_workflow', 'osha_workflow.admin');
+  $form_state['jobItem'] = $job_item;
+  $can_edit = user_access('create translation jobs');
+  $form['#can_edit']  = $can_edit;
+  $form['#tree'] = TRUE;
+  $form['#theme'] = 'osha_tmgmt_job_item_validators_form_table';
+  if (isset($form_state['rows'])) {
+    $rows = $form_state['rows'];
+  }
+  else {
+    $rows = osha_tmgmt_load_validators_by_job_item($job_item);
+    foreach ($rows as $row) {
+      $row->osha_tmgmt_validators_saved = TRUE;
+    }
+  }
+  $form_state['rows'] = $rows;
+  $weight = 0;
+  foreach ($rows as $uid => $row) {
+    $form['rows'][$uid]['#row'] = $row;
+    $form['rows'][$uid]['weight'] = array(
+      '#type' => 'weight',
+      '#title' => t('Weight'),
+      '#title_display' => 'invisible',
+      '#default_value' => $weight,
+      '#access' => $can_edit,
+      '#attributes' => array('class' => array('user-weight')),
+    );
+    $form['rows'][$uid]['uid'] = array(
+      '#type' => 'hidden',
+      '#value' => $uid,
+    );
+    $form['rows'][$uid]['remove'] = array(
+      '#type' => 'submit',
+      '#name' => $uid,
+      '#value' => t('Remove'),
+      '#access' => $can_edit,
+      '#submit' => array('osha_tmgmt_job_item_validators_remove'),
+    );
+    $weight++;
+  }
+  $form['add']['uid'] = array(
+    '#type' => 'textfield',
+    '#autocomplete_path' => 'users/autocomplete/' . OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR,
+    '#title' => t('Add another approver'),
+    '#title_display' => 'invisible',
+    '#access' => $can_edit,
+  );
+  $form['add']['submit'] = array(
+    '#type' => 'submit',
+    '#name' => 'adduser',
+    '#value' => t('Add to queue'),
+    '#access' => $can_edit,
+    '#attributes' => array('class' => array('container-inline')),
+    '#validate' => array('osha_tmgmt_job_item_validators_add_validate'),
+    '#submit' => array('osha_tmgmt_job_item_validators_add'),
+  );
+  $form['help'] = array(
+    '#type' => 'markup',
+    '#markup' =>
+      t('<div><strong>Tip:</strong> Use the drag handlers to sort the users in the order you want them to have the content reviewed. <br />** - Temporary, not yet saved</div>'),
+  );
+  $form['content'] = array(
+    'actions' => array(
+      '#type' => 'actions',
+      '#weight' => 20,
+      'submit' => array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#access' => $can_edit,
+      ),
+    ),
+  );
+  return $form;
+}
+
+
+/**
+ * Callback for Validation of Add Content Validator form.
+ */
+function osha_tmgmt_job_item_validators_add_validate($form, &$form_state) {
+  if (!empty($form_state['values']['add']['uid'])) {
+    $user = user_load_by_name($form_state['values']['add']['uid']);
+    if (empty($user)) {
+      form_set_error('add][uid', t('User does not exists!'));
+    }
+    elseif (!empty($form_state['rows'])
+      && in_array($user->uid, array_keys($form_state['rows']))) {
+      form_set_error('add][uid', t('You cannot add twice the same user!'));
+    }
+  }
+}
+
+/**
+ * Callback for Add Content Validator form.
+ *
+ * It adds the user to form_state.
+ * The form must be saved in order to add them to DB.
+ */
+function osha_tmgmt_job_item_validators_add($form, &$form_state) {
+  $user = user_load_by_name($form_state['values']['add']['uid']);
+  if (!empty($user)) {
+    $form_state['rows'][$user->uid] = $user;
+    $form_state['rows'][$user->uid]->osha_tmgmt_validators_saved = FALSE;
+    $form_state['values']['add']['uid'] = "";
+    $form_state['input']['add']['uid'] = "";
+    $form_state['rebuild'] = TRUE;
+    drupal_set_message(t('Changes made in this table will not be saved until you press Save'), 'warning');
+  }
+}
+
+/**
+ * Callback for Remove Content Validator Button.
+ *
+ * Removes just from form state.
+ */
+function osha_tmgmt_job_item_validators_remove($form, &$form_state) {
+  if (!empty($form_state['triggering_element']['#name'])) {
+    $remove_uid = $form_state['triggering_element']['#name'];
+    unset($form_state['rows'][$remove_uid]);
+    foreach ($form_state['rows'] as &$row) {
+      $row->osha_tmgmt_validators_saved = FALSE;
+    }
+  }
+  $form_state['rebuild'] = TRUE;
+  drupal_set_message(t('Changes made in this table will not be saved until you press Save'), 'warning');
+}
+
+/**
+ * Validate callback for Content Validators Save.
+ */
+function osha_tmgmt_job_item_validators_form_validate($form, &$form_state) {
+  if (empty($form_state['values']['rows'])) {
+    form_set_error('add][uid', t('Cannot have an empty queue!'));
+  }
+}
+
+/**
+ * Callback form Content Validators Submit.
+ *
+ * Removes old Content Validators.
+ * Inserts Content validators for the job items.
+ */
+function osha_tmgmt_job_item_validators_form_submit($form, &$form_state) {
+  if (!empty($form_state['values']['rows'])) {
+    osha_tmgmt_remove_current_translation_validators($form_state['jobItem']);
+    $validators = array();
+    foreach ($form_state['values']['rows'] as $row) {
+      $validators[$row['weight']] = $row;
+    }
+    ksort($validators);
+    $idx = 0;
+    foreach ($validators as $validator) {
+      $next = 0;
+      if ($idx == 0) {
+        $next = 1;
+      }
+      $idx++;
+      osha_tmgmt_add_translation_validator($validator['uid'], $form_state['jobItem'], $validator['weight'], $next);
+    }
+  }
+}
+
+/**
+ * Callback for accept translation for Content Validator.
+ */
+function osha_tmgmt_translation_validators_accept($form, &$form_state) {
+  $job_item = $form_state['item'];
+  $message = $form_state['values']['content_validation']['message'];
+  $validators = osha_tmgmt_load_validators_by_job_item($job_item);
+  global $user;
+  while ($validator = each($validators)) {
+    if ($validator[1]->uid == $user->uid) {
+      $validator[1]->message = $message;
+      $validator[1]->approved = OSHA_TMGMT_CONTENT_VALIDATOR_STATUS_APPROVED;
+      $validator[1]->next = 0;
+      entity_save('translation_validator', $validator[1]);
+      drupal_set_message(t('You have approved this translation!'));
+      if ($next_validator = current($validators)) {
+        $next_validator->next = 1;
+        entity_save('translation_validator', $next_validator);
+        drupal_set_message(t('@name is the next one to approve!',
+          array('@name' => $next_validator->name)));
+      }
+      else {
+        // Last Validator.
+        $job_item->state = OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated;
+        $job_item->save();
+      }
+      break;
+    }
+  }
+}
+
+/**
+ * Callback for reject translation for Content Validator.
+ */
+function osha_tmgmt_translation_validators_reject($form, &$form_state) {
+  $job_item = $form_state['item'];
+  $validators = osha_tmgmt_load_validators_by_job_item($job_item);
+  $last = end($validators);
+  global $user;
+  if ($user->uid == $last->uid && $last->next == 1) {
+    $last->message = $form_state['values']['content_validation']['message'];
+    $last->approved = OSHA_TMGMT_TRANS_VALID_REJECTED;
+    $last->next = 0;
+    entity_save('translation_validator', $last);
+    $job_item->state = TMGMT_JOB_ITEM_STATE_ABORTED;
+    $job_item->save();
+  }
+}
+
+
+  /**
+   * Themes the workflow_moderation_form form.
+   *
+   * @param array $variables
+   *   Form variables
+   *
+   * @return string
+   *   Form HTML
+   */
+function theme_osha_tmgmt_job_item_validators_form_table($variables) {
+  $output = '';
+  $form = $variables['form'];
+  $rows = array();
+  if (!empty($form['rows'])) {
+    $items = element_children($form['rows']);
+    reset($items);
+    foreach ($items as $uid) {
+      $moderator = $form['rows'][$uid]['#row'];
+      $status = '';
+      if (!empty($moderator->approved)) {
+        $status = '<strong>' . $moderator->approved . '</strong>';
+        if (!empty($moderator->message)) {
+          $status .= '<p>' . $moderator->message . '</p>';
+        }
+      }
+      $row = array();
+      $name = check_plain($moderator->name);
+      if (empty($moderator->osha_tmgmt_validators_saved)) {
+        $name .= '<sup>**</sup>';
+      }
+      $row[] = $name;
+      $row[] = check_plain($moderator->mail);
+      $row[] = $status;
+      $row[] = drupal_render($form['rows'][$uid]['remove']);
+      $row[] = drupal_render($form['rows'][$uid]['weight']);
+      $rows[] = array('data' => $row, 'class' => array('draggable'));
+    }
+  }
+  $row = array(
+    drupal_render($form['add']['uid']),
+    drupal_render($form['add']['submit']),
+    '',
+    '',
+    '',
+  );
+  $rows[] = $row;
+  $caption = t('List of approvers');
+
+  $header = array(
+    t('User'),
+    t('Mail'),
+    t('Status'),
+    '',
+  );
+  if ($form['#can_edit']) {
+    array_push($header, t('Order of notification'));
+  }
+  $table = array(
+    '#theme' => 'table',
+    '#caption' => $caption,
+    '#header' => $header,
+    '#attributes' => array(
+      'id' => 'approvers_table',
+    ),
+    '#rows' => $rows,
+  );
+  if (isset($form['moderation'])) {
+    $output .= drupal_render($form['moderation']);
+  }
+  $output .= drupal_render($table);
+  $output .= drupal_render_children($form);
+  if ($form['#can_edit']) {
+    drupal_add_tabledrag('approvers_table', 'order', 'sibling', 'user-weight');
+  }
+  return $output;
 }

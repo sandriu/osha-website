@@ -12,6 +12,14 @@ define('OSHA_TMGMT_TRANS_VALID_GROUP', 'translators_group');
 define('OSHA_TMGMT_TRANS_VALID_APPROVED', 'approved');
 define('OSHA_TMGMT_TRANS_VALID_REJECTED', 'rejected');
 
+define('OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired', 5);
+define('OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated', 6);
+define('OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish', 7);
+
+define('OSHA_TMGMT_CONTENT_VALIDATOR_STATUS_APPROVED', 'approved');
+define('OSHA_TMGMT_CONTENT_VALIDATOR_STATUS_REJECTED', 'rejected');
+
+include_once 'osha_tmgmt.entity.inc';
 module_load_include('inc', 'osha_tmgmt', 'osha_tmgmt.workflow');
 
 function osha_tmgmt_menu() {
@@ -20,6 +28,15 @@ function osha_tmgmt_menu() {
     'page arguments' => array(1, 3),
     'access arguments' => array('preview layout validation'),
     'type' => MENU_CALLBACK,
+    'file' => 'osha_tmgmt.workflow.inc',
+  );
+
+  $items['admin/tmgmt/items/%tmgmt_job_item/content-validators'] = array(
+    'title' => 'Content Validators',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_tmgmt_job_item_validators_form', 3),
+    'access arguments' => array('create translation jobs'),
+    'type' => MENU_LOCAL_TASK,
     'file' => 'osha_tmgmt.workflow.inc',
   );
   return $items;
@@ -78,20 +95,6 @@ function osha_tmgmt_schema_alter(&$schema) {
       'default' => NULL,
       'not null' => FALSE,
     );
-    $schema['tmgmt_job_item']['fields']['uid'] = array(
-      'description' => 'Translation Validator',
-      'type' => 'int',
-      'unsigned' => TRUE,
-      'default' => NULL,
-      'not null' => FALSE,
-    );
-    $schema['tmgmt_job_item']['fields']['approved'] = array(
-      'description' => 'NULL not voted, approved or rejected',
-      'type' => 'varchar',
-      'length' => 64,
-      'default' => NULL,
-      'not null' => FALSE,
-    );
   }
   if (isset($schema['tmgmt_job'])) {
     $schema['tmgmt_job']['fields']['character_count'] = array(
@@ -126,7 +129,7 @@ function osha_tmgmt_entity_info() {
     'translation_validator' => array(
       'label' => t('Translation Validators'),
       'module' => 'osha_tmgmt',
-      'controller class' => 'OshaWorkflowApprovalItemController',
+      'controller class' => 'OshaTMGMTValidatorItemController',
       'base table' => 'osha_tmgmt_job_trans_validators',
       'entity keys' => array(
         'id' => 'tvid',
@@ -186,6 +189,17 @@ function osha_tmgmt_entity_property_info() {
   return $info;
 }
 
+/**
+ * Implements hook_theme().
+ */
+function osha_tmgmt_theme() {
+  return array(
+    'osha_tmgmt_job_item_validators_form_table' => array(
+      'render element' => 'form',
+      'file' => 'osha_tmgmt.workflow.inc',
+    ),
+  );
+}
 
 /**
  * Implements hook_tmgmt_file_format_info().
@@ -468,7 +482,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           $item = $items[$langcode];
           $uri = $item->uri();
           $wrapper = entity_metadata_wrapper('tmgmt_job_item', $item);
-          $additional = l($wrapper->state->label(), $uri['path'], array('query' => array('destination' => current_path())));
+          $additional = l(osha_tmgmt_get_job_item_state_label($item->state), $uri['path'], array('query' => array('destination' => current_path())));
           // Disable the checkbox for this row since there is already a
           // translation in progress that has not yet been finished. This way we
           // make sure that we don't stack multiple active translations for the
@@ -482,7 +496,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         }
       }
 
-      // Translation Validators Group Form.
+      // Translation Content Validators Group Assign Form.
       if (!empty($items)) {
         $form['translation_validators'] = array(
           '#type' => 'fieldset',
@@ -521,37 +535,60 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         $form_state['validators_group'] = $group;
         $form_state['tmgmt_job'] = tmgmt_job_load($tjid);
         $form_state['tmgmt_job_items'] = $items;
-
-
-        // Translation Validators Reviews.
-        $trans_w_col_index = 5;
-        array_splice($form['languages']['#header'], $trans_w_col_index, 0,
-          array(t('Translation Workflow Status')));
-
-        foreach ($form['languages']['#options'] as $lang => &$row) {
-          if (!isset($items[$lang])) {
-            array_splice($row, $trans_w_col_index, 0, array(t('None')));
-            continue;
-          }
-          $status = t('To be Reviewed');
-          if (!empty($items[$lang]->approved)) {
-            $status = t('@status', array('@status' => $items[$lang]->approved));
-          }
-          if (!empty($items[$lang]->uid)) {
-            $user = user_load($items[$lang]->uid);
-            $status = t('@status by @name',
-              array(
-                '@name' => $user->name,
-                '@status' => $status)
-            );
-          }
-          array_splice($row, $trans_w_col_index, 0, $status);
-        }
       }
       break;
   }
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &$form_state) {
+  global $user;
+  $job_item = $form_state['item'];
+  $validators = osha_tmgmt_load_validators_by_job_item($job_item);
+  if (array_key_exists($user->uid, $validators)
+    && $validators[$user->uid]->next == 1) {
+    $form['content_validation'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Content Validation',
+      '#collapsible' => TRUE,
+      '#tree' => TRUE,
+    );
+    $form['content_validation']['message'] = array(
+      '#type' => 'textarea',
+      '#title' => 'Message',
+    );
+    $form['content_validation']['submit'] = array(
+      '#type' => 'submit',
+      '#submit' => array('osha_tmgmt_translation_validators_accept'),
+      '#validate' => array(),
+      '#value' => 'Approve',
+    );
+    $last = osha_tmgmt_load_validators_last($validators);
+    $can_reject = ($last->uid == $user->uid);
+    $form['content_validation']['reject'] = array(
+      '#type' => 'submit',
+      '#submit' => array('osha_tmgmt_translation_validators_reject'),
+      '#validate' => array(),
+      '#value' => 'Reject',
+      '#access' => $can_reject,
+    );
+  }
+}
+
+function osha_tmgmt_get_job_item_state_label($state) {
+  $states = array(
+    TMGMT_JOB_ITEM_STATE_ACTIVE => t('On Translation'),
+    TMGMT_JOB_ITEM_STATE_REVIEW => t('Translated'),
+    TMGMT_JOB_ITEM_STATE_ACCEPTED => t('Published'),
+    TMGMT_JOB_ITEM_STATE_ABORTED => t('Rejected'),
+    OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired => t('Needs Content Validation'),
+    OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated => t('Content Validated'),
+    OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish => t('Translation Ready to Publish'),
+  );
+  return $states[$state];
+}
 /**
  * Overrides form submit for tmgmt cart checkout.
  */

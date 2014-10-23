@@ -17,6 +17,8 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
   return array(
     'create translation jobs',
     'submit translation jobs',
+
+    'access user profiles',
   );
 }
 
