@@ -456,6 +456,48 @@ function osha_workflow_approve($node, $vote, $message = NULL, $voter = NULL) {
 }
 
 /**
+ * Make an HTML select options from the list of users assigned to a role.
+ *
+ * @param string $role_name
+ *   Name of the Role
+ *
+ * @see osha_workflow_users_get_review_managers
+ * @return array
+ *   HTML select options
+ */
+function osha_workflow_users_get_users_from_role_as_options($role_name) {
+  $users = osha_workflow_users_get_users_from_role($role_name);
+  $ret = array();
+  foreach ($users as $uid => $u) {
+    $ret[$uid] = $u->name;
+  }
+  return $ret;
+}
+
+/**
+ * Retrieve the list of users from a role, ordered by name.
+ *
+ * @param string $role_name
+ *   Name of the Role
+ *
+ * @return array
+ *   Array of user objects
+ */
+function osha_workflow_users_get_users_from_role($role_name) {
+  $ret = array();
+  if ($role = user_role_load_by_name($role_name)) {
+    $query = db_select('users', 'u')->fields('u', array('uid'));
+    $query->join('users_roles', 'ur', 'ur.uid = u.uid');
+    $uids = $query->condition('ur.rid', $role->rid)
+      ->orderBy('u.name')
+      ->groupBy('u.uid')
+      ->execute()->fetchCol();
+    $ret = user_load_multiple($uids);
+  }
+  return $ret;
+}
+
+/**
  * Class OshaWorkflowPermissions handles permission check for the workflow.
  */
 class OshaWorkflowPermissions {

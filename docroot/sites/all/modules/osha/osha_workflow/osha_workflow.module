@@ -451,6 +451,33 @@ function osha_workflow_workbench_moderation_states_next_alter(&$access, $op, $no
  * Implements hook_form_alter().
  */
 function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'entity_collection_content_add_form') {
+    if ($collection = $form_state['entity_collection']) {
+      if ($collection->bundle == 'moderators_group') {
+        $options = osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_APPROVER);
+        $users = array();
+        foreach ($options as $uid => $account) {
+          $users['user:' . $uid] = $account;
+        }
+        $form['add_content']['#title'] = t('Add approvers into the list');
+        $form['add_content']['entity_type']['#access'] = FALSE;
+        $form['add_content']['content_select'] = array(
+          '#type' => 'select',
+          '#options' => $users,
+          '#description' => t('Select the person account from the list then press <b>Add content</b>'),
+        );
+      }
+    }
+  }
+  if ($form_id == 'entity_collection_content_form') {
+    if ($collection = $form_state['entity_collection']) {
+      if ($collection->bundle == 'moderators_group') {
+        foreach ($form['content'] as &$row) {
+          hide($row['style']);
+        }
+      }
+    }
+  }
   if ($form_id == 'workbench_moderation_moderate_form' && isset($form['node']['#value'])) {
     $node = $form['node']['#value'];
     $state = $node->workbench_moderation['current']->state;
