@@ -64,6 +64,38 @@ function osha_schema_alter(&$schema) {
 }
 
 /**
+ * Implements hook_date_format_types().
+ */
+function osha_date_format_types() {
+  return array(
+    'year'  => t('Year'),
+    'short_date_eu'  => t('EU short date'),
+    'osha_day_only'  => t('Day only'),
+  );
+}
+
+/**
+ * Implements hook_date_formats().
+ */
+function osha_date_formats() {
+  $formats = array(
+    array(
+      'type' => 'year', 'format'  => 'Y', 'locales' => array(),
+    ),
+    array(
+      'type' => 'short_date_eu', 'format'  => 'd/m/Y - H:i', 'locales' => array(),
+    ),
+    array(
+      'type' => 'osha_day_only', 'format'  => 'd/m/Y', 'locales' => array(),
+    ),
+  );
+  foreach ($formats as $format) {
+    variable_set('date_format_' . $format['type'], $format['format']);
+  }
+  return $formats;
+}
+
+/**
  * Configure date and time-zone related settings.
  */
 function osha_configure_date_settings() {
