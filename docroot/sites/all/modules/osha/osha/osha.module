@@ -306,9 +306,19 @@ function osha_entity_info_alter(&$entity_info) {
 }
 
 /**
- * Implements hook_form_alter()
+ * Implements hook_form_alter().
  */
 function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['#node'])) {
+    $node = $form['#node'];
+    $jobs = tmgmt_ui_cart_get()->getJobItemsFromCart();
+    foreach ($jobs as $job) {
+      if ($job->plugin == 'entity' && $job->item_id == $node->nid) {
+        drupal_set_message(t('This node is in the translation cart!'), 'warning');
+        break;
+      }
+    }
+  }
   if (isset($form['field_tags']['und']['#options'])) {
     // $form_id has the following template <machine_name>_node_form
     $machine_name = substr($form_id, 0, -strlen('_node_form'));
