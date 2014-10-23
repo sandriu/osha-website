@@ -715,83 +715,6 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_pr_release_date'
-  $field_instances['node-press_release-field_pr_release_date'] = array(
-    'bundle' => 'press_release',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_pr_release_date',
-    'label' => 'Release date',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'text_parts' => array(),
-        'year_range' => '1970:+3',
-      ),
-      'type' => 'date_select',
-      'weight' => 6,
-    ),
-  );
-
   // Exported field_instance: 'node-press_release-field_publication_date'
   $field_instances['node-press_release-field_publication_date'] = array(
     'bundle' => 'press_release',
@@ -1216,7 +1139,6 @@ function osha_press_release_field_default_field_instances() {
   t('Notes to editor');
   t('Page count');
   t('Publication Date');
-  t('Release date');
   t('Summary');
   t('Tags');
   t('Thesaurus');
