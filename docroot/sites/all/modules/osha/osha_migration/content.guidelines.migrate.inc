@@ -46,6 +46,9 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('field_archived', 'archived');
     $this->addFieldMapping('field_expiration_date', 'expiration_date');
+    $this->addFieldMapping('field_external_url', 'external_url');
+
+    $this->addFieldMapping('field_available_in_languages', 'available_languages')->separator(',');
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -144,6 +147,8 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
       );
     }
 
+    $row->available_languages = str_replace(' ', '', $row->available_languages);
+
     return TRUE;
   }
 
@@ -229,7 +234,9 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
       'nace' => 'Nace codes taxonomy',
       'archived' => '',
       'expiration_date' => '',
-      'original_path' => 'The URL redirect'
+      'original_path' => 'The URL redirect',
+      'external_url' => '',
+      'available_languages' => ''
     );
   }
 }
