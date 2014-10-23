@@ -202,7 +202,7 @@ class MigrateOshaSeminarsTest extends OshaWebTestCase {
     foreach ($witness['files'] as $language => $files) {
       for ($i = 0; $i < count($files); $i++) {
         if (!empty($files[$i])) {
-          $file_name = $node->field_file[$language][$i]['uri'];
+          $file_name = $node->field_related_resources[$language][$i]['uri'];
           $file_name = str_replace('public://seminars/documents', '', $file_name);
           $this->assertEqual($file_name, $files[$i]);
         }

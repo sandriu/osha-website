@@ -144,7 +144,7 @@ return $output;';
   $formatter->code = '$output = \'<ul id="seminar_related_resources">\';
 global $language ;
 $curr_lang = $language->language;
-$object = isset($variables[\'#object\']->field_file[$curr_lang]) ? $variables[\'#object\']->field_file[$curr_lang] :$variables[\'#object\']->field_file[\'en\'];
+$object = isset($variables[\'#object\']->field_related_resources[$curr_lang]) ? $variables[\'#object\']->field_related_resources[$curr_lang] :$variables[\'#object\']->field_related_resources[\'en\'];
 foreach ($object as $obj) {
         $description = !empty($obj[\'description\']) ? $obj[\'description\'] : $obj[\'filename\'];
 	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $description;
