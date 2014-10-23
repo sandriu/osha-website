@@ -51,6 +51,12 @@ function osha_tmgmt_permission() {
       'title' => t('Access node layout validation preview screen'),
       'description' => t('Allows Layout Validators to preview the node before accepting translation'),
     ),
+    'view translation job' => array(
+      'title' => t('View the list of translation jobs and job details'),
+    ),
+    'view translation job item' => array(
+      'title' => t('View the job item details'),
+    ),
   );
   return $perms;
 }
@@ -242,6 +248,8 @@ function osha_tmgmt_entity_info_alter(&$entity_info) {
   }
   if (isset($entity_info['tmgmt_job'])) {
     $entity_info['tmgmt_job']['views controller class'] = 'OshaTMGMTJobViewsController';
+    // Override tmgmt_job_access to allow 'Translator Liaison' to view the jobs.
+    $entity_info['tmgmt_job']['access callback'] = 'osha_tmgmt_job_access';
   }
 }
 
@@ -265,6 +273,30 @@ function osha_tmgmt_menu_local_tasks_alter(&$items) {
     }
   }
 }
+
+
+/**
+ * Access callback for the job entity (overrides tmgmg_job_access).
+ *
+ * @param string $op
+ *   The operation being performed.
+ * @param object $job
+ *   (Optional) A TMGMTJob entity to check access for. If no entity is given, it
+ *   will be determined whether access is allowed for all entities.
+ * @param object $account
+ *   (Optional) The user to check for. Leave it to NULL to check for the global
+ *   user.
+ *
+ * @return bool
+ *   TRUE if access is allowed, FALSE otherwise.
+ */
+function osha_tmgmt_job_access($op, $job = NULL, $account = NULL) {
+  if ($op == 'view') {
+    return user_access('view translation job', $account);
+  }
+  return tmgmt_job_access($op, $job, $account);
+}
+
 
 /**
  * Implements hook_views_api().
@@ -388,6 +420,14 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'tmgmt_job_form':
+      if (!user_access('accept translation jobs')) {
+        // Make the form read-only
+        // @todo:urgent:possible security issue - upload XML as translator liaison
+        $form['translator_wrapper']['#access'] = FALSE;
+        $form['info']['label']['#disabled'] = TRUE;
+        $form['actions']['submit']['#access'] = FALSE;
+        $form['actions']['cancel']['#title'] = t('Back');
+      }
       $languages = tmgmt_available_languages();
       $job = $form_state['tmgmt_job'];
       $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($job);

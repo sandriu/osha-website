@@ -5,6 +5,7 @@
  */
 function osha_tmgmt_workflow_create_roles() {
   module_load_include('inc', 'osha_tmgmt', 'osha_tmgmt.permissions');
+  module_load_include('module', 'osha_workflow');
 
   $roles = array(
     OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER => osha_tmgmt_workflow_permissions_role_translation_manager(),

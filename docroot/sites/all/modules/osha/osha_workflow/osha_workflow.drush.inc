@@ -73,18 +73,22 @@ function drush_osha_workflow_osha_create_users() {
       drush_log("$username already exists ...", 'warning');
       continue;
     }
-    $role = user_role_load_by_name($role_name);
-    $fields = array(
-      'name' => $username,
-      'pass' => $username,
-      'status' => 1,
-      'init' => "$username@localhost",
-      'roles' => array(
-        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
-        $role->rid => $role_name,
-      ),
-    );
-    drush_log('Users created ...');
-    user_save(NULL, $fields);
+    if ($role = user_role_load_by_name($role_name)) {
+      $fields = array(
+        'name' => $username,
+        'pass' => $username,
+        'status' => 1,
+        'init' => "$username@localhost",
+        'roles' => array(
+          DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+          $role->rid => $role_name,
+        ),
+      );
+      drush_log('Users created ...');
+      user_save(NULL, $fields);
+    }
+    else {
+      drush_log("Cannot find role: $role_name", 'error');
+    }
   }
 }
