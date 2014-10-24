@@ -5,6 +5,7 @@ function osha_tmgmt_workflow_permissions_common() {
     'access dashboard',
     'view the administration theme',
     'access toolbar',
+    'view translation content validators',
 
     //@todo: remove
     'access devel information',
@@ -30,6 +31,7 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
     'submit translation jobs',
 
     'access user profiles',
+    'edit translation content validators',
   );
 }
 

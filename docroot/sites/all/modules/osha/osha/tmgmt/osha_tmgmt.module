@@ -35,7 +35,7 @@ function osha_tmgmt_menu() {
     'title' => 'Content Validators',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_tmgmt_job_item_validators_form', 3),
-    'access arguments' => array('create translation jobs'),
+    'access arguments' => array('view translation content validators'),
     'type' => MENU_LOCAL_TASK,
     'file' => 'osha_tmgmt.workflow.inc',
   );
@@ -57,6 +57,12 @@ function osha_tmgmt_permission() {
     ),
     'view translation job item' => array(
       'title' => t('View the job item details'),
+    ),
+    'view translation content validators' => array(
+      'title' => t('View the job item Content Validators'),
+    ),
+    'edit translation content validators' => array(
+      'title' => t('Edit the job item Content Validators'),
     ),
   );
   return $perms;
