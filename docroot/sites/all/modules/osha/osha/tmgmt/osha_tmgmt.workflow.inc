@@ -249,7 +249,11 @@ function osha_workflow_users_group_by_lang_skills($users, $from_lang = 'en') {
  */
 function osha_tmgmt_layout_validator_approve_submit($form, &$form_state) {
   $job_item = $form_state['item'];
-  $job_item->toTranslated();
+  $message = '';
+  if (!empty($form_state['values']['action_message'])) {
+    $message = $form_state['values']['action_message'];
+  }
+  $job_item->toTranslated($message);
 }
 
 /**
@@ -436,7 +440,7 @@ function osha_tmgmt_job_item_validators_form_submit($form, &$form_state) {
  */
 function osha_tmgmt_translation_validators_accept($form, &$form_state) {
   $job_item = $form_state['item'];
-  $message = $form_state['values']['content_validation']['message'];
+  $message = $form_state['values']['action_message'];
   $validators = osha_tmgmt_load_validators_by_job_item($job_item);
   global $user;
   while ($validator = each($validators)) {
@@ -446,22 +450,26 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
       $validator[1]->next = 0;
       entity_save('translation_validator', $validator[1]);
       drupal_set_message(t('You have approved this translation!'));
+
       if ($next_validator = current($validators)) {
         $next_validator->next = 1;
         entity_save('translation_validator', $next_validator);
         drupal_set_message(t('@name is the next one to approve!',
           array('@name' => $next_validator->name)));
+
+        // Save log message (no job item state change required).
+        $this->addMessage('@name approved the translation content.
+          Next approval is @next', array(
+            '@name' => $user->name,
+            '@next' => $next_validator->name,
+          ));
+        // Notify next approval.
+        OshaWorkflowNotifications::notifyTranslationValidators($job_item);
       }
       else {
         // Last Validator.
         $job_item->toTranslationValidated();
       }
-      // Save message to job item.
-      $form_state['jobItem']->addMessage('@name validated translation content.',
-        array(
-          '@name' => $user->name,
-        )
-      );
       break;
     }
   }
@@ -470,7 +478,7 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
 /**
  * Callback for reject translation for Content Validator.
  */
-function osha_tmgmt_translation_validators_reject($form, &$form_state) {
+function osha_tmgmt_job_item_translation_reject($form, &$form_state) {
   $job_item = $form_state['item'];
   $validators = osha_tmgmt_load_validators_by_job_item($job_item);
   $last = end($validators);
@@ -500,7 +508,32 @@ function osha_tmgmt_require_content_validation_validate($form, &$form_state) {
  */
 function osha_tmgmt_require_content_validation_submit($form, &$form_state) {
   $job_item = $form_state['item'];
-  $job_item->toTranslationValidationRequired();
+  $message = '';
+  if (!empty($form_state['values']['action_message'])) {
+    $message = $form_state['values']['action_message'];
+  }
+  $job_item->toTranslationValidationRequired($message);
+}
+
+/**
+ * Validation callback for Ready to publish form.
+ */
+function osha_tmgmt_ready_to_publish_validate($form, &$form_state) {
+  if (!user_access('set job item to ready to publish state')) {
+    form_set_error('actions][ready_to_publish', t('You do not have the rights to make this action'));
+  }
+}
+
+/**
+ * Callback for Ready to Publish button.
+ */
+function osha_tmgmt_ready_to_publish_submit($form, &$form_state) {
+  $job_item = $form_state['item'];
+  $message = '';
+  if (!empty($form_state['values']['action_message'])) {
+    $message = $form_state['values']['action_message'];
+  }
+  $job_item->toTranslationReadyToPublish($message);
 }
 
 

@@ -809,7 +809,19 @@ class OshaWorkflowNotifications {
   public static function notifyTranslationValidators($tmgmt_job_item) {
     $validators = osha_tmgmt_load_validators_by_job_item($tmgmt_job_item);
     $next_validator = osha_tmgmt_load_validators_next($validators);
-    OshaWorkflowNotifications::sendEmail(array($next_validator), array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
+    OshaWorkflowNotifications::sendEmail($next_validator, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
+  }
+
+  /**
+   * Notify Project Manager that translation is ready to publish..
+   *
+   * @param TMGMTJobItem|OshaTMGMTJobItem $tmgmt_job_item
+   *   Job created
+   */
+  public static function notifyTranslationProjectManager($tmgmt_job_item) {
+    $project_manager = osha_workflow_get_project_manager($tmgmt_job_item->item_id);
+    $users = array($project_manager);
+    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
   }
 
   /**
