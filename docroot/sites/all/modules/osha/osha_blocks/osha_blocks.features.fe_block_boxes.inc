@@ -11,12 +11,28 @@ function osha_blocks_default_fe_block_boxes() {
   $export = array();
 
   $fe_block_boxes = new stdClass();
+  $fe_block_boxes->info = 'Link on procurement page to archive';
+  $fe_block_boxes->format = 'full_html';
+  $fe_block_boxes->machine_name = 'calls_link_to_archive';
+  $fe_block_boxes->body = '<p><a href="/calls_archive">Archive</a></p>';
+
+  $export['calls_link_to_archive'] = $fe_block_boxes;
+
+  $fe_block_boxes = new stdClass();
   $fe_block_boxes->info = 'Join OSHMail subscribers';
   $fe_block_boxes->format = 'full_html';
   $fe_block_boxes->machine_name = 'join_oshmail_subscribers';
   $fe_block_boxes->body = '<div id="join_subscribers"><img src="/sites/all/themes/osha_frontend/images/content/blocks/join_65000_subscribers.png" alt="Join OSHMail Subscribers" /></div>';
 
   $export['join_oshmail_subscribers'] = $fe_block_boxes;
+
+  $fe_block_boxes = new stdClass();
+  $fe_block_boxes->info = 'Job Vacancies Reserve List';
+  $fe_block_boxes->format = 'full_html';
+  $fe_block_boxes->machine_name = 'osha_job_vacancies_reserve_block';
+  $fe_block_boxes->body = '<p class="Textfo" style="text-align: justify;">Reserve lists are composed of the candidates who came for an interview at the time of the recruitment procedure for the posts listed and who obtained the best overall marks.</p><p class="Textfo" style="text-align: justify;">Candidates in the reserve list may be offered contracts at a later date without subsequent selection procedure.</p><p class="Textfo" style="text-align: justify;">For some Contract Agent positions, EU-OSHA may use the EPSO database.</p>';
+
+  $export['osha_job_vacancies_reserve_block'] = $fe_block_boxes;
 
   $fe_block_boxes = new stdClass();
   $fe_block_boxes->info = 'Subscribe categories - static block';
@@ -41,6 +57,14 @@ function osha_blocks_default_fe_block_boxes() {
   $fe_block_boxes->body = '<div><a class="seminar_back-to-seminars back-to-link" href="/articles/seminars">Back to seminars</a></div>';
 
   $export['seminar_back_to_seminars_link'] = $fe_block_boxes;
+
+  $fe_block_boxes = new stdClass();
+  $fe_block_boxes->info = 'Link on careers page to closed vacancies';
+  $fe_block_boxes->format = 'full_html';
+  $fe_block_boxes->machine_name = 'vacancies_link_to_closed';
+  $fe_block_boxes->body = '<p><a href="/jobs_archive">Closed vacancies</a></p>';
+
+  $export['vacancies_link_to_closed'] = $fe_block_boxes;
 
   return $export;
 }

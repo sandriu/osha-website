@@ -340,6 +340,48 @@ class OshaMigratePublications extends OSHADynamicMigration {
       }
     }
   }
+
+
+  /**
+   * Sets the node aliases after the migration, nid is available.
+   *
+   * @param object $entity
+   *   Entity to be saved
+   * @param object $row
+   *   Source row
+   */
+  public function complete($entity, $row) {
+    parent::complete($entity, $row);
+
+    $languages = array_keys($entity->translations->data);
+    if (!in_array($row->language, $languages)) {
+      $languages[] = $row->language;
+    }
+
+    foreach ($languages as $language) {
+      if (isset($row->path[$language])) {
+
+        //check if source redirect exists
+        $source = $row->path[$language] . '/view';
+        $source_redirects = redirect_load_by_source($source,$language);
+
+        if ($source_redirects == FALSE) {
+          // create redirect from publication's/view path to publication's path
+          $redirect = new stdClass();
+          $redirect->source = $source;                                   // From URL
+          $redirect->source_options = array();
+          $redirect->redirect = 'node/'.$entity->nid;                    // To URL
+          $redirect->redirect_options = array();
+          $redirect->status_code = 0;                                    // Redirect Status
+          $redirect->type = 'redirect';
+          $redirect->language = $language;
+
+          // Create the redirect
+          redirect_save($redirect);
+        }
+      }
+    }
+  }
 }
 
 /**

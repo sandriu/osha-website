@@ -68,6 +68,7 @@ stylesheets[all][] = css/styles.css
 
 ;scripts[] = js/script.js
 scripts[] = js/hoverhref.js
+scripts[] = js/menu_fixed.js
 
 
 

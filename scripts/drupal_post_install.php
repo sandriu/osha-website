@@ -6,15 +6,27 @@ if (function_exists('drush_log')) {
 
 require_once 'utils.php';
 
-osha_configure_solr_entities();
 osha_change_field_size();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
 osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
+osha_disable_blocks();
 osha_configure_permissions();
 osha_config_development();
+osha_configure_recaptcha();
+osha_configure_on_the_web();
+osha_add_menu_position_rules();
+osha_add_agregator_rss_feeds();
 
+variable_set('admin_theme', 'osha_admin');
+variable_set('theme_default', 'osha_frontend');
+
+// @todo: Workflow configuration - hook_enable throws errors.
+variable_set('workbench_moderation_per_node_type', 1);
+osha_workflow_create_roles();
+
+module_disable(array('overlay'));
 
 /**
  * Configure permissions.
@@ -80,48 +92,6 @@ function osha_configure_permissions() {
   }
 }
 
-// @todo: Workflow configuration - hook_enable throws errors.
-variable_set('workbench_moderation_per_node_type', 1);
-osha_workflow_create_roles();
-
-
-module_disable(array('overlay'));
-
-/**
- * Configure the apachesolr and search_api_solr modules with proper settings.
- */
-function osha_configure_solr_entities() {
-  // Configure apachesolr: submit apachesolr_environment_edit_form
-  if (module_exists('apachesolr') && module_load_include('inc', 'apachesolr', 'apachesolr.admin')) {
-    drupal_set_message('Configuring apachesolr entities...');
-    // Mark all entities for search indexing - admin/config/search/apachesolr
-    $env_id = 'solr';
-    $form_state = array(
-      'values' => array(
-        'env_id' => $env_id,
-        'entities' => array(
-          'node' => array(
-            'article',
-            'page',
-            'blog',
-            'calls',
-            'highlight',
-            'job_vacancies',
-            'news',
-            'newsletter_article',
-            'press_release',
-            'publication',
-            'wiki_page',
-          ),
-        ),
-      ),
-    );
-    drupal_form_submit('apachesolr_index_config_form', $form_state, $env_id);
-  }
-}
-
-
-
 /**
  * Config file translator not available during osha_tmgmt installation.
  */
@@ -158,12 +128,12 @@ function osha_newsletter_create_taxonomy() {
 
     $weight = 0;
 
-    foreach ($new_terms as $idx => $term_name) {
+    foreach ($new_terms as $term_name) {
       $term = new stdClass();
       $term->name = $term_name;
       $term->language = 'en';
       $term->vid = $voc->vid;
-      // weight must be an integer
+      // Weight must be an integer.
       $term->weight = $weight++;
       taxonomy_term_save($term);
       if ($term->name == 'Coming soon') {
@@ -195,7 +165,7 @@ function osha_configure_search_autocomplete() {
   if ($fid) {
     db_update('search_autocomplete_forms')
       ->fields(array(
-        'data_view' => 'solr_autocomplete',
+        'data_view' => 'search_autocomplete',
         'theme' => 'basic-blue.css',
         'data_callback' => 'search_autocomplete/autocomplete/' . $fid . '/',
       ))
@@ -255,4 +225,117 @@ function osha_config_development() {
     variable_set(REROUTE_EMAIL_ADDRESS, $config['variables']['site_mail']);
     variable_set(REROUTE_EMAIL_ENABLE_MESSAGE, 1);
   }
+}
+
+/*
+ * Add configuration for recaptcha contrib module.
+ */
+function osha_configure_recaptcha() {
+  drupal_set_message('Configuring reCaptcha contrib module ...');
+
+  variable_set('captcha_default_challenge', 'recaptcha/reCAPTCHA');
+  variable_set('captcha_default_validation', 1);
+  variable_set('recaptcha_theme', 'custom');
+}
+
+/**
+ * Add menu position rules for publication content type.
+ */
+function osha_add_menu_position_rules() {
+  if (module_exists('menu_position') && module_load_include('inc', 'menu_position', 'menu_position.admin')) {
+    drupal_set_message('Create menu position rules ...');
+
+    // Config menu_position contrib module.
+    variable_set('menu_position_active_link_display', 'parent');
+
+    $options = menu_parent_options(menu_get_menus(), array('mlid' => 0));
+    $publications_menu = array_search('------ Publications', $options);
+
+    $form_state = array(
+      'values' => array(
+        'admin_title' => 'Publications Menu Rule',
+        'plid' => $publications_menu !== NULL ? $publications_menu : 'main-menu:0',
+        'content_type' => array('publication' => 'publication'),
+        'op' => 'Save',
+      ),
+    );
+
+    drupal_form_submit('menu_position_add_rule_form', $form_state);
+
+    $press_menu_entry = array_search('------ Press room', $options);
+
+    $form_state = array(
+      'values' => array(
+        'admin_title' => 'Press room Menu Rule',
+        'plid' => $press_menu_entry !== NULL ? $press_menu_entry : 'main-menu:0',
+        'content_type' => array('press_release' => 'press_release'),
+        'op' => 'Save',
+      ),
+    );
+
+    drupal_form_submit('menu_position_add_rule_form', $form_state);
+  }
+}
+
+/**
+ * Add press releases rss feed.
+ */
+function osha_add_agregator_rss_feeds(){
+  if (module_exists('aggregator') && module_load_include('inc', 'aggregator', 'aggregator.admin')) {
+    drupal_set_message('Add press releases rss feed ...');
+
+    $form_state = array(
+      'values' => array(
+        'title' => 'EU-OSHA in the media',
+        'url' => 'http://portal.kantarmedia.de/rss/index/1002043/100000063/1024803/9a7b629357e748080ff47e4d0db7ec57cffff3fe',
+        'refresh' => 900,
+        'block' => 2,
+        'op' => 'Save',
+      ),
+    );
+
+    drupal_form_submit('aggregator_form_feed', $form_state);
+
+    drupal_cron_run();
+    cache_clear_all();
+  }
+}
+
+/**
+ * Add configuration for on_the_web contrib module.
+ */
+function osha_configure_on_the_web() {
+  drupal_set_message('Configuring on_the_web contrib module ...');
+
+  variable_set('on_the_web_sitename', 0);
+  variable_set('on_the_web_facebook_page', 'http://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork');
+  variable_set('on_the_web_flickr_page', 'http://www.flickr.com/photos/euosha/');
+  variable_set('on_the_web_twitter_page', 'http://twitter.com/eu_osha');
+}
+
+/**
+ * Disable drupal default blocks
+ */
+function osha_disable_blocks(){
+  drupal_set_message('Disable navigation block on osha_frontend theme');
+
+  db_update('block')
+  ->fields(array('status' => 0))
+  ->condition('module', 'system')
+  ->condition('delta', 'navigation')
+  ->condition('theme', 'osha_frontend')
+  ->execute();
+
+  db_update('block')
+  ->fields(array('status' => 0))
+  ->condition('module', 'user')
+  ->condition('delta', 'login')
+  ->condition('theme', 'osha_frontend')
+  ->execute();
+
+  // we could also use drush
+  // block-configure --module=user --delta=login --region=-1 --theme=osha_frontend
+
+  // Flush cache.
+  cache_clear_all();
 }

@@ -533,15 +533,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Restructuring',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '02c241c2-0325-4d15-b87b-431a4dabacd0',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Restructuring',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -557,21 +574,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '974895cc-177f-4d46-82c6-63a7d309b716',
     ),
   );
   $terms[] = array(
     'name' => 'Slips, trips and falls',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '02fa5f88-67d0-4df9-9f43-619df14d81bc',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Slips, trips and falls',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -587,21 +622,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     ),
   );
   $terms[] = array(
     'name' => 'Worker participation and involvement',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '0686c47f-a6ef-4fff-9fd4-1d71a0735180',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Worker participation and involvement',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -617,19 +670,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'e268a4d0-9874-487e-8899-1d6d354bc720',
     ),
   );
   $terms[] = array(
     'name' => 'Dust and aerosols',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '07962edd-6d68-4047-8568-941aa79a1212',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -638,7 +702,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Dust and aerosols',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -654,21 +725,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
   );
   $terms[] = array(
     'name' => 'Working time',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '07c425ee-869a-4469-a928-1bf420c1faf7',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Working time',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -684,6 +773,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '974895cc-177f-4d46-82c6-63a7d309b716',
     ),
@@ -750,15 +840,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Workplace Health Promotion',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '09960840-6211-4b9f-80a0-7c85a4f33fcd',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Workplace Health Promotion',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -774,21 +881,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
   );
   $terms[] = array(
     'name' => 'Substance abuse',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '0bbdb03b-3a5a-4166-a87f-89cd29f6ee9c',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Substance abuse',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -804,21 +929,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '6438f9a5-8a5d-417b-b20e-ffea262b0999',
     ),
   );
   $terms[] = array(
     'name' => 'Risk assessment',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '0c49de45-8df0-4531-9275-c95ce47ee39a',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Risk assessment',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -834,21 +977,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'e268a4d0-9874-487e-8899-1d6d354bc720',
     ),
   );
   $terms[] = array(
     'name' => 'Distribution and logistics',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '0c963db3-d548-4d16-9c83-bbdefdf64ca4',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Distribution and logistics',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -864,21 +1025,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
   );
   $terms[] = array(
     'name' => 'Construction',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '0e403655-c86a-4876-8aeb-d1a93a1ba564',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Construction',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -894,19 +1073,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
   );
   $terms[] = array(
     'name' => 'Psychosocial issues',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 8,
     'uuid' => '10adc82d-ce69-4ef8-bbeb-2794d7c383ab',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -919,7 +1109,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Psychosocial issues',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -935,6 +1132,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Dangerous substances',
@@ -1327,15 +1525,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Transport',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '1589c71a-9063-4a1f-bad6-de14c1f0d317',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Transport',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -1351,19 +1566,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
   );
   $terms[] = array(
     'name' => 'Nanoparticles',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '1a593acc-a54a-4713-81dc-29c5804fbb65',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -1372,10 +1598,18 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
         1 => array(
           'tid' => '4063bbba-5ca1-4c6c-9dc2-8275e6477b1e',
+          'uuid' => '4063bbba-5ca1-4c6c-9dc2-8275e6477b1e',
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Nanoparticles',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -1391,21 +1625,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
   );
   $terms[] = array(
     'name' => 'Management Systems',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '1a5a0de7-5dc6-4477-86bf-c83db8b03dc2',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Management Systems',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -1421,21 +1673,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'e268a4d0-9874-487e-8899-1d6d354bc720',
     ),
   );
   $terms[] = array(
     'name' => 'Job design',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '1cc28e95-d6a5-4273-83d2-c031b02aa685',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Job design',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -1451,6 +1721,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '974895cc-177f-4d46-82c6-63a7d309b716',
     ),
@@ -1918,13 +2189,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Occupational diseases',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '20521222-4218-49f8-b679-af0b80fc3d3a',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -1933,7 +2214,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Occupational diseases',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -1949,21 +2237,73 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '6438f9a5-8a5d-417b-b20e-ffea262b0999',
     ),
   );
   $terms[] = array(
-    'name' => 'Anthropometry',
+    'name' => 'OSH related aspects',
     'description' => '',
+    'format' => 'full_html',
+    'weight' => 0,
+    'uuid' => '21ff9fd2-b2a8-4d20-b13a-e564f505fd01',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'directive_type',
+    'field_directive_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'osh-related-aspects',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'metatags' => array(),
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'en',
+          'source' => '',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413893926,
+          'entity_uuid' => '21ff9fd2-b2a8-4d20-b13a-e564f505fd01',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+  );
+  $terms[] = array(
+    'name' => 'Anthropometry',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '22d17eb8-e49f-4225-ae54-0684bca19960',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Anthropometry',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -1979,9 +2319,434 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     ),
+  );
+  $terms[] = array(
+    'name' => 'Provisions on workload, ergonomic and psychosocial risks',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 6,
+    'uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'provisions-on-workload-ergonomical-and-psychosocial-risks',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'provisions_workload',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Разпоредби относно риска, свързан с натоварване, ергономични и психо-социални рискове',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Ustanovení o pracovní zátěži a ergonomických a psychosociálních rizicích',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Bestemmelser om arbejdsmængderelaterede, ergonomiske og psykosociale risici',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Bestimmungen zur Arbeitsbelastung und zu den ergonomischen und psychosozialen Risiken',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Διατάξεις σχετικά με τους εργονομικούς και ψυχοκοινωνικούς κινδύνους καθώς και με τους κινδύνους που σχετίζονται με τον φόρτο εργασίας',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Provisions on workload, ergonomic and psychosocial risks',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Disposiciones en materia de riesgos relacionados con la carga de trabajo, riesgos ergonómicos y riesgos psicosociales',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Töökoormuse ja ergonoomiliste ning psühhosotsiaalsete ohtude sätted',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Työn kuormittavuutta sekä ergonomisia ja psykososiaalisia riskejä koskevat säännökset',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Dispositions relatives à la charge de travail et aux risques ergonomiques et psychosociaux',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Provisions on workload, ergonomic and psychosocial risks',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'A munkateherre, az ergonómiai és pszichoszociális kockázatokra vonatkozó rendelkezések',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Provisions on workload, ergonomic and psychosocial risks',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Disposizioni in materia di volume di lavoro, rischi psicosociali e di natura ergonomica',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Nuostatos dėl darbo krūvio, ergonominių aspektų ir psichosocialinių rizikos veiksnių',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Noteikumi par darba slodzi, ergonomiskajiem un psihosociālajiem riskiem',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Dispożizzjonijiet dwar ammont ta\' xogħol, riskji ergonomiċi u psikosoċjali',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Bepalingen inzake werklast, en ergonomische en psychosociale risico\'s',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Provisions on workload, ergonomic and psychosocial risks',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Przepisy dotyczące obciążenia pracą, zagrożeń ergonomicznych i psychospołecznych',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Disposições relativas aos riscos inerentes à carga de trabalho, aos riscos ergonómicos e aos riscos psicossociais',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Dispoziţii privind volumul de muncă, riscurile ergonomice şi psihosociale',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Ustanovenia o pracovnej záťaži, ergonomických a psychosociálnych rizikách',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Določbe o delovni obremenitvi ter ergonomskih in psihosocialnih tveganjih',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Bestämmelser om risker som har med arbetsbelastning att göra och ergonomiska och psykosociala risker',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '265de697-57ab-48f0-8bcd-803147ad525f',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => '2.1. European Survey of Enterprises on New & Emerging Risks (ESENER)',
@@ -2111,15 +2876,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Physiological fatigue',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '2cd439fb-b631-4724-97c2-58a54565695d',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Physiological fatigue',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -2135,6 +2917,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     ),
@@ -2951,15 +3734,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Training',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '2f752436-8777-426f-af8c-8f06ab49351d',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Training',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -2975,6 +3775,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
@@ -3442,15 +4243,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Vibration',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '328a8f48-55f4-4d79-9059-2100dc6f2c24',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Vibration',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -3466,6 +4284,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '8f36d40f-4400-432c-9067-2b5836ec2717',
     ),
@@ -3532,13 +4351,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Leadership',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '355f1f5b-d5da-4caf-b4c9-d4315c421b01',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -3547,7 +4376,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Leadership',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -3563,21 +4399,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'e268a4d0-9874-487e-8899-1d6d354bc720',
     ),
   );
   $terms[] = array(
     'name' => 'Disability management',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '3c20382e-6fcd-4275-9fd8-1c591ef83cf3',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Disability management',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -3593,6 +4447,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
@@ -4613,15 +5468,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Ergonomic work design',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '416df567-ec5c-42d9-88bb-71948cb5256d',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Ergonomic work design',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -4637,6 +5509,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     ),
@@ -5541,15 +6414,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Electricity',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '44c88915-07a9-468e-b068-ac0f8cc016e3',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Electricity',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -5565,21 +6455,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '8f36d40f-4400-432c-9067-2b5836ec2717',
     ),
   );
   $terms[] = array(
     'name' => 'Road safety',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '458f9d8c-f9fb-4033-8969-3871af27e87d',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Road safety',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -5595,19 +6503,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     ),
   );
   $terms[] = array(
     'name' => 'Young workers',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '4638fb7d-c73a-4e4c-bc64-19317fb5ae87',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -5616,7 +6535,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Young workers',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -5632,6 +6558,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
@@ -5778,15 +6705,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'OSH in general',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '4f931fb7-8258-4da9-9226-b26ffe706e24',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'OSH in general',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -5802,18 +6746,36 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Main OSH players - organisations',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 2,
     'uuid' => '54369f06-5dec-4010-9591-aeffcf516d3c',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Main OSH players - organisations',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -5829,6 +6791,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '4f931fb7-8258-4da9-9226-b26ffe706e24',
     ),
@@ -6356,15 +7319,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Ergonomics in office work',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '57d88eb2-ba6e-4bc5-9418-f3834a95a0bd',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Ergonomics in office work',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -6380,21 +7360,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     ),
   );
   $terms[] = array(
     'name' => 'Manufacturing',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '58d638b3-2de2-4c17-b0b8-6b186b994e39',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Manufacturing',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -6410,6 +7408,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
@@ -6858,6 +7857,430 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
+    'name' => 'Sector specific and worker related provisions',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 7,
+    'uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'sector-specific-and-worker-related-provisions',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'sector_specific',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Разпоредби за различни сектори и във връзка с работниците',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Ustanovení specifická pro jednotlivá odvětví a týkající se pracovníků',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Sektorspecifikke og arbejdstagerrelevante bestemmelser',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Sektorspezifische und auf den Arbeitnehmer bezogene Bestimmungen',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Ειδικές διατάξεις για τους διάφορους τομείς και για τους εργαζόμενους',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Sector specific and worker related provisions',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Disposiciones sectoriales y relativas a los trabajadores',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Sektorispetsiifilised ja töötajatega seotud sätted',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Alakohtaiset ja työntekijöihin liittyvät säännökset',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Dispositions spécifiques au secteur et liées aux travailleurs',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Sector specific and worker related provisions',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Ágazatspecifikus és a munkavállalókkal kapcsolatos rendelkezések',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Sector specific and worker related provisions',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Disposizioni specifiche per settore e legate ai lavoratori',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Konkrečių sektorių ir su darbuotojais susijusios nuostatos',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'No nozares atkarīgi un ar darba ņēmējiem saistīti noteikumi',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Dispożizzjonijiet speċifiċi għas-settur u relatati mal-ħaddiema',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Sectorspecifieke en werknemergerelateerde bepalingen',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Sector specific and worker related provisions',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Przepisy branżowe i przepisy dotyczące pracowników',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Disposições específicas do sector e relacionadas com os trabalhadores',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Dispoziţii specifice sectorului şi privind lucrătorii',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Ustanovenia týkajúce sa konkrétnych odvetví a ustanovenia týkajúce sa pracovníkov',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Določbe, značilne za sektor in v zvezi z delavci',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Branschspecifika och arbetstagarrelaterade bestämmelser',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '5942fc11-e846-439a-8bf1-498439f74fd0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
     'name' => 'Introduction',
     'description' => NULL,
     'format' => 'plain_text',
@@ -6893,13 +8316,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Legislation',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 3,
     'uuid' => '5f77cf38-4d5b-4e7b-93d1-f17c3aac9d18',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -6908,7 +8341,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Legislation',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -6924,6 +8364,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '4f931fb7-8258-4da9-9226-b26ffe706e24',
     ),
@@ -7343,15 +8784,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Workplace transport',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '61454728-dc7d-46f5-98dc-897682c6732f',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Workplace transport',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7367,21 +8825,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     ),
   );
   $terms[] = array(
     'name' => 'Safety',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 6,
     'uuid' => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Safety',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7397,18 +8873,36 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Health',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 9,
     'uuid' => '6438f9a5-8a5d-417b-b20e-ffea262b0999',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Health',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7424,24 +8918,43 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Ageing workers',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '646b7e62-30de-4c8a-a14e-ab52f960c897',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
           'tid' => 'e424b19c-5dc8-474a-a787-c80debb3b8bb',
+          'uuid' => 'e424b19c-5dc8-474a-a787-c80debb3b8bb',
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Ageing workers',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7457,6 +8970,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
@@ -7540,13 +9054,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Gender',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '67c2fe30-fe2e-4744-9b7e-d26c7f159d4f',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -7555,7 +9079,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Gender',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7571,6 +9102,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
@@ -7710,15 +9242,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Temporary workers',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '68e39593-c07f-4c57-87f8-532b49bcf8ce',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Temporary workers',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7734,6 +9283,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
@@ -7803,15 +9353,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Statistics',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 1,
     'uuid' => '6ca2f8a4-cb84-4006-8744-c8cb4c5f393e',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Statistics',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7827,6 +9394,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '4f931fb7-8258-4da9-9226-b26ffe706e24',
     ),
@@ -7927,15 +9495,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Social Dialogue',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '6e104d4b-46b5-41c7-b2b0-60d61de0fe85',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Social Dialogue',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7951,21 +9536,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '4f931fb7-8258-4da9-9226-b26ffe706e24',
     ),
   );
   $terms[] = array(
     'name' => 'Disabled persons',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '6eaee36d-0b50-4ab5-a291-958d9f69b3ed',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Disabled persons',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -7981,21 +9584,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
   );
   $terms[] = array(
     'name' => 'Work arrangements',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '6eb37f0a-4e15-426a-8a9c-34a158b24424',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Work arrangements',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -8011,21 +9632,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '974895cc-177f-4d46-82c6-63a7d309b716',
     ),
   );
   $terms[] = array(
     'name' => 'Machinery and work equipment',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '717e3179-b662-42ad-82e0-84944f34d266',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Machinery and work equipment',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -8041,21 +9680,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     ),
   );
   $terms[] = array(
     'name' => 'Sectors and occupations',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 10,
     'uuid' => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Sectors and occupations',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -8071,16 +9728,27 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Mental Health',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '724a67c7-423a-4164-a031-b685f6ab1b91',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -8093,7 +9761,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Mental Health',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -8109,6 +9784,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '10adc82d-ce69-4ef8-bbeb-2794d7c383ab',
     ),
@@ -8241,15 +9917,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Prevention measures',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '76890600-3073-44e6-bff0-8056c1030824',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Prevention measures',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -8265,6 +9958,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
@@ -8334,15 +10028,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Lighting',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '7803ae00-5844-45ae-afea-40431615d5c9',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Lighting',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -8358,10 +10069,12 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '8f36d40f-4400-432c-9067-2b5836ec2717',
     ),
   );
+
   $terms[] = array(
     'name' => 'Psychosocial risks and stress',
     'description' => NULL,
@@ -8801,13 +10514,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Identifying new and emerging risks',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 4,
     'uuid' => '7c841af9-9860-4e22-9ca9-f4a033403457',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -8816,7 +10539,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Identifying new and emerging risks',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -8832,21 +10562,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '4f931fb7-8258-4da9-9226-b26ffe706e24',
     ),
   );
   $terms[] = array(
     'name' => 'Employment status',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '7ca44f05-ac4a-430e-8ab9-382036976f5f',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Employment status',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -8862,6 +10610,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '974895cc-177f-4d46-82c6-63a7d309b716',
     ),
@@ -9263,16 +11012,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'entity_uuid' => '8205dae4-a004-4cd1-acab-c601e5a4a6bf',
           'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
         ),
-        'et' => array(
-          'entity_type' => 'taxonomy_term',
-          'language' => 'et',
-          'source' => 'en',
-          'status' => 1,
-          'translate' => 0,
-          'created' => 1411328866,
-          'entity_uuid' => '8205dae4-a004-4cd1-acab-c601e5a4a6bf',
-          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
-        ),
         'sv' => array(
           'entity_type' => 'taxonomy_term',
           'language' => 'sv',
@@ -9363,6 +11102,26 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'entity_uuid' => '8205dae4-a004-4cd1-acab-c601e5a4a6bf',
           'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
         ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1411328866,
+          'entity_uuid' => '8205dae4-a004-4cd1-acab-c601e5a4a6bf',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1411328866,
+          'entity_uuid' => '8205dae4-a004-4cd1-acab-c601e5a4a6bf',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
         'fi' => array(
           'entity_type' => 'taxonomy_term',
           'language' => 'fi',
@@ -9423,31 +11182,38 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
           'entity_uuid' => '8205dae4-a004-4cd1-acab-c601e5a4a6bf',
           'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
         ),
-        'lv' => array(
-          'entity_type' => 'taxonomy_term',
-          'language' => 'lv',
-          'source' => 'en',
-          'status' => 1,
-          'translate' => 0,
-          'created' => 1411328866,
-          'entity_uuid' => '8205dae4-a004-4cd1-acab-c601e5a4a6bf',
-          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
-        ),
       ),
     ),
     'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Hotels, restaurants and catering',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '828fa764-366a-474d-b4fc-e8834cadaabf',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Hotels, restaurants and catering',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -9463,19 +11229,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
   );
   $terms[] = array(
     'name' => 'Indoor air quality',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '82fe247b-13fc-4a22-ae08-95c228842aa2',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -9484,7 +11261,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Indoor air quality',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -9500,6 +11284,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
@@ -10428,15 +12213,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Health, screening and surveillance',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '8618a480-41d9-475c-a78d-5b16b778b2f6',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Health, screening and surveillance',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -10452,21 +12254,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '6438f9a5-8a5d-417b-b20e-ffea262b0999',
     ),
   );
   $terms[] = array(
     'name' => 'Emergency workers',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '871c53d5-962d-4630-be5f-ee0193168c67',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Emergency workers',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -10482,27 +12302,46 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
   );
   $terms[] = array(
     'name' => 'Musculoskeletal disorders',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '88a0f3c3-a3bf-40b2-a605-6de78effce85',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
           'tid' => 'f11d06a6-e3d1-4e7d-ae06-a4a4ea9c388a',
+          'uuid' => 'f11d06a6-e3d1-4e7d-ae06-a4a4ea9c388a',
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Musculoskeletal disorders',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -10518,6 +12357,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     ),
@@ -10650,15 +12490,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Physical agents',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 4,
     'uuid' => '8f36d40f-4400-432c-9067-2b5836ec2717',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Physical agents',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -10674,18 +12531,460 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
+    'name' => 'Exposure to physical hazards',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 4,
+    'uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure-to-physical-hazards',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure_physical_hazards',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Излагане на въздействието на физически опасности',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Expozice fyzikálním rizikům',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Eksponering for fysiske farer',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Gefährdung durch physikalische Gefahren',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Έκθεση σε φυσικούς κινδύνους',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Exposure to physical hazards',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Exposición a peligros físicos',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Kokkupuude füüsikaliste ohuteguritega',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Altistuminen fysikaalisille vaaroille',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Exposition à des dangers physiques',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Exposure to physical hazards',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Fizikai veszélyeknek való kitettség',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Exposure to physical hazards',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Esposizione a rischi fisici',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Fizinių veiksnių poveikis',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Fizisks apdraudējums',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Esponiment għal perikli fiżiċi',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Blootstelling aan fysieke gevaren',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Exposure to physical hazards',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Narażenie na zagrożenia fizyczne',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Exposição a perigos físicos',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Expunerea la pericole fizice',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Vystavenie fyzickým nebezpečenstvám',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Izpostavljenost fizikalnim nevarnostim',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Exponering för fysiska faror',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '8f875647-6cf3-48b9-ad24-aeb104843f36',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Self-employed',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => '900391f9-632b-4492-af03-caaac33a3309',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Self-employed',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -10701,9 +13000,434 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
+  );
+  $terms[] = array(
+    'name' => 'Exposure to chemical agents and chemical safety',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 3,
+    'uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure-to-chemical-agents-and-chemical-safety',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure_chemical_agents',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Излагане на въздействието на химични агенти и химическа безопасност',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Expozice chemickým činitelům a chemická bezpečnost',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Eksponering for kemiske stoffer og kemisk sikkerhed',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Gefährdung durch chemische Arbeitsstoffe und Stoffsicherheit',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Έκθεση σε χημικούς παράγοντες και χημική ασφάλεια',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Exposure to chemical agents and chemical safety',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Exposición a agentes químicos y seguridad química',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Kokkupuude kemikaalidega ja kemikaaliohutus',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Altistuminen kemiallisille tekijöille ja kemikaaliturvallisuus',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Exposition à des agents chimiques et sécurité chimique',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Exposure to chemical agents and chemical safety',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Vegyi anyagoknak való kitettség és kémiai biztonság',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Exposure to chemical agents and chemical safety',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Esposizione ad agenti chimici e sicurezza chimica',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Cheminių medžiagų poveikis ir cheminė sauga',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Ķimikāliju iedarbība un ķīmiskā drošība',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Esponiment għal sustanzi kimiċi u sikurezza kimika',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Blootstelling aan chemische agentia en chemische veiligheid',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Exposure to chemical agents and chemical safety',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Narażenie na czynniki chemiczne i bezpieczeństwo chemiczne',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Exposição a agentes químicos e segurança química',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Expunerea la agenţi chimici şi securitatea chimică',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Vystavenie chemickým látkam a chemická bezpečnosť',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Izpostavljenost kemičnim snovem in kemijska varnost',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Exponering för kemiska ämnen och kemikaliesäkerhet',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '90f101c5-46de-4c07-8036-fd7e5eb2670e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Mainstreaming OSH into education',
@@ -11149,15 +13873,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Work organisation',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 7,
     'uuid' => '974895cc-177f-4d46-82c6-63a7d309b716',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Work organisation',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -11173,6 +13914,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => '1.1. Foresight of new and emerging OSH risks  associated with new technologies in green jobs',
@@ -11489,16 +14231,6 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'translations' => array(
       'original' => 'en',
       'data' => array(
-        'sv' => array(
-          'entity_type' => 'taxonomy_term',
-          'language' => 'sv',
-          'source' => 'en',
-          'status' => 1,
-          'translate' => 0,
-          'created' => 1411328866,
-          'entity_uuid' => '9c242673-d19b-4b53-8567-fd6e613f5f44',
-          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
-        ),
         'lt' => array(
           'entity_type' => 'taxonomy_term',
           'language' => 'lt',
@@ -11592,6 +14324,16 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         'sl' => array(
           'entity_type' => 'taxonomy_term',
           'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1411328866,
+          'entity_uuid' => '9c242673-d19b-4b53-8567-fd6e613f5f44',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
           'source' => 'en',
           'status' => 1,
           'translate' => 0,
@@ -11744,14 +14486,448 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
+    'name' => 'Workplaces, equipment, signs, personal protective equipment',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 2,
+    'uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'workplaces-equipment-signs-personal-protective-equipment',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'workplaces',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Работни места, оборудване, знаци, лични предпазни средства',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Pracoviště, zařízení, značky, osobní ochranné prostředky',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Arbejdspladser, udstyr, skilte, personlige værnemidler',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Arbeitsstätten, Arbeitsmittel, Kennzeichnung, persönliche Schutzausrüstung',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Χώροι εργασίας, εξοπλισμός, προειδοποιητικές πινακίδες, μέσα ατομικής προστασίας',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Workplaces, equipment, signs, personal protective equipment',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Lugares de trabajo, equipos, señalización, equipos de protección individual',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Töökohad, töövahendid, märgid, isikukaitsevahendid',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Työpaikat, laitteet, merkit, henkilönsuojaimet',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Lieux de travail, équipement, panneaux, équipement de protection individuelle',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Workplaces, equipment, signs, personal protective equipment',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Munkahelyek, eszközök, jelzések, egyéni védőeszközök',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Workplaces, equipment, signs, personal protective equipment',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Luoghi di lavoro, attrezzature, segnaletica, dispositivi di protezione individuale',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Darbo vietos, įranga, ženklai, asmeninės apsaugos priemonės',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Darbavietas, aprīkojums, zīmes, individuālās aizsardzības līdzekļi',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Postijiet tax-xogħol, tagħmir, sinjali, apparat ta\' protezzjoni personali',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Werkplaatsen, arbeidsmiddelen, signalering en persoonlijke beschermingsmiddelen',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Workplaces, equipment, signs, personal protective equipment',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Stanowiska pracy, wyposażenie, oznakowanie, środki ochrony indywidualnej',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Locais de trabalho, equipamento, sinalização, equipamento de protecção individual',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Locuri de muncă, echipamente, elemente de semnalizare, echipamente individuale de protecţie',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Pracoviská, zariadenia, značky, osobné ochranné prostriedky',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Delovna mesta, oprema, znaki, osebna varovalna oprema',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Arbetsplatser, utrustning, skyltar, personlig skyddsutrustning',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => '9e0cd3bc-4c34-45cf-94a1-2f621d13aa5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
     'name' => 'Risk management for dangerous substances',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'a0d1c7d8-4f6a-480d-821f-658312cde646',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -11760,7 +14936,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Risk management for dangerous substances',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -11776,21 +14959,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
   );
   $terms[] = array(
     'name' => 'Migrant workers',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'a1aafd52-91b3-4530-96d5-f2188d794c98',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Migrant workers',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -11806,21 +15007,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
   );
   $terms[] = array(
     'name' => 'Health services',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'a213ea46-37b7-4ec6-9edb-0f4b764b97b7',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Health services',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -11836,6 +15055,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
@@ -12894,15 +16114,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Noise',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'a8eada5f-3531-46f9-80d9-c067ae4ff07f',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Noise',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -12918,21 +16155,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '8f36d40f-4400-432c-9067-2b5836ec2717',
     ),
   );
   $terms[] = array(
     'name' => 'Physical ergonomics',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'aa56c0a4-20d8-4702-9803-5e1d30fad214',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Physical ergonomics',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -12948,21 +16203,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     ),
   );
   $terms[] = array(
     'name' => 'Ergonomics',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 5,
     'uuid' => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Ergonomics',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -12978,16 +16251,27 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Dangerous substances (chemical and biological)',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 3,
     'uuid' => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -12996,7 +16280,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Dangerous substances (chemical and biological)',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13012,6 +16303,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => '4.2. Healthy Workplace Campaign (HWC): Healthy Workplaces manage stress',
@@ -13078,15 +16370,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Work ability',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'af036f1b-97e5-4383-a9c6-c949827a12b3',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Work ability',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13102,21 +16411,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
   );
   $terms[] = array(
     'name' => 'Agriculture',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'af3301ae-2904-45a6-9a84-a8319991777e',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Agriculture',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13132,21 +16459,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
   );
   $terms[] = array(
     'name' => 'Contractors',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'b18d852b-d042-46cf-a197-9e79f9a7539c',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Contractors',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13162,6 +16507,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
@@ -13231,13 +16577,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Psychosocial risk factors',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'b3a8f8d4-5128-44b1-a3ee-80541c85f590',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -13250,7 +16606,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Psychosocial risk factors',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13266,6 +16629,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '10adc82d-ce69-4ef8-bbeb-2794d7c383ab',
     ),
@@ -13733,13 +17097,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Irritants and allergens',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'b63831f6-2840-4e91-9124-4b124c557a60',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -13748,7 +17122,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Irritants and allergens',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13764,19 +17145,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
   );
   $terms[] = array(
     'name' => 'Violence',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'b8997d19-4cc6-43fc-a858-feba998129a3',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -13789,7 +17181,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Violence',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13805,21 +17204,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '10adc82d-ce69-4ef8-bbeb-2794d7c383ab',
     ),
   );
   $terms[] = array(
     'name' => 'Personal Protective Equipment',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'ba57795a-3025-4c17-83e2-45a06fad81a5',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Personal Protective Equipment',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13835,21 +17252,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
   );
   $terms[] = array(
     'name' => 'Corporate Social Responsibility',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'bb0668c0-47be-4b65-adc4-e7faba504705',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Corporate Social Responsibility',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -13865,6 +17300,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'e268a4d0-9874-487e-8899-1d6d354bc720',
     ),
@@ -14283,14 +17719,58 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Occupational exposure limit values',
+    'name' => 'OSH directives',
     'description' => '',
+    'format' => 'full_html',
+    'weight' => 0,
+    'uuid' => 'bbdf7c9b-3c76-42fa-8efc-5a2a8c15ddf2',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'directive_type',
+    'field_directive_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'osh-directives',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'metatags' => array(),
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'en',
+          'source' => '',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413893959,
+          'entity_uuid' => 'bbdf7c9b-3c76-42fa-8efc-5a2a8c15ddf2',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+  );
+  $terms[] = array(
+    'name' => 'Occupational exposure limit values',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'bcf85bb1-723f-45c1-8eda-0145f7c9aba4',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -14299,7 +17779,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Occupational exposure limit values',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -14315,21 +17802,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
   );
   $terms[] = array(
     'name' => 'Human errors',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'bd88ba24-84b4-4ec3-8117-87f50e5dca4e',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Human errors',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -14345,6 +17850,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     ),
@@ -14812,15 +18318,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Health and well-being',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'be1c3522-f3cd-4012-8580-0c6f36f4d727',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Health and well-being',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -14836,19 +18359,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '6438f9a5-8a5d-417b-b20e-ffea262b0999',
     ),
   );
   $terms[] = array(
     'name' => 'Education',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'be8cce66-29c3-4a73-95e7-beef273795e4',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -14857,7 +18391,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Education',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -14873,21 +18414,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '71f8013e-dc42-4f02-beef-80ce70d2b1a1',
     ),
   );
   $terms[] = array(
     'name' => 'Indoor climate',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'c17b9082-60ef-4a49-bf70-72121ed89f2b',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Indoor climate',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -14903,19 +18462,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '8f36d40f-4400-432c-9067-2b5836ec2717',
     ),
   );
   $terms[] = array(
     'name' => 'Packaging and labeling',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'c2314819-3035-4e7d-839d-be7b1823c1ff',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -14924,7 +18494,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Packaging and labeling',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -14940,6 +18517,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
@@ -15009,13 +18587,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Biological agents',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'c70519b6-c32b-47e6-b5d9-6018f8e64b61',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -15024,7 +18612,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Biological agents',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -15040,21 +18635,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
   );
   $terms[] = array(
     'name' => 'Communication',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'c8f0562c-f230-4d28-801e-e4a167bb8aef',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Communication',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -15070,21 +18683,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
   );
   $terms[] = array(
     'name' => 'What\'s OSH',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 5,
     'uuid' => 'c9be5bcd-3459-492e-afa6-52bdd8dd6213',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'What\'s OSH',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -15100,6 +18731,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '4f931fb7-8258-4da9-9226-b26ffe706e24',
     ),
@@ -15630,15 +19262,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Expectant mothers',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'ce58a3de-8efe-4fe7-9800-7e3008cc766a',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Expectant mothers',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -15654,6 +19303,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     ),
@@ -15723,13 +19373,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Harassment',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'd6cb3a4d-3551-42fa-a202-e07a1cb39bc5',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -15742,7 +19402,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Harassment',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -15758,6 +19425,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '10adc82d-ce69-4ef8-bbeb-2794d7c383ab',
     ),
@@ -15824,15 +19492,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Cognitive ergonomics',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'd892d9b5-c17f-4e0a-bd14-52683d43a0ae',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Cognitive ergonomics',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -15848,19 +19533,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aa8f1f07-57ac-4b6d-940c-5e53b96826e8',
     ),
   );
   $terms[] = array(
     'name' => 'Work-related stress management',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'd8cc7ad1-e71b-4c15-b912-d7c9951aac13',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -15873,7 +19569,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Work-related stress management',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -15889,21 +19592,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '10adc82d-ce69-4ef8-bbeb-2794d7c383ab',
     ),
   );
   $terms[] = array(
     'name' => 'Prevention and control strategies',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 2,
     'uuid' => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Prevention and control strategies',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -15919,6 +19640,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => '1.2. Large-scale foresight',
@@ -15985,15 +19707,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'OSH Management and organisation',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 1,
     'uuid' => 'e268a4d0-9874-487e-8899-1d6d354bc720',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'OSH Management and organisation',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -16009,18 +19748,36 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Accidents and incidents',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'e37a03ec-73a5-40da-b6da-efadfc8d5d8e',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Accidents and incidents',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -16036,6 +19793,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     ),
@@ -16095,15 +19853,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Working on height',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'e55c95b1-6f43-4892-b1f9-471afda213d3',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Working on height',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -16119,19 +19894,30 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     ),
   );
   $terms[] = array(
     'name' => 'Carcinogenic, mutagenic, reprotoxic (CMR) substances',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'e57fcd12-848b-442e-8a5f-1cc4183d61a6',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -16140,7 +19926,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Carcinogenic, mutagenic, reprotoxic (CMR) substances',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -16156,9 +19949,444 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'aac24ed1-6221-4ae3-88ac-e6ff1629c036',
     ),
+  );
+  $terms[] = array(
+    'name' => 'Exposure to biological agents',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 5,
+    'uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure-to-biological-agents',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'exposure_biological_agents',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Излагане на въздействието на биологични агенти',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Expozice biologickým činitelům',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Eksponering for biologiske agenser',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Gefährdung durch biologische Arbeitsstoffe',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Έκθεση σε βιολογικούς παράγοντες',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'Exposure to biological agents',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'Exposición a agentes biológicos',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Kokkupuude bioloogiliste mõjuritega',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Altistuminen biologisille tekijöille',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'Exposition à des agents biologiques',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'Exposure to biological agents',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'Biológiai anyagoknak való kitettség',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'Exposure to biological agents',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'Esposizione ad agenti biologici',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'Biologinių veiksnių poveikis',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'Bioloģisko aģentu iedarbība',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Esponiment għal sustanzi bioloġiċi',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'Blootstelling aan biologische agentia',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'Exposure to biological agents',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Narażenie na czynniki biologiczne',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Exposição a agentes biológicos',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Expunerea la agenţi biologici',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Vystavenie biologickým látkam',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Izpostavljenost biološkim dejavnikom',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Exponering för biologiska ämnen',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'en',
+          'source' => '',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906810,
+          'entity_uuid' => 'e6c7633d-7298-42da-98c9-84464e0224e0',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => '2: Facts and figures',
@@ -16222,15 +20450,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Fire and explosion',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'ed0fcaa9-c16a-4bfd-a879-acca82d51059',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Fire and explosion',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -16246,6 +20491,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     ),
@@ -16665,13 +20911,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Discrimination',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'ef440e9c-a0c0-439d-bae8-20e2029f9755',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -16684,7 +20940,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Discrimination',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -16700,6 +20963,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '10adc82d-ce69-4ef8-bbeb-2794d7c383ab',
     ),
@@ -17095,15 +21359,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Radiation',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'f233f664-6a3f-41c3-a861-2a3df768cd2e',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Radiation',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -17119,21 +21400,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '8f36d40f-4400-432c-9067-2b5836ec2717',
     ),
   );
   $terms[] = array(
     'name' => 'OSH Culture',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'f482f22e-9944-4310-aec1-e7615140be82',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'OSH Culture',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -17149,6 +21448,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'e268a4d0-9874-487e-8899-1d6d354bc720',
     ),
@@ -17215,15 +21515,32 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Maintenance',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'f7a0a2a0-753b-4562-b757-c5337d069a46',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Maintenance',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -17239,21 +21556,39 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '639aa2d8-9b19-4103-9602-c8baea1a3551',
     ),
   );
   $terms[] = array(
     'name' => 'Groups at risk',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 11,
     'uuid' => 'f9ae2eca-8f7c-4435-a3e1-143430592af0',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Groups at risk',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -17269,18 +21604,36 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
   );
   $terms[] = array(
     'name' => 'Emergency planning',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'fa9b716e-de10-4338-8076-6ed468b43042',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Emergency planning',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -17296,19 +21649,454 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'dc31454a-dff4-49b9-a52c-2baa781874cd',
     ),
   );
   $terms[] = array(
+    'name' => 'The OSH Framework Directive',
+    'description' => NULL,
+    'format' => 'plain_text',
+    'weight' => 1,
+    'uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+    'language' => 'en',
+    'i18n_tsid' => 0,
+    'vocabulary_machine_name' => 'legislation_category',
+    'field_directive_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'the-osh-framework-directive',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'field_guideline_category_code' => array(
+      'und' => array(
+        0 => array(
+          'value' => 'osh_framework_directive',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'name_field' => array(
+      'bg' => array(
+        0 => array(
+          'value' => 'Рамкова директива за БЗР',
+          'format' => NULL,
+        ),
+      ),
+      'cs' => array(
+        0 => array(
+          'value' => 'Rámcová směrnice o bezpečnosti a ochraně zdraví při práci',
+          'format' => NULL,
+        ),
+      ),
+      'da' => array(
+        0 => array(
+          'value' => 'Rammedirektivet om arbejdsmiljø',
+          'format' => NULL,
+        ),
+      ),
+      'de' => array(
+        0 => array(
+          'value' => 'Rahmenrichtlinie – Sicherheit und Gesundheitsschutz bei der Arbeit',
+          'format' => NULL,
+        ),
+      ),
+      'el' => array(
+        0 => array(
+          'value' => 'Οδηγία-πλαίσιο για την ασφάλεια και την υγεία κατά την εργασία',
+          'format' => NULL,
+        ),
+      ),
+      'en' => array(
+        0 => array(
+          'value' => 'The OSH Framework Directive',
+          'format' => NULL,
+        ),
+      ),
+      'es' => array(
+        0 => array(
+          'value' => 'La Directiva marco sobre salud y seguridad en el trabajo',
+          'format' => NULL,
+        ),
+      ),
+      'et' => array(
+        0 => array(
+          'value' => 'Tööohutuse ja töötervishoiu raamdirektiiv',
+          'format' => NULL,
+        ),
+      ),
+      'fi' => array(
+        0 => array(
+          'value' => 'Työturvallisuutta ja työterveyttä koskeva puitedirektiivi',
+          'format' => NULL,
+        ),
+      ),
+      'fr' => array(
+        0 => array(
+          'value' => 'La directive-cadre sur la SST',
+          'format' => NULL,
+        ),
+      ),
+      'hr' => array(
+        0 => array(
+          'value' => 'The OSH Framework Directive',
+          'format' => NULL,
+        ),
+      ),
+      'hu' => array(
+        0 => array(
+          'value' => 'A munkahelyi biztonságról és egészségvédelemről szóló keretirányelv',
+          'format' => NULL,
+        ),
+      ),
+      'is' => array(
+        0 => array(
+          'value' => 'The OSH Framework Directive',
+          'format' => NULL,
+        ),
+      ),
+      'it' => array(
+        0 => array(
+          'value' => 'La direttiva quadro sulla SSL',
+          'format' => NULL,
+        ),
+      ),
+      'lt' => array(
+        0 => array(
+          'value' => 'DSS pagrindų direktyva',
+          'format' => NULL,
+        ),
+      ),
+      'lv' => array(
+        0 => array(
+          'value' => 'OSH pamatdirektīva',
+          'format' => NULL,
+        ),
+      ),
+      'mt' => array(
+        0 => array(
+          'value' => 'Id-Direttiva Qafas dwar l-OHS',
+          'format' => NULL,
+        ),
+      ),
+      'nl' => array(
+        0 => array(
+          'value' => 'De kaderrichtlijn veiligheid en gezondheid op het werk',
+          'format' => NULL,
+        ),
+      ),
+      'no' => array(
+        0 => array(
+          'value' => 'The OSH Framework Directive',
+          'format' => NULL,
+        ),
+      ),
+      'pl' => array(
+        0 => array(
+          'value' => 'Dyrektywa ramowa dotycząca bezpieczeństwa i ochrony zdrowia w miejscu pracy',
+          'format' => NULL,
+        ),
+      ),
+      'pt' => array(
+        0 => array(
+          'value' => 'Directiva-quadro relativa à SST',
+          'format' => NULL,
+        ),
+      ),
+      'ro' => array(
+        0 => array(
+          'value' => 'Directiva-cadru privind securitatea şi sănătatea în muncă',
+          'format' => NULL,
+        ),
+      ),
+      'sk' => array(
+        0 => array(
+          'value' => 'Rámcová smernica o bezpečnosti a ochrane zdravia pri práci',
+          'format' => NULL,
+        ),
+      ),
+      'sl' => array(
+        0 => array(
+          'value' => 'Okvirna direktiva o varnosti in zdravju pri delu',
+          'format' => NULL,
+        ),
+      ),
+      'sv' => array(
+        0 => array(
+          'value' => 'Ramdirektivet om arbetsmiljö',
+          'format' => NULL,
+        ),
+      ),
+    ),
+    'translations' => array(
+      'original' => NULL,
+      'data' => array(
+        'hu' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hu',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'is' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'is',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'it' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'it',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'lv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'lv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'mt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'mt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'nl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'nl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'hr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'hr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fr' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fr',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'fi' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'fi',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'et' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'et',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'es' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'es',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'el' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'el',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'de' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'de',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'da' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'da',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'cs' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'cs',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'bg' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'bg',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'no' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'no',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sv' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sv',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sl' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sl',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'sk' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'sk',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'ro' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'ro',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+        'pt' => array(
+          'entity_type' => 'taxonomy_term',
+          'language' => 'pt',
+          'source' => 'en',
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1413906779,
+          'entity_uuid' => 'fb9ea542-bb25-4f93-8d39-deaf61783e5e',
+          'user_uuid' => 'ad1178c7-e011-4d1a-a3db-eb14e3094dbe',
+        ),
+      ),
+    ),
+    'metatags' => array(),
+  );
+  $terms[] = array(
     'name' => 'Economic aspects',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'fceffe36-fbe5-4267-a3f0-f831c6343c70',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -17317,7 +22105,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Economic aspects',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -17333,6 +22128,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => 'e268a4d0-9874-487e-8899-1d6d354bc720',
     ),
@@ -17839,13 +22635,23 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'Work-life balance',
-    'description' => '',
+    'description' => NULL,
     'format' => 'full_html',
     'weight' => 0,
     'uuid' => 'ffca7ebb-6749-41ac-9b21-aa369f0c6f53',
     'language' => 'en',
     'i18n_tsid' => 0,
     'vocabulary_machine_name' => 'wiki_categories',
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'full_html',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -17858,7 +22664,14 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
-    'metatags' => array(),
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Work-life balance',
+          'format' => NULL,
+        ),
+      ),
+    ),
     'translations' => array(
       'original' => 'en',
       'data' => array(
@@ -17874,6 +22687,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
         ),
       ),
     ),
+    'metatags' => array(),
     'parent' => array(
       0 => '10adc82d-ce69-4ef8-bbeb-2794d7c383ab',
     ),

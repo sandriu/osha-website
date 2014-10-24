@@ -20,6 +20,37 @@ function osha_frontend_menu_tree__main_menu($variables) {
 }
 
 /**
+ * Implements theme_menu_tree__search_menu().
+ *
+ * Add classes to search menu to style like tabs.
+ */
+function osha_frontend_menu_tree__menu_search($variables) {
+  return '<ul id="search_menu_tabs" class="tabs-primary tabs primary">'
+  . $variables['tree'] . '</ul>';
+}
+
+/**
+ * Implements hook_menu_link__menu_search().
+ *
+ * Add classes to search menu to style like tabs.
+ */
+function osha_frontend_menu_link__menu_search($variables) {
+  $element = $variables['element'];
+  $active = '';
+  if (in_array('active-trail', $element['#attributes']['class'])) {
+    $active = 'is-active active';
+  }
+  $element['#attributes']['class'] = array(
+    'tabs-primary__tab', $active,
+  );
+  $element['#localized_options']['attributes']['class'] = array(
+    'tabs-primary__tab-link', $active,
+  );
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . "</li>\n";
+}
+
+/**
  * Implements theme_menu_link__menu_block().
  */
 function osha_frontend_menu_link__menu_block($variables) {
@@ -88,6 +119,8 @@ function osha_frontend_apachesolr_sort_list($vars) {
   unset($items['sort_name']);
   return theme('item_list', array('items' => $vars['items']));
 }
+
+
 
 /**
  * Called from hook_preprocess_node
@@ -175,14 +208,22 @@ function fill_related_wiki(&$vars) {
         }
       }
 
+      // exclude manually related
+      $excluded_nids = array();
+      array_push($excluded_nids, 0); // avoid empty NOT IN clause
+      if (!empty($vars['field_related_oshwiki_articles'])) {
+        foreach ($vars['field_related_oshwiki_articles'] as $related_wiki) {
+          array_push($excluded_nids, $related_wiki['entity']->nid);
+        }
+      }
       $query = new EntityFieldQuery();
       $result = $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'wiki_page')
+        ->entityCondition('entity_id', $excluded_nids, 'NOT IN')
         ->fieldCondition('field_wiki_categories', 'tid', $tids, 'IN')
         ->fieldOrderBy('field_updated', 'value', 'DESC')
         ->pager($limit)
         ->execute();
-
       if (!empty($result)) {
         $vars['total_wiki'] = sizeof($result['node']);
         $vars['tagged_wiki'] = array();
@@ -209,6 +250,37 @@ function osha_frontend_process_node(&$vars) {
   if (isset($vars['content']['links']['node']['#links']['node-readmore'])) {
     $vars['content']['links']['node']['#links']['node-readmore']['title'] = t('Show details');
   }
+
+  /*insert views blocks - disabled for the moment
+  add_blocks_inside_content($vars);*/
+}
+
+/**
+ * Called from hook_preprocess_node()
+ * Insert view or custom blocks in node when meet a specific markup
+ * The markup is like <!--[name-of-the-block]-->
+ */
+function add_blocks_inside_content(&$vars){
+  $body = $vars['content']['body'][0]['#markup'];
+  $pattern = '/(<!--\[)([(\w+)(\-+)(\_+)(\d+)]+)(\]-->)/';
+
+  if(preg_match_all($pattern, $body, $matches)){
+    $blocks = $matches[2];
+
+    foreach($blocks as $block){
+      //try load a view block
+      $block_object = block_load('views', $block);
+      //load a custom block
+      if(!isset($block_object->bid))
+        $block_object = block_load('block', $block);
+
+      if(isset($block_object->bid)){
+        $render_array =  _block_get_renderable_array(_block_render_blocks(array($block_object)));
+        $body = str_replace('<!--['.$block.']-->', render($render_array), $body);
+      }
+    }
+    $vars['content']['body'][0]['#markup'] = $body;
+  }
 }
 
 /**
@@ -218,6 +290,15 @@ function osha_frontend_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_block_form') {
     $form['search_block_form']['#attributes']['placeholder'] = t('Search');
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_file_icon().
+ *
+ * Change the icon directory to use icons from this theme.
+ */
+function osha_frontend_preprocess_file_icon(&$variables) {
+  $variables['icon_directory'] = drupal_get_path('theme', 'osha_frontend') . '/images/file_icons';
 }
 
 /**

@@ -121,16 +121,16 @@ function osha_job_vacancies_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '16',
+          'weight' => '17',
         ),
         'redirect' => array(
-          'weight' => '17',
+          'weight' => '18',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'metatags' => array(
-          'weight' => '18',
+          'weight' => '19',
         ),
         'workbench_access' => array(
           'weight' => '1',
@@ -185,7 +185,7 @@ function osha_job_vacancies_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_job_vacancies';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_job_vacancies'] = $strongarm;
 
   return $export;

@@ -124,8 +124,8 @@ function osha_wysiwyg_default_profiles() {
         'table' => array(
           'tablecontrols' => 1,
         ),
-        'media' => array(
-          'media' => 1,
+        'wordcount' => array(
+          'wordcount' => 1,
         ),
         'imce' => array(
           'imce' => 1,
@@ -134,6 +134,7 @@ function osha_wysiwyg_default_profiles() {
           'linkit' => 1,
         ),
         'drupal' => array(
+          'media' => 1,
           'accordion' => 1,
           'accordion_header' => 1,
           'accordion_panel' => 1,

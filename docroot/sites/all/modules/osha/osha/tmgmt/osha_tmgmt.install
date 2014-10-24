@@ -40,6 +40,10 @@ function osha_tmgmt_uninstall() {
  * Implements hook_install().
  */
 function osha_tmgmt_install() {
+  db_update('system')
+    ->fields(array('weight' => 9))
+    ->condition('name', 'osha_tmgmt', '=')
+    ->execute();
 
   // tmgmt_job_item alteration.
   if (!db_field_exists('tmgmt_job_item', 'source_language')) {
@@ -132,4 +136,12 @@ function osha_tmgmt_install() {
   if ($local) {
     $local->delete();
   }
+}
+
+/**
+ * Fix tmgmt 'Add to cart' rule (entity instead of node), disable tmgmt_node.
+ */
+function osha_tmgmt_update_7001() {
+  module_load_include('module', 'osha_tmgmt');
+  module_disable('tmgmt_node');
 }

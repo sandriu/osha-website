@@ -259,7 +259,9 @@ if(file_exists($json_path)) {
 }
 
 $options['init-modules'] = array(
-  'ctools', 'entity',
+  'ctools',
+  'entity',
+  'aggregator',
 
   'locale',
   'entity_translation',
@@ -267,6 +269,9 @@ $options['init-modules'] = array(
   'i18n_string',
   'i18n_taxonomy',
   'variable',
+
+  // contrib module that add email field
+  'email',
 
   'views',
   'views_ui',
@@ -292,12 +297,13 @@ $options['init-modules'] = array(
   'redirect',
   'file_entity',
   'media',
+  'media_wysiwyg',
   'languagefield',
   'image_field_caption',
 
   'tmgmt',
   'tmgmt_local',
-  'tmgmt_node',
+  /* 'tmgmt_node', */
   'tmgmt_entity',
   'tmgmt_entity_ui',
   'tmgmt_ui',
@@ -333,6 +339,7 @@ $options['init-modules'] = array(
   'custom_formatters',
 
   'taxonomy_manager',
+  'term_reference_tree',
   'node_export',
   'mpac',
   'linkit',
@@ -349,27 +356,36 @@ $options['init-modules'] = array(
   'workbench_access',
   'workbench_moderation',
 
+
   'osha_taxonomies',
 //  'osha_taxonomies_uuid',
   'osha',
   'osha_migration',
   'osha_news',
+  'osha_note_to_editor',
   'osha_publication',
   'osha_calls',
   'osha_blog',
   'osha_tmgmt',
   'osha_highlight',
+  'osha_press_contact',
   'osha_homepage',
   'osha_menu',
+  'osha_job_vacancies',
   'osha_wiki',
   'osha_workflow',
   'osha_blocks',
+  'osha_breadcrumbs',
 //  'osha_content',
+  'osha_legislation',
+  'osha_short_messages',
 
-  'search_api',
   'facetapi',
   'search_api_facetapi',
   'search_autocomplete',
+  'search_api_et',
+  'search_api_et_solr',
+  'search_api_views',
   'osha_search',
 
   // Newsletter modules.
@@ -379,10 +395,16 @@ $options['init-modules'] = array(
 
   // Captcha
   'captcha',
-  'image_captcha',
+  'recaptcha',
 
   // Social share
   'addtoany',
+  'on_the_web',
+
+  // Link content types with main menu items
+  'menu_position',
+
+  'r4032login',
 
   'devel',
   'devel_node_access',

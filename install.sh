@@ -4,7 +4,7 @@
 cd docroot/
 drush site-install -y
 
-drush en -y apachesolr apachesolr_views apachesolr_search apachesolr_multilingual apachesolr_views
+drush en -y search_api search_api_solr
 
 # Save configuration to database for later usage
 drush php-script ../scripts/drupal_pre_install.php
@@ -13,6 +13,9 @@ drush init
 drush build
 
 drush php-script ../scripts/drupal_post_install.php
+
+# Fix settings for OSHA in the media block (created in post_install)
+drush fr osha_press_release.fe_block_settings -y --force
 
 echo "Registering migrations ..."
 drush migrate-auto-register
@@ -43,6 +46,9 @@ do
     #   echo "Importing Publication types taxonomy"
     #   drush migrate-import TaxonomyPublicationTypes
 
+    #   echo "Importing legislation category taxonomy"
+    #   drush migrate-import TaxonomyLegislationCategories
+
         echo "Importing multilingual Thesaurus taxonomy"
         drush migrate-import TaxonomyThesaurus
 
@@ -54,43 +60,43 @@ do
 
         echo "Importing Files content"
         drush migrate-import Files
-      
+
         #echo "Importing Images content"
         #drush migrate-import Images
-      
+
         echo "Importing News content"
         drush migrate-import News
-      
+
         echo "Importing Highlight content"
         drush migrate-import Highlight
-      
+
         echo "Importing Publications content"
         drush migrate-import Publication
-      
+
         echo "Importing Articles content"
         drush migrate-import Article
-      
+
         echo "Importing Blog content"
         drush migrate-import Blog
-      
+
         echo "Importing Case Study content"
         drush migrate-import CaseStudy
 
         echo "Importing Calls content"
         drush migrate-import Calls
-    
+
         echo "Importing PressRelease content"
         drush migrate-import PressRelease
 
         echo "Importing Seminar content"
         drush migrate-import Seminar
-    
+
         echo "Importing Job vacancies content"
         drush migrate-import JobVacancies
 
         echo "Importing Calls content"
         drush migrate-import Calls
-     
+
         echo "Importing PressRelease content"
         drush migrate-import PressRelease
     fi

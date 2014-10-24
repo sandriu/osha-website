@@ -1,6 +1,8 @@
 jQuery(document).ready(function () {
     hoverThemes();
 	zoomMedium();
+	hoverSlideHome();
+	displayCaptcha();
 });
 
 
@@ -36,6 +38,47 @@ function hoverThemes() {
 		obj.find(".introduction-title a").css("background","none");
 		});
 	});
+}
+
+
+function hoverSlideHome() {
+
+	jQuery("#num_slides div").each(function() {
+		jQuery(this).mouseover(function() {
+		jQuery("span",this).addClass('text_white');
+		jQuery("span",this).removeClass('text_blue');
+		});
+	});
+	
+	jQuery("#num_slides div").each(function() {
+		jQuery(this).mouseout(function() {
+		jQuery("span",this).addClass('text_blue');
+		jQuery("span",this).removeClass('text_white');
+		});
+	});	
+	
+	jQuery("#num_slides div").each(function() {
+		jQuery(this).mouseover(function() {
+		jQuery("img",this).addClass('img_opac');
+		jQuery("img",this).removeClass('img_no_opac');
+		});
+	});	
+	
+	jQuery("#num_slides div").each(function() {
+		jQuery(this).mouseout(function() {
+		jQuery("img",this).addClass('img_no_opac');
+		jQuery("img",this).removeClass('img_opac');
+		});
+	});	
+	
+}
+
+function displayCaptcha() {
+	
+	jQuery( "#edit-email" ).click(function() {
+		jQuery(".captcha").show(300);
+	});
+	
 }
 
         
