@@ -22,7 +22,7 @@ function osha_highlight_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'News';
+  $handler->display->display_options['title'] = 'Highlights';
   $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['use_more_always'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -119,7 +119,7 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['fields']['field_publication_date']['label'] = '';
   $handler->display->display_options['fields']['field_publication_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'osha_day_only',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -178,7 +178,7 @@ function osha_highlight_views_default_views() {
   );
   $translatables['highlight'] = array(
     t('Master'),
-    t('News'),
+    t('Highlights'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -194,7 +194,6 @@ function osha_highlight_views_default_views() {
     t('last »'),
     t('Highlights - all'),
     t('Latest Highlights'),
-    t('Highlights'),
     t('<a href="highlights">View all</a>'),
     t('Translations'),
     t('See more'),

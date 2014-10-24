@@ -118,48 +118,6 @@ function osha_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'date_format_osha_day_only';
-  $strongarm->value = 'd/m/Y';
-  $export['date_format_osha_day_only'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'date_format_short_date_eu';
-  $strongarm->value = 'd/m/Y - H:i';
-  $export['date_format_short_date_eu'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'date_format_short_date_only';
-  $strongarm->value = 'm/d/Y';
-  $export['date_format_short_date_only'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'date_format_year';
-  $strongarm->value = 'Y';
-  $export['date_format_year'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'date_views_day_format_without_year';
-  $strongarm->value = 'l, F j';
-  $export['date_views_day_format_without_year'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'date_views_day_format_with_year';
-  $strongarm->value = 'l, F j, Y';
-  $export['date_views_day_format_with_year'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_comment_filter_page';
   $strongarm->value = FALSE;
   $export['entity_translation_comment_filter_page'] = $strongarm;

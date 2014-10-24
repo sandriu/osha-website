@@ -385,7 +385,13 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       $options = array();
       $job_char_count = 0;
       $job_page_count = 0;
-      foreach (tmgmt_ui_cart_get()->getJobItemsFromCart() as $item) {
+      $items = tmgmt_ui_cart_get()->getJobItemsFromCart();
+      if (empty($items)) {
+        drupal_set_message('Your cart is empty', 'warning');
+        hide($form);
+        break;
+      }
+      foreach ($items as $item) {
         OshaTMGMTStatistics::computeJobItemStatistics($item);
         $job_char_count += $item->character_count;
         $job_page_count += $item->page_count;
