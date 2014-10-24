@@ -204,7 +204,8 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
   public function complete($entity, $row) {
     if (!empty($row->original_path)) {
       // create redirects
-      MigrationUtil::createRedirects($entity, $row->original_path);
+      $original_path = substr($row->original_path, 1);
+      MigrationUtil::createRedirects($entity, $original_path);
     }
 
     //extract directive title from path
