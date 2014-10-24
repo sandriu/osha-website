@@ -95,3 +95,19 @@ class osha_tmgmt_handler_field_tmgmt_job_item_operations extends tmgmt_handler_f
     return drupal_render($element);
   }
 }
+
+/**
+ * Class osha_tmgmt_handler_field_tmgmt_job_item_operations handles Operations
+ */
+class osha_tmgmt_handler_field_tmgmt_job_item_state extends views_handler_field_machine_name {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function render($job_item) {
+    if (isset($job_item->tmgmt_job_item_state)) {
+      return osha_tmgmt_get_job_item_state_label($job_item->tmgmt_job_item_state);
+    }
+    return '';
+  }
+}
