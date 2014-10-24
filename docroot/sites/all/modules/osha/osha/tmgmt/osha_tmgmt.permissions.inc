@@ -60,10 +60,14 @@ function osha_tmgmt_workflow_permissions_role_translation_liaison() {
  *   Array of permissions
  */
 function osha_tmgmt_workflow_permissions_role_layout_validator() {
-  return array(
-    'preview layout validation',
-    'set job item to translated state',
-    'abort job item',
+  return array_merge(
+    array(
+      'abort job item',
+      'view translation job',
+      'preview layout validation',
+      'set job item to translated state',
+    ),
+    osha_tmgmt_workflow_permissions_common()
   );
 }
 
