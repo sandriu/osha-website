@@ -403,7 +403,11 @@ function osha_content_edw_uuid_features_default_content() {
   'field_press_contact_phone' => array(
     'und' => array(
       0 => array(
-        'value' => '+32 2 401 68 59 / Cell +32 0 477 175 770',
+        'value' => '+32 2 401 68 59',
+        'format' => NULL,
+      ),
+      1 => array(
+        'value' => '+32 0 477 175 770',
         'format' => NULL,
       ),
     ),

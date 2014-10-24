@@ -26,9 +26,9 @@ function osha_press_contact_views_api($module = NULL, $api = NULL) {
 function osha_press_contact_node_info() {
   $items = array(
     'press_contact' => array(
-      'name' => t('Press Contact'),
+      'name' => t('Press contact'),
       'base' => 'node_content',
-      'description' => t('Press Contact for OSHA Project'),
+      'description' => t('Press contact for press releases'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
