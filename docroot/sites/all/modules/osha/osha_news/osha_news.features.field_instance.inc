@@ -364,7 +364,7 @@ function osha_news_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'medium',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -529,7 +529,7 @@ function osha_news_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'short',
+          'format_type' => 'osha_day_only',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -581,7 +581,7 @@ function osha_news_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'short_date_eu',
+          'format_type' => 'osha_day_only',
           'fromto' => '',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -942,7 +942,6 @@ function osha_news_field_default_field_instances() {
   t('Character count');
   t('Expiration Date');
   t('Image');
-  t('OSHWiki featured articles');
   t('Page count');
   t('Publication Date');
   t('Summary');
