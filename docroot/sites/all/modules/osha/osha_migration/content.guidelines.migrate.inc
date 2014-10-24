@@ -5,6 +5,9 @@
  */
 class OshaMigrateGuidelines extends OSHADynamicMigration {
 
+  /*path pattern*/
+  const PATH_PATTERN = '/\/([a-z]{2})\/legislation\/guidelines\/([\w\d-_]+)\/([\w\d-_]+)/';
+
   /**
    * {@inheritdoc}
    */
@@ -138,8 +141,7 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
       );
     }
     //Term ID for Legislation Category Taxonomy
-    $pattern = '/\/([a-z]{2})\/legislation\/guidelines\/([\w-_]+)\//';
-    if(preg_match($pattern, $row->path, $matches)){
+    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
       $row->legislation_category = MigrationUtil::findTidByEntityValue(
         OSHA_TAXONOMIES_LEGISLATION_CATEGORY,
         'field_guideline_category_code',
@@ -192,7 +194,7 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
   }
 
   /**
-   * Sets the node aliases after the migration, nid is available.
+   * Sets the node aliases and redirects after the migration, nid is available.
    *
    * @param object $entity
    *   Entity to be saved
@@ -200,13 +202,19 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
    *   Source row
    */
   public function complete($entity, $row) {
-    // call MigrationUtil::createAliases
-    parent::complete($entity, $row);
     if (!empty($row->original_path)) {
       // create redirects
       MigrationUtil::createRedirects($entity, $row->original_path);
     }
+
+    //extract directive title from path
+    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
+      $row->id = 'legislation/guidelines/'.$matches[3];
+    }
+    // call MigrationUtil::createAliases
+    parent::complete($entity, $row);
   }
+
 
   /**
    * Return the list of available source fields.
