@@ -568,7 +568,7 @@ function osha_highlight_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'short',
+          'format_type' => 'short_date_eu',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -925,7 +925,6 @@ function osha_highlight_field_default_field_instances() {
   t('Character count');
   t('Expiration Date');
   t('Image');
-  t('OSHWiki featured articles');
   t('Page count');
   t('Publication Date');
   t('Summary');
