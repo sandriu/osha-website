@@ -5,6 +5,9 @@
  */
 class OshaMigrateDirectives extends OSHADynamicMigration {
 
+  /*path pattern*/
+  const PATH_PATTERN = '/\/([a-z]{2})\/legislation\/directives\/([\w\d-_]+)\/([\w\d-_]+)\/([\w\d-_]+)/';
+
   /**
    * {@inheritdoc}
    */
@@ -137,8 +140,7 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
       );
     }
     //Term ID for Legislation Category Taxonomy
-    $pattern = '/\/([a-z]{2})\/legislation\/directives\/([\w\d-_]+)\//';
-    if(preg_match($pattern, $row->path, $matches)){
+    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
       $row->legislation_category = MigrationUtil::findTidByEntityValue(
         OSHA_TAXONOMIES_LEGISLATION_CATEGORY,
         'field_directive_category_code',
@@ -147,8 +149,7 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
     }
 
     //Term ID for Directive Type Taxonomy
-    $pattern = '/\/([a-z]{2})\/legislation\/directives\/([\w\d-_]+)\/([\w\d-_]+)/';
-    if(preg_match($pattern, $row->path, $matches)){
+    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
       $row->directive_type = MigrationUtil::findTidByEntityValue(
         OSHA_TAXONOMIES_DIRECTIVE_TYPE,
         'field_directive_code',
@@ -196,6 +197,29 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
         MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
       }
     }
+  }
+
+  /**
+   * Sets the node aliases and redirects after the migration, nid is available.
+   *
+   * @param object $entity
+   *   Entity to be saved
+   * @param object $row
+   *   Source row
+   */
+  public function complete($entity, $row) {
+    if (!empty($row->path)) {
+      // create redirects
+      $path = substr($row->path, 4);
+      MigrationUtil::createRedirects($entity, $path);
+    }
+
+    //extract directive title from path
+    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
+      $row->id = 'legislation/directive/'.$matches[4];
+    }
+    // call MigrationUtil::createAliases
+    parent::complete($entity, $row);
   }
 
   /**
