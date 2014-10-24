@@ -14,6 +14,7 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
     $this->description = 'Import "Press release" contents from CSV file';
     $this->dependencies = array(
 //      OSHA_MIGRATION_TAXONOMY_TAGS,
+      OSHA_MIGRATION_CONTENT_TYPE_NOTE_TO_EDITOR
     );
 
     /* Remove limits on time/memory, slower machines will fail */
@@ -29,24 +30,26 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
         'id' => 'Primary Key (URL pattern)',
         'path' => 'URL pattern without language',
         'language' => 'Row language',
+        'canonical' => 'The path to the press release in english',
         'workflow_state' => '',
         'creation_date' => '',
         'modification_date' => '',
         'publication_date' => '',
-        'releaseDate' => '',
+        'expiration_date' => '',
         'creator' => 'Author user id from the old website',
+        'archived' => '',
+        'is_default_page' => '',
         'title' => '',
         'description' => '',
+        'releaseTiming' => '',
+        'subHead' => 'Not imported',
         'text' => 'Body of the news',
-        'subject' => 'Categories/Tags',
+        'notesToEditors' => '',
         'relatedLinks' => 'The link related with the press release',
         'location' => 'Not imported',
+        'releaseDate' => '',
+        'subject' => 'Categories/Tags',
         'country' => 'Not imported',
-        'canonical' => 'The path to the press release in english',
-        'releaseTiming' => '',
-        'archived' => '',
-        'expiration_date' => '',
-        'subHead' => 'Not imported',
       )
     );
 
@@ -69,11 +72,11 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
 
     $this->addFieldMapping('field_tags', 'subject');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
-    $this->addFieldMapping('field_pr_release_date', 'releaseDate');
+    $this->addFieldMapping('field_pr_embargo_date', 'releaseDate');
     $this->addFieldMapping('field_publication_date', 'publication_date');
     $this->addFieldMapping('field_archived', 'archived');
     $this->addFieldMapping('field_expiration_date', 'expiration_date');
-
+    $this->addFieldMapping('field_pr_notes_to_editor', 'notesToEditors');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
@@ -108,8 +111,6 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
       'body:format',
       'title_field',
       'body:summary',
-      'field_pr_notes_to_editor',
-      'field_pr_notes_to_editor:format',
       'field_summary:format',
       'field_summary',
       'field_publication_date:timezone',
@@ -126,7 +127,7 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
       'field_nace_codes:ignore_case',
       'field_nace_codes:source_type',
       'field_pr_release_date:timezone',
-      'field_pr_release_date:rrule',
+      'field_pr_release_date:rule',
       'field_pr_release_date:to',
       'field_pr_related_links:title',
       'field_pr_related_links:attributes',
@@ -155,7 +156,45 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
     }
 
     $row->subject = MigrationUtil::decodeTagsTerms($row->subject);
+
+    $row->notesToEditors = array();
+    if (!empty($row->note_to_editor_path)) {
+      foreach ($row->note_to_editor_path as $path) {
+        $related_item_nid = $this->getNoteToEditorNid($path);
+        if ($related_item_nid != NULL) {
+          $row->notesToEditors[] = $related_item_nid;
+        } else {
+          $this->saveMessage("Failed to link Note to editors Entity: {$path}", MigrationBase::MESSAGE_WARNING);
+        }
+      }
+    }
     return TRUE;
+  }
+
+
+  private static function getNoteToEditorNid($path) {
+    $lang = substr($path, 1, 2);
+    $alias = substr($path, 4);
+    if (strlen($alias) > 255) {
+      //drupal_set_message(sprintf('Truncating path longer than 255: %s', $url), 'warning');
+      $alias= substr($alias, 0, 255);
+    }
+
+
+    $result = db_query('
+      SELECT source
+      FROM url_alias
+      WHERE alias LIKE :alias
+      AND language LIKE :lang',
+      array(':alias' => $alias, ':lang' => $lang));
+    foreach ($result as $r) {
+      $source = $r->source;
+      $temp = parse_url($source);
+      $node_path = explode('/',$temp['path']);
+      $nid = $node_path[count($node_path) - 1];
+      return $nid;
+    }
+    return NULL;
   }
 
   /**
@@ -192,10 +231,7 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
         $entity->body[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
-      if (!empty($row->notesToEditors[$language])) {
-        $entity->field_pr_notes_to_editor[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->notesToEditors[$language]);
-        $entity->field_pr_notes_to_editor[$language][0]['format'] = 'full_html';
-      }
+
       if (!empty($row->relatedLinks[$language])) {
         $entity->field_pr_related_links[$language]
           = array_map(
@@ -209,6 +245,25 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
         MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
       }
     }
+
+    if (!empty($row->notesToEditors)) {
+      foreach ($row->notesToEditors as $nid) {
+        $node = node_load($nid);
+        if (!empty($node)) {
+          $entity->field_pr_notes_to_editor[$language][] = array(
+            'field_pr_notes_to_editor_target_id' => $node->nid,
+            'bundle' => $node->bundle,
+            'language' => $language
+          );
+        } else {
+          drupal_set_message(
+            sprintf('Could not find Note to Editor related migrated entity nid %s', $nid),
+            'warning'
+          );
+        }
+      }
+    }
+
   }
 }
 
@@ -260,6 +315,8 @@ class PressReleaseMigrateList extends MigrateList {
           case 'description':
           case 'text':
           case 'notesToEditors':
+            $items = $this->parseRelatedNotesString($raw_data[$key]);
+            self::$data[$path]['note_to_editor_path'] = $items;
           case 'relatedLinks':
             self::$data[$path][$field][$language] = $raw_data[$key];
             break;
@@ -274,6 +331,20 @@ class PressReleaseMigrateList extends MigrateList {
         }
       }
     }
+  }
+
+
+  private function parseRelatedNotesString($field_value) {
+    $ret = array();
+    if (empty($field_value)) {
+      return $ret;
+    }
+    $items = array_map('trim', explode(',', $field_value));
+    foreach ($items as $item) {
+      $ret[] = $item;
+    }
+
+    return $ret;
   }
 
   /**
