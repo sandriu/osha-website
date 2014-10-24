@@ -303,6 +303,7 @@ $options['init-modules'] = array(
 
   'tmgmt',
   'tmgmt_local',
+  'tmgmt_locale',
   /* 'tmgmt_node', */
   'tmgmt_entity',
   'tmgmt_entity_ui',

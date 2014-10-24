@@ -270,19 +270,37 @@ function osha_tmgmt_menu_local_tasks_alter(&$items) {
     'admin/tmgmt/sources/i18n_string_taxonomy_term',
     'admin/tmgmt/sources/i18n_string_taxonomy_vocabulary',
 
-    'admin/tmgmt/sources/entity_node',
-    'admin/tmgmt/sources/i18n_string_block',
+    //'admin/tmgmt/sources/entity_node',
+    //'admin/tmgmt/sources/i18n_string_block',
     'admin/tmgmt/sources/i18n_string_field_instance',
     'admin/tmgmt/sources/i18n_string_field',
-    //'admin/tmgmt/sources/i18n_string_path_breadcrumbs',
+    'admin/tmgmt/sources/i18n_string_path_breadcrumbs',
     'admin/tmgmt/sources/i18n_string_menu',
   );
+
+  $weights = array(
+    'admin/tmgmt/sources/osha' => 1,
+    'admin/tmgmt/sources/entity_node' => 2,
+    'admin/tmgmt/sources/i18n_string_block' => 3,
+    'admin/tmgmt/sources/locale_default' => 10,
+    'admin/tmgmt/sources/i18n_string_menu_link' => 5,
+    'admin/tmgmt/sources/entity_taxonomy_term' => 6,
+  );
+
   if (isset($items['tabs']['1']['output']) && is_array($items['tabs']['1']['output'])) {
     foreach ($items['tabs']['1']['output'] as $index => &$tab) {
+      if (isset($tab['#link']['path'])
+        && array_key_exists($tab['#link']['path'], $weights)) {
+        $tab['#weight'] = $weights[$tab['#link']['path']];
+      }
       if (isset($tab['#link']['path'])
           && in_array($tab['#link']['path'], $disable)) {
         $tab['#link']['access'] = FALSE;
         unset($items['tabs']['1']['output'][$index]);
+      }
+      // Change name from Locale => Literals.
+      if (isset($tab['#link']['path']) && $tab['#link']['path'] == 'admin/tmgmt/sources/locale_default') {
+        $tab['#link']['title'] = t('Literals');
       }
     }
   }
