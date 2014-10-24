@@ -73,6 +73,9 @@ function osha_tmgmt_permission() {
     'set job item to ready to publish state' => array(
       'title' => t('Can set the job item to Translation Ready to Publish'),
     ),
+    'abort job item' => array(
+      'title' => t('Can abort a job item.'),
+    ),
   );
   return $perms;
 }
