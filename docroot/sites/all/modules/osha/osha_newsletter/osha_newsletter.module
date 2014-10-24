@@ -7,6 +7,7 @@
 include_once 'osha_newsletter.features.inc';
 
 define('OSHA_NEWSLETTER_PAGE_URL', 'pages/oshmail-newsletter');
+define('OSHA_PRIVACY_PAGE_URL', 'articles/privacy-statement-oshmail');
 
 /**
  * Implements hook_permission().
@@ -334,8 +335,16 @@ function _osha_newsletter_latest_block_content(){
   $newsletters_no = variable_get('newsletters_no', 2);
   $newsletter_items_no = variable_get('newsletter_items_no', 3);
   $items = array();
+  $collections = array();
 
-  $collections = entity_load_multiple_by_name('entity_collection');
+  $entity_collections = entity_load_multiple_by_name('entity_collection');
+
+  foreach ($entity_collections as $element) {
+    if ($element->bundle == 'newsletter_content_collection') {
+      $collections[] = $element;
+    }
+  }
+
   usort($collections, function($a, $b){
     $a_date = strtotime($a->field_created[LANGUAGE_NONE][0]['value']);
     $b_date = strtotime($b->field_created[LANGUAGE_NONE][0]['value']);
@@ -354,7 +363,7 @@ function _osha_newsletter_latest_block_content(){
         $elements = entity_collection_load_content($item->bundle, $item)->children;
         if (sizeof($elements)>0) {
           $count_items = 0;
-          foreach($elements as $child){
+          foreach($elements as $child) {
             if ($newsletter_items_no - $count_items > 0) {
               if ($child->type == 'node') {
                 $node = node_view($child->content,'newsletter_item');
@@ -386,6 +395,10 @@ function osha_newsletter_subscribe_extra_form() {
     '#size' => 30,
     '#required' => TRUE,
     '#attributes' => array('placeholder' => t('E-mail address'))
+  );
+  $form['captcha'] = array(
+    '#type' => 'captcha',
+    '#captcha_type' => 'recaptcha/reCAPTCHA',
   );
   $link_label = variable_get('subscribe_extra_block_details_link_label', t('How will EU-OSHA use my details?'));
   $link_url = variable_get('subscribe_extra_block_details_link_url', url(OSHA_NEWSLETTER_PAGE_URL));
@@ -424,10 +437,11 @@ function osha_newsletter_subscribe_form() {
   );
   $form['captcha'] = array(
     '#type' => 'captcha',
-    '#captcha_type' => 'image_captcha/Image',
+    '#captcha_type' => 'recaptcha/reCAPTCHA',
+
   );
   $link_label = variable_get('subscribe_block_details_link_label', t('Privacy policy'));
-  $link_url = variable_get('subscribe_block_details_link_url', url(OSHA_NEWSLETTER_PAGE_URL));
+  $link_url = variable_get('subscribe_block_details_link_url', url(OSHA_PRIVACY_PAGE_URL));
   $form['details_link'] = array(
     '#markup' => '<a href='.$link_url.'>'.$link_label.'</a><br/>',
   );
@@ -454,7 +468,7 @@ function osha_newsletter_unsubscribe_form() {
   );
   $form['captcha'] = array(
     '#type' => 'captcha',
-    '#captcha_type' => 'image_captcha/Image',
+    '#captcha_type' => 'recaptcha/reCAPTCHA',
   );
   $form['submit'] = array(
     '#type' => 'submit',

@@ -21,39 +21,6 @@ function osha_news_views_api($module = NULL, $api = NULL) {
 }
 
 /**
- * Implements hook_fe_nodequeue_export_fields().
- */
-function osha_news_fe_nodequeue_export_fields() {
-  $nodequeues = array();
-
-  // Exported nodequeues: latest_news
-  $nodequeues['latest_news'] = array(
-    'name' => 'latest_news',
-    'title' => 'Latest News',
-    'subqueue_title' => '',
-    'size' => 10,
-    'link' => '',
-    'link_remove' => '',
-    'owner' => 'nodequeue',
-    'show_in_ui' => 1,
-    'show_in_tab' => 1,
-    'show_in_links' => 0,
-    'reference' => 0,
-    'reverse' => 0,
-    'i18n' => 1,
-    'subqueues' => 1,
-    'types' => array(
-      0 => 'highlight',
-      1 => 'news',
-    ),
-    'roles' => array(),
-    'count' => 0,
-  );
-
-  return $nodequeues;
-}
-
-/**
  * Implements hook_node_info().
  */
 function osha_news_node_info() {

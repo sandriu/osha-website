@@ -1,0 +1,10 @@
+<?php
+/**
+ * @file
+ * Code for the Legislation feature.
+ */
+
+include_once 'osha_legislation.features.inc';
+
+define('OSHA_LEGISLATION_CONTENT_TYPE_DIRECTIVE', 'directive');
+define('OSHA_LEGISLATION_CONTENT_TYPE_GUIDELINE', 'guideline');

@@ -240,7 +240,7 @@ function osha_tmgmt_tmgmt_translator_plugin_info_alter(&$info) {
  */
 function osha_tmgmt_tmgmt_source_plugin_info_alter(&$info) {
   $info['entity']['plugin controller class'] = 'OSHATMGMTEntitySourcePluginController';
-//  $info['node']['plugin controller class'] = 'OSHATMGMTNodeSourcePluginController';
+  // $info['node']['plugin controller class'] = 'OSHATMGMTNodeSourcePluginController';
   $info['i18n_string']['plugin controller class'] = 'OSHATMGMTI18nStringSourcePluginController';
 }
 
@@ -269,6 +269,13 @@ function osha_tmgmt_menu_local_tasks_alter(&$items) {
   $disable = array(
     'admin/tmgmt/sources/i18n_string_taxonomy_term',
     'admin/tmgmt/sources/i18n_string_taxonomy_vocabulary',
+
+    'admin/tmgmt/sources/entity_node',
+    'admin/tmgmt/sources/i18n_string_block',
+    'admin/tmgmt/sources/i18n_string_field_instance',
+    'admin/tmgmt/sources/i18n_string_field',
+    //'admin/tmgmt/sources/i18n_string_path_breadcrumbs',
+    'admin/tmgmt/sources/i18n_string_menu',
   );
   if (isset($items['tabs']['1']['output']) && is_array($items['tabs']['1']['output'])) {
     foreach ($items['tabs']['1']['output'] as $index => &$tab) {
@@ -338,6 +345,21 @@ function osha_tmgmt_preprocess_page(&$variables) {
     if (isset($variables['page']['help']['system_help']['#markup'])) {
       $variables['page']['help']['system_help']['#markup'] = '';
     };
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * Pre-calculate field_character_count and field_page_count before saving.
+ */
+function osha_tmgmt_node_presave($node) {
+  if (isset($node->field_character_count)) {
+    OshaTMGMTStatistics::computeEntityStatistics($node, 'node');
+    $node->field_character_count[LANGUAGE_NONE][0]['value'] = $node->character_count;
+    if (isset($node->field_page_count)) {
+      $node->field_page_count[LANGUAGE_NONE][0]['value'] = $node->page_count;
+    }
   }
 }
 
@@ -680,6 +702,16 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
         );
       }
       break;
+
+    case 'views_form_tmgmt_node_selection_view_tmgmt_node_selection_view_page':
+      if ($form['#id'] == 'views-form-tmgmt-node-selection-view-tmgmt-node-selection-view-page') {
+        if (isset($form['select']['rules_component::tmgmt_node_ui_tmgmt_nodes_add_items_to_cart'])) {
+          /* Hijack submit button to call our own method to add items to cart - with integrity check */
+          $form['select']['rules_component::tmgmt_node_ui_tmgmt_nodes_add_items_to_cart']['#submit'] = array(
+            'osha_tmgmt_node_ui_tmgmt_nodes_add_items_to_cart',
+          );
+        }
+      }
   }
 }
 
@@ -697,6 +729,39 @@ function osha_tmgmt_get_job_item_state_label($state) {
     OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish => t('Translation Ready to Publish'),
   );
   return $states[$state];
+}
+
+/*
+ * Overrides views_bulk_operations action that add items to cart.
+ * This methods checks and reports duplicate items that are already in the cart.
+ *
+ * @param $form
+ * @param $form_state
+ */
+function osha_tmgmt_node_ui_tmgmt_nodes_add_items_to_cart($form, &$form_state) {
+  $vbo = _views_bulk_operations_get_field($form_state['build_info']['args'][0]);
+  $source_items = _views_bulk_operations_get_selection($vbo, $form_state);
+  $existing = array();
+  $cart = tmgmt_ui_cart_get();
+  foreach ($cart->getJobItemsFromCart() as $item) {
+    if ($item->plugin == 'entity' && $item->item_type == 'node') {
+      $existing[] = $item->item_id;
+    }
+  }
+  $i = 0;
+  foreach ($source_items as $source_id) {
+    if (!in_array($source_id, $existing)) {
+      if (tmgmt_ui_cart_get()->addJobItem('entity', 'node', $source_id)) {
+        $i++;
+      }
+    }
+    else {
+      $node = node_load($source_id);
+      drupal_set_message("<a href='node/{$source_id}'><strong>{$node->title}</strong></a> is already in the cart");
+    }
+  }
+  drupal_set_message(format_plural($i, '@count content source was added into the <a href="@url">cart</a>.',
+    '@count content sources were added into the <a href="@url">cart</a>.', array('@url' => url('admin/tmgmt/cart'))));
 }
 
 /**
@@ -801,7 +866,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
 /**
  * Loads active job entities that have a job item with the identifiers.
  *
- * @param $plugin
+ * @param string $plugin
  *   The source plugin.
  * @param $item_type
  *   The source item type.
@@ -975,17 +1040,39 @@ class OshaTMGMTStatistics {
       if (!$entity) {
         throw new TMGMTException(t('Unable to load entity %type with id %id', array('%type' => $job_item->item_type, $job_item->item_id)));
       }
-      $source_language = isset($entity->language) ? $entity->language : 'en';
-      $data = tmgmt_field_get_source_data($job_item->item_type, $entity, $source_language, TRUE);
+      self::computeEntityStatistics($entity, $job_item->item_type);
     }
     else {
       $data = $job_item->getSourceData();
+      self::count($data, $ret);
+      $job_item->character_count = $ret;
+      if ($job_item->character_count > 0) {
+        $cpp = variable_get('osha_tmgmt_characters_per_page', 1500);
+        $job_item->page_count = $job_item->character_count / $cpp;
+      }
     }
+  }
+
+  /**
+   * Compute characters/page count for node/taxonomy_term entity types.
+   *
+   * @param object $node
+   *   Object to compute data for. Will return with fields character_count and
+   *   page_count set.
+   * @param string $entity_type
+   *   Type of entity, e.g. 'node', 'taxonomy_term'
+   */
+  public static function computeEntityStatistics(&$node, $entity_type) {
+    $node->character_count = 0;
+    $node->page_count = 0;
+
+    $language = entity_language($entity_type, $node);
+    $data = tmgmt_field_get_source_data($entity_type, $node, $language, TRUE);
     self::count($data, $ret);
-    $job_item->character_count = $ret;
-    if ($job_item->character_count > 0) {
+    $node->character_count = $ret;
+    if ($node->character_count > 0) {
       $cpp = variable_get('osha_tmgmt_characters_per_page', 1500);
-      $job_item->page_count = $job_item->character_count / $cpp;
+      $node->page_count = $node->character_count / $cpp;
     }
   }
 

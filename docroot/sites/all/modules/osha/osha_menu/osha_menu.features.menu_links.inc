@@ -347,30 +347,6 @@ function osha_menu_menu_default_menu_links() {
     'menu_links_customized' => 1,
     'parent_identifier' => 'main-menu_legislation:node/8',
   );
-  // Exported menu link: main-menu_european-parliament-pilot-project-on-health-and-safety-of-older-workers-:<front>
-  $menu_links['main-menu_european-parliament-pilot-project-on-health-and-safety-of-older-workers-:<front>'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
-    'link_title' => 'European Parliament pilot project on health and safety of older workers ',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'alter' => TRUE,
-      'identifier' => 'main-menu_european-parliament-pilot-project-on-health-and-safety-of-older-workers-:<front>',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 1,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -50,
-    'customized' => 1,
-    'language' => 'und',
-    'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_press-room:<front>',
-  );
   // Exported menu link: main-menu_european-standards:node/13
   $menu_links['main-menu_european-standards:node/13'] = array(
     'menu_name' => 'main-menu',
@@ -1183,16 +1159,16 @@ function osha_menu_menu_default_menu_links() {
     'parent_identifier' => 'main-menu_surveys--statistics:node/11',
   );
   // Exported menu link: main-menu_press-room:<front>
-  $menu_links['main-menu_press-room:<front>'] = array(
+  $menu_links['main-menu_press-room:press-room'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'press-room',
+    'router_path' => 'press-room',
     'link_title' => 'Press room',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_press-room:<front>',
+      'identifier' => 'main-menu_press-room:press-room',
       'content' => array(
         'image' => 'public://menuimage/press.jpg',
       ),
@@ -1582,7 +1558,6 @@ function osha_menu_menu_default_menu_links() {
   t('Enterprise Survey (ESENER)');
   t('European Directives');
   t('European Guidelines');
-  t('European Parliament pilot project on health and safety of older workers ');
   t('European Standards');
   t('Events');
   t('Film Awards');

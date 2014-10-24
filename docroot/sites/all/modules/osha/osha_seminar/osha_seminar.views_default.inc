@@ -11,6 +11,107 @@ function osha_seminar_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'search_seminars';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'search_api_index_default_multilingual_node_index';
+  $view->human_name = 'Search Seminars';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Search Seminars';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'entity';
+  $handler->display->display_options['row_options']['view_mode'] = 'teaser';
+  /* Header: Global: Unfiltered text */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['content'] = '<a class="seminar_back-to-seminars back-to-link" href="/articles/seminars">Back to seminars</a>';
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
+  /* Field: Indexed Multilingual Node: Multilingual ID */
+  $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
+  $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
+  /* Sort criterion: Indexed Multilingual Node: Start date */
+  $handler->display->display_options['sorts']['field_seminar_start_date']['id'] = 'field_seminar_start_date';
+  $handler->display->display_options['sorts']['field_seminar_start_date']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['sorts']['field_seminar_start_date']['field'] = 'field_seminar_start_date';
+  $handler->display->display_options['sorts']['field_seminar_start_date']['order'] = 'DESC';
+  /* Filter criterion: Indexed Multilingual Node: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
+  /* Filter criterion: Indexed Multilingual Node: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'seminar' => 'seminar',
+  );
+  /* Filter criterion: Search: Fulltext search */
+  $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+  );
+  $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
+    'body:summary' => 'body:summary',
+    'body:value' => 'body:value',
+    'title_field' => 'title_field',
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['path'] = 'seminars';
+  $translatables['search_seminars'] = array(
+    t('Master'),
+    t('Search Seminars'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('<a class="seminar_back-to-seminars back-to-link" href="/articles/seminars">Back to seminars</a>'),
+    t('No results'),
+    t('Multilingual ID'),
+    t('Page'),
+  );
+  $export['search_seminars'] = $view;
+
+  $view = new view();
   $view->name = 'seminars';
   $view->description = '';
   $view->tag = 'default';
@@ -95,30 +196,6 @@ function osha_seminar_views_default_views() {
     'seminar' => 'seminar',
   );
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['enabled'] = FALSE;
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'field_seminar_start_date_1',
-      'rendered' => 1,
-      'rendered_strip' => 1,
-    ),
-  );
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Start date (field_seminar_start_date) */
-  $handler->display->display_options['sorts']['field_seminar_start_date_value']['id'] = 'field_seminar_start_date_value';
-  $handler->display->display_options['sorts']['field_seminar_start_date_value']['table'] = 'field_data_field_seminar_start_date';
-  $handler->display->display_options['sorts']['field_seminar_start_date_value']['field'] = 'field_seminar_start_date_value';
-  $handler->display->display_options['sorts']['field_seminar_start_date_value']['order'] = 'DESC';
-  $handler->display->display_options['path'] = 'seminars';
-
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
@@ -183,7 +260,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['fields']['field_seminar_start_date_1']['label'] = '';
   $handler->display->display_options['fields']['field_seminar_start_date_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['text'] = '[field_seminar_start_date_1] - [type]s';
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['text'] = '[field_seminar_start_date_1] - Seminars';
   $handler->display->display_options['fields']['field_seminar_start_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_seminar_start_date_1']['settings'] = array(
     'format_type' => 'year',
@@ -217,9 +294,8 @@ function osha_seminar_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Page'),
     t('Block'),
-    t('[field_seminar_start_date_1] - [type]s'),
+    t('[field_seminar_start_date_1] - Seminars'),
     t('See details'),
   );
   $export['seminars'] = $view;
