@@ -471,7 +471,7 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form_id == 'entity_collection_content_form') {
     if ($collection = $form_state['entity_collection']) {
-      if ($collection->bundle == 'moderators_group') {
+      if ($collection->bundle == 'moderators_group' && !empty($form['content'])) {
         foreach ($form['content'] as &$row) {
           hide($row['style']);
         }
