@@ -64,6 +64,15 @@ function osha_tmgmt_permission() {
     'edit translation content validators' => array(
       'title' => t('Edit the job item Content Validators'),
     ),
+    'set job item to translated state' => array(
+      'title' => t('View the job to Translated state'),
+    ),
+    'set job item to require content validation state' => array(
+      'title' => t('Can set the job item to Require Content Validation'),
+    ),
+    'set job item to ready to publish state' => array(
+      'title' => t('Can set the job item to Translation Ready to Publish'),
+    ),
   );
   return $perms;
 }
@@ -631,18 +640,23 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
   // Rename button Cancel.
   $form['actions']['cancel']['#title'] = t('Back to Job');
 
-  // Hide Buttons from other users.
-  if (!OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $user)
-      && !OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user)
-  ) {
-    if (!empty($form['actions']['save'])) {
-      $form['actions']['save']['#access'] = FALSE;
-    }
-    if (!empty($form['actions']['accept']['#access'])) {
-      $form['actions']['accept']['#access'] = FALSE;
-    }
+  // Set actions and access levels.
+  if (!empty($form['actions']['save'])) {
+    $form['actions']['save']['#access'] = user_access('set job item to ready to publish');
+  }
+  if (!empty($form['actions']['accept']['#access'])) {
+    $form['actions']['accept']['#access'] = user_access('accept job item translation');
   }
 
+  $form['actions']['ready_to_publish'] = array(
+    '#type' => 'submit',
+    '#value' => t('Ready to Publish'),
+    '#submit' => array('osha_tmgmt_layout_validator_approve_submit'),
+    '#validate' => array(),
+    '#access' => user_access('set job item to ready to publish'),
+  );
+
+  // Alter form on different states.
   switch ($job_item->state) {
     case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired:
       $validators = osha_tmgmt_load_validators_by_job_item($job_item);
@@ -677,36 +691,23 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
       break;
 
     case TMGMT_JOB_ITEM_STATE_ACTIVE:
-      if (OshaWorkflowPermissions::userHasRole(
-        OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR, $user)) {
-        $form['actions']['accept_layout'] = array(
-          '#type' => 'submit',
-          '#value' => t('Approve layout'),
-          '#submit' => array('osha_tmgmt_layout_validator_approve_submit'),
-          '#validate' => array(),
-          '#access' => TRUE,
-        );
-      }
+      $form['actions']['accept_layout'] = array(
+        '#type' => 'submit',
+        '#value' => t('Approve layout'),
+        '#submit' => array('osha_tmgmt_layout_validator_approve_submit'),
+        '#validate' => array(),
+        '#access' => user_access('set job item to translated state'),
+      );
       break;
 
     case TMGMT_JOB_ITEM_STATE_REVIEW:
-      if (OshaWorkflowPermissions::userHasRole(
-        OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER, $user)) {
-        $form['actions']['require_content_validation'] = array(
-          '#type' => 'submit',
-          '#value' => t('Require Content Validation'),
-          '#submit' => array('osha_tmgmt_require_content_validation_submit'),
-          '#validate' => array('osha_tmgmt_require_content_validation_validate'),
-          '#access' => TRUE,
-        );
-        $form['actions']['ready_to_publish'] = array(
-          '#type' => 'submit',
-          '#value' => t('Ready to Publish'),
-          '#submit' => array('osha_tmgmt_layout_validator_approve_submit'),
-          '#validate' => array(),
-          '#access' => TRUE,
-        );
-      }
+      $form['actions']['require_content_validation'] = array(
+        '#type' => 'submit',
+        '#value' => t('Require Content Validation'),
+        '#submit' => array('osha_tmgmt_require_content_validation_submit'),
+        '#validate' => array('osha_tmgmt_require_content_validation_validate'),
+        '#access' => user_access('set job item to require content validation'),
+      );
       break;
 
     case 'views_form_tmgmt_node_selection_view_tmgmt_node_selection_view_page':

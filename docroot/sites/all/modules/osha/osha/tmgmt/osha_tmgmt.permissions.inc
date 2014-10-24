@@ -32,6 +32,8 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
 
     'access user profiles',
     'edit translation content validators',
+    'set job item to require content validation',
+    'set job item to ready to publish',
   );
 }
 
@@ -59,6 +61,7 @@ function osha_tmgmt_workflow_permissions_role_translation_liaison() {
 function osha_tmgmt_workflow_permissions_role_layout_validator() {
   return array(
     'preview layout validation',
+    'set job item to translated state',
   );
 }
 
