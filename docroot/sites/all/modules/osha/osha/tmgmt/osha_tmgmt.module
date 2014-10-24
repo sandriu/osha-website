@@ -455,7 +455,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       );
 
       $form['language_info']['target_languages'] = array(
-        '#title' => t('Target languages').' ('.count($target_languages_codes).')',
+        '#title' => t('Target languages') . ' (' . count($target_languages_codes) . ')',
         '#type' => 'checkboxes',
         '#default_value' => $target_languages,
         '#options' => drupal_map_assoc($target_languages),
@@ -502,119 +502,190 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         $form['info']['created'] = $created;
       }
       break;
-
-    case 'tmgmt_entity_ui_translate_form':
-      list($id, $vid, $bundle) = entity_extract_ids($form_state['entity_type'], $form_state['entity']);
-      $entity_language = entity_language($form_state['entity_type'], $form_state['entity']);
-      $items = osha_tmgmt_job_item_load_latest('entity', $form_state['entity_type'], $id, $entity_language);
-
-      $pt_col_index = 4;
-
-      // Remove all previously disabled checkboxes - we override that.
-      $languages = language_list();
-
-      foreach ($languages as $langcode => $language) {
-        // Reset the pending column and ordering, rebuild based on job item.
-        unset($form['languages'][$langcode]);
-        $form['languages']['#options'][$langcode][$pt_col_index] = t('None');
-
-        if (isset($items[$langcode])) {
-          $item = $items[$langcode];
-          $uri = $item->uri();
-          $wrapper = entity_metadata_wrapper('tmgmt_job_item', $item);
-          $additional = l(osha_tmgmt_get_job_item_state_label($item->state), $uri['path'], array('query' => array('destination' => current_path())));
-          $form['languages']['#options'][$langcode][$pt_col_index] = $additional;
-        }
-      }
-
-      // Change from table select to table.
-      $form['languages']['#type'] = 'table';
-      $form['languages']['#theme'] = 'table';
-      $form['languages']['#rows'] = $form['languages']['#options'];
-      unset($form['languages']['#options']);
-      unset($form['actions']);
-
-      // Translation Content Validators Group Assign Form.
-      if (!empty($items)) {
-        $form['translation_validators'] = array(
-          '#type' => 'fieldset',
-          '#title' => 'Translation Validators',
-          '#collapsible' => TRUE,
-          '#tree' => TRUE,
-          '#weight' => -1,
-        );
-        reset($items);
-        $tjid = current($items)->tjid;
-        $form['translation_validators']['existing_group'] = array(
-          '#type' => 'markup',
-          '#markup' => t('No group of Translation Validators is not set.'),
-        );
-        $group_id = current($items)->eid;
-        $group = array();
-        if (!empty($group_id)) {
-          $group = osha_tmgmt_get_job_translation_validators_group($group_id);
-          $form['translation_validators']['existing_group']['#markup']
-            = t('<b>@name</b> is assigned for this node. If you assign another group, it will override the current reviews.',
-            array('@name' => $group->name));
-        }
-
-        $form['translation_validators']['translation_group'] = array(
-          '#type' => 'select',
-          '#title' => 'Translation group',
-          '#options' => osha_tmgmt_get_translators_groups_as_options(),
-        );
-        $form['translation_validators']['submit'] = array(
-          '#type' => 'submit',
-          '#submit' => array('osha_tmgmt_translation_validators_submit'),
-          '#validate' => array(),
-          '#value' => 'Apply',
-        );
-
-        $form_state['validators_group'] = $group;
-        $form_state['tmgmt_job'] = tmgmt_job_load($tjid);
-        $form_state['tmgmt_job_items'] = $items;
-      }
-      break;
   }
 }
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &$form_state) {
-  global $user;
-  $job_item = $form_state['item'];
-  $validators = osha_tmgmt_load_validators_by_job_item($job_item);
-  if (array_key_exists($user->uid, $validators)
-    && $validators[$user->uid]->next == 1) {
-    $form['content_validation'] = array(
+function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_state, $form_id) {
+  list($id, $vid, $bundle) = entity_extract_ids($form_state['entity_type'], $form_state['entity']);
+  $entity_language = entity_language($form_state['entity_type'], $form_state['entity']);
+  $items = osha_tmgmt_job_item_load_latest('entity', $form_state['entity_type'], $id, $entity_language);
+
+  $pt_col_index = 4;
+
+  // Remove all previously disabled checkboxes - we override that.
+  $languages = language_list();
+
+  foreach (array_keys($languages) as $langcode) {
+    // Reset the pending column and ordering, rebuild based on job item.
+    unset($form['languages'][$langcode]);
+    $form['languages']['#options'][$langcode][$pt_col_index] = t('None');
+
+    if (isset($items[$langcode])) {
+      $item = $items[$langcode];
+      $uri = $item->uri();
+      $additional = l(osha_tmgmt_get_job_item_state_label($item->state), $uri['path'], array('query' => array('destination' => current_path())));
+      $form['languages']['#options'][$langcode][$pt_col_index] = $additional;
+    }
+  }
+
+  // Hide button Add to cart if node not in published or ready to published.
+  if ($form_state['entity_type'] == 'node'
+    && !empty($form_state['entity']->workbench_moderation)) {
+    $add_to_cart_states = array(OSHA_WORKFLOW_STATE_PUBLISHED, OSHA_WORKFLOW_STATE_READY_TO_PUBLISH);
+    $current_state = $form_state['entity']->workbench_moderation['current']->state;
+    if (!in_array($current_state, $add_to_cart_states)) {
+      hide($form['top_actions']['add_to_cart']);
+    }
+  }
+
+  // Change from table select to table.
+  $form['languages']['#type'] = 'table';
+  $form['languages']['#theme'] = 'table';
+  $form['languages']['#rows'] = $form['languages']['#options'];
+  hide($form['actions']);
+
+  // Translation Content Validators Group Assign Form.
+  if (!empty($items)) {
+    $form['translation_validators'] = array(
       '#type' => 'fieldset',
-      '#title' => 'Content Validation',
+      '#title' => 'Translation Validators',
       '#collapsible' => TRUE,
       '#tree' => TRUE,
+      '#weight' => -1,
     );
-    $form['content_validation']['message'] = array(
-      '#type' => 'textarea',
-      '#title' => 'Message',
+    reset($items);
+    $tjid = current($items)->tjid;
+    $form['translation_validators']['existing_group'] = array(
+      '#type' => 'markup',
+      '#markup' => t('No group of Translation Validators is not set.'),
     );
-    $form['content_validation']['submit'] = array(
+    $group_id = current($items)->eid;
+    $group = array();
+    if (!empty($group_id)) {
+      $group = osha_tmgmt_get_job_translation_validators_group($group_id);
+      $form['translation_validators']['existing_group']['#markup']
+        = t('<b>@name</b> is assigned for this node. If you assign another group, it will override the current reviews.',
+        array('@name' => $group->name));
+    }
+
+    $form['translation_validators']['translation_group'] = array(
+      '#type' => 'select',
+      '#title' => 'Translation group',
+      '#options' => osha_tmgmt_get_translators_groups_as_options(),
+    );
+    $form['translation_validators']['submit'] = array(
       '#type' => 'submit',
-      '#submit' => array('osha_tmgmt_translation_validators_accept'),
+      '#submit' => array('osha_tmgmt_translation_validators_submit'),
       '#validate' => array(),
-      '#value' => 'Approve',
+      '#value' => 'Apply',
     );
-    $last = osha_tmgmt_load_validators_last($validators);
-    $can_reject = ($last->uid == $user->uid);
-    $form['content_validation']['reject'] = array(
-      '#type' => 'submit',
-      '#submit' => array('osha_tmgmt_translation_validators_reject'),
-      '#validate' => array(),
-      '#value' => 'Reject',
-      '#access' => $can_reject,
-    );
+
+    $form_state['validators_group'] = $group;
+    $form_state['tmgmt_job'] = tmgmt_job_load($tjid);
+    $form_state['tmgmt_job_items'] = $items;
   }
 }
 
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &$form_state) {
+  $job_item = $form_state['item'];
+  global $user;
+
+  // Fix State Label.
+  $form['info']['state']['#markup'] = osha_tmgmt_get_job_item_state_label($job_item->state);
+
+  // Rename button Cancel.
+  $form['actions']['cancel']['#title'] = t('Back to Job');
+
+  // Hide Buttons from other users.
+  if (!OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $user)
+      && !OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user)
+  ) {
+    if (!empty($form['actions']['save'])) {
+      $form['actions']['save']['#access'] = FALSE;
+    }
+    if (!empty($form['actions']['accept']['#access'])) {
+      $form['actions']['accept']['#access'] = FALSE;
+    }
+  }
+
+  switch ($job_item->state) {
+    case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired:
+      $validators = osha_tmgmt_load_validators_by_job_item($job_item);
+      if (array_key_exists($user->uid, $validators)
+        && $validators[$user->uid]->next == 1) {
+        $form['content_validation'] = array(
+          '#type' => 'fieldset',
+          '#title' => 'Content Validation',
+          '#collapsible' => TRUE,
+          '#tree' => TRUE,
+        );
+        $form['content_validation']['message'] = array(
+          '#type' => 'textarea',
+          '#title' => 'Message',
+        );
+        $form['content_validation']['submit'] = array(
+          '#type' => 'submit',
+          '#submit' => array('osha_tmgmt_translation_validators_accept'),
+          '#validate' => array(),
+          '#value' => 'Approve',
+        );
+        $last = osha_tmgmt_load_validators_last($validators);
+        $can_reject = ($last->uid == $user->uid);
+        $form['content_validation']['reject'] = array(
+          '#type' => 'submit',
+          '#submit' => array('osha_tmgmt_translation_validators_reject'),
+          '#validate' => array(),
+          '#value' => 'Reject',
+          '#access' => $can_reject,
+        );
+      }
+      break;
+
+    case TMGMT_JOB_ITEM_STATE_ACTIVE:
+      if (OshaWorkflowPermissions::userHasRole(
+        OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR, $user)) {
+        $form['actions']['accept_layout'] = array(
+          '#type' => 'submit',
+          '#value' => t('Approve layout'),
+          '#submit' => array('osha_tmgmt_layout_validator_approve_submit'),
+          '#validate' => array(),
+          '#access' => TRUE,
+        );
+      }
+      break;
+
+    case TMGMT_JOB_ITEM_STATE_REVIEW:
+      if (OshaWorkflowPermissions::userHasRole(
+        OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER, $user)) {
+        $form['actions']['require_content_validation'] = array(
+          '#type' => 'submit',
+          '#value' => t('Require Content Validation'),
+          '#submit' => array('osha_tmgmt_require_content_validation_submit'),
+          '#validate' => array('osha_tmgmt_require_content_validation_validate'),
+          '#access' => TRUE,
+        );
+        $form['actions']['ready_to_publish'] = array(
+          '#type' => 'submit',
+          '#value' => t('Ready to Publish'),
+          '#submit' => array('osha_tmgmt_layout_validator_approve_submit'),
+          '#validate' => array(),
+          '#access' => TRUE,
+        );
+      }
+      break;
+  }
+}
+
+/**
+ * Returns osha state label of a job item state.
+ */
 function osha_tmgmt_get_job_item_state_label($state) {
   $states = array(
     TMGMT_JOB_ITEM_STATE_ACTIVE => t('On Translation'),
@@ -627,6 +698,7 @@ function osha_tmgmt_get_job_item_state_label($state) {
   );
   return $states[$state];
 }
+
 /**
  * Overrides form submit for tmgmt cart checkout.
  */
@@ -639,10 +711,10 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
     drupal_set_message(t('No target language selected'), 'error');
     return;
   }
-  $job_items_by_source_language = array();
+  $job_it_by_src_lang = array();
   // Group the selected items by source language.
   foreach (tmgmt_job_item_load_multiple(array_filter($form_state['values']['items'])) as $job_item) {
-    $job_items_by_source_language[$job_item->getSourceLangCode()][$job_item->tjiid] = $job_item;
+    $job_it_by_src_lang[$job_item->getSourceLangCode()][$job_item->tjiid] = $job_item;
   }
   $job = tmgmt_job_create(
     OSHA_TMGMT_DEFAULT_SOURCE_LANGUAGE,
@@ -654,7 +726,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
   // language combination add add the relevant job items to it.
   foreach ($target_languages as $target_language) {
     $job_empty = TRUE;
-    foreach ($job_items_by_source_language as $source_language => $job_items) {
+    foreach ($job_it_by_src_lang as $source_language => $job_items) {
       // Skip in case the source language is the same as the target language.
       if ($source_language == $target_language) {
         continue;
@@ -680,7 +752,7 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
         catch (Exception $e) {
           // If an item fails for one target language, then it is also going
           // to fail for others, so remove it from the array.
-          unset($job_items_by_source_language[$source_language][$id]);
+          unset($job_it_by_src_lang[$source_language][$id]);
           drupal_set_message($e->getMessage(), 'error');
         }
       }
@@ -859,6 +931,15 @@ function osha_tmgmt_mail($key, &$message, $params) {
     $body = variable_get('osha_mail_template_approval_body',
       'Dear [user:name],
       There was new content published/ready to publish that can be translated [node:url].
+
+      Thank you,'
+    );
+  }
+  elseif (isset($params['tmgmt_job_item'])) {
+    $subject = variable_get('osha_mail_template_translation_job_item_subject', '[OSHA Website] CMW: [tmgmt_job_item:tjid:label]');
+    $body = variable_get('osha_mail_template_translation_job_item_body',
+      'Dear [user:name],
+      You have a translation task that needs your attention <a href="[tmgmt_job_item:url]">[tmgmt_job_item:tjid:label]</a>.
 
       Thank you,'
     );

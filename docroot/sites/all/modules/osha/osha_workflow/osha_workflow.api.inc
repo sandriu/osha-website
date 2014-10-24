@@ -553,6 +553,8 @@ class OshaWorkflowPermissions {
    *
    * @param string $role
    *   Existing user role
+   * @param array $user
+   *   Existing user role
    *
    * @return bool
    *   TRUE if user has role
@@ -732,6 +734,40 @@ class OshaWorkflowNotifications {
   public static function notifyTranslationJobCreated($tmgmt_job) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_LIAISON);
     OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job' => $tmgmt_job), 'osha_tmgmt');
+  }
+
+  /**
+   * Notify Translation Manager that Layout is Approved.
+   *
+   * @param TMGMTJobItem|OshaTMGMTJobItem $tmgmt_job_item
+   *   Job created
+   */
+  public static function notifyTranslationLayoutApproved($tmgmt_job_item) {
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
+  }
+
+  /**
+   * Notify Translation Manager the content translation was validated.
+   *
+   * @param TMGMTJobItem|OshaTMGMTJobItem $tmgmt_job_item
+   *   Job created
+   */
+  public static function notifyTranslationValidated($tmgmt_job_item) {
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
+  }
+
+  /**
+   * Notify Next Translation Content Validator the content needs validation..
+   *
+   * @param TMGMTJobItem|OshaTMGMTJobItem $tmgmt_job_item
+   *   Job created
+   */
+  public static function notifyTranslationValidators($tmgmt_job_item) {
+    $validators = osha_tmgmt_load_validators_by_job_item($tmgmt_job_item);
+    $next_validator = osha_tmgmt_load_validators_next($validators);
+    OshaWorkflowNotifications::sendEmail(array($next_validator), array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
   }
 
   /**

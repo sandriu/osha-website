@@ -101,24 +101,35 @@ function osha_tmgmt_translation_validators_submit($form, &$form_state) {
     foreach ($form_state['tmgmt_job_items'] as $job_item) {
       if ($job_item->state != OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish) {
         $group_id = $form_state['values']['translation_validators']['translation_group'];
+        $entity_group = entity_collection_load($group_id);
         $users = osha_tmgmt_get_users_from_collection($group_id);
         $users = osha_workflow_users_group_by_lang_skills($users, $job_item->source_language);
         // Cancel existing validators.
         osha_tmgmt_remove_current_translation_validators($job_item);
         if (!empty($users[$job_item->target_language])) {
+          $users_name = array();
           foreach ($users[$job_item->target_language] as $idx => $user) {
             $next = 0;
             if ($idx == 0) {
               $next = 1;
             }
+            $users_name[] = $user->name;
             osha_tmgmt_add_translation_validator($user->uid, $job_item, $idx, $next);
           }
+          // Save message to job item.
+          global $user;
+          $form_state['jobItem']->addMessage('@name assigned group "@group" default content validators: @validators',
+            array(
+              '@name' => $user->name,
+              '@group' => $entity_group->name,
+              '@validators' => implode(', ', $users_name),
+            )
+          );
         }
         else {
           drupal_set_message(t('No user was found for language @language',
             array('@language' => $job_item->target_language)));
         }
-        $job_item->state = OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired;
         $job_item->eid = $group_id;
         $job_item->save();
       }
@@ -195,6 +206,15 @@ function osha_tmgmt_load_validators_last($validators) {
   return end($weight);
 }
 
+function osha_tmgmt_load_validators_next($validators) {
+  foreach ($validators as &$validator) {
+    if ($validator->next == 1) {
+      return $validator;
+    }
+  }
+  return array();
+}
+
 /**
  * Get translation validator group.
  */
@@ -225,13 +245,21 @@ function osha_workflow_users_group_by_lang_skills($users, $from_lang = 'en') {
 }
 
 /**
+ * Callback for Layout Approve Submit.
+ */
+function osha_tmgmt_layout_validator_approve_submit($form, &$form_state) {
+  $job_item = $form_state['item'];
+  $job_item->toTranslated();
+}
+
+/**
  * Form for Managing Content Validators of a Job Item.
  */
 function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   module_load_include('inc', 'osha_workflow', 'osha_workflow.admin');
   $form_state['jobItem'] = $job_item;
-  $can_edit = user_access('create translation jobs');
+  $can_edit = user_access('edit translation content validators');
   $form['#can_edit']  = $can_edit;
   $form['#tree'] = TRUE;
   $form['#theme'] = 'osha_tmgmt_job_item_validators_form_table';
@@ -289,6 +317,7 @@ function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
     '#type' => 'markup',
     '#markup' =>
       t('<div><strong>Tip:</strong> Use the drag handlers to sort the users in the order you want them to have the content reviewed. <br />** - Temporary, not yet saved</div>'),
+    '#access' => $can_edit,
   );
   $form['content'] = array(
     'actions' => array(
@@ -380,14 +409,25 @@ function osha_tmgmt_job_item_validators_form_submit($form, &$form_state) {
     }
     ksort($validators);
     $idx = 0;
+    $validators_name = array();
     foreach ($validators as $validator) {
       $next = 0;
       if ($idx == 0) {
         $next = 1;
       }
       $idx++;
+      $validators_name[] = $form_state['rows'][$validator['uid']]->name;
       osha_tmgmt_add_translation_validator($validator['uid'], $form_state['jobItem'], $validator['weight'], $next);
     }
+
+    // Save message to job item.
+    global $user;
+    $form_state['jobItem']->addMessage('@name assigned content validators: @validators',
+      array(
+        '@name' => $user->name,
+        '@validators' => implode(', ', $validators_name),
+      )
+    );
   }
 }
 
@@ -414,9 +454,14 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
       }
       else {
         // Last Validator.
-        $job_item->state = OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated;
-        $job_item->save();
+        $job_item->toTranslationValidated();
       }
+      // Save message to job item.
+      $form_state['jobItem']->addMessage('@name validated translation content.',
+        array(
+          '@name' => $user->name,
+        )
+      );
       break;
     }
   }
@@ -438,6 +483,24 @@ function osha_tmgmt_translation_validators_reject($form, &$form_state) {
     $job_item->state = TMGMT_JOB_ITEM_STATE_ABORTED;
     $job_item->save();
   }
+}
+
+/**
+ * Validation Callback for Request Content Validation button.
+ */
+function osha_tmgmt_require_content_validation_validate($form, &$form_state) {
+  $validators = osha_tmgmt_load_validators_by_job_item($form_state['item']);
+  if (empty($validators)) {
+    form_set_error('actions][require_content_validation', t('There are no Content Validators assigned to this job item!'));
+  }
+}
+
+/**
+ * Submit callback for  Request Content Validation button.
+ */
+function osha_tmgmt_require_content_validation_submit($form, &$form_state) {
+  $job_item = $form_state['item'];
+  $job_item->toTranslationValidationRequired();
 }
 
 

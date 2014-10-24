@@ -40,11 +40,61 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
             '@language' => $target_language,
             '!review_url' => url($uri['path'], array('query' => array('destination' => $job_uri['path']))),
           );
-          $this->needsReview('The translation of !source to @language is finished and can now be <a href="!review_url">reviewed</a>.', $variables);
+          drupal_set_message(
+            t('The translation of !source to @language is finished and can now be <a href="!review_url">reviewed</a>.',
+              $variables));
         }
       }
     }
     $this->save();
+  }
+
+  /**
+   * Move the Job Item to Translated state.
+   */
+  public function toTranslated() {
+    $this->state = TMGMT_JOB_ITEM_STATE_REVIEW;
+    global $user;
+    $this->save();
+    $this->addMessage('@name approved the Layout. Job item is now "@state".',
+    array(
+      '@name' => $user->name,
+      '@state' => osha_tmgmt_get_job_item_state_label(TMGMT_JOB_ITEM_STATE_REVIEW),
+    ));
+    OshaWorkflowNotifications::notifyTranslationLayoutApproved($this);
+    drupal_set_message(t('You have Approved the Layout'));
+  }
+
+  /**
+   * Move the Job Item to Translation Validated state.
+   */
+  public function toTranslationValidated() {
+    $this->state = OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated;
+    global $user;
+    $this->save();
+    $this->addMessage('@name validated translation content. Job item is now "@state".',
+      array(
+        '@name' => $user->name,
+        '@state' => osha_tmgmt_get_job_item_state_label(OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated),
+      ));
+    OshaWorkflowNotifications::notifyTranslationValidated($this);
+    drupal_set_message(t('You have Validated the translation'));
+  }
+
+  /**
+   * Move the Job Item to Translation Validation Required state.
+   */
+  public function toTranslationValidationRequired() {
+    $this->state = OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired;
+    global $user;
+    $this->save();
+    $this->addMessage('@name: Translation requires Content Validation. Job item is now "@state".',
+      array(
+        '@name' => $user->name,
+        '@state' => osha_tmgmt_get_job_item_state_label(OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated),
+      ));
+    OshaWorkflowNotifications::notifyTranslationValidators($this);
+    drupal_set_message(t('You have Required Translation Validation for this translation'));
   }
 }
 
