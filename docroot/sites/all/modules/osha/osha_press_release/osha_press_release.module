@@ -44,7 +44,7 @@ function osha_press_release_workbench_access_node_element_alter(&$element, $form
 }
 
 function osha_press_release_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'press_release') {
+  if ($node->type == 'press_release' && $view_mode == 'full') {
     $output = field_view_field('node', $node, 'field_publication_date');
     if (!empty($node->field_pr_embargo_date)) {
       $embargo_date = strtotime($node->field_pr_embargo_date[LANGUAGE_NONE][0]['value']);
