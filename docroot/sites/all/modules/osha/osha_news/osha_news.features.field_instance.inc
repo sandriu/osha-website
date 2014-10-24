@@ -935,7 +935,6 @@ function osha_news_field_default_field_instances() {
   t('Character count');
   t('Expiration Date');
   t('Image');
-  t('OSHWiki featured articles');
   t('Page count');
   t('Publication Date');
   t('Summary');
