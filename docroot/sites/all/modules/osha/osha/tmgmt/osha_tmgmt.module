@@ -341,6 +341,31 @@ function osha_tmgmt_job_access($op, $job = NULL, $account = NULL) {
   return tmgmt_job_access($op, $job, $account);
 }
 
+/**
+ * Implements hook_node_access().
+ *
+ * Checks if node is in an active job and denies edit for the node. admin still
+ * can edit the node anyway at is own risk.
+ *
+ * {@inheritdoc}
+ */
+function osha_tmgmt_node_access($node, $operation, $user) {
+  if ($operation == 'update') {
+    if ($user->uid != 1) {
+      $query = db_select('tmgmt_job', 'tj');
+      $query->join('tmgmt_job_item', 'tji', 'tj.tjid = tji.tjid');
+      $query->fields('tj');
+      $query->condition('tj.state', '1')
+        ->condition('tji.plugin', 'entity')
+        ->condition('tji.item_id', $node->nid);
+      $count = $query->execute()->rowCount();
+      if ($count > 0) {
+        return NODE_ACCESS_DENY;
+      }
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
 
 /**
  * Implements hook_views_api().
