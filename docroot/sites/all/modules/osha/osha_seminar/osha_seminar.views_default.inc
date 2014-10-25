@@ -100,7 +100,7 @@ function osha_seminar_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
-  $handler->display->display_options['path'] = 'seminars';
+  $handler->display->display_options['path'] = 'search-seminars';
   $translatables['search_seminars'] = array(
     t('Master'),
     t('Search Seminars'),
