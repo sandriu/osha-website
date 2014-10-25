@@ -428,7 +428,7 @@ legislation/directive/*',
     'module' => 'views',
     'node_types' => array(),
     'pages' => 'articles/seminars
-search-seminars',
+search/seminars',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

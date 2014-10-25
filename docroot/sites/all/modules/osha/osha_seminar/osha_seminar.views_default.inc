@@ -74,16 +74,13 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
   $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Free text search';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
-  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'filter';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
-    4 => 0,
-    5 => 0,
-    6 => 0,
-    7 => 0,
   );
   $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
     'body:summary' => 'body:summary',
@@ -100,7 +97,7 @@ function osha_seminar_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
-  $handler->display->display_options['path'] = 'search-seminars';
+  $handler->display->display_options['path'] = 'search/seminars';
   $translatables['search_seminars'] = array(
     t('Master'),
     t('Search Seminars'),
@@ -113,6 +110,7 @@ function osha_seminar_views_default_views() {
     t('<a class="seminar_back-to-seminars back-to-link" href="/articles/seminars">Back to seminars</a>'),
     t('No results'),
     t('Multilingual ID'),
+    t('Free text search'),
     t('Page'),
   );
   $export['search_seminars'] = $view;
