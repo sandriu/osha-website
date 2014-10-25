@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* tmgmt
+  * Notice: Undefined index: format in text_tmgmt_source_translation_structure() (line 27 of /Users/cristiroma/Work/osha/project/docroot/sites/all/modules/contrib/tmgmt/sources/field/tmgmt_field.module). when creating nodes
+  * patches/tmgmt/undefined_index_format.patch
+
 * pdf_to_imagefield
   * Do not overwrite existing images
   * https://www.drupal.org/node/2049725
