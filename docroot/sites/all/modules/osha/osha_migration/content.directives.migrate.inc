@@ -61,6 +61,7 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
     $this->addFieldMapping('field_directive_type', 'directive_type');
     $this->addFieldMapping('field_directive_type:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+    $this->addFieldMapping('field_date_of_directive', 'directive_date');
 
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
@@ -237,6 +238,7 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
       'creation_date' => '',
       'modification_date' => '',
       'publication_date' => '',
+      'directive_date' => '',
       'creator' => 'Author user id from the old website',
       'title' => '',
       'description' => 'Summary of the directive',
@@ -309,10 +311,13 @@ class DirectiveContentListCSV extends MigrateList {
             break;
 
           case 'description':
+            //try to fill directive date
+            if (preg_match('/of ([\d]+ [\w]+ [\d]+) /', $raw_data[$key], $matches)) {
+              self::$data[$path]['directive_date'] = $matches[1];
+            }
           case 'text':
             self::$data[$path][$field][$language] = $raw_data[$key];
             break;
-
           default:
             if ($language == 'en') {
               self::$data[$path][$field] = $raw_data[$key];
