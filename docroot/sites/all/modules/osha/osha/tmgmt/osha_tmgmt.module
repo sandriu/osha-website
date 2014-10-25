@@ -464,6 +464,35 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
       break;
 
+    case 'entity_collection_content_add_form':
+      if ($collection = $form_state['entity_collection']) {
+        if ($collection->bundle == 'translators_group') {
+          $options = osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR);
+          $users = array();
+          foreach ($options as $uid => $account) {
+            $users['user:' . $uid] = $account;
+          }
+          $form['add_content']['#title'] = t('Add validator');
+          $form['add_content']['entity_type']['#access'] = FALSE;
+          $form['add_content']['content_select'] = array(
+            '#type' => 'select',
+            '#options' => $users,
+            '#description' => t('Select the person account from the list then press <b>Add content</b>'),
+          );
+        }
+      }
+      break;
+
+    case 'entity_collection_content_form':
+      if ($collection = $form_state['entity_collection']) {
+        if ($collection->bundle == 'translators_group' && !empty($form['content'])) {
+          foreach ($form['content'] as &$row) {
+            hide($row['style']);
+          }
+        }
+      }
+      break;
+
     case 'tmgmt_ui_cart_content':
       $languages = tmgmt_available_languages();
       $options = array();
