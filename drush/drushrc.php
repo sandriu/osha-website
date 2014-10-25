@@ -343,6 +343,7 @@ $options['init-modules'] = array(
   'node_export',
   'mpac',
   'linkit',
+  'scanner',
 
   // Enable last (conflict with rules)
   'uuid',
