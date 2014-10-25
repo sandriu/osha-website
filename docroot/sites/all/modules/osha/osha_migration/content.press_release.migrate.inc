@@ -245,25 +245,6 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
         MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
       }
     }
-
-    if (!empty($row->notesToEditors)) {
-      foreach ($row->notesToEditors as $nid) {
-        $node = node_load($nid);
-        if (!empty($node)) {
-          $entity->field_pr_notes_to_editor[$language][] = array(
-            'field_pr_notes_to_editor_target_id' => $node->nid,
-            'bundle' => $node->bundle,
-            'language' => $language
-          );
-        } else {
-          drupal_set_message(
-            sprintf('Could not find Note to Editor related migrated entity nid %s', $nid),
-            'warning'
-          );
-        }
-      }
-    }
-
   }
 }
 
