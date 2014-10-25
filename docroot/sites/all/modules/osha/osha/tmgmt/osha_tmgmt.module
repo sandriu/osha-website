@@ -787,6 +787,53 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
       break;
   }
 }
+function osha_tmgmt_form_tmgmt_job_form_alter(&$form, &$form_state, $form_id) {
+
+  $form['job_items_wrapper']['#attributes'] = array('class' => array('container-inline'));
+  $form['job_items_wrapper']['target_language'] = array(
+    '#type' => 'select',
+    '#title' => t('Target language'),
+    '#title_display' => 'before',
+    '#weight' => -4,
+    '#options' => array(
+      '' => t('-- All --'),
+    ),
+  );
+
+  $form['job_items_wrapper']['activity'] = array(
+    '#type' => 'select',
+    '#title' => t('Activity'),
+    '#title_display' => 'before',
+    '#weight' => -3,
+    '#options' => array(
+      '' => t('-- Any --'),
+    ),
+  );
+
+  $form['job_items_wrapper']['state'] = array(
+    '#type' => 'select',
+    '#title' => t('Translation status'),
+    '#title_display' => 'before',
+    '#weight' => -2,
+    '#options' => array(
+      TMGMT_JOB_ITEM_STATE_ACTIVE => t('On translation'),
+      OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired => t('Validation required'),
+      OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated => t('Validated'),
+      OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish => t('Translated'),
+    ),
+  );
+
+  $form['job_items_wrapper']['filter'] = array(
+    '#type' => 'submit',
+    '#value' => t('Filter'),
+    '#submit' => array('osha_tmgmt_tmgmt_job_form_filter_submit'),
+    '#weight' => -1,
+  );
+}
+
+function osha_tmgmt_tmgmt_job_form_filter_submit() {
+  drupal_set_message('Why would you do that for?', 'warning');
+}
 
 /**
  * Returns osha state label of a job item state.
