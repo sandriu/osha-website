@@ -449,3 +449,24 @@ function osha_node_view($node, $view_mode, $langcode) {
 function osha_date_formatter_dates_alter(&$dates, $context) {
   $dates['value']['osha_date_theme'] = $context['display']['settings']['osha_date_theme'];
 }
+
+/**
+ * Retrieve the decoded name for Activity field attached to a node.
+ *
+ * @param object $node
+ *   Node to get data
+ *
+ * @return string
+ *   The name of the activity or empty string
+ */
+function osha_node_activity_name($node) {
+  if (isset($node->field_activity[LANGUAGE_NONE][0])) {
+    $tid = $node->field_activity[LANGUAGE_NONE][0]['tid'];
+    $term = taxonomy_term_load($tid);
+    $value = field_get_items('taxonomy_term', $term, 'name_field');
+    if (!empty($value)) {
+      return $value[0]['safe_value'];
+    }
+  }
+  return '';
+}
