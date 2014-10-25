@@ -34,6 +34,10 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
       'submit translation jobs',
       'accept translation jobs',
 
+      'preview layout validation',
+      'view translation job item',
+      'set job item to translated state',
+
       'access user profiles',
       'edit translation content validators',
       'set job item to require content validation state',
