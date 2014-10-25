@@ -338,7 +338,7 @@ function osha_legislation_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_directive_type',
     'label' => 'Directive Type',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -470,7 +470,7 @@ function osha_legislation_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_legislation_category',
     'label' => 'Legislation category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -927,9 +927,8 @@ function osha_legislation_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 1,
       ),
     ),
