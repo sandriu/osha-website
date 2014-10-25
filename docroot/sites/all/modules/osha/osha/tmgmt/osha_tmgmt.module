@@ -1153,43 +1153,42 @@ function osha_tmgmt_views_default_views_alter(&$views) {
   }
 
   if (isset($views['tmgmt_ui_job_overview'])) {
-    $handler =& $views['tmgmt_ui_job_overview']->display['default'];
+    $handler = &$views['tmgmt_ui_job_overview']->display['default']->handler;
 
     // Remove un-needed filters.
-    unset($handler->display_options['filters']['source_language']);
-    unset($handler->display_options['filters']['target_language']);
-    unset($handler->display_options['filters']['translator']);
+    unset($handler->display->display_options['filters']['source_language']);
+    unset($handler->display->display_options['filters']['target_language']);
+    unset($handler->display->display_options['filters']['translator']);
 
     // Remove un-needed columns.
-    unset($handler->display_options['fields']['source_language']);
-    unset($handler->display_options['fields']['target_language']);
-    unset($handler->display_options['fields']['translator']);
-    unset($handler->display_options['fields']['word_count']);
+    unset($handler->display->display_options['fields']['source_language']);
+    unset($handler->display->display_options['fields']['target_language']);
+    unset($handler->display->display_options['fields']['translator']);
+    unset($handler->display->display_options['fields']['word_count']);
 
     /* Field: Translation Management Job: Priority */
-    $handler->display_options['fields']['priority']['id'] = 'priority';
-    $handler->display_options['fields']['priority']['table'] = 'tmgmt_job';
-    $handler->display_options['fields']['priority']['field'] = 'priority';
+    $handler->display->display_options['fields']['priority']['id'] = 'priority';
+    $handler->display->display_options['fields']['priority']['table'] = 'tmgmt_job';
+    $handler->display->display_options['fields']['priority']['field'] = 'priority';
 
     /* Field: Translation Management Job: Page count */
-    $handler->display_options['fields']['page_count']['id'] = 'page_count';
-    $handler->display_options['fields']['page_count']['table'] = 'tmgmt_job';
-    $handler->display_options['fields']['page_count']['field'] = 'page_count';
+    $handler->display->display_options['fields']['page_count']['id'] = 'page_count';
+    $handler->display->display_options['fields']['page_count']['table'] = 'tmgmt_job';
+    $handler->display->display_options['fields']['page_count']['field'] = 'page_count';
 
     /* Field: Translation Management Job: Character count */
-    $handler->display_options['fields']['character_count']['id'] = 'character_count';
-    $handler->display_options['fields']['character_count']['table'] = 'tmgmt_job';
-    $handler->display_options['fields']['character_count']['field'] = 'character_count';
+    $handler->display->display_options['fields']['character_count']['id'] = 'character_count';
+    $handler->display->display_options['fields']['character_count']['table'] = 'tmgmt_job';
+    $handler->display->display_options['fields']['character_count']['field'] = 'character_count';
 
     // Reorder view fields.
     foreach (array('progress', 'changed', 'operations') as $column) {
-      if (isset($handler->display_options['fields'][$column])) {
-        $settings = $handler->display_options['fields'][$column];
-        unset($handler->display_options['fields'][$column]);
-        $handler->display_options['fields'][$column] = $settings;
+      if (isset($handler->display->display_options['fields'][$column])) {
+        $settings = $handler->display->display_options['fields'][$column];
+        unset($handler->display->display_options['fields'][$column]);
+        $handler->display->display_options['fields'][$column] = $settings;
       }
     }
-
   }
 }
 
