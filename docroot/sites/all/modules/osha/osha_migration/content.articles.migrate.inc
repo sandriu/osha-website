@@ -266,7 +266,7 @@ class ArticleMigrateList extends MigrateList {
         switch ($field) {
           case 'title':
             if ($language == 'en') {
-              self::$data[$path]['title'] = $raw_data[$key];
+              self::$data[$path]['title'] = MigrationUtil::decodeHTMLText($raw_data[$key]);
             }
             self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;
