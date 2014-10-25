@@ -2246,7 +2246,7 @@ function osha_taxonomies_uuid_uuid_features_default_terms() {
     'name' => 'OSH related aspects',
     'description' => '',
     'format' => 'full_html',
-    'weight' => 0,
+    'weight' => 1,
     'uuid' => '21ff9fd2-b2a8-4d20-b13a-e564f505fd01',
     'language' => 'en',
     'i18n_tsid' => 0,
