@@ -371,8 +371,12 @@ function osha_tmgmt_node_access($node, $operation, $user) {
  * Implements hook_views_api().
  */
 function osha_tmgmt_views_api() {
-  return array('api' => 3.0);
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'osha_tmgmt') . '/views/',
+  );
 }
+
 
 /**
  * Implements hook_views_default_views().
@@ -978,37 +982,80 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
  */
 function osha_tmgmt_views_default_views_alter(&$views) {
   if (isset($views['tmgmt_ui_job_items'])) {
-    $handler =& $views['tmgmt_ui_job_items']->display['default'];
+    $handler = &$views['tmgmt_ui_job_items']->display['default']->handler;
 
     // Hide word count.
-    unset($handler->display_options['fields']['word_count_1']);
+    unset($handler->display->display_options['fields']['word_count_1']);
+    unset($handler->display->display_options['fields']['progress']);
+
+    $handler->display->display_options['fields']['activity'] = array(
+      'id' => 'activity',
+      'table' => 'tmgmt_job_item',
+      'field' => 'activity',
+      'label' => t('Activity'),
+      'element_label_colon' => FALSE,
+    );
 
     /* Field: Translation Management Job Item: Source language */
-    $handler->display_options['fields']['source_language']['id'] = 'source_language';
-    $handler->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
-    $handler->display_options['fields']['source_language']['field'] = 'source_language';
+    $handler->display->display_options['fields']['source_language']['id'] = 'source_language';
+    $handler->display->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['source_language']['field'] = 'source_language';
+    $handler->display->display_options['fields']['source_language']['label'] = t('Language');
 
     /* Field: Translation Management Job Item: Target language */
-    $handler->display_options['fields']['target_language']['id'] = 'target_language';
-    $handler->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
-    $handler->display_options['fields']['target_language']['field'] = 'target_language';
+    $handler->display->display_options['fields']['target_language']['id'] = 'target_language';
+    $handler->display->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['target_language']['field'] = 'target_language';
 
     /* Field: Translation Management Job Item: Character count */
-    $handler->display_options['fields']['page_count']['id'] = 'page_count';
-    $handler->display_options['fields']['page_count']['table'] = 'tmgmt_job_item';
-    $handler->display_options['fields']['page_count']['field'] = 'page_count';
+    $handler->display->display_options['fields']['page_count']['id'] = 'page_count';
+    $handler->display->display_options['fields']['page_count']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['page_count']['field'] = 'page_count';
+    $handler->display->display_options['fields']['page_count']['label'] = t('Pages (1500 chars)');
 
     /* Field: Translation Management Job Item: Character count */
-    $handler->display_options['fields']['character_count']['id'] = 'character_count';
-    $handler->display_options['fields']['character_count']['table'] = 'tmgmt_job_item';
-    $handler->display_options['fields']['character_count']['field'] = 'character_count';
+    $handler->display->display_options['fields']['character_count']['id'] = 'character_count';
+    $handler->display->display_options['fields']['character_count']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['character_count']['field'] = 'character_count';
+
+    /* Field: Translation Management Job Item: Character count */
+    $handler->display->display_options['fields']['plugin']['id'] = 'plugin';
+    $handler->display->display_options['fields']['plugin']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['plugin']['field'] = 'plugin';
+    $handler->display->display_options['fields']['plugin']['exclude'] = 1;
+
+    /* Field: Translation Management Job Item: Activity */
+    $handler->display->display_options['fields']['activity']['id'] = 'activity';
+    $handler->display->display_options['fields']['activity']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['activity']['field'] = 'activity';
+    $handler->display->display_options['fields']['activity']['label'] = t('Activity');
+
+    /* Field: Translation Management Job Item: Section */
+    $handler->display->display_options['fields']['section']['id'] = 'section';
+    $handler->display->display_options['fields']['section']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['section']['field'] = 'section';
+    $handler->display->display_options['fields']['section']['label'] = t('Section');
+
+    /* Field: Translation Management Job Item: Creator */
+    $handler->display->display_options['fields']['creator']['id'] = 'creator';
+    $handler->display->display_options['fields']['creator']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['creator']['field'] = 'creator';
+    $handler->display->display_options['fields']['creator']['label'] = t('Creator');
+
+    $handler->display->display_options['fields']['type']['label'] = t('Content type');
+    $handler->display->display_options['fields']['state']['label'] = t('Status');
+    $handler->display->display_options['fields']['changed']['label'] = t('Modified date');
 
     // Reorder view fields.
-    foreach (array('type', 'progress', 'state', 'changed', 'operations') as $column) {
-      if (isset($handler->display_options['fields'][$column])) {
-        $settings = $handler->display_options['fields'][$column];
-        unset($handler->display_options['fields'][$column]);
-        $handler->display_options['fields'][$column] = $settings;
+    $columns = array(
+      'type', 'section', 'activity', 'progress', 'state',
+      'changed', 'creator', 'operations',
+    );
+    foreach ($columns as $column) {
+      if (isset($handler->display->display_options['fields'][$column])) {
+        $settings = $handler->display->display_options['fields'][$column];
+        unset($handler->display->display_options['fields'][$column]);
+        $handler->display->display_options['fields'][$column] = $settings;
       }
     }
   }

@@ -99,7 +99,7 @@ class osha_tmgmt_handler_field_tmgmt_job_item_operations extends tmgmt_handler_f
 /**
  * Class osha_tmgmt_handler_field_tmgmt_job_item_operations handles Operations
  */
-class osha_tmgmt_handler_field_tmgmt_job_item_state extends views_handler_field_machine_name {
+class osha_tmgmt_handler_field_tmgmt_job_item_state extends views_handler_field {
 
   /**
    * {@inheritdoc}
@@ -107,6 +107,67 @@ class osha_tmgmt_handler_field_tmgmt_job_item_state extends views_handler_field_
   public function render($job_item) {
     if (isset($job_item->tmgmt_job_item_state)) {
       return osha_tmgmt_get_job_item_state_label($job_item->tmgmt_job_item_state);
+    }
+    return '';
+  }
+}
+
+/**
+ * Class osha_tmgmt_handler_field_tmgmt_job_item_activity handles node activity
+ */
+class osha_tmgmt_handler_field_tmgmt_job_item_activity extends views_handler_field {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function render($row) {
+    if ($row->tmgmt_job_item_plugin == 'entity') {
+      $nid = $row->tmgmt_job_item_item_id;
+      $node = node_load($nid);
+      module_load_include('module', 'osha');
+      return osha_node_activity_name($node);
+    }
+    return '';
+  }
+}
+
+/**
+ * Class osha_tmgmt_handler_field_tmgmt_job_item_activity handles node activity
+ */
+class osha_tmgmt_handler_field_tmgmt_job_item_section extends views_handler_field {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function render($row) {
+    if ($row->tmgmt_job_item_plugin == 'entity') {
+      $nid = $row->tmgmt_job_item_item_id;
+      $node = node_load($nid);
+      if (!empty($node->workbench_access)) {
+        module_load_include('inc', 'workbench_access', 'workbench_access.tokens');
+        $sections = _workbench_access_get_node_section_names($node);
+        return current($sections);
+      }
+    }
+    return '';
+  }
+}
+
+/**
+ * Class osha_tmgmt_handler_field_tmgmt_job_item_activity handles node activity
+ */
+class osha_tmgmt_handler_field_tmgmt_job_item_creator extends views_handler_field {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function render($row) {
+    if ($row->tmgmt_job_item_plugin == 'entity') {
+      $nid = $row->tmgmt_job_item_item_id;
+      $node = node_load($nid);
+      if ($creator = user_load($node->uid)) {
+        return $creator->name;
+      }
     }
     return '';
   }

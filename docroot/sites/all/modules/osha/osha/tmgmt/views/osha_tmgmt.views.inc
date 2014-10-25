@@ -42,8 +42,45 @@ class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
       'field' => array(),
     );
 
+    $data['tmgmt_job_item']['plugin'] = array(
+      'title' => t('Plugin'),
+      'help' => t('Source plugin'),
+      'real field' => 'plugin',
+      'field' => array(
+        'real field' => 'plugin',
+        'handler' => 'views_handler_field',
+      ),
+    );
+
     $data['tmgmt_job_item']['operations']['field']['handler'] = 'osha_tmgmt_handler_field_tmgmt_job_item_operations';
     $data['tmgmt_job_item']['state']['field']['handler'] = 'osha_tmgmt_handler_field_tmgmt_job_item_state';
+
+    $data['tmgmt_job_item']['activity'] = array(
+      'title' => t('Node activity'),
+      'real field' => 'item_id',
+      'field' => array(
+        'handler' => 'osha_tmgmt_handler_field_tmgmt_job_item_activity',
+        'click sortable' => TRUE,
+      ),
+    );
+
+    $data['tmgmt_job_item']['section'] = array(
+      'title' => t('Node section'),
+      'real field' => 'item_id',
+      'field' => array(
+        'handler' => 'osha_tmgmt_handler_field_tmgmt_job_item_section',
+        'click sortable' => TRUE,
+      ),
+    );
+
+    $data['tmgmt_job_item']['creator'] = array(
+      'title' => t('Node author'),
+      'real field' => 'item_id',
+      'field' => array(
+        'handler' => 'osha_tmgmt_handler_field_tmgmt_job_item_creator',
+        'click sortable' => TRUE,
+      ),
+    );
 
     return $data;
   }
