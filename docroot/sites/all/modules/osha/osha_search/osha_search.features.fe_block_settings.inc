@@ -20,7 +20,7 @@ function osha_search_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'search-directives
+    'pages' => 'search/directives
 legislation/directives
 legislation/directives/*
 legislation/directive/*',
@@ -384,7 +384,7 @@ search/*',
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => 'search-directives
+    'pages' => 'search/directives
 legislation/directives
 legislation/directives/*
 legislation/directive/*',

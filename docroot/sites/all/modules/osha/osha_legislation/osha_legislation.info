@@ -100,6 +100,7 @@ features[variable][] = workbench_access_node_type_directive
 features[variable][] = workbench_access_node_type_guideline
 features[views_view][] = legislation
 features[views_view][] = legislation_guidelines
+features[views_view][] = search_directives
 features_exclude[dependencies][title] = title
 features_exclude[field_base][field_directive_code] = field_directive_code
 features_exclude[field_base][field_legislation_category_code] = field_legislation_category_code
