@@ -37,25 +37,19 @@
   hide($content['comments']);
   hide($content['links']);
   // unset to render below after a div
-  if (isset($content['field_related_man_pubs'])) {
-    hide($content['field_related_man_pubs']);
-  }
   if (isset($content['field_related_oshwiki_articles'])) {
     hide($content['field_related_oshwiki_articles']);
   }
   print render($content);
-  // render related publications(both manual + dynamic from template preprocess_node
+  // render related publications(dynamic from template preprocess_node
   if ( $view_mode == 'full') {
-    if (!empty($field_related_man_pubs) || $total_related_publications > 0) { ?>
+    if ($total_related_publications > 0) { ?>
       <div id="related-publications">
         <div class="related_publications_head"><span><?php print t('Related publications');?><span></div>
       <div>
     <?php
-      print render($content['field_related_man_pubs']);
-      if ($total_related_publications > 0) {
-        foreach ($tagged_related_publications as $related_pub) {
-          print render($related_pub);
-        }
+      foreach ($tagged_related_publications as $related_pub) {
+        print render($related_pub);
       }
     }?>
 

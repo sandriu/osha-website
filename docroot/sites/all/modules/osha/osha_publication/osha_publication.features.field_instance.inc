@@ -1069,7 +1069,7 @@ function osha_publication_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_publication_type',
     'label' => 'Publication Type',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -1093,12 +1093,8 @@ function osha_publication_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'entityreference',
-        'settings' => array(
-          'links' => 0,
-          'view_mode' => 'osha_wiki',
-        ),
-        'type' => 'entityreference_entity_view',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 9,
       ),
       'highlights_item' => array(
