@@ -423,6 +423,31 @@ function osha_tmgmt_node_presave($node) {
 }
 
 /**
+ * Show job priority as translatable string.
+ *
+ * @param object $job
+ *   Job
+ *
+ * @return string
+ *   Job priority in current language
+ */
+function osha_tmgmt_job_priority_name($job) {
+  if (isset($job->priority)) {
+    switch ($job->priority) {
+      case OSHA_TMGMT_JOB_PRIORITY_HIGH:
+        return t('High');
+
+      case OSHA_TMGMT_JOB_PRIORITY_LOW:
+        return t('Low');
+
+      default:
+        return t('Normal');
+    }
+  }
+  return '';
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
@@ -524,6 +549,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
       $languages = tmgmt_available_languages();
       $job = $form_state['tmgmt_job'];
+
       $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($job);
       $target_languages = array();
       foreach ($target_languages_codes as $lang_code) {
@@ -566,6 +592,14 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#prefix' => '<div id="tmgmt-ui-character-count" class="tmgmt-ui-character-count tmgmt-ui-info-item">',
         '#suffix' => '</div>',
       );
+
+      $form['info']['priority'] = array(
+        '#attributes' => array('class' => array('container-inline')),
+        '#type' => 'item',
+        '#title' => t('Priority'),
+        '#markup' => osha_tmgmt_job_priority_name($job),
+      );
+
       $form['info']['page_count'] = array(
         '#title' => t('Page count'),
         '#type'  => 'item',
@@ -574,6 +608,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#suffix' => '</div>',
       );
 
+      hide($form['info']['word_count']);
       hide($form['info']['source_language']);
       hide($form['info']['target_language']);
       hide($form['info']['translator']);
