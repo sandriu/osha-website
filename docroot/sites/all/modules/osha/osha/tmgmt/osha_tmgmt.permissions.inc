@@ -7,6 +7,8 @@ function osha_tmgmt_workflow_permissions_common() {
     'access toolbar',
     'view translation content validators',
 
+    'view translation job',
+
     //@todo: remove
     'access devel information',
   );
@@ -26,15 +28,18 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
   // accept translation jobs
 
   // Local Translator??
-  return array(
-    'create translation jobs',
-    'submit translation jobs',
+  return array_merge(
+    array(
+      'create translation jobs',
+      'submit translation jobs',
 
-    'access user profiles',
-    'edit translation content validators',
-    'set job item to require content validation state',
-    'set job item to ready to publish state',
-    'abort job item',
+      'access user profiles',
+      'edit translation content validators',
+      'set job item to require content validation state',
+      'set job item to ready to publish state',
+      'abort job item',
+    ),
+    osha_tmgmt_workflow_permissions_common()
   );
 }
 
@@ -63,7 +68,6 @@ function osha_tmgmt_workflow_permissions_role_layout_validator() {
   return array_merge(
     array(
       'abort job item',
-      'view translation job',
       'preview layout validation',
       'set job item to translated state',
     ),
