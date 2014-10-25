@@ -1330,12 +1330,8 @@ function osha_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'entityreference',
-        'settings' => array(
-          'links' => 0,
-          'view_mode' => 'osha_wiki',
-        ),
-        'type' => 'entityreference_entity_view',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 3,
       ),
       'highlights_item' => array(
