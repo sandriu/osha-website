@@ -31,6 +31,14 @@ function osha_tmgmt_views_query_alter(&$view, &$query) {
       }
     }
   }
+  if ($view->name == 'content_validators_group' && $view->current_display == 'content_validators_group_page') {
+    $query->where[0]['type'] = 'AND';
+    $query->where[0]['conditions'][] = array(
+      'field' => 'entity_collection_collections.bundle',
+      'operator' => '=',
+      'value' => 'translators_group',
+    );
+  }
 }
 
 
