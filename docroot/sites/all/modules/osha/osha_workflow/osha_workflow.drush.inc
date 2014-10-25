@@ -79,6 +79,7 @@ function drush_osha_workflow_osha_create_users() {
         'pass' => $username,
         'status' => 1,
         'init' => "$username@localhost",
+        'mail' => "$username@example.com",
         'roles' => array(
           DRUPAL_AUTHENTICATED_RID => 'authenticated user',
           $role->rid => $role_name,
