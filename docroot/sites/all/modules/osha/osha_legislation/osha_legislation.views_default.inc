@@ -241,16 +241,11 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['fields']['field_legislation_category']['label'] = '';
   $handler->display->display_options['fields']['field_legislation_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_legislation_category']['element_label_colon'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Sort criterion: Content: Published */
-  $handler->display->display_options['sorts']['status']['id'] = 'status';
-  $handler->display->display_options['sorts']['status']['table'] = 'node';
-  $handler->display->display_options['sorts']['status']['field'] = 'status';
-  $handler->display->display_options['sorts']['status']['order'] = 'DESC';
+  /* Sort criterion: Content: Publication Date (field_publication_date) */
+  $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['sorts']['field_publication_date_value']['order'] = 'DESC';
   /* Contextual filter: Taxonomy term: Guideline Category Code (field_guideline_category_code) */
   $handler->display->display_options['arguments']['field_guideline_category_code_value']['id'] = 'field_guideline_category_code_value';
   $handler->display->display_options['arguments']['field_guideline_category_code_value']['table'] = 'field_data_field_guideline_category_code';
@@ -281,6 +276,12 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'guideline' => 'guideline',
   );
+  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
