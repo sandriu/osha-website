@@ -1,7 +1,7 @@
 name = osha
 core = 7.x
 package = OSHA
-version = 7.x-1.11
+version = 7.x-1.12
 project = osha
 dependencies[] = admin_views
 dependencies[] = ctools
@@ -214,6 +214,8 @@ features[variable][] = pathauto_ignore_words
 features[variable][] = pathauto_max_component_length
 features[variable][] = pathauto_max_length
 features[variable][] = pathauto_node_article_pattern
+features[variable][] = pathauto_node_directive_pattern
+features[variable][] = pathauto_node_guideline_pattern
 features[variable][] = pathauto_node_news_pattern
 features[variable][] = pathauto_node_page_pattern
 features[variable][] = pathauto_node_pattern

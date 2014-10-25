@@ -781,8 +781,22 @@ function osha_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_directive_pattern';
+  $strongarm->value = 'legislation/directive/[node:title]';
+  $export['pathauto_node_directive_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_guideline_pattern';
+  $strongarm->value = 'legislation/guidelines/[node:title]';
+  $export['pathauto_node_guideline_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_news_pattern';
-  $strongarm->value = 'news/[node:title]';
+  $strongarm->value = 'oshnews/[node:title]';
   $export['pathauto_node_news_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
