@@ -790,17 +790,19 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
 function osha_tmgmt_form_tmgmt_job_form_alter(&$form, &$form_state, $form_id) {
 
   $form['job_items_wrapper']['#attributes'] = array('class' => array('container-inline'));
-  $form['job_items_wrapper']['target_language'] = array(
+  $form_state['filter_target_language'] = '';
+  $form['job_items_wrapper']['filter_target_language'] = array(
     '#type' => 'select',
     '#title' => t('Target language'),
     '#title_display' => 'before',
     '#weight' => -4,
     '#options' => array(
-      '' => t('-- All --'),
+      '' => t('-- Any --'),
     ),
   );
 
-  $form['job_items_wrapper']['activity'] = array(
+  $form_state['filter_activity'] = '';
+  $form['job_items_wrapper']['filter_activity'] = array(
     '#type' => 'select',
     '#title' => t('Activity'),
     '#title_display' => 'before',
@@ -810,7 +812,8 @@ function osha_tmgmt_form_tmgmt_job_form_alter(&$form, &$form_state, $form_id) {
     ),
   );
 
-  $form['job_items_wrapper']['state'] = array(
+  $form_state['filter_state'] = '';
+  $form['job_items_wrapper']['filter_state'] = array(
     '#type' => 'select',
     '#title' => t('Translation status'),
     '#title_display' => 'before',
@@ -831,7 +834,7 @@ function osha_tmgmt_form_tmgmt_job_form_alter(&$form, &$form_state, $form_id) {
   );
 }
 
-function osha_tmgmt_tmgmt_job_form_filter_submit() {
+function osha_tmgmt_tmgmt_job_form_filter_submit(&$form, &$form_state) {
   drupal_set_message('Why would you do that for?', 'warning');
 }
 
