@@ -1057,7 +1057,7 @@ function osha_tmgmt_views_default_views_alter(&$views) {
     $handler->display->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
     $handler->display->display_options['fields']['target_language']['field'] = 'target_language';
 
-    /* Field: Translation Management Job Item: Character count */
+    /* Field: Translation Management Job Item: Page count */
     $handler->display->display_options['fields']['page_count']['id'] = 'page_count';
     $handler->display->display_options['fields']['page_count']['table'] = 'tmgmt_job_item';
     $handler->display->display_options['fields']['page_count']['field'] = 'page_count';
@@ -1068,11 +1068,17 @@ function osha_tmgmt_views_default_views_alter(&$views) {
     $handler->display->display_options['fields']['character_count']['table'] = 'tmgmt_job_item';
     $handler->display->display_options['fields']['character_count']['field'] = 'character_count';
 
-    /* Field: Translation Management Job Item: Character count */
+    /* Field: Translation Management Job Item: Plugin */
     $handler->display->display_options['fields']['plugin']['id'] = 'plugin';
     $handler->display->display_options['fields']['plugin']['table'] = 'tmgmt_job_item';
     $handler->display->display_options['fields']['plugin']['field'] = 'plugin';
     $handler->display->display_options['fields']['plugin']['exclude'] = 1;
+
+    /* Field: Translation Management Job Item: Item type */
+    $handler->display->display_options['fields']['item_type']['id'] = 'item_type';
+    $handler->display->display_options['fields']['item_type']['table'] = 'tmgmt_job_item';
+    $handler->display->display_options['fields']['item_type']['field'] = 'item_type';
+    $handler->display->display_options['fields']['item_type']['exclude'] = 1;
 
     /* Field: Translation Management Job Item: Activity */
     $handler->display->display_options['fields']['activity']['id'] = 'activity';
@@ -1092,6 +1098,7 @@ function osha_tmgmt_views_default_views_alter(&$views) {
     $handler->display->display_options['fields']['creator']['field'] = 'creator';
     $handler->display->display_options['fields']['creator']['label'] = t('Creator');
 
+    /* Rename some of the labels*/
     $handler->display->display_options['fields']['type']['label'] = t('Content type');
     $handler->display->display_options['fields']['state']['label'] = t('Status');
     $handler->display->display_options['fields']['changed']['label'] = t('Modified date');
