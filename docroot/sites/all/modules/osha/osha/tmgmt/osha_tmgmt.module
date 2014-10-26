@@ -663,6 +663,22 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           );
         }
       }
+      break;
+
+    case 'tmgmt_ui_entity_translation_review_form':
+      if (isset($form_state['item']) && $form_state['item']->item_type == 'node'
+          && user_access('preview layout validation')) {
+        $form['preview'] = array(
+          '#theme' => 'link',
+          '#text' => 'Preview layout',
+          '#path' => sprintf('node/%s/layout-validation/%s', $form_state['item']->item_id, $form_state['item']->tjiid),
+          '#weight' => -10,
+          '#options' => array(
+            'attributes' => array('target' => '_blank'),
+            'html' => FALSE
+          ),
+        );
+      }
   }
 }
 
