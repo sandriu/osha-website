@@ -247,6 +247,9 @@ class NewsContentListCSV extends MigrateList {
     while (($raw_data = fgetcsv($handle, 100000, ';')) !== FALSE) {
       $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
       $path = MigrationUtil::getIDFromSourceRow($raw_data);
+      if (strpos($path, 'news/') !== 0) {
+        continue;
+      }
       self::$data[$path]['id'] = $path;
       // Assign the workflow state of the row from english entry.
       if ($language == 'en') {
