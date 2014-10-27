@@ -402,6 +402,12 @@ $options['init-modules'] = array(
   'addtoany',
   'on_the_web',
 
+  // print and generate pdf - per node action
+  'print',
+  'print_ui',
+  'print_pdf_tcpdf',
+  'print_pdf',
+
   // Link content types with main menu items
   'menu_position',
 
