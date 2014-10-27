@@ -30,12 +30,6 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
   // Local Translator??
   return array_merge(
     array(
-      'create translators_group entity collections',
-      'edit translators_group entity collections',
-      'view translators_group entity collections',
-      'delete translators_group entity collections',
-      'add content to translators_group entity collections',
-      'manage content in translators_group entity collections',
 
       'create translation jobs',
       'submit translation jobs',

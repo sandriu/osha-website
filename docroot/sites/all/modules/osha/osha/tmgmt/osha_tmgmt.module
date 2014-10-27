@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * Code for the OSHA Translation Management feature.
+ */
+
+include_once 'osha_tmgmt.features.inc';
 
 define('OSHA_TMGMT_DEFAULT_SOURCE_LANGUAGE', 'en');
 define('OSHA_TMGMT_DEFAULT_TARGET_LANGUAGE', 'ro');
@@ -80,6 +86,26 @@ function osha_tmgmt_permission() {
   return $perms;
 }
 
+/**
+ * Implements hook_post_features_revert().
+ */
+function osha_tmgmt_post_features_revert($component) {
+  // Add permissions for managing translators_group entity.
+  if ($component == 'entity_collection_bundles') {
+    $permissions = array(
+      'create translators_group entity collections',
+      'edit translators_group entity collections',
+      'view translators_group entity collections',
+      'delete translators_group entity collections',
+      'add content to translators_group entity collections',
+      'manage content in translators_group entity collections',
+    );
+
+    $role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    user_role_grant_permissions($role->rid, $permissions);
+  }
+
+}
 
 /**
  * Implements hook_schema_alter().
