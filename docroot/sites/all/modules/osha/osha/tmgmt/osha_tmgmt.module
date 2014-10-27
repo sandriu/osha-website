@@ -395,17 +395,6 @@ function osha_tmgmt_node_access($node, $operation, $user) {
 }
 
 /**
- * Implements hook_views_api().
- */
-function osha_tmgmt_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'osha_tmgmt') . '/views/',
-  );
-}
-
-
-/**
  * Implements hook_views_default_views().
  */
 function osha_tmgmt_views_default_views() {
