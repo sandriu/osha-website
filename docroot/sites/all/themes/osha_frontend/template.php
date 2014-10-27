@@ -302,6 +302,29 @@ function osha_frontend_preprocess_file_icon(&$variables) {
 }
 
 /**
+ * Implements theme_on_the_web_image().
+ *
+ * @param $variables
+ *   An associative array with generated variables.
+ *
+ * @return
+ *   HTML for a social media icon.
+ */
+function osha_frontend_on_the_web_image($variables) {
+  $service = $variables['service'];
+  $title   = $variables['title'];
+  $size    = variable_get('on_the_web_size', 'sm');
+
+  $variables = array(
+    'alt'   => $title,
+    'path'  => drupal_get_path('theme', 'osha_frontend') . '/images/social-icons/' . $size . '/' . $service . '.png',
+    'title' => $title
+  );
+
+  return theme('image', $variables);
+}
+
+/**
  * @todo @Ivan: Edit only below
  */
 
