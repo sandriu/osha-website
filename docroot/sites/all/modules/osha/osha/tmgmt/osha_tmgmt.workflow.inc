@@ -32,6 +32,54 @@ function osha_tmgmt_workflow_create_roles() {
 }
 
 /**
+ * Check if current user can edit the job item.
+ */
+function osha_tmgmt_user_can_edit_job_item($job_item) {
+  global $user;
+  if (OshaWorkflowPermissions::userHasRole('administrator', $user)) {
+    return TRUE;
+  }
+
+  switch ($job_item->state) {
+    case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired:
+      if (OshaWorkflowPermissions::userHasRole(
+        OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER, $user)) {
+        return TRUE;
+      }
+      // If next Content Validator -> can edit.
+      $validators = osha_tmgmt_load_validators_by_job_item($job_item);
+      if (array_key_exists($user->uid, $validators)
+        && $validators[$user->uid]->next == 1) {
+        return TRUE;
+      }
+      break;
+
+    case TMGMT_JOB_ITEM_STATE_ACTIVE:
+      if (OshaWorkflowPermissions::userHasRole(
+        OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR, $user
+      )) {
+        return TRUE;
+      }
+      break;
+
+    case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated:
+      if (OshaWorkflowPermissions::userHasRole(
+        OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER, $user)) {
+        return TRUE;
+      }
+      break;
+
+    case TMGMT_JOB_ITEM_STATE_REVIEW:
+      if (OshaWorkflowPermissions::userHasRole(
+        OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER, $user)) {
+        return TRUE;
+      }
+      break;
+  }
+  return FALSE;
+}
+
+/**
  * Hook menu that allows to see layout validation of a node from a job item.
  *
  * @param object $node
@@ -460,7 +508,7 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
           array('@name' => $next_validator->name)));
 
         // Save log message (no job item state change required).
-        $this->addMessage('@name approved the translation content.
+        $job_item->addMessage('@name approved the translation content.
           Next approval is @next', array(
             '@name' => $user->name,
             '@next' => $next_validator->name,

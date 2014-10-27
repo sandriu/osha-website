@@ -27,6 +27,7 @@ define('OSHA_TMGMT_CONTENT_VALIDATOR_STATUS_REJECTED', 'rejected');
 
 include_once 'osha_tmgmt.entity.inc';
 module_load_include('inc', 'osha_tmgmt', 'osha_tmgmt.workflow');
+module_load_include('inc', 'osha_tmgmt', 'osha_tmgmt.permissions');
 
 function osha_tmgmt_menu() {
   $items['node/%node/layout-validation/%tmgmt_job_item'] = array(
@@ -47,6 +48,15 @@ function osha_tmgmt_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function osha_tmgmt_menu_alter(&$items) {
+  unset($items['admin/tmgmt/items/%entity_object']['access callback']);
+  $items['admin/tmgmt/items/%entity_object']['access arguments']
+    = array('view translation job item');
 }
 
 /**
@@ -770,6 +780,16 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
   $job_item = $form_state['item'];
   global $user;
 
+  $user_can_edit = osha_tmgmt_user_can_edit_job_item($job_item);
+
+  $fields = element_children($form['review']);
+  foreach ($fields as $field) {
+    $values = element_children($form['review'][$field]);
+    foreach ($values as $value) {
+      $form['review'][$field][$value]['actions']['#access'] = $user_can_edit;
+      $form['review'][$field][$value]['translation']['#disabled'] = !$user_can_edit;
+    }
+  }
   // Fix State Label.
   $form['info']['state']['#markup'] = osha_tmgmt_get_job_item_state_label($job_item->state);
 
@@ -785,11 +805,8 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
   }
 
 
-  // Show buttons if job item in not ready.
-  $ready_states = array(OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish,
-    TMGMT_DATA_ITEM_STATE_ACCEPTED,
-    TMGMT_JOB_ITEM_STATE_ABORTED);
-  if (!in_array($job_item->state, $ready_states)) {
+  if ($user_can_edit) {
+    // Show buttons if job item in not ready.
     $form['actions']['ready_to_publish'] = array(
       '#type' => 'submit',
       '#value' => t('Ready to Publish'),
@@ -811,58 +828,49 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
       '#description' => t('You can enter a message before making an action
         to keep it in logs.'),
     );
-  }
 
+    // Alter form on different states.
+    switch ($job_item->state) {
+      case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired:
+        $validators = osha_tmgmt_load_validators_by_job_item($job_item);
+        if (array_key_exists($user->uid, $validators)
+          && $validators[$user->uid]->next == 1) {
+          // Add validators actions.
+          $form['actions']['cvalidator_approve'] = array(
+            '#type' => 'submit',
+            '#submit' => array('osha_tmgmt_translation_validators_accept'),
+            '#validate' => array(),
+            '#value' => 'Approve',
+          );
+          $last = osha_tmgmt_load_validators_last($validators);
+          $can_reject = ($last->uid == $user->uid);
+          $form['actions']['reject']['#access'] = $can_reject;
+        }
+        break;
 
-  // Remove the Reject button in some situations.
-  if ((OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR,
-      $user) && $job_item->state != TMGMT_JOB_ITEM_STATE_ACTIVE)
-    || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR,
-      $user)
-  ) {
-    $form['actions']['reject']['#access'] = FALSE;
-  }
-
-  // Alter form on different states.
-  switch ($job_item->state) {
-    case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired:
-      $validators = osha_tmgmt_load_validators_by_job_item($job_item);
-      if (array_key_exists($user->uid, $validators)
-        && $validators[$user->uid]->next == 1) {
-        // Add validators actions.
-        $form['actions']['cvalidator_approve'] = array(
+      case TMGMT_JOB_ITEM_STATE_ACTIVE:
+        $form['actions']['accept_layout'] = array(
           '#type' => 'submit',
-          '#submit' => array('osha_tmgmt_translation_validators_accept'),
+          '#value' => t('Approve layout'),
+          '#submit' => array('osha_tmgmt_layout_validator_approve_submit'),
           '#validate' => array(),
-          '#value' => 'Approve',
+          '#access' => user_access('set job item to translated state'),
         );
-        $last = osha_tmgmt_load_validators_last($validators);
-        $can_reject = ($last->uid == $user->uid);
-        $form['content_validation']['reject']['#access'] = $can_reject;
-      }
-      break;
+        break;
 
-    case TMGMT_JOB_ITEM_STATE_ACTIVE:
-      $form['actions']['accept_layout'] = array(
-        '#type' => 'submit',
-        '#value' => t('Approve layout'),
-        '#submit' => array('osha_tmgmt_layout_validator_approve_submit'),
-        '#validate' => array(),
-        '#access' => user_access('set job item to translated state'),
-      );
-      break;
-
-    case TMGMT_JOB_ITEM_STATE_REVIEW:
-      $form['actions']['require_content_validation'] = array(
-        '#type' => 'submit',
-        '#value' => t('Require Content Validation'),
-        '#submit' => array('osha_tmgmt_require_content_validation_submit'),
-        '#validate' => array('osha_tmgmt_require_content_validation_validate'),
-        '#access' => user_access('set job item to require content validation state'),
-      );
-      break;
+      case TMGMT_JOB_ITEM_STATE_REVIEW:
+        $form['actions']['require_content_validation'] = array(
+          '#type' => 'submit',
+          '#value' => t('Require Content Validation'),
+          '#submit' => array('osha_tmgmt_require_content_validation_submit'),
+          '#validate' => array('osha_tmgmt_require_content_validation_validate'),
+          '#access' => user_access('set job item to require content validation state'),
+        );
+        break;
+    }
   }
 }
+
 function osha_tmgmt_form_tmgmt_job_form_alter(&$form, &$form_state, $form_id) {
 
   $form['job_items_wrapper']['#attributes'] = array('class' => array('container-inline'));

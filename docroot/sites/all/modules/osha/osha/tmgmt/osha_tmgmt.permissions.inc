@@ -77,6 +77,7 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
 
       'preview layout validation',
       'view translation job item',
+      'edit translation job item',
       'set job item to translated state',
 
       'access user profiles',
@@ -116,6 +117,8 @@ function osha_tmgmt_workflow_permissions_role_layout_validator() {
       'abort job item',
       'preview layout validation',
       'set job item to translated state',
+      'view translation job item',
+      'edit translation job item',
     ),
     osha_tmgmt_workflow_permissions_common()
   );
@@ -128,9 +131,12 @@ function osha_tmgmt_workflow_permissions_role_layout_validator() {
  *   Array of permissions
  */
 function osha_tmgmt_workflow_permissions_role_content_validator() {
-  return array(
-    'abort job item',
-  );
+  return array_merge(
+    array(
+      'abort job item',
+      'edit translation job item',
+    ),
+    osha_tmgmt_workflow_permissions_common());
 }
 
 /**
@@ -139,5 +145,6 @@ function osha_tmgmt_workflow_permissions_role_content_validator() {
 function osha_tmgmt_pm_permissions() {
   return array(
     'accept job item translation',
+    'edit translation job item',
   );
 }
