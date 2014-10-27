@@ -820,8 +820,10 @@ class OshaWorkflowNotifications {
    */
   public static function notifyTranslationProjectManager($tmgmt_job_item) {
     $project_manager = osha_workflow_get_project_manager($tmgmt_job_item->item_id);
-    $users = array($project_manager);
-    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
+    if (empty($project_manager)) {
+      drupal_set_message(t('The node does not have a PM assigned. Please contact an administrator!'), 'warning');
+    }
+    OshaWorkflowNotifications::sendEmail($project_manager, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
   }
 
   /**

@@ -198,6 +198,16 @@ function osha_tmgmt_entity_property_info() {
     'required' => TRUE,
     'schema field' => 'nid',
   );
+  $properties['tjiid'] = array(
+    'label' => t("Job Item"),
+    'type' => 'tmgmt_job_item',
+    'description' => t("The Job Item that needs validation of the translation."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'tjiid',
+  );
   $properties['approved'] = array(
     'label' => t("Translation Validation Status"),
     'type' => 'text',
@@ -209,15 +219,26 @@ function osha_tmgmt_entity_property_info() {
 //    'required' => TRUE,
     'schema field' => 'approved',
   );
-//  $properties['next'] = array(
-//    'label' => t("Next"),
-//    'type' => 'integer',
-//    'description' => t("If the user is next who needs to approve"),
-//    'getter callback' => 'entity_property_verbatim_get',
-//    'schema field' => 'next',
-//  );
+  $properties['next'] = array(
+    'label' => t("Next"),
+    'type' => 'integer',
+    'description' => t("If the user is next who needs to approve"),
+    'getter callback' => 'entity_property_verbatim_get',
+    'schema field' => 'next',
+  );
+  $properties['deleted'] = array(
+    'label' => t("Deleted vote"),
+    'type' => 'integer',
+    'description' => t("If the relation is no longer valid."),
+    'getter callback' => 'entity_property_verbatim_get',
+    'schema field' => 'deleted',
+  );
 
   return $info;
+}
+
+function osha_tmgmt_entity_property_info_alter(&$info) {
+  $info['tmgmt_job_item']['properties']['state']['options list'] = 'osha_tmgmt_get_job_item_states';
 }
 
 /**
@@ -922,11 +943,8 @@ function osha_tmgmt_tmgmt_job_form_filter_submit(&$form, &$form_state) {
   drupal_set_message('Why would you do that for?', 'warning');
 }
 
-/**
- * Returns osha state label of a job item state.
- */
-function osha_tmgmt_get_job_item_state_label($state) {
-  $states = array(
+function osha_tmgmt_get_job_item_states() {
+  return array(
     TMGMT_JOB_ITEM_STATE_ACTIVE => t('On Translation'),
     TMGMT_JOB_ITEM_STATE_REVIEW => t('Translated'),
     TMGMT_JOB_ITEM_STATE_ACCEPTED => t('Published'),
@@ -935,6 +953,12 @@ function osha_tmgmt_get_job_item_state_label($state) {
     OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated => t('Content Validated'),
     OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish => t('Translation Ready to Publish'),
   );
+}
+/**
+ * Returns osha state label of a job item state.
+ */
+function osha_tmgmt_get_job_item_state_label($state) {
+  $states = osha_tmgmt_get_job_item_states();
   return $states[$state];
 }
 

@@ -36,6 +36,12 @@ function osha_tmgmt_extra_permissions() {
     'accept job item translation' => array(
       'title' => t('Accept (saves to entity) job item translation!'),
     ),
+    'view on translation content list' => array(
+      'title' => t('View "On Translation" tab from workbench'),
+    ),
+    'view needs content validation list' => array(
+      'title' => t('View "Needs Content Validation" tab from workbench'),
+    ),
   );
   return $perms;
 }
@@ -48,6 +54,7 @@ function osha_tmgmt_workflow_permissions_common() {
     'view translation content validators',
 
     'view translation job',
+    'access workbench',
 
     //@todo: remove
     'access devel information',
@@ -119,6 +126,7 @@ function osha_tmgmt_workflow_permissions_role_layout_validator() {
       'set job item to translated state',
       'view translation job item',
       'edit translation job item',
+      'view on translation content list',
     ),
     osha_tmgmt_workflow_permissions_common()
   );
@@ -135,6 +143,7 @@ function osha_tmgmt_workflow_permissions_role_content_validator() {
     array(
       'abort job item',
       'edit translation job item',
+      'view needs content validation list',
     ),
     osha_tmgmt_workflow_permissions_common());
 }

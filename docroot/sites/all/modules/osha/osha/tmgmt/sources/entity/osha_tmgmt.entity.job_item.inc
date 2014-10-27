@@ -107,14 +107,14 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
     $this->state = OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish;
     global $user;
     $this->save();
-    $this->addMessage('@name: Translation requires Content Validation. Job item is now "@state". Message: @message',
+    $this->addMessage('@name: Translation is ready to be published. Job item is now "@state". Message: @message',
       array(
         '@name' => $user->name,
         '@state' => osha_tmgmt_get_job_item_state_label(OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish),
         '@message' => $message,
       ));
     OshaWorkflowNotifications::notifyTranslationProjectManager($this);
-    drupal_set_message(t('You have Required Translation Validation for this translation'));
+    drupal_set_message(t('You have set Translation as Ready to Publish.'));
   }
 
 }
