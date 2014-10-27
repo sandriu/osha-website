@@ -15,6 +15,9 @@ function osha_tmgmt_extra_permissions() {
     'view translation job item' => array(
       'title' => t('View the job item details'),
     ),
+    'edit translation job item' => array(
+      'title' => t('Can edit job item no matter the state.'),
+    ),
     'view translation content validators' => array(
       'title' => t('View the job item Content Validators'),
     ),
@@ -54,7 +57,8 @@ function osha_tmgmt_workflow_permissions_common() {
     'view translation content validators',
 
     'view translation job',
-    'access workbench',
+    // TODO checko why fails on install if access workbench permission added here.
+//    'access workbench',
 
     //@todo: remove
     'access devel information',
@@ -125,7 +129,6 @@ function osha_tmgmt_workflow_permissions_role_layout_validator() {
       'preview layout validation',
       'set job item to translated state',
       'view translation job item',
-      'edit translation job item',
       'view on translation content list',
     ),
     osha_tmgmt_workflow_permissions_common()
@@ -142,7 +145,6 @@ function osha_tmgmt_workflow_permissions_role_content_validator() {
   return array_merge(
     array(
       'abort job item',
-      'edit translation job item',
       'view needs content validation list',
     ),
     osha_tmgmt_workflow_permissions_common());
@@ -154,6 +156,5 @@ function osha_tmgmt_workflow_permissions_role_content_validator() {
 function osha_tmgmt_pm_permissions() {
   return array(
     'accept job item translation',
-    'edit translation job item',
   );
 }
