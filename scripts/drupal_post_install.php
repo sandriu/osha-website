@@ -214,7 +214,7 @@ function osha_configure_addtoany_social_share() {
     'highlight' => 'highlight',
     'job_vacancies' => 0,
     'newsletter_article' => 0,
-    'press_release' => 0,
+    'press_release' => 'press_release',
     'publication' => 0,
     'wiki_page' => 0,
     )
