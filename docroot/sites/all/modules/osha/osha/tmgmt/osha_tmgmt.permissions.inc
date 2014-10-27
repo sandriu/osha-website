@@ -1,5 +1,45 @@
 <?php
 
+/**
+ * Define extra permissions used by this module.
+ */
+function osha_tmgmt_extra_permissions() {
+  $perms = array(
+    'preview layout validation' => array(
+      'title' => t('Access node layout validation preview screen'),
+      'description' => t('Allows Layout Validators to preview the node before accepting translation'),
+    ),
+    'view translation job' => array(
+      'title' => t('View the list of translation jobs and job details'),
+    ),
+    'view translation job item' => array(
+      'title' => t('View the job item details'),
+    ),
+    'view translation content validators' => array(
+      'title' => t('View the job item Content Validators'),
+    ),
+    'edit translation content validators' => array(
+      'title' => t('Edit the job item Content Validators'),
+    ),
+    'set job item to translated state' => array(
+      'title' => t('View the job to Translated state'),
+    ),
+    'set job item to require content validation state' => array(
+      'title' => t('Can set the job item to Require Content Validation'),
+    ),
+    'set job item to ready to publish state' => array(
+      'title' => t('Can set the job item to Translation Ready to Publish'),
+    ),
+    'abort job item' => array(
+      'title' => t('Can abort a job item.'),
+    ),
+    'accept job item translation' => array(
+      'title' => t('Accept (saves to entity) job item translation!'),
+    ),
+  );
+  return $perms;
+}
+
 function osha_tmgmt_workflow_permissions_common() {
   return array(
     'access dashboard',
@@ -90,5 +130,14 @@ function osha_tmgmt_workflow_permissions_role_layout_validator() {
 function osha_tmgmt_workflow_permissions_role_content_validator() {
   return array(
     'abort job item',
+  );
+}
+
+/**
+ * Extra permissions for Project Managers (workflow).
+ */
+function osha_tmgmt_pm_permissions() {
+  return array(
+    'accept job item translation',
   );
 }
