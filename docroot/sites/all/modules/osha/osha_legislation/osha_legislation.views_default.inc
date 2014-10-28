@@ -287,10 +287,10 @@ function osha_legislation_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'legislation/guidelines/%';
 
-  /* Display: All Guidelines */
-  $handler = $view->new_display('block', 'All Guidelines', 'block_1');
+  /* Display: Guidelines by topics */
+  $handler = $view->new_display('block', 'Guidelines by topics', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'All Guidelines';
+  $handler->display->display_options['title'] = 'Guidelines by topics';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['grouping'] = array(
@@ -324,6 +324,43 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Taxonomy term: Guideline Category Code */
+  $handler->display->display_options['fields']['field_guideline_category_code']['id'] = 'field_guideline_category_code';
+  $handler->display->display_options['fields']['field_guideline_category_code']['table'] = 'field_data_field_guideline_category_code';
+  $handler->display->display_options['fields']['field_guideline_category_code']['field'] = 'field_guideline_category_code';
+  $handler->display->display_options['fields']['field_guideline_category_code']['relationship'] = 'field_legislation_category_tid';
+  $handler->display->display_options['fields']['field_guideline_category_code']['label'] = '';
+  $handler->display->display_options['fields']['field_guideline_category_code']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_guideline_category_code']['element_label_colon'] = FALSE;
+  /* Field: Content: Legislation category */
+  $handler->display->display_options['fields']['field_legislation_category']['id'] = 'field_legislation_category';
+  $handler->display->display_options['fields']['field_legislation_category']['table'] = 'field_data_field_legislation_category';
+  $handler->display->display_options['fields']['field_legislation_category']['field'] = 'field_legislation_category';
+  $handler->display->display_options['fields']['field_legislation_category']['label'] = '';
+  $handler->display->display_options['fields']['field_legislation_category']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_legislation_category']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_legislation_category']['alter']['path'] = 'legislation/guidelines/[field_guideline_category_code]';
+  $handler->display->display_options['fields']['field_legislation_category']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_legislation_category']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['relationship'] = 'field_legislation_category_tid';
+  /* Sort criterion: Content: Publication Date (field_publication_date) */
+  $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['sorts']['field_publication_date_value']['order'] = 'DESC';
   $translatables['legislation_guidelines'] = array(
     t('Master'),
     t('Legislation'),
@@ -338,7 +375,7 @@ function osha_legislation_views_default_views() {
     t('Get the actual content from a content revision.'),
     t('All'),
     t('Page'),
-    t('All Guidelines'),
+    t('Guidelines by topics'),
   );
   $export['legislation_guidelines'] = $view;
 
