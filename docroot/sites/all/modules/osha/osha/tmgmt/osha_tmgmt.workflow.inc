@@ -171,9 +171,10 @@ function osha_tmgmt_translation_validators_submit($form, &$form_state) {
             $users_name[] = $user->name;
             osha_tmgmt_add_translation_validator($user->uid, $job_item, $idx, $next);
           }
+
           // Save message to job item.
           global $user;
-          $form_state['jobItem']->addMessage('@name assigned group "@group" default content validators: @validators',
+          $job_item->addMessage('@name assigned group "@group" default content validators: @validators',
             array(
               '@name' => $user->name,
               '@group' => $entity_group->name,
