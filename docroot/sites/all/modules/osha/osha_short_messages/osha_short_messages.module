@@ -63,6 +63,16 @@ function osha_short_messages_form($form, &$form_state){
   //remove links
   $display['links'] = FALSE;
   $display['#contextual_links'] = FALSE;
+  //remove publication formatter links
+  foreach($display['field_file'] as $key => $field){
+    if(is_array($field) && isset($field['contextual_links']))
+      unset($display['field_file'][$key]['contextual_links']);
+  }
+
+  foreach($display['field_publication_bookshop_id'] as $key => $field){
+    if(is_array($field) && isset($field['contextual_links']))
+      unset($display['field_publication_bookshop_id'][$key]['contextual_links']);
+  }
 
   //remove some fields from default view
   $display['title_field'] = FALSE;
