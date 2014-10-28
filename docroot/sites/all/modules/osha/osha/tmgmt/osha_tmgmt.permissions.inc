@@ -146,6 +146,7 @@ function osha_tmgmt_workflow_permissions_role_content_validator() {
     array(
       'abort job item',
       'view needs content validation list',
+      'view translation job item',
     ),
     osha_tmgmt_workflow_permissions_common());
 }
@@ -156,5 +157,6 @@ function osha_tmgmt_workflow_permissions_role_content_validator() {
 function osha_tmgmt_pm_permissions() {
   return array(
     'accept job item translation',
+    'view translation job item',
   );
 }

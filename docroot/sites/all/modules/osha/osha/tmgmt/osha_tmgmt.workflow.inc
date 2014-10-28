@@ -74,6 +74,12 @@ function osha_tmgmt_user_can_edit_job_item($job_item) {
         return TRUE;
       }
       break;
+
+    case OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish:
+      if (user_access('accept job item translation')) {
+        return TRUE;
+      }
+      break;
   }
   return FALSE;
 }
