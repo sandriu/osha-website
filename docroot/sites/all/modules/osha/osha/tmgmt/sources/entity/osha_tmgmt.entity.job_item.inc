@@ -103,6 +103,23 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
   /**
    * Move the Job Item to Translation Validation Required state.
    */
+  public function toTranslationRejected($message = '') {
+    $this->state = TMGMT_JOB_ITEM_STATE_ABORTED;
+    global $user;
+    $this->save();
+    $this->addMessage('@name: Translation Rejected. Job item is now "@state". Message: @message',
+      array(
+        '@name' => $user->name,
+        '@state' => osha_tmgmt_get_job_item_state_label(OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired),
+        '@message' => $message,
+      ));
+    OshaWorkflowNotifications::notifyTranslationValidators($this);
+    drupal_set_message(t('You have Rejected this translation'));
+  }
+
+  /**
+   * Move the Job Item to Translation Validation Required state.
+   */
   public function toTranslationReadyToPublish($message = '') {
     $this->state = OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish;
     global $user;

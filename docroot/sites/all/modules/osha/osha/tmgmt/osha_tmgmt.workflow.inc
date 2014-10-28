@@ -167,7 +167,6 @@ function osha_tmgmt_translation_validators_submit($form, &$form_state) {
             $users_name[] = $user->name;
             osha_tmgmt_add_translation_validator($user->uid, $job_item, $idx, $next);
           }
-
           // Save message to job item.
           global $user;
           $job_item->addMessage('@name assigned group "@group" default content validators: @validators',
@@ -532,17 +531,18 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
  */
 function osha_tmgmt_job_item_translation_reject($form, &$form_state) {
   $job_item = $form_state['item'];
-  $validators = osha_tmgmt_load_validators_by_job_item($job_item);
-  $last = end($validators);
-  global $user;
-  if ($user->uid == $last->uid && $last->next == 1) {
-    $last->message = $form_state['values']['content_validation']['message'];
-    $last->approved = OSHA_TMGMT_TRANS_VALID_REJECTED;
-    $last->next = 0;
-    entity_save('translation_validator', $last);
-    $job_item->state = TMGMT_JOB_ITEM_STATE_ABORTED;
-    $job_item->save();
+  if ($job_item->state == OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired) {
+    $validators = osha_tmgmt_load_validators_by_job_item($job_item);
+    $last = end($validators);
+    global $user;
+    if ($user->uid == $last->uid && $last->next == 1) {
+      $last->message = $form_state['values']['content_validation']['message'];
+      $last->approved = OSHA_TMGMT_TRANS_VALID_REJECTED;
+      $last->next = 0;
+      entity_save('translation_validator', $last);
+    }
   }
+  $job_item->toTranslationRejected();
 }
 
 /**

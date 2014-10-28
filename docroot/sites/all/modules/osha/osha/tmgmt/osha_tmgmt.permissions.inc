@@ -100,6 +100,9 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
       'set job item to ready to publish state',
       'abort job item',
       'osha tmgmt upload translation file',
+
+      // Translate tab on nodes.
+      'translate node entities',
     ),
     osha_tmgmt_workflow_permissions_common()
   );
