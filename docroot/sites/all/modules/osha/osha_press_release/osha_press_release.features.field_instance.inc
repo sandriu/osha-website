@@ -732,7 +732,7 @@ function osha_press_release_field_default_field_instances() {
           'multiple_to' => '',
           'osha_date_theme' => '',
         ),
-        'type' => 'date_default',
+        'type' => 'custom',
         'weight' => 0,
       ),
       'highlights_item' => array(
@@ -752,7 +752,7 @@ function osha_press_release_field_default_field_instances() {
           'multiple_to' => '',
           'osha_date_theme' => '',
         ),
-        'type' => 'date_default',
+        'type' => 'custom',
         'weight' => 1,
       ),
       'osha_slideshow' => array(
