@@ -235,6 +235,12 @@ function fill_related_wiki(&$vars) {
  */
 function osha_frontend_process_node(&$vars) {
   // Change default text of the read more link.
+  if ($vars['type'] != 'press_release' && $vars['view_mode'] == 'full') {
+    if (isset($vars['content']['links']['print_pdf'])) {
+      // only press release could be downloaded as pdf
+      unset($vars['content']['links']['print_pdf']);
+    }
+  }
   if ($vars['type'] == 'publication' && $vars['view_mode'] == 'full' ) {
     fill_related_publications($vars);
   }
