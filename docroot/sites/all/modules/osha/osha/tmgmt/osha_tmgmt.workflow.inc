@@ -591,6 +591,24 @@ function osha_tmgmt_ready_to_publish_submit($form, &$form_state) {
   $job_item->toTranslationReadyToPublish($message);
 }
 
+function osha_tmgmt_job_item_accept_validate($form, &$form_state) {
+  if (!user_access('accept job item translation')) {
+    form_set_error('actions][accept', t('You do not have the rights to make this action'));
+  }
+}
+
+function osha_tmgmt_job_item_accept_submit($form, &$form_state) {
+  $job_item = $form_state['item'];
+  $message = '';
+  if (!empty($form_state['values']['action_message'])) {
+    $message = $form_state['values']['action_message'];
+  }
+  $job_item->acceptTranslationIntoEntity($message);
+  if ($job_item->isAccepted()) {
+    $uri = $job_item->uri();
+    $form_state['redirect'] = $uri['path'];
+  }
+}
 
   /**
    * Themes the workflow_moderation_form form.

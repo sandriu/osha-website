@@ -812,7 +812,12 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
   }
 
   if (!empty($form['actions']['accept'])) {
-    $form['actions']['accept']['#access'] = user_access('accept job item translation');
+    $can_accept = user_access('accept job item translation')
+      && $job_item->state != TMGMT_JOB_ITEM_STATE_ACCEPTED
+      && $job_item->state != TMGMT_JOB_ITEM_STATE_ABORTED;
+    $form['actions']['accept']['#access'] = $can_accept;
+    $form['actions']['accept']['#submit'] = array('osha_tmgmt_job_item_accept_submit');
+    $form['actions']['accept']['#validate'] = array('osha_tmgmt_job_item_accept_validate');
   }
 
 

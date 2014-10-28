@@ -117,6 +117,19 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
     drupal_set_message(t('You have set Translation as Ready to Publish.'));
   }
 
+  public function acceptTranslationIntoEntity($message = '') {
+    $controller = $this->getSourceController();
+    $controller->saveTranslation($this);
+
+    global $user;
+    $this->addMessage('@name: Translation is now accepted and saved to node. Job item is now "@state". Message: @message',
+      array(
+        '@name' => $user->name,
+        '@state' => osha_tmgmt_get_job_item_state_label(TMGMT_JOB_ITEM_STATE_ACCEPTED),
+        '@message' => $message,
+      ));
+    $this->save();
+  }
 }
 
 
