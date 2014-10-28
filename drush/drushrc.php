@@ -344,6 +344,7 @@ $options['init-modules'] = array(
   'mpac',
   'linkit',
   'scanner',
+  'search_and_replace',
 
   // Enable last (conflict with rules)
   'uuid',
