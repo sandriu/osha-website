@@ -1334,6 +1334,8 @@ class OshaTMGMTStatistics {
         throw new TMGMTException(t('Unable to load entity %type with id %id', array('%type' => $job_item->item_type, $job_item->item_id)));
       }
       self::computeEntityStatistics($entity, $job_item->item_type);
+      $job_item->character_count = $entity->character_count;
+      $job_item->page_count = $entity->page_count;
     }
     else {
       $data = $job_item->getSourceData();
@@ -1381,7 +1383,7 @@ class OshaTMGMTStatistics {
     $items = $job->getItems();
     /* @var TMGMTJobItem $item */
     foreach ($items as $item) {
-      if ($item->character_count == 0) {
+      if (empty($item->character_count)) {
         self::computeJobItemStatistics($item);
       }
     }
