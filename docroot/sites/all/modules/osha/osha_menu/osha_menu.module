@@ -54,7 +54,7 @@ function osha_menu_post_features_revert($component) {
       drupal_set_message('Could not find the menu images source directory', 'warning');
       return;
     }
-    if (!file_prepare_directory($image_dest_dir)) {
+    if (!file_prepare_directory($image_dest_dir, FILE_CREATE_DIRECTORY)) {
       drupal_set_message("Could not create menuimage directory ($image_dest_dir)", 'warning');
       return;
     }
