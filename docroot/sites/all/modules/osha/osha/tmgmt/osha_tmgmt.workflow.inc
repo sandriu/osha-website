@@ -26,8 +26,6 @@ function osha_tmgmt_workflow_create_roles() {
       user_role_save($role);
     }
     user_role_grant_permissions($role->rid, $permissions);
-    // Grant workbench access for this role.
-    workbench_access_role_section_save($role->rid, 'main-menu', 'menu');
   }
 }
 
