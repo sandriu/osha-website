@@ -14,6 +14,7 @@ osha_disable_blocks();
 osha_configure_permissions();
 osha_configure_recaptcha();
 osha_configure_on_the_web();
+osha_configure_print_pdf();
 osha_add_menu_position_rules();
 osha_add_agregator_rss_feeds();
 
@@ -305,6 +306,41 @@ function osha_configure_on_the_web() {
   variable_set('on_the_web_facebook_page', 'http://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork');
   variable_set('on_the_web_flickr_page', 'http://www.flickr.com/photos/euosha/');
   variable_set('on_the_web_twitter_page', 'http://twitter.com/eu_osha');
+}
+
+/**
+ * Add configuration for print, print_pdf contrib modules.
+ */
+function osha_configure_print_pdf(){
+  if (module_exists('print_pdf') && module_load_include('inc', 'print_pdf', 'print_pdf.admin')) {
+    drupal_set_message('Configuring print and print_pdf contrib modules ...');
+
+    variable_set('print_pdf_link_text_enabled', 1);
+    variable_set('print_pdf_link_text', 'Download as PDF');
+
+    variable_set('print_html_link_pos', array (
+      'link' => 0,
+      'corner' => 0,
+      'block' => 0,
+      'help' => 0,
+    ));
+    variable_set('print_pdf_link_pos', array (
+      'link' => 'link',
+      'corner' => 0,
+      'block' => 0,
+      'help' => 0,
+    ));
+    variable_set('print_html_book_link', 0);
+    variable_set('print_pdf_book_link', 2);
+
+    $form_state = array(
+        'values' => array(
+          'op' => 'Save configuration',
+        )
+    );
+
+    drupal_form_submit('print_pdf_settings', $form_state);
+  }
 }
 
 /**
