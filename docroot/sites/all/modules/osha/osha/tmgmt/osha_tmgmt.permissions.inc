@@ -48,6 +48,10 @@ function osha_tmgmt_extra_permissions() {
     'view needs content validation list' => array(
       'title' => t('View "Needs Content Validation" tab from workbench'),
     ),
+    'view untranslated jobs' => array(
+      'title' => t('View "Needs Translation" tab from workbench'),
+      'description' => t('Applies to translation liaison role'),
+    ),
     'manage content in translators group entity collections' => array(
       'title' => t('Manage Content Validators Groups'),
     ),
@@ -122,6 +126,7 @@ function osha_tmgmt_workflow_permissions_role_translation_liaison() {
   return array_merge(
     array(
       'view translation job item',
+      'view untranslated jobs',
     ),
     osha_tmgmt_workflow_permissions_common()
   );
