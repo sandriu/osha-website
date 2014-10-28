@@ -6,6 +6,10 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
    * {@inheritdoc}
    */
   public function addTranslatedData($translation, $key = array()) {
+    if ($this->item_type != 'node') {
+      $this->addTranslatedDataToNonNodes($translation, $key);
+      return;
+    }
     $this->addTranslatedDataRecursive($translation, $key);
     // Check if the job item has all the translated data that it needs now.
     // Only attempt to change the status to needs review if it is currently
@@ -35,6 +39,53 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
       drupal_set_message(
         t('The translation of !source to @language is uploaded and can now be <a href="!review_url">reviewed</a>.',
           $variables));
+    }
+    $this->save();
+  }
+
+  /**
+   * Executes for entities that are not nodes.
+   */
+  public function addTranslatedDataToNonNodes($translation, $key = array()) {
+    $this->addTranslatedDataRecursive($translation, $key);
+    // Check if the job item has all the translated data that it needs now.
+    // Only attempt to change the status to needs review if it is currently
+    // active.
+    if ($this->isActive()) {
+      $data = tmgmt_flatten_data($this->getData());
+      $data = array_filter($data, '_tmgmt_filter_data');
+      $finished = TRUE;
+      foreach ($data as $item) {
+        if (empty($item['#status']) || $item['#status'] == TMGMT_DATA_ITEM_STATE_PENDING) {
+          $finished = FALSE;
+          break;
+        }
+      }
+      if ($finished) {
+        // There are no unfinished elements left.
+        if ($this->getJob()->getTranslator()->getSetting('auto_accept')) {
+          // If the job item is going to be auto-accepted, set to review without
+          // a message.
+          $this->needsReview(FALSE);
+        }
+        else {
+          // Otherwise, create a message that contains source label, target
+          // language and links to the review form.
+          $uri = $this->uri();
+          $job_uri = $this->getJob()->uri();
+          $wrapper = entity_metadata_wrapper($this->entityType, $this);
+          $target_language = $wrapper->target_language->label();
+          $variables = array(
+            '!source' => l($this->getSourceLabel(), $uri['path']),
+            '@language' => $target_language,
+            '!review_url' => url($uri['path'], array('query' => array('destination' => $job_uri['path']))),
+          );
+          $msg = t('The translation of !source to @language is uploaded and can now be <a href="!review_url">reviewed</a>.',
+            $variables);
+          drupal_set_message($msg);
+          $this->needsReview($msg);
+        }
+      }
     }
     $this->save();
   }
@@ -153,6 +204,10 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
    *   means that it will replace the whole translated data array.
    */
   protected function addTranslatedDataRecursive($translation, $key = array()) {
+    if ($this->item_type != 'node') {
+      parent::addTranslatedDataRecursive($translation, $key);
+      return;
+    }
     if (isset($translation['#text'])) {
       $data = $this->getData(tmgmt_ensure_keys_array($key));
 
