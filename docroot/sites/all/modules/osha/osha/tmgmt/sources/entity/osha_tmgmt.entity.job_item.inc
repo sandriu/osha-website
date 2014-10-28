@@ -6,13 +6,6 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
    * {@inheritdoc}
    */
   public function addTranslatedData($translation, $key = array()) {
-    if ($this->state != TMGMT_JOB_ITEM_STATE_ACTIVE
-      && $this->state != TMGMT_JOB_ITEM_STATE_ABORTED) {
-      drupal_set_message(
-        t('The translation of @job_item was skipped.',
-          array('@job_item' => $this->label())));
-      return;
-    }
     $this->addTranslatedDataRecursive($translation, $key);
     // Check if the job item has all the translated data that it needs now.
     // Only attempt to change the status to needs review if it is currently
@@ -38,7 +31,6 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
         '@language' => $target_language,
         '!review_url' => url($uri['path'], array('query' => array('destination' => $job_uri['path']))),
       );
-      $this->state = TMGMT_JOB_ITEM_STATE_ACTIVE;
 
       drupal_set_message(
         t('The translation of !source to @language is uploaded and can now be <a href="!review_url">reviewed</a>.',

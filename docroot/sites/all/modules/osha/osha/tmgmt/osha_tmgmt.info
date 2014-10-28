@@ -26,6 +26,7 @@ files[] = views/handlers/osha_tmgmt_handler_fields_tmgmt_job_item.inc
 files[] = views/handlers/osha_tmgmt_handler_fields_tmgmt_job.inc
 files[] = views/handlers/tmgmt_i18n_string.plugin.inc
 files[] = sources/entity/osha_tmgmt_entity.plugin.inc
+files[] = sources/entity/osha_tmgmt.entity.job.inc
 files[] = sources/entity/osha_tmgmt.entity.job_item.inc
 files[] = sources/i18n_string/tmgmt_i18n_string.plugin.inc
 files[] = osha_tmgmt.entity_collection_bundles_default.inc

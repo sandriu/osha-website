@@ -156,6 +156,7 @@ function osha_tmgmt_workflow_permissions_role_layout_validator() {
 function osha_tmgmt_workflow_permissions_role_content_validator() {
   return array_merge(
     array(
+      'preview layout validation',
       'abort job item',
       'view needs content validation list',
       'view translation job item',
@@ -170,5 +171,6 @@ function osha_tmgmt_pm_permissions() {
   return array(
     'accept job item translation',
     'view translation job item',
+    'view translation job',
   );
 }

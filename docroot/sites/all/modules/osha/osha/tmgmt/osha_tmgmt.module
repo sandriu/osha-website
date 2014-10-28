@@ -293,6 +293,7 @@ function osha_tmgmt_entity_info_alter(&$entity_info) {
     $entity_info['tmgmt_job_item']['metadata controller class'] = 'OshaTMGMTJobItemMetadataController';
   }
   if (isset($entity_info['tmgmt_job'])) {
+    $entity_info['tmgmt_job']['entity class'] = 'OshaTMGMTJob';
     $entity_info['tmgmt_job']['views controller class'] = 'OshaTMGMTJobViewsController';
     // Override tmgmt_job_access to allow 'Translator Liaison' to view the jobs.
     $entity_info['tmgmt_job']['access callback'] = 'osha_tmgmt_job_access';
