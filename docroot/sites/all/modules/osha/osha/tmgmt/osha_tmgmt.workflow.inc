@@ -588,12 +588,18 @@ function osha_tmgmt_ready_to_publish_submit($form, &$form_state) {
   $job_item->toTranslationReadyToPublish($message);
 }
 
+/**
+ * Validation Callback for Save as Completed action.
+ */
 function osha_tmgmt_job_item_accept_validate($form, &$form_state) {
   if (!user_access('accept job item translation')) {
     form_set_error('actions][accept', t('You do not have the rights to make this action'));
   }
 }
 
+/**
+ * Callback for Save as Cpmpleted button.
+ */
 function osha_tmgmt_job_item_accept_submit($form, &$form_state) {
   $job_item = $form_state['item'];
   $message = '';
@@ -605,6 +611,13 @@ function osha_tmgmt_job_item_accept_submit($form, &$form_state) {
     $uri = $job_item->uri();
     $form_state['redirect'] = $uri['path'];
   }
+}
+
+/**
+ * Extra callback for Uploading XML file on a job.
+ */
+function osha_tmgmt_file_translation_upload_submit($form, &$form_state) {
+  OshaWorkflowNotifications::notifyTranslationUploadedFile($form_state['tmgmt_job']);
 }
 
   /**

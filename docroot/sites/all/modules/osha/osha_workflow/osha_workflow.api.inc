@@ -779,6 +779,17 @@ class OshaWorkflowNotifications {
   }
 
   /**
+   * TRANS_TM_US_13 Notify Translation Manager when a new file is uplaoded.
+   *
+   * @param TMGMTJob $tmgmt_job
+   *   Job created
+   */
+  public static function notifyTranslationUploadedFile($tmgmt_job) {
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job' => $tmgmt_job), 'osha_tmgmt');
+  }
+
+  /**
    * Notify Translation Manager that Layout is Approved.
    *
    * @param TMGMTJobItem|OshaTMGMTJobItem $tmgmt_job_item

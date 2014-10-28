@@ -587,11 +587,11 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       if (!user_access('accept translation jobs')) {
         // Make the form read-only
         // @todo:urgent:possible security issue - upload XML as translator liaison
-        $form['translator_wrapper']['#access'] = FALSE;
         $form['info']['label']['#disabled'] = TRUE;
         $form['actions']['submit']['#access'] = FALSE;
         $form['actions']['cancel']['#title'] = t('Back');
       }
+
       $languages = tmgmt_available_languages();
       $job = $form_state['tmgmt_job'];
 
@@ -658,10 +658,14 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       hide($form['info']['target_language']);
       hide($form['info']['translator']);
       if (!user_access('osha tmgmt upload translation file')) {
-        hide($form['translator_wrapper']);
+        $form['translator_wrapper']['#access'] = FALSE;
         if (isset($form['job_items_wrapper']['suggestions'])) {
           hide($form['job_items_wrapper']['suggestions']);
         }
+      }
+      else {
+        $form['translator_wrapper']['info']['submit']['#submit'][]
+          = 'osha_tmgmt_file_translation_upload_submit';
       }
       if (isset($form['info']['created'])) {
         $created = $form['info']['created'];

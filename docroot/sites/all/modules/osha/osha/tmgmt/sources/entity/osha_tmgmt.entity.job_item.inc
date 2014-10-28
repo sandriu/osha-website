@@ -9,7 +9,7 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
     if ($this->state != TMGMT_JOB_ITEM_STATE_ACTIVE
       && $this->state != TMGMT_JOB_ITEM_STATE_ABORTED) {
       drupal_set_message(
-        t('The translation of @job_imem was skipped.',
+        t('The translation of @job_item was skipped.',
           array('@job_item' => $this->label())));
       return;
     }
