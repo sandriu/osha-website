@@ -170,10 +170,9 @@ function fill_related_publications(&$vars) {
 function fill_related_wiki(&$vars) {
   $wiki_articles_no = 0;
   $vars['tagged_wiki'] = array();
-  if (isset($vars['field_related_oshwiki_articles'])) {
+  if (!empty($vars['field_related_oshwiki_articles'])) {
     $manual_wiki_articles = $vars['field_related_oshwiki_articles'][LANGUAGE_NONE];
     $wiki_articles_no = sizeof($manual_wiki_articles);
-    $vars['total_wiki'] = $wiki_articles_no;
     // add manually tagged wiki articles (hidden in display mode)
     foreach ($manual_wiki_articles as $related_wiki) {
       $node = node_load($related_wiki['target_id']);
@@ -220,7 +219,6 @@ function fill_related_wiki(&$vars) {
         ->pager($limit)
         ->execute();
       if (!empty($result)) {
-        $vars['total_wiki'] = $wiki_articles_no + sizeof($result['node']);
         foreach ($result['node'] as $n) {
           $node = node_load($n->nid);
           $vars['tagged_wiki'][] = node_view($node,'osha_wiki');
