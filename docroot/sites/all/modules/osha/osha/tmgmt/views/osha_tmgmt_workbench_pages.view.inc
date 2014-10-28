@@ -27,6 +27,7 @@ $handler->display->display_options['fields']['tjiid']['id'] = 'tjiid';
 $handler->display->display_options['fields']['tjiid']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['fields']['tjiid']['field'] = 'tjiid';
 $handler->display->display_options['fields']['tjiid']['label'] = 'Job Item ID';
+$handler->display->display_options['fields']['tjiid']['exclude'] = TRUE;
 /* Field: Translation Management Job Item: Label */
 $handler->display->display_options['fields']['label']['id'] = 'label';
 $handler->display->display_options['fields']['label']['table'] = 'tmgmt_job_item';
@@ -178,6 +179,76 @@ $handler->display->display_options['menu']['title'] = 'Translations Needs Review
 $handler->display->display_options['menu']['weight'] = '0';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+/* Display: Translation Overview */
+$handler = $view->new_display('page', 'Translation Overview', 'page_4');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Translation Overview';
+$handler->display->display_options['defaults']['access'] = FALSE;
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'create translation jobs';
+$handler->display->display_options['defaults']['relationships'] = FALSE;
+/* Relationship: Translation Management Job Item: Tjid */
+$handler->display->display_options['relationships']['tjid']['id'] = 'tjid';
+$handler->display->display_options['relationships']['tjid']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['relationships']['tjid']['field'] = 'tjid';
+$handler->display->display_options['relationships']['tjid']['required'] = TRUE;
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Translation Management Job Item: Translation management job item ID */
+$handler->display->display_options['fields']['tjiid']['id'] = 'tjiid';
+$handler->display->display_options['fields']['tjiid']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['tjiid']['field'] = 'tjiid';
+$handler->display->display_options['fields']['tjiid']['label'] = 'Job Item ID';
+$handler->display->display_options['fields']['tjiid']['exclude'] = TRUE;
+/* Field: Translation Management Job Item: Label */
+$handler->display->display_options['fields']['label']['id'] = 'label';
+$handler->display->display_options['fields']['label']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['label']['field'] = 'label';
+/* Field: Translation Management Job: Label */
+$handler->display->display_options['fields']['label_1']['id'] = 'label_1';
+$handler->display->display_options['fields']['label_1']['table'] = 'tmgmt_job';
+$handler->display->display_options['fields']['label_1']['field'] = 'label';
+$handler->display->display_options['fields']['label_1']['relationship'] = 'tjid';
+$handler->display->display_options['fields']['label_1']['label'] = 'Job';
+/* Field: Translation Management Job Item: Item type */
+$handler->display->display_options['fields']['item_type']['id'] = 'item_type';
+$handler->display->display_options['fields']['item_type']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['item_type']['field'] = 'item_type';
+/* Field: Translation Management Job Item: Source language */
+$handler->display->display_options['fields']['source_language']['id'] = 'source_language';
+$handler->display->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['source_language']['field'] = 'source_language';
+/* Field: Translation Management Job Item: Target language */
+$handler->display->display_options['fields']['target_language']['id'] = 'target_language';
+$handler->display->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['target_language']['field'] = 'target_language';
+/* Field: Translation Management Job Item: URL */
+$handler->display->display_options['fields']['url']['id'] = 'url';
+$handler->display->display_options['fields']['url']['table'] = 'views_entity_tmgmt_job_item';
+$handler->display->display_options['fields']['url']['field'] = 'url';
+$handler->display->display_options['fields']['url']['alter']['alter_text'] = TRUE;
+$handler->display->display_options['fields']['url']['alter']['text'] = 'View';
+$handler->display->display_options['fields']['url']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['url']['alter']['path'] = '[url]';
+$handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
+$handler->display->display_options['fields']['url']['link_to_entity'] = 1;
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Translation Management Job: State */
+$handler->display->display_options['filters']['state_1']['id'] = 'state_1';
+$handler->display->display_options['filters']['state_1']['table'] = 'tmgmt_job';
+$handler->display->display_options['filters']['state_1']['field'] = 'state';
+$handler->display->display_options['filters']['state_1']['relationship'] = 'tjid';
+$handler->display->display_options['filters']['state_1']['value'] = array(
+  0 => '0',
+  1 => '1',
+);
+$handler->display->display_options['path'] = 'admin/workbench/translation-overview';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'Translation Overview';
+$handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
 $translatables['osha_translation_workbench'] = array(
   t('Master'),
   t('On Translation'),
@@ -210,4 +281,7 @@ $translatables['osha_translation_workbench'] = array(
   t('Needs Review TM'),
   t('Needs Review PM'),
   t('Translations Needs Review PM'),
+  t('Translation Overview'),
+  t('Translation Management Job'),
+  t('Job'),
 );
