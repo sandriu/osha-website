@@ -126,51 +126,39 @@ function osha_frontend_apachesolr_sort_list($vars) {
  * Called from hook_preprocess_node
  */
 function fill_related_publications(&$vars) {
-  $num_related_publications = 0;
-  if (isset($vars['field_related_man_pubs'])) {
-    $num_related_publications = sizeof($vars['field_related_man_pubs']);
+  $vars['total_related_publications'] = 0;
+  // get 3 related publications by common tags
+  $tags_tids = array();
+  if (!empty($vars['field_tags'])) {
+    $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
   }
 
-  $vars['total_related_publications'] = 0;
-  if ($num_related_publications < 3) {
-    $limit = 3 - $num_related_publications;
-    // get 3-$num_related_publications tagged publications
-    $tags_tids = array();
-    if (!empty($vars['field_tags'])) {
-      $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
+  if (!empty($tags_tids)) {
+    // query all publications with the same tags
+    $tids = array();
+    foreach ($tags_tids as $tid) {
+      array_push($tids, $tid['tid']);
     }
 
-    if (!empty($tags_tids)) {
-      // query all publications with the same tags
-      $tids = array();
-      foreach ($tags_tids as $tid) {
-        array_push($tids, $tid['tid']);
-      }
+    $query = new EntityFieldQuery();
+    // exclude self
+    $excluded_nids = array();
+    array_push($excluded_nids, $vars['node']->nid);
 
-      $query = new EntityFieldQuery();
-      // exclude self and manually related
-      $excluded_nids = array();
-      array_push($excluded_nids, $vars['node']->nid);
-      if (!empty($vars['field_related_man_pubs'])) {
-        foreach ($vars['field_related_man_pubs'] as $related_pub) {
-          array_push($excluded_nids, $related_pub['entity']->nid);
-        }
-      }
-      $result = $query->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', 'publication')
-        ->entityCondition('entity_id', $excluded_nids, 'NOT IN')
-        ->fieldCondition('field_tags', 'tid', $tids, 'IN')
-        ->propertyOrderBy('changed', 'DESC')
-        ->pager($limit)
-        ->execute();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'publication')
+      ->entityCondition('entity_id', $excluded_nids, 'NOT IN')
+      ->fieldCondition('field_tags', 'tid', $tids, 'IN')
+      ->propertyOrderBy('changed', 'DESC')
+      ->pager(3)
+      ->execute();
 
-      if (!empty($result)) {
-        $vars['total_related_publications'] = sizeof($result['node']);
-        $vars['tagged_related_publications'] = array();
-        foreach ($result['node'] as $n) {
-          $node = node_load($n->nid);
-          $vars['tagged_related_publications'][] = node_view($node,'teaser');
-        }
+    if (!empty($result)) {
+      $vars['total_related_publications'] = sizeof($result['node']);
+      $vars['tagged_related_publications'] = array();
+      foreach ($result['node'] as $n) {
+        $node = node_load($n->nid);
+        $vars['tagged_related_publications'][] = node_view($node,'teaser');
       }
     }
   }
@@ -181,11 +169,17 @@ function fill_related_publications(&$vars) {
  */
 function fill_related_wiki(&$vars) {
   $wiki_articles_no = 0;
-  if (isset($vars['field_related_oshwiki_articles'])) {
-    $wiki_articles_no = sizeof($vars['field_related_oshwiki_articles']);
+  $vars['tagged_wiki'] = array();
+  if (!empty($vars['field_related_oshwiki_articles'])) {
+    $manual_wiki_articles = $vars['field_related_oshwiki_articles'][LANGUAGE_NONE];
+    $wiki_articles_no = sizeof($manual_wiki_articles);
+    // add manually tagged wiki articles (hidden in display mode)
+    foreach ($manual_wiki_articles as $related_wiki) {
+      $node = node_load($related_wiki['target_id']);
+      $vars['tagged_wiki'][] = node_view($node,'osha_wiki');
+    }
   }
 
-  $vars['total_wiki'] = 0;
   if ($wiki_articles_no < 2) {
     $limit = 2 - $wiki_articles_no;
     // get 2-$wiki_articles_no tagged wiki
@@ -208,17 +202,23 @@ function fill_related_wiki(&$vars) {
         }
       }
 
+      // exclude manually related
+      $excluded_nids = array();
+      array_push($excluded_nids, 0); // avoid empty NOT IN clause
+      if (!empty($vars['field_related_oshwiki_articles'])) {
+        foreach ($vars['field_related_oshwiki_articles'] as $related_wiki) {
+          array_push($excluded_nids, $related_wiki[0]['target_id']);
+        }
+      }
       $query = new EntityFieldQuery();
       $result = $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'wiki_page')
+        ->entityCondition('entity_id', $excluded_nids, 'NOT IN')
         ->fieldCondition('field_wiki_categories', 'tid', $tids, 'IN')
         ->fieldOrderBy('field_updated', 'value', 'DESC')
         ->pager($limit)
         ->execute();
-
       if (!empty($result)) {
-        $vars['total_wiki'] = sizeof($result['node']);
-        $vars['tagged_wiki'] = array();
         foreach ($result['node'] as $n) {
           $node = node_load($n->nid);
           $vars['tagged_wiki'][] = node_view($node,'osha_wiki');

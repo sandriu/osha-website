@@ -9,6 +9,18 @@ include_once 'osha_publication.features.inc';
 define('OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION', 'publication');
 
 /**
+ * Implements hook_views_pre_render().
+ */
+function osha_publication_views_pre_render(&$view) {
+  $jssor_path = libraries_get_path('jquery-slider-master');
+
+  if ($view->name == 'publications') {
+    drupal_add_js($jssor_path . '/jssor.slider.mini.js');
+    drupal_add_css($jssor_path . '/jssor.css');
+  }
+}
+
+/**
  * Implements hook_post_features_enable_feature().
  *
  * {@inheritdoc}
@@ -27,6 +39,18 @@ function osha_publication_post_features_enable_feature($component) {
         'delete any publication content',
       );
       user_role_grant_permissions($role->rid, $permissions);
+    }
+  }
+}
+
+function osha_publication_workbench_access_node_element_alter(&$element, $form_state, $active) {
+  if (isset($form_state['build_info']['form_id']) && $form_state['build_info']['form_id'] == 'publication_node_form' ) {
+    $element['#required'] = FALSE;
+    foreach ($element['#options'] as $key=>$option) {
+      if (preg_match('/^[-\\s]*Publications$/', $option)) {
+        $element['#default_value'] = $key;
+        break;
+      }
     }
   }
 }

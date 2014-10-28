@@ -3,6 +3,8 @@ rem Setup a clean site in docroot/
 cd docroot/
 call drush site-install -y
 
+call drush en -y search_api search_api_solr
+
 rem Save configuration to database for later usage
 call drush php-script ../scripts/drupal_pre_install.php
 

@@ -54,7 +54,7 @@ function osha_seminar_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 150,
         ),
-        'type' => 'text_trimmed',
+        'type' => 'text_summary_or_trimmed',
         'weight' => 2,
       ),
     ),
@@ -147,6 +147,71 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-seminar-field_character_count'
+  $field_instances['node-seminar-field_character_count'] = array(
+    'bundle' => 'seminar',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Automatically calculated when saving. The count of characters found in the default language text (English).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_character_count',
+    'label' => 'Character count',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 30,
+    ),
+  );
+
   // Exported field_instance: 'node-seminar-field_expiration_date'
   $field_instances['node-seminar-field_expiration_date'] = array(
     'bundle' => 'seminar',
@@ -215,73 +280,6 @@ function osha_seminar_field_default_field_instances() {
       ),
       'type' => 'date_select',
       'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-seminar-field_file'
-  $field_instances['node-seminar-field_file'] = array(
-    'bundle' => 'seminar',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'custom_formatters',
-        'settings' => array(),
-        'type' => 'custom_formatters_seminar_related_resources',
-        'weight' => 2,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 21,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_file',
-    'label' => 'Related resources',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 1,
-      'entity_translation_sync' => 0,
-      'file_directory' => 'seminars/documents',
-      'file_extensions' => 'pdf doc docx ppt pptx html odp odt txt',
-      'max_filesize' => '50MB',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 10,
     ),
   );
 
@@ -357,6 +355,71 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-seminar-field_page_count'
+  $field_instances['node-seminar-field_page_count'] = array(
+    'bundle' => 'seminar',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Automatically calculated when saving. The count of pages of text in the default language (English).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_page_count',
+    'label' => 'Page count',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-seminar-field_publication_date'
   $field_instances['node-seminar-field_publication_date'] = array(
     'bundle' => 'seminar',
@@ -425,6 +488,73 @@ function osha_seminar_field_default_field_instances() {
       ),
       'type' => 'date_select',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-seminar-field_related_resources'
+  $field_instances['node-seminar-field_related_resources'] = array(
+    'bundle' => 'seminar',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'custom_formatters',
+        'settings' => array(),
+        'type' => 'custom_formatters_seminar_related_resources',
+        'weight' => 2,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_resources',
+    'label' => 'Related resources',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 1,
+      'entity_translation_sync' => 0,
+      'file_directory' => 'seminars/documents',
+      'file_extensions' => 'pdf doc docx ppt pptx html odp odt txt',
+      'max_filesize' => '50MB',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 10,
     ),
   );
 
@@ -1444,7 +1574,7 @@ function osha_seminar_field_default_field_instances() {
     'bundle' => 'seminar',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => 'You may select multiple items from the list by holding CTRL',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1564,67 +1694,6 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_workflow_status'
-  $field_instances['node-seminar-field_workflow_status'] = array(
-    'bundle' => 'seminar',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 21,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_workflow_status',
-    'label' => 'Workflow status',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 25,
-    ),
-  );
-
   // Exported field_instance: 'node-seminar-title_field'
   $field_instances['node-seminar-title_field'] = array(
     'bundle' => 'seminar',
@@ -1703,7 +1772,10 @@ function osha_seminar_field_default_field_instances() {
   t('Archived');
   t('Attachment');
   t('Attendees');
+  t('Automatically calculated when saving. The count of characters found in the default language text (English).');
+  t('Automatically calculated when saving. The count of pages of text in the default language (English).');
   t('Body');
+  t('Character count');
   t('Conclusions');
   t('Contact email');
   t('Contact name');
@@ -1715,6 +1787,7 @@ function osha_seminar_field_default_field_instances() {
   t('Further actions');
   t('Image');
   t('Location');
+  t('Page count');
   t('Publication Date');
   t('Related resources');
   t('Show roster hour');
@@ -1724,7 +1797,7 @@ function osha_seminar_field_default_field_instances() {
   t('Thesaurus');
   t('Title');
   t('Use comma ( , ) to assign multiple terms');
-  t('Workflow status');
+  t('You may select multiple items from the list by holding CTRL');
 
   return $field_instances;
 }

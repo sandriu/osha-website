@@ -292,12 +292,13 @@ $options['init-modules'] = array(
   'redirect',
   'file_entity',
   'media',
+  'media_wysiwyg',
   'languagefield',
   'image_field_caption',
 
   'tmgmt',
   'tmgmt_local',
-  'tmgmt_node',
+  /* 'tmgmt_node', */
   'tmgmt_entity',
   'tmgmt_entity_ui',
   'tmgmt_ui',
@@ -333,6 +334,7 @@ $options['init-modules'] = array(
   'custom_formatters',
 
   'taxonomy_manager',
+  'term_reference_tree',
   'node_export',
   'mpac',
   'linkit',
@@ -364,6 +366,7 @@ $options['init-modules'] = array(
   'osha_highlight',
   'osha_homepage',
   'osha_menu',
+  'osha_job_vacancies',
   'osha_wiki',
   'osha_workflow',
   'osha_blocks',

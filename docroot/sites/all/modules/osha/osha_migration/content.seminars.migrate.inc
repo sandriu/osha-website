@@ -57,14 +57,14 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
     $this->addFieldMapping('field_image:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'logo');
     $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
 
-    $this->addFieldMapping('field_file', 'files');
-    $this->addFieldMapping('field_file:file_class')->defaultValue('OSHAMigrateFileUri');
-    $this->addFieldMapping('field_file:description', 'file_descriptions');
-    $this->addFieldmapping('field_file:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldMapping('field_file:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_file:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'files');
-    $this->addFieldMapping('field_file:multilingual')->defaultValue(TRUE);
+    $this->addFieldMapping('field_related_resources', 'files');
+    $this->addFieldMapping('field_related_resources:file_class')->defaultValue('OSHAMigrateFileUri');
+    $this->addFieldMapping('field_related_resources:description', 'file_descriptions');
+    $this->addFieldmapping('field_related_resources:preserve_files')->defaultValue(TRUE);
+    $this->addFieldMapping('field_related_resources:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_related_resources:source_dir')->defaultValue($data_path . '/export/');
+    $this->addFieldMapping('field_related_resources:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'files');
+    $this->addFieldMapping('field_related_resources:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_seminar_attachment', 'attachment');
     $this->addFieldMapping('field_seminar_attachment:file_class')->defaultValue('OSHAMigrateFileUri');
@@ -295,7 +295,7 @@ class SeminarsListCSV extends MigrateList {
         switch ($field) {
           case 'title':
             if ($language == 'en') {
-              self::$data[$path]['title'] = $raw_data[$key];
+              self::$data[$path]['title'] = MigrationUtil::decodeHTMLText($raw_data[$key]);
             }
             self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;

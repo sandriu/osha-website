@@ -247,6 +247,9 @@ class HighlightContentListCSV extends MigrateList {
     while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
       $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
       $path = MigrationUtil::getIDFromSourceRow($raw_data);
+      if (strpos($path, 'teaser/') !== 0) {
+        continue;
+      }
       self::$data[$path]['id'] = $path;
       // Assign the workflow state of the row from english entry.
       if ($language == 'en') {
@@ -261,7 +264,7 @@ class HighlightContentListCSV extends MigrateList {
         switch ($field) {
           case 'title':
             if ($language == 'en') {
-              self::$data[$path]['title'] = $raw_data[$key];
+              self::$data[$path]['title'] = MigrationUtil::decodeHTMLText($raw_data[$key]);
             }
             self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;

@@ -4,6 +4,11 @@
  * Returns the HTML for a publication node.
  */
 ?>
+<?php if($page): ?>
+  <h1 id="page-title" class="page__title title"><?php print t('Publications');?></h1>
+  <div class="view-header"><?php print l(t('Back to publications and filter'), 'publications'); ?></div>
+<?php endif; ?>
+
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>
@@ -32,40 +37,31 @@
   hide($content['comments']);
   hide($content['links']);
   // unset to render below after a div
-  if (isset($content['field_related_man_pubs'])) {
-    hide($content['field_related_man_pubs']);
-  }
   if (isset($content['field_related_oshwiki_articles'])) {
     hide($content['field_related_oshwiki_articles']);
   }
   print render($content);
-  // render related publications(both manual + dynamic from template preprocess_node
+  // render related publications(dynamic from template preprocess_node
   if ( $view_mode == 'full') {
-    if (!empty($field_related_man_pubs) || $total_related_publications > 0) { ?>
+    if ($total_related_publications > 0) { ?>
       <div id="related-publications">
         <div class="related_publications_head"><span><?php print t('Related publications');?><span></div>
       <div>
     <?php
-      print render($content['field_related_man_pubs']);
-      if ($total_related_publications > 0) {
-        foreach ($tagged_related_publications as $related_pub) {
-          print render($related_pub);
-        }
+      foreach ($tagged_related_publications as $related_pub) {
+        print render($related_pub);
       }
     }?>
 
   <?php
   // render related wiki articles (both manual + dynamic from template preprocess_node
-    if ( !empty($field_related_oshwiki_articles) || $total_wiki > 0) { ?>
+    if ( !empty($tagged_wiki) ) { ?>
       <div id="related-wiki-publications">
         <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
       <div>
     <?php
-      print render($content['field_related_oshwiki_articles']);
-      if ($total_wiki > 0) {
-        foreach ($tagged_wiki as $wiki) {
-          print render($wiki);
-        }
+      foreach ($tagged_wiki as $wiki) {
+        print render($wiki);
       }
     }
   } ?>
