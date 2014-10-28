@@ -48,6 +48,9 @@ function osha_tmgmt_extra_permissions() {
     'view needs content validation list' => array(
       'title' => t('View "Needs Content Validation" tab from workbench'),
     ),
+    'manage content in translators group entity collections' => array(
+      'title' => t('View Content Validators Groups'),
+    ),
   );
   return $perms;
 }
@@ -103,6 +106,7 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
 
       // Translate tab on nodes.
       'translate node entities',
+      'manage content in translators group entity collections',
     ),
     osha_tmgmt_workflow_permissions_common()
   );
