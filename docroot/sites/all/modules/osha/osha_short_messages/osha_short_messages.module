@@ -64,14 +64,20 @@ function osha_short_messages_form($form, &$form_state){
   $display['links'] = FALSE;
   $display['#contextual_links'] = FALSE;
   //remove publication formatter links
-  foreach($display['field_file'] as $key => $field){
-    if(is_array($field) && isset($field['contextual_links']))
-      unset($display['field_file'][$key]['contextual_links']);
-  }
-
-  foreach($display['field_publication_bookshop_id'] as $key => $field){
-    if(is_array($field) && isset($field['contextual_links']))
-      unset($display['field_publication_bookshop_id'][$key]['contextual_links']);
+  $fields_with_formatters = array(
+    'field_file',
+    'field_publication_bookshop_id',
+    'field_related_publications',
+    'field_related_resources',
+    'field_publication_related_res'
+  );
+  foreach ($fields_with_formatters as $field) {
+    if (!empty($display[$field])) {
+      foreach($display[$field] as $key => $field_value){
+        if(is_array($field_value) && isset($field_value['contextual_links']))
+          unset($display[$field][$key]['contextual_links']);
+      }
+    }
   }
 
   //remove some fields from default view
