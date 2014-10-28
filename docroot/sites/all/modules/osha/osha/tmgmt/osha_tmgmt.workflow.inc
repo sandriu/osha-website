@@ -167,15 +167,15 @@ function osha_tmgmt_translation_validators_submit($form, &$form_state) {
             $users_name[] = $user->name;
             osha_tmgmt_add_translation_validator($user->uid, $job_item, $idx, $next);
           }
-          // Save message to job item.
           global $user;
-          $job_item->addMessage('@name assigned group "@group" default content validators: @validators',
+          $msg = t('@name assigned group "@group" default content validators: @validators',
             array(
               '@name' => $user->name,
               '@group' => $entity_group->name,
               '@validators' => implode(', ', $users_name),
-            )
-          );
+            ));
+          drupal_set_message($msg);
+          $job_item->addMessage($msg);
         }
         else {
           drupal_set_message(t('No user was found for language @language',
