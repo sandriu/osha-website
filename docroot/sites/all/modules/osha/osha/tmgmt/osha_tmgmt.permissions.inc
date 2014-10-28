@@ -49,7 +49,7 @@ function osha_tmgmt_extra_permissions() {
       'title' => t('View "Needs Content Validation" tab from workbench'),
     ),
     'manage content in translators group entity collections' => array(
-      'title' => t('View Content Validators Groups'),
+      'title' => t('Manage Content Validators Groups'),
     ),
   );
   return $perms;
