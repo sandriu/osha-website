@@ -28,7 +28,7 @@ function findTermNameFromEntityField($view, $field){
 
   $tid = MigrationUtil::findTidByEntityValue('legislation_category', $field, $view->args[0]);
   $term = taxonomy_term_load($tid);
-  $name = $term->name;
+  $name = $term? $term->name : '';
 
   return $name;
 }
