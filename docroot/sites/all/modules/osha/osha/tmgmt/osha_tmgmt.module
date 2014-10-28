@@ -657,7 +657,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       hide($form['info']['source_language']);
       hide($form['info']['target_language']);
       hide($form['info']['translator']);
-      if ($form_state['tmgmt_job']->state == TMGMT_JOB_STATE_UNPROCESSED) {
+      if (!user_access('osha tmgmt upload translation file')) {
         hide($form['translator_wrapper']);
         if (isset($form['job_items_wrapper']['suggestions'])) {
           hide($form['job_items_wrapper']['suggestions']);
@@ -797,6 +797,7 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
 
   $user_can_edit = osha_tmgmt_user_can_edit_job_item($job_item);
 
+  // Enable/Disable text areas and button for editing the job item translation.
   $fields = element_children($form['review']);
   foreach ($fields as $field) {
     $values = element_children($form['review'][$field]);
@@ -827,13 +828,17 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
 
 
   if ($user_can_edit) {
-    // Show buttons if job item in not ready.
+    // Set default access for buttons.
+    $show_ready_to_publish = user_access('set job item to ready to publish state')
+      && !in_array($job_item->state,
+        array(TMGMT_JOB_ITEM_STATE_ACCEPTED, TMGMT_JOB_ITEM_STATE_ABORTED,
+          OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish));
     $form['actions']['ready_to_publish'] = array(
       '#type' => 'submit',
       '#value' => t('Ready to Publish'),
       '#submit' => array('osha_tmgmt_ready_to_publish_submit'),
       '#validate' => array('osha_tmgmt_ready_to_publish_validate'),
-      '#access' => user_access('set job item to ready to publish state'),
+      '#access' => $show_ready_to_publish,
     );
     $form['actions']['reject'] = array(
       '#type' => 'submit',
@@ -887,6 +892,14 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
           '#validate' => array('osha_tmgmt_require_content_validation_validate'),
           '#access' => user_access('set job item to require content validation state'),
         );
+        break;
+
+      case TMGMT_JOB_ITEM_STATE_ABORTED:
+        $form['actions']['#access'] = FALSE;
+        break;
+
+      case TMGMT_JOB_ITEM_STATE_ACCEPTED:
+        $form['actions']['#access'] = FALSE;
         break;
     }
   }

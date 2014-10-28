@@ -5,6 +5,9 @@
  */
 function osha_tmgmt_extra_permissions() {
   $perms = array(
+    'osha tmgmt upload translation file' => array(
+      'title' => t('Upload translation file to a Job'),
+    ),
     'preview layout validation' => array(
       'title' => t('Access node layout validation preview screen'),
       'description' => t('Allows Layout Validators to preview the node before accepting translation'),
@@ -96,6 +99,7 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
       'set job item to require content validation state',
       'set job item to ready to publish state',
       'abort job item',
+      'osha tmgmt upload translation file',
     ),
     osha_tmgmt_workflow_permissions_common()
   );
@@ -130,6 +134,7 @@ function osha_tmgmt_workflow_permissions_role_layout_validator() {
       'set job item to translated state',
       'view translation job item',
       'view on translation content list',
+      'osha tmgmt upload translation file',
     ),
     osha_tmgmt_workflow_permissions_common()
   );

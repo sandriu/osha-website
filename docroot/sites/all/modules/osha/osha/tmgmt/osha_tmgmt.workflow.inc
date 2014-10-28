@@ -34,43 +34,39 @@ function osha_tmgmt_workflow_create_roles() {
  */
 function osha_tmgmt_user_can_edit_job_item($job_item) {
   global $user;
-  if (OshaWorkflowPermissions::userHasRole('administrator', $user)
-    || user_access('edit translation job item')) {
+  if (OshaWorkflowPermissions::userHasRole('administrator', $user)) {
     return TRUE;
   }
 
   switch ($job_item->state) {
     case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired:
-      if (OshaWorkflowPermissions::userHasRole(
-        OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER, $user)) {
-        return TRUE;
-      }
       // If next Content Validator -> can edit.
       $validators = osha_tmgmt_load_validators_by_job_item($job_item);
       if (array_key_exists($user->uid, $validators)
         && $validators[$user->uid]->next == 1) {
         return TRUE;
       }
+      if (user_access('set job item to ready to publish state')) {
+        return TRUE;
+      }
       break;
 
     case TMGMT_JOB_ITEM_STATE_ACTIVE:
-      if (OshaWorkflowPermissions::userHasRole(
-        OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR, $user
-      )) {
+      if (user_access('set job item to translated state')
+      && user_access('abort job item')) {
         return TRUE;
       }
       break;
 
     case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated:
-      if (OshaWorkflowPermissions::userHasRole(
-        OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER, $user)) {
+      if (user_access('set job item to ready to publish state')) {
         return TRUE;
       }
       break;
 
     case TMGMT_JOB_ITEM_STATE_REVIEW:
-      if (OshaWorkflowPermissions::userHasRole(
-        OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER, $user)) {
+      if (user_access('set job item to require content validation state')
+      || user_access('set job item to ready to publish state')) {
         return TRUE;
       }
       break;
