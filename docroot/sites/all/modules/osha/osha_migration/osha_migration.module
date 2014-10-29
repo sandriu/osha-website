@@ -3,6 +3,7 @@
 define('OSHA_MIGRATION_TAXONOMY_ACTIVITY', 'TaxonomyActivity');
 define('OSHA_MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
 define('OSHA_MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
+define('OSHA_MIGRATION_TAXONOMY_LEGISLATION_CATEGORIES', 'TaxonomyLegislationCategories');
 define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
 define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
 define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
@@ -11,15 +12,20 @@ define('OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES', 'JobVacancies');
 define('OSHA_MIGRATION_CONTENT_TYPE_BLOG', 'Blog');
 define('OSHA_MIGRATION_CONTENT_TYPE_CALLS', 'Calls');
 define('OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY', 'CaseStudy');
+define('OSHA_MIGRATION_CONTENT_TYPE_DIRECTIVE', 'Directive');
+define('OSHA_MIGRATION_CONTENT_TYPE_GUIDELINE', 'Guideline');
 define('OSHA_MIGRATION_CONTENT_TYPE_HIGHLIGHT', 'Highlight');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
 define('OSHA_MIGRATION_CONTENT_TYPE_SEMINAR', 'Seminar');
 define('OSHA_MIGRATION_CONTENT_TYPE_WIKI', 'Wiki');
+define('OSHA_MIGRATION_CONTENT_TYPE_LEGISLATION', 'Legislation');
 define('OSHA_MIGRATION_FILES', 'Files');
 define('OSHA_MIGRATION_IMAGES', 'Images');
 define('OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE', 'PressRelease');
 define('OSHA_MIGRATION_FILES_PUBLICATION', 'FilesPublication');
+define('OSHA_MIGRATION_CONTENT_TYPE_NOTE_TO_EDITOR', 'NoteToEditor');
+
 
 define('OSHA_MIGRATION_EXPORT_DIRECTORY', 'export');
 
@@ -38,33 +44,17 @@ function osha_migration_migrate_api() {
     'class_name' => 'OshaMigrateWiki',
   );
 
-  /*
-  if (is_readable($migration_module_dir . '/data/activity.json')) {
-    $migrations[OSHA_MIGRATION_TAXONOMY_ACTIVITY] = array(
-      'class_name' => 'MigrateOshaTaxonomyActivity',
-      'file_name' => $migration_module_dir . '/data/activity.json',
-    );
-  }
-
-  if (is_readable($migration_module_dir . '/data/activity.json')) {
-    $migrations[OSHA_MIGRATION_TAXONOMY_TAGS] = array(
-      'class_name' => 'MigrateOshaTaxonomyTags',
-      'file_name' => $migration_module_dir . '/data/tags.json',
-    );
-  }
-
-  if (is_readable($migration_module_dir . '/data/activity.json')) {
-    $migrations[OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES] = array(
-      'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
-      'file_name' => $migration_module_dir . '/data/publication_types.json',
-    );
-  }
-  */
-
   if (is_readable($migration_module_dir . '/data/esener.json')) {
     $migrations[OSHA_MIGRATION_TAXONOMY_ESENER] = array(
       'class_name' => 'MigrateOshaTaxonomyEsener',
       'file_name' => $migration_module_dir . '/data/esener.json',
+    );
+  }
+
+  if (is_readable($migration_module_dir . '/data/legislation_category.json')) {
+    $migrations[OSHA_MIGRATION_TAXONOMY_LEGISLATION_CATEGORIES] = array(
+      'class_name' => 'MigrateOshaTaxonomyLegislationCategories',
+      'file_name' => $migration_module_dir . '/data/legislation_category.json',
     );
   }
 
@@ -107,6 +97,20 @@ function osha_migration_migrate_api() {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY] = array(
       'class_name' => 'MigrateOshaCaseStudy',
       'file_name' => $external_data_dir . '/export/case_studies.txt',
+    );
+  }
+
+  if (is_readable($external_data_dir . '/export/legislation.txt')) {
+    $migrations[OSHA_MIGRATION_CONTENT_TYPE_DIRECTIVE] = array(
+      'class_name' => 'OshaMigrateDirectives',
+      'file_name' => $external_data_dir . '/export/legislation.txt',
+    );
+  }
+
+  if (is_readable($external_data_dir . '/export/legislation.txt')) {
+    $migrations[OSHA_MIGRATION_CONTENT_TYPE_GUIDELINE] = array(
+      'class_name' => 'OshaMigrateGuidelines',
+      'file_name' => $external_data_dir . '/export/legislation.txt',
     );
   }
 
@@ -163,6 +167,13 @@ function osha_migration_migrate_api() {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE] = array(
       'class_name' => 'MigrateOshaPressRelease',
       'file_name' => $external_data_dir . '/export/press_release.txt',
+    );
+  }
+
+  if (is_readable($external_data_dir . '/export/notes_to_editors.txt')) {
+    $migrations[OSHA_MIGRATION_CONTENT_TYPE_NOTE_TO_EDITOR] = array(
+      'class_name' => 'MigrateOshaNoteToEditor',
+      'file_name' => $external_data_dir . '/export/notes_to_editors.txt',
     );
   }
 

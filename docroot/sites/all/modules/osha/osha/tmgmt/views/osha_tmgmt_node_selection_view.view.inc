@@ -1,553 +1,269 @@
 <?php
 
 $view = new view();
-$view->name = 'tmgmt_node_selection_view';
+$view->name = 'osha_translation_workbench';
 $view->description = '';
 $view->tag = 'default';
-$view->base_table = 'node';
-$view->human_name = 'OSHA TMGMT node selection';
+$view->base_table = 'tmgmt_job_item';
+$view->human_name = 'Osha Translation Workbench';
 $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
-$handler->display->display_options['title'] = 'OSHA content selection';
-$handler->display->display_options['css_class'] = 'tmgmt_node_selection_view';
+$handler->display->display_options['title'] = 'On Translation';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'perm';
-$handler->display->display_options['access']['perm'] = 'create translation jobs';
+$handler->display->display_options['access']['perm'] = 'view on translation content list';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
-$handler->display->display_options['query']['options']['distinct'] = TRUE;
 $handler->display->display_options['exposed_form']['type'] = 'basic';
-$handler->display->display_options['exposed_form']['options']['submit_button'] = 'Filter';
-$handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Ascending';
-$handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Descending';
 $handler->display->display_options['pager']['type'] = 'full';
-$handler->display->display_options['pager']['options']['items_per_page'] = '50';
-$handler->display->display_options['pager']['options']['offset'] = '0';
-$handler->display->display_options['pager']['options']['id'] = '0';
-$handler->display->display_options['pager']['options']['quantity'] = '9';
-$handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
-$handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '25, 50, 100, 200';
+$handler->display->display_options['pager']['options']['items_per_page'] = '10';
 $handler->display->display_options['style_plugin'] = 'table';
-$handler->display->display_options['style_options']['columns'] = array(
-  'views_bulk_operations' => 'views_bulk_operations',
-  'title' => 'title',
-  'type' => 'type',
-  'field_workflow_status' => 'field_workflow_status',
-  'name' => 'name',
-  'changed' => 'changed',
-  'edit_node' => 'edit_node',
-);
-$handler->display->display_options['style_options']['default'] = 'changed';
-$handler->display->display_options['style_options']['info'] = array(
-  'views_bulk_operations' => array(
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'title' => array(
-    'sortable' => 0,
-    'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'type' => array(
-    'sortable' => 1,
-    'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'field_workflow_status' => array(
-    'sortable' => 1,
-    'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'name' => array(
-    'sortable' => 1,
-    'default_sort_order' => 'asc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'changed' => array(
-    'sortable' => 1,
-    'default_sort_order' => 'desc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'edit_node' => array(
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-);
-/* No results behavior: Global: Text area */
-$handler->display->display_options['empty']['area']['id'] = 'area';
-$handler->display->display_options['empty']['area']['table'] = 'views';
-$handler->display->display_options['empty']['area']['field'] = 'area';
-$handler->display->display_options['empty']['area']['empty'] = TRUE;
-$handler->display->display_options['empty']['area']['content'] = 'There are no results. Please broaden your filters above.';
-$handler->display->display_options['empty']['area']['format'] = 'full_html';
-/* Relationship: Content: Author */
-$handler->display->display_options['relationships']['uid']['id'] = 'uid';
-$handler->display->display_options['relationships']['uid']['table'] = 'node';
-$handler->display->display_options['relationships']['uid']['field'] = 'uid';
-/* Relationship: Content: Entity translation: translations */
-$handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
-$handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
-$handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
-$handler->display->display_options['relationships']['entity_translations']['required'] = TRUE;
-/* Field: Bulk operations: Content */
-$handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-$handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
-$handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-$handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
-$handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
-$handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
-$handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
-$handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
-$handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-  'rules_component::tmgmt_node_ui_tmgmt_nodes_add_items_to_cart' => array(
-    'selected' => 1,
-    'skip_confirmation' => 1,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::nodequeue_add_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::node_assign_owner_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::scs_views_create_newsletter_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::views_bulk_operations_delete_item' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::views_bulk_operations_delete_revision' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::views_bulk_operations_script_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::node_make_sticky_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::node_make_unsticky_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::views_bulk_operations_modify_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-    'settings' => array(
-      'show_all_tokens' => 1,
-      'display_values' => array(
-        '_all_' => '_all_',
-      ),
-    ),
-  ),
-  'action::views_bulk_operations_argument_selector_action' => array(
-    'selected' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-    'settings' => array(
-      'url' => '',
-    ),
-  ),
-  'action::node_promote_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::node_publish_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::node_unpromote_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::nodequeue_remove_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::node_save_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::system_send_email_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::node_unpublish_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::node_unpublish_by_keyword_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::pathauto_node_update_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-);
-/* Field: Content: Title */
-$handler->display->display_options['fields']['title']['id'] = 'title';
-$handler->display->display_options['fields']['title']['table'] = 'node';
-$handler->display->display_options['fields']['title']['field'] = 'title';
-$handler->display->display_options['fields']['title']['label'] = '';
-$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-/* Field: Content: Type */
-$handler->display->display_options['fields']['type']['id'] = 'type';
-$handler->display->display_options['fields']['type']['table'] = 'node';
-$handler->display->display_options['fields']['type']['field'] = 'type';
-$handler->display->display_options['fields']['type']['label'] = 'Type of content';
-/* Field: Workbench Moderation: State */
-$handler->display->display_options['fields']['state']['id'] = 'state';
-$handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-$handler->display->display_options['fields']['state']['field'] = 'state';
-$handler->display->display_options['fields']['state']['label'] = 'Workflow state';
-$handler->display->display_options['fields']['state']['machine_name'] = 0;
-/* Field: User: Name */
-$handler->display->display_options['fields']['name']['id'] = 'name';
-$handler->display->display_options['fields']['name']['table'] = 'users';
-$handler->display->display_options['fields']['name']['field'] = 'name';
-$handler->display->display_options['fields']['name']['relationship'] = 'uid';
-$handler->display->display_options['fields']['name']['label'] = 'Author';
-/* Field: Content: Updated date */
-$handler->display->display_options['fields']['changed']['id'] = 'changed';
-$handler->display->display_options['fields']['changed']['table'] = 'node';
-$handler->display->display_options['fields']['changed']['field'] = 'changed';
-$handler->display->display_options['fields']['changed']['label'] = 'Updated';
-$handler->display->display_options['fields']['changed']['date_format'] = 'short';
-$handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-/* Field: Content: Edit link */
-$handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-$handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-$handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-$handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-/* Sort criterion: Content: Post date */
-$handler->display->display_options['sorts']['created']['id'] = 'created';
-$handler->display->display_options['sorts']['created']['table'] = 'node';
-$handler->display->display_options['sorts']['created']['field'] = 'created';
-$handler->display->display_options['sorts']['created']['order'] = 'DESC';
-$handler->display->display_options['sorts']['created']['exposed'] = TRUE;
-$handler->display->display_options['sorts']['created']['expose']['label'] = 'Post date';
-/* Sort criterion: Content: Updated date */
+/* Field: Translation Management Job Item: Translation management job item ID */
+$handler->display->display_options['fields']['tjiid']['id'] = 'tjiid';
+$handler->display->display_options['fields']['tjiid']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['tjiid']['field'] = 'tjiid';
+$handler->display->display_options['fields']['tjiid']['label'] = 'Job Item ID';
+$handler->display->display_options['fields']['tjiid']['exclude'] = TRUE;
+/* Field: Translation Management Job Item: Label */
+$handler->display->display_options['fields']['label']['id'] = 'label';
+$handler->display->display_options['fields']['label']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['label']['field'] = 'label';
+/* Field: Translation Management Job Item: Item type */
+$handler->display->display_options['fields']['item_type']['id'] = 'item_type';
+$handler->display->display_options['fields']['item_type']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['item_type']['field'] = 'item_type';
+/* Field: Translation Management Job Item: Source language */
+$handler->display->display_options['fields']['source_language']['id'] = 'source_language';
+$handler->display->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['source_language']['field'] = 'source_language';
+/* Field: Translation Management Job Item: Target language */
+$handler->display->display_options['fields']['target_language']['id'] = 'target_language';
+$handler->display->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['target_language']['field'] = 'target_language';
+/* Field: Translation Management Job Item: URL */
+$handler->display->display_options['fields']['url']['id'] = 'url';
+$handler->display->display_options['fields']['url']['table'] = 'views_entity_tmgmt_job_item';
+$handler->display->display_options['fields']['url']['field'] = 'url';
+$handler->display->display_options['fields']['url']['alter']['alter_text'] = TRUE;
+$handler->display->display_options['fields']['url']['alter']['text'] = 'View';
+$handler->display->display_options['fields']['url']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['url']['alter']['path'] = '[url]';
+$handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
+$handler->display->display_options['fields']['url']['link_to_entity'] = 1;
+/* Sort criterion: Translation Management Job Item: Changed */
 $handler->display->display_options['sorts']['changed']['id'] = 'changed';
-$handler->display->display_options['sorts']['changed']['table'] = 'node';
+$handler->display->display_options['sorts']['changed']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['sorts']['changed']['field'] = 'changed';
 $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
-$handler->display->display_options['sorts']['changed']['exposed'] = TRUE;
-$handler->display->display_options['sorts']['changed']['expose']['label'] = 'Updated date';
-/* Sort criterion: User: Name */
-$handler->display->display_options['sorts']['name']['id'] = 'name';
-$handler->display->display_options['sorts']['name']['table'] = 'users';
-$handler->display->display_options['sorts']['name']['field'] = 'name';
-$handler->display->display_options['sorts']['name']['relationship'] = 'uid';
-$handler->display->display_options['sorts']['name']['exposed'] = TRUE;
-$handler->display->display_options['sorts']['name']['expose']['label'] = 'Author name';
-/* Sort criterion: Content: Type */
-$handler->display->display_options['sorts']['type']['id'] = 'type';
-$handler->display->display_options['sorts']['type']['table'] = 'node';
-$handler->display->display_options['sorts']['type']['field'] = 'type';
-$handler->display->display_options['sorts']['type']['exposed'] = TRUE;
-$handler->display->display_options['sorts']['type']['expose']['label'] = 'Type';
-/* Filter criterion: Content: Type */
-$handler->display->display_options['filters']['type']['id'] = 'type';
-$handler->display->display_options['filters']['type']['table'] = 'node';
-$handler->display->display_options['filters']['type']['field'] = 'type';
-$handler->display->display_options['filters']['type']['value'] = array(
-  'article' => 'article',
-  'page' => 'page',
-  'blog' => 'blog',
-  'calls' => 'calls',
-  'highlight' => 'highlight',
-  'job_vacancies' => 'job_vacancies',
-  'news' => 'news',
-  'press_release' => 'press_release',
-  'publication' => 'publication',
-  'seminar' => 'seminar',
-);
-$handler->display->display_options['filters']['type']['group'] = 1;
-$handler->display->display_options['filters']['type']['exposed'] = TRUE;
-$handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
-$handler->display->display_options['filters']['type']['expose']['label'] = 'Type of content';
-$handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
-$handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
-$handler->display->display_options['filters']['type']['expose']['multiple'] = TRUE;
-$handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
-  4 => 0,
-  5 => 0,
-  6 => 0,
-  7 => 0,
-  8 => 0,
-  9 => 0,
-  10 => 0,
-  11 => 0,
-);
-/* Filter criterion: Content: Title (title_field) */
-$handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
-$handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
-$handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
-$handler->display->display_options['filters']['title_field_value']['operator'] = 'contains';
-$handler->display->display_options['filters']['title_field_value']['group'] = 1;
-$handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
-$handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
-$handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Title contains';
-$handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
-$handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
-$handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
-  4 => 0,
-  5 => 0,
-  6 => 0,
-  7 => 0,
-  8 => 0,
-  9 => 0,
-  10 => 0,
-  11 => 0,
-);
-/* Filter criterion: Content: Nid */
-$handler->display->display_options['filters']['nid']['id'] = 'nid';
-$handler->display->display_options['filters']['nid']['table'] = 'node';
-$handler->display->display_options['filters']['nid']['field'] = 'nid';
-$handler->display->display_options['filters']['nid']['group'] = 1;
-$handler->display->display_options['filters']['nid']['exposed'] = TRUE;
-$handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
-$handler->display->display_options['filters']['nid']['expose']['label'] = 'Node ID';
-$handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
-$handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
-$handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
-);
-/* Filter criterion: Content: Activity (field_activity) */
-$handler->display->display_options['filters']['field_activity_tid']['id'] = 'field_activity_tid';
-$handler->display->display_options['filters']['field_activity_tid']['table'] = 'field_data_field_activity';
-$handler->display->display_options['filters']['field_activity_tid']['field'] = 'field_activity_tid';
-$handler->display->display_options['filters']['field_activity_tid']['group'] = 1;
-$handler->display->display_options['filters']['field_activity_tid']['exposed'] = TRUE;
-$handler->display->display_options['filters']['field_activity_tid']['expose']['operator_id'] = 'field_activity_tid_op';
-$handler->display->display_options['filters']['field_activity_tid']['expose']['label'] = 'Activity';
-$handler->display->display_options['filters']['field_activity_tid']['expose']['operator'] = 'field_activity_tid_op';
-$handler->display->display_options['filters']['field_activity_tid']['expose']['identifier'] = 'field_activity_tid';
-$handler->display->display_options['filters']['field_activity_tid']['expose']['multiple'] = TRUE;
-$handler->display->display_options['filters']['field_activity_tid']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
-);
-$handler->display->display_options['filters']['field_activity_tid']['group_info']['label'] = 'Activity (field_activity)';
-$handler->display->display_options['filters']['field_activity_tid']['group_info']['identifier'] = 'field_activity_tid';
-$handler->display->display_options['filters']['field_activity_tid']['group_info']['remember'] = FALSE;
-$handler->display->display_options['filters']['field_activity_tid']['group_info']['group_items'] = array(
-  1 => array(),
-  2 => array(),
-  3 => array(),
-);
-$handler->display->display_options['filters']['field_activity_tid']['vocabulary'] = 'activity';
-$handler->display->display_options['filters']['field_activity_tid']['hierarchy'] = 1;
-/* Filter criterion: Content: Updated date */
-$handler->display->display_options['filters']['changed']['id'] = 'changed';
-$handler->display->display_options['filters']['changed']['table'] = 'node';
-$handler->display->display_options['filters']['changed']['field'] = 'changed';
-$handler->display->display_options['filters']['changed']['operator'] = 'between';
-$handler->display->display_options['filters']['changed']['group'] = 1;
-$handler->display->display_options['filters']['changed']['exposed'] = TRUE;
-$handler->display->display_options['filters']['changed']['expose']['operator_id'] = 'changed_op';
-$handler->display->display_options['filters']['changed']['expose']['label'] = 'Updated';
-$handler->display->display_options['filters']['changed']['expose']['description'] = 'Select an interval for filtering';
-$handler->display->display_options['filters']['changed']['expose']['operator'] = 'changed_op';
-$handler->display->display_options['filters']['changed']['expose']['identifier'] = 'changed';
-$handler->display->display_options['filters']['changed']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
-);
-/* Filter criterion: Entity translation: Translation exists */
-$handler->display->display_options['filters']['translation_exists']['id'] = 'translation_exists';
-$handler->display->display_options['filters']['translation_exists']['table'] = 'entity_translation';
-$handler->display->display_options['filters']['translation_exists']['field'] = 'translation_exists';
-$handler->display->display_options['filters']['translation_exists']['relationship'] = 'entity_translations';
-$handler->display->display_options['filters']['translation_exists']['operator'] = 'not in';
-$handler->display->display_options['filters']['translation_exists']['value'] = array(
-  'bg' => 'bg',
-  'cs' => 'cs',
-  'da' => 'da',
-  'de' => 'de',
-  'el' => 'el',
-  'es' => 'es',
-  'et' => 'et',
-  'fi' => 'fi',
-  'hr' => 'hr',
-  'fr' => 'fr',
-  'hu' => 'hu',
-  'is' => 'is',
-  'it' => 'it',
-  'lv' => 'lv',
-  'lt' => 'lt',
-  'nl' => 'nl',
-  'mt' => 'mt',
-  'no' => 'no',
-  'pl' => 'pl',
-  'pt' => 'pt',
-  'ro' => 'ro',
-  'ru' => 'ru',
-  'sk' => 'sk',
-  'sl' => 'sl',
-  'sv' => 'sv',
-  'tr' => 'tr',
-);
-$handler->display->display_options['filters']['translation_exists']['group'] = 1;
-$handler->display->display_options['filters']['translation_exists']['exposed'] = TRUE;
-$handler->display->display_options['filters']['translation_exists']['expose']['operator_id'] = 'translation_exists_op';
-$handler->display->display_options['filters']['translation_exists']['expose']['label'] = 'Not translated in';
-$handler->display->display_options['filters']['translation_exists']['expose']['operator'] = 'translation_exists_op';
-$handler->display->display_options['filters']['translation_exists']['expose']['identifier'] = 'translation_exists';
-$handler->display->display_options['filters']['translation_exists']['expose']['multiple'] = TRUE;
-$handler->display->display_options['filters']['translation_exists']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
-  4 => 0,
-  5 => 0,
-  6 => 0,
-  7 => 0,
-  8 => 0,
-  9 => 0,
-  10 => 0,
-  11 => 0,
-);
-$handler->display->display_options['filters']['translation_exists']['expose']['reduce'] = TRUE;
-$handler->display->display_options['filters']['translation_exists']['entity_type'] = 'node';
-/* Filter criterion: Workbench Moderation: State */
+$handler->display->display_options['sorts']['changed']['granularity'] = 'minute';
+/* Filter criterion: Translation Management Job Item: State */
 $handler->display->display_options['filters']['state']['id'] = 'state';
-$handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+$handler->display->display_options['filters']['state']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['filters']['state']['field'] = 'state';
 $handler->display->display_options['filters']['state']['value'] = array(
-  'published' => 'published',
-);
-$handler->display->display_options['filters']['state']['group'] = 1;
-$handler->display->display_options['filters']['state']['exposed'] = TRUE;
-$handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
-$handler->display->display_options['filters']['state']['expose']['label'] = 'Workflow Status';
-$handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
-$handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
-$handler->display->display_options['filters']['state']['expose']['required'] = TRUE;
-$handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
-$handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
   2 => '2',
-  1 => 0,
-  3 => 0,
-  4 => 0,
-  5 => 0,
-  6 => 0,
-  7 => 0,
-  8 => 0,
-  9 => 0,
-  10 => 0,
-  11 => 0,
+  6 => '6',
 );
-$handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
 
-/* Display: OSHA content selection */
-$handler = $view->new_display('page', 'OSHA content selection', 'tmgmt_node_selection_view_page');
-$handler->display->display_options['path'] = 'admin/tmgmt/sources/osha';
+/* Display: On Translation */
+$handler = $view->new_display('page', 'On Translation', 'page');
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Translation Management Job Item: State */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  1 => '1',
+);
+$handler->display->display_options['path'] = 'admin/workbench/on-translation';
 $handler->display->display_options['menu']['type'] = 'tab';
-$handler->display->display_options['menu']['title'] = 'OSHA content';
-$handler->display->display_options['menu']['weight'] = '-30';
+$handler->display->display_options['menu']['title'] = 'On Translation';
+$handler->display->display_options['menu']['weight'] = '0';
 $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
-$translatables['tmgmt_node_selection_view'] = array(
+
+/* Display: Content Validation */
+$handler = $view->new_display('page', 'Content Validation', 'page_1');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Needs Content Validation';
+$handler->display->display_options['defaults']['access'] = FALSE;
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'view needs content validation list';
+$handler->display->display_options['defaults']['relationships'] = FALSE;
+/* Relationship: Translation Management Job Item: Translation Validators */
+$handler->display->display_options['relationships']['osha_tmgmt_job_trans_validators']['id'] = 'osha_tmgmt_job_trans_validators';
+$handler->display->display_options['relationships']['osha_tmgmt_job_trans_validators']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['relationships']['osha_tmgmt_job_trans_validators']['field'] = 'osha_tmgmt_job_trans_validators';
+$handler->display->display_options['relationships']['osha_tmgmt_job_trans_validators']['required'] = TRUE;
+$handler->display->display_options['defaults']['arguments'] = FALSE;
+/* Contextual filter: Translation Validators: User uid */
+$handler->display->display_options['arguments']['user']['id'] = 'user';
+$handler->display->display_options['arguments']['user']['table'] = 'osha_tmgmt_job_trans_validators';
+$handler->display->display_options['arguments']['user']['field'] = 'user';
+$handler->display->display_options['arguments']['user']['relationship'] = 'osha_tmgmt_job_trans_validators';
+$handler->display->display_options['arguments']['user']['default_action'] = 'default';
+$handler->display->display_options['arguments']['user']['default_argument_type'] = 'current_user';
+$handler->display->display_options['arguments']['user']['summary']['number_of_records'] = '0';
+$handler->display->display_options['arguments']['user']['summary']['format'] = 'default_summary';
+$handler->display->display_options['arguments']['user']['summary_options']['items_per_page'] = '25';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Translation Management Job Item: State */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  5 => '5',
+);
+/* Filter criterion: Translation Validators: Next */
+$handler->display->display_options['filters']['next']['id'] = 'next';
+$handler->display->display_options['filters']['next']['table'] = 'osha_tmgmt_job_trans_validators';
+$handler->display->display_options['filters']['next']['field'] = 'next';
+$handler->display->display_options['filters']['next']['relationship'] = 'osha_tmgmt_job_trans_validators';
+$handler->display->display_options['filters']['next']['value']['value'] = '1';
+/* Filter criterion: Translation Validators: Deleted vote */
+$handler->display->display_options['filters']['deleted']['id'] = 'deleted';
+$handler->display->display_options['filters']['deleted']['table'] = 'osha_tmgmt_job_trans_validators';
+$handler->display->display_options['filters']['deleted']['field'] = 'deleted';
+$handler->display->display_options['filters']['deleted']['relationship'] = 'osha_tmgmt_job_trans_validators';
+$handler->display->display_options['filters']['deleted']['value']['value'] = '0';
+$handler->display->display_options['path'] = 'admin/workbench/needs-content-validation';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'Needs Content Validation';
+$handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+
+/* Display: Needs Review TM */
+$handler = $view->new_display('page', 'Needs Review TM', 'page_2');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Needs Review TM';
+$handler->display->display_options['defaults']['access'] = FALSE;
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'create translation jobs';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Translation Management Job Item: State */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  2 => '2',
+  6 => '6',
+);
+$handler->display->display_options['path'] = 'admin/workbench/needs-review-tm';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'Needs Review TM';
+$handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+
+/* Display: Needs Review PM */
+$handler = $view->new_display('page', 'Needs Review PM', 'page_3');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Translations Needs Review PM';
+$handler->display->display_options['defaults']['access'] = FALSE;
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'accept job item translation';
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Translation Management Job Item: State */
+$handler->display->display_options['filters']['state']['id'] = 'state';
+$handler->display->display_options['filters']['state']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['filters']['state']['field'] = 'state';
+$handler->display->display_options['filters']['state']['value'] = array(
+  7 => '7',
+);
+$handler->display->display_options['path'] = 'admin/workbench/translation-ready-to-publish';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'Translations Needs Review PM';
+$handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+
+/* Display: Translation Overview */
+$handler = $view->new_display('page', 'Translation Overview', 'page_4');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Translation Overview';
+$handler->display->display_options['defaults']['access'] = FALSE;
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'create translation jobs';
+$handler->display->display_options['defaults']['relationships'] = FALSE;
+/* Relationship: Translation Management Job Item: Tjid */
+$handler->display->display_options['relationships']['tjid']['id'] = 'tjid';
+$handler->display->display_options['relationships']['tjid']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['relationships']['tjid']['field'] = 'tjid';
+$handler->display->display_options['relationships']['tjid']['required'] = TRUE;
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Translation Management Job Item: Translation management job item ID */
+$handler->display->display_options['fields']['tjiid']['id'] = 'tjiid';
+$handler->display->display_options['fields']['tjiid']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['tjiid']['field'] = 'tjiid';
+$handler->display->display_options['fields']['tjiid']['label'] = 'Job Item ID';
+$handler->display->display_options['fields']['tjiid']['exclude'] = TRUE;
+/* Field: Translation Management Job Item: Label */
+$handler->display->display_options['fields']['label']['id'] = 'label';
+$handler->display->display_options['fields']['label']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['label']['field'] = 'label';
+/* Field: Translation Management Job: Label */
+$handler->display->display_options['fields']['label_1']['id'] = 'label_1';
+$handler->display->display_options['fields']['label_1']['table'] = 'tmgmt_job';
+$handler->display->display_options['fields']['label_1']['field'] = 'label';
+$handler->display->display_options['fields']['label_1']['relationship'] = 'tjid';
+$handler->display->display_options['fields']['label_1']['label'] = 'Job';
+/* Field: Translation Management Job Item: Item type */
+$handler->display->display_options['fields']['item_type']['id'] = 'item_type';
+$handler->display->display_options['fields']['item_type']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['item_type']['field'] = 'item_type';
+/* Field: Translation Management Job Item: Source language */
+$handler->display->display_options['fields']['source_language']['id'] = 'source_language';
+$handler->display->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['source_language']['field'] = 'source_language';
+/* Field: Translation Management Job Item: Target language */
+$handler->display->display_options['fields']['target_language']['id'] = 'target_language';
+$handler->display->display_options['fields']['target_language']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['fields']['target_language']['field'] = 'target_language';
+/* Field: Translation Management Job Item: URL */
+$handler->display->display_options['fields']['url']['id'] = 'url';
+$handler->display->display_options['fields']['url']['table'] = 'views_entity_tmgmt_job_item';
+$handler->display->display_options['fields']['url']['field'] = 'url';
+$handler->display->display_options['fields']['url']['alter']['alter_text'] = TRUE;
+$handler->display->display_options['fields']['url']['alter']['text'] = 'View';
+$handler->display->display_options['fields']['url']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['url']['alter']['path'] = '[url]';
+$handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
+$handler->display->display_options['fields']['url']['link_to_entity'] = 1;
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Translation Management Job: State */
+$handler->display->display_options['filters']['state_1']['id'] = 'state_1';
+$handler->display->display_options['filters']['state_1']['table'] = 'tmgmt_job';
+$handler->display->display_options['filters']['state_1']['field'] = 'state';
+$handler->display->display_options['filters']['state_1']['relationship'] = 'tjid';
+$handler->display->display_options['filters']['state_1']['value'] = array(
+  0 => '0',
+  1 => '1',
+);
+$handler->display->display_options['path'] = 'admin/workbench/translation-overview';
+$handler->display->display_options['menu']['type'] = 'tab';
+$handler->display->display_options['menu']['title'] = 'Translation Overview';
+$handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['menu']['context_only_inline'] = 0;
+$translatables['osha_translation_workbench'] = array(
   t('Master'),
-  t('OSHA content selection'),
+  t('On Translation'),
   t('more'),
-  t('Filter'),
+  t('Apply'),
   t('Reset'),
   t('Sort by'),
-  t('Ascending'),
-  t('Descending'),
+  t('Asc'),
+  t('Desc'),
   t('Items per page'),
   t('- All -'),
   t('Offset'),
@@ -555,24 +271,23 @@ $translatables['tmgmt_node_selection_view'] = array(
   t('‹ previous'),
   t('next ›'),
   t('last »'),
-  t('There are no results. Please broaden your filters above.'),
-  t('author'),
-  t('Translations'),
-  t('- Choose an operation -'),
-  t('Type of content'),
-  t('Workflow state'),
-  t('Author'),
-  t('Updated'),
-  t('Edit'),
-  t('Post date'),
-  t('Updated date'),
-  t('Author name'),
-  t('Type'),
-  t('Title contains'),
-  t('Node ID'),
-  t('Activity'),
-  t('Activity (field_activity)'),
-  t('Select an interval for filtering'),
-  t('Not translated in'),
-  t('Workflow Status'),
+  t('Job Item ID'),
+  t('.'),
+  t(','),
+  t('Label'),
+  t('Item type'),
+  t('Source language'),
+  t('Target language'),
+  t('URL'),
+  t('View'),
+  t('Content Validation'),
+  t('Needs Content Validation'),
+  t('Translation Validators'),
+  t('All'),
+  t('Needs Review TM'),
+  t('Needs Review PM'),
+  t('Translations Needs Review PM'),
+  t('Translation Overview'),
+  t('Translation Management Job'),
+  t('Job'),
 );

@@ -13,6 +13,9 @@ call drush build
 
 call drush php-script ../scripts/drupal_post_install.php
 
+rem Fix settings for OSHA in the media block (created in post_install)
+call drush fr osha_press_release.fe_block_settings -y --force
+
 echo "Registering migrations ..."
 call drush migrate-auto-register
 
@@ -44,6 +47,9 @@ GOTO DONE
 
     rem echo "Importing Publication types taxonomy"
     rem call drush migrate-import TaxonomyPublicationTypes
+
+    rem echo "Importing legislation category taxonomy"
+    rem call drush migrate-import TaxonomyLegislationCategories
 
     echo "Importing multilingual Thesaurus taxonomy"
     call drush migrate-import TaxonomyThesaurus

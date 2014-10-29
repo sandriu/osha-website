@@ -9,10 +9,14 @@ drush en -y search_api search_api_solr
 # Save configuration to database for later usage
 drush php-script ../scripts/drupal_pre_install.php
 
+#drush --debug-modules init
 drush init
 drush build
 
 drush php-script ../scripts/drupal_post_install.php
+
+# Fix settings for OSHA in the media block (created in post_install)
+drush fr osha_press_release.fe_block_settings -y --force
 
 echo "Registering migrations ..."
 drush migrate-auto-register
@@ -42,6 +46,9 @@ do
 
     #   echo "Importing Publication types taxonomy"
     #   drush migrate-import TaxonomyPublicationTypes
+
+    #   echo "Importing legislation category taxonomy"
+    #   drush migrate-import TaxonomyLegislationCategories
 
         echo "Importing multilingual Thesaurus taxonomy"
         drush migrate-import TaxonomyThesaurus

@@ -259,7 +259,9 @@ if(file_exists($json_path)) {
 }
 
 $options['init-modules'] = array(
-  'ctools', 'entity',
+  'ctools',
+  'entity',
+  'aggregator',
 
   'locale',
   'entity_translation',
@@ -267,6 +269,9 @@ $options['init-modules'] = array(
   'i18n_string',
   'i18n_taxonomy',
   'variable',
+
+  // contrib module that add email field
+  'email',
 
   'views',
   'views_ui',
@@ -298,6 +303,7 @@ $options['init-modules'] = array(
 
   'tmgmt',
   'tmgmt_local',
+  'tmgmt_locale',
   /* 'tmgmt_node', */
   'tmgmt_entity',
   'tmgmt_entity_ui',
@@ -352,18 +358,18 @@ $options['init-modules'] = array(
   'workbench_moderation',
 
 
-
-
   'osha_taxonomies',
 //  'osha_taxonomies_uuid',
   'osha',
   'osha_migration',
   'osha_news',
+  'osha_note_to_editor',
   'osha_publication',
   'osha_calls',
   'osha_blog',
   'osha_tmgmt',
   'osha_highlight',
+  'osha_press_contact',
   'osha_homepage',
   'osha_menu',
   'osha_job_vacancies',
@@ -372,6 +378,8 @@ $options['init-modules'] = array(
   'osha_blocks',
   'osha_breadcrumbs',
 //  'osha_content',
+  'osha_legislation',
+  'osha_short_messages',
 
   'facetapi',
   'search_api_facetapi',
@@ -392,11 +400,15 @@ $options['init-modules'] = array(
 
   // Social share
   'addtoany',
+  'on_the_web',
 
   // Link content types with main menu items
   'menu_position',
 
+  'r4032login',
+
   'devel',
+  'devel_node_access',
   'diff',
   'simpletest'
 );
@@ -405,6 +417,11 @@ $options['init-themes'] = array(
   'osha_admin',
   'osha_frontend'
 );
+
+// Add the modules for development/testing.
+if ($cfg->variables->environment == 'development') {
+  $options['init-modules'][] = 'reroute_email';
+}
 
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
   include_once dirname(__FILE__) . '/drushrc.local.php';
