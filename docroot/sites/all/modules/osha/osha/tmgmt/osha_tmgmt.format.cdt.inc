@@ -259,7 +259,8 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $reader = new XMLReader();
     foreach ($targets as $target) {
       $count = 0;
-      $reader->XML('<Translation>' . $target['#text'] . '</Translation>');
+      $encoded_value = htmlentities($target['#text'], ENT_COMPAT | ENT_XML1);
+      $reader->XML('<Translation>' . $encoded_value . '</Translation>', 'UTF-8');
       while ($reader->read()) {
         if (in_array($reader->name, array('Translation', '#text'))) {
           continue;
