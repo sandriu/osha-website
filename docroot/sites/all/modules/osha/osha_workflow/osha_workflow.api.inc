@@ -812,6 +812,19 @@ class OshaWorkflowNotifications {
   }
 
   /**
+   * Notify Translation Manager the content translation was rejected.
+   *
+   * @param TMGMTJobItem|OshaTMGMTJobItem $tmgmt_job_item
+   *   Job created
+   */
+  public static function notifyTranslationRejected($tmgmt_job_item) {
+    $tmanagers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    $tliaisons = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_LIAISON);
+    $users = array_merge($tmanagers, $tliaisons);
+    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
+  }
+
+  /**
    * Notify Next Translation Content Validator the content needs validation..
    *
    * @param TMGMTJobItem|OshaTMGMTJobItem $tmgmt_job_item

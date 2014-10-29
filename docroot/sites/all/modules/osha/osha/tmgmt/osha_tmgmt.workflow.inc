@@ -619,6 +619,7 @@ function osha_tmgmt_job_item_translation_reject($form, &$form_state) {
       $last->approved = OSHA_TMGMT_TRANS_VALID_REJECTED;
       $last->next = 0;
       entity_save('translation_validator', $last);
+      OshaWorkflowNotifications::notifyTranslationRejected($job_item);
     }
   }
   $job_item->toTranslationRejected();
