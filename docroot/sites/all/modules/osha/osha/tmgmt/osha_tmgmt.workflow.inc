@@ -566,15 +566,15 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
       if ($next_validator = current($validators)) {
         $next_validator->next = 1;
         entity_save('translation_validator', $next_validator);
-        drupal_set_message(t('@name is the next one to approve!',
+        drupal_set_message(t('@name is the next one to approve',
           array('@name' => $next_validator->name)));
 
         // Save log message (no job item state change required).
-        $job_item->addMessage('@name approved the translation content.
-          Next approval is @next', array(
-            '@name' => $user->name,
-            '@next' => $next_validator->name,
-          ));
+        $log_entry = sprintf('%s approved the translation content. Next to approve is %s', $user->name, $next_validator->name);
+        if (!empty($message)) {
+          $log_entry .= ' Messsage: ' . $message;
+        }
+        $job_item->addMessage($log_entry);
         // Notify next approval.
         OshaWorkflowNotifications::notifyTranslationValidators($job_item);
       }
