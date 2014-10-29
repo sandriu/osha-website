@@ -344,6 +344,9 @@ $options['init-modules'] = array(
   'node_export',
   'mpac',
   'linkit',
+  'scanner',
+  'search_and_replace',
+  'nodeblock',
 
   // Enable last (conflict with rules)
   'uuid',
@@ -357,6 +360,11 @@ $options['init-modules'] = array(
   'workbench_access',
   'workbench_moderation',
 
+  // print and generate pdf - per node action
+  'print',
+  'print_ui',
+  'print_pdf_tcpdf',
+  'print_pdf',
 
   'osha_taxonomies',
 //  'osha_taxonomies_uuid',

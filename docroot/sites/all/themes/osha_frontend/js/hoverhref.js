@@ -11,7 +11,7 @@ function hoverThemes() {
 		var obj=jQuery(this);
 		jQuery(".introduction-image img",this).mouseover(function() {
 		obj.find(".introduction-title").css("border-bottom", "10px solid #DC2E81");
-		obj.find(".introduction-title a").css("background","url('/sites/all/themes/osha_frontend/images/flecha.png') 100% 50% no-repeat").css("padding-right", "1.5em");
+		obj.find(".introduction-title a").css("background","url('/sites/all/themes/osha_frontend/images/flecha.png') 100% 25% no-repeat").css("padding-right", "1.5em");
 		});
 	});
 	
@@ -27,7 +27,7 @@ function hoverThemes() {
 		var obj=jQuery(this);
 		jQuery(".introduction-title",this).mouseover(function() {
 		obj.find(".introduction-title").css("border-bottom", "10px solid #DC2E81");
-		obj.find(".introduction-title a").css("background","url('/sites/all/themes/osha_frontend/images/flecha.png') 100% 50% no-repeat").css("padding-right", "1.5em");
+		obj.find(".introduction-title a").css("background","url('/sites/all/themes/osha_frontend/images/flecha.png') 100% 25% no-repeat").css("padding-right", "1.5em");
 		});
 	});
 	

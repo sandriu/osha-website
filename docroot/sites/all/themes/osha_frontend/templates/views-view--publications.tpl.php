@@ -55,7 +55,6 @@ jQuery(document).ready(function ($) {
     var jssor_slider1 = new $JssorSlider$("publication_slideshow", options);
 });
 </script>
-<div class="separator_recomended_resources_home">&nbsp;</div>
 <?php 
 $intNumberOfItems = substr_count($rows ,'<article');
 ?>
@@ -68,7 +67,7 @@ $intNumberOfItems = substr_count($rows ,'<article');
     <div u="navigator" class="jssorb03" style="position: absolute; bottom: 4px; right: 6px;">
         <div u="prototype" style="position: absolute; width: 21px; height: 21px; text-align:center; line-height:21px; color:white; font-size:12px;"></div>
     </div>	
-	<span u="arrowleft" class="jssora03l" style="width: 55px; height: 55px; top: 115px; left: 8px;"></span>
-	<span u="arrowright" class="jssora03r" style="width: 55px; height: 55px; top: 115px; right: 8px"></span>
+	<span u="arrowleft" class="jssora03l publications" style="width: 55px; height: 55px; top: 115px; left: 8px;"></span>
+	<span u="arrowright" class="jssora03r publications" style="width: 55px; height: 55px; top: 115px; right: 8px"></span>
 	<?php endif; ?>
 </div>

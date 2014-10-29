@@ -97,7 +97,7 @@ function osha_calls_views_default_views() {
   /* Display: Open */
   $handler = $view->new_display('block', 'Open', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Current calls for contractors';
+  $handler->display->display_options['title'] = 'Open calls for contractors';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -277,7 +277,7 @@ function osha_calls_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Open'),
-    t('Current calls for contractors'),
+    t('Open calls for contractors'),
     t('Ongoing'),
     t('Ongoing calls for contractors'),
     t('Archived calls page'),

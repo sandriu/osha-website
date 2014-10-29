@@ -233,6 +233,12 @@ function fill_related_wiki(&$vars) {
  */
 function osha_frontend_process_node(&$vars) {
   // Change default text of the read more link.
+  if ($vars['type'] != 'press_release' && $vars['view_mode'] == 'full') {
+    if (isset($vars['content']['links']['print_pdf'])) {
+      // only press release could be downloaded as pdf
+      unset($vars['content']['links']['print_pdf']);
+    }
+  }
   if ($vars['type'] == 'publication' && $vars['view_mode'] == 'full' ) {
     fill_related_publications($vars);
   }
@@ -291,6 +297,50 @@ function osha_frontend_form_alter(&$form, &$form_state, $form_id) {
  */
 function osha_frontend_preprocess_file_icon(&$variables) {
   $variables['icon_directory'] = drupal_get_path('theme', 'osha_frontend') . '/images/file_icons';
+}
+
+/**
+ * Implements theme_on_the_web_image().
+ *
+ * @param $variables
+ *   An associative array with generated variables.
+ *
+ * @return
+ *   HTML for a social media icon.
+ */
+function osha_frontend_on_the_web_image($variables) {
+  $service = $variables['service'];
+  $title   = $variables['title'];
+  $size    = variable_get('on_the_web_size', 'sm');
+
+  $variables = array(
+    'alt'   => $title,
+    'path'  => drupal_get_path('theme', 'osha_frontend') . '/images/social-icons/' . $size . '/' . $service . '.png',
+    'title' => $title
+  );
+
+  return theme('image', $variables);
+}
+
+
+/**
+ * Returns HTML for an individual feed item for display in the block.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - item: The item to be displayed.
+ *   - feed: Not used.
+ *
+ * @ingroup themeable
+ */
+function osha_frontend_aggregator_block_item($variables) {
+  // Display the external link to the item.
+  $item = $variables['item'];
+
+  $element = '<span class="feed-item-date">'. format_date($item->timestamp, 'custom', variable_get('date_format_osha_day_only', 'd/m/Y')) .'</span>';
+  $element .= '<br/>';
+  $element .= '<a href="' . check_url($item->link) . '">' . check_plain($variables['item']->title) . "</a>\n";
+  return $element;
 }
 
 /**

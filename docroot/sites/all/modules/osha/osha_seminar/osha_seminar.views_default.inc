@@ -87,6 +87,12 @@ function osha_seminar_views_default_views() {
     'body:value' => 'body:value',
     'title_field' => 'title_field',
   );
+  /* Filter criterion: Indexed Multilingual Node: Publication date */
+  $handler->display->display_options['filters']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date']['value'] = 'now';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

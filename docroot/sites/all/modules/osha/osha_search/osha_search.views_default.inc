@@ -476,8 +476,8 @@ function osha_search_views_default_views() {
   $handler->display->display_options['tab_options']['title'] = 'Site';
   $handler->display->display_options['tab_options']['weight'] = '1';
 
-  /* Display: Wiki Search */
-  $handler = $view->new_display('page', 'Wiki Search', 'wiki');
+  /* Display: OSHWiki Search */
+  $handler = $view->new_display('page', 'OSHWiki Search', 'wiki');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'OSHWiki Search';
   $handler->display->display_options['exposed_block'] = TRUE;
@@ -494,15 +494,6 @@ function osha_search_views_default_views() {
     'title_link' => 'content',
     'title_class' => '',
   );
-  /* Field: Indexed Multilingual Node: Date changed */
-  $handler->display->display_options['fields']['changed']['id'] = 'changed';
-  $handler->display->display_options['fields']['changed']['table'] = 'search_api_index_default_multilingual_node_index';
-  $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = '';
-  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['changed']['date_format'] = 'osha_day_only';
-  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  $handler->display->display_options['fields']['changed']['link_to_entity'] = 0;
   /* Field: Indexed Multilingual Node: URL */
   $handler->display->display_options['fields']['field_wiki_page_url']['id'] = 'field_wiki_page_url';
   $handler->display->display_options['fields']['field_wiki_page_url']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -518,6 +509,35 @@ function osha_search_views_default_views() {
   $handler->display->display_options['fields']['search_api_excerpt']['label'] = '';
   $handler->display->display_options['fields']['search_api_excerpt']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['search_api_excerpt']['link_to_entity'] = 0;
+  /* Field: Indexed Multilingual Node: Updated */
+  $handler->display->display_options['fields']['field_updated']['id'] = 'field_updated';
+  $handler->display->display_options['fields']['field_updated']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['field_updated']['field'] = 'field_updated';
+  $handler->display->display_options['fields']['field_updated']['label'] = '';
+  $handler->display->display_options['fields']['field_updated']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_updated']['settings'] = array(
+    'format_type' => 'osha_day_only',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'osha_date_theme' => '',
+  );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  /* Sort criterion: Indexed Multilingual Node: Updated */
+  $handler->display->display_options['sorts']['field_updated']['id'] = 'field_updated';
+  $handler->display->display_options['sorts']['field_updated']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['sorts']['field_updated']['field'] = 'field_updated';
+  $handler->display->display_options['sorts']['field_updated']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_updated']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_updated']['expose']['label'] = 'Date';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Search: Fulltext search */
@@ -582,8 +602,8 @@ function osha_search_views_default_views() {
     t('Site Search'),
     t('Publication date'),
     t('Language'),
-    t('Wiki Search'),
     t('OSHWiki Search'),
+    t('Date'),
   );
   $export['search'] = $view;
 

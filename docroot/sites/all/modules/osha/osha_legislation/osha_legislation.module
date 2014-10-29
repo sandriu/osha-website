@@ -8,3 +8,48 @@ include_once 'osha_legislation.features.inc';
 
 define('OSHA_LEGISLATION_CONTENT_TYPE_DIRECTIVE', 'directive');
 define('OSHA_LEGISLATION_CONTENT_TYPE_GUIDELINE', 'guideline');
+
+/**
+ * Implements hook_views_pre_render
+ * @param $view
+ */
+function osha_legislation_views_pre_render(&$view) {
+  //Set view name with taxonomy term name (category code parameter in the URL)
+  if ($view->name == 'legislation_guidelines') {
+    $view->build_info['title'] = findTermNameFromEntityField($view, 'field_guideline_category_code');
+  }elseif ($view->name == 'legislation'){
+    $view->build_info['title'] = findTermNameFromEntityField($view, 'field_directive_category_code');
+  }
+}
+
+function findTermNameFromEntityField($view, $field){
+  if(empty($view->args[0]))
+    return FALSE;
+
+  $tid = MigrationUtil::findTidByEntityValue('legislation_category', $field, $view->args[0]);
+  $term = taxonomy_term_load($tid);
+  $name = $term? $term->name : '';
+
+  return $name;
+}
+
+function osha_legislation_workbench_access_node_element_alter(&$element, $form_state, $active) {
+  if (isset($form_state['build_info']['form_id']) && $form_state['build_info']['form_id'] == 'directive_node_form' ) {
+    $element['#required'] = FALSE;
+    foreach ($element['#options'] as $key=>$option) {
+      if (preg_match('/^[-\\s]*European Directives$/', $option)) {
+        $element['#default_value'] = $key;
+        break;
+      }
+    }
+  }
+  if (isset($form_state['build_info']['form_id']) && $form_state['build_info']['form_id'] == 'guideline_node_form' ) {
+    $element['#required'] = FALSE;
+    foreach ($element['#options'] as $key=>$option) {
+      if (preg_match('/^[-\\s]*European Guidelines$/', $option)) {
+        $element['#default_value'] = $key;
+        break;
+      }
+    }
+  }
+}

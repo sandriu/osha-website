@@ -153,6 +153,60 @@ function osha_legislation_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_directive';
+  $strongarm->value = array(
+    'teaser' => 'teaser',
+    'full' => 0,
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
+    'osha_wiki' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_directive'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_guideline';
+  $strongarm->value = array(
+    'teaser' => 'teaser',
+    'full' => 0,
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
+    'osha_wiki' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_guideline'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_directive';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_directive'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_guideline';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_guideline'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__directive';
   $strongarm->value = array(
     'view_modes' => array(
@@ -369,6 +423,20 @@ function osha_legislation_strongarm() {
   $strongarm->name = 'node_submitted_guideline';
   $strongarm->value = 0;
   $export['node_submitted_guideline'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_directive';
+  $strongarm->value = 1;
+  $export['workbench_access_node_type_directive'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_guideline';
+  $strongarm->value = 1;
+  $export['workbench_access_node_type_guideline'] = $strongarm;
 
   return $export;
 }

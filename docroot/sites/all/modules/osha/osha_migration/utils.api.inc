@@ -759,14 +759,19 @@ class MigrationUtil {
    * @return mixed
    */
   public static function findTidByEntityValue($vocabulary_name, $entity_field, $entity_value){
+    $tid = 0;
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'taxonomy_term')
       ->entityCondition('bundle', array($vocabulary_name))
       ->fieldCondition($entity_field, 'value', $entity_value, '=');
     $result = $query->execute();
-    $tid = array_keys($result['taxonomy_term']);
 
-    return $tid[0];
+    if($result){
+      $terms = array_keys($result['taxonomy_term']);
+      $tid = $terms[0];
+    }
+
+    return $tid;
   }
 }
 
