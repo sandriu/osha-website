@@ -90,6 +90,18 @@ function osha_configure_permissions() {
     user_role_grant_permissions($role->rid, $permissions);
     user_role_revoke_permissions($role->rid, array('use workbench_moderation needs review tab'));
   }
+
+  $roles = array(
+    OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER,
+    OSHA_WORKFLOW_ROLE_TRANSLATION_LIAISON,
+    OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR,
+    OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR,
+  );
+  foreach ($roles as $role_name) {
+    if ($role = user_role_load_by_name($role_name)) {
+      user_role_grant_permissions($role->rid, array('access workbench'));
+    }
+  }
 }
 
 /**

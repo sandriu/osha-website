@@ -54,6 +54,12 @@ $handler->display->display_options['fields']['url']['alter']['make_link'] = TRUE
 $handler->display->display_options['fields']['url']['alter']['path'] = '[url]';
 $handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
 $handler->display->display_options['fields']['url']['link_to_entity'] = 1;
+/* Sort criterion: Translation Management Job Item: Changed */
+$handler->display->display_options['sorts']['changed']['id'] = 'changed';
+$handler->display->display_options['sorts']['changed']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['sorts']['changed']['field'] = 'changed';
+$handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+$handler->display->display_options['sorts']['changed']['granularity'] = 'minute';
 /* Filter criterion: Translation Management Job Item: State */
 $handler->display->display_options['filters']['state']['id'] = 'state';
 $handler->display->display_options['filters']['state']['table'] = 'tmgmt_job_item';

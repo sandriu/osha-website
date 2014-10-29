@@ -94,7 +94,15 @@ function osha_tmgmt_user_can_edit_job_item($job_item) {
 function osha_tmgmt_layout_validation_node_preview($node, $job_item) {
   $target_language = $job_item->target_language;
   tmgmt_field_populate_entity($node->type, $node, $target_language, $job_item->getData());
-  $renderable_node = node_view($node, 'full', $target_language);
+  $renderable_node = node_view($node);
+  $title = field_get_items('node', $node, 'title_field', $target_language);
+  if (!empty($title[0]['value'])) {
+    // @todo: Title hard-coded in template 'Manage Display' hides the title.
+    $renderable_node['title_field'] = array(
+      '#type' => 'item',
+      '#markup' => sprintf('<h1 class="page__title title" id="page-title">%s</h1>', $title[0]['value']),
+    );
+  }
   return drupal_render($renderable_node);
 }
 
@@ -151,38 +159,56 @@ function osha_tmgmt_translation_validators_submit($form, &$form_state) {
   if (!empty($form_state['values']['translation_validators']['translation_group'])) {
     foreach ($form_state['tmgmt_job_items'] as $job_item) {
       if ($job_item->state != OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish) {
-        $group_id = $form_state['values']['translation_validators']['translation_group'];
-        $entity_group = entity_collection_load($group_id);
-        $users = osha_tmgmt_get_users_from_collection($group_id);
-        $users = osha_workflow_users_group_by_lang_skills($users, $job_item->source_language);
-        // Cancel existing validators.
-        osha_tmgmt_remove_current_translation_validators($job_item);
-        if (!empty($users[$job_item->target_language])) {
-          $users_name = array();
-          foreach ($users[$job_item->target_language] as $idx => $user) {
-            $next = 0;
-            if ($idx == 0) {
-              $next = 1;
+        $existing_validators = osha_tmgmt_load_validators_by_job_item($job_item);
+        // Don't override existing assigned validators.
+        if (empty($existing_validators)) {
+          $group_id = $form_state['values']['translation_validators']['translation_group'];
+          $entity_group = entity_collection_load($group_id);
+          $users = osha_tmgmt_get_users_from_collection($group_id);
+          $users = osha_workflow_users_group_by_lang_skills($users, $job_item->source_language);
+          // Cancel existing validators.
+          osha_tmgmt_remove_current_translation_validators($job_item);
+          if (!empty($users[$job_item->target_language])) {
+            $users_name = array();
+            foreach ($users[$job_item->target_language] as $idx => $u) {
+              $next = 0;
+              if ($idx == 0) {
+                $next = 1;
+              }
+              $users_name[] = $u->name;
+              osha_tmgmt_add_translation_validator($u->uid, $job_item, $idx, $next);
             }
-            $users_name[] = $user->name;
-            osha_tmgmt_add_translation_validator($user->uid, $job_item, $idx, $next);
+            global $user;
+            $msg = t('@name assigned validators: @validators to @language',
+              array(
+                '@name' => $user->name,
+                '@language' => locale_language_name($job_item->target_language),
+                '@group' => $entity_group->name,
+                '@validators' => implode(', ', $users_name),
+              ));
+            drupal_set_message($msg);
+            $job_item->addMessage($msg);
           }
-          global $user;
-          $msg = t('@name assigned group "@group" default content validators: @validators',
-            array(
-              '@name' => $user->name,
-              '@group' => $entity_group->name,
-              '@validators' => implode(', ', $users_name),
-            ));
-          drupal_set_message($msg);
-          $job_item->addMessage($msg);
+          else {
+            drupal_set_message(
+              t(
+                'No translator available for @language',
+                array('@language' => locale_language_name($job_item->target_language))
+              ),
+              'warning'
+            );
+          }
+          $job_item->eid = $group_id;
+          $job_item->save();
         }
         else {
-          drupal_set_message(t('No user was found for language @language',
-            array('@language' => $job_item->target_language)));
+          drupal_set_message(
+            t('Skipped assignment to !to, already has validators assigned',
+              array('!to' => locale_language_name($job_item->target_language))
+            ),
+            'warning'
+          );
         }
-        $job_item->eid = $group_id;
-        $job_item->save();
       }
     }
   }
@@ -274,6 +300,50 @@ function osha_tmgmt_get_job_translation_validators_group($eid) {
 }
 
 /**
+ * Retrieve the list of content validators with  a certain translation skill.
+ *
+ * @param string $target_language
+ *   Language to translate to
+ * @param string $source_language
+ *   Language to translate from
+ *
+ * @return array
+ *   Array of users with the required skills.
+ */
+function osha_tmgmt_get_content_validators_by_skill($target_language, $source_language = 'en') {
+  $ret = array();
+  $users = osha_workflow_users_get_users_from_role(OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR);
+  foreach ($users as $user) {
+    if (!empty($user->tmgmt_translation_skills[LANGUAGE_NONE])) {
+      foreach ($user->tmgmt_translation_skills[LANGUAGE_NONE] as $skill) {
+        if ($skill['language_from'] == $source_language && $skill['language_to'] == $target_language) {
+          $ret[] = $user;
+          break;
+        }
+      }
+    }
+  }
+  return $ret;
+}
+
+/**
+ * List of content validators with certain skill as select options.
+ *
+ * @see osha_tmgmt_get_content_validators_by_skill
+ * @return array
+ *   Array rendered as options
+ */
+function osha_tmgmt_get_content_validators_by_skill_as_options($target_language, $source_language = 'en') {
+  $ret = array();
+  $users = osha_tmgmt_get_content_validators_by_skill($target_language, $source_language);
+  foreach ($users as $user) {
+    $ret[$user->uid] = $user->name;
+  }
+  return $ret;
+}
+
+
+/**
  * Group an array of users by their language skills.
  *
  * return array
@@ -352,12 +422,20 @@ function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
     );
     $weight++;
   }
+  $cvalidators = osha_tmgmt_get_content_validators_by_skill_as_options($job_item->target_language, $job_item->source_language);
   $form['add']['uid'] = array(
-    '#type' => 'textfield',
-    '#autocomplete_path' => 'users/autocomplete/' . OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR,
-    '#title' => t('Add another approver'),
-    '#title_display' => 'invisible',
+    '#type' => 'select',
+    '#title' => t('Add validator'),
+    '#description' => t(
+      'Select a content validator having !from to !to translation skill',
+      array(
+        '!from' => locale_language_name($job_item->source_language),
+        '!to' => locale_language_name($job_item->target_language),
+      )
+    ),
+    '#title_display' => 'before',
     '#access' => $can_edit,
+    '#options' => $cvalidators,
   );
   $form['add']['submit'] = array(
     '#type' => 'submit',
@@ -370,8 +448,9 @@ function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
   );
   $form['help'] = array(
     '#type' => 'markup',
-    '#markup' =>
-      t('<div><strong>Tip:</strong> Use the drag handlers to sort the users in the order you want them to have the content reviewed. <br />** - Temporary, not yet saved</div>'),
+    '#markup' => t(
+      '<div><strong>Tip:</strong> Use the drag handlers to sort the users in the order you want them to have the content reviewed. <br />** - Temporary, not yet saved</div>'
+    ),
     '#access' => $can_edit,
   );
   $form['content'] = array(
@@ -394,13 +473,13 @@ function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
  */
 function osha_tmgmt_job_item_validators_add_validate($form, &$form_state) {
   if (!empty($form_state['values']['add']['uid'])) {
-    $user = user_load_by_name($form_state['values']['add']['uid']);
+    $user = user_load($form_state['values']['add']['uid']);
     if (empty($user)) {
-      form_set_error('add][uid', t('User does not exists!'));
+      form_set_error('add][uid', t('User does not exist!'));
     }
     elseif (!empty($form_state['rows'])
       && in_array($user->uid, array_keys($form_state['rows']))) {
-      form_set_error('add][uid', t('You cannot add twice the same user!'));
+      form_set_error('add][uid', t('User is already validator for this translation'));
     }
   }
 }
@@ -412,7 +491,7 @@ function osha_tmgmt_job_item_validators_add_validate($form, &$form_state) {
  * The form must be saved in order to add them to DB.
  */
 function osha_tmgmt_job_item_validators_add($form, &$form_state) {
-  $user = user_load_by_name($form_state['values']['add']['uid']);
+  $user = user_load($form_state['values']['add']['uid']);
   if (!empty($user)) {
     $form_state['rows'][$user->uid] = $user;
     $form_state['rows'][$user->uid]->osha_tmgmt_validators_saved = FALSE;
@@ -445,7 +524,7 @@ function osha_tmgmt_job_item_validators_remove($form, &$form_state) {
  */
 function osha_tmgmt_job_item_validators_form_validate($form, &$form_state) {
   if (empty($form_state['values']['rows'])) {
-    form_set_error('add][uid', t('Cannot have an empty queue!'));
+    form_set_error('add][uid', t('Cannot have an empty queue! Add another validator first'));
   }
 }
 
@@ -505,15 +584,15 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
       if ($next_validator = current($validators)) {
         $next_validator->next = 1;
         entity_save('translation_validator', $next_validator);
-        drupal_set_message(t('@name is the next one to approve!',
+        drupal_set_message(t('@name is the next one to approve',
           array('@name' => $next_validator->name)));
 
         // Save log message (no job item state change required).
-        $job_item->addMessage('@name approved the translation content.
-          Next approval is @next', array(
-            '@name' => $user->name,
-            '@next' => $next_validator->name,
-          ));
+        $log_entry = sprintf('%s approved the translation content. Next to approve is %s', $user->name, $next_validator->name);
+        if (!empty($message)) {
+          $log_entry .= ' Messsage: ' . $message;
+        }
+        $job_item->addMessage($log_entry);
         // Notify next approval.
         OshaWorkflowNotifications::notifyTranslationValidators($job_item);
       }
@@ -540,6 +619,7 @@ function osha_tmgmt_job_item_translation_reject($form, &$form_state) {
       $last->approved = OSHA_TMGMT_TRANS_VALID_REJECTED;
       $last->next = 0;
       entity_save('translation_validator', $last);
+      OshaWorkflowNotifications::notifyTranslationRejected($job_item);
     }
   }
   $job_item->toTranslationRejected();
@@ -695,4 +775,95 @@ function theme_osha_tmgmt_job_item_validators_form_table($variables) {
     drupal_add_tabledrag('approvers_table', 'order', 'sibling', 'user-weight');
   }
   return $output;
+}
+
+
+function theme_osha_tmgmt_ui_translator_review_form($variables) {
+  $element = $variables['element'];
+  $result = '';
+  $labels = '';
+  $parent_label = '';
+  $element_groups = array();
+  $element_group = '';
+  foreach (element_children($element) as $key) {
+    // Label of all element groups.
+    $parent_label = array_shift($element[$key]['#parent_label']);
+    $element[$key]['#top_label'] = $parent_label;
+    $element[$key]['#leave_label'] = array_pop($element[$key]['#parent_label']);
+    // Start a new element group.
+    if ($labels != $element[$key]['#parent_label']) {
+      $labels = $element[$key]['#parent_label'];
+      if (!empty($labels)) {
+        // Append to previous group to the group collection.
+        if (!empty($element_group)) {
+          $element_groups[] = '<tbody>' . $element_group . '</tbody>';
+        }
+      }
+    }
+    $element[$key]['#theme'] = 'osha_tmgmt_ui_translator_review_form_element';
+    $element_group .= drupal_render($element[$key]);
+  }
+
+  // Append the last group to the group collection.
+  $element_groups[] = '<tbody>' . $element_group . '</tbody>';
+
+  // Display the label of all element groups inside a table header.
+  if (!empty($parent_label)) {
+    $cell = array(
+      'data' => $parent_label,
+      'colspan' => 5,
+    );
+    $result = '<thead><tr>' . _theme_table_cell($cell, TRUE) . '</tr></thead>' . implode('', $element_groups);
+  }
+  $table = '<table class="tmgmt-ui-review"><colgroup width="100" /><colgroup width="*" span="2" /><colgroup width="100" />' . $result . '</table>';
+  return '<div id="' . $element['#ajaxid'] . '">' . $table . '</div>';
+}
+
+function theme_osha_tmgmt_ui_translator_review_form_element($variables) {
+  $element = $variables['element'];
+  // Label of all element groups.
+  if (!isset($element['#top_label'])) {
+    $element['#top_label'] = array_shift($element['#parent_label']);
+  }
+  // Label of the current data item.
+  if (!isset($element['#leave_label'])) {
+    $element['#leave_label'] = array_pop($element['#parent_label']);
+  }
+  // Do not repeat labels inside the same hierarchy.
+  if ($element['#top_label'] == $element['#leave_label']) {
+    $element['#leave_label'] = '';
+  }
+  $result = '<tr' . drupal_attributes(array('class' => $element['#zebra'])) . '>';
+  $row = array();
+  $row[] = array(
+    'data' => '&nbsp;',
+    'class' => 'tmgmt-ui-data-item-label',
+  );
+  $row[] = array(
+    'data' => drupal_render($element['source']),
+    'class' => 'tmgmt-ui-data-item-source',
+  );
+  $row[] = array(
+    'data' => drupal_render($element['translation']),
+    'class' => 'tmgmt-ui-data-item-translation',
+  );
+  $row[] = array(
+    'data' => drupal_render($element['actions']),
+    'class' => 'tmgmt-ui-data-item-actions',
+  );
+  foreach ($row as $cell) {
+    $result .= _theme_table_cell($cell);
+  }
+  $result .= '</tr>';
+
+  if (!empty($element['below'])) {
+    $result .= '<tr' . drupal_attributes(array('class' => $element['#zebra'])) . '>';
+    $result .= _theme_table_cell(array(
+      'data' => drupal_render($element['below']),
+      'colspan' => '4',
+    ));
+    $result .= '</tr>';
+  }
+
+  return $result;
 }

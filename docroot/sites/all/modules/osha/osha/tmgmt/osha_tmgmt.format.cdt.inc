@@ -207,59 +207,60 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
    *
    * Checks:
    * - Job ID.
-   * - Target ans source languages
+   * - Target and source languages
    * - Content integrity by
    */
   public function validateImport($imported_file) {
     $xml = $this->getImportedXML($imported_file);
-    // Check if our phase information is there.
-    $phase = $xml->xpath("//TransactionIdentifier");
+    if (empty($xml)) {
+      drupal_set_message('Cannot parse XML file, check XML integrity and syntax', 'error');
+      return FALSE;
+    }
+    $phase = $xml->xpath('//TransactionIdentifier');
     if ($phase) {
       $phase = reset($phase);
     }
     else {
-      drupal_set_message('Transaction identifier tag could not be found', 'error');
+      drupal_set_message('TransactionIdentifier tag is missing. XML is not valid', 'error');
       return FALSE;
     }
-
     // Check if the job can be loaded.
-    $jid = (string) $phase;
-    if (!$job = tmgmt_job_load($jid)) {
-      drupal_set_message(sprintf('File\'s job %s could not be found', $jid), 'error');
+    $tjid = (string) $phase;
+    $job = tmgmt_job_load($tjid);
+    if (empty($job)) {
+      drupal_set_message(sprintf('Cannot find inside the system a matching job for ID: %s', $tjid), 'error');
       return FALSE;
     }
-
     // Check if Job Items IDs from file belongs to this Job.
     $items_ids = array_keys($job->getItems());
-    $identifiers = $xml->xpath("//ContentIdentifier");
+    $identifiers = $xml->xpath('//ContentIdentifier');
     foreach ($identifiers as $identifier) {
-      $jiid = (string) $identifier;
-      if (!in_array($jiid, $items_ids)) {
-        drupal_set_message(sprintf('Job item %s could not be found', $jiid), 'error');
+      $tjiid = (string) $identifier;
+      if (!in_array($tjiid, $items_ids)) {
+        drupal_set_message(sprintf('The job inside the system does not have a corresponding job item with ID: %s', $tjiid), 'error');
         return FALSE;
       }
     }
-
     // Check if file contains other languages than those from the job.
     $this->getMappedItemIDs($job);
     $languages = $xml->xpath("//TranslationTargetLanguage");
     foreach ($languages as $language) {
       $lang = (string) $language;
       if ($lang != $job->source_language && !isset($this->mappedItemsIDs[$lang])) {
-        drupal_set_message(sprintf('Target language %s could not be found', $lang), 'error');
+        drupal_set_message(sprintf('Invalid target language. This job does not accept translations in: %s', $lang), 'error');
         return FALSE;
       }
     }
-
     $targets = $this->getImportedTargets($job);
     if (empty($targets)) {
-      drupal_set_message('Targets could not be processed', 'error');
+      drupal_set_message('No translations processed (missing <Translation> sections?)', 'error');
       return FALSE;
     }
     $reader = new XMLReader();
-    foreach ($targets as $id => $target) {
+    foreach ($targets as $target) {
       $count = 0;
-      $reader->XML('<Translation>' . $target['#text'] . '</Translation>');
+      $encoded_value = htmlentities($target['#text'], ENT_COMPAT | ENT_XML1);
+      $reader->XML('<Translation>' . $encoded_value . '</Translation>', 'UTF-8');
       while ($reader->read()) {
         if (in_array($reader->name, array('Translation', '#text'))) {
           continue;
@@ -267,8 +268,6 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
         $count++;
       }
     }
-
-    // Validation successful.
     return $job;
   }
 
@@ -278,11 +277,11 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
       // url encoded due to the temporary://. This is a PHP bug, see
       // https://bugs.php.net/bug.php?id=61469
       $xml_string = file_get_contents($imported_file);
-      $this->importedXML = simplexml_load_string($xml_string);
-      // Register the XLIFF namespace, required for xpath.
-      $this->importedXML->registerXPathNamespace('cdt', 'urn:oasis:names:tc:cdt:document:1.2');
+      if ($this->importedXML = simplexml_load_string($xml_string)) {
+        // Register the XLIFF namespace, required for xpath.
+        $this->importedXML->registerXPathNamespace('cdt', 'urn:oasis:names:tc:cdt:document:1.2');
+      }
     }
-
     return $this->importedXML;
   }
 
@@ -290,14 +289,11 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     if (empty($this->importedXML)) {
       return FALSE;
     }
-
     // Populates Job Item Ids array.
     $this->getMappedItemIDs($job);
-
     if (empty($this->importedTransUnits)) {
       $reader = new XMLReader();
       foreach ($this->importedXML->xpath('//Translation') as $translation) {
-        // Get the target language of the current translation element.
         $target_language = (string) $translation->TranslationTargetLanguage;
         if ($job->source_language != $target_language) {
           foreach ($translation->xpath('DynamicElement') as $unit) {
@@ -310,14 +306,13 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
               $item_id = $this->mappedItemsIDs[$target_language][$entity_type][$entity_id];
               $reader->XML($unit->DynamicContent->asXML());
               $reader->read();
-              $this->importedTransUnits[$item_id . (string) $unit['name']]['#text']
-                = $this->processForImport($reader->readInnerXML(), $job);
+              $key = $item_id . (string) $unit['name'];
+              $this->importedTransUnits[$key]['#text'] = $this->processForImport($reader->readInnerXML(), $job);
             }
           }
         }
       }
     }
-
     return $this->importedTransUnits;
   }
 

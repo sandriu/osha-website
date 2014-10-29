@@ -64,8 +64,6 @@ function osha_tmgmt_workflow_permissions_common() {
     'access dashboard',
     'view the administration theme',
     'access toolbar',
-    'view translation content validators',
-
     'view translation job',
     // TODO checko why fails on install if access workbench permission added here.
 //    'access workbench',
@@ -100,6 +98,8 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
       'view translation job item',
       'edit translation job item',
       'set job item to translated state',
+
+      'view translation content validators',
 
       'access user profiles',
       'edit translation content validators',
