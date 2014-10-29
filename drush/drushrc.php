@@ -344,6 +344,8 @@ $options['init-modules'] = array(
   'mpac',
   'linkit',
   'scanner',
+  'search_and_replace',
+  'nodeblock',
 
   // Enable last (conflict with rules)
   'uuid',
@@ -357,6 +359,11 @@ $options['init-modules'] = array(
   'workbench_access',
   'workbench_moderation',
 
+  // print and generate pdf - per node action
+  'print',
+  'print_ui',
+  'print_pdf_tcpdf',
+  'print_pdf',
 
   'osha_taxonomies',
 //  'osha_taxonomies_uuid',
@@ -401,12 +408,6 @@ $options['init-modules'] = array(
   // Social share
   'addtoany',
   'on_the_web',
-
-  // print and generate pdf - per node action
-  'print',
-  'print_ui',
-  'print_pdf_tcpdf',
-  'print_pdf',
 
   // Link content types with main menu items
   'menu_position',

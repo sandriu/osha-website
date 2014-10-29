@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * osha.features.user_permission.inc
+ * search_and_replace.features.user_permission.inc
  */
 
 /**
  * Implements hook_user_default_permissions().
  */
-function osha_user_default_permissions() {
+function search_and_replace_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: 'administer scanner settings'.
