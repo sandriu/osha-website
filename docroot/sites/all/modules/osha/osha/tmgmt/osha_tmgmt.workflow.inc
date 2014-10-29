@@ -757,3 +757,94 @@ function theme_osha_tmgmt_job_item_validators_form_table($variables) {
   }
   return $output;
 }
+
+
+function theme_osha_tmgmt_ui_translator_review_form($variables) {
+  $element = $variables['element'];
+  $result = '';
+  $labels = '';
+  $parent_label = '';
+  $element_groups = array();
+  $element_group = '';
+  foreach (element_children($element) as $key) {
+    // Label of all element groups.
+    $parent_label = array_shift($element[$key]['#parent_label']);
+    $element[$key]['#top_label'] = $parent_label;
+    $element[$key]['#leave_label'] = array_pop($element[$key]['#parent_label']);
+    // Start a new element group.
+    if ($labels != $element[$key]['#parent_label']) {
+      $labels = $element[$key]['#parent_label'];
+      if (!empty($labels)) {
+        // Append to previous group to the group collection.
+        if (!empty($element_group)) {
+          $element_groups[] = '<tbody>' . $element_group . '</tbody>';
+        }
+      }
+    }
+    $element[$key]['#theme'] = 'osha_tmgmt_ui_translator_review_form_element';
+    $element_group .= drupal_render($element[$key]);
+  }
+
+  // Append the last group to the group collection.
+  $element_groups[] = '<tbody>' . $element_group . '</tbody>';
+
+  // Display the label of all element groups inside a table header.
+  if (!empty($parent_label)) {
+    $cell = array(
+      'data' => $parent_label,
+      'colspan' => 5,
+    );
+    $result = '<thead><tr>' . _theme_table_cell($cell, TRUE) . '</tr></thead>' . implode('', $element_groups);
+  }
+  $table = '<table class="tmgmt-ui-review"><colgroup width="100" /><colgroup width="*" span="2" /><colgroup width="100" />' . $result . '</table>';
+  return '<div id="' . $element['#ajaxid'] . '">' . $table . '</div>';
+}
+
+function theme_osha_tmgmt_ui_translator_review_form_element($variables) {
+  $element = $variables['element'];
+  // Label of all element groups.
+  if (!isset($element['#top_label'])) {
+    $element['#top_label'] = array_shift($element['#parent_label']);
+  }
+  // Label of the current data item.
+  if (!isset($element['#leave_label'])) {
+    $element['#leave_label'] = array_pop($element['#parent_label']);
+  }
+  // Do not repeat labels inside the same hierarchy.
+  if ($element['#top_label'] == $element['#leave_label']) {
+    $element['#leave_label'] = '';
+  }
+  $result = '<tr' . drupal_attributes(array('class' => $element['#zebra'])) . '>';
+  $row = array();
+  $row[] = array(
+    'data' => '&nbsp;',
+    'class' => 'tmgmt-ui-data-item-label',
+  );
+  $row[] = array(
+    'data' => drupal_render($element['source']),
+    'class' => 'tmgmt-ui-data-item-source',
+  );
+  $row[] = array(
+    'data' => drupal_render($element['translation']),
+    'class' => 'tmgmt-ui-data-item-translation',
+  );
+  $row[] = array(
+    'data' => drupal_render($element['actions']),
+    'class' => 'tmgmt-ui-data-item-actions',
+  );
+  foreach ($row as $cell) {
+    $result .= _theme_table_cell($cell);
+  }
+  $result .= '</tr>';
+
+  if (!empty($element['below'])) {
+    $result .= '<tr' . drupal_attributes(array('class' => $element['#zebra'])) . '>';
+    $result .= _theme_table_cell(array(
+      'data' => drupal_render($element['below']),
+      'colspan' => '4',
+    ));
+    $result .= '</tr>';
+  }
+
+  return $result;
+}

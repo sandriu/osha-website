@@ -250,6 +250,14 @@ function osha_tmgmt_theme() {
       'render element' => 'form',
       'file' => 'osha_tmgmt.workflow.inc',
     ),
+    'osha_tmgmt_ui_translator_review_form' => array(
+      'render element' => 'element',
+      'file' => 'osha_tmgmt.workflow.inc',
+    ),
+    'osha_tmgmt_ui_translator_review_form_element' => array(
+      'render element' => 'element',
+      'file' => 'osha_tmgmt.workflow.inc',
+    ),
   );
 }
 
@@ -687,6 +695,16 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'tmgmt_ui_entity_translation_review_form':
+      foreach (element_children($form['review']) as $field_name) {
+        $form['review'][$field_name]['#theme'] = 'osha_tmgmt_ui_translator_review_form';
+      }
+      if (isset($form_state['triggering_element']['#ajax'])
+        && isset($form_state['triggering_element']['#submit'][0])
+        && $form_state['triggering_element']['#submit'][0] == 'tmgmt_ui_translation_review_form_update_state'
+      ) {
+        // Happens when user clicks the Ajax checkmark button on review form.
+        drupal_set_message('Value was saved');
+      }
       if (isset($form_state['item']) && $form_state['item']->item_type == 'node'
           && user_access('preview layout validation')) {
         $form['preview'] = array(
@@ -700,8 +718,35 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           ),
         );
       }
+      break;
+
+    case 'tmgmt_ui_locale_translation_review_form':
+      foreach (element_children($form['review']) as $field_name) {
+        $form['review'][$field_name]['#theme'] = 'osha_tmgmt_ui_translator_review_form';
+      }
+      if (isset($form_state['triggering_element']['#ajax'])
+        && isset($form_state['triggering_element']['#submit'][0])
+        && $form_state['triggering_element']['#submit'][0] == 'tmgmt_ui_translation_review_form_update_state'
+      ) {
+        // Happens when user clicks the Ajax checkmark button on review form.
+        drupal_set_message('Value was saved');
+      }
+      break;
+
+    case 'tmgmt_ui_i18n_string_translation_review_form':
+      foreach (element_children($form['review']) as $field_name) {
+        $form['review'][$field_name]['#theme'] = 'osha_tmgmt_ui_translator_review_form';
+      }
+      if (isset($form_state['triggering_element']['#ajax'])
+        && isset($form_state['triggering_element']['#submit'][0])
+        && $form_state['triggering_element']['#submit'][0] == 'tmgmt_ui_translation_review_form_update_state'
+      ) {
+        // Happens when user clicks the Ajax checkmark button on review form.
+        drupal_set_message('Value was saved');
+      }
   }
 }
+
 
 /**
  * Implements hook_form_FORM_ID_alter().
