@@ -1423,7 +1423,7 @@ class OshaTMGMTStatistics {
   protected static function count($item, &$count) {
     if (!empty($item['#text'])) {
       if (_tmgmt_filter_data($item)) {
-        $count += strlen(str_replace("&nbsp;", "", preg_replace("/\s+/", "", strip_tags($item['#text']))));
+        $count += mb_strlen(str_replace("&nbsp;", "", preg_replace("/\s+/", "", strip_tags($item['#text']))), 'utf-8');
       }
     }
     elseif (is_array($item)) {
