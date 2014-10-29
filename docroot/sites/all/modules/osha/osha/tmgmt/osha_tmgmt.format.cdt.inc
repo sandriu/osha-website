@@ -212,6 +212,10 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
    */
   public function validateImport($imported_file) {
     $xml = $this->getImportedXML($imported_file);
+    if (empty($xml)) {
+      drupal_set_message('Cannot parse XML file, check XML integrity and syntax', 'error');
+      return FALSE;
+    }
     $phase = $xml->xpath('//TransactionIdentifier');
     if ($phase) {
       $phase = reset($phase);
@@ -272,9 +276,10 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
       // url encoded due to the temporary://. This is a PHP bug, see
       // https://bugs.php.net/bug.php?id=61469
       $xml_string = file_get_contents($imported_file);
-      $this->importedXML = simplexml_load_string($xml_string);
-      // Register the XLIFF namespace, required for xpath.
-      $this->importedXML->registerXPathNamespace('cdt', 'urn:oasis:names:tc:cdt:document:1.2');
+      if ($this->importedXML = simplexml_load_string($xml_string)) {
+        // Register the XLIFF namespace, required for xpath.
+        $this->importedXML->registerXPathNamespace('cdt', 'urn:oasis:names:tc:cdt:document:1.2');
+      }
     }
     return $this->importedXML;
   }
