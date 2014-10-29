@@ -274,6 +274,50 @@ function osha_tmgmt_get_job_translation_validators_group($eid) {
 }
 
 /**
+ * Retrieve the list of content validators with  a certain translation skill.
+ *
+ * @param string $target_language
+ *   Language to translate to
+ * @param string $source_language
+ *   Language to translate from
+ *
+ * @return array
+ *   Array of users with the required skills.
+ */
+function osha_tmgmt_get_content_validators_by_skill($target_language, $source_language = 'en') {
+  $ret = array();
+  $users = osha_workflow_users_get_users_from_role(OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR);
+  foreach ($users as $user) {
+    if (!empty($user->tmgmt_translation_skills[LANGUAGE_NONE])) {
+      foreach ($user->tmgmt_translation_skills[LANGUAGE_NONE] as $skill) {
+        if ($skill['language_from'] == $source_language && $skill['language_to'] == $target_language) {
+          $ret[] = $user;
+          break;
+        }
+      }
+    }
+  }
+  return $ret;
+}
+
+/**
+ * List of content validators with certain skill as select options.
+ *
+ * @see osha_tmgmt_get_content_validators_by_skill
+ * @return array
+ *   Array rendered as options
+ */
+function osha_tmgmt_get_content_validators_by_skill_as_options($target_language, $source_language = 'en') {
+  $ret = array();
+  $users = osha_tmgmt_get_content_validators_by_skill($target_language, $source_language);
+  foreach ($users as $user) {
+    $ret[$user->uid] = $user->name;
+  }
+  return $ret;
+}
+
+
+/**
  * Group an array of users by their language skills.
  *
  * return array
@@ -352,12 +396,20 @@ function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
     );
     $weight++;
   }
+  $cvalidators = osha_tmgmt_get_content_validators_by_skill_as_options($job_item->target_language, $job_item->source_language);
   $form['add']['uid'] = array(
-    '#type' => 'textfield',
-    '#autocomplete_path' => 'users/autocomplete/' . OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR,
-    '#title' => t('Add another approver'),
-    '#title_display' => 'invisible',
+    '#type' => 'select',
+    '#title' => t('Add validator'),
+    '#description' => t(
+      'Select a content validator having !from to !to translation skill',
+      array(
+        '!from' => locale_language_name($job_item->source_language),
+        '!to' => locale_language_name($job_item->target_language),
+      )
+    ),
+    '#title_display' => 'before',
     '#access' => $can_edit,
+    '#options' => $cvalidators,
   );
   $form['add']['submit'] = array(
     '#type' => 'submit',
@@ -370,8 +422,9 @@ function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
   );
   $form['help'] = array(
     '#type' => 'markup',
-    '#markup' =>
-      t('<div><strong>Tip:</strong> Use the drag handlers to sort the users in the order you want them to have the content reviewed. <br />** - Temporary, not yet saved</div>'),
+    '#markup' => t(
+      '<div><strong>Tip:</strong> Use the drag handlers to sort the users in the order you want them to have the content reviewed. <br />** - Temporary, not yet saved</div>'
+    ),
     '#access' => $can_edit,
   );
   $form['content'] = array(
@@ -394,13 +447,13 @@ function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
  */
 function osha_tmgmt_job_item_validators_add_validate($form, &$form_state) {
   if (!empty($form_state['values']['add']['uid'])) {
-    $user = user_load_by_name($form_state['values']['add']['uid']);
+    $user = user_load($form_state['values']['add']['uid']);
     if (empty($user)) {
-      form_set_error('add][uid', t('User does not exists!'));
+      form_set_error('add][uid', t('User does not exist!'));
     }
     elseif (!empty($form_state['rows'])
       && in_array($user->uid, array_keys($form_state['rows']))) {
-      form_set_error('add][uid', t('You cannot add twice the same user!'));
+      form_set_error('add][uid', t('User is already validator for this translation'));
     }
   }
 }
@@ -412,7 +465,7 @@ function osha_tmgmt_job_item_validators_add_validate($form, &$form_state) {
  * The form must be saved in order to add them to DB.
  */
 function osha_tmgmt_job_item_validators_add($form, &$form_state) {
-  $user = user_load_by_name($form_state['values']['add']['uid']);
+  $user = user_load($form_state['values']['add']['uid']);
   if (!empty($user)) {
     $form_state['rows'][$user->uid] = $user;
     $form_state['rows'][$user->uid]->osha_tmgmt_validators_saved = FALSE;
