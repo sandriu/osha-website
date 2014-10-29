@@ -345,6 +345,7 @@ $options['init-modules'] = array(
   'linkit',
   'scanner',
   'search_and_replace',
+  'nodeblock',
 
   // Enable last (conflict with rules)
   'uuid',
