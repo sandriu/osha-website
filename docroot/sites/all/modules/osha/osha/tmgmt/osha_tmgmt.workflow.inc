@@ -94,7 +94,15 @@ function osha_tmgmt_user_can_edit_job_item($job_item) {
 function osha_tmgmt_layout_validation_node_preview($node, $job_item) {
   $target_language = $job_item->target_language;
   tmgmt_field_populate_entity($node->type, $node, $target_language, $job_item->getData());
-  $renderable_node = node_view($node, 'full', $target_language);
+  $renderable_node = node_view($node);
+  $title = field_get_items('node', $node, 'title_field', $target_language);
+  if (!empty($title[0]['value'])) {
+    // @todo: Title hard-coded in template 'Manage Display' hides the title.
+    $renderable_node['title_field'] = array(
+      '#type' => 'item',
+      '#markup' => sprintf('<h1 class="page__title title" id="page-title">%s</h1>', $title[0]['value']),
+    );
+  }
   return drupal_render($renderable_node);
 }
 
