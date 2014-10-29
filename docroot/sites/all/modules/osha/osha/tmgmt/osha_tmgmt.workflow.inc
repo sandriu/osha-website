@@ -167,13 +167,13 @@ function osha_tmgmt_translation_validators_submit($form, &$form_state) {
         osha_tmgmt_remove_current_translation_validators($job_item);
         if (!empty($users[$job_item->target_language])) {
           $users_name = array();
-          foreach ($users[$job_item->target_language] as $idx => $user) {
+          foreach ($users[$job_item->target_language] as $idx => $u) {
             $next = 0;
             if ($idx == 0) {
               $next = 1;
             }
-            $users_name[] = $user->name;
-            osha_tmgmt_add_translation_validator($user->uid, $job_item, $idx, $next);
+            $users_name[] = $u->name;
+            osha_tmgmt_add_translation_validator($u->uid, $job_item, $idx, $next);
           }
           global $user;
           $msg = t('@name assigned group "@group" default content validators: @validators',
