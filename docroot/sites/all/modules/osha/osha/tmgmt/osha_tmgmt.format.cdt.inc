@@ -253,7 +253,7 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     }
     $targets = $this->getImportedTargets($job);
     if (empty($targets)) {
-      drupal_set_message('Some translations could not be processed/imported', 'error');
+      drupal_set_message('No translations processed (missing <Translation> sections?)', 'error');
       return FALSE;
     }
     $reader = new XMLReader();
