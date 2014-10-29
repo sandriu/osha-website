@@ -707,6 +707,23 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
       if (isset($form_state['item']) && $form_state['item']->item_type == 'node'
           && user_access('preview layout validation')) {
+        $job = $form_state['item'];
+        $form['info']['source'] = array(
+          '#type' => 'item',
+          '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
+          '#suffix' => '</div>',
+          '#title' => t('Source language'),
+          '#markup' => locale_language_name($job->source_language),
+          '#weight' => 9,
+        );
+        $form['info']['target'] = array(
+          '#type' => 'item',
+          '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
+          '#suffix' => '</div>',
+          '#title' => t('Target language'),
+          '#markup' => locale_language_name($job->target_language),
+          '#weight' => 10,
+        );
         $form['preview'] = array(
           '#theme' => 'link',
           '#text' => 'Preview layout',
