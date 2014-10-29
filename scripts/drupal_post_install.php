@@ -17,7 +17,7 @@ osha_config_development();
 osha_configure_recaptcha();
 osha_configure_on_the_web();
 osha_add_menu_position_rules();
-osha_add_agregator_rss_feeds();
+// osha_add_agregator_rss_feeds();
 
 variable_set('admin_theme', 'osha_admin');
 variable_set('theme_default', 'osha_frontend');
@@ -262,6 +262,7 @@ function osha_add_menu_position_rules() {
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
+    /* disabled temporarily for release branch
     $press_menu_entry = array_search('------ Press room', $options);
 
     $form_state = array(
@@ -272,6 +273,7 @@ function osha_add_menu_position_rules() {
         'op' => 'Save',
       ),
     );
+    */
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
