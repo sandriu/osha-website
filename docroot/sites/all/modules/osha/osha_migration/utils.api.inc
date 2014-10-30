@@ -764,7 +764,13 @@ class MigrationUtil {
       ->entityCondition('bundle', array($vocabulary_name))
       ->fieldCondition($entity_field, 'value', $entity_value, '=');
     $result = $query->execute();
-    $tid = $result? array_keys($result['taxonomy_term'])[0] : 0;
+	if ($result) {
+	  $result = array_keys($result['taxonomy_term']);
+	  $tid = $result[0];
+	} else {
+	  $tid = 0;
+	}
+    
 
     return $tid;
   }

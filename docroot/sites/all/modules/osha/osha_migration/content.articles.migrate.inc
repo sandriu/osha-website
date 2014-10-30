@@ -227,8 +227,8 @@ class OshaMigrateArticles extends OSHADynamicMigration {
 
     // create redirects for pages with is_default_page=1
     if (!empty($row->is_default_page) && $row->is_default_page) {
-      $base_path = pathinfo($entity->path["alias"])["dirname"];
-      MigrationUtil::createRedirects($entity, $base_path);
+      $base_path = pathinfo($entity->path["alias"]);
+      MigrationUtil::createRedirects($entity, $base_path["dirname"]);
     }
   }
 }
