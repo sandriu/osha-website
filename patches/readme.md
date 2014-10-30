@@ -135,6 +135,10 @@ List of patches (most recent first)
   * This patch is needed by doc_to_imagefield module
   * pdf_to_imagefield/pdf_to_imagefield-allow_non_pdf_file.patch
 
+* pdf_to_image
+  * Generated image is saved on the revision and not for the published version
+  * pdf_to_imagefield_save_to_revision.patch
+
 
 Patch documentation should be in the following format:
 
