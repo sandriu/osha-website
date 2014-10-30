@@ -51,12 +51,14 @@ function osha_migration_migrate_api() {
     );
   }
 
+  /*
   if (is_readable($migration_module_dir . '/data/legislation_category.json')) {
     $migrations[OSHA_MIGRATION_TAXONOMY_LEGISLATION_CATEGORIES] = array(
       'class_name' => 'MigrateOshaTaxonomyLegislationCategories',
       'file_name' => $migration_module_dir . '/data/legislation_category.json',
     );
   }
+  */
 
   if (is_readable($migration_module_dir . '/data/nace_codes.json')) {
     $migrations[OSHA_MIGRATION_TAXONOMY_NACE_CODES] = array(
