@@ -227,8 +227,9 @@ class OshaMigrateArticles extends OSHADynamicMigration {
 
     // create redirects for pages with is_default_page=1
     if (!empty($row->is_default_page) && $row->is_default_page) {
-      $base_path = pathinfo($entity->path["alias"]);
-      MigrationUtil::createRedirects($entity, $base_path["dirname"]);
+      $path = pathinfo($entity->path["alias"]);
+      $base_path = $path["dirname"];
+      MigrationUtil::createRedirects($entity, $base_path);
     }
   }
 }
@@ -286,7 +287,7 @@ class ArticleMigrateList extends MigrateList {
         switch ($field) {
           case 'title':
             if ($language == 'en') {
-              $this->data[$path]['title'] = $raw_data[$key];
+              $this->data[$path]['title'] = MigrationUtil::decodeHTMLText($raw_data[$key]);
             }
             $this->data[$path]['title_field'][$language] = $raw_data[$key];
             break;

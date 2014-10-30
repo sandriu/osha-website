@@ -268,6 +268,32 @@ function osha_add_menu_position_rules(){
     );
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
+
+    //menu position rule for Directive
+    $directive_menu_entry = array_search('------ European Directives', $options);
+
+    $form_state = array(
+      'values' => array(
+        'admin_title' => 'Directive Menu Rule',
+        'plid' => $directive_menu_entry !== NULL ? $directive_menu_entry : 'main-menu:0',
+        'pages' => 'legislation/directives/*'.PHP_EOL.'legislation/directive/*',
+        'op' => 'Save'
+      )
+    );
+    drupal_form_submit('menu_position_add_rule_form', $form_state);
+
+    //menu position rule for Guideline
+    $guideline_menu_entry = array_search('------ European Guidelines', $options);
+
+    $form_state = array(
+      'values' => array(
+        'admin_title' => 'Guideline Menu Rule',
+        'plid' => $guideline_menu_entry !== NULL ? $guideline_menu_entry : 'main-menu:0',
+        'pages' => 'legislation/guidelines/*',
+        'op' => 'Save'
+      )
+    );
+    drupal_form_submit('menu_position_add_rule_form', $form_state);
   }
 }
 

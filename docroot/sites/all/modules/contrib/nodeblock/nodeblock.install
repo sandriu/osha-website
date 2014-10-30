@@ -217,6 +217,8 @@ function nodeblock_uninstall() {
       variable_del('nodeblock_comment_link_' . $type_name);
       variable_del('nodeblock_node_link_' . $type_name);
       variable_del('nodeblock_view_mode_' . $type_name);
+      variable_del('nodeblock_node_override_block_available_' . $type_name);
+      variable_del('nodeblock_node_overrides_' . $type_name);
     }
   }
   db_delete('block')

@@ -342,7 +342,7 @@ function osha_calls_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_calls_agency_responses',
-    'label' => 'Agency Responses',
+    'label' => 'Clarifications to questions',
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
@@ -1400,7 +1400,7 @@ function osha_calls_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
-  t('Agency Responses');
+  t('Clarifications to questions');
   t('Amendments');
   t('Archived');
   t('Author');

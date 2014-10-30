@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* nodeblock
+  * Default options on/off for nodeblock
+  * 2072427-default-on-off-6.patch
+  * https://www.drupal.org/node/2072427
 * pdf_to_imagefield
   * Do not overwrite existing images
   * https://www.drupal.org/node/2049725

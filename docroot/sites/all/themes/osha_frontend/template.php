@@ -322,6 +322,27 @@ function osha_frontend_on_the_web_image($variables) {
   return theme('image', $variables);
 }
 
+
+/**
+ * Returns HTML for an individual feed item for display in the block.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - item: The item to be displayed.
+ *   - feed: Not used.
+ *
+ * @ingroup themeable
+ */
+function osha_frontend_aggregator_block_item($variables) {
+  // Display the external link to the item.
+  $item = $variables['item'];
+
+  $element = '<span class="feed-item-date">'. format_date($item->timestamp, 'custom', variable_get('date_format_osha_day_only', 'd/m/Y')) .'</span>';
+  $element .= '<br/>';
+  $element .= '<a href="' . check_url($item->link) . '">' . check_plain($variables['item']->title) . "</a>\n";
+  return $element;
+}
+
 /**
  * @todo @Ivan: Edit only below
  */

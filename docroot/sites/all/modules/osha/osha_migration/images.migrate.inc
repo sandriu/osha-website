@@ -1,6 +1,6 @@
 <?php
 
-define('OSHA_MIGRATE_IMAGES_DEST_DIR', 'public://images');
+define('OSHA_MIGRATE_IMAGES_DEST_DIR', 'public://');
 /**
  * Class OshaMigrateImages
  */
