@@ -653,18 +653,21 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       );
 
       $form['info']['total_character_count'] = array(
-        '#title' => t('Total character count'),
-        '#type'  => 'item',
-        '#markup' => $job->character_count,
-        '#prefix' => '<div id="tmgmt-ui-character-count" class="tmgmt-ui-character-count tmgmt-ui-info-item">',
+        '#type' => 'item',
+        '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
         '#suffix' => '</div>',
+        '#title' => t('Total character count'),
+        '#markup' => $job->character_count,
+        '#weight' => 11,
       );
 
       $form['info']['priority'] = array(
-        '#attributes' => array('class' => array('container-inline')),
         '#type' => 'item',
+        '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
         '#title' => t('Priority'),
         '#markup' => osha_tmgmt_job_priority_name($job),
+        '#weight' => 13,
       );
 
       $form['info']['page_count'] = array(
@@ -673,6 +676,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => $job->page_count,
         '#prefix' => '<div id="tmgmt-ui-page-count" class="tmgmt-ui-page-count tmgmt-ui-info-item">',
         '#suffix' => '</div>',
+        '#weight' => 12,
       );
 
       hide($form['info']['word_count']);
@@ -1126,28 +1130,45 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
       }
       /* @var TMGMTJobItem $job_item */
       foreach ($job_items as $id => $job_item) {
-        try {
-          // As the same item might be added to multiple jobs, we need to
-          // re-create them and delete the old ones, after removing them from
-          // the cart.
-          $new_job_item = $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
-          $new_job_item->source_language = $source_language;
-          $new_job_item->target_language = $target_language;
-          // @TODO: Set plugin type entity on add to cart, not here (ugly).
-          if ($new_job_item->plugin == 'node') {
-            $new_job_item->plugin = 'entity';
+        if (!osha_tmgmt_is_duplicate_job_item($job_item->item_id, $target_language, $job_item->item_type)) {
+          try {
+            // As the same item might be added to multiple jobs, we need to
+            // re-create them and delete the old ones, after removing them from
+            // the cart.
+            $new_job_item = $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
+            $new_job_item->source_language = $source_language;
+            $new_job_item->target_language = $target_language;
+            // @TODO: Set plugin type entity on add to cart, not here (ugly).
+            if ($new_job_item->plugin == 'node') {
+              $new_job_item->plugin = 'entity';
+            }
+            OshaTMGMTStatistics::computeJobItemStatistics($new_job_item);
+            $new_job_item->save();
+            $job_empty = FALSE;
           }
-          OshaTMGMTStatistics::computeJobItemStatistics($new_job_item);
-          $new_job_item->save();
-          $remove_job_item_ids[$job_item->tjiid] = $job_item->tjiid;
-          $job_empty = FALSE;
+          catch (Exception $e) {
+            // If an item fails for one target language, then it is also going
+            // to fail for others, so remove it from the array.
+            unset($job_it_by_src_lang[$source_language][$id]);
+            drupal_set_message($e->getMessage(), 'error');
+          }
         }
-        catch (Exception $e) {
-          // If an item fails for one target language, then it is also going
-          // to fail for others, so remove it from the array.
-          unset($job_it_by_src_lang[$source_language][$id]);
-          drupal_set_message($e->getMessage(), 'error');
+        else {
+          $item_name = sprintf('%s:%s', $job_item->item_type, $job_item->item_id);
+          if ($job_item->item_type == 'node') {
+            $node = node_load($job_item->item_id);
+            $item_name = l($node->title, 'node/' . $node->nid, array('options' => array('absolute' => TRUE)));
+          }
+          $msg = t(
+            'Cannot add item (!item_name) already in translation to !target_language',
+            array(
+              '!item_name' => $item_name,
+              '!target_language' => locale_language_name($target_language),
+            )
+          );
+          drupal_set_message($msg, 'warning');
         }
+        $remove_job_item_ids[$job_item->tjiid] = $job_item->tjiid;
       }
     }
   }
@@ -1190,6 +1211,36 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
   }
 }
 
+/**
+ * Check if there's an active job for this node in the same target language.
+ *
+ * @param int $nid
+ *   Node NID
+ * @param string $target_language
+ *   Target language
+ * @param string $bundle
+ *   Item bundle
+ *
+ * @return bool
+ *   Returns TRUE if there's another job in progress
+ */
+function osha_tmgmt_is_duplicate_job_item($nid, $target_language, $bundle) {
+  $r = db_query(
+    "SELECT count(*) FROM tmgmt_job_item a
+      INNER JOIN tmgmt_job b ON a.tjid = b.tjid
+      WHERE (b.state = :s1 OR b.state = :s1)
+        AND a.target_language = :target_language
+        AND a.item_type = :bundle
+        AND a.item_id = :nid",
+    array(
+      ':s1' => TMGMT_JOB_STATE_ACTIVE,
+      ':s2' => TMGMT_JOB_STATE_UNPROCESSED,
+      ':bundle' => $bundle,
+      ':target_language' => $target_language,
+      ':nid' => $nid,
+    ))->fetchCol(0);
+  return $r[0] > 0;
+}
 
 /**
  * Loads active job entities that have a job item with the identifiers.

@@ -1,6 +1,27 @@
 <?php
 
 class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginController {
+
+  /**
+   * {@inheritdoc}
+   *
+   * Returns the data from the fields as a structure that can be processed by
+   * the Translation Management system.
+   */
+  public function getData(TMGMTJobItem $job_item) {
+    if ($job_item->item_type == 'node') {
+      $entity = node_load($job_item->item_id);
+      $entity = workbench_moderation_node_current_load($entity);
+    }
+    else {
+      $entity = entity_load_single($job_item->item_type, $job_item->item_id);
+    }
+    if (!$entity) {
+      throw new TMGMTException(t('Unable to load entity %type with id %id', array('%type' => $job_item->item_type, $job_item->item_id)));
+    }
+    return tmgmt_field_get_source_data($job_item->item_type, $entity, $job_item->getJob()->source_language, TRUE);
+  }
+
   /**
    * Overwrite parent function to set the language from job item not job id.
    */
