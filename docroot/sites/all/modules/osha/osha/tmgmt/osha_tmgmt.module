@@ -445,6 +445,17 @@ function osha_tmgmt_node_presave($node) {
       $node->field_page_count[LANGUAGE_NONE][0]['value'] = $node->page_count;
     }
   }
+  // prepare translation information
+  global $language;
+  $node_lang = $language->language;
+  if ($node->type == 'article' &&
+    isset($node->translations) && $node->translations->original == $node_lang &&
+    isset($node->body[$node_lang][0]["value"]) &&
+    isset($node->body[$node_lang][0]["format"]) &&
+    $node->body[$node_lang][0]["format"] == "full_html") {
+      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$node_lang][0]["value"]);
+      $node->body[$node_lang][0]["value"] = $new_text;
+  }
 }
 
 /**
