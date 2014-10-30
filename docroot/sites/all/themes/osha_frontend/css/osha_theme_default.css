@@ -3577,6 +3577,94 @@ article.node-press-release{
 /*END PRESS ROOM CONTENT*/
 
 
+/*LEGISLATION*/
+
+.view-legislation table tr{
+	padding:1em;
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	border-bottom:0px;
+}
+
+.view-legislation table tr td{
+	padding:1em;
+
+}
+
+.view-legislation table caption{
+	color: #003399;
+	font-family: Oswald;
+	font-size: 1.35em;
+	font-weight: 400;
+	background-color: #e9edf6;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-left: 0.5em;
+	margin: 0em;
+	text-align:left;
+	margin-bottom:1em;
+}
+
+.view-legislation table tr td a{
+	color: #003399!important;
+	font-family: 'Oswald',sans-serif!important;
+	border-bottom: 0px!important;
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: -0.75px;
+	padding-bottom: 0.5em;
+}
+
+
+
+/*END LEGISLATION*/
+
+/* SEARCH DIRECTIVES*/
+
+.view-search-directives .field-name-title-field a{
+	color: #000000!important;
+	font-family: 'Oswald',sans-serif!important;
+	border-bottom: 0px!important;
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: -0.75px;
+	padding-bottom: 0.5em;
+	
+}
+
+.view-search-directives  .links {
+	background: url("../images/flecha.png") no-repeat scroll right center transparent;
+	color: #003399;
+	float: right;
+	font-family: "Oswald",sans-serif;
+	font-size: 1.1em;
+	margin: 0;
+	padding-bottom: 0.3em;
+	text-align: right;
+	width: 100%;
+}
+
+.view-search-directives  .links a{
+	padding-right: 0.5em;
+	font-family: "Oswald",sans-serif!important;
+	border-bottom: 0px!important;
+}
+
+.view-search-directives  .field-name-field-summary{
+	padding:0;
+}
+
+.view-search-directives  .view-content .views-row{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	padding-bottom:1em;
+	padding-top:1em;
+
+}
+
+
+/* END SEARCH DIRECTIVES*/
+
+
+
 .file-icon{
 	padding-right:0.3em;
 }
