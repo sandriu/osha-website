@@ -640,18 +640,21 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       );
 
       $form['info']['total_character_count'] = array(
-        '#title' => t('Total character count'),
-        '#type'  => 'item',
-        '#markup' => $job->character_count,
-        '#prefix' => '<div id="tmgmt-ui-character-count" class="tmgmt-ui-character-count tmgmt-ui-info-item">',
+        '#type' => 'item',
+        '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
         '#suffix' => '</div>',
+        '#title' => t('Total character count'),
+        '#markup' => $job->character_count,
+        '#weight' => 11,
       );
 
       $form['info']['priority'] = array(
-        '#attributes' => array('class' => array('container-inline')),
         '#type' => 'item',
+        '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
         '#title' => t('Priority'),
         '#markup' => osha_tmgmt_job_priority_name($job),
+        '#weight' => 13,
       );
 
       $form['info']['page_count'] = array(
@@ -660,6 +663,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => $job->page_count,
         '#prefix' => '<div id="tmgmt-ui-page-count" class="tmgmt-ui-page-count tmgmt-ui-info-item">',
         '#suffix' => '</div>',
+        '#weight' => 12,
       );
 
       hide($form['info']['word_count']);
@@ -1137,13 +1141,13 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
           }
         }
         else {
-          $item_name = sprintf('(%s:%s)', $job_item->item_type, $job_item->item_id);
+          $item_name = sprintf('%s:%s', $job_item->item_type, $job_item->item_id);
           if ($job_item->item_type == 'node') {
             $node = node_load($job_item->item_id);
             $item_name = l($node->title, 'node/' . $node->nid, array('options' => array('absolute' => TRUE)));
           }
           $msg = t(
-            'Cannot add item !item_name already in translation to !target_language language',
+            'Cannot add item (!item_name) already in translation to !target_language',
             array(
               '!item_name' => $item_name,
               '!target_language' => locale_language_name($target_language),
