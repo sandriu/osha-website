@@ -579,16 +579,19 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
       $validator[1]->approved = OSHA_TMGMT_CONTENT_VALIDATOR_STATUS_APPROVED;
       $validator[1]->next = 0;
       entity_save('translation_validator', $validator[1]);
-      drupal_set_message(t('You have approved this translation!'));
-
+      drupal_set_message(t('You have validated this translation.'));
       if ($next_validator = current($validators)) {
         $next_validator->next = 1;
         entity_save('translation_validator', $next_validator);
-        drupal_set_message(t('@name is the next one to approve',
-          array('@name' => $next_validator->name)));
+        drupal_set_message(
+          t(
+            '@name is the next one to validate',
+            array('@name' => $next_validator->name)
+          )
+        );
 
         // Save log message (no job item state change required).
-        $log_entry = sprintf('%s approved the translation content. Next to approve is %s', $user->name, $next_validator->name);
+        $log_entry = sprintf('%s validated the translation. Next to validate is %s', $user->name, $next_validator->name);
         if (!empty($message)) {
           $log_entry .= ' Messsage: ' . $message;
         }
@@ -598,7 +601,13 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
       }
       else {
         // Last Validator.
+        $log_entry = sprintf('%s validated the translation.', $user->name);
+        if (!empty($message)) {
+          $log_entry .= ' Messsage: ' . $message;
+        }
+        $job_item->addMessage($log_entry);
         $job_item->toTranslationValidated();
+        OshaWorkflowNotifications::notifyTranslationValidated($job_item);
       }
       break;
     }
@@ -609,20 +618,24 @@ function osha_tmgmt_translation_validators_accept($form, &$form_state) {
  * Callback for reject translation for Content Validator.
  */
 function osha_tmgmt_job_item_translation_reject($form, &$form_state) {
+  global $user;
   $job_item = $form_state['item'];
   if ($job_item->state == OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired) {
     $validators = osha_tmgmt_load_validators_by_job_item($job_item);
     $last = end($validators);
-    global $user;
     if ($user->uid == $last->uid && $last->next == 1) {
-      $last->message = $form_state['values']['content_validation']['message'];
+      $last->message = $form_state['values']['action_message'];
       $last->approved = OSHA_TMGMT_TRANS_VALID_REJECTED;
       $last->next = 0;
       entity_save('translation_validator', $last);
       OshaWorkflowNotifications::notifyTranslationRejected($job_item);
     }
   }
-  $job_item->toTranslationRejected();
+  $log_entry = '';
+  if (!empty($form_state['values']['action_message'])) {
+    $log_entry = ' Messsage: ' . $form_state['values']['action_message'];
+  }
+  $job_item->toTranslationRejected($log_entry);
 }
 
 /**
