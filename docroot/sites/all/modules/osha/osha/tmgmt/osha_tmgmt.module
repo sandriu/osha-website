@@ -445,16 +445,21 @@ function osha_tmgmt_node_presave($node) {
       $node->field_page_count[LANGUAGE_NONE][0]['value'] = $node->page_count;
     }
   }
-  // prepare translation information
+  // Prepare re-translation information
   global $language;
   $node_lang = $language->language;
-  if ($node->type == 'article' &&
+  if (isset($node->field_needs_retranslation) &&
     isset($node->translations) && $node->translations->original == $node_lang &&
-    isset($node->body[$node_lang][0]["value"]) &&
-    isset($node->body[$node_lang][0]["format"]) &&
-    $node->body[$node_lang][0]["format"] == "full_html") {
-      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$node_lang][0]["value"]);
-      $node->body[$node_lang][0]["value"] = $new_text;
+    isset($node->body[$node_lang][0]['value']) &&
+    isset($node->body[$node_lang][0]['format']) &&
+    $node->body[$node_lang][0]['format'] == 'full_html') {
+      if (!$node->field_needs_retranslation[LANGUAGE_NONE][0]['value']) {
+        // Check if body has been modified and if true set checkbox
+        OshaTMGMTRetranslate::mark_dirty($node);
+      }
+      // Enhance paragraphs with unique id's
+      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$node_lang][0]['value']);
+      $node->body[$node_lang][0]['value'] = $new_text;
   }
 }
 

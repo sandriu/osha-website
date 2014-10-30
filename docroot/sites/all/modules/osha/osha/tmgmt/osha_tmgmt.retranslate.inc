@@ -15,7 +15,7 @@ class OshaTMGMTRetranslate {
      
      $body = $DOM->getElementsByTagName('body')->item(0);
      $items = $body->childNodes;
-     // get all existing ID's and compute max
+     // Get all existing ID's and compute max
      $max = 0;
      for($i = 0; $i < $items->length; $i++) {
        $id = $items->item($i)->getAttribute(ATTRIBUTE_ID);
@@ -28,7 +28,7 @@ class OshaTMGMTRetranslate {
          $max = max(substr($id, strlen(ID_PREFIX)), $max);
        }
      }
-     // once again, and set id's where we have new tags
+     // Once again, and set id's where we have new tags
      $current_id = $max+1;
      for($i = 0; $i < $items->length; $i++) {
        $item = $items->item($i);
@@ -42,5 +42,17 @@ class OshaTMGMTRetranslate {
        $Document->appendChild($Document->importNode($items->item($i),true));
      }
      return html_entity_decode($Document->saveHTML());
+  }
+  
+  /*
+    Set checkbox if a revision has been translated and body has been changed
+  */
+  public static function mark_dirty($node) {
+    $node_lang = $node->translations->original;
+    $new_text = $node->body[$node_lang][0]['value'];
+    $old_text = $node->original->body[$node_lang][0]['value'];
+    if (trim($new_text) != trim($old_text)) {
+      $node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 1;
+    }
   }
 }
