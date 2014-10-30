@@ -447,19 +447,16 @@ function osha_tmgmt_node_presave($node) {
   }
   // Prepare re-translation information
   global $language;
-  $node_lang = $language->language;
+  $current_lang = $language->language;
   if (isset($node->field_needs_retranslation) &&
-    isset($node->translations) && $node->translations->original == $node_lang &&
-    isset($node->body[$node_lang][0]['value']) &&
-    isset($node->body[$node_lang][0]['format']) &&
-    $node->body[$node_lang][0]['format'] == 'full_html') {
+    $node->translations->original == $current_lang) {
       if (!$node->field_needs_retranslation[LANGUAGE_NONE][0]['value']) {
         // Check if body has been modified and if true set checkbox
-        OshaTMGMTRetranslate::mark_dirty($node);
+        // OshaTMGMTRetranslate::mark_dirty($node);
       }
       // Enhance paragraphs with unique id's
-      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$node_lang][0]['value']);
-      $node->body[$node_lang][0]['value'] = $new_text;
+      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$current_lang][0]['value']);
+      $node->body[$current_lang][0]['value'] = $new_text;
   }
 }
 
