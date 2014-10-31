@@ -452,11 +452,11 @@ function osha_tmgmt_node_presave($node) {
     $node->translations->original == $current_lang) {
       if (!$node->field_needs_retranslation[LANGUAGE_NONE][0]['value']) {
         // Check if body has been modified and if true set checkbox
-        // OshaTMGMTRetranslate::mark_dirty($node);
+        OshaTMGMTRetranslate::mark_dirty($node);
       }
       // Enhance paragraphs with unique id's
       $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$current_lang][0]['value']);
-      $node->body[$current_lang][0]['value'] = $new_text;
+      //$node->body[$current_lang][0]['value'] = $new_text;
   }
 }
 

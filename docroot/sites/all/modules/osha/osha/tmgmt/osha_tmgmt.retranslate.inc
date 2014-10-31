@@ -8,11 +8,14 @@ class OshaTMGMTRetranslate {
    * Add data-translation-id for level 1 HTML elements
    */
    public static function prepare_text($text) {
-     var_dump($text);
      $items = self::getDOMNodeList($text);
      // Get all existing ID's and compute max
      $max = 0;
      for($i = 0; $i < $items->length; $i++) {
+       if (get_class($items->item($i)) == 'DOMText' ) {
+         // ignore text between tags, can happen during migration
+         continue;
+       }
        $id = $items->item($i)->getAttribute('id');
        if (!empty($id) && !preg_match('/^'.ID_PREFIX.'/', $id)) {
          // invalid id, remove it
@@ -27,6 +30,10 @@ class OshaTMGMTRetranslate {
      $current_id = $max+1;
      for($i = 0; $i < $items->length; $i++) {
        $item = $items->item($i);
+       if (get_class($items->item($i)) == 'DOMText' ) {
+         // ignore text between tags, can happen during migration
+         continue;
+       }
        if (empty($item->getAttribute('id'))) {
          $item->setAttribute('id', ID_PREFIX.($current_id++));
        }
@@ -63,8 +70,9 @@ class OshaTMGMTRetranslate {
     $node_lang = $node->translations->original;
     $new_text = $node->body[$node_lang][0]['value'];
     $old_text = $node->original->body[$node_lang][0]['value'];
-    //@todo: compare only plain text
-    if (trim($new_text) != trim($old_text)) {
+    $new_text_plain = preg_replace("/\s+/", "", strip_tags($new_text));
+    $old_text_plain = preg_replace("/\s+/", "", strip_tags($old_text));
+    if ( $new_text_plain != $old_text_plain) {
       $node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 1;
     }
   }
