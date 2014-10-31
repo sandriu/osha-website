@@ -456,7 +456,7 @@ function osha_tmgmt_node_presave($node) {
       }
       // Enhance paragraphs with unique id's
       $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$current_lang][0]['value']);
-      //$node->body[$current_lang][0]['value'] = $new_text;
+      $node->body[$current_lang][0]['value'] = $new_text;
   }
 }
 
@@ -483,6 +483,54 @@ function osha_tmgmt_job_priority_name($job) {
     }
   }
   return '';
+}
+
+
+/**
+ *  Implements hook_tmgmt_source_translation_structure().
+ */
+function osha_tmgmt_tmgmt_source_translation_structure($job_item,
+                                                       $entity,
+                                                       $field, $instance,
+                                                       $items) {
+  $structure = array();
+  if (!empty($items)) {
+    $field_name = $instance['field_name'];
+    $structure['#label'] = check_plain($instance['label']);
+    foreach ($items as $delta => $value) {
+      if ($field_name == 'body') {
+
+        $text = OshaTMGMTRetranslate::get_text_to_retranslate(
+          $job_item->item_id, $entity->type,
+          $job_item->source_language, $job_item->target_language,
+          $field_name
+        );
+      }
+      else {
+        $text = $value['value'];
+      }
+      $structure[$delta]['#label'] = t('Delta #@delta', array('@delta' => $delta));
+      $structure[$delta]['value'] = array(
+        '#label' => $structure['#label'],
+        '#text' => $text,
+        '#translate' => TRUE,
+      );
+      // Add format.
+      $structure[$delta]['format'] = array(
+        '#label' => '',
+        '#text' => !empty($value['format']) ? $value['format'] : '',
+        '#translate' => FALSE,
+      );
+      if ($field['type'] == 'text_with_summary' && !empty($value['summary'])) {
+        $structure[$delta]['summary'] = array(
+          '#label' => t('Summary'),
+          '#text' => $value['summary'],
+          '#translate' => TRUE,
+        );
+      }
+    }
+  }
+  return $structure;
 }
 
 /**
@@ -1135,10 +1183,9 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
             // As the same item might be added to multiple jobs, we need to
             // re-create them and delete the old ones, after removing them from
             // the cart.
-            $new_job_item = $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
-            $new_job_item->source_language = $source_language;
-            $new_job_item->target_language = $target_language;
-            // @TODO: Set plugin type entity on add to cart, not here (ugly).
+            $new_job_item = $job->addItem(
+              $job_item->plugin, $job_item->item_type, $job_item->item_id, $source_language, $target_language
+            );
             if ($new_job_item->plugin == 'node') {
               $new_job_item->plugin = 'entity';
             }

@@ -9,6 +9,9 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
    * the Translation Management system.
    */
   public function getData(TMGMTJobItem $job_item) {
+    if (!isset($job_item->target_language)) {
+      return FALSE;
+    }
     if ($job_item->item_type == 'node') {
       $entity = node_load($job_item->item_id);
       $entity = workbench_moderation_node_current_load($entity);
@@ -19,7 +22,7 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
     if (!$entity) {
       throw new TMGMTException(t('Unable to load entity %type with id %id', array('%type' => $job_item->item_type, $job_item->item_id)));
     }
-    return tmgmt_field_get_source_data($job_item->item_type, $entity, $job_item->getJob()->source_language, TRUE);
+    return osha_tmgmt_field_get_source_data($job_item, $entity, TRUE);
   }
 
   /**
@@ -49,4 +52,34 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
     $handler->saveTranslations();
     $job_item->accepted();
   }
+}
+
+/**
+ * Helper function for retrieving all translatable field values from an entity.
+ *
+ * @see tmgmt_field_get_source_data
+ */
+function osha_tmgmt_field_get_source_data($job_item, $entity, $only_translatable = FALSE) {
+  $entity_type = $job_item->item_type;
+  $langcode = $job_item->source_language;
+  try {
+    list(, , $bundle) = entity_extract_ids($entity_type, $entity);
+  }
+  catch (Exception $e) {
+    watchdog_exception('tmgmt field', $e);
+    return array();
+  }
+
+  $fields = array();
+  foreach (field_info_instances($entity_type, $bundle) as $field_name => $instance) {
+    $field = field_info_field($field_name);
+    $items = field_get_items($entity_type, $entity, $field_name, $langcode);
+    if ((!$only_translatable || $field['translatable']) && $items) {
+      if ($data = module_invoke('osha_tmgmt', 'tmgmt_source_translation_structure', $job_item, $entity, $field, $instance, $items)) {
+        $fields[$field_name] = $data;
+      }
+
+    }
+  }
+  return $fields;
 }
