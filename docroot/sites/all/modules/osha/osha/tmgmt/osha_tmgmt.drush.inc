@@ -17,8 +17,8 @@ function osha_tmgmt_drush_command() {
     'description' => 'Check if all translations of node have the same structure',
     'aliases' => array('oshrtv'),
     'examples' => array(),
-    'arguments' => array('nid' => 'The node id'),
-    'options' => array(),
+    'arguments' => array('bundle' => 'The node bundle'),
+    'options' => array('nids' => 'List of nids separated by comma'),
     'sections' => array(),
   );
   return $items;
@@ -68,21 +68,38 @@ function drush_osha_tmgmt_statistics() {
   }
 }
 
-function drush_osha_tmgmt_retranslate_validate($nid) {
-  $vid = OshaTMGMTRetranslate::get_latest_clean_revision($nid);
-  $node = node_load($nid, $vid);
-  $orig_lang = $node->translations->original;
-  $orig_structure = OshaTMGMTRetranslate::getHTMLStructure($node->body[$orig_lang][0]['value']);
-  foreach (array_keys($node->body) as $lang) {
-    $html = $node->body[$lang][0]['value'];
-    $diffs = array_diff_assoc($orig_structure, OshaTMGMTRetranslate::getHTMLStructure($html));
-    if (!empty($diffs)) {
-      $first_diff = current(array_keys($diffs));
-      drush_log(
-        sprintf(
-          'Node %s, revision %s cannot be re-translated in language %s. Different structure starting at %s[id="%s"].',
-          $nid, $vid, $lang, $diffs[$first_diff], $first_diff
-      ), 'warning');
+function drush_osha_tmgmt_retranslate_validate($bundle) {
+  $nids = drush_get_option('nids');
+  if (!$nids) {
+    // Load all
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', $bundle)
+      ->propertyOrderBy('nid')
+      ->execute();
+    $nids = array_keys($result['node']);
+  } else {
+    $nids = explode(',', $nids);
+  }
+  if (empty($nids)) {
+    drush_log('No node found', 'warning');
+    return;
+  }
+  print("Checking ".count($nids)." nodes\n");
+  foreach ($nids as $nid) {
+    $messages = array();
+    $vid = 0;
+    $valid_languages = array();
+    $invalid_languages = array();
+    $node = new stdClass();
+    $node->nid = $nid;
+    OshaTMGMTRetranslate::validate_can_retranslate($node, $vid, $messages, $valid_languages, $invalid_languages);
+    drush_log(sprintf("Checking node %s (%s), r%s", $node->nid, $node->path['alias'], $vid), 'success');
+    foreach ($messages as $message) {
+      drush_log("  ".$message, 'success');
+    }
+    foreach ($invalid_languages as $lang => $data) {
+      drush_log(sprintf("  %s diff starts at %s[%s]", $lang, $data[0], $data[1]), 'warning');
     }
   }
 }

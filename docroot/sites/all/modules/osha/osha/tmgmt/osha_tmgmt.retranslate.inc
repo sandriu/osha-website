@@ -8,6 +8,9 @@ class OshaTMGMTRetranslate {
    * Add data-translation-id for level 1 HTML elements
    */
    public static function prepare_text($text) {
+     if (empty($text)) {
+       return $text;
+     }
      $items = self::getDOMNodeList($text);
      // Get all existing ID's and compute max
      $max = 0;
@@ -95,11 +98,18 @@ class OshaTMGMTRetranslate {
    * Returns latest revision where original language is synchronized with translations
    */
   public static function get_latest_clean_revision($entity_id) {
-    $count = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
+    $rev = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
       WHERE f.entity_id = :entity_id AND f.field_needs_retranslation_value = 0",
       array(':entity_id' => $entity_id)
     )->fetchField();
-    return $count;
+    if (!$rev) {
+      // No clean revision found, probably field_needs_retranslation_value was not there
+      // Return the first available revision
+      $rev = db_query("SELECT MIN(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
+        array(':entity_id' => $entity_id)
+      )->fetchField();
+    }
+    return $rev;
   }
   
   /*
@@ -178,5 +188,49 @@ class OshaTMGMTRetranslate {
       }
     }
     return html_entity_decode($changes->saveHTML());
+  }
+  
+  /**
+    * Input: $node->nid
+    * The latest clean revision is returned in $revision
+    * Status messages are returned in array $messages
+    * Results are returned in arrays $valid_languages and $invalid_languages, keyed by language code
+    */
+  public static function validate_can_retranslate(&$node, &$vid, &$messages, &$valid_languages, &$invalid_languages) {
+    if (!$vid) {
+      $vid = self::get_latest_clean_revision($node->nid);
+    }
+    if (!isset($node->nid)) {
+      throw new TMGMTException('node->nid not provided');
+    }
+    $node = node_load($node->nid, $vid);
+    $orig_lang = $node->translations->original;
+    $orig_structure = self::getHTMLStructure($node->body[$orig_lang][0]['value']);
+    $languages = array_keys($node->body);
+    if (count($languages) == 1 ) {
+      $messages[] = t('Node has no translations');
+      return;
+    }
+    $valid_languages = array();
+    foreach ($languages as $lang) {
+      if ($lang == $orig_lang) {
+        continue;
+      }
+      $html = $node->body[$lang][0]['value'];
+      $diffs = array_diff_assoc($orig_structure, self::getHTMLStructure($html));
+      if (!empty($diffs)) {
+        $first_diff = current(array_keys($diffs));
+        // Add first different tag in returned data
+        $invalid_languages[$lang] = array($diffs[$first_diff], $first_diff);
+      } else {
+        $valid_languages[] = $lang;
+      }
+    }
+    if (!empty($valid_languages)) {
+      $messages[] = t('Node can be re-translated in ').implode(",", $valid_languages);
+    }
+    if (!empty($invalid_languages)) {
+      $messages[] = t('Node cannot be re-translated in ').implode(",", array_keys($invalid_languages));
+    }
   }
 }
