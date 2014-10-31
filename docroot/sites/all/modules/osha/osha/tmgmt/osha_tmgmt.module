@@ -448,15 +448,18 @@ function osha_tmgmt_node_presave($node) {
   // Prepare re-translation information
   global $language;
   $current_lang = $language->language;
-  if (isset($node->field_needs_retranslation) &&
-    $node->translations->original == $current_lang) {
-      if (!$node->field_needs_retranslation[LANGUAGE_NONE][0]['value']) {
+  if (isset($node->field_needs_retranslation)) { 
+    // reformat body text for all languages and enhance paragraphs with unique id's
+    foreach(array_keys($node->body) as $lang) {
+      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
+      $node->body[$lang][0]['value'] = $new_text;
+    }
+    // check for changes in the original language, except for new nodes
+    if ($node->translations->original == $current_lang && !empty($node->is_new) && 
+        !$node->field_needs_retranslation[LANGUAGE_NONE][0]['value']) {
         // Check if body has been modified and if true set checkbox
         OshaTMGMTRetranslate::mark_dirty($node);
-      }
-      // Enhance paragraphs with unique id's
-      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$current_lang][0]['value']);
-      $node->body[$current_lang][0]['value'] = $new_text;
+    }
   }
 }
 

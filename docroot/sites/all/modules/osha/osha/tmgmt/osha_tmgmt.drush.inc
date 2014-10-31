@@ -13,6 +13,14 @@ function osha_tmgmt_drush_command() {
     'options' => array(),
     'sections' => array(),
   );
+  $items['osha-tmgmt-retranslate-validate'] = array(
+    'description' => 'Check if all translations of node have the same structure',
+    'aliases' => array('oshrtv'),
+    'examples' => array(),
+    'arguments' => array('nid' => 'The node id'),
+    'options' => array(),
+    'sections' => array(),
+  );
   return $items;
 }
 
@@ -23,15 +31,12 @@ function osha_tmgmt_drush_help($section) {
   switch ($section) {
     case 'osha-tmgmt-statistics':
       return 'This command will create a group of test users assigned to the workflow roles';
+    case 'osha-tmgmt-retranslate-validate':
+      return 'This command will check if all translations of a node have a the same HTML structure of the body field';
   }
   return NULL;
 }
 
-/**
- * Drush command to create OSHA workflow users.
- *
- * @throws Exception
- */
 function drush_osha_tmgmt_statistics() {
   $rows = db_select('node', 'n')
     ->fields('n', array('nid'))
@@ -60,5 +65,24 @@ function drush_osha_tmgmt_statistics() {
     $fake->bundle = $node->type;
     $fake->type = $node->type;
     field_attach_update('node', $fake);
+  }
+}
+
+function drush_osha_tmgmt_retranslate_validate($nid) {
+  $vid = OshaTMGMTRetranslate::get_latest_clean_revision($nid);
+  $node = node_load($nid, $vid);
+  $orig_lang = $node->translations->original;
+  $orig_structure = OshaTMGMTRetranslate::getHTMLStructure($node->body[$orig_lang][0]['value']);
+  foreach (array_keys($node->body) as $lang) {
+    $html = $node->body[$lang][0]['value'];
+    $diffs = array_diff_assoc($orig_structure, OshaTMGMTRetranslate::getHTMLStructure($html));
+    if (!empty($diffs)) {
+      $first_diff = current(array_keys($diffs));
+      drush_log(
+        sprintf(
+          'Node %s, revision %s cannot be re-translated in language %s. Different structure starting at %s[id="%s"].',
+          $nid, $vid, $lang, $diffs[$first_diff], $first_diff
+      ), 'warning');
+    }
   }
 }

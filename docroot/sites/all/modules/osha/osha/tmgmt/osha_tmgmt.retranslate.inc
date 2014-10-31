@@ -12,8 +12,8 @@ class OshaTMGMTRetranslate {
      // Get all existing ID's and compute max
      $max = 0;
      for($i = 0; $i < $items->length; $i++) {
-       if (get_class($items->item($i)) == 'DOMText' ) {
-         // ignore text between tags, can happen during migration
+       if (get_class($items->item($i)) != 'DOMElement' ) {
+         // ignore text between tags and comments, can happen during migration
          continue;
        }
        $id = $items->item($i)->getAttribute('id');
@@ -30,8 +30,8 @@ class OshaTMGMTRetranslate {
      $current_id = $max+1;
      for($i = 0; $i < $items->length; $i++) {
        $item = $items->item($i);
-       if (get_class($items->item($i)) == 'DOMText' ) {
-         // ignore text between tags, can happen during migration
+       if (get_class($items->item($i)) != 'DOMElement' ) {
+         // ignore text between tags and comments, can happen during migration
          continue;
        }
        if (empty($item->getAttribute('id'))) {
@@ -44,8 +44,10 @@ class OshaTMGMTRetranslate {
   
   public static function getDOMDocument($text) {
      $DOM = new DOMDocument;
+     libxml_use_internal_errors(true);
      $text = mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8');
      $DOM->loadHTML($text);
+     libxml_clear_errors();
      return $DOM;
   }
   
@@ -61,6 +63,18 @@ class OshaTMGMTRetranslate {
        $Document->appendChild($Document->importNode($domNodeList->item($i),true));
      }
      return html_entity_decode($Document->saveHTML());
+  }
+
+  public static function getHTMLStructure($text) {
+    $items = self::getDOMNodeList($text);
+    $structure = array();
+    for($i = 0; $i < $items->length; $i++) {
+      $item = $items->item($i);
+      if (get_class($item) == 'DOMElement' ) {
+        $structure[$item->getAttribute('id')] = $item->tagName;
+      }
+    }
+    return $structure;
   }
 
   /*
