@@ -232,13 +232,37 @@ class OshaTMGMTRetranslate {
         continue;
       }
       $html = $node->body[$lang][0]['value'];
-      $diffs = array_diff_assoc($orig_structure, self::getHTMLStructure($html));
+      $translated_structure = self::getHTMLStructure($html);
+      $diffs = array_diff_assoc($orig_structure, $translated_structure);
+      // $diffs contains tags that exist in source language but not in target language
       if (!empty($diffs)) {
         $first_diff = current(array_keys($diffs));
+        // See if that element id exists in translation
+        if (isset($translated_structure[$first_diff])) {
+          $first_diff_in_trans = $translated_structure[$first_diff];
+        }
         // Add first different tag in returned data
-        $invalid_languages[$lang] = array($diffs[$first_diff], $first_diff);
+        $invalid_languages[$lang] = array(
+          'id' => $first_diff,
+          'source' => $orig_lang,
+          $orig_lang => $diffs[$first_diff],
+          $lang => $first_diff_in_trans,
+        );
       } else {
-        $valid_languages[] = $lang;
+        // check if target language contains more tags
+        $diffs = array_diff_assoc($orig_structure, $translated_structure);
+        if (!empty($diffs)) {
+          $first_diff = current(array_keys($diffs));
+          // Add first different tag in returned data (non-existing in source lang?)
+          $invalid_languages[$lang] = array(
+            'id' => $first_diff,
+            'source' => $orig_lang,
+            $orig_lang => NULL,
+            $lang => $diffs[$first_diff]
+          );
+        } else {
+          $valid_languages[] = $lang;
+        }
       }
     }
     if (!empty($valid_languages)) {

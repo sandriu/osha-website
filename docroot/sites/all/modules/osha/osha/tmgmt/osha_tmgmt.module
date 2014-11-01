@@ -941,7 +941,10 @@ function osha_tmgmt_retranslate_validate_ui($form, &$form_state) {
   }
   $details = array();
   foreach ($invalid_languages as $lang => $data) {
-    $details[$lang] = sprintf("Different HTML starting at <%s id='%s'", $data[0], $data[1]);
+    $details[$lang] = sprintf("Different HTML starting at id = '%s', <%s> in %s, <%s> in %s",
+      $data['id'],
+      $data[$data['source']], strtoupper($data['source']),
+      $data[$lang], strtoupper($lang));
   }
   if (!empty($details)) {
     dpm($details);

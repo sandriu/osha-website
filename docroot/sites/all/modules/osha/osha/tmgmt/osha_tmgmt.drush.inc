@@ -99,7 +99,11 @@ function drush_osha_tmgmt_retranslate_validate($bundle) {
       drush_log("  ".$message, 'success');
     }
     foreach ($invalid_languages as $lang => $data) {
-      drush_log(sprintf("  %s diff starts at %s[%s]", strtoupper($lang), $data[0], $data[1]), 'warning');
+      $info = sprintf("Different HTML starting at id = '%s', <%s> in %s, <%s> in %s",
+        $data['id'],
+        $data[$data['source']], strtoupper($data['source']),
+        $data[$lang], strtoupper($lang), TRUE);
+      drush_log($info, 'warning');
     }
   }
 }
