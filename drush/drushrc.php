@@ -248,6 +248,8 @@
 
 // Read JSON configuration file from conf/ and pre-configure drush commands
 $json_path = dirname(__FILE__) . '/../conf/config.json';
+
+$cfg = (object) array('variables' => (object) array('environment' => 'production'));
 if(file_exists($json_path)) {
   $cfg = json_decode(file_get_contents($json_path));
   $db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
@@ -257,6 +259,7 @@ if(file_exists($json_path)) {
     'db-su' => $cfg->db->root_username, 'db-su-pw' => $cfg->db->root_password
   );
 }
+$environment = $cfg->variables->environment;
 
 $options['init-modules'] = array(
   'ctools', 'entity',
@@ -351,11 +354,7 @@ $options['init-modules'] = array(
   'workbench_access',
   'workbench_moderation',
 
-
-
-
   'osha_taxonomies',
-//  'osha_taxonomies_uuid',
   'osha',
   'osha_migration',
   'osha_news',
@@ -371,7 +370,6 @@ $options['init-modules'] = array(
   'osha_workflow',
   'osha_blocks',
   'osha_breadcrumbs',
-//  'osha_content',
 
   'facetapi',
   'search_api_facetapi',
@@ -395,11 +393,14 @@ $options['init-modules'] = array(
 
   // Link content types with main menu items
   'menu_position',
-
-  'devel',
-  'diff',
-  'simpletest'
 );
+
+if ($environment == 'development') {
+  $options['init-modules'][] = 'devel';
+  $options['init-modules'][] = 'diff';
+  $options['init-modules'][] = 'simpletest';
+  // Module installed during development
+}
 
 $options['init-themes'] = array(
   'osha_admin',
