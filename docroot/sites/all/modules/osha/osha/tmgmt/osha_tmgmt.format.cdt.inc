@@ -130,8 +130,6 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
   public function export(TMGMTJob $job) {
     $this->job = $job;
 
-    $job_items = OshaTMGMTStatistics::getUniqueItems($job);
-
     $this->openMemory();
     $this->setIndent(TRUE);
     $this->setIndentString(' ');
@@ -161,9 +159,12 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $this->startElement('TranslationDetails');
     $this->writeElement('TotalCharacterLength', $job->character_count);
 
+    $job_items = self::getUniqueItems($job);
     foreach ($job_items as $item_type => $item_ids) {
-      foreach ($item_ids as $item_id => $item) {
-        $this->addItem($item, $job);
+      foreach ($item_ids as $item_id => $item_list) {
+        foreach ($item_list as $item) {
+          $this->addItem($item, $job);
+        }
       }
     }
 
@@ -174,6 +175,43 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
 
     $this->endDocument();
     return $this->outputMemory();
+  }
+
+  /**
+   * Generates an unique array of items, based on item content
+   * Also sets $item->target_languages array, used in addItem
+   *
+   * @return array
+   *   Items -> Items[item_type][item_id] contains an array of items
+   */
+  public static function getUniqueItems($job) {
+    $job_items = array();
+    foreach ($job->getItems() as $item) {
+      // Search if node already exists in job_items
+      if (isset($job_items[$item->item_type][$item->item_id])) {
+        // $is_new will be FALSE when $item is added to an existing element of $job_items
+        $is_new = TRUE;
+        foreach ($job_items[$item->item_type][$item->item_id] as $new_item) {
+          // Now check if the two items have the same content
+          if (serialize($new_item->getData()) == serialize($item->getData()) ) {
+            // Same content, simply add another language
+            $new_item->target_languages[] = $item->target_language;
+            $is_new = FALSE;
+            break;
+          }
+        };
+        if ($is_new) {
+          // If not found until now, add it
+          $item->target_languages = array($item->target_language);
+          $job_items[$item->item_type][$item->item_id][] = $item;
+        }
+      } else {
+        // This is the first job item for the node, add it
+        $item->target_languages = array($item->target_language);
+        $job_items[$item->item_type][$item->item_id][] = $item;
+      }
+    }
+    return $job_items;
   }
 
   /**

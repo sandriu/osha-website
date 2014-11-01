@@ -1538,17 +1538,19 @@ class OshaTMGMTStatistics {
   public static function computeJobItemStatistics(&$job_item) {
     $job_item->character_count = 0;
     $job_item->page_count = 0;
-
-    if ($job_item->item_type == "node" || $job_item->item_type == "taxonomy_term") {
-      $entity = entity_load_single($job_item->item_type, $job_item->item_id);
-      if (!$entity) {
-        throw new TMGMTException(t('Unable to load entity %type with id %id', array('%type' => $job_item->item_type, $job_item->item_id)));
+    // When job items is still in cart, getData() returns nothing, so we simulate character count
+    if (empty($job_item->getSourceData())) {
+      if ($job_item->item_type == "node" || $job_item->item_type == "taxonomy_term") {
+        $entity = entity_load_single($job_item->item_type, $job_item->item_id);
+        if (!$entity) {
+          throw new TMGMTException(t('Unable to load entity %type with id %id', array('%type' => $job_item->item_type, $job_item->item_id)));
+        }
+        self::computeEntityStatistics($entity, $job_item->item_type);
+        $job_item->character_count = $entity->character_count;
+        $job_item->page_count = $entity->page_count;
       }
-      self::computeEntityStatistics($entity, $job_item->item_type);
-      $job_item->character_count = $entity->character_count;
-      $job_item->page_count = $entity->page_count;
-    }
-    else {
+    } else {
+      // Call default behaviour
       $data = $job_item->getSourceData();
       self::count($data, $ret);
       $job_item->character_count = $ret;
@@ -1598,12 +1600,10 @@ class OshaTMGMTStatistics {
         self::computeJobItemStatistics($item);
       }
     }
-    foreach (self::getUniqueItems($job) as $item_type => $items) {
-      foreach ($items as $item) {
+    foreach ($job->getItems() as $item) {
         if ($item->character_count > 0) {
           $job->character_count += $item->character_count;
         }
-      }
     }
     if ($job->character_count > 0) {
       $cpp = variable_get('osha_tmgmt_characters_per_page', 1500);
