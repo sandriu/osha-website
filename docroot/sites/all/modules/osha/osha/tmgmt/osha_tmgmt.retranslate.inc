@@ -227,10 +227,12 @@ class OshaTMGMTRetranslate {
       }
     }
     if (!empty($valid_languages)) {
-      $messages[] = t('Node can be re-translated in ').implode(",", $valid_languages);
+      $messages[] = t('Node can be re-translated in ')
+        .implode(", ", array_map('strtoupper', $valid_languages));
     }
     if (!empty($invalid_languages)) {
-      $messages[] = t('Node cannot be re-translated in ').implode(",", array_keys($invalid_languages));
+      $messages[] = t('Node cannot be re-translated in ')
+        .implode(", ", array_map('strtoupper', array_keys($invalid_languages)));
     }
   }
 }
