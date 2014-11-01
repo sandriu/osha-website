@@ -448,7 +448,7 @@ function osha_tmgmt_node_presave($node) {
   // Prepare re-translation information
   global $language;
   $current_lang = $language->language;
-  if (isset($node->field_needs_retranslation)) {
+  if (isset($node->field_needs_retranslation) && is_array($node->body)) {
     // reformat body text for all languages and enhance paragraphs with unique id's
     foreach(array_keys($node->body) as $lang) {
       $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
@@ -967,7 +967,7 @@ function osha_tmgmt_retranslate_validate_ui($form, &$form_state) {
       $data[$lang], strtoupper($lang));
   }
   if (!empty($details)) {
-    dpm($details);
+    drupal_set_message('<pre>'.htmlspecialchars(print_r($details, TRUE)).'</pre>', 'warning');
   }
 }
 

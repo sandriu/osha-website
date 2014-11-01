@@ -86,7 +86,12 @@ class OshaTMGMTRetranslate {
   public static function mark_dirty($node) {
     $node_lang = $node->translations->original;
     $new_text = $node->body[$node_lang][0]['value'];
-    $old_text = $node->original->body[$node_lang][0]['value'];
+    if (!isset($node->original->body[$node_lang])) {
+      // no body before
+      $old_text = '';
+    } else {
+      $old_text = $node->original->body[$node_lang][0]['value'];
+    }
     $new_text_plain = preg_replace("/\s+/", "", strip_tags($new_text));
     $old_text_plain = preg_replace("/\s+/", "", strip_tags($old_text));
     if ( $new_text_plain != $old_text_plain) {
@@ -133,11 +138,14 @@ class OshaTMGMTRetranslate {
     $field_id = $fields[$field_name]['field_id'];
     field_attach_load_revision('node', $entities, array('field_id' => $field_id));
     $field = $entities[$entity_id]->$field_name;
-    if (isset($field[$lang])) {
-      return $field[$lang][0]['value'];
-    } else {
+    if (!isset($field[$lang])) {
       return NULL;
     }
+    if (isset($field[$lang][0]['fid'])) {
+      // @todo handle files and image
+      return NULL;
+    }
+    return $field[$lang][0]['value'];
   }
   
   public static function get_changed_ids($old_text, $new_text) {
@@ -230,6 +238,11 @@ class OshaTMGMTRetranslate {
       throw new TMGMTException('node->nid not provided');
     }
     $node = node_load($node->nid, $vid);
+    if (empty($node->body)) {
+      // no body
+      $messages['warning'] = t('Empty node body in initial revision.');
+      return;
+    }
     $orig_lang = $node->translations->original;
     $orig_structure = self::getHTMLStructure($node->body[$orig_lang][0]['value']);
     $languages = array_keys($node->body);
@@ -244,11 +257,18 @@ class OshaTMGMTRetranslate {
       }
       $html = $node->body[$lang][0]['value'];
       $translated_structure = self::getHTMLStructure($html);
-      $diffs = array_diff_assoc($orig_structure, $translated_structure);
+      // Search for id's that are present in $translated_structure but with different tags
+      $diffs = array();
+      foreach ($orig_structure as $id => $tag) {
+        if (isset($translated_structure[$id]) && $tag != $translated_structure[$id]) {
+          $diffs[$id] = $translated_structure[$id];
+        }
+      }
       // $diffs contains tags that exist in source language but not in target language
       if (!empty($diffs)) {
         $first_diff = current(array_keys($diffs));
         // See if that element id exists in translation
+        $first_diff_in_trans = NULL;
         if (isset($translated_structure[$first_diff])) {
           $first_diff_in_trans = $translated_structure[$first_diff];
         }
@@ -260,8 +280,12 @@ class OshaTMGMTRetranslate {
           $lang => $first_diff_in_trans,
         );
       } else {
-        // check if target language contains more tags
-        $diffs = array_diff_assoc($orig_structure, $translated_structure);
+        // Check if target language contains more tags
+        foreach ($translated_structure as $id => $tag) {
+          if (!isset($orig_structure[$id])) {
+            $diffs[$id] = $tag;
+          }
+        }
         if (!empty($diffs)) {
           $first_diff = current(array_keys($diffs));
           // Add first different tag in returned data (non-existing in source lang?)
