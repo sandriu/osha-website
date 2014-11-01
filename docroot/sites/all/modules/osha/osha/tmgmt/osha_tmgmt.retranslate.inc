@@ -218,7 +218,7 @@ class OshaTMGMTRetranslate {
   /**
     * Input: $node->nid
     * The latest clean revision is returned in $revision
-    * Status messages are returned in array $messages
+    * Status messages are returned in array $messages[key => severity_level]
     * Results are returned in arrays $valid_languages and $invalid_languages, keyed by language code
     */
   public static function validate_can_retranslate(&$node, &$vid, &$messages, &$valid_languages, &$invalid_languages) {
@@ -233,7 +233,7 @@ class OshaTMGMTRetranslate {
     $orig_structure = self::getHTMLStructure($node->body[$orig_lang][0]['value']);
     $languages = array_keys($node->body);
     if (count($languages) == 1 ) {
-      $messages[] = t('Node has no translations');
+      $messages['warning'] = t('Node has no translations');
       return;
     }
     $valid_languages = array();
@@ -276,11 +276,11 @@ class OshaTMGMTRetranslate {
       }
     }
     if (!empty($valid_languages)) {
-      $messages[] = t('Node can be re-translated in ')
+      $messages['status'] = t('Node can be re-translated in ')
         .implode(", ", array_map('strtoupper', $valid_languages));
     }
     if (!empty($invalid_languages)) {
-      $messages[] = t('Node cannot be re-translated in ')
+      $messages['error'] = t('Node cannot be re-translated in ')
         .implode(", ", array_map('strtoupper', array_keys($invalid_languages)));
     }
   }

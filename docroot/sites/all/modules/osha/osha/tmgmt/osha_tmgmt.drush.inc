@@ -95,8 +95,8 @@ function drush_osha_tmgmt_retranslate_validate($bundle) {
     $node->nid = $nid;
     OshaTMGMTRetranslate::validate_can_retranslate($node, $vid, $messages, $valid_languages, $invalid_languages);
     drush_log(sprintf("Checking node %s (%s), r%s", $node->nid, $node->path['alias'], $vid), 'success');
-    foreach ($messages as $message) {
-      drush_log("  ".$message, 'success');
+    foreach ($messages as $severity => $message) {
+      drush_log("  ".$message, $severity);
     }
     foreach ($invalid_languages as $lang => $data) {
       $info = sprintf("Different HTML starting at id = '%s', <%s> in %s, <%s> in %s",
