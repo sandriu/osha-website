@@ -147,10 +147,13 @@ class OshaTMGMTRetranslate {
     $changes = array();
     for($i = 0; $i < $new_items->length; $i++) {
       $new_item = $new_items->item($i);
+      if (get_class($new_item) != 'DOMElement') {
+        continue;
+      }
       $new_id = $new_item->getAttribute('id');
       // Check if added or existing
       $old_item = $old_doc->getElementById($new_id);
-      if (!$old_item || $old_item && $old_item->nodeValue !== $new_item->nodeValue ) {
+      if (!$old_item || $old_item->nodeValue !== $new_item->nodeValue ) {
         $changes[] = $new_id;
       }
     }
@@ -194,6 +197,9 @@ class OshaTMGMTRetranslate {
     $source_items = self::getDOMNodeList($source_text);
     for($i = 0; $i < $source_items->length; $i++) {
       $source_item = $source_items->item($i);
+      if (get_class($source_item) != 'DOMElement') {
+        continue;
+      }
       if ( in_array($source_item->getAttribute('id'), $changed_ids) ) {
         // this element has been changed in source language, so it is added by default
         $changes->appendChild($changes->importNode($source_item, true));
