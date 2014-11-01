@@ -1643,31 +1643,6 @@ class OshaTMGMTStatistics {
   }
 
   /**
-   * Generates an unique array of items, based on item_type and item_id.
-   *
-   * @param object $job
-   *   The job with the items
-   *
-   * @return array
-   *   Items -> Items[item_type][item_id] contains an item
-   */
-  public static function getUniqueItems($job) {
-    $job_items = array();
-    foreach ($job->getItems() as $item) {
-      if (!isset($job_items[$item->item_type][$item->item_id])) {
-        $item->target_languages = array();
-        $item->target_languages[] = $item->target_language;
-
-        $job_items[$item->item_type][$item->item_id] = $item;
-      }
-      else {
-        $job_items[$item->item_type][$item->item_id]->target_languages[] = $item->target_language;
-      }
-    }
-    return $job_items;
-  }
-
-  /**
    * Returns the job target languages.
    *
    * @param TMGMTJob $job
