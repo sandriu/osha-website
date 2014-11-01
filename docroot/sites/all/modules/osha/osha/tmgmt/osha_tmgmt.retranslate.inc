@@ -208,7 +208,11 @@ class OshaTMGMTRetranslate {
         $changes->appendChild($changes->importNode($source_item,true));
       }
     }
-    return html_entity_decode($changes->saveHTML());
+    if ($changes->hasChildNodes()) {
+      return html_entity_decode($changes->saveHTML());
+    } else {
+      return NULL;
+    }
   }
   
   /**
