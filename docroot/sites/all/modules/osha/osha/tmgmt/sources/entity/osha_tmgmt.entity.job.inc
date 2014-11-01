@@ -91,8 +91,8 @@ class OshaTMGMTJob extends TMGMTJob {
         $this->tjid = NULL;
       }
 
-      throw new TMGMTException('Job item @label (@type) has no translatable content.',
-        array('@label' => $item->label(), '@type' => $item->getSourceType()));
+      throw new TMGMTException('Job item @label (@type) has no translatable content in language @target_lang.',
+        array('@label' => $item->label(), '@type' => $item->getSourceType(), '@target_lang' => strtoupper($target_language)));
     }
 
     return $item;
