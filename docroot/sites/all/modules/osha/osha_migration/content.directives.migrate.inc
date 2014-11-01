@@ -61,6 +61,7 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
     $this->addFieldMapping('field_directive_type', 'directive_type');
     $this->addFieldMapping('field_directive_type:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+    $this->addFieldMapping('field_needs_retranslation')->defaultValue(0);
 
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
