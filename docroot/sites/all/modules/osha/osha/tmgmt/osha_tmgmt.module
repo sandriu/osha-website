@@ -456,7 +456,7 @@ function osha_tmgmt_node_presave($node) {
     }
     // Check for changes in the original language
     // except for new nodes and nodes without translations
-    if ($node->translations->original == $current_lang && !empty($node->is_new) && 
+    if ($node->translations->original == $current_lang && empty($node->is_new) &&
         !$node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] &&
         !empty(array_keys($node->translations->data))) {
         // Check if body has been modified and if true set checkbox
@@ -503,17 +503,11 @@ function osha_tmgmt_tmgmt_source_translation_structure($job_item,
     $field_name = $instance['field_name'];
     $structure['#label'] = check_plain($instance['label']);
     foreach ($items as $delta => $value) {
-      if ($field_name == 'body') {
-
-        $text = OshaTMGMTRetranslate::get_text_to_retranslate(
-          $job_item->item_id, $entity->type,
-          $job_item->source_language, $job_item->target_language,
-          $field_name
-        );
-      }
-      else {
-        $text = $value['value'];
-      }
+      $text = OshaTMGMTRetranslate::get_text_to_retranslate(
+        $job_item->item_id, $entity->type,
+        $job_item->source_language, $job_item->target_language,
+        $field_name
+      );
       $structure[$delta]['#label'] = t('Delta #@delta', array('@delta' => $delta));
       $structure[$delta]['value'] = array(
         '#label' => $structure['#label'],
@@ -870,7 +864,7 @@ function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_sta
       hide($form['top_actions']['add_to_cart']);
     }
   }
-  
+
   // add re-translate validation button
   $form['top_actions']['retranslate_validate'] = array(
     '#type' => 'submit',

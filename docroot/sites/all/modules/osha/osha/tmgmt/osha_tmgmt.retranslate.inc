@@ -123,7 +123,7 @@ class OshaTMGMTRetranslate {
     return $count;
   }
 
-  public static function get_field_value($entity_id, $bundle, $revision, $node_lang = 'en', $field_name = 'body') {
+  public static function get_field_value($entity_id, $bundle, $revision, $lang = 'en', $field_name = 'body') {
     $entities = array(
       $entity_id => (object)array(
         'type' => $bundle, 'nid' => $entity_id, 'vid' => $revision,
@@ -133,7 +133,11 @@ class OshaTMGMTRetranslate {
     $field_id = $fields[$field_name]['field_id'];
     field_attach_load_revision('node', $entities, array('field_id' => $field_id));
     $field = $entities[$entity_id]->$field_name;
-    return $field[$node_lang][0]['value'];
+    if (isset($field[$lang])) {
+      return $field[$lang][0]['value'];
+    } else {
+      return NULL;
+    }
   }
   
   public static function get_changed_ids($old_text, $new_text) {
@@ -163,16 +167,27 @@ class OshaTMGMTRetranslate {
       // All text must be translated
       return $source_text;
     }
+    // This is the most recent version that has been already translated
+    $clean_source_text = self::get_field_value($entity_id, $bundle, $clean_revision, $source_lang, $field_name);
+    // If field is not body, check if it has been changed in the source language
+    if ($field_name != 'body' && $source_text != $clean_source_text) {
+        return $source_text;
+    }
+    // For body, get the different paragraphs only
     // The latest version in the target language
     $translated_text = self::get_field_value($entity_id, $bundle, $revision, $target_lang, $field_name);
     if (!$translated_text) {
       return $source_text;
     }
-    // This is the most recent version that has been already translated
-    $clean_source_text = self::get_field_value($entity_id, $bundle, $clean_revision, $source_lang, $field_name);
+    if ($field_name != 'body') {
+      // If we got here for other fields it means that target_lang exists,
+      // but field has not been changed, so no retranslation is needed
+      return NULL;
+    }
+
     // This is just a list of element id's (changed or added in the source language)
     $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
-    
+
     $translated_doc = self::getDOMDocument($translated_text);
     // Changed/added elements will be added here
     $changes = new DOMDocument();
@@ -180,7 +195,7 @@ class OshaTMGMTRetranslate {
     for($i = 0; $i < $source_items->length; $i++) {
       $source_item = $source_items->item($i);
       if ( in_array($source_item->getAttribute('id'), $changed_ids) ) {
-        // this element has been changed, no need to check the translations
+        // this element has been changed in source language, so it is added by default
         $changes->appendChild($changes->importNode($source_item, true));
       } else if (!$translated_doc->getElementById($source_item->getAttribute('id'))) {
         // This item does not exist at all in the translated version
