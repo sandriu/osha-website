@@ -33,5 +33,6 @@ files[] = osha_tmgmt.entity_collection_bundles_default.inc
 files[] = osha_tmgmt_node.plugin.inc
 files[] = osha_tmgmt_file.plugin.inc
 files[] = osha_tmgmt.format.cdt.inc
+files[] = osha_tmgmt.retranslate.inc
 files[] = osha_tmgmt.test
 files[] = osha_tmgmt.workflow.inc

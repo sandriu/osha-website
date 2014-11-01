@@ -445,6 +445,24 @@ function osha_tmgmt_node_presave($node) {
       $node->field_page_count[LANGUAGE_NONE][0]['value'] = $node->page_count;
     }
   }
+  // Prepare re-translation information
+  global $language;
+  $current_lang = $language->language;
+  if (isset($node->field_needs_retranslation) && is_array($node->body)) {
+    // reformat body text for all languages and enhance paragraphs with unique id's
+    foreach(array_keys($node->body) as $lang) {
+      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
+      $node->body[$lang][0]['value'] = $new_text;
+    }
+    // Check for changes in the original language
+    // except for new nodes and nodes without translations
+    if ($node->translations->original == $current_lang && empty($node->is_new) &&
+        !$node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] &&
+        !empty(array_keys($node->translations->data))) {
+        // Check if body has been modified and if true set checkbox
+        OshaTMGMTRetranslate::mark_dirty($node);
+    }
+  }
 }
 
 /**
@@ -470,6 +488,48 @@ function osha_tmgmt_job_priority_name($job) {
     }
   }
   return '';
+}
+
+
+/**
+ *  Implements hook_tmgmt_source_translation_structure().
+ */
+function osha_tmgmt_tmgmt_source_translation_structure($job_item,
+                                                       $entity,
+                                                       $field, $instance,
+                                                       $items) {
+  $structure = array();
+  if (!empty($items)) {
+    $field_name = $instance['field_name'];
+    $structure['#label'] = check_plain($instance['label']);
+    foreach ($items as $delta => $value) {
+      $text = OshaTMGMTRetranslate::get_text_to_retranslate(
+        $job_item->item_id, $entity->type,
+        $job_item->source_language, $job_item->target_language,
+        $field_name
+      );
+      $structure[$delta]['#label'] = t('Delta #@delta', array('@delta' => $delta));
+      $structure[$delta]['value'] = array(
+        '#label' => $structure['#label'],
+        '#text' => $text,
+        '#translate' => TRUE,
+      );
+      // Add format.
+      $structure[$delta]['format'] = array(
+        '#label' => '',
+        '#text' => !empty($value['format']) ? $value['format'] : '',
+        '#translate' => FALSE,
+      );
+      if ($field['type'] == 'text_with_summary' && !empty($value['summary'])) {
+        $structure[$delta]['summary'] = array(
+          '#label' => t('Summary'),
+          '#text' => $value['summary'],
+          '#translate' => TRUE,
+        );
+      }
+    }
+  }
+  return $structure;
 }
 
 /**
@@ -531,6 +591,26 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
       foreach ($items as $item) {
         OshaTMGMTStatistics::computeJobItemStatistics($item);
+        // remove original language from list of languages
+        unset($form['target_language']['#options'][$item->getSourceLangCode()]);
+        // remove Turkish and Russian
+        unset($form['target_language']['#options']['tr']);
+        unset($form['target_language']['#options']['ru']);
+        if ($item->plugin == 'entity' && $item->item_type == 'node') {
+          // check if retranslation is possible
+          $node = (object)array('nid' => $item->item_id);
+          $vid = 0;
+          $messages = array();
+          $valid_languages = array();
+          $invalid_languages = array();
+          OshaTMGMTRetranslate::validate_can_retranslate($node, $vid, $messages, $valid_languages, $invalid_languages);
+          if (!empty($invalid_languages)) {
+            drupal_set_message($item->label().": ".$messages['error'], 'warning');
+            foreach ($invalid_languages as $language => $data) {
+              unset($form['target_language']['#options'][$language]);
+            }
+          }
+        }
         $job_char_count += $item->character_count;
         $job_page_count += $item->page_count;
         $uri = $item->getSourceUri();
@@ -544,7 +624,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
 
       #increase the size of the language select list
-      $form['target_language']['#size'] = count($languages);
+      $form['target_language']['#size'] = count($form['target_language']['#options']);
       $form['items'] = array(
         '#type' => 'tableselect',
         '#header' => array(
@@ -640,18 +720,21 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       );
 
       $form['info']['total_character_count'] = array(
-        '#title' => t('Total character count'),
-        '#type'  => 'item',
-        '#markup' => $job->character_count,
-        '#prefix' => '<div id="tmgmt-ui-character-count" class="tmgmt-ui-character-count tmgmt-ui-info-item">',
+        '#type' => 'item',
+        '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
         '#suffix' => '</div>',
+        '#title' => t('Total character count'),
+        '#markup' => $job->character_count,
+        '#weight' => 11,
       );
 
       $form['info']['priority'] = array(
-        '#attributes' => array('class' => array('container-inline')),
         '#type' => 'item',
+        '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
+        '#suffix' => '</div>',
         '#title' => t('Priority'),
         '#markup' => osha_tmgmt_job_priority_name($job),
+        '#weight' => 13,
       );
 
       $form['info']['page_count'] = array(
@@ -660,6 +743,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => $job->page_count,
         '#prefix' => '<div id="tmgmt-ui-page-count" class="tmgmt-ui-page-count tmgmt-ui-info-item">',
         '#suffix' => '</div>',
+        '#weight' => 12,
       );
 
       hide($form['info']['word_count']);
@@ -801,6 +885,16 @@ function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_sta
     }
   }
 
+  // add re-translate validation button
+  $form['top_actions']['retranslate_validate'] = array(
+    '#type' => 'submit',
+    '#value' => t('Validate retranslation'),
+    '#submit' => array('osha_tmgmt_retranslate_validate_ui'),
+    '#weight' => 1,
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+
   // Change from table select to table.
   $form['#validate'] = array();
   $form['languages']['#type'] = 'table';
@@ -854,6 +948,29 @@ function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_sta
     $form_state['tmgmt_job_items'] = $items;
   }
 }
+
+function osha_tmgmt_retranslate_validate_ui($form, &$form_state) {
+  $node = menu_get_object();
+  $vid = 0;
+  $messages = array();
+  $valid_languages = array();
+  $invalid_languages = array();
+  OshaTMGMTRetranslate::validate_can_retranslate($node, $vid, $messages, $valid_languages, $invalid_languages);
+  foreach ($messages as $severity => $message) {
+    drupal_set_message($message, $severity);
+  }
+  $details = array();
+  foreach ($invalid_languages as $lang => $data) {
+    $details[$lang] = sprintf("Different HTML starting at id = '%s', <%s> in %s, <%s> in %s",
+      $data['id'],
+      $data[$data['source']], strtoupper($data['source']),
+      $data[$lang], strtoupper($lang));
+  }
+  if (!empty($details)) {
+    drupal_set_message('<pre>'.htmlspecialchars(print_r($details, TRUE)).'</pre>', 'warning');
+  }
+}
+
 
 
 /**
@@ -1118,10 +1235,9 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
             // As the same item might be added to multiple jobs, we need to
             // re-create them and delete the old ones, after removing them from
             // the cart.
-            $new_job_item = $job->addItem($job_item->plugin, $job_item->item_type, $job_item->item_id);
-            $new_job_item->source_language = $source_language;
-            $new_job_item->target_language = $target_language;
-            // @TODO: Set plugin type entity on add to cart, not here (ugly).
+            $new_job_item = $job->addItem(
+              $job_item->plugin, $job_item->item_type, $job_item->item_id, $source_language, $target_language
+            );
             if ($new_job_item->plugin == 'node') {
               $new_job_item->plugin = 'entity';
             }
@@ -1137,13 +1253,13 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
           }
         }
         else {
-          $item_name = sprintf('(%s:%s)', $job_item->item_type, $job_item->item_id);
+          $item_name = sprintf('%s:%s', $job_item->item_type, $job_item->item_id);
           if ($job_item->item_type == 'node') {
             $node = node_load($job_item->item_id);
             $item_name = l($node->title, 'node/' . $node->nid, array('options' => array('absolute' => TRUE)));
           }
           $msg = t(
-            'Cannot add item !item_name already in translation to !target_language language',
+            'Cannot add item (!item_name) already in translation to !target_language',
             array(
               '!item_name' => $item_name,
               '!target_language' => locale_language_name($target_language),
@@ -1445,17 +1561,19 @@ class OshaTMGMTStatistics {
   public static function computeJobItemStatistics(&$job_item) {
     $job_item->character_count = 0;
     $job_item->page_count = 0;
-
-    if ($job_item->item_type == "node" || $job_item->item_type == "taxonomy_term") {
-      $entity = entity_load_single($job_item->item_type, $job_item->item_id);
-      if (!$entity) {
-        throw new TMGMTException(t('Unable to load entity %type with id %id', array('%type' => $job_item->item_type, $job_item->item_id)));
+    // When job items is still in cart, getData() returns nothing, so we simulate character count
+    if (empty($job_item->getSourceData())) {
+      if ($job_item->item_type == "node" || $job_item->item_type == "taxonomy_term") {
+        $entity = entity_load_single($job_item->item_type, $job_item->item_id);
+        if (!$entity) {
+          throw new TMGMTException(t('Unable to load entity %type with id %id', array('%type' => $job_item->item_type, '%id' => $job_item->item_id)));
+        }
+        self::computeEntityStatistics($entity, $job_item->item_type);
+        $job_item->character_count = $entity->character_count;
+        $job_item->page_count = $entity->page_count;
       }
-      self::computeEntityStatistics($entity, $job_item->item_type);
-      $job_item->character_count = $entity->character_count;
-      $job_item->page_count = $entity->page_count;
-    }
-    else {
+    } else {
+      // Call default behaviour
       $data = $job_item->getSourceData();
       self::count($data, $ret);
       $job_item->character_count = $ret;
@@ -1505,12 +1623,10 @@ class OshaTMGMTStatistics {
         self::computeJobItemStatistics($item);
       }
     }
-    foreach (self::getUniqueItems($job) as $item_type => $items) {
-      foreach ($items as $item) {
+    foreach ($job->getItems() as $item) {
         if ($item->character_count > 0) {
           $job->character_count += $item->character_count;
         }
-      }
     }
     if ($job->character_count > 0) {
       $cpp = variable_get('osha_tmgmt_characters_per_page', 1500);
@@ -1544,31 +1660,6 @@ class OshaTMGMTStatistics {
         self::count($item[$key], $count);
       }
     }
-  }
-
-  /**
-   * Generates an unique array of items, based on item_type and item_id.
-   *
-   * @param object $job
-   *   The job with the items
-   *
-   * @return array
-   *   Items -> Items[item_type][item_id] contains an item
-   */
-  public static function getUniqueItems($job) {
-    $job_items = array();
-    foreach ($job->getItems() as $item) {
-      if (!isset($job_items[$item->item_type][$item->item_id])) {
-        $item->target_languages = array();
-        $item->target_languages[] = $item->target_language;
-
-        $job_items[$item->item_type][$item->item_id] = $item;
-      }
-      else {
-        $job_items[$item->item_type][$item->item_id]->target_languages[] = $item->target_language;
-      }
-    }
-    return $job_items;
   }
 
   /**

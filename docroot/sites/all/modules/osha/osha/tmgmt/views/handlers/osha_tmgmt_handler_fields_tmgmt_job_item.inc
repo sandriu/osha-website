@@ -124,6 +124,7 @@ class osha_tmgmt_handler_field_tmgmt_job_item_activity extends views_handler_fie
     if ($row->tmgmt_job_item_plugin == 'entity' && $row->tmgmt_job_item_item_type == 'node') {
       $nid = $row->tmgmt_job_item_item_id;
       $node = node_load($nid);
+      $node = workbench_moderation_node_current_load($node);
       module_load_include('module', 'osha');
       return osha_node_activity_name($node);
     }
