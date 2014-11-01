@@ -220,6 +220,7 @@ class OshaTMGMTRetranslate {
     * The latest clean revision is returned in $revision
     * Status messages are returned in array $messages[key => severity_level]
     * Results are returned in arrays $valid_languages and $invalid_languages, keyed by language code
+    * @todo Check all full_html fields, not only in body!
     */
   public static function validate_can_retranslate(&$node, &$vid, &$messages, &$valid_languages, &$invalid_languages) {
     if (!$vid) {

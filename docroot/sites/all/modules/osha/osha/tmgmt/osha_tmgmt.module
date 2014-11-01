@@ -591,6 +591,26 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
       foreach ($items as $item) {
         OshaTMGMTStatistics::computeJobItemStatistics($item);
+        // remove original language from list of languages
+        unset($form['target_language']['#options'][$item->getSourceLangCode()]);
+        // remove Turkish and Russian
+        unset($form['target_language']['#options']['tr']);
+        unset($form['target_language']['#options']['ru']);
+        if ($item->plugin == 'entity' && $item->item_type == 'node') {
+          // check if retranslation is possible
+          $node = (object)array('nid' => $item->item_id);
+          $vid = 0;
+          $messages = array();
+          $valid_languages = array();
+          $invalid_languages = array();
+          OshaTMGMTRetranslate::validate_can_retranslate($node, $vid, $messages, $valid_languages, $invalid_languages);
+          if (!empty($invalid_languages)) {
+            drupal_set_message($item->label().": ".$messages['error'], 'warning');
+            foreach ($invalid_languages as $language => $data) {
+              unset($form['target_language']['#options'][$language]);
+            }
+          }
+        }
         $job_char_count += $item->character_count;
         $job_page_count += $item->page_count;
         $uri = $item->getSourceUri();
@@ -604,7 +624,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
 
       #increase the size of the language select list
-      $form['target_language']['#size'] = count($languages);
+      $form['target_language']['#size'] = count($form['target_language']['#options']);
       $form['items'] = array(
         '#type' => 'tableselect',
         '#header' => array(
