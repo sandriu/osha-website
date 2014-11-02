@@ -67,6 +67,21 @@ function osha_workflow_update_7001() {
   module_load_include('module', 'osha_workflow');
   osha_workflow_create_roles();
 
+  db_create_table(
+    'osha_workflow_node_project_managers',
+    drupal_get_schema_unprocessed('osha_worfklow', 'osha_workflow_node_project_managers')
+  );
+
+  db_create_table(
+    'osha_workflow_node_project_managers',
+    drupal_get_schema_unprocessed('osha_worfklow', 'osha_workflow_node_approval')
+  );
+
+  db_create_table(
+    'osha_workflow_node_project_managers',
+    drupal_get_schema_unprocessed('osha_worfklow', 'osha_workflow_access_pm')
+  );
+
   // @see https://www.drupal.org/node/1681414#comment-6347524
   drupal_static_reset('i18n_object_info');
   osha_workflow_add_user_fields();
