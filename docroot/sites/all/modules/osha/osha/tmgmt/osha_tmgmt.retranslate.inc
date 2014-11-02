@@ -85,6 +85,9 @@ class OshaTMGMTRetranslate {
    */
   public static function mark_dirty($node) {
     $node_lang = $node->translations->original;
+    if (empty($node->body[$node_lang])) {
+      return;
+    }
     $new_text = $node->body[$node_lang][0]['value'];
     if (!isset($node->original->body[$node_lang])) {
       // no body before
