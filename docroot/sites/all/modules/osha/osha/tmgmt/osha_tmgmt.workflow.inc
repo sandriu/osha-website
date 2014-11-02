@@ -130,6 +130,7 @@ function osha_tmgmt_layout_validation_node_preview($nid, $job_item) {
   }
   */
   $renderable_node = node_view($node, 'full', $target_language);
+  /* No need to show the title, it is already included
   $title = field_get_items('node', $node, 'title_field', $target_language);
   if (!empty($title[0]['value'])) {
     // @todo: Title hard-coded in template 'Manage Display' hides the title.
@@ -138,6 +139,7 @@ function osha_tmgmt_layout_validation_node_preview($nid, $job_item) {
       '#markup' => sprintf('<h1 class="page__title title" id="page-title">%s</h1>', $title[0]['value']),
     );
   }
+  */
   return drupal_render($renderable_node);
 }
 
