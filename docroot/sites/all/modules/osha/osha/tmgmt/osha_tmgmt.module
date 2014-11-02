@@ -81,8 +81,9 @@ function osha_tmgmt_post_features_revert($component) {
       'manage content in translators_group entity collections',
     );
 
-    $role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
-    user_role_grant_permissions($role->rid, $permissions);
+    if($role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER)) {
+      user_role_grant_permissions($role->rid, $permissions);
+    }
   }
 
 }
