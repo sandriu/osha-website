@@ -290,7 +290,7 @@ function osha_add_menu_position_rules() {
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
     //menu position rule for Directive
-    $directive_menu_entry = array_search('------ European Directives', $options);
+    $directive_menu_entry = array_search('------ EU Directives', $options);
 
     $form_state = array(
       'values' => array(
@@ -303,7 +303,7 @@ function osha_add_menu_position_rules() {
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
     //menu position rule for Guideline
-    $guideline_menu_entry = array_search('------ European Guidelines', $options);
+    $guideline_menu_entry = array_search('------ EU Guidelines', $options);
 
     $form_state = array(
       'values' => array(
