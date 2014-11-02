@@ -73,12 +73,12 @@ function osha_workflow_update_7001() {
   );
 
   db_create_table(
-    'osha_workflow_node_project_managers',
+    'osha_workflow_node_approval',
     drupal_get_schema_unprocessed('osha_worfklow', 'osha_workflow_node_approval')
   );
 
   db_create_table(
-    'osha_workflow_node_project_managers',
+    'osha_workflow_access_pm',
     drupal_get_schema_unprocessed('osha_worfklow', 'osha_workflow_access_pm')
   );
 
@@ -171,145 +171,4 @@ function osha_workflow_add_user_fields() {
     );
     field_create_instance($instance);
   }
-}
-
-/**
- * Implements hook_schema().
- */
-function osha_workflow_schema() {
-  $schema = array();
-  $schema['osha_workflow_node_project_managers'] = array(
-    'description' => 'Base table for the content review workflow',
-    'fields' => array(
-      'npmid' => array(
-        'description' => 'Identifier',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => 'Node under review',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'uid' => array(
-        'description' => 'Project manager account',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-    ),
-    'primary key' => array('npmid'),
-    'indexes' => array(
-      'osha_workflow_review_uid' => array('uid'),
-    ),
-    'foreign keys' => array(
-      'uid' => array(
-        'table' => 'users',
-        'columns' => array('uid' => 'uid'),
-      ),
-      'nid' => array(
-        'table' => 'node',
-        'columns' => array('nid' => 'nid'),
-      ),
-    ),
-  );
-
-  $schema['osha_workflow_node_approval'] = array(
-    'description' => 'Base table for node approval entity',
-    'fields' => array(
-      'apid' => array(
-        'description' => 'Identifier for the approved item',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => 'Moderated node ID (nid)',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'uid' => array(
-        'description' => 'Account doing the moderation',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'approved' => array(
-        'description' => 'NULL not voted, approved or rejected',
-        'type' => 'varchar',
-        'length' => 64,
-        'default' => NULL,
-        'not null' => FALSE,
-      ),
-      'next' => array(
-        'description' => '0 - no, 1 - yes',
-        'type' => 'int',
-        'default' => 0,
-        'not null' => TRUE,
-      ),
-      'weight' => array(
-        'description' => 'Order of moderation, lowest first',
-        'type' => 'int',
-        'default' => 0,
-        'not null' => TRUE,
-      ),
-      'message' => array(
-        'description' => 'Message left by the moderator',
-        'type' => 'text',
-        'size' => 'medium',
-      ),
-    ),
-    'primary key' => array('apid'),
-    'indexes' => array(
-      'moderator_uid' => array('uid'),
-    ),
-    'unique keys' => array(
-      'moderation_unique' => array('nid', 'uid'),
-    ),
-    'foreign keys' => array(
-      'uid' => array(
-        'table' => 'users',
-        'columns' => array('uid' => 'uid'),
-      ),
-      'nid' => array(
-        'table' => 'node',
-        'columns' => array('nid' => 'nid'),
-      ),
-    ),
-  );
-
-  $schema['osha_workflow_access_pm'] = array(
-    'description' => 'Maps Project Managers access to sections',
-    'fields' => array(
-      'uid' => array(
-        'description' => 'The user identifier. Foreign key to {users}.',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'access_id' => array(
-        'description' => 'The section identifier. Foreign key to {workbench_access}.',
-        'type' => 'varchar',
-        'length' => '80',
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'access_scheme' => array(
-        'description' => 'The module responsbile for this access system.',
-        'type' => 'varchar',
-        'length' => '40',
-        'not null' => TRUE,
-        'default' => '',
-      ),
-    ),
-    'primary key' => array('uid', 'access_id', 'access_scheme'),
-    'foreign keys' => array(
-      'section_id' => array('workbench_access' => array('access_id', 'access_scheme')),
-      'uid' => array('users' => 'uid'),
-    ),
-  );
-
-  return $schema;
 }
