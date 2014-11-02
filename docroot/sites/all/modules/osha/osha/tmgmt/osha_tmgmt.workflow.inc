@@ -91,9 +91,44 @@ function osha_tmgmt_user_can_edit_job_item($job_item) {
  * @return string
  *   Renderable array
  */
-function osha_tmgmt_layout_validation_node_preview($node, $job_item) {
+function osha_tmgmt_layout_validation_node_preview($nid, $job_item) {
   $target_language = $job_item->target_language;
-  tmgmt_field_populate_entity($node->type, $node, $target_language, $job_item->getData());
+  $source_language = $job_item->source_language;
+  $node = entity_load_single($job_item->item_type, $job_item->item_id);
+  $node = workbench_moderation_node_current_load($node);
+
+  $new_job_data = OshaTMGMTRetranslate::apply_partial_translation(
+    $node, $job_item->getData(), $source_language, $target_language);
+  tmgmt_field_populate_entity($node->type, $node, $target_language, $new_job_data);
+  if (isset($node->body[$target_language][0])) {
+    $body = $node->body[$target_language][0];
+    // Re-sanitize text after tmgmt_field_populate_entity
+    // ['safe_value'] is rendered instead if different than ['value']
+    // This can happen when node had a translation (re-translation)
+    $node->body[$target_language][0]['safe_value'] =
+      check_markup($body['value'], $body['format'], $target_language);
+  }
+
+  /* @todo: fix the preview when the node has a Published and a ReadyToPublish version without translations
+  see also https://www.drupal.org/node/2020325
+  if (!isset($node->translations->data[$target_language])) {
+    // tmgmt_field_populate_entity does not add the translation if not present before
+    $handler = entity_translation_get_handler($job_item->item_type, $node);
+    $handler->setFormLanguage($job_item->target_language);
+    $translation = array(
+      // @todo Improve hardcoded values.
+      'entity_type' => $job_item->item_type,
+      'entity_id' => $node->nid,
+      'translate' => 0,
+      'status' => 1,
+      'language' => $job_item->target_language,
+      'source' => $job_item->source_language,
+    );
+    $handler->setTranslation($translation, $node);
+    $node->translations->data[$target_language] = $translation;
+    //$handler->saveTranslations();
+  }
+  */
   $renderable_node = node_view($node, 'full', $target_language);
   $title = field_get_items('node', $node, 'title_field', $target_language);
   if (!empty($title[0]['value'])) {
