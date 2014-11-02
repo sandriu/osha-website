@@ -309,4 +309,82 @@ class OshaTMGMTRetranslate {
         .implode(", ", array_map('strtoupper', array_keys($invalid_languages)));
     }
   }
+
+  /**
+   * @param string $new_translation contains the translated changes
+   * @param string $old_translation represents the old translation
+   * @param string $source_text represents the full text in the source language
+   */
+  public static function get_merged_translation($new_translation, $old_translation, $source_text) {
+    $orig_structure = self::getHTMLStructure($source_text);
+    $new_trans = self::getDOMDocument($new_translation);
+    $old_trans = self::getDOMDocument($old_translation);
+    $result = new DOMDocument();
+    foreach ($orig_structure as $id => $tag) {
+      // Follow the structure of the source language
+      $item = $new_trans->getElementById($id);
+      if ($item) {
+        // Found in new translation, now check if the same tag
+        if ($item->tagName == $tag) {
+          $result->appendChild($result->importNode($item,true));
+        } else {
+          // We have a different tag in the translation, raise error
+          throw new TMGMTException('Element @id is a <@tag_new> instead of <@tag_old>.',
+            array('@id' => $id, '@tag_new' => $item->tagName, '@tag_old' => $tag));
+        }
+      } else {
+        // Item not found in translation, re-use the old one
+        $item = $old_trans->getElementById($id);
+        if ($item) {
+          $result->appendChild($result->importNode($item,true));
+        } else {
+          // We don't have this tag at all, raise error
+          throw new TMGMTException('<@tag id="@id"> not included in translation.',
+            array('@id' => $id, '@tag' => $tag));
+        }
+      }
+    }
+    // Check for extra tags in the translated text
+    // not using getHTMLStructure to avoid the re-creation of a node
+    $new_items = $new_trans->getElementsByTagName('body')->item(0)->childNodes;
+    for($i = 0; $i < $new_items->length; $i++) {
+      $item = $new_items->item($i);
+      if (get_class($item) == 'DOMElement' ) {
+        $id = $item->getAttribute('id');
+        // Should exist in $orig_structure
+        if (!isset($orig_structure[$id])) {
+          throw new TMGMTException('Unexpected element <@tag id="@id"> in translation.',
+            array('@id' => $id, '@tag' => $item->tagName));
+        }
+      }
+    }
+    return html_entity_decode($result->saveHTML());
+  }
+
+  public static function apply_partial_translation($node, $job_data, $source_lang, $target_lang) {
+    // Get old_translation from latest clean version
+    $revision = self::get_latest_clean_revision($node->nid);
+    if (!$revision) {
+      return $job_data;
+    }
+    foreach ($job_data as $field => $field_data) {
+      if ($field == 'body') {
+        // Get full reference text from source lang of latest revision
+        $source_text = $node->{$field}[$source_lang][0]['value'];
+        $old_translation = self::get_field_value($node->nid, $node->type, $revision, $target_lang, $field);
+        if (!$old_translation) {
+          // $new_translation contains the entire needed text
+          continue;
+        }
+        // Get new translation from job data
+        $new_translation = $field_data[0]['value']['#translation']['#text'];
+        $source_lang = $node->translations->original;
+        $result = self::get_merged_translation($new_translation, $old_translation, $source_text);
+        // Write it in job data (must return it, array is passed by value in this function)
+        $job_data[$field][0]['value']['#translation']['#text'] = $result;
+      }
+    }
+    // Return the array, passed by value
+    return $job_data;
+  }
 }

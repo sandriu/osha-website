@@ -30,7 +30,7 @@ module_load_include('inc', 'osha_tmgmt', 'osha_tmgmt.workflow');
 module_load_include('inc', 'osha_tmgmt', 'osha_tmgmt.permissions');
 
 function osha_tmgmt_menu() {
-  $items['node/%node/layout-validation/%tmgmt_job_item'] = array(
+  $items['node/%/layout-validation/%tmgmt_job_item'] = array(
     'page callback' => 'osha_tmgmt_layout_validation_node_preview',
     'page arguments' => array(1, 3),
     'access arguments' => array('preview layout validation'),
@@ -452,8 +452,11 @@ function osha_tmgmt_node_presave($node) {
   if (isset($node->field_needs_retranslation) && is_array($node->body)) {
     // reformat body text for all languages and enhance paragraphs with unique id's
     foreach(array_keys($node->body) as $lang) {
-      $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
-      $node->body[$lang][0]['value'] = $new_text;
+      if (isset($node->body[$lang][0])) {
+        // can be not set for a new node with empty body
+        $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
+        $node->body[$lang][0]['value'] = $new_text;
+      }
     }
     // Check for changes in the original language
     // except for new nodes and nodes without translations
