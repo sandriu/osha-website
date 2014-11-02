@@ -361,19 +361,27 @@ class OshaTMGMTRetranslate {
     return html_entity_decode($result->saveHTML());
   }
 
-  public static function apply_partial_translation($node, $job_data, $target_lang) {
+  public static function apply_partial_translation($node, $job_data, $source_lang, $target_lang) {
+    // Get old_translation from latest clean version
+    $revision = self::get_latest_clean_revision($node->nid);
+    if (!$revision) {
+      return $job_data;
+    }
     foreach ($job_data as $field => $field_data) {
       if ($field == 'body') {
+        // Get full reference text from source lang of latest revision
+        $source_text = $node->{$field}[$source_lang][0]['value'];
+        $old_translation = self::get_field_value($node->nid, $node->type, $revision, $target_lang, $field);
+        if (!$old_translation) {
+          // $new_translation contains the entire needed text
+          continue;
+        }
+        // Get new translation from job data
         $new_translation = $field_data[0]['value']['#translation']['#text'];
         $source_lang = $node->translations->original;
-        $body = $node->$field;
-        $source_text = $body[$source_lang][0]['value'];
-        if (isset($body[$target_lang][0]['value'])) {
-          $old_translation = $body[$target_lang][0]['value'];
-          $result = self::get_merged_translation($new_translation, $old_translation, $source_text);
-          // Write it in job data (array is copied)
-          $job_data[$field][0]['value']['#translation']['#text'] = $result;
-        }
+        $result = self::get_merged_translation($new_translation, $old_translation, $source_text);
+        // Write it in job data (must return it, array is passed by value in this function)
+        $job_data[$field][0]['value']['#translation']['#text'] = $result;
       }
     }
     // Return the array, passed by value

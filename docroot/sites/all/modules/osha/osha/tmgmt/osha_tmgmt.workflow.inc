@@ -93,10 +93,12 @@ function osha_tmgmt_user_can_edit_job_item($job_item) {
  */
 function osha_tmgmt_layout_validation_node_preview($nid, $job_item) {
   $target_language = $job_item->target_language;
-  $node = node_load($nid);
+  $source_language = $job_item->source_language;
+  $node = entity_load_single($job_item->item_type, $job_item->item_id);
   $node = workbench_moderation_node_current_load($node);
 
-  $new_job_data = OshaTMGMTRetranslate::apply_partial_translation($node, $job_item->getData(), $target_language);
+  $new_job_data = OshaTMGMTRetranslate::apply_partial_translation(
+    $node, $job_item->getData(), $source_language, $target_language);
   tmgmt_field_populate_entity($node->type, $node, $target_language, $new_job_data);
   if (isset($node->body[$target_language][0])) {
     $body = $node->body[$target_language][0];
@@ -108,6 +110,7 @@ function osha_tmgmt_layout_validation_node_preview($nid, $job_item) {
   }
 
   /* @todo: fix the preview when the node has a Published and a ReadyToPublish version without translations
+  see also https://www.drupal.org/node/2020325
   if (!isset($node->translations->data[$target_language])) {
     // tmgmt_field_populate_entity does not add the translation if not present before
     $handler = entity_translation_get_handler($job_item->item_type, $node);
@@ -126,9 +129,7 @@ function osha_tmgmt_layout_validation_node_preview($nid, $job_item) {
     //$handler->saveTranslations();
   }
   */
-
   $renderable_node = node_view($node, 'full', $target_language);
-
   $title = field_get_items('node', $node, 'title_field', $target_language);
   if (!empty($title[0]['value'])) {
     // @todo: Title hard-coded in template 'Manage Display' hides the title.
