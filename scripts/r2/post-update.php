@@ -1,7 +1,5 @@
 <?php
 
-require_once '../utils.php';
-
 // Need to call it again because function changed.
 osha_configure_search_autocomplete();
 // Need to call it again because function changed.
