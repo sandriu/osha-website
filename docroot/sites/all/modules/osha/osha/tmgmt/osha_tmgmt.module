@@ -1572,7 +1572,8 @@ class OshaTMGMTStatistics {
     $job_item->character_count = 0;
     $job_item->page_count = 0;
     // When job items is still in cart, getData() returns nothing, so we simulate character count
-    if (empty($job_item->getSourceData())) {
+    $data = $job_item->getSourceData();
+    if (empty($data)) {
       if ($job_item->item_type == "node" || $job_item->item_type == "taxonomy_term") {
         $entity = entity_load_single($job_item->item_type, $job_item->item_id);
         if (!$entity) {
@@ -1584,7 +1585,6 @@ class OshaTMGMTStatistics {
       }
     } else {
       // Call default behaviour
-      $data = $job_item->getSourceData();
       self::count($data, $ret);
       $job_item->character_count = $ret;
       if ($job_item->character_count > 0) {
