@@ -7,74 +7,74 @@ class OshaTMGMTRetranslate {
   /**
    * Add data-translation-id for level 1 HTML elements
    */
-   public static function prepare_text($text) {
-     if (empty($text)) {
-       return $text;
-     }
-     $items = self::getDOMNodeList($text);
-     // Get all existing ID's and compute max
-     $max = 0;
-     for($i = 0; $i < $items->length; $i++) {
-       if (get_class($items->item($i)) != 'DOMElement' ) {
-         // ignore text between tags and comments, can happen during migration
-         continue;
-       }
-       $id = $items->item($i)->getAttribute('id');
-       if (!empty($id) && !preg_match('/^'.ID_PREFIX.'/', $id)) {
-         // invalid id, remove it
-         $items->item($i)->removeAttribute('id');
-         $id = NULL;
-       }
-       if (!empty($id)) {
-         $max = max(substr($id, strlen(ID_PREFIX)), $max);
-       }
-     }
-     // Once again, and set id's where we have new tags
-     $current_id = $max+1;
-     for($i = 0; $i < $items->length; $i++) {
-       $item = $items->item($i);
-       if (get_class($items->item($i)) != 'DOMElement' ) {
-         // ignore text between tags and comments, can happen during migration
-         continue;
-       }
-       $item_id = $item->getAttribute('id');
-       if (empty($item_id)) {
-         $item->setAttribute('id', ID_PREFIX.($current_id++));
-       }
-     }
-     
-     return self::getHTML($items);
+  public static function prepare_text($text) {
+    if (empty($text)) {
+      return $text;
+    }
+    $items = self::getDOMNodeList($text);
+    // Get all existing ID's and compute max
+    $max = 0;
+    for ($i = 0; $i < $items->length; $i++) {
+      if (get_class($items->item($i)) != 'DOMElement') {
+        // ignore text between tags and comments, can happen during migration
+        continue;
+      }
+      $id = $items->item($i)->getAttribute('id');
+      if (!empty($id) && !preg_match('/^' . ID_PREFIX . '/', $id)) {
+        // invalid id, remove it
+        $items->item($i)->removeAttribute('id');
+        $id = NULL;
+      }
+      if (!empty($id)) {
+        $max = max(substr($id, strlen(ID_PREFIX)), $max);
+      }
+    }
+    // Once again, and set id's where we have new tags
+    $current_id = $max + 1;
+    for ($i = 0; $i < $items->length; $i++) {
+      $item = $items->item($i);
+      if (get_class($items->item($i)) != 'DOMElement') {
+        // ignore text between tags and comments, can happen during migration
+        continue;
+      }
+      $item_id = $item->getAttribute('id');
+      if (empty($item_id)) {
+        $item->setAttribute('id', ID_PREFIX . ($current_id++));
+      }
+    }
+
+    return self::getHTML($items);
   }
-  
+
   public static function getDOMDocument($text) {
-     $DOM = new DOMDocument;
-     libxml_use_internal_errors(true);
-     $text = mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8');
-     $DOM->loadHTML($text);
-     libxml_clear_errors();
-     return $DOM;
+    $DOM = new DOMDocument;
+    libxml_use_internal_errors(TRUE);
+    $text = mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8');
+    $DOM->loadHTML($text);
+    libxml_clear_errors();
+    return $DOM;
   }
-  
+
   public static function getDOMNodeList($text) {
-     $DOM = self::getDOMDocument($text);
-     $body = $DOM->getElementsByTagName('body')->item(0);
-     return $body->childNodes;
+    $DOM = self::getDOMDocument($text);
+    $body = $DOM->getElementsByTagName('body')->item(0);
+    return $body->childNodes;
   }
-  
+
   public static function getHTML($domNodeList) {
-     $Document = new DOMDocument();
-     for($i = 0; $i < $domNodeList->length; $i++) {
-       $Document->appendChild($Document->importNode($domNodeList->item($i),true));
-     }
-     return html_entity_decode($Document->saveHTML());
+    $Document = new DOMDocument();
+    for ($i = 0; $i < $domNodeList->length; $i++) {
+      $Document->appendChild($Document->importNode($domNodeList->item($i), TRUE));
+    }
+    return html_entity_decode($Document->saveHTML());
   }
 
   public static function getHTMLStructure($text) {
     $items = self::getDOMNodeList($text);
     $structure = array();
-    for($i = 0; $i < $items->length; $i++) {
+    for ($i = 0; $i < $items->length; $i++) {
       $item = $items->item($i);
-      if (get_class($item) == 'DOMElement' ) {
+      if (get_class($item) == 'DOMElement') {
         $structure[$item->getAttribute('id')] = $item->tagName;
       }
     }
@@ -93,12 +93,13 @@ class OshaTMGMTRetranslate {
     if (!isset($node->original->body[$node_lang])) {
       // no body before
       $old_text = '';
-    } else {
+    }
+    else {
       $old_text = $node->original->body[$node_lang][0]['value'];
     }
     $new_text_plain = preg_replace("/\s+/", "", strip_tags($new_text));
     $old_text_plain = preg_replace("/\s+/", "", strip_tags($old_text));
-    if ( $new_text_plain != $old_text_plain) {
+    if ($new_text_plain != $old_text_plain) {
       $node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 1;
     }
   }
@@ -120,7 +121,7 @@ class OshaTMGMTRetranslate {
     }
     return $rev;
   }
-  
+
   /*
    * Returns latest revision where original language is synchronized with translations
    */
@@ -132,10 +133,13 @@ class OshaTMGMTRetranslate {
     return $count;
   }
 
-  public static function get_field_value($entity_id, $bundle, $revision, $lang = 'en', $field_name = 'body') {
+  public static function get_field_value($entity_id, $bundle, $revision,
+                                         $lang = 'en', $field_name = 'body') {
     $entities = array(
-      $entity_id => (object)array(
-        'type' => $bundle, 'nid' => $entity_id, 'vid' => $revision,
+      $entity_id => (object) array(
+        'type' => $bundle,
+        'nid' => $entity_id,
+        'vid' => $revision,
       ),
     );
     $fields = field_info_instances('node', $bundle);
@@ -151,13 +155,13 @@ class OshaTMGMTRetranslate {
     }
     return $field[$lang][0]['value'];
   }
-  
+
   public static function get_changed_ids($old_text, $new_text) {
     $old_doc = self::getDOMDocument($old_text);
     $new_items = self::getDOMNodeList($new_text);
     // Array of element id's
     $changes = array();
-    for($i = 0; $i < $new_items->length; $i++) {
+    for ($i = 0; $i < $new_items->length; $i++) {
       $new_item = $new_items->item($i);
       if (get_class($new_item) != 'DOMElement') {
         continue;
@@ -165,14 +169,16 @@ class OshaTMGMTRetranslate {
       $new_id = $new_item->getAttribute('id');
       // Check if added or existing
       $old_item = $old_doc->getElementById($new_id);
-      if (!$old_item || $old_item->nodeValue !== $new_item->nodeValue ) {
+      if (!$old_item || $old_item->nodeValue !== $new_item->nodeValue) {
         $changes[] = $new_id;
       }
     }
     return $changes;
   }
-  
-  public static function get_text_to_retranslate($entity_id, $bundle, $source_lang, $target_lang, $field_name = 'body') {
+
+  public static function get_text_to_retranslate($entity_id, $bundle,
+                                                 $source_lang, $target_lang,
+                                                 $field_name = 'body') {
     $revision = self::get_latest_revision($entity_id);
     $clean_revision = self::get_latest_clean_revision($entity_id);
 
@@ -186,7 +192,7 @@ class OshaTMGMTRetranslate {
     $clean_source_text = self::get_field_value($entity_id, $bundle, $clean_revision, $source_lang, $field_name);
     // If field is not body, check if it has been changed in the source language
     if ($field_name != 'body' && $source_text != $clean_source_text) {
-        return $source_text;
+      return $source_text;
     }
     // For body, get the different paragraphs only
     // The latest version in the target language
@@ -207,34 +213,40 @@ class OshaTMGMTRetranslate {
     // Changed/added elements will be added here
     $changes = new DOMDocument();
     $source_items = self::getDOMNodeList($source_text);
-    for($i = 0; $i < $source_items->length; $i++) {
+    for ($i = 0; $i < $source_items->length; $i++) {
       $source_item = $source_items->item($i);
       if (get_class($source_item) != 'DOMElement') {
         continue;
       }
-      if ( in_array($source_item->getAttribute('id'), $changed_ids) ) {
+      if (in_array($source_item->getAttribute('id'), $changed_ids)) {
         // this element has been changed in source language, so it is added by default
-        $changes->appendChild($changes->importNode($source_item, true));
-      } else if (!$translated_doc->getElementById($source_item->getAttribute('id'))) {
-        // This item does not exist at all in the translated version
-        $changes->appendChild($changes->importNode($source_item,true));
+        $changes->appendChild($changes->importNode($source_item, TRUE));
+      }
+      else {
+        if (!$translated_doc->getElementById($source_item->getAttribute('id'))) {
+          // This item does not exist at all in the translated version
+          $changes->appendChild($changes->importNode($source_item, TRUE));
+        }
       }
     }
     if ($changes->hasChildNodes()) {
       return html_entity_decode($changes->saveHTML());
-    } else {
+    }
+    else {
       return NULL;
     }
   }
-  
+
   /**
-    * Input: $node->nid
-    * The latest clean revision is returned in $revision
-    * Status messages are returned in array $messages[key => severity_level]
-    * Results are returned in arrays $valid_languages and $invalid_languages, keyed by language code
-    * @todo Check all full_html fields, not only in body!
-    */
-  public static function validate_can_retranslate(&$node, &$vid, &$messages, &$valid_languages, &$invalid_languages) {
+   * Input: $node->nid
+   * The latest clean revision is returned in $revision
+   * Status messages are returned in array $messages[key => severity_level]
+   * Results are returned in arrays $valid_languages and $invalid_languages, keyed by language code
+   * @todo Check all full_html fields, not only in body!
+   */
+  public static function validate_can_retranslate(&$node, &$vid, &$messages,
+                                                  &$valid_languages,
+                                                  &$invalid_languages) {
     if (!$vid) {
       $vid = self::get_latest_clean_revision($node->nid);
     }
@@ -250,7 +262,7 @@ class OshaTMGMTRetranslate {
     $orig_lang = $node->translations->original;
     $orig_structure = self::getHTMLStructure($node->body[$orig_lang][0]['value']);
     $languages = array_keys($node->body);
-    if (count($languages) == 1 ) {
+    if (count($languages) == 1) {
       $messages['warning'] = t('Node has no translations');
       return;
     }
@@ -283,7 +295,8 @@ class OshaTMGMTRetranslate {
           $orig_lang => $diffs[$first_diff],
           $lang => $first_diff_in_trans,
         );
-      } else {
+      }
+      else {
         // Check if target language contains more tags
         foreach ($translated_structure as $id => $tag) {
           if (!isset($orig_structure[$id])) {
@@ -299,18 +312,19 @@ class OshaTMGMTRetranslate {
             $orig_lang => NULL,
             $lang => $diffs[$first_diff]
           );
-        } else {
+        }
+        else {
           $valid_languages[] = $lang;
         }
       }
     }
     if (!empty($valid_languages)) {
       $messages['status'] = t('Node can be re-translated in ')
-        .implode(", ", array_map('strtoupper', $valid_languages));
+        . implode(", ", array_map('strtoupper', $valid_languages));
     }
     if (!empty($invalid_languages)) {
       $messages['error'] = t('Node cannot be re-translated in ')
-        .implode(", ", array_map('strtoupper', array_keys($invalid_languages)));
+        . implode(", ", array_map('strtoupper', array_keys($invalid_languages)));
     }
   }
 
@@ -319,7 +333,9 @@ class OshaTMGMTRetranslate {
    * @param string $old_translation represents the old translation
    * @param string $source_text represents the full text in the source language
    */
-  public static function get_merged_translation($new_translation, $old_translation, $source_text) {
+  public static function get_merged_translation($new_translation,
+                                                $old_translation,
+                                                $source_text) {
     $orig_structure = self::getHTMLStructure($source_text);
     $new_trans = self::getDOMDocument($new_translation);
     $old_trans = self::getDOMDocument($old_translation);
@@ -330,18 +346,25 @@ class OshaTMGMTRetranslate {
       if ($item) {
         // Found in new translation, now check if the same tag
         if ($item->tagName == $tag) {
-          $result->appendChild($result->importNode($item,true));
-        } else {
+          $result->appendChild($result->importNode($item, TRUE));
+        }
+        else {
           // We have a different tag in the translation, raise error
           throw new TMGMTException('Element @id is a <@tag_new> instead of <@tag_old>.',
-            array('@id' => $id, '@tag_new' => $item->tagName, '@tag_old' => $tag));
+            array(
+              '@id' => $id,
+              '@tag_new' => $item->tagName,
+              '@tag_old' => $tag
+            ));
         }
-      } else {
+      }
+      else {
         // Item not found in translation, re-use the old one
         $item = $old_trans->getElementById($id);
         if ($item) {
-          $result->appendChild($result->importNode($item,true));
-        } else {
+          $result->appendChild($result->importNode($item, TRUE));
+        }
+        else {
           // We don't have this tag at all, raise error
           throw new TMGMTException('<@tag id="@id"> not included in translation.',
             array('@id' => $id, '@tag' => $tag));
@@ -351,9 +374,9 @@ class OshaTMGMTRetranslate {
     // Check for extra tags in the translated text
     // not using getHTMLStructure to avoid the re-creation of a node
     $new_items = $new_trans->getElementsByTagName('body')->item(0)->childNodes;
-    for($i = 0; $i < $new_items->length; $i++) {
+    for ($i = 0; $i < $new_items->length; $i++) {
       $item = $new_items->item($i);
-      if (get_class($item) == 'DOMElement' ) {
+      if (get_class($item) == 'DOMElement') {
         $id = $item->getAttribute('id');
         // Should exist in $orig_structure
         if (!isset($orig_structure[$id])) {
@@ -365,7 +388,8 @@ class OshaTMGMTRetranslate {
     return html_entity_decode($result->saveHTML());
   }
 
-  public static function apply_partial_translation($node, $job_data, $source_lang, $target_lang) {
+  public static function apply_partial_translation($node, $job_data,
+                                                   $source_lang, $target_lang) {
     // Get old_translation from latest clean version
     $revision = self::get_latest_clean_revision($node->nid);
     if (!$revision) {
