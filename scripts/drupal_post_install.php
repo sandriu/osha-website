@@ -261,8 +261,8 @@ function osha_add_menu_position_rules() {
     variable_set('menu_position_active_link_display', 'parent');
 
     $options = menu_parent_options(menu_get_menus(), array('mlid' => 0));
-    $publications_menu = array_search('------ Publications', $options);
 
+    $publications_menu = array_search('------ Publications', $options);
     $form_state = array(
       'values' => array(
         'admin_title' => 'Publications Menu Rule',
@@ -271,12 +271,9 @@ function osha_add_menu_position_rules() {
         'op' => 'Save',
       ),
     );
-
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
-    /* disabled temporarily for release branch
     $press_menu_entry = array_search('------ Press room', $options);
-
     $form_state = array(
       'values' => array(
         'admin_title' => 'Press room Menu Rule',
@@ -285,33 +282,31 @@ function osha_add_menu_position_rules() {
         'op' => 'Save',
       ),
     );
-    */
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
-
     //menu position rule for Directive
-    $directive_menu_entry = array_search('------ EU Directives', $options);
+    $directive_menu_entry = array_search('------ European Directives', $options);
 
     $form_state = array(
       'values' => array(
         'admin_title' => 'Directive Menu Rule',
         'plid' => $directive_menu_entry !== NULL ? $directive_menu_entry : 'main-menu:0',
         'pages' => 'legislation/directives/*'.PHP_EOL.'legislation/directive/*',
-        'op' => 'Save'
-      )
+        'op' => 'Save',
+      ),
     );
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
     //menu position rule for Guideline
-    $guideline_menu_entry = array_search('------ EU Guidelines', $options);
+    $guideline_menu_entry = array_search('------ European Guidelines', $options);
 
     $form_state = array(
       'values' => array(
         'admin_title' => 'Guideline Menu Rule',
         'plid' => $guideline_menu_entry !== NULL ? $guideline_menu_entry : 'main-menu:0',
         'pages' => 'legislation/guidelines/*',
-        'op' => 'Save'
-      )
+        'op' => 'Save',
+      ),
     );
     drupal_form_submit('menu_position_add_rule_form', $form_state);
   }
