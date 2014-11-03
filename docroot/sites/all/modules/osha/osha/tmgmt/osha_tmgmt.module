@@ -461,10 +461,16 @@ function osha_tmgmt_node_presave($node) {
     // Check for changes in the original language
     // except for new nodes and nodes without translations
     if ($node->translations->original == $current_lang && empty($node->is_new) &&
-        !$node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] &&
-        !empty(array_keys($node->translations->data))) {
-        // Check if body has been modified and if true set checkbox
-        OshaTMGMTRetranslate::mark_dirty($node);
+        !$node->field_needs_retranslation[LANGUAGE_NONE][0]['value']) {
+      if (!isset($node->translations->data)) {
+        return;
+      }
+      $languages = array_keys($node->translations->data);
+      if (empty($languages)) {
+        return;
+      }
+      // Check if body has been modified and if true set checkbox
+      OshaTMGMTRetranslate::mark_dirty($node);
     }
   }
 }
