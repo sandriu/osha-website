@@ -210,18 +210,22 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
    *   Source row
    */
   public function complete($entity, $row) {
-    if (!empty($row->path)) {
-      // create redirects
+    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
+      //create alias
+      $args = array(
+        'source' => 'node/'.$entity->nid,
+        'alias' => 'legislation/directives/'.$matches[4],
+        'language' => 'en'
+      );
+      path_save($args);
+
+      // create redirect
       $path = substr($row->path, 4);
       MigrationUtil::createRedirects($entity, $path);
+    }else{
+      // call MigrationUtil::createAliases
+      parent::complete($entity, $row);
     }
-
-    //extract directive title from path
-    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
-      $row->id = 'legislation/directive/'.$matches[4];
-    }
-    // call MigrationUtil::createAliases
-    parent::complete($entity, $row);
   }
 
   /**
