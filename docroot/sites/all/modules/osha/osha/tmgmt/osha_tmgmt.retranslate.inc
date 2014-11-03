@@ -37,7 +37,8 @@ class OshaTMGMTRetranslate {
          // ignore text between tags and comments, can happen during migration
          continue;
        }
-       if (empty($item->getAttribute('id'))) {
+       $item_id = $item->getAttribute('id');
+       if (empty($item_id)) {
          $item->setAttribute('id', ID_PREFIX.($current_id++));
        }
      }
