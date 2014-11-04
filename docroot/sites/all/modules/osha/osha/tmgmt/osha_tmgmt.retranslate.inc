@@ -360,13 +360,9 @@ class OshaTMGMTRetranslate {
     $old_items = self::getDOMNodeList($old_translation);
     $result = new DOMDocument();
     foreach ($orig_structure as $id => $tag) {
-<<<<<<< HEAD
       // Follow the structure of the source language.
-      $item = $new_trans->getElementById($id);
-=======
       // Follow the structure of the source language
       $item = self::getElementById($new_items, $id);
->>>>>>> tmgmt-retranslation
       if ($item) {
         // Found in new translation, now check if the same tag.
         if ($item->tagName == $tag) {
@@ -381,16 +377,10 @@ class OshaTMGMTRetranslate {
               '@tag_old' => $tag,
             ));
         }
-<<<<<<< HEAD
       }
       else {
         // Item not found in translation, re-use the old one.
-        $item = $old_trans->getElementById($id);
-=======
-      } else {
-        // Item not found in translation, re-use the old one
         $item = self::getElementById($old_items, $id);
->>>>>>> tmgmt-retranslation
         if ($item) {
           $result->appendChild($result->importNode($item, TRUE));
         }
@@ -402,14 +392,8 @@ class OshaTMGMTRetranslate {
       }
     }
     // Check for extra tags in the translated text
-<<<<<<< HEAD
     // not using getHTMLStructure to avoid the re-creation of a node.
-    $new_items = $new_trans->getElementsByTagName('body')->item(0)->childNodes;
-    for ($i = 0; $i < $new_items->length; $i++) {
-=======
-    // not using getHTMLStructure to avoid the re-creation of a node
     for($i = 0; $i < $new_items->length; $i++) {
->>>>>>> tmgmt-retranslation
       $item = $new_items->item($i);
       if (get_class($item) == 'DOMElement') {
         $id = $item->getAttribute('id');
