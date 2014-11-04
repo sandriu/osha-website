@@ -74,7 +74,7 @@
   <head>
     <?php print $head; ?>
     <base href='<?php print $url ?>' />
-    <title><?php print $print_title; ?></title>
+    <!--title><?php print $print_title; ?></title-->
     <?php print $scripts; ?>
     <?php if (isset($sendtoprinter)) print $sendtoprinter; ?>
     <?php print $robots_meta; ?>
@@ -84,6 +84,46 @@
     <?php print $css; ?>
   </head>
   <body>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+      <tr class="blue-line">
+        <td style="background-color:#003399; width: 100%; height: 4px;"></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table border="0" cellpadding="18" cellspacing="0" style="font-family: Oswald, Arial,sans-serif;">
+      <tbody>
+      <tr>
+        <td>
+          <?php
+          $directory = drupal_get_path('module','osha_newsletter');
+          $site_url = variable_get('site_base_url', 'http://osha.europa.eu');
+          print l(theme('image', array(
+            'path' => $directory . '/images/Osha-EU-logos.png',
+            'width' => 256,
+            'height' => 60,
+            'alt' => 'Osha logo',
+            'attributes' => array('style' => 'border: 0px;')
+          )), $site_url, array(
+            'html' => TRUE,
+            'external' => TRUE
+          ));
+          ?>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+      <tr class="blue-line">
+        <td style="background-color:#003399; width: 100%; height: 4px;"></td>
+      </tr>
+      </tbody>
+    </table>
+
     <?php if (!empty($message)): ?>
       <div class="print-message"><?php print $message; ?></div><p />
     <?php endif; ?>
@@ -91,14 +131,14 @@
       <div class="print-logo"><?php print $print_logo; ?></div>
     <?php endif; ?>
     <div class="print-site_name"><?php print theme('print_published'); ?></div>
-    <p />
+
     <div class="print-breadcrumb"><?php print theme('print_breadcrumb', array('node' => $node)); ?></div>
     <hr class="print-hr" />
     <?php if (!isset($node->type)): ?>
       <h2 class="print-title"><?php print $print_title; ?></h2>
     <?php endif; ?>
     <div class="print-content"><?php print $content;?></div>
-    <div class="print-footer"><?php print theme('print_footer'); ?></div>
+    <!--div class="print-footer"><?php print theme('print_footer'); ?></div-->
     <hr class="print-hr" />
     <?php if ($sourceurl_enabled): ?>
       <div class="print-source_url">
@@ -107,5 +147,88 @@
     <?php endif; ?>
     <div class="print-links"><?php print theme('print_url_list'); ?></div>
     <?php print $footer_scripts; ?>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+      <tr class="blue-line">
+        <td style="background-color:#003399; width: 100%; height: 4px;"></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table border="0" cellpadding="10" cellspacing="0">
+      <tbody>
+      <tr>
+        <td style="padding-top: 10px; padding-bottom: 10px; text-align: center; font-family: Arial,sans-serif; font-size: 8px; color: #333333;">
+          <span><?php print t('Occupational Safety and Health News &ndash; Europe'); ?></span>
+          <?php print t('Brought to you by EU-OSHA. Visit us at: <a href="@url" style="@style">http://osha.europa.eu</a>',
+            array('@style' => 'color: #003399; border-bottom-color: #DC2F82; border-bottom-style: solid; border-bottom-width: 1px; text-decoration: none;', '@url' => 'https://osha.europa.eu/en')); ?>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tbody>
+      <tr>
+        <td style="background-color: #B2B3B5;">
+          <table border="0" cellpadding="10" cellspacing="0">
+            <tbody>
+            <tr>
+              <td style="padding-top: 10px; padding-bottom: 10px; color: #FFFFFF; font-family: Arial, sans-serif; font-size: 8px; "><?php print t('Subscribe to our <a href="@url" style="@style">Alert service</a> for <br/> customised content delivery',
+                  array('@style' => 'color: #FFFFFF;', '@url' => url('https://osha.europa.eu/en/alertservice'))); ?>
+              </td>
+              <td class="social" style="padding-top: 10px; padding-bottom: 10px;">
+                <?php
+                $social = array(
+                  'twitter' => array(
+                    'path' => 'https://twitter.com/eu_osha',
+                    'alt' => t('Twitter')
+                  ),
+                  'linkedin' => array(
+                    'path' => 'https://www.linkedin.com/company/european-agency-for-safety-and-health-at-work',
+                    'alt' => t('LinkedIn')
+                  ),
+                  'facebook' => array(
+                    'path' => 'https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork',
+                    'alt' => t('Facebook')
+                  ),
+                  'blog' => array(
+                    'path' => 'https://osha.europa.eu/en/about/director_corner/blog',
+                    'alt' => t('blog')
+                  ),
+                  'youtube' => array(
+                    'path' => 'https://www.youtube.com/user/EUOSHA',
+                    'alt' => t('Youtube')
+                  )
+                );
+
+                foreach ($social as $name => $options) {
+                  $directory = drupal_get_path('module','osha_newsletter');
+                  print l(theme('image', array(
+                    'path' => $directory . '/images/icon-oshmail-' . $name . '.png',
+                    'width' => 'auto',
+                    'height' => 20,
+                    'alt' => $options['alt'],
+                    'attributes' => array('style' => 'border: 0px; padding-right: 24px; vertical-align: middle;')
+                  )), $options['path'], array(
+                    'attributes' => array('style' => 'color: #144989; text-decoration: none;'),
+                    'html' => TRUE,
+                    'external' => TRUE
+                  ));
+                }
+                ?>
+              </td>
+              <td style="padding-top: 10px; padding-bottom: 10px; color: #FFFFFF; font-family: Arial, sans-serif; font-size: 8px; text-align: center;">
+                <?php print t('Like what you\'re reading? <br/><a href="@url" style="@style">Tell a colleague</a>', array('@style' => 'color: #FFFFFF;', '@url' => 'https://osha.europa.eu/en/news/oshmail/sendto_form')); ?>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
   </body>
 </html>
