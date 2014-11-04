@@ -60,6 +60,21 @@ class OshaTMGMTRetranslate {
     return $body->childNodes;
   }
 
+  public static function getElementById($domNodeList, $id) {
+    // Use this function instead of doc->getElementById, which needs to validate the DOM.
+    // Validation requires HTTP access to http://www.w3.org/TR/REC-html40/loose.dtd
+    if (!$domNodeList) {
+      return NULL;
+    }
+    for($i = 0; $i < $domNodeList->length; $i++) {
+      $item = $domNodeList->item($i);
+      if (get_class($item) == 'DOMElement' && $item->getAttribute('id') == $id) {
+        return $item;
+      }
+    }
+    return NULL;
+  }
+  
   public static function getHTML($domNodeList) {
     $dom = new DOMDocument();
     for ($i = 0; $i < $domNodeList->length; $i++) {
@@ -157,7 +172,7 @@ class OshaTMGMTRetranslate {
   }
 
   public static function get_changed_ids($old_text, $new_text) {
-    $old_doc = self::getDOMDocument($old_text);
+    $old_items = self::getDOMNodeList($old_text);
     $new_items = self::getDOMNodeList($new_text);
     // Array of element id's
     $changes = array();
@@ -168,8 +183,8 @@ class OshaTMGMTRetranslate {
       }
       $new_id = $new_item->getAttribute('id');
       // Check if added or existing.
-      $old_item = $old_doc->getElementById($new_id);
-      if (!$old_item || $old_item->nodeValue !== $new_item->nodeValue) {
+      $old_item = self::getElementById($old_items, $new_id);
+      if (!$old_item || $old_item->nodeValue !== $new_item->nodeValue ) {
         $changes[] = $new_id;
       }
     }
@@ -209,7 +224,7 @@ class OshaTMGMTRetranslate {
     // Just a list of element id's (changed or added in the source language).
     $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
 
-    $translated_doc = self::getDOMDocument($translated_text);
+    $translated_items = self::getDOMNodeList($translated_text);
     // Changed/added elements will be added here.
     $changes = new DOMDocument();
     $source_items = self::getDOMNodeList($source_text);
@@ -224,7 +239,7 @@ class OshaTMGMTRetranslate {
         $changes->appendChild($changes->importNode($source_item, TRUE));
       }
       else {
-        if (!$translated_doc->getElementById($source_item->getAttribute('id'))) {
+        if (!self::getElementById($translated_items, $source_item->getAttribute('id'))) {
           // This item does not exist at all in the translated version.
           $changes->appendChild($changes->importNode($source_item, TRUE));
         }
@@ -341,12 +356,17 @@ class OshaTMGMTRetranslate {
                                                 $old_translation,
                                                 $source_text) {
     $orig_structure = self::getHTMLStructure($source_text);
-    $new_trans = self::getDOMDocument($new_translation);
-    $old_trans = self::getDOMDocument($old_translation);
+    $new_items = self::getDOMNodeList($new_translation);
+    $old_items = self::getDOMNodeList($old_translation);
     $result = new DOMDocument();
     foreach ($orig_structure as $id => $tag) {
+<<<<<<< HEAD
       // Follow the structure of the source language.
       $item = $new_trans->getElementById($id);
+=======
+      // Follow the structure of the source language
+      $item = self::getElementById($new_items, $id);
+>>>>>>> tmgmt-retranslation
       if ($item) {
         // Found in new translation, now check if the same tag.
         if ($item->tagName == $tag) {
@@ -361,10 +381,16 @@ class OshaTMGMTRetranslate {
               '@tag_old' => $tag,
             ));
         }
+<<<<<<< HEAD
       }
       else {
         // Item not found in translation, re-use the old one.
         $item = $old_trans->getElementById($id);
+=======
+      } else {
+        // Item not found in translation, re-use the old one
+        $item = self::getElementById($old_items, $id);
+>>>>>>> tmgmt-retranslation
         if ($item) {
           $result->appendChild($result->importNode($item, TRUE));
         }
@@ -376,9 +402,14 @@ class OshaTMGMTRetranslate {
       }
     }
     // Check for extra tags in the translated text
+<<<<<<< HEAD
     // not using getHTMLStructure to avoid the re-creation of a node.
     $new_items = $new_trans->getElementsByTagName('body')->item(0)->childNodes;
     for ($i = 0; $i < $new_items->length; $i++) {
+=======
+    // not using getHTMLStructure to avoid the re-creation of a node
+    for($i = 0; $i < $new_items->length; $i++) {
+>>>>>>> tmgmt-retranslation
       $item = $new_items->item($i);
       if (get_class($item) == 'DOMElement') {
         $id = $item->getAttribute('id');
