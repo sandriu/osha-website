@@ -389,6 +389,7 @@ $options['init-modules'] = array(
   'osha_breadcrumbs',
   'osha_legislation',
   'osha_short_messages',
+  'osha_resources',
 
   'facetapi',
   'search_api_facetapi',
@@ -410,6 +411,12 @@ $options['init-modules'] = array(
   // Social share
   'addtoany',
   'on_the_web',
+
+  //Youtube and Flickr field
+  'youtube',
+  'flickr',
+  'flickr_block',
+  'flickrfield',
 
   // Link content types with main menu items
   'menu_position',

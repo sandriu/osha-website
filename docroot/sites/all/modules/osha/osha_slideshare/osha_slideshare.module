@@ -1,0 +1,127 @@
+<?php
+
+/**
+ * Implements hook_field_info().
+ */
+function osha_slideshare_field_info() {
+  return array(
+    'slideshare' => array(
+      'label' => t('Slideshare URL'),
+      'description' => t('This field add a slideshare link'),
+      'default_widget' => 'slideshare_field',
+      'default_formatter' => 'slideshare_default',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function osha_slideshare_field_widget_info() {
+  return array(
+    'slideshare_field' => array(
+      'label' => t('Slideshare URL'),
+      'field types' => array('slideshare'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_settings_form().
+ */
+function osha_slideshare_field_settings_form($field, $instance, $has_data) {
+  $settings = $field['settings'];
+  // Add your global settings fields here
+  $form = array();
+  return $form;
+}
+
+/**
+ * Implements hook_field_instance_settings_form().
+ */
+function osha_slideshare_field_instance_settings_form($field, $instance) {
+  $settings = $instance['settings'];
+  // Add your instance settings fields here.
+  $form = array();
+  return $form;
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function osha_slideshare_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $element['slideshare']['slide_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Slideshare URL'),
+    '#default_value' => isset($items[$delta]['slide_url']) ? $items[$delta]['slide_url'] : '',
+    '#attributes' => array('maxlength' => 256),
+  );
+
+  if($element['#description'] == '') {
+    $element['slideshare']['slide_url']['#description'] = t('Enter the Slideshare URL. Valid URL
+      format like: http://www.slideshare.net/euosha');
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_validate().
+ */
+function osha_slideshare_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+// Loop through field items in the case of multiple values.
+  foreach ($items as $delta => $item) {
+    if (isset($item['slide_url']) && $item['slide_url'] != '') {
+      if (!valid_slide_url($item['slide_url'])) {
+        $errors[$field['slide_url']][$langcode][$delta][] = array(
+          'error' => t('Invalid Slideshare URL.'),
+        );
+      }
+    }
+  }
+}
+
+function valid_slide_url($url){
+  return TRUE;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function osha_slideshare_field_formatter_info() {
+  return array(
+    'slideshare_default' => array(
+      'label' => t('Default'),
+      'field types' => array('slideshare'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_slideshare_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    case 'slideshare_default' :
+      foreach ($items as $delta => $item) {
+        if (isset($item['slide_url'])) {
+          $element[$delta]['#markup'] = $item['slide_url'];
+        }
+      }
+      break;
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function osha_slideshare_field_is_empty($item, $field) {
+  if (empty($item['slideshare']['slide_url'])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+

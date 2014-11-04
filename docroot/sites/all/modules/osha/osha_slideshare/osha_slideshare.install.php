@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function osha_slideshare_field_schema($field) {
+  return array(
+    'columns' => array(
+      'slide_url' => array(
+        'type' => 'varchar',
+        'length' => 256,
+        'not null' => TRUE,
+      ),
+    ),
+  );
+}
