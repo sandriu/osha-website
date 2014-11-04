@@ -39,6 +39,30 @@ function osha_tmgmt_views_query_alter(&$view, &$query) {
       'value' => 'translators_group',
     );
   }
+
+  // Switch from JOIN to LEFT JOIN with workbench_moderation_node_history
+  // to allow adding content types which are not moderated (i.e. page).
+  if ($view->name == 'tmgmt_node_selection_view') {
+    if (isset($query->table_queue['workbench_moderation_node_history']['join']->type)) {
+      $query->table_queue['workbench_moderation_node_history']['join']->type = 'LEFT';
+    }
+  }
+}
+
+/**
+ * Implements hook_views_data_alter().
+ *
+ * We override the filter handler for table workbench_moderation_node_history
+ * to allow proper filtering for non-moderated content in content selection
+ * screen.
+ *
+ * {@inheritdoc}
+ */
+function osha_tmgmt_views_data_alter(&$data) {
+  // Used by tmgmt_node_selection_view.
+  if (isset($data['workbench_moderation_node_history']['state']['filter']['handler'])) {
+    $data['workbench_moderation_node_history']['state']['filter']['handler'] = 'osha_workbench_moderation_handler_filter_state';
+  }
 }
 
 
