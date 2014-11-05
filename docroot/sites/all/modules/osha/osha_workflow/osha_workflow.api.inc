@@ -785,8 +785,9 @@ class OshaWorkflowNotifications {
    *   Job created
    */
   public static function notifyTranslationUploadedFile($tmgmt_job) {
-    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
-    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job' => $tmgmt_job), 'osha_tmgmt');
+    // See CW-696 (Notification not needed)
+    // $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    // OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job' => $tmgmt_job), 'osha_tmgmt');
   }
 
   /**
