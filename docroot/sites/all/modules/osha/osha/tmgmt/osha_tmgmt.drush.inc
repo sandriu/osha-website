@@ -3,7 +3,8 @@
 /**
  * Implements COMMANDFILE_drush_command().
  */
-function osha_tmgmt_drush_command() {
+function osha_tmgmt_drush_command()
+{
   $items = array();
   $items['osha-tmgmt-statistics'] = array(
     'description' => 'Generate character/page count statistics for nodes',
@@ -27,7 +28,8 @@ function osha_tmgmt_drush_command() {
 /**
  * Implements COMMANDFILE_drush_help().
  */
-function osha_tmgmt_drush_help($section) {
+function osha_tmgmt_drush_help($section)
+{
   switch ($section) {
     case 'osha-tmgmt-statistics':
       return 'This command will create a group of test users assigned to the workflow roles';
@@ -37,7 +39,8 @@ function osha_tmgmt_drush_help($section) {
   return NULL;
 }
 
-function drush_osha_tmgmt_statistics() {
+function drush_osha_tmgmt_statistics()
+{
   $rows = db_select('node', 'n')
     ->fields('n', array('nid'))
     ->condition('type', array(
@@ -68,7 +71,8 @@ function drush_osha_tmgmt_statistics() {
   }
 }
 
-function drush_osha_tmgmt_retranslate_validate($bundle) {
+function drush_osha_tmgmt_retranslate_validate($bundle)
+{
   $nids = drush_get_option('nids');
   if (!$nids) {
     // Load all
@@ -85,18 +89,19 @@ function drush_osha_tmgmt_retranslate_validate($bundle) {
     drush_log('No node found', 'warning');
     return;
   }
-  print("Checking ".count($nids)." nodes\n");
+  print("Checking " . count($nids) . " nodes\n");
   foreach ($nids as $nid) {
     $messages = array();
-    $vid = 0;
     $valid_languages = array();
     $invalid_languages = array();
     $node = new stdClass();
     $node->nid = $nid;
-    OshaTMGMTRetranslate::validate_can_retranslate($node, $vid, $messages, $valid_languages, $invalid_languages);
-    drush_log(sprintf("Checking node %s (%s), r%s", $node->nid, $node->path['alias'], $vid), 'success');
-    foreach ($messages as $severity => $message) {
-      drush_log("  ".$message, $severity);
+    OshaTMGMTRetranslate::validate_can_retranslate($node, $messages, $valid_languages, $invalid_languages);
+    drush_log(sprintf("Checking node %s (%s)", $node->nid, $node->path['alias']), 'success');
+    foreach ($messages as $severity => $message_list) {
+      foreach ($message_list as $message) {
+        drush_log("  " . $message, $severity);
+      }
     }
     foreach ($invalid_languages as $lang => $data) {
       $info = sprintf("Different HTML starting at id = '%s', <%s> in %s, <%s> in %s",
