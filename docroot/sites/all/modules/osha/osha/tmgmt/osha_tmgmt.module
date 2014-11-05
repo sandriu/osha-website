@@ -609,13 +609,14 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         if ($item->plugin == 'entity' && $item->item_type == 'node') {
           // check if retranslation is possible
           $node = (object)array('nid' => $item->item_id);
-          $vid = 0;
           $messages = array();
           $valid_languages = array();
           $invalid_languages = array();
-          OshaTMGMTRetranslate::validate_can_retranslate($node, $vid, $messages, $valid_languages, $invalid_languages);
+          OshaTMGMTRetranslate::validate_can_retranslate($node, $messages, $valid_languages, $invalid_languages);
           if (!empty($invalid_languages)) {
-            drupal_set_message($item->label().": ".$messages['error'], 'warning');
+            foreach ($messages['error'] as $message) {
+              drupal_set_message($item->label().": ".$message, 'error');
+            }
             foreach ($invalid_languages as $language => $data) {
               unset($form['target_language']['#options'][$language]);
             }
@@ -961,17 +962,18 @@ function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_sta
 
 function osha_tmgmt_retranslate_validate_ui($form, &$form_state) {
   $node = menu_get_object();
-  $vid = 0;
   $messages = array();
   $valid_languages = array();
   $invalid_languages = array();
-  OshaTMGMTRetranslate::validate_can_retranslate($node, $vid, $messages, $valid_languages, $invalid_languages);
-  foreach ($messages as $severity => $message) {
-    drupal_set_message($message, $severity);
+  OshaTMGMTRetranslate::validate_can_retranslate($node, $messages, $valid_languages, $invalid_languages);
+  foreach ($messages as $severity => $message_list) {
+    foreach ($message_list as $message) {
+      drupal_set_message($message, $severity);
+    }
   }
   $details = array();
   foreach ($invalid_languages as $lang => $data) {
-    $details[$lang] = sprintf("Different HTML starting at id = '%s', <%s> in %s, <%s> in %s",
+    $details[$lang] = sprintf("Different HTML at id = '%s', <%s> in %s, <%s> in %s",
       $data['id'],
       $data[$data['source']], strtoupper($data['source']),
       $data[$lang], strtoupper($lang));
