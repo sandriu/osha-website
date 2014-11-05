@@ -132,8 +132,7 @@ class OshaTMGMTRetranslate {
     )->fetchField();
     if (!$rev) {
       // No clean revision found, probably field_needs_retranslation_value
-      // was not there.
-      // Return the first available revision.
+      // was not there. Return the first available revision.
       $rev = db_query("SELECT MIN(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
         array(':entity_id' => $entity_id)
       )->fetchField();
@@ -145,11 +144,18 @@ class OshaTMGMTRetranslate {
    * Returns latest revision where original language is synchronized with translations.
    */
   public static function get_latest_revision($entity_id) {
-    $count = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
+    $rev = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
       WHERE f.entity_id = :entity_id",
       array(':entity_id' => $entity_id)
     )->fetchField();
-    return $count;
+    if (!$rev) {
+      // No revision found, probably field_needs_retranslation_value
+      // was not there. Return the latest available revision.
+      $rev = db_query("SELECT MAX(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
+        array(':entity_id' => $entity_id)
+      )->fetchField();
+    }
+    return $rev;
   }
 
   public static function get_field_value($entity_id, $bundle, $revision,
