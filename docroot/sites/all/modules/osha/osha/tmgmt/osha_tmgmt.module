@@ -615,7 +615,7 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           OshaTMGMTRetranslate::validate_can_retranslate($node, $messages, $valid_languages, $invalid_languages);
           if (!empty($invalid_languages)) {
             foreach ($messages['error'] as $message) {
-              drupal_set_message($item->label().": ".$messages, 'warning');
+              drupal_set_message($item->label().": ".$message, 'error');
             }
             foreach ($invalid_languages as $language => $data) {
               unset($form['target_language']['#options'][$language]);

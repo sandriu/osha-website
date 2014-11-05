@@ -301,6 +301,24 @@ class OshaTMGMTRetranslate {
       $new_structure = self::getHTMLStructure($source_text);
     }
 
+    $languages = array_diff(array_keys($node->translations->data), [$orig_lang]);
+    if (!empty($languages)) {
+      // Check if source language has been changed and retranslation is possible.
+      $result = self::check_same_tags_in_translation($vid, $latest_rev, $orig_structure, $new_structure);
+      if (!empty($result)) {
+        foreach ($languages as $lang) {
+          $result[$lang] = t('Incompatible change in @lang from @tag1 to @tag2', array(
+            '@lang' => strtoupper($orig_lang),
+            '@tag1' => $result[$vid],
+            '@tag2' => $result[$latest_rev]
+          ));
+          $invalid_languages[$lang] = $result;
+        }
+        $messages['error'][] = t('Node cannot be re-translated in: ')
+          . implode(", ", array_map('strtoupper', $languages));
+      }
+      return;
+    }
     // Check if source language has been changed.
     $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
     if (empty($changed_ids)) {
@@ -315,13 +333,9 @@ class OshaTMGMTRetranslate {
         array('@lang' => strtoupper($orig_lang), '@msg' => substr($msg, 0, -1)));
     }
 
-    $languages = array_keys($node->translations->data);
     $valid_languages = array();
     // Check for incompatibilities
     foreach ($languages as $lang) {
-      if ($lang == $orig_lang) {
-        continue;
-      }
       $translated_structure = self::getHTMLStructure($node->body[$lang][0]['value']);
       // Check if tags in translations match the tags in source language.
       $result = self::check_same_tags_in_translation($orig_lang, $lang, $orig_structure, $translated_structure);
@@ -329,6 +343,13 @@ class OshaTMGMTRetranslate {
         $invalid_languages[$lang] = $result;
         continue;
       }
+      // Check same tags in latest version
+      $result = self::check_same_tags_in_translation($orig_lang, $lang, $new_structure, $translated_structure);
+      if (!empty($result)) {
+        $invalid_languages[$lang] = $result;
+        continue;
+      }
+
       // Check if the latest revision of target language contains more tags
       // than the initial revision of the source language.
       $result = self::check_more_tags_in_translation(
