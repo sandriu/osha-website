@@ -18,6 +18,7 @@ osha_configure_recaptcha();
 osha_configure_on_the_web();
 osha_add_menu_position_rules();
 // osha_add_agregator_rss_feeds();
+osha_configure_search_index();
 
 variable_set('admin_theme', 'osha_admin');
 variable_set('theme_default', 'osha_frontend');
@@ -27,6 +28,18 @@ variable_set('workbench_moderation_per_node_type', 1);
 osha_workflow_create_roles();
 
 module_disable(array('overlay'));
+
+/**
+ * Configure the index to exclude unpublished nodes.
+ */
+function osha_configure_search_index() {
+  if ($index = search_api_index_load('default_multilingual_node_index')) {
+    $index->options['data_alter_callbacks']['search_api_alter_node_status']['status'] = 1;
+    $index->save();
+    $index->reindex();
+    drupal_set_message(t("The indexing workflow was successfully edited. All content was scheduled for re-indexing so the new settings can take effect."));
+  }
+}
 
 /**
  * Configure permissions.

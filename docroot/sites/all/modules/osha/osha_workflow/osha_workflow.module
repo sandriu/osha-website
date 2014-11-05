@@ -534,6 +534,18 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   if ($new == OSHA_WORKFLOW_STATE_READY_TO_PUBLISH) {
     OshaWorkflowNotifications::notifyNodeIsReadyToPublish($node);
   }
+
+  // Mark the node dirty for search re-indexing
+  $languages = array($node->language);
+  foreach ($languages as $language) {
+    $item_id = $language . '_' . $node->nid;
+    if ($new == OSHA_WORKFLOW_STATE_PUBLISHED) {
+      search_api_track_item_change('search_api_et_node', array($item_id));
+    }
+    else {
+      search_api_track_item_change('search_api_et_node', array($item_id));
+    }
+  }
 }
 
 /**
