@@ -97,7 +97,7 @@ class OshaMigratePublications extends OSHADynamicMigration {
 
     $this->addFieldMapping('field_related_publications', 'related_publications');
     $this->addFieldMapping('body', 'description');
-    $this->addFieldMapping('body:format')->defaultValue('plain_text');
+    $this->addFieldMapping('body:format')->defaultValue('full_html');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
