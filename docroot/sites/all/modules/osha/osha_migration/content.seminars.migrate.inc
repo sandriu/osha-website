@@ -83,7 +83,7 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
     $this->addFieldMapping('field_seminar_show_roster_hour', 'showRosterHour');
 
     $this->addFieldMapping('body', 'description');
-    $this->addFieldMapping('body:format')->defaultValue('plain_text');
+    $this->addFieldMapping('body:format')->defaultValue('full_html');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
