@@ -390,6 +390,7 @@ $options['init-modules'] = array(
   'osha_legislation',
   'osha_short_messages',
   'osha_resources',
+  'osha_slideshare',
 
   'facetapi',
   'search_api_facetapi',

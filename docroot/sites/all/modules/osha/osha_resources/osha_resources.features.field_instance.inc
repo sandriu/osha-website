@@ -90,7 +90,7 @@ function osha_resources_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 45,
+      'weight' => 46,
     ),
   );
 
@@ -157,7 +157,7 @@ function osha_resources_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 44,
+      'weight' => 45,
     ),
   );
 
@@ -351,7 +351,69 @@ function osha_resources_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 46,
+      'weight' => 47,
+    ),
+  );
+
+  // Exported field_instance: 'node-resources-field_slideshare'
+  $field_instances['node-resources-field_slideshare'] = array(
+    'bundle' => 'resources',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'osha_slideshare',
+        'settings' => array(),
+        'type' => 'slideshare_default',
+        'weight' => 12,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_slideshare',
+    'label' => 'Slideshare',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'osha_slideshare',
+      'settings' => array(),
+      'type' => 'slideshare',
+      'weight' => 44,
     ),
   );
 
@@ -501,6 +563,7 @@ function osha_resources_field_default_field_instances() {
   t('Flickr tags');
   t('Grab Flickr photos with these tags only. Comma separated.');
   t('Internal Contents');
+  t('Slideshare');
   t('Title');
   t('Youtube');
 

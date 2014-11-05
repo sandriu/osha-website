@@ -9,7 +9,7 @@ function osha_slideshare_field_schema($field) {
       'slide_url' => array(
         'type' => 'varchar',
         'length' => 256,
-        'not null' => TRUE,
+        'not null' => FALSE,
       ),
     ),
   );
