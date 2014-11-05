@@ -150,6 +150,14 @@ function osha_tmgmt_translation_validation_options() {
   );
 }
 
+function osha_tmgmt_job_item_target_language_options() {
+  $languages = language_list();
+  $return = array();
+  foreach ($languages as $lang_code => $language) {
+    $return[$lang_code] = $languages->name;
+  }
+}
+
 /**
  * Get Groups of Translation Validators.
  */

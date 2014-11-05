@@ -240,6 +240,16 @@ function osha_tmgmt_entity_property_info() {
 
 function osha_tmgmt_entity_property_info_alter(&$info) {
   $info['tmgmt_job_item']['properties']['state']['options list'] = 'osha_tmgmt_get_job_item_states';
+  $info['tmgmt_job_item']['properties']['target_language'] = array(
+    'label' => t("Job Item Target Language"),
+    'type' => 'text',
+    'description' => t("Job Item Target Language"),
+    'options list' => 'entity_metadata_language_list',
+    'setter callback' => 'entity_metadata_verbatim_set',
+    'getter callback' => 'entity_property_verbatim_get',
+    'entity views field' => TRUE,
+    'schema field' => 'target_language',
+  );
 }
 
 /**
@@ -683,101 +693,6 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       );
       break;
 
-    case 'tmgmt_job_form':
-      if (!user_access('accept translation jobs')) {
-        // Make the form read-only
-        // @todo:urgent:possible security issue - upload XML as translator liaison
-        $form['info']['label']['#disabled'] = TRUE;
-        $form['actions']['submit']['#access'] = FALSE;
-        $form['actions']['cancel']['#title'] = t('Back');
-      }
-
-      $languages = tmgmt_available_languages();
-      $job = $form_state['tmgmt_job'];
-
-      $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($job);
-      $target_languages = array();
-      foreach ($target_languages_codes as $lang_code) {
-        $target_languages[$lang_code] = $languages[$lang_code];
-      }
-      $wrapper = entity_metadata_wrapper('tmgmt_job', $job);
-      drupal_set_title(t('@title - @state', array(
-        '@title' => $job->label(),
-        '@state' => $wrapper->state->label(),
-      )));
-
-      $form['language_info'] = array(
-        '#type' => 'container',
-        '#attributes' => array('class' => array('tmgmt-ui-job-info', 'clearfix')),
-        '#weight' => 1,
-      );
-
-      $form['language_info']['target_languages'] = array(
-        '#title' => t('Target languages') . ' (' . count($target_languages_codes) . ')',
-        '#type' => 'checkboxes',
-        '#default_value' => $target_languages,
-        '#options' => drupal_map_assoc($target_languages),
-        '#disabled' => TRUE,
-        '#weight' => 1,
-        '#attributes' => array('class' => array('container-inline')),
-      );
-
-      $form['language_info']['target_languages_not'] = array(
-        '#type' => 'checkboxes',
-        '#options' => drupal_map_assoc(array_diff($languages, $target_languages)),
-        '#disabled' => TRUE,
-        '#weight' => 2,
-        '#attributes' => array('class' => array('container-inline')),
-      );
-
-      $form['info']['total_character_count'] = array(
-        '#type' => 'item',
-        '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
-        '#suffix' => '</div>',
-        '#title' => t('Total character count'),
-        '#markup' => $job->character_count,
-        '#weight' => 11,
-      );
-
-      $form['info']['priority'] = array(
-        '#type' => 'item',
-        '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
-        '#suffix' => '</div>',
-        '#title' => t('Priority'),
-        '#markup' => osha_tmgmt_job_priority_name($job),
-        '#weight' => 13,
-      );
-
-      $form['info']['page_count'] = array(
-        '#title' => t('Page count'),
-        '#type'  => 'item',
-        '#markup' => $job->page_count,
-        '#prefix' => '<div id="tmgmt-ui-page-count" class="tmgmt-ui-page-count tmgmt-ui-info-item">',
-        '#suffix' => '</div>',
-        '#weight' => 12,
-      );
-
-      hide($form['info']['word_count']);
-      hide($form['info']['source_language']);
-      hide($form['info']['target_language']);
-      hide($form['info']['translator']);
-      if (!user_access('osha tmgmt upload translation file')) {
-        $form['translator_wrapper']['#access'] = FALSE;
-        if (isset($form['job_items_wrapper']['suggestions'])) {
-          hide($form['job_items_wrapper']['suggestions']);
-        }
-      }
-      else {
-        $form['translator_wrapper']['info']['submit']['#submit'][]
-          = 'osha_tmgmt_file_translation_upload_submit';
-      }
-      if (isset($form['info']['created'])) {
-        $created = $form['info']['created'];
-        unset($form['info']['created']);
-        $form['info']['created'] = $created;
-      }
-      break;
-
     case 'views_form_tmgmt_node_selection_view_tmgmt_node_selection_view_page':
       if ($form['#id'] == 'views-form-tmgmt-node-selection-view-tmgmt-node-selection-view-page') {
         if (isset($form['select']['rules_component::tmgmt_node_ui_tmgmt_nodes_add_items_to_cart'])) {
@@ -858,7 +773,6 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       }
   }
 }
-
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -958,6 +872,16 @@ function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_sta
     $form_state['tmgmt_job'] = tmgmt_job_load($tjid);
     $form_state['tmgmt_job_items'] = $items;
   }
+}
+
+/**
+ * Callback for Filter job items function on Job overview page.
+ *
+ * Just rebuilds the form because the filters are passed to view
+ * form form_state as contextual fitlers.
+ */
+function osha_tmgmt_tmgmt_job_form_filter_submit(&$form, &$form_state) {
+  $form_state['rebuild'] = TRUE;
 }
 
 function osha_tmgmt_retranslate_validate_ui($form, &$form_state) {
@@ -1106,28 +1030,56 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
 }
 
 function osha_tmgmt_form_tmgmt_job_form_alter(&$form, &$form_state, $form_id) {
+  if (!user_access('accept translation jobs')) {
+    // Make the form read-only
+    // @todo:urgent:possible security issue - upload XML as translator liaison
+    $form['info']['label']['#disabled'] = TRUE;
+    $form['actions']['submit']['#access'] = FALSE;
+    $form['actions']['cancel']['#title'] = t('Back');
+  }
+
+  $languages = tmgmt_available_languages();
+
+  // Add form for filtering job items.
+  // Added manually the form filter fields outside the view
+  // because of submitting problems with exposed form in job form (form in form)
+
+  // Parse field values
+  $filter_activity = !empty($form_state['values']['filter_activity'])
+    ? $form_state['values']['filter_activity'] : 'any';
+
+  $filter_state = !empty($form_state['values']['filter_state'])
+    ? $form_state['values']['filter_state'] : 'any';
+
+  $filter_target_lang = !empty($form_state['values']['filter_target_language'])
+    ? $form_state['values']['filter_target_language'] : 'any';
+
+  // Embed views.
+  // @todo remove the standard view of tmgmt because here it's already loaded
+  //    @todo: so there are 2 views loaded for the same task.
+  $form['job_items_wrapper']['items']['#markup']
+    = views_embed_view('osha_job_overview_job_items', 'job_job_items', NULL,
+        $filter_state, $filter_activity, $filter_target_lang);
 
   $form['job_items_wrapper']['#attributes'] = array('class' => array('container-inline'));
-  $form_state['filter_target_language'] = '';
+
   $form['job_items_wrapper']['filter_target_language'] = array(
     '#type' => 'select',
     '#title' => t('Target language'),
     '#title_display' => 'before',
     '#weight' => -4,
-    '#options' => array(
-      '' => t('-- Any --'),
-    ),
+    '#options' => array('any' => '- Any -') + $languages,
+    '#default_value' => $filter_target_lang,
   );
 
-  $form_state['filter_activity'] = '';
+  $activity_terms = taxonomy_allowed_values(field_info_field('field_activity'));
   $form['job_items_wrapper']['filter_activity'] = array(
     '#type' => 'select',
     '#title' => t('Activity'),
     '#title_display' => 'before',
     '#weight' => -3,
-    '#options' => array(
-      '' => t('-- Any --'),
-    ),
+    '#options' => array('any' => '- Any -') + $activity_terms,
+    '#default_value' => $filter_activity,
   );
 
   $form_state['filter_state'] = '';
@@ -1136,24 +1088,100 @@ function osha_tmgmt_form_tmgmt_job_form_alter(&$form, &$form_state, $form_id) {
     '#title' => t('Translation status'),
     '#title_display' => 'before',
     '#weight' => -2,
-    '#options' => array(
-      TMGMT_JOB_ITEM_STATE_ACTIVE => t('On translation'),
-      OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired => t('Validation required'),
-      OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated => t('Validated'),
-      OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish => t('Translated'),
-    ),
+    '#options' => array('any' => '- Any -') + osha_tmgmt_get_job_item_states(),
+    '#default_value' => $filter_state,
   );
-
   $form['job_items_wrapper']['filter'] = array(
     '#type' => 'submit',
     '#value' => t('Filter'),
     '#submit' => array('osha_tmgmt_tmgmt_job_form_filter_submit'),
     '#weight' => -1,
   );
-}
 
-function osha_tmgmt_tmgmt_job_form_filter_submit(&$form, &$form_state) {
-  drupal_set_message('Why would you do that for?', 'warning');
+
+  $job = $form_state['tmgmt_job'];
+
+  $target_languages_codes = OshaTMGMTStatistics::getJobTargetLanguages($job);
+  $target_languages = array();
+  foreach ($target_languages_codes as $lang_code) {
+    $target_languages[$lang_code] = $languages[$lang_code];
+  }
+  $wrapper = entity_metadata_wrapper('tmgmt_job', $job);
+  drupal_set_title(t('@title - @state', array(
+    '@title' => $job->label(),
+    '@state' => $wrapper->state->label(),
+  )));
+
+  $form['language_info'] = array(
+    '#type' => 'container',
+    '#attributes' => array('class' => array('tmgmt-ui-job-info', 'clearfix')),
+    '#weight' => 1,
+  );
+
+  $form['language_info']['target_languages'] = array(
+    '#title' => t('Target languages') . ' (' . count($target_languages_codes) . ')',
+    '#type' => 'checkboxes',
+    '#default_value' => $target_languages,
+    '#options' => drupal_map_assoc($target_languages),
+    '#disabled' => TRUE,
+    '#weight' => 1,
+    '#attributes' => array('class' => array('container-inline')),
+  );
+
+  $form['language_info']['target_languages_not'] = array(
+    '#type' => 'checkboxes',
+    '#options' => drupal_map_assoc(array_diff($languages, $target_languages)),
+    '#disabled' => TRUE,
+    '#weight' => 2,
+    '#attributes' => array('class' => array('container-inline')),
+  );
+
+  $form['info']['total_character_count'] = array(
+    '#type' => 'item',
+    '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
+    '#suffix' => '</div>',
+    '#title' => t('Total character count'),
+    '#markup' => $job->character_count,
+    '#weight' => 11,
+  );
+
+  $form['info']['priority'] = array(
+    '#type' => 'item',
+    '#prefix' => '<div class="tmgmt-ui-source-type tmgmt-ui-info-item">',
+    '#suffix' => '</div>',
+    '#title' => t('Priority'),
+    '#markup' => osha_tmgmt_job_priority_name($job),
+    '#weight' => 13,
+  );
+
+  $form['info']['page_count'] = array(
+    '#title' => t('Page count'),
+    '#type'  => 'item',
+    '#markup' => $job->page_count,
+    '#prefix' => '<div id="tmgmt-ui-page-count" class="tmgmt-ui-page-count tmgmt-ui-info-item">',
+    '#suffix' => '</div>',
+    '#weight' => 12,
+  );
+
+  hide($form['info']['word_count']);
+  hide($form['info']['source_language']);
+  hide($form['info']['target_language']);
+  hide($form['info']['translator']);
+  if (!user_access('osha tmgmt upload translation file')) {
+    $form['translator_wrapper']['#access'] = FALSE;
+    if (isset($form['job_items_wrapper']['suggestions'])) {
+      hide($form['job_items_wrapper']['suggestions']);
+    }
+  }
+  else {
+    $form['translator_wrapper']['info']['submit']['#submit'][]
+      = 'osha_tmgmt_file_translation_upload_submit';
+  }
+  if (isset($form['info']['created'])) {
+    $created = $form['info']['created'];
+    unset($form['info']['created']);
+    $form['info']['created'] = $created;
+  }
 }
 
 function osha_tmgmt_get_job_item_states() {
