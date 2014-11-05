@@ -55,6 +55,10 @@ class OshaTMGMTRetranslate {
   }
 
   public static function getDOMNodeList($text) {
+    if (empty($text)) {
+      // Return empty array for empty text to avoid warnings
+      return new DOMNodeList();
+    }
     $dom = self::getDOMDocument($text);
     $body = $dom->getElementsByTagName('body')->item(0);
     return $body->childNodes;
@@ -128,8 +132,7 @@ class OshaTMGMTRetranslate {
     )->fetchField();
     if (!$rev) {
       // No clean revision found, probably field_needs_retranslation_value
-      // was not there.
-      // Return the first available revision.
+      // was not there. Return the first available revision.
       $rev = db_query("SELECT MIN(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
         array(':entity_id' => $entity_id)
       )->fetchField();
@@ -141,11 +144,18 @@ class OshaTMGMTRetranslate {
    * Returns latest revision where original language is synchronized with translations.
    */
   public static function get_latest_revision($entity_id) {
-    $count = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
+    $rev = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
       WHERE f.entity_id = :entity_id",
       array(':entity_id' => $entity_id)
     )->fetchField();
-    return $count;
+    if (!$rev) {
+      // No revision found, probably field_needs_retranslation_value
+      // was not there. Return the latest available revision.
+      $rev = db_query("SELECT MAX(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
+        array(':entity_id' => $entity_id)
+      )->fetchField();
+    }
+    return $rev;
   }
 
   public static function get_field_value($entity_id, $bundle, $revision,
@@ -255,96 +265,131 @@ class OshaTMGMTRetranslate {
 
   /**
    * Input: $node->nid
-   * The latest clean revision is returned in $revision
-   * Status messages are returned in array $messages[key => severity_level]
-   * Results are returned in arrays $valid_languages and $invalid_languages, keyed by language code
+   * The latest clean revision is returned in $vid
+   * Status messages are returned in array $messages[key => severity_level][]
+   * $valid_languages is a simple array with language code as elements
+   * $invalid_languages[language_code] contains detailed explanatory messages
    * @todo Check all full_html fields, not only in body!
    */
-  public static function validate_can_retranslate(&$node, &$vid, &$messages,
+  public static function validate_can_retranslate(&$node, &$messages,
                                                   &$valid_languages,
-                                                  &$invalid_languages) {
-    if (!$vid) {
-      $vid = self::get_latest_clean_revision($node->nid);
-    }
+                                                  &$invalid_languages)
+  {
     if (!isset($node->nid)) {
       throw new TMGMTException('node->nid not provided');
     }
-    $node = node_load($node->nid, $vid);
+    $vid = self::get_latest_clean_revision($node->nid);
+    $old_node = node_load($node->nid, $vid);
+    $orig_lang = $old_node->translations->original;
+    if (empty($old_node->body)) {
+      $clean_source_text = '';
+      $orig_structure = array();
+    } else {
+      $clean_source_text = $old_node->body[$orig_lang][0]['value'];
+      $orig_structure = self::getHTMLStructure($old_node->body[$orig_lang][0]['value']);
+    }
+    $latest_rev = self::get_latest_revision($node->nid);
+    $messages['status'][] = t('Comparing revision @latest to revision @original in source language @lang',
+      array('@latest' => $latest_rev, '@original' => $vid, '@lang' => strtoupper($orig_lang)));
+
+    $node = node_load($node->nid, $latest_rev);
     if (empty($node->body)) {
-      // No body.
-      $messages['warning'] = t('Empty node body in initial revision.');
-      return;
+      $source_text = '';
+      $new_structure = array();
+    } else {
+      $source_text = $node->body[$orig_lang][0]['value'];
+      $new_structure = self::getHTMLStructure($source_text);
     }
-    $orig_lang = $node->translations->original;
-    $orig_structure = self::getHTMLStructure($node->body[$orig_lang][0]['value']);
-    $languages = array_keys($node->body);
-    if (count($languages) == 1) {
-      $messages['warning'] = t('Node has no translations');
-      return;
+
+    // Check if source language has been changed.
+    $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
+    if (empty($changed_ids)) {
+      $messages['status'][] = t('No changes detected in language @lang.',
+        array('@lang' => strtoupper($orig_lang)));
+    } else {
+      $msg = ' ';
+      foreach ($changed_ids as $id) {
+        $msg = $msg . '<' . $new_structure[$id] . ' id="' . $id . '">,';
+      }
+      $messages['status'][] = t('Detected changes in @lang: @msg',
+        array('@lang' => strtoupper($orig_lang), '@msg' => substr($msg, 0, -1)));
     }
+
+    $languages = array_keys($node->translations->data);
     $valid_languages = array();
+    // Check for incompatibilities
     foreach ($languages as $lang) {
       if ($lang == $orig_lang) {
         continue;
       }
-      $html = $node->body[$lang][0]['value'];
-      $translated_structure = self::getHTMLStructure($html);
-      // Search for id's that are present in $translated_structure
-      // but with different tags.
-      $diffs = array();
-      foreach ($orig_structure as $id => $tag) {
-        if (isset($translated_structure[$id]) && $tag != $translated_structure[$id]) {
-          $diffs[$id] = $translated_structure[$id];
-        }
+      $translated_structure = self::getHTMLStructure($node->body[$lang][0]['value']);
+      // Check if tags in translations match the tags in source language.
+      $result = self::check_same_tags_in_translation($orig_lang, $lang, $orig_structure, $translated_structure);
+      if (!empty($result)) {
+        $invalid_languages[$lang] = $result;
+        continue;
       }
-      // $diffs contains tags that exist in source language
-      // but not in target language.
-      if (!empty($diffs)) {
-        $first_diff = current(array_keys($diffs));
-        // See if that element id exists in translation.
-        $first_diff_in_trans = NULL;
-        if (isset($translated_structure[$first_diff])) {
-          $first_diff_in_trans = $translated_structure[$first_diff];
-        }
-        // Add first different tag in returned data.
-        $invalid_languages[$lang] = array(
-          'id' => $first_diff,
-          'source' => $orig_lang,
-          $orig_lang => $diffs[$first_diff],
-          $lang => $first_diff_in_trans,
-        );
+      // Check if the latest revision of target language contains more tags
+      // than the initial revision of the source language.
+      $result = self::check_more_tags_in_translation(
+        $orig_lang, $lang, $orig_structure, $translated_structure);
+      if (!empty($result)) {
+        $invalid_languages[$lang] = $result;
+        continue;
       }
-      else {
-        // Check if target language contains more tags.
-        foreach ($translated_structure as $id => $tag) {
-          if (!isset($orig_structure[$id])) {
-            $diffs[$id] = $tag;
-          }
-        }
-        if (!empty($diffs)) {
-          $first_diff = current(array_keys($diffs));
-          // Add first different tag in returned data
-          // (non-existing in source lang?).
-          $invalid_languages[$lang] = array(
-            'id' => $first_diff,
-            'source' => $orig_lang,
-            $orig_lang => NULL,
-            $lang => $diffs[$first_diff],
-          );
-        }
-        else {
+      // Check if source language has been changed.
+      if (!empty($changed_ids)) {
+        // Check if target language really needs retranslation and show changes for each valid language.
+        $changed_text = self::get_text_to_retranslate($node->nid, $node->type, $orig_lang, $lang, 'body');
+        if (empty($changed_text)) {
+          $messages['status'][] = t('Language @lang does not need retranslation',
+            array('@lang' => strtoupper($lang)));
+        } else {
           $valid_languages[] = $lang;
+          $changes = self::getHTMLStructure($changed_text);
+          $msg = ' ';
+          foreach ($changes as $id => $tag) {
+            $msg = $msg . '<' . $tag . ' id="' . $id . '">';
+          }
+          $messages['status'][] = t('Node can be re-translated in @lang. Changes: @msg',
+            array('@lang' => strtoupper($lang), '@msg' => $msg));
         }
       }
     }
-    if (!empty($valid_languages)) {
-      $messages['status'] = t('Node can be re-translated in:')
-        . implode(", ", array_map('strtoupper', $valid_languages));
-    }
+
     if (!empty($invalid_languages)) {
-      $messages['error'] = t('Node cannot be re-translated in:')
+      $messages['error'][] = t('Node cannot be re-translated in: ')
         . implode(", ", array_map('strtoupper', array_keys($invalid_languages)));
     }
+  }
+
+  protected static function check_same_tags_in_translation($orig_lang, $lang, $orig_structure, $translated_structure) {
+    foreach ($orig_structure as $id => $tag) {
+      if (isset($translated_structure[$id]) && $tag != $translated_structure[$id]) {
+        return array(
+          'id' => $id,
+          'source' => $orig_lang,
+          $orig_lang => $tag,
+          $lang => $translated_structure[$id],
+        );
+      }
+    }
+    return NULL;
+  }
+
+  protected static function check_more_tags_in_translation($orig_lang, $lang, $orig_structure, $translated_structure) {
+    foreach ($translated_structure as $id => $tag) {
+      if (!isset($orig_structure[$id])) {
+        return array(
+          'id' => $id,
+          'source' => $orig_lang,
+          $orig_lang => NULL,
+          $lang => $tag,
+        );
+        $diffs[$id] = $tag;
+      }
+    }
+    return NULL;
   }
 
   /**
