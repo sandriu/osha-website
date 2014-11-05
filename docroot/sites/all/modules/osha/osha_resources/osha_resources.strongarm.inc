@@ -177,6 +177,172 @@ function osha_resources_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_api_key';
+  $strongarm->value = '481e9c32ac14a893e8079cc088f3b590';
+  $export['flickr_api_key'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_api_secret';
+  $strongarm->value = '78f9fa4cad6ac659';
+  $export['flickr_api_secret'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_block_heading';
+  $strongarm->value = 'h2';
+  $export['flickr_block_heading'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_block_hide_empty';
+  $strongarm->value = 0;
+  $export['flickr_block_hide_empty'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_block_photos_per_set';
+  $strongarm->value = '6';
+  $export['flickr_block_photos_per_set'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_block_refresh_others';
+  $strongarm->value = '31';
+  $export['flickr_block_refresh_others'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_block_refresh_random';
+  $strongarm->value = '23';
+  $export['flickr_block_refresh_random'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_cache_duration';
+  $strongarm->value = '3600';
+  $export['flickr_cache_duration'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_caption_padding';
+  $strongarm->value = '0';
+  $export['flickr_caption_padding'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_class';
+  $strongarm->value = '';
+  $export['flickr_class'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_counter';
+  $strongarm->value = 1;
+  $export['flickr_counter'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_css';
+  $strongarm->value = 1;
+  $export['flickr_css'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_default_size_album';
+  $strongarm->value = 's';
+  $export['flickr_default_size_album'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_default_userid';
+  $strongarm->value = '106220236@N08';
+  $export['flickr_default_userid'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_info_overlay';
+  $strongarm->value = array(
+    'title' => 'title',
+    'metadata' => 'metadata',
+    'description' => 'description',
+    'license' => 0,
+  );
+  $export['flickr_info_overlay'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_license';
+  $strongarm->value = 0;
+  $export['flickr_license'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_maps';
+  $strongarm->value = 0;
+  $export['flickr_maps'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_metadata_suppress_on_small';
+  $strongarm->value = '150';
+  $export['flickr_metadata_suppress_on_small'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_opening_size';
+  $strongarm->value = '';
+  $export['flickr_opening_size'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_per_page';
+  $strongarm->value = '100';
+  $export['flickr_per_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_photos_per_page';
+  $strongarm->value = '6';
+  $export['flickr_photos_per_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_rel';
+  $strongarm->value = '';
+  $export['flickr_rel'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'flickr_title_suppress_on_small';
+  $strongarm->value = '100';
+  $export['flickr_title_suppress_on_small'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_resources';
   $strongarm->value = '4';
   $export['language_content_type_resources'] = $strongarm;
@@ -217,6 +383,13 @@ function osha_resources_strongarm() {
   $strongarm->name = 'node_submitted_resources';
   $strongarm->value = 0;
   $export['node_submitted_resources'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'on_the_web_flickr_page';
+  $strongarm->value = 'http://www.flickr.com/photos/euosha/';
+  $export['on_the_web_flickr_page'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
