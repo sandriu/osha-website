@@ -61,3 +61,10 @@ function osha_configure_imce() {
     throw new Exception('Cannot assign IMCE profile User-1 to administrator - role administrator not found.');
   }
 }
+
+/**
+ * Update date formats & timezone settings with correct settings.
+ */
+function osha_update_7001() {
+  osha_configure_date_settings();
+}
