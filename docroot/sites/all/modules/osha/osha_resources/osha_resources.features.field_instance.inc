@@ -152,11 +152,19 @@ function osha_resources_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'file',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          0 => 'public',
+          1 => 'private',
+        ),
+        'allowed_types' => array(
+          0 => 'image',
+        ),
+        'browser_plugins' => array(),
         'progress_indicator' => 'throbber',
       ),
-      'type' => 'file_generic',
+      'type' => 'media_generic',
       'weight' => 45,
     ),
   );
@@ -232,9 +240,8 @@ function osha_resources_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 10,
       ),
       'highlights_item' => array(
@@ -298,7 +305,7 @@ function osha_resources_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'link' => 1,
         ),
         'type' => 'entityreference_label',
         'weight' => 7,
@@ -428,16 +435,10 @@ function osha_resources_field_default_field_instances() {
         'label' => 'above',
         'module' => 'youtube',
         'settings' => array(
-          'youtube_autohide' => FALSE,
-          'youtube_autoplay' => FALSE,
-          'youtube_controls' => FALSE,
-          'youtube_height' => NULL,
-          'youtube_iv_load_policy' => FALSE,
-          'youtube_showinfo' => FALSE,
-          'youtube_size' => '420x315',
-          'youtube_width' => NULL,
+          'image_link' => 'youtube',
+          'image_style' => 'youtube_thumbnail',
         ),
-        'type' => 'youtube_video',
+        'type' => 'youtube_thumbnail',
         'weight' => 8,
       ),
       'highlights_item' => array(
@@ -496,9 +497,10 @@ function osha_resources_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_plain',
         'weight' => 1,
       ),
       'highlights_item' => array(
