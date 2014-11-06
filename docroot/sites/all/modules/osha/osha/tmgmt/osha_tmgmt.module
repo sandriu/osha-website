@@ -127,6 +127,18 @@ function osha_tmgmt_schema_alter(&$schema) {
       'default' => NULL,
       'not null' => FALSE,
     );
+
+    $schema['tmgmt_job_item']['fields']['vid'] = array(
+      'description' => 'Revision Translated',
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'default' => NULL,
+      'not null' => FALSE,
+    );
+    $schema['foreign keys']['vid'] = array(
+      'table' => 'node_revision',
+      'columns' => array('vid' => 'vid'),
+    );
   }
   if (isset($schema['tmgmt_job'])) {
     $schema['tmgmt_job']['fields']['character_count'] = array(

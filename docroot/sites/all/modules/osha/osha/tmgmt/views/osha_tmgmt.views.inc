@@ -235,6 +235,34 @@ class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
       ),
     );
 
+    $data['tmgmt_job_item']['job_item_to_node_revision'] = array(
+      'title' => t('Content'),
+      'help' => t('Content revision that is associated with this job item.'),
+      'real field' => 'vid',
+      'relationship' => array(
+        'label' => t('Content Revision'),
+        'base' => 'node_revision',
+        'base field' => 'vid',
+        'handler' => 'views_handler_relationship',
+        'field' => 'vid',
+        'relationship field' => 'vid',
+        'extra' => array(
+          array(
+            'table' => 'tmgmt_job_item',
+            'field' => 'item_type',
+            'operator' => '=',
+            'value' => 'node',
+          ),
+          array(
+            'table' => 'tmgmt_job_item',
+            'field' => 'plugin',
+            'operator' => '=',
+            'value' => 'entity',
+          ),
+        ),
+      ),
+    );
+
     return $data;
   }
 }

@@ -18,6 +18,7 @@ $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'none';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['query']['options']['distinct'] = TRUE;
 $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'mini';
 $handler->display->display_options['pager']['options']['items_per_page'] = '25';
@@ -25,6 +26,7 @@ $handler->display->display_options['pager']['options']['offset'] = '0';
 $handler->display->display_options['pager']['options']['id'] = '0';
 $handler->display->display_options['style_plugin'] = 'table';
 $handler->display->display_options['style_options']['columns'] = array(
+  'title_field-revision_id' => 'title_field-revision_id',
   'label' => 'label',
   'source_language' => 'source_language',
   'target_language' => 'target_language',
@@ -32,7 +34,7 @@ $handler->display->display_options['style_options']['columns'] = array(
   'character_count' => 'character_count',
   'type' => 'type',
   'section' => 'section',
-  'field_activity' => 'field_activity',
+  'field_activity-revision_id' => 'field_activity-revision_id',
   'state' => 'state',
   'changed' => 'changed',
   'name' => 'name',
@@ -40,6 +42,13 @@ $handler->display->display_options['style_options']['columns'] = array(
 );
 $handler->display->display_options['style_options']['default'] = '-1';
 $handler->display->display_options['style_options']['info'] = array(
+  'title_field-revision_id' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
   'label' => array(
     'align' => '',
     'separator' => '',
@@ -81,7 +90,7 @@ $handler->display->display_options['style_options']['info'] = array(
     'separator' => '',
     'empty_column' => 0,
   ),
-  'field_activity' => array(
+  'field_activity-revision_id' => array(
     'sortable' => 1,
     'default_sort_order' => 'asc',
     'align' => '',
@@ -114,18 +123,35 @@ $handler->display->display_options['style_options']['info'] = array(
   ),
 );
 /* Relationship: Translation Management Job Item: Content */
+$handler->display->display_options['relationships']['job_item_to_node_revision']['id'] = 'job_item_to_node_revision';
+$handler->display->display_options['relationships']['job_item_to_node_revision']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['relationships']['job_item_to_node_revision']['field'] = 'job_item_to_node_revision';
+/* Relationship: Content revision: User */
+$handler->display->display_options['relationships']['uid']['id'] = 'uid';
+$handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
+$handler->display->display_options['relationships']['uid']['field'] = 'uid';
+$handler->display->display_options['relationships']['uid']['relationship'] = 'job_item_to_node_revision';
+/* Relationship: Translation Management Job Item: Content */
 $handler->display->display_options['relationships']['job_item_to_node']['id'] = 'job_item_to_node';
 $handler->display->display_options['relationships']['job_item_to_node']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['relationships']['job_item_to_node']['field'] = 'job_item_to_node';
-/* Relationship: Content: Author */
-$handler->display->display_options['relationships']['uid']['id'] = 'uid';
-$handler->display->display_options['relationships']['uid']['table'] = 'node';
-$handler->display->display_options['relationships']['uid']['field'] = 'uid';
-$handler->display->display_options['relationships']['uid']['relationship'] = 'job_item_to_node';
+/* Field: Content (historical data): Title */
+$handler->display->display_options['fields']['title_field-revision_id']['id'] = 'title_field-revision_id';
+$handler->display->display_options['fields']['title_field-revision_id']['table'] = 'field_revision_title_field';
+$handler->display->display_options['fields']['title_field-revision_id']['field'] = 'title_field-revision_id';
+$handler->display->display_options['fields']['title_field-revision_id']['relationship'] = 'job_item_to_node_revision';
+$handler->display->display_options['fields']['title_field-revision_id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['title_field-revision_id']['type'] = 'title_linked';
+$handler->display->display_options['fields']['title_field-revision_id']['settings'] = array(
+  'title_style' => '_none',
+  'title_link' => 'content',
+  'title_class' => '',
+);
 /* Field: Translation Management Job Item: Label */
 $handler->display->display_options['fields']['label']['id'] = 'label';
 $handler->display->display_options['fields']['label']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['fields']['label']['field'] = 'label';
+$handler->display->display_options['fields']['label']['empty'] = '[title_field-revision_id]';
 /* Field: Translation Management Job Item: Source language */
 $handler->display->display_options['fields']['source_language']['id'] = 'source_language';
 $handler->display->display_options['fields']['source_language']['table'] = 'tmgmt_job_item';
@@ -155,12 +181,12 @@ $handler->display->display_options['fields']['section']['id'] = 'section';
 $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
 $handler->display->display_options['fields']['section']['field'] = 'section';
 $handler->display->display_options['fields']['section']['relationship'] = 'job_item_to_node';
-/* Field: Content: Activity */
-$handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
-$handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
-$handler->display->display_options['fields']['field_activity']['field'] = 'field_activity';
-$handler->display->display_options['fields']['field_activity']['relationship'] = 'job_item_to_node';
-$handler->display->display_options['fields']['field_activity']['type'] = 'taxonomy_term_reference_plain';
+/* Field: Content (historical data): Activity */
+$handler->display->display_options['fields']['field_activity-revision_id']['id'] = 'field_activity-revision_id';
+$handler->display->display_options['fields']['field_activity-revision_id']['table'] = 'field_revision_field_activity';
+$handler->display->display_options['fields']['field_activity-revision_id']['field'] = 'field_activity-revision_id';
+$handler->display->display_options['fields']['field_activity-revision_id']['relationship'] = 'job_item_to_node_revision';
+$handler->display->display_options['fields']['field_activity-revision_id']['type'] = 'taxonomy_term_reference_plain';
 /* Field: Translation Management Job Item: State */
 $handler->display->display_options['fields']['state']['id'] = 'state';
 $handler->display->display_options['fields']['state']['table'] = 'tmgmt_job_item';
@@ -222,38 +248,6 @@ $handler->display->display_options['arguments']['target_language']['summary']['f
 $handler->display->display_options['arguments']['target_language']['summary_options']['items_per_page'] = '25';
 $handler->display->display_options['arguments']['target_language']['limit'] = '0';
 $handler->display->display_options['filter_groups']['operator'] = 'OR';
-$handler->display->display_options['filter_groups']['groups'] = array(
-  1 => 'OR',
-  2 => 'AND',
-);
-/* Filter criterion: Content: Type */
-$handler->display->display_options['filters']['type']['id'] = 'type';
-$handler->display->display_options['filters']['type']['table'] = 'node';
-$handler->display->display_options['filters']['type']['field'] = 'type';
-$handler->display->display_options['filters']['type']['relationship'] = 'job_item_to_node';
-$handler->display->display_options['filters']['type']['value'] = array(
-  'banner' => 'banner',
-  'page' => 'page',
-  'newsletter_article' => 'newsletter_article',
-  'wiki_page' => 'wiki_page',
-);
-$handler->display->display_options['filters']['type']['group'] = 1;
-/* Filter criterion: Translation Management Job Item: Item type */
-$handler->display->display_options['filters']['item_type']['id'] = 'item_type';
-$handler->display->display_options['filters']['item_type']['table'] = 'tmgmt_job_item';
-$handler->display->display_options['filters']['item_type']['field'] = 'item_type';
-$handler->display->display_options['filters']['item_type']['operator'] = 'not in';
-$handler->display->display_options['filters']['item_type']['value'] = array(
-  'node' => 'node',
-);
-$handler->display->display_options['filters']['item_type']['group'] = 1;
-/* Filter criterion: Workbench Moderation: Current */
-$handler->display->display_options['filters']['current']['id'] = 'current';
-$handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
-$handler->display->display_options['filters']['current']['field'] = 'current';
-$handler->display->display_options['filters']['current']['relationship'] = 'job_item_to_node';
-$handler->display->display_options['filters']['current']['value'] = '1';
-$handler->display->display_options['filters']['current']['group'] = 2;
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'job_job_items');
@@ -274,9 +268,12 @@ $translatables['osha_job_overview_job_items'] = array(
   t('‹ previous'),
   t('next ›'),
   t('last »'),
+  t('Content Revision'),
+  t('revision user'),
   t('Content'),
-  t('author'),
+  t('Title'),
   t('Label'),
+  t('[title_field-revision_id]'),
   t('Source language'),
   t('Target Language'),
   t('Page count'),

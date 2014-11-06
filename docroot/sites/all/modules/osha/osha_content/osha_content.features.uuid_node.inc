@@ -71,7 +71,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -280,7 +279,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -484,7 +482,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -688,7 +685,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -893,7 +889,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -1104,7 +1099,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -1315,7 +1309,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -1526,7 +1519,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -1737,7 +1729,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -1941,7 +1932,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -2143,7 +2133,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -2354,7 +2343,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -2558,7 +2546,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -2762,7 +2749,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -2966,7 +2952,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -3177,7 +3162,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -3397,7 +3381,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -3602,7 +3585,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -3806,7 +3788,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
@@ -4015,7 +3996,6 @@ function osha_content_uuid_features_default_content() {
     ),
   ),
   'field_thesaurus' => array(),
-  'field_workflow_status' => array(),
   'field_wiki_categories' => array(),
   'metatags' => array(),
   'rdf_mapping' => array(
