@@ -1,0 +1,27 @@
+<?php
+
+function osha_legislation_install() {
+  osha_legislation_add_menu_position_rules();
+}
+
+/**
+ * Add legislation menu position rules
+ */
+function osha_legislation_update_7001() {
+  osha_legislation_add_menu_position_rules();
+}
+
+/**
+ * Add menu position rules for publication content type.
+ */
+function osha_legislation_add_menu_position_rules() {
+  if (module_exists('osha') && module_load_include('inc', 'osha', 'osha.utils')) {
+    $parent_menu = array('------ EU directives', '------ European Directives');
+    $condition = array('pages' => 'legislation/directives/*'.PHP_EOL.'legislation/directive/*');
+    osha_add_menu_position_rule('Directive Menu Rule', $parent_menu, $condition);
+    
+    $parent_menu = array('------ EU guidelines', '------ European Guidelines');
+    $condition = array('pages' => 'legislation/guidelines/*');
+    osha_add_menu_position_rule('Guideline Menu Rule', $parent_menu, $condition);
+  }
+}
