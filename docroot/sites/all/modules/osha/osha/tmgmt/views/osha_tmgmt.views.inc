@@ -47,6 +47,14 @@ function osha_tmgmt_views_query_alter(&$view, &$query) {
       $query->table_queue['workbench_moderation_node_history']['join']->type = 'LEFT';
     }
   }
+
+  // Switch from JOIN to LEFT JOIN with workbench_moderation_node_history
+  // to allow showing job items that doesn't have items moderated.
+  if ($view->name == 'osha_job_overview_job_items') {
+    if (isset($query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type)) {
+      $query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type = 'LEFT';
+    }
+  }
 }
 
 /**
@@ -65,6 +73,13 @@ function osha_tmgmt_views_data_alter(&$data) {
   }
 }
 
+function osha_tmgtm_entity_list() {
+  $entities = array();
+  foreach (entity_get_info() as $name => $entity) {
+    $entities[$name] = $entity['label'];
+  }
+  return $entities;
+}
 
 class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
 
@@ -92,20 +107,36 @@ class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
       'field' => array(
         'handler' => 'tmgmt_handler_field_tmgmt_job_item_language',
       ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_in_operator',
+        'options callback' => 'entity_metadata_language_list',
+        'real field' => 'target_language',
+      ),
+      'argument' => array(
+        'real field' => 'target_language',
+        'handler' => 'views_handler_argument_string',
+      ),
     );
 
     $data['tmgmt_job_item']['page_count'] = array(
       'title' => t('Page count'),
       'help' => t('Number of pages for translation'),
-      'real field' => 'page_count',
-      'field' => array(),
+      'field' => array(
+        'real field' => 'page_count',
+        'handler' => 'views_handler_field',
+        'click sortable' => TRUE,
+      ),
     );
 
     $data['tmgmt_job_item']['character_count'] = array(
       'title' => t('Character count'),
       'help' => t('Number of characters for translation'),
-      'real field' => 'character_count',
-      'field' => array(),
+      'field' => array(
+        'real field' => 'character_count',
+        'handler' => 'views_handler_field',
+        'click sortable' => TRUE,
+      ),
+
     );
 
     $data['tmgmt_job_item']['plugin'] = array(
@@ -125,6 +156,11 @@ class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
       'field' => array(
         'real field' => 'item_type',
         'handler' => 'views_handler_field',
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_in_operator',
+        'options callback' => 'osha_tmgtm_entity_list',
+        'real field' => 'item_type',
       ),
     );
 
@@ -158,6 +194,72 @@ class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
       'field' => array(
         'handler' => 'osha_tmgmt_handler_field_tmgmt_job_item_creator',
         'click sortable' => TRUE,
+      ),
+    );
+
+    $data['tmgmt_job_item']['changed'] = array(
+      'title' => t('Changed date'),
+      'real field' => 'changed',
+      'help' => t('The date job item was last changed.'),
+      'field' => array(
+        'handler' => 'views_handler_field_date',
+      ),
+    );
+
+    $data['tmgmt_job_item']['job_item_to_node'] = array(
+      'title' => t('Content'),
+      'help' => t('Content that is associated with this job item.'),
+      'real field' => 'item_id',
+      'relationship' => array(
+        'label' => t('Content'),
+        'base' => 'node',
+        'base field' => 'nid',
+        'handler' => 'views_handler_relationship',
+        'field' => 'item_id',
+
+        'relationship field' => 'item_id',
+        'extra' => array(
+          array(
+            'table' => 'tmgmt_job_item',
+            'field' => 'item_type',
+            'operator' => '=',
+            'value' => 'node',
+          ),
+          array(
+            'table' => 'tmgmt_job_item',
+            'field' => 'plugin',
+            'operator' => '=',
+            'value' => 'entity',
+          ),
+        ),
+      ),
+    );
+
+    $data['tmgmt_job_item']['job_item_to_node_revision'] = array(
+      'title' => t('Content'),
+      'help' => t('Content revision that is associated with this job item.'),
+      'real field' => 'vid',
+      'relationship' => array(
+        'label' => t('Content Revision'),
+        'base' => 'node_revision',
+        'base field' => 'vid',
+        'handler' => 'views_handler_relationship',
+        'field' => 'vid',
+        'relationship field' => 'vid',
+        'extra' => array(
+          array(
+            'table' => 'tmgmt_job_item',
+            'field' => 'item_type',
+            'operator' => '=',
+            'value' => 'node',
+          ),
+          array(
+            'table' => 'tmgmt_job_item',
+            'field' => 'plugin',
+            'operator' => '=',
+            'value' => 'entity',
+          ),
+        ),
       ),
     );
 
