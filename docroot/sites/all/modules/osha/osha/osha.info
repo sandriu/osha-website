@@ -254,3 +254,4 @@ features_exclude[taxonomy][activity] = activity
 features_exclude[taxonomy][nace_codes] = nace_codes
 features_exclude[taxonomy][thesaurus] = thesaurus
 files[] = osha.test
+files[] = osha.api.inc

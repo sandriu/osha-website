@@ -285,6 +285,18 @@ function osha_tmgmt_theme() {
 }
 
 /**
+ * Hook osha_i18n_string_list().
+ *
+ * Implement this hook to return translatable strings.
+ */
+function hook_osha_tmgmt_i18n_string_list() {
+  return array(
+    'String value',
+    'Ready to Publish',
+  );
+}
+
+/**
  * Implements hook_tmgmt_file_format_info().
  */
 function osha_tmgmt_tmgmt_file_format_plugin_info() {
@@ -312,6 +324,7 @@ function osha_tmgmt_tmgmt_source_plugin_info_alter(&$info) {
   $info['entity']['plugin controller class'] = 'OSHATMGMTEntitySourcePluginController';
   // $info['node']['plugin controller class'] = 'OSHATMGMTNodeSourcePluginController';
   $info['i18n_string']['plugin controller class'] = 'OSHATMGMTI18nStringSourcePluginController';
+  $info['locale']['ui controller class'] = 'OSHATMGMTLocaleSourceUIController';
 }
 
 /**

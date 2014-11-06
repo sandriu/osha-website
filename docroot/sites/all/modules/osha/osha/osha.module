@@ -3,6 +3,7 @@
 include_once 'osha.features.inc';
 
 define('OSHA_ARTICLE_CONTENT_TYPE_ARTICLE', 'article');
+define('OSHA', 'OSHA');
 
 function osha_menu() {
   $items = array();
@@ -43,6 +44,87 @@ function osha_users_autocomplete($role_name, $name) {
   }
   drupal_json_output($output);
 }
+
+/**
+ * Implements hook_osha_tmgmt_i18n_string_list().
+ */
+function osha_osha_tmgmt_i18n_string_list() {
+  return array(
+    '- All -',
+    '‹ previous',
+    '« first',
+    'Activity',
+    'Alt Text',
+    'Alternative text is used by screen readers, search engines, and when the image cannot be loaded. By adding alt text you improve accessibility and search engine optimization.',
+    'Apply',
+    'Approved',
+    'Archived',
+    'Article type',
+    'Asc',
+    'Automatically calculated when saving. The count of characters found in the default language text (English).',
+    'Automatically calculated when saving. The count of pages of text in the default language (English).',
+    'Basic page setup error: !error',
+    'Body',
+    'Calendar page',
+    'Character count',
+    'Day only',
+    'Default',
+    'Desc',
+    'Description',
+    'Draft',
+    'EU short date',
+    'Expiration Date',
+    'File name',
+    'Image',
+    'Items per page',
+    'Language',
+    'last »',
+    'Master',
+    'Media browser',
+    'more',
+    'My files (OSHA)',
+    'My files',
+    'Nace',
+    'Needs Retranslation',
+    'next ›',
+    'No files available.',
+    'Offset',
+    'OSHA Library ',
+    'Osha Slideshow',
+    'OSHWiki Category',
+    'OSHWiki featured articles',
+    'Page count',
+    'Publication date',
+    'Published',
+    'Ready To Publish',
+    'Rejected',
+    'Replacing title_field for !bundle',
+    'Reset',
+    'Save',
+    'Show using theme @theme',
+    'Sort by',
+    'Summary',
+    'Tags setup error: !error',
+    'Tags',
+    'Theme:',
+    'Thesaurus',
+    'This node is in the translation cart!',
+    'Title text is used in the tool tip when a user hovers their mouse over the image. Adding title text makes it easier to understand the context of an image and improves usability.',
+    'Title Text',
+    'Title',
+    'To Be Approved',
+    'To Be Reviewed',
+    'Type',
+    'Upload date',
+    'Use comma ( , ) to assign multiple terms',
+    'Use count',
+    'User who uploaded',
+    'Year',
+    'You may select multiple items from the list by holding CTRL',
+    "Use <em>basic pages</em> for your static content, such as an 'About us' page.",
+  );
+}
+
 
 /**
  * Implements hook_schema_alter().
@@ -343,7 +425,7 @@ function osha_enable_field_image_translations() {
       drupal_form_submit('entity_translation_translatable_form', $form_state, 'field_image');
     }
     else {
-      drupal_set_message(t("field_image field not available yet"), 'error');
+      drupal_set_message('field_image field not available yet', 'error');
     }
   }
   else {
