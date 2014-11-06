@@ -19,6 +19,7 @@ class OSHATMGMTLocaleSourceUIController extends TMGMTLocaleSourceUIController {
     $osha = cache_get('osha:osha_tmgmt_i18n_string_list');
     if (empty($osha)) {
       $strings = module_invoke_all('osha_tmgmt_i18n_string_list');
+      $strings = array_unique($strings);
       $osha = array();
       $all = db_select('locales_source', 'ls')
         ->fields('ls', array('lid', 'source'))
