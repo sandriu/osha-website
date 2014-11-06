@@ -20,8 +20,78 @@ $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
 $handler->display->display_options['pager']['type'] = 'full';
-$handler->display->display_options['pager']['options']['items_per_page'] = '10';
+$handler->display->display_options['pager']['options']['items_per_page'] = '25';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['pager']['options']['id'] = '0';
+$handler->display->display_options['pager']['options']['quantity'] = '9';
 $handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'title_field-revision_id' => 'title_field-revision_id',
+  'tjiid' => 'tjiid',
+  'label' => 'label',
+  'item_type' => 'item_type',
+  'source_language' => 'source_language',
+  'target_language' => 'target_language',
+  'url' => 'url',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'title_field-revision_id' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'tjiid' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'label' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'item_type' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'source_language' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'target_language' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'url' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+/* Relationship: Translation Management Job Item: Content */
+$handler->display->display_options['relationships']['job_item_to_node_revision']['id'] = 'job_item_to_node_revision';
+$handler->display->display_options['relationships']['job_item_to_node_revision']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['relationships']['job_item_to_node_revision']['field'] = 'job_item_to_node_revision';
+/* Field: Content (historical data): Title */
+$handler->display->display_options['fields']['title_field-revision_id']['id'] = 'title_field-revision_id';
+$handler->display->display_options['fields']['title_field-revision_id']['table'] = 'field_revision_title_field';
+$handler->display->display_options['fields']['title_field-revision_id']['field'] = 'title_field-revision_id';
+$handler->display->display_options['fields']['title_field-revision_id']['relationship'] = 'job_item_to_node_revision';
+$handler->display->display_options['fields']['title_field-revision_id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['title_field-revision_id']['type'] = 'title_linked';
+$handler->display->display_options['fields']['title_field-revision_id']['settings'] = array(
+  'title_style' => '_none',
+  'title_link' => 'content',
+  'title_class' => '',
+);
 /* Field: Translation Management Job Item: Translation management job item ID */
 $handler->display->display_options['fields']['tjiid']['id'] = 'tjiid';
 $handler->display->display_options['fields']['tjiid']['table'] = 'tmgmt_job_item';
@@ -32,6 +102,7 @@ $handler->display->display_options['fields']['tjiid']['exclude'] = TRUE;
 $handler->display->display_options['fields']['label']['id'] = 'label';
 $handler->display->display_options['fields']['label']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['fields']['label']['field'] = 'label';
+$handler->display->display_options['fields']['label']['empty'] = '[title_field-revision_id]';
 /* Field: Translation Management Job Item: Item type */
 $handler->display->display_options['fields']['item_type']['id'] = 'item_type';
 $handler->display->display_options['fields']['item_type']['table'] = 'tmgmt_job_item';
@@ -54,12 +125,11 @@ $handler->display->display_options['fields']['url']['alter']['make_link'] = TRUE
 $handler->display->display_options['fields']['url']['alter']['path'] = '[url]';
 $handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
 $handler->display->display_options['fields']['url']['link_to_entity'] = 1;
-/* Sort criterion: Translation Management Job Item: Changed */
-$handler->display->display_options['sorts']['changed']['id'] = 'changed';
-$handler->display->display_options['sorts']['changed']['table'] = 'tmgmt_job_item';
-$handler->display->display_options['sorts']['changed']['field'] = 'changed';
-$handler->display->display_options['sorts']['changed']['order'] = 'DESC';
-$handler->display->display_options['sorts']['changed']['granularity'] = 'minute';
+/* Sort criterion: Translation Management Job Item: Translation management job item ID */
+$handler->display->display_options['sorts']['tjiid']['id'] = 'tjiid';
+$handler->display->display_options['sorts']['tjiid']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['sorts']['tjiid']['field'] = 'tjiid';
+$handler->display->display_options['sorts']['tjiid']['order'] = 'DESC';
 /* Filter criterion: Translation Management Job Item: State */
 $handler->display->display_options['filters']['state']['id'] = 'state';
 $handler->display->display_options['filters']['state']['table'] = 'tmgmt_job_item';
@@ -100,6 +170,10 @@ $handler->display->display_options['relationships']['osha_tmgmt_job_trans_valida
 $handler->display->display_options['relationships']['osha_tmgmt_job_trans_validators']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['relationships']['osha_tmgmt_job_trans_validators']['field'] = 'osha_tmgmt_job_trans_validators';
 $handler->display->display_options['relationships']['osha_tmgmt_job_trans_validators']['required'] = TRUE;
+/* Relationship: Translation Management Job Item: Content */
+$handler->display->display_options['relationships']['job_item_to_node_revision']['id'] = 'job_item_to_node_revision';
+$handler->display->display_options['relationships']['job_item_to_node_revision']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['relationships']['job_item_to_node_revision']['field'] = 'job_item_to_node_revision';
 $handler->display->display_options['defaults']['arguments'] = FALSE;
 /* Contextual filter: Translation Validators: User uid */
 $handler->display->display_options['arguments']['user']['id'] = 'user';
@@ -199,7 +273,23 @@ $handler->display->display_options['relationships']['tjid']['id'] = 'tjid';
 $handler->display->display_options['relationships']['tjid']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['relationships']['tjid']['field'] = 'tjid';
 $handler->display->display_options['relationships']['tjid']['required'] = TRUE;
+/* Relationship: Translation Management Job Item: Content */
+$handler->display->display_options['relationships']['job_item_to_node_revision']['id'] = 'job_item_to_node_revision';
+$handler->display->display_options['relationships']['job_item_to_node_revision']['table'] = 'tmgmt_job_item';
+$handler->display->display_options['relationships']['job_item_to_node_revision']['field'] = 'job_item_to_node_revision';
 $handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content (historical data): Title */
+$handler->display->display_options['fields']['title_field-revision_id']['id'] = 'title_field-revision_id';
+$handler->display->display_options['fields']['title_field-revision_id']['table'] = 'field_revision_title_field';
+$handler->display->display_options['fields']['title_field-revision_id']['field'] = 'title_field-revision_id';
+$handler->display->display_options['fields']['title_field-revision_id']['relationship'] = 'job_item_to_node_revision';
+$handler->display->display_options['fields']['title_field-revision_id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['title_field-revision_id']['type'] = 'title_linked';
+$handler->display->display_options['fields']['title_field-revision_id']['settings'] = array(
+  'title_style' => '_none',
+  'title_link' => 'content',
+  'title_class' => '',
+);
 /* Field: Translation Management Job Item: Translation management job item ID */
 $handler->display->display_options['fields']['tjiid']['id'] = 'tjiid';
 $handler->display->display_options['fields']['tjiid']['table'] = 'tmgmt_job_item';
@@ -210,6 +300,7 @@ $handler->display->display_options['fields']['tjiid']['exclude'] = TRUE;
 $handler->display->display_options['fields']['label']['id'] = 'label';
 $handler->display->display_options['fields']['label']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['fields']['label']['field'] = 'label';
+$handler->display->display_options['fields']['label']['empty'] = '[title_field-revision_id]';
 /* Field: Translation Management Job: Label */
 $handler->display->display_options['fields']['label_1']['id'] = 'label_1';
 $handler->display->display_options['fields']['label_1']['table'] = 'tmgmt_job';
@@ -271,10 +362,13 @@ $translatables['osha_translation_workbench'] = array(
   t('‹ previous'),
   t('next ›'),
   t('last »'),
+  t('Content Revision'),
+  t('Title'),
   t('Job Item ID'),
   t('.'),
   t(','),
   t('Label'),
+  t('[title_field-revision_id]'),
   t('Item type'),
   t('Source language'),
   t('Target language'),
