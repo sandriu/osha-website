@@ -17,7 +17,7 @@ osha_config_development();
 osha_configure_recaptcha();
 osha_configure_on_the_web();
 osha_add_menu_position_rules();
-// osha_add_agregator_rss_feeds();
+osha_add_agregator_rss_feeds();
 
 variable_set('admin_theme', 'osha_admin');
 variable_set('theme_default', 'osha_frontend');
@@ -305,6 +305,18 @@ function osha_add_menu_position_rules() {
         'admin_title' => 'Guideline Menu Rule',
         'plid' => $guideline_menu_entry !== NULL ? $guideline_menu_entry : 'main-menu:0',
         'pages' => 'legislation/guidelines/*',
+        'op' => 'Save',
+      ),
+    );
+    drupal_form_submit('menu_position_add_rule_form', $form_state);
+
+    //menu position rule for See all Press Releases Menu Rule
+    $all_press_releases_menu_entry = array_search('------ Press room', $options);
+    $form_state = array(
+      'values' => array(
+        'admin_title' => 'See all Press Releases Menu Rule',
+        'plid' => $all_press_releases_menu_entry !== NULL ? $all_press_releases_menu_entry : 'main-menu:0',
+        'pages' => 'press-releases',
         'op' => 'Save',
       ),
     );
