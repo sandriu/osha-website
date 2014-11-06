@@ -293,6 +293,7 @@ $options['init-modules'] = array(
 
   'field_group',
   'entityreference',
+  'entityreference_view_widget',
   'link',
   'title',
   'wysiwyg',

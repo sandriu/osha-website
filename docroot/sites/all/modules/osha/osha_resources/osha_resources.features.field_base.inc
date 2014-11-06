@@ -13,7 +13,7 @@ function osha_resources_field_default_field_bases() {
   // Exported field_base: 'field_flickr'
   $field_bases['field_flickr'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_flickr',
@@ -24,44 +24,8 @@ function osha_resources_field_default_field_bases() {
     'settings' => array(
       'entity_translation_sync' => FALSE,
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'flickrfield',
-  );
-
-  // Exported field_base: 'field_flickr_tags'
-  $field_bases['field_flickr_tags'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_flickr_tags',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
-    'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'taxonomy',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'flickr_tags',
-          'parent' => 0,
-        ),
-      ),
-      'entity_translation_sync' => FALSE,
-      'options_list_callback' => 'i18n_taxonomy_allowed_values',
-    ),
-    'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_internal_contents'
@@ -109,14 +73,14 @@ function osha_resources_field_default_field_bases() {
       ),
       'target_type' => 'node',
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_slideshare'
   $field_bases['field_slideshare'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_slideshare',
@@ -129,14 +93,14 @@ function osha_resources_field_default_field_bases() {
       'entity_translation_sync' => FALSE,
       'secret_key' => 'v1HYiYhg',
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'slideshare',
   );
 
   // Exported field_base: 'field_youtube'
   $field_bases['field_youtube'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_youtube',
@@ -151,7 +115,7 @@ function osha_resources_field_default_field_bases() {
     'settings' => array(
       'entity_translation_sync' => FALSE,
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'youtube',
   );
 

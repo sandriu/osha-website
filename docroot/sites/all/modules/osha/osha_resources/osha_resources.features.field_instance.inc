@@ -231,69 +231,6 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-resources-field_flickr_tags'
-  $field_instances['node-resources-field_flickr_tags'] = array(
-    'bundle' => 'resources',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Grab Flickr photos with these tags only. Comma separated.',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_flickr_tags',
-    'label' => 'Flickr tags',
-    'required' => FALSE,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 42,
-    ),
-  );
-
   // Exported field_instance: 'node-resources-field_internal_contents'
   $field_instances['node-resources-field_internal_contents'] = array(
     'bundle' => 'resources',
@@ -351,13 +288,14 @@ function osha_resources_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference',
+      'module' => 'entityreference_view_widget',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
+        'allow_duplicates' => 0,
+        'close_modal' => 0,
+        'pass_argument' => 1,
+        'view' => 'aditional_resources|entityreference_view_widget_1',
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'entityreference_view_widget',
       'weight' => 47,
     ),
   );
@@ -498,9 +436,8 @@ function osha_resources_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_plain',
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'highlights_item' => array(
@@ -562,8 +499,6 @@ function osha_resources_field_default_field_instances() {
   t('External URL');
   t('File');
   t('Flickr');
-  t('Flickr tags');
-  t('Grab Flickr photos with these tags only. Comma separated.');
   t('Internal Contents');
   t('Slideshare');
   t('Title');
