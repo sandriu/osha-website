@@ -32,6 +32,10 @@ class osha_tmgmt_handler_field_tmgmt_entity_label extends tmgmt_handler_field_tm
       $label = $entity->label();
       switch ($entity->item_type) {
         case 'node':
+          // Set it to empty to let the views handle the label (from revision).
+          $label = '';
+          break;
+
         case 'taxonomy_term':
           $uri = $entity->getSourceUri();
           $label = l($entity->label(), $uri['path'], $uri['options']);
