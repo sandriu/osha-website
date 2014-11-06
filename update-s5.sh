@@ -9,7 +9,13 @@ echo "Switching to RELEASE branch ..."
 git checkout sprint-5
 
 echo "Enabling new modules ..."
-#drush en -y ...
+drush en -y entityreference_view_widget
+drush en -y flickr
+drush en -y flickr_block
+drush en -y flickrfield
+drush en -y youtube
+drush en -y osha_resources
+drush en -y osha_slideshare
 
 drush cc all
 
