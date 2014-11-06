@@ -524,6 +524,17 @@ function osha_tmgmt_job_priority_name($job) {
   return '';
 }
 
+/**
+ * Get list (options) of Job Priorities
+ */
+function osha_tmgmt_job_priority_list() {
+  return array(
+    OSHA_TMGMT_JOB_PRIORITY_HIGH => 'High',
+    OSHA_TMGMT_JOB_PRIORITY_LOW => 'Low',
+    OSHA_TMGMT_JOB_PRIORITY_NORMAL => 'Normal',
+  );
+}
+
 
 /**
  *  Implements hook_tmgmt_source_translation_structure().
@@ -1518,45 +1529,6 @@ function osha_tmgmt_views_default_views_alter(&$views) {
       'changed', 'creator', 'operations',
     );
     foreach ($columns as $column) {
-      if (isset($handler->display->display_options['fields'][$column])) {
-        $settings = $handler->display->display_options['fields'][$column];
-        unset($handler->display->display_options['fields'][$column]);
-        $handler->display->display_options['fields'][$column] = $settings;
-      }
-    }
-  }
-
-  if (isset($views['tmgmt_ui_job_overview'])) {
-    $handler = &$views['tmgmt_ui_job_overview']->display['default']->handler;
-
-    // Remove un-needed filters.
-    unset($handler->display->display_options['filters']['source_language']);
-    unset($handler->display->display_options['filters']['target_language']);
-    unset($handler->display->display_options['filters']['translator']);
-
-    // Remove un-needed columns.
-    unset($handler->display->display_options['fields']['source_language']);
-    unset($handler->display->display_options['fields']['target_language']);
-    unset($handler->display->display_options['fields']['translator']);
-    unset($handler->display->display_options['fields']['word_count']);
-
-    /* Field: Translation Management Job: Priority */
-    $handler->display->display_options['fields']['priority']['id'] = 'priority';
-    $handler->display->display_options['fields']['priority']['table'] = 'tmgmt_job';
-    $handler->display->display_options['fields']['priority']['field'] = 'priority';
-
-    /* Field: Translation Management Job: Page count */
-    $handler->display->display_options['fields']['page_count']['id'] = 'page_count';
-    $handler->display->display_options['fields']['page_count']['table'] = 'tmgmt_job';
-    $handler->display->display_options['fields']['page_count']['field'] = 'page_count';
-
-    /* Field: Translation Management Job: Character count */
-    $handler->display->display_options['fields']['character_count']['id'] = 'character_count';
-    $handler->display->display_options['fields']['character_count']['table'] = 'tmgmt_job';
-    $handler->display->display_options['fields']['character_count']['field'] = 'character_count';
-
-    // Reorder view fields.
-    foreach (array('progress', 'changed', 'operations') as $column) {
       if (isset($handler->display->display_options['fields'][$column])) {
         $settings = $handler->display->display_options['fields'][$column];
         unset($handler->display->display_options['fields'][$column]);
