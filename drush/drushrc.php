@@ -293,6 +293,7 @@ $options['init-modules'] = array(
 
   'field_group',
   'entityreference',
+  'entityreference_view_widget',
   'link',
   'title',
   'wysiwyg',
@@ -390,6 +391,8 @@ $options['init-modules'] = array(
   'osha_breadcrumbs',
   'osha_legislation',
   'osha_short_messages',
+  'osha_resources',
+  'osha_slideshare',
 
   'facetapi',
   'search_api_facetapi',
@@ -411,6 +414,12 @@ $options['init-modules'] = array(
   // Social share
   'addtoany',
   'on_the_web',
+
+  //Youtube and Flickr field
+  'youtube',
+  'flickr',
+  'flickr_block',
+  'flickrfield',
 
   // Link content types with main menu items
   'menu_position',
