@@ -74,8 +74,12 @@ class OshaTMGMTJob extends TMGMTJob {
       $this->save();
       $is_new = TRUE;
     }
-
     $item = tmgmt_job_item_create($plugin, $item_type, $item_id, array('tjid' => $this->tjid));
+    if ($item_type == 'node') {
+      $node = node_load($item_id);
+      $current_rev = workbench_moderation_node_current_load($node);
+      $item->vid = $current_rev->vid;
+    }
     $item->source_language = $source_language;
     $item->target_language = $target_language;
 
