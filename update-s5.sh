@@ -17,7 +17,11 @@ drush en -y youtube
 drush en -y osha_resources
 drush en -y osha_slideshare
 drush en -y osha_press_contact
-
+drush en -y osha_short_messages
+drush en -y print
+drush en -y print_ui
+drush en -y print_pdf_tcpdf
+drush en -y print_pdf
 drush cc all
 
 echo "PRE-UPDATE tasks ..."
@@ -25,7 +29,8 @@ drush php-script ../scripts/s5/pre-update.php
 drush cc all
 
 echo "FEATURE REVERT ..."
-drush  features-revert --force -y osha_press_release
+drush features-revert --force -y osha_press_release
+#drush features-revert --force -y osha_short_messages
 drush cc all
 
 echo "UPDATEDB ..."
