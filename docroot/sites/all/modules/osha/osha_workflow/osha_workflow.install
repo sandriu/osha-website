@@ -174,3 +174,30 @@ function osha_workflow_add_user_fields() {
     field_create_instance($instance);
   }
 }
+
+/**
+ * Disable views default from My Workbench.
+ */
+function osha_workflow_update_7002() {
+  // Disable workbench views from My Workbench.
+  $view = views_get_view('workbench_edited');
+  if (!empty($view)) {
+    // Revert the view before disable it.
+    $view->delete();
+    ctools_include('object-cache');
+    ctools_object_cache_clear('view', 'workbench_edited');
+    $status = variable_get('views_defaults', array());
+    $status['workbench_edited'] = TRUE;
+    variable_set('views_defaults', $status);
+  }
+  $view = views_get_view('workbench_recent_content');
+  if (!empty($view)) {
+    // Revert the view before disable it.
+    $view->delete();
+    ctools_include('object-cache');
+    ctools_object_cache_clear('view', 'workbench_recent_content');
+    $status = variable_get('views_defaults', array());
+    $status['workbench_recent_content'] = TRUE;
+    variable_set('views_defaults', $status);
+  }
+}
