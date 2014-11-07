@@ -55,4 +55,49 @@ class OSHATMGMTLocaleSourceUIController extends TMGMTLocaleSourceUIController {
     $select = $select->extend('PagerDefault')->limit(variable_get('tmgmt_source_list_limit', 20));
     return $select->execute()->fetchAll();
   }
+
+  /**
+   * Helper function to create translation data list for the sources page list.
+   *
+   * @param array $strings
+   *   Result of the search query returned by tmgmt_i18n_string_get_strings().
+   * @param string $type
+   *   I18n object type.
+   *
+   * @return array
+   *   Structured array with translation data.
+   */
+  protected function getTranslationData($strings, $type) {
+    $objects = array();
+    // Source language of locale strings is always english.
+    $source_language = 'en';
+
+    foreach ($strings as $string) {
+      $id = $string->lid;
+      // Get existing translations and current job items for the entity
+      // to determine translation statuses
+      $current_job_items = osha_tmgmt_job_item_load_latest('locale', $type, $id, $source_language);
+      $objects[$id] = array(
+        'id' => $id,
+        'object' => $string
+      );
+      // Load entity translation specific data.
+      foreach (language_list() as $langcode => $language) {
+        $langcode = str_replace('-', '', $langcode);
+
+        $translation_status = 'current';
+
+        if ($langcode == $source_language) {
+          $translation_status = 'original';
+        }
+        elseif ($string->{'lang_' . $langcode} === NULL) {
+          $translation_status = 'missing';
+        }
+
+        $objects[$id]['current_job_items'][$langcode] = isset($current_job_items[$langcode]) ? $current_job_items[$langcode] : NULL;
+        $objects[$id]['translation_statuses'][$langcode] = $translation_status;
+      }
+    }
+    return $objects;
+  }
 }
