@@ -15,7 +15,8 @@ function osha_workflow_views_query_alter(&$view, &$query) {
   if ($view->name == 'osh_workflow_admin') {
     // Alter the query for views from Workflow Dashboard.
     // Get the latest state of nodes, not just the published ones.
-    if (!empty($query->table_queue['node_revision'])) {
+    if (!empty($query->table_queue['node_revision'])
+        && $view->current_display != 'my_content_non_moderated') {
       $query->table_queue['node_revision']['join']->field = 'nid';
       $query->table_queue['node_revision']['join']->left_field = 'nid';
     }
