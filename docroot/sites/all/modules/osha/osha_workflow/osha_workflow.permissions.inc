@@ -160,6 +160,8 @@ function osha_workflow_permissions_role_review_manager() {
       'moderate content from final_draft to to_be_approved',
       'moderate content from approved to ready_to_publish',
       'moderate content from rejected to ready_to_publish',
+      'moderate content from ready_to_publish to published',
+      'edit any content in ready_to_publish',
     ),
     osha_workflow_permissions_common(),
     osha_workflow_permissions_manage_content(),

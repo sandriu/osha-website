@@ -200,4 +200,8 @@ function osha_workflow_update_7002() {
     $status['workbench_recent_content'] = TRUE;
     variable_set('views_defaults', $status);
   }
+
+  // Give new permissions to Review Manager.
+  $role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
+  user_role_grant_permissions($role->rid, osha_workflow_permissions_role_review_manager());
 }
