@@ -445,7 +445,6 @@ function osha_workflow_views_default_views() {
   $handler->display->display_options['title'] = 'My Content';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'view osh content tab';
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
