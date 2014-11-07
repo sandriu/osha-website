@@ -1302,7 +1302,6 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
   // Loop over all target languages, create a job for each source and target
   // language combination add add the relevant job items to it.
   foreach ($target_languages as $target_language) {
-    $job_empty = TRUE;
     foreach ($job_it_by_src_lang as $source_language => $job_items) {
       // Skip in case the source language is the same as the target language.
       if ($source_language == $target_language) {
