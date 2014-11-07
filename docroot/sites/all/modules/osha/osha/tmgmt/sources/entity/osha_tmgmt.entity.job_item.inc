@@ -39,7 +39,7 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
         }
       }
       if ($finished) {
-        $this->needsReview(TRUE);
+        $this->needsReview(t('Translation was accepted'));
       }
     }
     $this->save();
