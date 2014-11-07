@@ -122,6 +122,14 @@ $handler->display->display_options['style_options']['info'] = array(
     'empty_column' => 0,
   ),
 );
+/* No results behavior: Global: Text area */
+$handler->display->display_options['empty']['area']['id'] = 'area';
+$handler->display->display_options['empty']['area']['table'] = 'views';
+$handler->display->display_options['empty']['area']['field'] = 'area';
+$handler->display->display_options['empty']['area']['label'] = 'No results';
+$handler->display->display_options['empty']['area']['empty'] = TRUE;
+$handler->display->display_options['empty']['area']['content'] = 'No job items found for your search.';
+$handler->display->display_options['empty']['area']['format'] = 'full_html';
 /* Relationship: Translation Management Job Item: Content */
 $handler->display->display_options['relationships']['job_item_to_node_revision']['id'] = 'job_item_to_node_revision';
 $handler->display->display_options['relationships']['job_item_to_node_revision']['table'] = 'tmgmt_job_item';
@@ -268,6 +276,8 @@ $translatables['osha_job_overview_job_items'] = array(
   t('‹ previous'),
   t('next ›'),
   t('last »'),
+  t('No results'),
+  t('No job items found for your search.'),
   t('Content Revision'),
   t('revision user'),
   t('Content'),
