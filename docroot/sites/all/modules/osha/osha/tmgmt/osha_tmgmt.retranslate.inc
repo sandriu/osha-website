@@ -333,6 +333,9 @@ class OshaTMGMTRetranslate {
         array('@lang' => strtoupper($orig_lang), '@msg' => substr($msg, 0, -1)));
     }
 
+    if ( empty($languages)) {
+      $messages['status'][] = t('Full translation in all languages.');
+    }
     $valid_languages = array();
     // Check for incompatibilities
     foreach ($languages as $lang) {
