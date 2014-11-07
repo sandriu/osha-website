@@ -316,8 +316,8 @@ class OshaTMGMTRetranslate {
         }
         $messages['error'][] = t('Node cannot be re-translated in: ')
           . implode(", ", array_map('strtoupper', $languages));
+        return;
       }
-      return;
     }
     // Check if source language has been changed.
     $changed_ids = self::get_changed_ids($clean_source_text, $source_text);

@@ -19,7 +19,8 @@ drush php-script ../scripts/s4/pre-update.php
 drush cc all
 
 echo "FEATURE REVERT ..."
-#drush features-revert --force -y ...
+drush fr osha_workflow --force -y
+drush fr osha_tmgmt --force -y
 
 echo "UPDATEDB ..."
 drush updatedb -y
