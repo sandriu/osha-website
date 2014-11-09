@@ -31,6 +31,10 @@ function osha_add_menu_position_rules() {
     // Menu position rule for Seminar content type
     $condition = array('content_type' => array('seminar' => 'seminar'));
     osha_add_menu_position_rule('Seminar Menu Rule', '------ Our seminars', $condition);
+
+    // Menu position rule for Calls content type
+    $condition = array('content_type' => array('calls' => 'calls'));
+    osha_add_menu_position_rule('Calls Menu Rule', '------ Procurement', $condition);
   }
 }
 

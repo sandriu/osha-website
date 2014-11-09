@@ -6,7 +6,7 @@ echo "Disabling the modules no longer in use ..."
 #drush dis -y ...
 
 echo "Switching to RELEASE branch ..."
-# git checkout sprint-5
+git checkout sprint-5
 
 echo "Enabling new modules ..."
 drush en -y entityreference_view_widget
