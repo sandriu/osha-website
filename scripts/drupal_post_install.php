@@ -17,6 +17,7 @@ osha_config_development();
 osha_configure_recaptcha();
 osha_configure_on_the_web();
 osha_configure_search_index();
+osha_add_menu_position_rules();
 
 variable_set('admin_theme', 'osha_admin');
 variable_set('theme_default', 'osha_frontend');
@@ -299,4 +300,23 @@ function osha_disable_blocks(){
 
   // Flush cache.
   cache_clear_all();
+}
+
+/**
+ * Add menu position rules.
+ */
+function osha_add_menu_position_rules() {
+  if (module_exists('osha') && module_load_include('inc', 'osha', 'osha.utils')) {
+    // Menu position rule for Press Release content type.
+    $parent_menu = '------ Press room';
+    $condition = array('content_type' => array('press_release' => 'press_release'));
+    osha_add_menu_position_rule('Press room Menu Rule', $parent_menu, $condition);
+    
+    // Menu position rule for See all Press Releases Menu Rule.
+    $condition = array('pages' => 'press-releases');
+    osha_add_menu_position_rule('See all Press Releases Menu Rule', $parent_menu, $condition);
+
+    $condition = array('content_type' => array('publication' => 'publication'));
+    osha_add_menu_position_rule('Publications Menu Rule', '------ Publications', $condition);
+  }
 }

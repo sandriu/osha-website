@@ -1,14 +1,14 @@
 <?php
 
 function osha_publication_install() {
-  osha_publication_add_menu_position_rules();
+  //osha_publication_add_menu_position_rules();
 }
 
 /**
  * Add publication menu position rules
  */
 function osha_publication_update_7001() {
-  osha_publication_add_menu_position_rules();
+  //osha_publication_add_menu_position_rules();
 }
 
 /**
