@@ -24,8 +24,13 @@ function osha_add_menu_position_rules() {
     $condition = array('pages' => 'press-releases');
     osha_add_menu_position_rule('See all Press Releases Menu Rule', $parent_menu, $condition);
 
+    // Menu position rule for Publication content type
     $condition = array('content_type' => array('publication' => 'publication'));
     osha_add_menu_position_rule('Publications Menu Rule', '------ Publications', $condition);
+
+    // Menu position rule for Seminar content type
+    $condition = array('content_type' => array('seminar' => 'seminar'));
+    osha_add_menu_position_rule('Seminar Menu Rule', '------ Our seminars', $condition);
   }
 }
 
