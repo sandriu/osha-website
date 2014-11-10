@@ -35,6 +35,7 @@ drush features-revert --force -y osha_breadcrumbs
 drush features-revert --force -y osha_highlight
 drush features-revert --force -y osha_news
 drush features-revert --force -y osha_publication
+drush features-revert --force -y osha_highlight
 drush cc all
 
 echo "UPDATEDB ..."
