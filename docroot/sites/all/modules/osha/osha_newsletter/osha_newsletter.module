@@ -135,7 +135,11 @@ highlight/*
 teaser/*
 news/*
 seminar/*
-seminars/*',
+seminars/*
+about/calls/*
+calls/*
+about/jobs/*
+job-vacancies/*',
     'cache' => DRUPAL_NO_CACHE,
     'weight' => -30
   );
