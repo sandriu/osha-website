@@ -194,8 +194,16 @@ class OshaTMGMTRetranslate {
       $new_id = $new_item->getAttribute('id');
       // Check if added or existing.
       $old_item = self::getElementById($old_items, $new_id);
-      if (!$old_item || $old_item->nodeValue !== $new_item->nodeValue ) {
+      if (!$old_item) {
+        // Item is new.
         $changes[] = $new_id;
+      } else {
+        // Compare nodeValues without whitespace.
+        $new_text_plain = preg_replace("/\s+/", "", $new_item->nodeValue);
+        $old_text_plain = preg_replace("/\s+/", "", $old_item->nodeValue);
+        if ( $new_text_plain !== $old_text_plain ) {
+          $changes[] = $new_id;
+        }
       }
     }
     return $changes;
