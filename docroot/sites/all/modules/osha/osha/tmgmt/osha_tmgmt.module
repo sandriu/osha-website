@@ -1010,6 +1010,14 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
       // Set editor also for source textarea.
       $form['review']['body']['body|0|value']['source']['#type'] = 'text_format';
       $form['review']['body']['body|0|value']['source']['#disabled'] = FALSE;
+      $form['review']['body']['body|0|value']['source']['#description']
+        = t('Any modifications made here will not be preserved!');
+      // Hide Text Format selector. It's ugly but is the simplest solution
+      // without side effects.
+      $form['#attached']['css'][] = array(
+        'data' => '.filter-wrapper {display: none}',
+        'type' => 'inline',
+      );
     }
     // Add submit callback for Review Action to handle the body field value.
     $fields = element_children($form['review']);
