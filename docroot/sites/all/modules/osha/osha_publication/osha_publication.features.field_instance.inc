@@ -155,6 +155,74 @@ function osha_publication_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-publication-field_aditional_resources'
+  $field_instances['node-publication-field_aditional_resources'] = array(
+    'bundle' => 'publication',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 22,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_aditional_resources',
+    'label' => 'Aditional Resources',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference_view_widget',
+      'settings' => array(
+        'allow_duplicates' => 0,
+        'close_modal' => 0,
+        'pass_argument' => 0,
+        'view' => 'aditional_resources|entityreference_view_widget_1',
+      ),
+      'type' => 'entityreference_view_widget',
+      'weight' => 30,
+    ),
+  );
+
   // Exported field_instance: 'node-publication-field_archived'
   $field_instances['node-publication-field_archived'] = array(
     'bundle' => 'publication',
@@ -1599,6 +1667,7 @@ function osha_publication_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
+  t('Aditional Resources');
   t('Archived');
   t('Author(s)');
   t('Automatically calculated when saving. The count of characters found in the default language text (English).');
@@ -1610,6 +1679,7 @@ function osha_publication_field_default_field_instances() {
   t('Expiration Date');
   t('File');
   t('Nace');
+  t('Needs Retranslation');
   t('OSHWiki categories');
   t('OSHWiki featured articles');
   t('Page count');
