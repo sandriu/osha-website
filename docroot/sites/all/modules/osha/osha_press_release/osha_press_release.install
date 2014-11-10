@@ -2,7 +2,7 @@
 
 function osha_press_release_install() {
   osha_press_release_add_agregator_rss_feeds();
-  osha_press_release_add_menu_position_rules();
+  //osha_press_release_add_menu_position_rules();
 }
 
 /**
@@ -10,7 +10,7 @@ function osha_press_release_install() {
  */
 function osha_press_release_update_7001() {
   osha_press_release_add_agregator_rss_feeds();
-  osha_press_release_add_menu_position_rules();
+  //osha_press_release_add_menu_position_rules();
 }
 
 /**

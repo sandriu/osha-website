@@ -30,6 +30,7 @@ drush cc all
 
 echo "FEATURE REVERT ..."
 drush features-revert --force -y osha_press_release
+drush features-revert --force -y osha_breadcrumbs
 #drush features-revert --force -y osha_short_messages
 drush cc all
 
