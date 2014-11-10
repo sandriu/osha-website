@@ -196,7 +196,7 @@ function osha_highlight_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_aditional_resources',
-    'label' => 'Aditional Resources',
+    'label' => 'Additional Resources',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -1060,7 +1060,7 @@ function osha_highlight_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
-  t('Aditional Resources');
+  t('Additional Resources');
   t('Archived');
   t('Automatically calculated when saving. The count of characters found in the default language text (English).');
   t('Automatically calculated when saving. The count of pages of text in the default language (English).');
