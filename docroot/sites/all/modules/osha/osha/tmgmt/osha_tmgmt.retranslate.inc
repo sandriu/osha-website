@@ -232,18 +232,18 @@ class OshaTMGMTRetranslate {
     if ($field_name != 'body' && $source_text != $clean_source_text) {
       return $source_text;
     }
-    // For body, get the different paragraphs only.
-    // The latest version in the target language.
-    $translated_text = self::get_field_value($entity_id, $bundle, $revision, $target_lang, $field_name);
-    if (!$translated_text) {
-      return $source_text;
-    }
     if ($field_name != 'body') {
       // If we got here for other fields it means that target_lang exists,
       // but field has not been changed, so no re-translation is needed.
       return NULL;
     }
 
+    // For body, get the different paragraphs only.
+    // The latest version in the target language.
+    $translated_text = self::get_field_value($entity_id, $bundle, $revision, $target_lang, $field_name);
+    if (!$translated_text) {
+      return $source_text;
+    }
     // Just a list of element id's (changed or added in the source language).
     $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
 
