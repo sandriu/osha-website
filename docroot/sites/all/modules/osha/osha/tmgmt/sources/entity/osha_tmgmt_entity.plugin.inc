@@ -70,6 +70,7 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
  * @see tmgmt_field_get_source_data
  */
 function osha_tmgmt_field_get_source_data($job_item, $entity, $only_translatable = FALSE) {
+
   $entity_type = $job_item->item_type;
   $langcode = $job_item->source_language;
   try {

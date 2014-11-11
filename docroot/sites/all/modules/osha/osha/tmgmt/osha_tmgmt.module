@@ -546,14 +546,15 @@ function osha_tmgmt_tmgmt_source_translation_structure($job_item,
     $field_name = $instance['field_name'];
     $structure['#label'] = check_plain($instance['label']);
     foreach ($items as $delta => $value) {
-      if ($job_item->item_type == 'node') {
+      if ($job_item->item_type == 'node' && empty($job_item->is_full_translation)) {
+        // Retranslation.
         $text = OshaTMGMTRetranslate::get_text_to_retranslate(
           $job_item->item_id, $entity->type,
           $job_item->source_language, $job_item->target_language,
           $field_name
         );
       } else {
-        // This could be a taxonomy term.
+        // This could be a taxonomy term or full translation was requested.
         $text = $value['value'];
       }
       $structure[$delta]['#label'] = t('Delta #@delta', array('@delta' => $delta));
@@ -655,9 +656,6 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
             foreach ($messages['error'] as $message) {
               drupal_set_message($item->label().": ".$message, 'error');
             }
-            foreach ($invalid_languages as $language => $data) {
-              unset($form['target_language']['#options'][$language]);
-            }
           }
         }
         $job_char_count += $item->character_count;
@@ -696,20 +694,13 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
           '#title' => t('Select all languages'),
       );
 
-      #select some languages
-      $form['select_some_lng'] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Select EU-OSHA default languages (24)'),
-      );
-
       #order form elements
       $form['tmgmt-ui-cart-content']['#weight'] = 0;
       $form['priority']['#weight'] = 1;
       $form['target_language']['#weight'] = 2;
       $form['select_all_lng']['#weight'] = 3;
-      $form['select_some_lng']['#weight'] = 3;
-      $form['empty_cart']['#weight']['#weight'] = 4;
-      $form['remove_selected']['#weight']['#weight'] = 4;
+      $form['empty_cart']['#weight']['#weight'] = 7;
+      $form['remove_selected']['#weight']['#weight'] = 6;
       $form['request_translation']['#weight']['#weight'] = 4;
 
       $form['request_translation']['#submit'] = array('osha_tmgmt_tmgmt_ui_cart_content_submit');
@@ -718,6 +709,13 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'select',
         '#options' => array(0 => 'Normal', 2 => 'High', 1 => 'Low'),
         '#weight' => 0,
+      );
+      // Add another button to request full translation
+      $form['request_full_translation'] = array(
+        '#type' => 'submit',
+        '#value' => t('Request full translation'),
+        '#submit' => array('osha_tmgmt_tmgmt_ui_cart_content_submit'),
+        '#weight' => array('#weight' => 5)
       );
       break;
 
@@ -1324,6 +1322,8 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
     drupal_set_message(t('No target language selected'), 'error');
     return;
   }
+  // Test if user pressed "Full translation".
+  $is_full_translation = $form_state['triggering_element']['#id'] == 'edit-request-full-translation';
   $job_it_by_src_lang = array();
   // Group the selected items by source language.
   foreach (tmgmt_job_item_load_multiple(array_filter($form_state['values']['items'])) as $job_item) {
@@ -1349,9 +1349,10 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
           try {
             // As the same item might be added to multiple jobs, we need to
             // re-create them and delete the old ones, after removing them from
-            // the cart.
+            // the cart. Note: addItem saves the job item in the database
             $new_job_item = $job->addItem(
-              $job_item->plugin, $job_item->item_type, $job_item->item_id, $source_language, $target_language
+              $job_item->plugin, $job_item->item_type, $job_item->item_id,
+              $source_language, $target_language, $is_full_translation
             );
             if ($new_job_item->plugin == 'node') {
               $new_job_item->plugin = 'entity';
