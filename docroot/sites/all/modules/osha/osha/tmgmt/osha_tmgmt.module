@@ -485,30 +485,14 @@ function osha_tmgmt_node_presave($node) {
     }
   }
   // Prepare re-translation information
-  global $language;
-  $current_lang = $language->language;
-  if (isset($node->field_needs_retranslation) && is_array($node->body)) {
+  if (is_array($node->body)) {
     // reformat body text for all languages and enhance paragraphs with unique id's
     foreach(array_keys($node->body) as $lang) {
-      if (isset($node->body[$lang][0])) {
+      if (isset($node->body[$lang][0]['format']) && $node->body[$lang][0]['format'] == 'full_html') {
         // can be not set for a new node with empty body
         $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
         $node->body[$lang][0]['value'] = $new_text;
       }
-    }
-    // Check for changes in the original language
-    // except for new nodes and nodes without translations
-    if ($node->translations->original == $current_lang && empty($node->is_new) &&
-        !$node->field_needs_retranslation[LANGUAGE_NONE][0]['value']) {
-      if (!isset($node->translations->data)) {
-        return;
-      }
-      $languages = array_keys($node->translations->data);
-      if (empty($languages)) {
-        return;
-      }
-      // Check if body has been modified and if true set checkbox
-      OshaTMGMTRetranslate::mark_dirty($node);
     }
   }
 }
@@ -1002,6 +986,40 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
       && !in_array($job_item->state,
         array(TMGMT_JOB_ITEM_STATE_ACCEPTED, TMGMT_JOB_ITEM_STATE_ABORTED,
           OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish));
+
+    // Set WYSIWYG editor for body field.
+    if (isset($form['review']['body']['body|0|value']['translation'])) {
+      $form['review']['body']['body|0|value']['translation']['#format'] = 'full_html';
+      $form['review']['body']['body|0|value']['translation']['#type'] = 'text_format';
+      // Set editor also for source textarea.
+      $form['review']['body']['body|0|value']['source']['#type'] = 'text_format';
+      $form['review']['body']['body|0|value']['source']['#disabled'] = FALSE;
+      $form['review']['body']['body|0|value']['source']['#description']
+        = t('Any modifications made here will not be preserved!');
+      // Hide Text Format selector. It's ugly but is the simplest solution
+      // without side effects.
+      $form['#attached']['css'][] = array(
+        'data' => '.filter-wrapper {display: none}',
+        'type' => 'inline',
+      );
+    }
+    // Add submit callback for Review Action to handle the body field value.
+    $fields = element_children($form['review']);
+    foreach ($fields as $field) {
+      $values = element_children($form['review'][$field]);
+      foreach ($values as $value) {
+        if (isset($form['review'][$field][$value]['actions']['unreviewed'])) {
+          $form['review'][$field][$value]['actions']['unreviewed']['#submit']
+            = array_merge(array('osha_tmgtm_data_field_update_submit'),
+            $form['review'][$field][$value]['actions']['unreviewed']['#submit']);
+        }
+        if (isset($form['review'][$field][$value]['actions']['reviewed'])) {
+          $form['review'][$field][$value]['actions']['reviewed']['#submit']
+            = array_merge(array('osha_tmgtm_data_field_update_submit'),
+          $form['review'][$field][$value]['actions']['reviewed']['#submit']);
+        }
+      }
+    }
     $form['actions']['ready_to_publish'] = array(
       '#type' => 'submit',
       '#value' => t('Ready to Publish'),
@@ -1071,6 +1089,19 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
         $form['actions']['#access'] = FALSE;
         break;
     }
+  }
+}
+
+/**
+ * Our custom Callback for Action Save Data for a Job item.
+ */
+function osha_tmgtm_data_field_update_submit($form, &$form_state) {
+  // TMGMT expects ['translation'] te be the value.
+  // For body field - WYSIWYG editor has extra level key ['value']
+  // Copy this to it's parent ['translation']
+  if (isset($form_state['values']['body|0|value']['translation']['value'])) {
+    $form_state['values']['body|0|value']['translation']
+      = $form_state['values']['body|0|value']['translation']['value'];
   }
 }
 
