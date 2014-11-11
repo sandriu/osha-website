@@ -424,7 +424,6 @@ class OshaTMGMTRetranslate {
           $orig_lang => NULL,
           $lang => $tag,
         );
-        $diffs[$id] = $tag;
       }
     }
     return NULL;
@@ -518,4 +517,39 @@ class OshaTMGMTRetranslate {
     // Return the array, passed by value.
     return $job_data;
   }
+
+  public static function validate_translation_structure($job_item) {
+    // Validate that structure is the same in field body
+    if (isset($job_item->data['body'][0]['value'])) {
+      $orig_text = $job_item->data['body'][0]['value']['#text'];
+      $trans_text = $job_item->data['body'][0]['value']['#translation']['#text'];
+      $orig_structure = self::getHTMLStructure($orig_text);
+      $trans_structure = self::getHTMLStructure($trans_text);
+      $result = self::check_same_tags(
+        $job_item->source_language, $job_item->target_language,
+        $orig_structure, $trans_structure);
+      if (!empty($result)) {
+        return t('Tag @id changed from @tag1 to @tag2.', array(
+          '@id' => $result['id'],
+          '@tag1' => $result[$job_item->source_language],
+          '@tag2' => $result[$job_item->target_language]
+        ));
+      }
+      // check missing tags
+      $orig_id_list = array_keys($orig_structure);
+      $trans_id_list = array_keys($trans_structure);
+      $missing_tags = array_diff($orig_id_list, $trans_id_list);
+      if (!empty($missing_tags)) {
+        $first = array_pop($missing_tags);
+        return 'Tag '.$orig_structure[$first].' id="'.$first.'" missing in translation.';
+      }
+      $extra_tags = array_diff($trans_id_list, $orig_id_list);
+      if (!empty($extra_tags)) {
+        $first = array_pop($extra_tags);
+        return 'Unexpected tag '.$trans_structure[$first].' id="'.$first.'" in translation.';
+      }
+    }
+    return NULL;
+  }
+
 }

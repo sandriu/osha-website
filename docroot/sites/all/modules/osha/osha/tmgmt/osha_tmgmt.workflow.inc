@@ -616,6 +616,16 @@ function osha_tmgmt_job_item_validators_form_submit($form, &$form_state) {
 }
 
 /**
+ * Validate callback for accept translation for Content Validator.
+ */
+function osha_tmgmt_translation_validators_accept_validate($form, &$form_state) {
+  $result = OshaTMGMTRetranslate::validate_translation_structure($form_state['item']);
+  if ($result) {
+    form_set_error('actions][cvalidator_approve', $result);
+  }
+}
+
+/**
  * Callback for accept translation for Content Validator.
  */
 function osha_tmgmt_translation_validators_accept($form, &$form_state) {
@@ -689,12 +699,26 @@ function osha_tmgmt_job_item_translation_reject($form, &$form_state) {
 }
 
 /**
+ * Validation Callback for Approve Layout button.
+ */
+function osha_tmgmt_layout_validator_approve_validate($form, &$form_state) {
+  $result = OshaTMGMTRetranslate::validate_translation_structure($form_state['item']);
+  if ($result) {
+    form_set_error('actions][accept_layout', $result);
+  }
+}
+
+/**
  * Validation Callback for Request Content Validation button.
  */
 function osha_tmgmt_require_content_validation_validate($form, &$form_state) {
   $validators = osha_tmgmt_load_validators_by_job_item($form_state['item']);
   if (empty($validators)) {
     form_set_error('actions][require_content_validation', t('There are no Content Validators assigned to this job item!'));
+  }
+  $result = OshaTMGMTRetranslate::validate_translation_structure($form_state['item']);
+  if ($result) {
+    form_set_error('actions][require_content_validation', $result);
   }
 }
 
@@ -716,6 +740,10 @@ function osha_tmgmt_require_content_validation_submit($form, &$form_state) {
 function osha_tmgmt_ready_to_publish_validate($form, &$form_state) {
   if (!user_access('set job item to ready to publish state')) {
     form_set_error('actions][ready_to_publish', t('You do not have the rights to make this action'));
+  }
+  $result = OshaTMGMTRetranslate::validate_translation_structure($form_state['item']);
+  if ($result) {
+    form_set_error('actions][ready_to_publish', $result);
   }
 }
 
