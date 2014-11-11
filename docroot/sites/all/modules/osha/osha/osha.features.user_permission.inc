@@ -32,5 +32,16 @@ function osha_user_default_permissions() {
     'module' => 'aggregator',
   );
 
+  // Exported permission: 'post comments'.
+  $permissions['post comments'] = array(
+    'name' => 'post comments',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'comment',
+  );
+
   return $permissions;
 }

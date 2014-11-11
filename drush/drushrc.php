@@ -421,6 +421,9 @@ $options['init-modules'] = array(
   'flickr_block',
   'flickrfield',
 
+  //Allow anonymous comments per node type
+  'comment_allow_anonymous',
+
   // Link content types with main menu items
   'menu_position',
   'r4032login',

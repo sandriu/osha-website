@@ -29,4 +29,12 @@ function osha_blog_post_features_enable_feature($component) {
       user_role_grant_permissions($role->rid, $permissions);
     }
   }
+
+  //Add recaptcha validation for blog comment form
+  $data = array(
+    'form_id' => 'comment_node_blog_form',
+    'module' => 'recaptcha',
+    'captcha_type' => 'reCAPTCHA',
+  );
+  drupal_write_record('captcha_points', $data, 'form_id');
 }

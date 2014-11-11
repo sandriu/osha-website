@@ -1052,6 +1052,7 @@ function osha_blog_field_default_field_instances() {
   t('Expiration Date');
   t('Image');
   t('Nace');
+  t('Needs Retranslation');
   t('Page count');
   t('Publication date');
   t('Summary');
