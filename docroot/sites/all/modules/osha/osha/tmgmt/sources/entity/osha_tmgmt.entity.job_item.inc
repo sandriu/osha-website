@@ -39,12 +39,7 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
         }
       }
       if ($finished) {
-        // There are no unfinished elements left.
-        if ($this->getJob()->getTranslator()->getSetting('auto_accept')) {
-          // If the job item is going to be auto-accepted, set to review without
-          // a message.
-          $this->needsReview(FALSE);
-        }
+        $this->needsReview(t('Translation was accepted'));
       }
     }
     $this->save();

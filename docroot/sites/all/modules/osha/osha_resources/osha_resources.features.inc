@@ -58,10 +58,42 @@ function osha_resources_image_default_styles() {
  */
 function osha_resources_node_info() {
   $items = array(
-    'resources' => array(
-      'name' => t('Resources'),
+    'external_url' => array(
+      'name' => t('External URL'),
       'base' => 'node_content',
-      'description' => t('Additional resources for other content types'),
+      'description' => t('Resources External URL Field'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+    'file' => array(
+      'name' => t('File'),
+      'base' => 'node_content',
+      'description' => t('Resources File Field'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+    'flickr' => array(
+      'name' => t('Flickr'),
+      'base' => 'node_content',
+      'description' => t('Resources Flickr Photos'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+    'slideshare' => array(
+      'name' => t('Slideshare'),
+      'base' => 'node_content',
+      'description' => t('Resources Slideshare Field'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+    'youtube' => array(
+      'name' => t('Youtube'),
+      'base' => 'node_content',
+      'description' => t('Resources Youtube Field'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

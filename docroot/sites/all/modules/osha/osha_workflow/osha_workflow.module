@@ -90,6 +90,9 @@ function osha_workflow_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_menu_alter().
+ */
 function osha_workflow_menu_alter(&$items) {
   // Disable Section Menu from Workbench Dashboard.
   $items['admin/workbench/sections']['access callback'] = FALSE;
@@ -98,6 +101,8 @@ function osha_workflow_menu_alter(&$items) {
   $items['admin/config/workbench/access']['page callback'] = 'workbench_access_roles';
   $items['admin/config/workbench/access/editors']['access callback'] = FALSE;
 
+  $items['admin/workbench']['page callback'] = 'views_embed_view';
+  $items['admin/workbench']['page arguments'] = array('osh_workflow_admin', 'my_content');
 }
 
 function osha_workflow_editor_page() {

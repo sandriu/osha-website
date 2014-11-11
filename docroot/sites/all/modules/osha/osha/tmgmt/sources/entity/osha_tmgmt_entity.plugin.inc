@@ -39,7 +39,7 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
       $new_job_data = OshaTMGMTRetranslate::apply_partial_translation(
         $entity, $job_item->getData(), $job_item->source_language, $job_item->target_language);
       tmgmt_field_populate_entity($job_item->item_type, $entity, $job_item->target_language, $new_job_data);
-      $entity->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 0;
+      //$entity->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 0;
     } else {
       tmgmt_field_populate_entity($job_item->item_type, $entity, $job_item->target_language, $job_item->getData());
     }

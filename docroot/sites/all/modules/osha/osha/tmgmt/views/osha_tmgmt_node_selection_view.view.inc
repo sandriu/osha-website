@@ -35,12 +35,13 @@ $handler->display->display_options['pager']['options']['expose']['items_per_page
 $handler->display->display_options['style_plugin'] = 'table';
 $handler->display->display_options['style_options']['columns'] = array(
   'views_bulk_operations' => 'views_bulk_operations',
-  'title' => 'title',
+  'field_summary' => 'field_summary',
+  'body' => 'body',
+  'title_1' => 'title_1',
   'type' => 'type',
   'state' => 'state',
   'name' => 'name',
   'changed' => 'changed',
-  'edit_node' => 'edit_node',
   'field_character_count' => 'field_character_count',
   'field_page_count' => 'field_page_count',
 );
@@ -51,8 +52,22 @@ $handler->display->display_options['style_options']['info'] = array(
     'separator' => '',
     'empty_column' => 0,
   ),
-  'title' => array(
+  'field_summary' => array(
     'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'body' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'title_1' => array(
+    'sortable' => 1,
     'default_sort_order' => 'asc',
     'align' => '',
     'separator' => '',
@@ -82,11 +97,6 @@ $handler->display->display_options['style_options']['info'] = array(
   'changed' => array(
     'sortable' => 1,
     'default_sort_order' => 'desc',
-    'align' => '',
-    'separator' => '',
-    'empty_column' => 0,
-  ),
-  'edit_node' => array(
     'align' => '',
     'separator' => '',
     'empty_column' => 0,
@@ -295,13 +305,11 @@ $handler->display->display_options['fields']['body']['field'] = 'body';
 $handler->display->display_options['fields']['body']['label'] = '';
 $handler->display->display_options['fields']['body']['exclude'] = TRUE;
 $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-/* Field: Content: Title */
-$handler->display->display_options['fields']['title']['id'] = 'title';
-$handler->display->display_options['fields']['title']['table'] = 'node';
-$handler->display->display_options['fields']['title']['field'] = 'title';
-$handler->display->display_options['fields']['title']['label'] = '';
-$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+/* Field: Content revision: Title */
+$handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+$handler->display->display_options['fields']['title_1']['table'] = 'node_revision';
+$handler->display->display_options['fields']['title_1']['field'] = 'title';
+$handler->display->display_options['fields']['title_1']['link_to_node'] = TRUE;
 /* Field: Content: Type */
 $handler->display->display_options['fields']['type']['id'] = 'type';
 $handler->display->display_options['fields']['type']['table'] = 'node';
@@ -437,7 +445,7 @@ $handler->display->display_options['filters']['combine']['expose']['remember_rol
 $handler->display->display_options['filters']['combine']['fields'] = array(
   'field_summary' => 'field_summary',
   'body' => 'body',
-  'title' => 'title',
+  'title_1' => 'title_1',
 );
 /* Filter criterion: Content: Nid */
 $handler->display->display_options['filters']['nid']['id'] = 'nid';
@@ -724,6 +732,7 @@ $translatables['tmgmt_node_selection_view'] = array(
   t('author'),
   t('Translations'),
   t('- Choose an operation -'),
+  t('Title'),
   t('Type of content'),
   t('Workflow state'),
   t('Author'),

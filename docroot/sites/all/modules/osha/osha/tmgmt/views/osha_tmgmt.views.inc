@@ -283,6 +283,12 @@ class OshaTMGMTJobViewsController extends TMGMTJobViewsController {
       'real field' => 'priority',
       'field' => array(
         'handler' => 'tmgmt_handler_field_tmgmt_job_priority',
+        'click sortable' => TRUE,
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_in_operator',
+        'options callback' => 'osha_tmgmt_job_priority_list',
+        'real field' => 'priority',
       ),
     );
 
@@ -290,14 +296,20 @@ class OshaTMGMTJobViewsController extends TMGMTJobViewsController {
       'title' => t('Page count'),
       'help' => t('Number of pages for translation'),
       'real field' => 'page_count',
-      'field' => array(),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
     );
 
     $data['tmgmt_job']['character_count'] = array(
       'title' => t('Character count'),
       'help' => t('Number of characters for translation'),
       'real field' => 'character_count',
-      'field' => array(),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
     );
 
     return $data;

@@ -40,6 +40,8 @@ $handler->display->display_options['style_options']['info'] = array(
     'empty_column' => 0,
   ),
   'priority' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
     'align' => '',
     'separator' => '',
     'empty_column' => 0,
@@ -53,7 +55,7 @@ $handler->display->display_options['style_options']['info'] = array(
   ),
   'changed' => array(
     'sortable' => 1,
-    'default_sort_order' => 'asc',
+    'default_sort_order' => 'desc',
     'align' => '',
     'separator' => '',
     'empty_column' => 0,

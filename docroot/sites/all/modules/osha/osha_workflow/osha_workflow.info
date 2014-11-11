@@ -62,6 +62,7 @@ features[workbench_moderation_transitions][] = final_draft:to_be_approved
 features[workbench_moderation_transitions][] = needs_review:final_draft
 features[workbench_moderation_transitions][] = needs_review:ready_to_publish
 features[workbench_moderation_transitions][] = needs_review:to_be_approved
+features[workbench_moderation_transitions][] = ready_to_publish:published
 features[workbench_moderation_transitions][] = rejected:draft
 features[workbench_moderation_transitions][] = rejected:ready_to_publish
 features[workbench_moderation_transitions][] = rejected:to_be_approved

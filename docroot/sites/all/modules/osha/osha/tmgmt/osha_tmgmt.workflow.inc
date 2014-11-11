@@ -108,6 +108,11 @@ function osha_tmgmt_layout_validation_node_preview($nid, $job_item) {
     $node->body[$target_language][0]['safe_value'] =
       check_markup($body['value'], $body['format'], $target_language);
   }
+  // set also the title safe_value (causes warning on preview)
+  if (isset($node->title_field[$target_language][0])) {
+    $node->title_field[$target_language][0]['safe_value'] =
+      $node->title_field[$target_language][0]['value'];
+  }
 
   /* @todo: fix the preview when the node has a Published and a ReadyToPublish version without translations
   see also https://www.drupal.org/node/2020325

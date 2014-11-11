@@ -12,7 +12,7 @@ $view->disabled = FALSE; /* Edit this to true to make a default view disabled in
 
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
-$handler->display->display_options['title'] = 'Content validators group';
+$handler->display->display_options['title'] = 'Content validators groups';
 $handler->display->display_options['use_more_always'] = FALSE;
 $handler->display->display_options['access']['type'] = 'perm';
 $handler->display->display_options['access']['perm'] = 'manage content in translators group entity collections';
@@ -23,6 +23,12 @@ $handler->display->display_options['pager']['type'] = 'some';
 $handler->display->display_options['pager']['options']['items_per_page'] = '10';
 $handler->display->display_options['style_plugin'] = 'default';
 $handler->display->display_options['row_plugin'] = 'fields';
+/* Header: Global: Text area */
+$handler->display->display_options['header']['area']['id'] = 'area';
+$handler->display->display_options['header']['area']['table'] = 'views';
+$handler->display->display_options['header']['area']['field'] = 'area';
+$handler->display->display_options['header']['area']['content'] = '<a class="button" id="add-translators-group" href="/admin/structure/entity_collection/add/translators_group">Create new group </a>';
+$handler->display->display_options['header']['area']['format'] = 'full_html';
 /* Field: Entity Collection: Rendered Entity Collection */
 $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
 $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_entity_collection';
@@ -43,12 +49,13 @@ $handler->display->display_options['menu']['context'] = 0;
 $handler->display->display_options['menu']['context_only_inline'] = 0;
 $translatables['content_validators_group'] = array(
   t('Master'),
-  t('Content validators group'),
+  t('Content validators groups'),
   t('more'),
   t('Apply'),
   t('Reset'),
   t('Sort by'),
   t('Asc'),
   t('Desc'),
+  t('<a class="button" id="add-translators-group" href="/admin/structure/entity_collection/add/translators_group">Create new group </a>'),
   t('List of content validators groups'),
 );

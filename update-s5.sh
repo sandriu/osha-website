@@ -29,8 +29,15 @@ drush php-script ../scripts/s5/pre-update.php
 drush cc all
 
 echo "FEATURE REVERT ..."
+drush features-revert --force -y osha
 drush features-revert --force -y osha_press_release
-#drush features-revert --force -y osha_short_messages
+drush features-revert --force -y osha_breadcrumbs
+drush features-revert --force -y osha_highlight
+drush features-revert --force -y osha_news
+drush features-revert --force -y osha_publication
+drush features-revert --force -y osha_homepage
+drush features-revert --force -y osha_newsletter
+
 drush cc all
 
 echo "UPDATEDB ..."
