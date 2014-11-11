@@ -91,7 +91,7 @@ class OshaTMGMTJobItemViewsController extends TMGMTJobItemViewsController {
 
     $data['tmgmt_job_item']['source_language'] = array(
       'title' => t('Source language'),
-      'help' => t('Language to translate to.'),
+      'help' => t('Language to translate from.'),
       'real field' => 'source_language',
       'field' => array(
         'handler' => 'tmgmt_handler_field_tmgmt_job_item_language',
