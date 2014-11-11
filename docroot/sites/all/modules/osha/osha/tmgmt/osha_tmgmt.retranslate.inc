@@ -239,8 +239,8 @@ class OshaTMGMTRetranslate {
     }
 
     // For body, get the different paragraphs only.
-    // The latest version in the target language.
-    $translated_text = self::get_field_value($entity_id, $bundle, $revision, $target_lang, $field_name);
+    // The latest published version in the target language.
+    $translated_text = self::get_field_value($entity_id, $bundle, $clean_revision, $target_lang, $field_name);
     if (!$translated_text) {
       return $source_text;
     }
