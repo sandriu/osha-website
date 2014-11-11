@@ -174,8 +174,15 @@
  * a structure-tables-key is provided. You may add new tables to the existing
  * array or add a new element.
  */
-# $options['structure-tables']['common'] = array('cache', 'cache_filter', 'cache_menu', 'cache_page', 'history', 'sessions', 'watchdog');
-
+$options['structure-tables']['common'] = array(
+  'cache',
+  'cache_filter',
+  'cache_menu',
+  'cache_page',
+  'history',
+  'sessions',
+  'watchdog',
+);
 /**
  * Customize this associative array with your own tables. This is the list of
  * tables that are entirely omitted by the 'sql-dump' and 'sql-sync' commands
@@ -259,7 +266,6 @@ if(file_exists($json_path)) {
     'db-su' => $cfg->db->root_username, 'db-su-pw' => $cfg->db->root_password
   );
 }
-$environment = $cfg->variables->environment;
 
 $options['init-modules'] = array(
   'ctools',
@@ -422,17 +428,35 @@ $options['init-modules'] = array(
   'diff',
 );
 
-if ($environment == 'development') {
-  $options['init-modules'][] = 'reroute_email';
-  $options['init-modules'][] = 'simpletest';
-  // Module installed during development
-}
 
 $options['init-themes'] = array(
   'osha_admin',
   'osha_frontend'
 );
 
+// Add specific settings for development or demo.
+$command_specific['devify'] = array(
+  'enable-modules' => array(
+    'reroute_email',
+    'simpletest',
+    'devel',
+    'devel_node_access',
+    'stage_file_proxy',
+  ),
+//  'disable-modules' => array('varnish', 'memcache_admin'),
+  'delete-variables' => array('googleanalytics_account'),
+  'reset-variables' => array_merge(
+    array(
+      'reroute_email_enable_message' => TRUE,
+      'reroute_email_enable' => TRUE,
+      'stage_file_proxy_origin' => 'http://osha-corp-staging03.mainstrat.com',
+      'stage_file_proxy_use_imagecache_root' => FALSE,
+      'stage_file_proxy_hotlink' => TRUE,
+      'reroute_email_address' => $cfg->variables->site_mail,
+    )
+  , (array) $cfg->variables),
+);
+
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
-  include_once dirname(__FILE__) . '/drushrc.local.php';
+  include dirname(__FILE__) . '/drushrc.local.php';
 }
