@@ -25,7 +25,7 @@ function osha_add_menu_position_rule($rule_name, $parent_menu, $condition) {
       }
       if ($menu_entry === FALSE) {
         drupal_set_message('Cannot find menu link for '.$rule_name.
-          ', using the main menu instead.', 'warning');
+          ', using the main menu instead.', 'error');
         $menu_entry = 'main-menu:0';
       }
       $values = array(

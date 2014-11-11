@@ -15,6 +15,7 @@ class OshaTMGMTRetranslate {
     // Get all existing ID's and compute max.
     $max = 0;
     for ($i = 0; $i < $items->length; $i++) {
+      // First pass, compute max(id)
       if (get_class($items->item($i)) != 'DOMElement') {
         // Ignore text between tags and comments, can happen during migration.
         continue;
@@ -102,6 +103,7 @@ class OshaTMGMTRetranslate {
   /*
    * Set checkbox if a revision has been translated and body has been changed
    */
+  /*
   public static function mark_dirty($node) {
     $node_lang = $node->translations->original;
     if (empty($node->body[$node_lang])) {
@@ -121,20 +123,19 @@ class OshaTMGMTRetranslate {
       $node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 1;
     }
   }
+  */
 
   /*
    * Return latest revision where original language is synchronized with translations.
    */
   public static function get_latest_clean_revision($entity_id) {
-    $rev = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
-      WHERE f.entity_id = :entity_id AND f.field_needs_retranslation_value = 0",
-      array(':entity_id' => $entity_id)
+    // Get the latest published revision.
+    $rev = db_query("SELECT MAX(vid) FROM {workbench_moderation_node_history} WHERE
+      nid = :entity_id AND published=1" ,array(':entity_id' => $entity_id)
     )->fetchField();
-    if (!$rev) {
-      // No clean revision found, probably field_needs_retranslation_value
-      // was not there. Return the first available revision.
-      $rev = db_query("SELECT MIN(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
-        array(':entity_id' => $entity_id)
+    if (!$rev ) {
+      $rev = db_query("SELECT MAX(nr.vid) FROM {node_revision} nr WHERE
+      nr.nid = :entity_id AND status=1",array(':entity_id' => $entity_id)
       )->fetchField();
     }
     return $rev;
@@ -144,15 +145,14 @@ class OshaTMGMTRetranslate {
    * Returns latest revision where original language is synchronized with translations.
    */
   public static function get_latest_revision($entity_id) {
-    $rev = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
-      WHERE f.entity_id = :entity_id",
-      array(':entity_id' => $entity_id)
+    // Get the current revision from workbench moderation.
+    $rev = db_query("SELECT MAX(vid) FROM {workbench_moderation_node_history} WHERE
+      nid = :entity_id AND current=1" ,array(':entity_id' => $entity_id)
     )->fetchField();
-    if (!$rev) {
-      // No revision found, probably field_needs_retranslation_value
-      // was not there. Return the latest available revision.
-      $rev = db_query("SELECT MAX(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
-        array(':entity_id' => $entity_id)
+    if (!$rev ) {
+      // Get the latest available revision.
+      $rev = db_query("SELECT MAX(nr.vid) FROM {node_revision} nr WHERE
+        nr.nid = :entity_id", array(':entity_id' => $entity_id)
       )->fetchField();
     }
     return $rev;
@@ -175,8 +175,13 @@ class OshaTMGMTRetranslate {
       return NULL;
     }
     if (isset($field[$lang][0]['fid'])) {
-      // @todo handle files and image
+      // @todo handle files and images
       return NULL;
+    }
+    if (isset($field[$lang][0]['url'])) {
+      // Handle link field type
+      // @todo check the import of translations
+      return $field[$lang][0]['title'];
     }
     return $field[$lang][0]['value'];
   }
@@ -194,8 +199,16 @@ class OshaTMGMTRetranslate {
       $new_id = $new_item->getAttribute('id');
       // Check if added or existing.
       $old_item = self::getElementById($old_items, $new_id);
-      if (!$old_item || $old_item->nodeValue !== $new_item->nodeValue ) {
+      if (!$old_item) {
+        // Item is new.
         $changes[] = $new_id;
+      } else {
+        // Compare nodeValues without whitespace.
+        $new_text_plain = preg_replace("/\s+/", "", $new_item->nodeValue);
+        $old_text_plain = preg_replace("/\s+/", "", $old_item->nodeValue);
+        if ( $new_text_plain !== $old_text_plain ) {
+          $changes[] = $new_id;
+        }
       }
     }
     return $changes;
@@ -316,8 +329,8 @@ class OshaTMGMTRetranslate {
         }
         $messages['error'][] = t('Node cannot be re-translated in: ')
           . implode(", ", array_map('strtoupper', $languages));
+        return;
       }
-      return;
     }
     // Check if source language has been changed.
     $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
@@ -333,6 +346,9 @@ class OshaTMGMTRetranslate {
         array('@lang' => strtoupper($orig_lang), '@msg' => substr($msg, 0, -1)));
     }
 
+    if ( empty($languages)) {
+      $messages['status'][] = t('Full translation in all languages.');
+    }
     $valid_languages = array();
     // Check for incompatibilities
     foreach ($languages as $lang) {

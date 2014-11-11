@@ -72,6 +72,6 @@ function osha_update_7001() {
     $index->options['data_alter_callbacks']['search_api_alter_node_status']['status'] = 1;
     $index->save();
     $index->reindex();
-    drupal_set_message(t("The indexing workflow was successfully edited. All content was scheduled for re-indexing so the new settings can take effect."));
+    drupal_set_message('The indexing workflow was successfully edited. All content was scheduled for re-indexing so the new settings can take effect.');
   }
 }
