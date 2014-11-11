@@ -51,6 +51,13 @@ function osha_short_messages_form($form, &$form_state){
 
   $languages = $languages[1];
 
+  //hide some languages
+  $hided_lng = array('ru', 'tr');
+  foreach($languages as $key => $language){
+    if(in_array($language->language, $hided_lng))
+      unset($languages[$key]);
+  }
+
   //compose header, content and footer
   $header = theme('short_messages_header', array(
     'languages' => $languages,

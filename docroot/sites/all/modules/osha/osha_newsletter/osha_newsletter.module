@@ -1049,6 +1049,13 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
 
   $languages = $languages[1];
 
+  //hide some languages
+  $hided_lng = array('ru', 'tr');
+  foreach($languages as $key => $language){
+    if(in_array($language->language, $hided_lng))
+      unset($languages[$key]);
+  }
+
   // Get message data from source.
   $message['subject'] = $source->title;
   $message['body']['header'] = theme('newsletter_header', array('languages' => $languages, 'newsletter_title' => $newsletter_title, 'newsletter_id' => $newsletter_id, 'newsletter_date' => $newsletter_date));
