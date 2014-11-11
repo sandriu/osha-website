@@ -1,7 +1,34 @@
 <?php
-$aliases['osha.dev'] = array(
-  'uri' => 'osha.edw.ro',
+
+$aliases['osha.staging'] = array(
+  'uri' => 'osha-corp-staging03.mainstrat.com',
   'db-allows-remote' => TRUE,
-  'remote-host' => 'rom.edw.ro',
-  'root' => '/var/local/osha/docroot'
+  'remote-host' => 'osha-corp-staging03.mainstrat.com',
+  'remote-user' => 'root',
+  'root' => '/expert/osha/docroot',
+  'path-aliases' => array(
+    '%files' => 'sites/default/files',
+  ),
 );
+
+$aliases['osha.staging.edw'] = array(
+  'uri' => '10.0.0.173',
+  'db-allows-remote' => TRUE,
+  'remote-host' => '10.0.0.173',
+  'remote-user' => 'root',
+  'root' => '/var/local/osha-website/docroot',
+  'path-aliases' => array(
+    '%files' => 'sites/default/files',
+  ),
+);
+
+// Example of local setting.
+// $aliases['osha.local'] = array(
+//   'uri' => 'osha.localhost',
+//   'root' => '/home/my_user/osha-website/docroot',
+// );
+
+// Add your local aliases.
+if (file_exists(dirname(__FILE__) . '/aliases.local.php')) {
+  include dirname(__FILE__) . '/aliases.local.php';
+}
