@@ -13,6 +13,9 @@ field_delete_field('field_related_man_pubs');
 drush_log('Dropping field: field_workflow_status', 'ok');
 field_delete_field('field_workflow_status');
 
+drush_log('Dropping field: field_needs_retranslation', 'ok');
+field_delete_field('field_needs_retranslation');
+
 // cristi
 // dragos
 // claudia
