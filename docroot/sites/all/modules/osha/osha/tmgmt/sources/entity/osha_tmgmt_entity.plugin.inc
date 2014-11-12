@@ -82,6 +82,8 @@ function osha_tmgmt_field_get_source_data($job_item, $entity, $only_translatable
   }
 
   $fields = array();
+  // Static reset because it returns LANGUAGE_NONE for field_author because of a previous call
+  drupal_static_reset('field_language');
   foreach (field_info_instances($entity_type, $bundle) as $field_name => $instance) {
     $field = field_info_field($field_name);
     $items = field_get_items($entity_type, $entity, $field_name, $langcode);
