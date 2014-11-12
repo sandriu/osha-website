@@ -38,6 +38,7 @@ drush features-revert --force -y osha_publication
 drush features-revert --force -y osha_homepage
 drush features-revert --force -y osha_newsletter
 drush features-revert --force -y osha_job_vacancies
+drush features-revert --force -y osha_content
 
 drush cc all
 
