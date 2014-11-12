@@ -48,6 +48,10 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
     $handler = entity_translation_get_handler($job_item->item_type, $entity);
     $handler->setFormLanguage($job_item->target_language);
 
+    if ( $job_item->item_type == 'node' && workbench_moderation_node_type_moderated($entity->type) ) {
+      // Force the same state in order to avoid creation of new weird transitions.
+      $entity->workbench_moderation_state_new = $entity->workbench_moderation['current']->state;
+    }
     entity_save($job_item->item_type, $entity);
 
     $translation = array(
