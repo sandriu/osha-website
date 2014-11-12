@@ -298,6 +298,12 @@ class OshaTMGMTRetranslate {
     $nid = $node->nid;
     $published_rev = self::get_latest_clean_revision($nid);
     $node_published = node_load($nid, $published_rev);
+    if (!workbench_moderation_node_type_moderated($node_published->type)) {
+      // Node type is not moderated, always return text for full translation.
+      $messages['status'][] = t('This node has no revisions, full translation in all languages.');
+      return NULL;
+    }
+
     if(!isset($node_published->body)) {
       // body is not present on this node
       $messages['status'][] = t('This node has no body field.');
