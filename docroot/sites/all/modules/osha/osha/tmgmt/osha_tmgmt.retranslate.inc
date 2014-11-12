@@ -218,10 +218,15 @@ class OshaTMGMTRetranslate {
                                                  $source_lang, $target_lang,
                                                  $field_name = 'body') {
     $revision = self::get_latest_revision($entity_id);
-    $clean_revision = self::get_latest_clean_revision($entity_id);
-
     // This is the latest version in the source language.
     $source_text = self::get_field_value($entity_id, $bundle, $revision, $source_lang, $field_name);
+    if (!workbench_moderation_node_type_moderated($bundle)) {
+      // Node type is not moderated, always return text for full translation.
+      return $source_text;
+    }
+
+    $clean_revision = self::get_latest_clean_revision($entity_id);
+
     if (!$clean_revision) {
       // All text must be translated.
       return $source_text;
@@ -293,6 +298,11 @@ class OshaTMGMTRetranslate {
     $nid = $node->nid;
     $published_rev = self::get_latest_clean_revision($nid);
     $node_published = node_load($nid, $published_rev);
+    if(!isset($node_published->body)) {
+      // body is not present on this node
+      $messages['status'][] = t('This node has no body field.');
+      return NULL;
+    }
     $orig_lang = $node_published->translations->original;
     if (empty($node_published->body)) {
       $published_source_text = '';
