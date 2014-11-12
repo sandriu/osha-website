@@ -887,7 +887,8 @@ function theme_osha_tmgmt_ui_translator_review_form($variables) {
       if (!empty($labels)) {
         // Append to previous group to the group collection.
         if (!empty($element_group)) {
-          $element_groups[] = '<tbody>' . $element_group . '</tbody>';
+          // commented this because it creates duplicate rows for multiple value fields like field_publication_related_res
+          //$element_groups[] = '<tbody>' . $element_group . '</tbody>';
         }
       }
     }
@@ -902,7 +903,7 @@ function theme_osha_tmgmt_ui_translator_review_form($variables) {
   if (!empty($parent_label)) {
     $cell = array(
       'data' => $parent_label,
-      'colspan' => 5,
+      'colspan' => 4,
     );
     $result = '<thead><tr>' . _theme_table_cell($cell, TRUE) . '</tr></thead>' . implode('', $element_groups);
   }
@@ -955,6 +956,5 @@ function theme_osha_tmgmt_ui_translator_review_form_element($variables) {
     ));
     $result .= '</tr>';
   }
-
   return $result;
 }
