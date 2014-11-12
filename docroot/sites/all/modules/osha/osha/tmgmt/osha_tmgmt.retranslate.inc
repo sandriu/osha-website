@@ -517,7 +517,7 @@ class OshaTMGMTRetranslate {
       return $job_data;
     }
     foreach ($job_data as $field => $field_data) {
-      if ($field == 'body') {
+      if ($field == 'body' && isset($field_data[0]['value']['#translation']['#text'])) {
         // Get full reference text from source lang of latest revision.
         $source_text = $node->{$field}[$source_lang][0]['value'];
         $old_translation = self::get_field_value($node->nid, $node->type, $revision, $target_lang, $field);
