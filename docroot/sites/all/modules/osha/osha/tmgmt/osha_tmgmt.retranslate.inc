@@ -300,13 +300,17 @@ class OshaTMGMTRetranslate {
     $node_published = node_load($nid, $published_rev);
     if (!workbench_moderation_node_type_moderated($node_published->type)) {
       // Node type is not moderated, always return text for full translation.
-      $messages['status'][] = t('This node has no revisions, full translation in all languages.');
+      $messages['status'][] = t('This node has no revisions, retranslation not applicable.');
+      return NULL;
+    }
+    if (!$published_rev) {
+      $messages['status'][] = t('This node has no published revision, retranslation not applicable.');
       return NULL;
     }
 
     if(!isset($node_published->body)) {
       // body is not present on this node
-      $messages['status'][] = t('This node has no body field.');
+      $messages['status'][] = t('This node has no body field, retranslation not applicable.');
       return NULL;
     }
     $orig_lang = $node_published->translations->original;
