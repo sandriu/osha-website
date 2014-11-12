@@ -37,3 +37,5 @@ if [ ! -z "$post_update" ]; then
 echo "Run post update"
 ../$post_update
 fi
+
+drush cc all

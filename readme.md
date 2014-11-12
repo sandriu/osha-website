@@ -80,6 +80,7 @@ to `config.json` and customize to suit your environment
   Redefine your osha.staging.sync alias as you need. Default one might not be accessible to you.
 
 4 Run install_from_staging.sh
+  ex: ./install_from_staging.sh -b update_s4_before.sh -a update_s4_after.sh
 
 3 (deprecated). Run [install.sh](https://github.com/EU-OSHA/osha-website/blob/master/install.sh) (wrapper around few drush commands)
 
