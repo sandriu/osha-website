@@ -30,6 +30,7 @@ drush osha_build -y
 
 # Devify - development settings
 drush devify --yes
+drush devify_solr
 
 drush cc all
 

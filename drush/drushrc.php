@@ -457,6 +457,10 @@ $command_specific['devify'] = array(
   , (array) $cfg->variables),
 );
 
+$command_specific['devify_solr'] = array(
+  'solr_server' => (array) $cfg->solr_server,
+);
+
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
   include dirname(__FILE__) . '/drushrc.local.php';
 }
