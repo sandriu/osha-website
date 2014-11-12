@@ -485,7 +485,7 @@ function osha_tmgmt_node_presave($node) {
     }
   }
   // Prepare re-translation information
-  if (is_array($node->body)) {
+  if (isset($node->body) && is_array($node->body)) {
     // reformat body text for all languages and enhance paragraphs with unique id's
     foreach(array_keys($node->body) as $lang) {
       if (isset($node->body[$lang][0]['format']) && $node->body[$lang][0]['format'] == 'full_html') {
@@ -546,36 +546,88 @@ function osha_tmgmt_tmgmt_source_translation_structure($job_item,
     $field_name = $instance['field_name'];
     $structure['#label'] = check_plain($instance['label']);
     foreach ($items as $delta => $value) {
-      if ($job_item->item_type == 'node' && empty($job_item->is_full_translation)) {
-        // Retranslation.
-        $text = OshaTMGMTRetranslate::get_text_to_retranslate(
-          $job_item->item_id, $entity->type,
-          $job_item->source_language, $job_item->target_language,
-          $field_name
-        );
-      } else {
-        // This could be a taxonomy term or full translation was requested.
-        $text = $value['value'];
+      switch ($field['type']) {
+        /* don't translate images and files for the moment
+        case 'image':
+          if (!empty($value['alt'])) {
+            $structure[$delta]['alt'] = array(
+              '#label' => t('Image Alt Text'),
+              '#text' => $value['alt'],
+              '#translate' => TRUE,
+            );
+          }
+          if (!empty($value['title'])) {
+            $structure[$delta]['title'] = array(
+              '#label' => t('Image Title Text'),
+              '#text' => $value['title'],
+              '#translate' => TRUE,
+            );
+          }
+          break;
+        case 'file':
+          if (!empty($value['description'])) {
+            $structure[$delta]['description'] = array(
+              '#label' => t('File Description'),
+              '#text' => $value['description'],
+              '#translate' => TRUE,
+            );
+          }
+          break;
+        */
+        case 'link_field':
+          if (!empty($value['title'])) {
+            $structure[$delta]['title'] = array(
+              '#label' => t('Link Title Text'),
+              '#text' => $value['title'],
+              '#translate' => TRUE,
+            );
+          }
+          if (!empty($value['url'])) {
+            $structure[$delta]['url'] = array(
+              '#label' => t('Link URL'),
+              '#text' => $value['url'],
+              '#translate' => FALSE,
+            );
+          }
+          break;
+        case 'text':
+        case 'text_long':
+        case 'text_with_summary':
+          if ($job_item->item_type == 'node' && empty($job_item->is_full_translation)) {
+            // Retranslation.
+            $text = OshaTMGMTRetranslate::get_text_to_retranslate(
+              $job_item->item_id, $entity->type,
+              $job_item->source_language, $job_item->target_language,
+              $field_name
+            );
+          } else {
+            // This could be a taxonomy term or full translation was requested.
+            $text = $value['value'];
+          }
+          $structure[$delta]['value'] = array(
+            '#label' => $structure['#label'],
+            '#text' => $text,
+            '#translate' => TRUE,
+          );
+          if ($field['type'] == 'text_with_summary' && !empty($value['summary'])) {
+            $structure[$delta]['summary'] = array(
+              '#label' => t('Summary'),
+              '#text' => $value['summary'],
+              '#translate' => TRUE,
+            );
+          }
+          break;
+        default:
+          return $structure;
       }
+
       $structure[$delta]['#label'] = t('Delta #@delta', array('@delta' => $delta));
-      $structure[$delta]['value'] = array(
-        '#label' => $structure['#label'],
-        '#text' => $text,
-        '#translate' => TRUE,
-      );
       // Add format.
       $structure[$delta]['format'] = array(
         '#label' => '',
         '#text' => !empty($value['format']) ? $value['format'] : '',
         '#translate' => FALSE,
       );
-      if ($field['type'] == 'text_with_summary' && !empty($value['summary'])) {
-        $structure[$delta]['summary'] = array(
-          '#label' => t('Summary'),
-          '#text' => $value['summary'],
-          '#translate' => TRUE,
-        );
-      }
     }
   }
   return $structure;
