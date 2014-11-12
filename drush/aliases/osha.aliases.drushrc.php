@@ -22,6 +22,10 @@ $aliases['osha.staging.edw'] = array(
   ),
 );
 
+// This alias is used in install and update scripts.
+// Rewrite it in your aliases.local.php as you need.
+$aliases['osha.staging.sync'] = $aliases['osha.staging.edw'];
+
 // Example of local setting.
 // $aliases['osha.local'] = array(
 //   'uri' => 'osha.localhost',
