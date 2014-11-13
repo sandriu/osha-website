@@ -37,3 +37,8 @@ echo "Running cron to cleanup ..."
 drush cron
 
 drush cc all
+
+echo "Migrating new data"
+drush mr PressRelease
+drush mi NoteToEditor
+drush mi PressRelease
