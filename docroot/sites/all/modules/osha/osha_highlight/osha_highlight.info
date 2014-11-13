@@ -1,7 +1,7 @@
 name = Highlight
 core = 7.x
 package = OSHA
-version = 7.x-1.5
+version = 7.x-1.6
 project = osha_highlight
 dependencies[] = ctools
 dependencies[] = date
@@ -63,4 +63,6 @@ features_exclude[dependencies][osha_seminar] = osha_seminar
 features_exclude[dependencies][osha_wiki] = osha_wiki
 features_exclude[field_base][field_image] = field_image
 features_exclude[field_base][field_tags] = field_tags
+features_exclude[field_base][field_flickr_tags] = field_flickr_tags
 features_exclude[taxonomy][tags] = tags
+features_exclude[taxonomy][flickr_tags] = flickr_tags
