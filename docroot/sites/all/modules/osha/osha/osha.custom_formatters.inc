@@ -173,22 +173,29 @@ return $output;';
   $formatter->field_types = 'file';
   $formatter->code = 'global $language;
 $curr_lang = $language->language ;
-$output = \'\';
+$output = \'<ul id="job_vacancies_related_resources">\';
+
+$files = isset($variables[\'#object\']->field_related_resources[$curr_lang]) ? $variables[\'#object\']->field_related_resources[$curr_lang] : $variables[\'#object\']->field_related_resources[\'en\'];
+
 $field_name = $variables[\'#field\'][\'field_name\'];
 $field = $variables[\'#object\']->{$field_name};
 $file= isset($field[$curr_lang]) ? $field[$curr_lang] : NULL;
 
-if (isset($file[0])) {   
-    $output .= \' <a href = "\' . file_create_url($file[0][\'uri\']) . \'">\';
-    $output .= \'<span>\' . $file[0][\'filename\'] . \'</span> - \';
+foreach ($files as $file) {
+  $description = !empty($file[\'description\']) ? $file[\'description\'] : $file[\'filename\'];
+    $output .= \' <li><a href = "\' . file_create_url($file[\'uri\']) . \'">\' . $description;
+    $output .= \' - \';
     $output .= theme_file_icon(
-		   array(
-		       "file" => file_load($file[0][\'fid\']),
-		       "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
-		   ));
-    $output .= \'<span>\' . format_size(filesize($file[0][\'uri\'])). \'</span>\';
-    $output .= \'</a>\'; 
+       array(
+           "file" => file_load($file[\'fid\']),
+           "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
+       ));
+    $output .= \'<span>\' . format_size(filesize($file[\'uri\'])). \'</span>\';
+    $output .= \'</a></li>\';
 }
+
+$output .= \'</ul>\';
+
 return $output;';
   $formatter->fapi = '';
   $export['vacancies_related_resources'] = $formatter;
