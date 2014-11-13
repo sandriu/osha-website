@@ -99,6 +99,15 @@ function osha_job_vacancies_views_default_views() {
   $handler = $view->new_display('page', 'Open job vacancies', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Open job vacancies';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Message';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -187,6 +196,15 @@ function osha_job_vacancies_views_default_views() {
   $handler = $view->new_display('page', 'Ongoing job vacancies', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Ongoing job vacancies';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Message';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -269,6 +287,15 @@ function osha_job_vacancies_views_default_views() {
   $handler = $view->new_display('page', 'Shortlisted job vacancies', 'page_4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Shortlisted job vacancies';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Message';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -347,6 +374,15 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="/articles/careers">Careers</a>';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Messege';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -383,14 +419,8 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['table'] = 'field_data_field_expiration_date';
   $handler->display->display_options['filters']['field_expiration_date_value']['field'] = 'field_expiration_date_value';
   $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_expiration_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Shortlisted (field_job_vacancies_shortlisted) */
-  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['id'] = 'field_job_vacancies_shortlisted_value';
-  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['table'] = 'field_data_field_job_vacancies_shortlisted';
-  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['field'] = 'field_job_vacancies_shortlisted_value';
-  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['value'] = array(
-    0 => '0',
-  );
   $handler->display->display_options['path'] = 'jobs_archive';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Closed job vacancies';
@@ -595,9 +625,12 @@ function osha_job_vacancies_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Open job vacancies'),
+    t('No Results Message'),
+    t('Currently, there are no vacancies available in this section.'),
     t('Ongoing job vacancies'),
     t('Shortlisted job vacancies'),
     t('<a href="/articles/careers">Careers</a>'),
+    t('No Results Messege'),
     t('Open Vacancies block'),
     t('Ongoing Vacancies block'),
     t('Shortlisted Vacancies block'),

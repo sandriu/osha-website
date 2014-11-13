@@ -510,73 +510,6 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_related_resources'
-  $field_instances['node-job_vacancies-field_related_resources'] = array(
-    'bundle' => 'job_vacancies',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'custom_formatters',
-        'settings' => array(),
-        'type' => 'custom_formatters_vacancies_related_resources',
-        'weight' => 14,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_related_resources',
-    'label' => 'Related resources',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 1,
-      'entity_translation_sync' => 0,
-      'file_directory' => 'job-vacancies/documents',
-      'file_extensions' => 'pdf doc docx ppt pptx html odp odt txt',
-      'max_filesize' => '50MB',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 8,
-    ),
-  );
-
   // Exported field_instance: 'node-job_vacancies-field_job_vacancies_shortlisted'
   $field_instances['node-job_vacancies-field_job_vacancies_shortlisted'] = array(
     'bundle' => 'job_vacancies',
@@ -867,6 +800,73 @@ function osha_job_vacancies_field_default_field_instances() {
       ),
       'type' => 'date_select',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-job_vacancies-field_related_resources'
+  $field_instances['node-job_vacancies-field_related_resources'] = array(
+    'bundle' => 'job_vacancies',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'custom_formatters',
+        'settings' => array(),
+        'type' => 'custom_formatters_vacancies_related_resources',
+        'weight' => 14,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_resources',
+    'label' => 'Related resources',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 1,
+      'entity_translation_sync' => 0,
+      'file_directory' => 'job-vacancies/documents',
+      'file_extensions' => 'pdf doc docx ppt pptx html odp odt txt',
+      'max_filesize' => '50MB',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 8,
     ),
   );
 
