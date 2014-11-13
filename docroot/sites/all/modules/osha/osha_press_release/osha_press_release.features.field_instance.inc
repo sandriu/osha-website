@@ -732,7 +732,7 @@ function osha_press_release_field_default_field_instances() {
           'multiple_to' => '',
           'osha_date_theme' => '',
         ),
-        'type' => 'custom',
+        'type' => 'date_default',
         'weight' => 0,
       ),
       'highlights_item' => array(
@@ -752,7 +752,7 @@ function osha_press_release_field_default_field_instances() {
           'multiple_to' => '',
           'osha_date_theme' => '',
         ),
-        'type' => 'custom',
+        'type' => 'date_default',
         'weight' => 1,
       ),
       'osha_slideshow' => array(
@@ -1136,7 +1136,6 @@ function osha_press_release_field_default_field_instances() {
   t('Expiration Date');
   t('Image');
   t('Nace');
-  t('Needs Retranslation');
   t('Notes to editor');
   t('Page count');
   t('Publication Date');

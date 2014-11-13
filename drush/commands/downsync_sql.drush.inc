@@ -2,24 +2,26 @@
 
 /**
  * @file
- * Downsync command for Drush
+ * Downsync_sql command for Drush
+ *
+ * Copied from downsync - removed rsync.
  */
 
 /**
  * Implements hook_drush_command().
  */
-function downsync_drush_command() {
+function downsync_sql_drush_command() {
   $items = array();
-  $items['downsync'] = array(
+  $items['downsync_sql'] = array(
     'description' => "Sync one environment's db and files to another.",
     'arguments' => array(
       'source-alias' => 'Alias of the source site to copy from.',
       'destination-alias' => 'Alias of the destination site to copy to.',
     ),
     'examples' => array(
-      'drush downsync @prod @local' => 'sql-sync the database and rsync the files from @prod to @local',
+      'drush downsync_sql @prod @local' => 'sql-sync the database from @prod to @local',
     ),
-    'aliases' => array('dsync'),
+    'aliases' => array('dsyncsql'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
     'drush dependencies' => array('sql', 'core'),
   );
@@ -29,7 +31,7 @@ function downsync_drush_command() {
 /**
  * Actual function run by the downsync command.
  */
-function drush_downsync($source = NULL, $destination = NULL) {
+function drush_downsync_sql($source = NULL, $destination = NULL) {
   // Make sure we have the source-dump and target-dump options.
   $source_dump = drush_get_option('source-dump');
   if (!isset($source_dump)) {
@@ -45,8 +47,4 @@ function drush_downsync($source = NULL, $destination = NULL) {
   print dt('SQL Sync running... NOTE: if you do not have ssh passwordless logins setup, you may be asked for your password multiple times.');
 
   drush_invoke('sql-sync', array($source, $destination));
-
-  // Rsync the files.
-  print dt('Rsync-ing files...');
-  drush_invoke('rsync', array($source . ':%files', $destination . ':%files'));
 }
