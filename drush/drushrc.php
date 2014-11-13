@@ -413,6 +413,7 @@ $options['init-modules'] = array(
   'search_api_et_solr',
   'search_api_views',
   'osha_search',
+  'osha_content',
 
   // Newsletter modules.
   'entity_collection',
