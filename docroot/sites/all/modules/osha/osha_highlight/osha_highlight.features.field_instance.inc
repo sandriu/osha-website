@@ -158,9 +158,10 @@ function osha_highlight_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'links' => 0,
+          'view_mode' => 'default',
         ),
-        'type' => 'entityreference_label',
+        'type' => 'entityreference_entity_view',
         'weight' => 18,
       ),
       'highlights_item' => array(
@@ -1001,7 +1002,6 @@ function osha_highlight_field_default_field_instances() {
   t('Character count');
   t('Expiration Date');
   t('Image');
-  t('Needs Retranslation');
   t('Page count');
   t('Publication Date');
   t('Summary');
