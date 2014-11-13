@@ -3,13 +3,6 @@ jQuery(document).ready(function() {
     //select all languages in the cart form
     jQuery('#edit-select-all-lng').change(function(){
         select_values('#edit-select-all-lng', '#edit-target-language', 'all');
-        jQuery('#edit-select-some-lng').attr('checked', '');
-    });
-    //select a list of languages in the cart form
-    jQuery('#edit-select-some-lng').change(function(){
-        select_values('#edit-select-some-lng', '#edit-target-language',
-          ["da", "de", "et", "es", "fr", "hr", "it", "lv", "lt", "hu", "mt", "nl", "no", "pl", "pt", "ro", "sk", "sl", "fi", "sv", "is", "cs", "el", "bg"]);
-        jQuery('#edit-select-all-lng').attr('checked', '');
     });
 });
 

@@ -21,7 +21,8 @@ class OSHATMGMTFileTranslatorPluginController extends TMGMTFileTranslatorPluginC
     if (file_prepare_directory($dirname, FILE_CREATE_DIRECTORY)) {
       if ($file = file_save_data($export->export($job), $path, FILE_EXISTS_REPLACE)) {
         file_usage_add($file, 'osha_tmgmt', 'tmgmt_job', $job->tjid);
-        $job->submitted('Translation job file was created. <a href="!link">Click here to download the XML file</a>', array('!link' => file_create_url($path)));
+        $job->submitted('Translation <a href="@job_url">job</a> file was created. <a href="!link">Click here to download the XML file</a>',
+          array('!link' => file_create_url($path), '@job_url' => url("admin/tmgmt/jobs/".$job->tjid)));
       }
       else {
         $job->addMessage('Error saving translation file. Please contact technical support (cannot save !file)', array('!file' => $path), 'error');
