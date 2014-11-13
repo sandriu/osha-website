@@ -1,7 +1,7 @@
 <?php
 
 
-/* Add new stuff for deployment of sprint-4 branch here. To avoid conflicts, add them after your name 
+/* Add new stuff for deployment of sprint-4 branch here. To avoid conflicts, add them after your name
  * Also include the ticket number, see example below
  */
 // andrei
@@ -18,5 +18,11 @@ field_delete_field('field_needs_retranslation');
 
 // cristi
 // dragos
+drush_log('Dropping field: field_pr_related_links', 'ok');
+field_delete_field('field_pr_related_links');
+
+drush_log('Dropping field: field_pr_release_date', 'ok');
+field_delete_field('field_pr_release_date');
+
 // claudia
 // radu

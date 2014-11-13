@@ -144,6 +144,9 @@ function osha_news_strongarm() {
       'osha_wiki' => array(
         'custom_settings' => TRUE,
       ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

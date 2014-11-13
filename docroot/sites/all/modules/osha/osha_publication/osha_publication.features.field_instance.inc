@@ -165,9 +165,10 @@ function osha_publication_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'links' => 0,
+          'view_mode' => 'default',
         ),
-        'type' => 'entityreference_label',
+        'type' => 'entityreference_entity_view',
         'weight' => 22,
       ),
       'highlights_item' => array(
@@ -1612,7 +1613,6 @@ function osha_publication_field_default_field_instances() {
   t('Expiration Date');
   t('File');
   t('Nace');
-  t('Needs Retranslation');
   t('OSHWiki categories');
   t('OSHWiki featured articles');
   t('Page count');
