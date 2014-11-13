@@ -11,7 +11,7 @@ echo "Run pre update"
 
 # Before s4...
 echo "Disabling the modules no longer in use ..."
-drush dis -y osha_taxonomies_uuid osha_content osha_content_edw
+drush dis -y osha_taxonomies_uuid osha_content_edw
 
 echo "PRE-UPDATE tasks ..."
 drush php-script ../scripts/s4/pre-update.php 
