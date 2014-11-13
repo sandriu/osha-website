@@ -67,7 +67,18 @@ highlight/*
 teaser/*
 news/*
 seminar/*
-seminars/*',
+seminars/*
+about/calls/*
+calls/*
+about/jobs/*
+job-vacancies/*
+shortlisted_job_vacancies
+ongoing_job_vacancies
+open_job_vacancies
+jobs_archive
+articles/careers
+calls_archive
+articles/procurement',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
