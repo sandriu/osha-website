@@ -376,6 +376,12 @@ $options['init-modules'] = array(
   'print_pdf_tcpdf',
   'print_pdf',
 
+  //Youtube and Flickr field
+  'youtube',
+  'flickr',
+  'flickr_block',
+  'flickrfield',
+
   'osha_taxonomies',
   'osha',
   'osha_migration',
@@ -420,12 +426,6 @@ $options['init-modules'] = array(
   // Social share
   'addtoany',
   'on_the_web',
-
-  //Youtube and Flickr field
-  'youtube',
-  'flickr',
-  'flickr_block',
-  'flickrfield',
 
   // Link content types with main menu items
   'menu_position',
