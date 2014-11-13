@@ -61,3 +61,32 @@ function osha_job_vacancies_post_features_revert($component) {
       ->execute();
   }
 }
+
+/**
+ * Implements hook_node_validate().
+ * @param $node
+ * @param $form
+ * @param $form_state
+ */
+function osha_job_vacancies_node_validate($node, $form, &$form_state) {
+  if($node->type == 'job_vacancies') {
+    if (isset($node->field_job_vacancies_deadline) && isset($node->field_expiration_date) && isset($node->field_publication_date)) {
+      if ($node->field_job_vacancies_deadline[LANGUAGE_NONE][0]['value'] &&
+        $node->field_expiration_date[LANGUAGE_NONE][0]['value'] &&
+        $node->field_publication_date[LANGUAGE_NONE][0]['value'] ) {
+
+        $publication_date =  $node->field_publication_date[LANGUAGE_NONE][0]['value'];
+        $expiration_date = $node->field_expiration_date[LANGUAGE_NONE][0]['value'];
+        $deadline_date = $node->field_job_vacancies_deadline[LANGUAGE_NONE][0]['value'];
+
+        if ($deadline_date < $publication_date) {
+          form_set_error('field_job_vacancies_deadline', t('The deadline date must be greater than publication date.'));
+        }
+
+        if ($expiration_date < $deadline_date) {
+          form_set_error('field_expiration_date', t('The expiration date must be greater than deadline date.'));
+        }
+      }
+    }
+  }
+}
