@@ -1,11 +1,11 @@
-#!/bin/bash 
+#!/bin/bash
 
 cd docroot/
 
 drush site-install -y
 
 # Sync from edw staging
-drush downsync_sql @osha.staging.sync @osha.local -y -v
+drush downsync_sql @osha.staging.sync @osha.local -y
 
 echo "Run pre update"
 
@@ -14,7 +14,7 @@ echo "Disabling the modules no longer in use ..."
 drush dis -y osha_taxonomies_uuid osha_content_edw
 
 echo "PRE-UPDATE tasks ..."
-drush php-script ../scripts/s4/pre-update.php 
+drush php-script ../scripts/s4/pre-update.php
 
 # Before s5...
 
@@ -38,7 +38,7 @@ drush cron
 
 drush cc all
 
-echo "Migrating new data"
-drush mr PressRelease
-drush mi NoteToEditor
-drush mi PressRelease
+#echo "Migrating new data"
+#drush mr PressRelease
+#drush mi NoteToEditor
+#drush mi PressRelease

@@ -9,7 +9,7 @@
 // claudia
 
 osha_add_menu_position_rules();
-
+delete_extra_fields();
 /**
  * Add menu position rules.
  */
@@ -43,3 +43,17 @@ function osha_add_menu_position_rules() {
 }
 
 // radu
+drush_log('Dropping field: field_flickr_tags', 'ok');
+field_delete_field('field_flickr_tags');
+
+function delete_extra_fields() {
+  if ($instance = field_info_instance('node', 'field_related_oshwiki_articles', 'highlight')) {
+    field_delete_instance($instance);
+  }
+  if ($instance = field_info_instance('node', 'field_related_oshwiki_articles', 'news')) {
+    field_delete_instance($instance);
+  }
+  if ($instance = field_info_instance('node', 'field_file', 'seminar')) {
+    field_delete_instance($instance);
+  }
+}

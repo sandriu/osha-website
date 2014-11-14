@@ -36,6 +36,12 @@ function osha_press_contact_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'osha_slideshow' => array(
         'label' => 'above',
         'settings' => array(),
@@ -96,6 +102,12 @@ function osha_press_contact_field_default_field_instances() {
         'weight' => 0,
       ),
       'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -176,6 +188,12 @@ function osha_press_contact_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'osha_slideshow' => array(
         'label' => 'above',
         'settings' => array(),
@@ -241,6 +259,12 @@ function osha_press_contact_field_default_field_instances() {
         'weight' => 0,
       ),
       'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -316,6 +340,12 @@ function osha_press_contact_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'osha_slideshow' => array(
         'label' => 'above',
         'settings' => array(),
@@ -385,6 +415,12 @@ function osha_press_contact_field_default_field_instances() {
         'weight' => 0,
       ),
       'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
