@@ -34,6 +34,8 @@ call drush cc all
 call drush php-script ../scripts/s5/post-update.php
 call drush cc all
 
+mkdir ../docroot/sites/default/files/slideshare
+
 echo "Running cron to cleanup ..."
 call drush cron
 

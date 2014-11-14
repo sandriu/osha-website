@@ -5,6 +5,7 @@ package = OSHA
 version = 7.x-0.3
 project = osha_resources
 dependencies[] = ctools
+dependencies[] = custom_formatters
 dependencies[] = entityreference
 dependencies[] = entityreference_view_widget
 dependencies[] = features

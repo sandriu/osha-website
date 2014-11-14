@@ -120,6 +120,7 @@ features[filter][] = filtered_html
 features[filter][] = full_html
 features[filter][] = plain_text
 features[formatters][] = call_contract_notice
+features[formatters][] = file_as_title
 features[formatters][] = publication_bookshop_id
 features[formatters][] = publication_file
 features[formatters][] = publication_related_publications
