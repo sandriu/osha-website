@@ -65,30 +65,19 @@ function osha_resources_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'article' => 'article',
-    'banner' => 'banner',
-    'page' => 'page',
-    'blog' => 'blog',
-    'calls' => 'calls',
-    'directive' => 'directive',
-    'guideline' => 'guideline',
-    'highlight' => 'highlight',
-    'job_vacancies' => 'job_vacancies',
-    'news' => 'news',
-    'newsletter_article' => 'newsletter_article',
-    'note_to_editor' => 'note_to_editor',
-    'press_contact' => 'press_contact',
-    'press_release' => 'press_release',
+    'external_url' => 'external_url',
+    'file' => 'file',
+    'flickr' => 'flickr',
     'publication' => 'publication',
-    'resources' => 'resources',
-    'seminar' => 'seminar',
-    'wiki_page' => 'wiki_page',
+    'slideshare' => 'slideshare',
+    'youtube' => 'youtube',
   );
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -102,6 +91,7 @@ function osha_resources_views_default_views() {
     10 => 0,
     11 => 0,
   );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
