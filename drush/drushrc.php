@@ -459,7 +459,7 @@ $command_specific['devify'] = array(
       'reroute_email_enable_message' => TRUE,
       'reroute_email_enable' => TRUE,
       'stage_file_proxy_origin' => 'http://osha-corp-staging03.mainstrat.com',
-      'stage_file_proxy_use_imagecache_root' => FALSE,
+      'stage_file_proxy_use_imagecache_root' => TRUE,
       'stage_file_proxy_hotlink' => TRUE,
       'reroute_email_address' => $cfg->variables->site_mail,
     )
