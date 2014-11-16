@@ -135,16 +135,16 @@ function osha_calls_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '21',
+          'weight' => '20',
         ),
         'redirect' => array(
-          'weight' => '20',
+          'weight' => '19',
         ),
         'language' => array(
           'weight' => '1',
         ),
         'metatags' => array(
-          'weight' => '22',
+          'weight' => '21',
         ),
         'workbench_access' => array(
           'weight' => '0',
