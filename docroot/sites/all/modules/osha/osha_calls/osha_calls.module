@@ -30,3 +30,48 @@ function osha_calls_post_features_enable_feature($component) {
     }
   }
 }
+
+/**
+ * Implements hook_field_widget_form_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_calls_field_widget_form_alter(&$element, &$form_state) {
+  if (!empty($element['#field_name'])
+      && $element['#field_name'] == 'field_file') {
+    $node = $form_state['node'];
+    if ($node->type == 'calls') {
+      foreach (element_children($element) as $i) {
+        $ctrl = &$element[$i];
+        $ctrl['#process'] = array_merge($ctrl['#process'], array('osha_calls_file_field_widget_process'));
+      }
+    }
+  }
+}
+
+/**
+ * Widget processing function to replace text input with select widget.
+ *
+ * @param array $element
+ *   Element to process.
+ *
+ * @return array
+ *   Updated widget.
+ */
+function osha_calls_file_field_widget_process($element) {
+  $file_types = &drupal_static(__FUNCTION__);
+  if (!isset($file_types)) {
+    $voc = taxonomy_vocabulary_machine_name_load('attachment_file_type');
+    $types = taxonomy_get_tree($voc->vid);
+    $file_types[''] = t('-- Please select type --');
+    foreach ($types as $term) {
+      $file_types[$term->tid] = $term->name;
+    }
+  }
+  if (isset($element['description'])) {
+    $description = &$element['description'];
+    $description['#type'] = 'select';
+    $description['#options'] = $file_types;
+  }
+  return $element;
+}
