@@ -158,6 +158,7 @@ function osha_calls_file_field_widget_process($element) {
     $description = &$element['description'];
     $description['#type'] = 'select';
     $description['#options'] = $file_types;
+    $description['#title'] = t('Type');
   }
   return $element;
 }
