@@ -26,7 +26,7 @@ function osha_legislation_field_default_field_bases() {
     'locked' => 0,
     'module' => 'languagefield',
     'settings' => array(
-      'enabled' => 1,
+      'enabled' => 2,
       'entity_translation_sync' => FALSE,
       'excluded_languages' => array(),
       'format' => array(
