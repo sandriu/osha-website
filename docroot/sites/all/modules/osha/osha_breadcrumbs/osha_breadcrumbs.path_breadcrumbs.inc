@@ -60,6 +60,28 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
 
   $path_breadcrumb = new stdClass();
   $path_breadcrumb->api_version = 1;
+  $path_breadcrumb->machine_name = 'directive_search';
+  $path_breadcrumb->name = 'Directive search';
+  $path_breadcrumb->path = 'search/directives';
+  $path_breadcrumb->data = array(
+    'titles' => array(
+      0 => 'Legislation',
+      1 => 'European Directives',
+    ),
+    'paths' => array(
+      0 => 'articles/safety-and-health-legislation',
+      1 => 'articles/european-directives',
+    ),
+    'home' => 1,
+    'translatable' => 0,
+    'arguments' => array(),
+    'access' => array(),
+  );
+  $path_breadcrumb->weight = 0;
+  $export['directive_search'] = $path_breadcrumb;
+
+  $path_breadcrumb = new stdClass();
+  $path_breadcrumb->api_version = 1;
   $path_breadcrumb->machine_name = 'directive_view';
   $path_breadcrumb->name = 'Directive view';
   $path_breadcrumb->path = 'legislation/directives/%string';
