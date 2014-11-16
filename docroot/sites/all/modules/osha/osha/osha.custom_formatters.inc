@@ -90,9 +90,19 @@ return empty($code)?\'\':\'<span>\'.t(\'Order a printed copy\').\'<a href="http:
   $formatter->description = '';
   $formatter->mode = 'php';
   $formatter->field_types = 'file';
-  $formatter->code = '$output = "<span>Download PDF in: </span>";
+  $formatter->code = 'global $language;
+$curr_lang = $language->language ;
+$node = $variables[\'#object\'];
+$file = isset($node->field_file[$curr_lang][0]) ? $node->field_file[$curr_lang][0] : $node->field_file[\'en\'][0];
+$output = "<span class=\'label_publication_file\'>Download</span>";
+$output .= theme_file_icon(
+  array(
+    "file" => file_load($file[\'fid\']),
+    "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
+));
+$output .="<span class=\'label_publication_file\'>in:</span>";
 
-foreach($variables[\'#object\']->field_file as $lang => $object) {
+foreach($node->field_file as $lang => $object) {
     $output .=  \'<a href="\' . file_create_url($object[0][\'uri\']) . \'">\' . strtoupper($lang) . \'</a> | \';
 }
 $output = substr($output, 0, -3);
@@ -114,16 +124,23 @@ $output = \'<h3>Summary &amp; Resources</h3>\';
 $output .= \'<ul id="publication_related_publications">\';
 $related_pubs = $variables[\'#object\']->field_related_publications[\'und\'];
 foreach ($related_pubs as $pub) {
-	$output .= \'<li>\';
-	$node = node_load($pub[\'target_id\']);
-	$title = isset($node->title_field[$curr_lang][0]) ? $node->title_field[$curr_lang][0][\'value\'] : $node->title_field[\'en\'][0][\'value\'];
-	$output .=  \'<a href="\' . url(\'node/\' . $node->nid, array(\'absolute\' => TRUE)) . \'">\' . $title . \'</a>\';
-	$output .= \'<span>Download PDF in:</span>\';
-	foreach ($node->field_file as $lang => $object) {
-		$output .=  \' <a href="\' . file_create_url($object[0][\'uri\']) . \'">\' . strtoupper($lang) . \'</a> | \';
-	}
-	$output = substr($output, 0, -3);
-	$output .= \'</li>\';
+  $output .= \'<li>\';
+  $node = node_load($pub[\'target_id\']);
+  $title = isset($node->title_field[$curr_lang][0]) ? $node->title_field[$curr_lang][0][\'value\'] : $node->title_field[\'en\'][0][\'value\'];
+  $output .=  \'<a href="\' . url(\'node/\' . $node->nid, array(\'absolute\' => TRUE)) . \'">\' . $title . \'</a>\';
+  $output .= \'<span>Download</span>\';
+  $file = isset($node->field_file[$curr_lang][0]) ? $node->field_file[$curr_lang][0] : $node->field_file[\'en\'][0];
+  $output .= theme_file_icon(
+    array(
+      "file" => file_load($file[\'fid\']),
+      "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
+  ));
+  $output .=\'<span>in:</span>\';
+  foreach ($node->field_file as $lang => $object) {
+    $output .=  \' <a href="\' . file_create_url($object[0][\'uri\']) . \'">\' . strtoupper($lang) . \'</a> | \';
+  }
+  $output = substr($output, 0, -3);
+  $output .= \'</li>\';
 }
 $output .= \'</ul>\';
 return $output;';
