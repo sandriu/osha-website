@@ -155,8 +155,9 @@ function osha_legislation_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'exclude_node_title_content_type_modes_directive';
   $strongarm->value = array(
+    'full' => 'full',
     'teaser' => 'teaser',
-    'full' => 0,
+    'osha_resources' => 'osha_resources',
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
@@ -165,6 +166,7 @@ function osha_legislation_strongarm() {
     'highlights_item' => 0,
     'newsletter_item' => 0,
     'osha_wiki' => 0,
+    'print' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -175,8 +177,9 @@ function osha_legislation_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'exclude_node_title_content_type_modes_guideline';
   $strongarm->value = array(
+    'full' => 'full',
     'teaser' => 'teaser',
-    'full' => 0,
+    'osha_resources' => 'osha_resources',
     'rss' => 0,
     'search_index' => 0,
     'search_result' => 0,
@@ -185,6 +188,7 @@ function osha_legislation_strongarm() {
     'highlights_item' => 0,
     'newsletter_item' => 0,
     'osha_wiki' => 0,
+    'print' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -241,6 +245,12 @@ function osha_legislation_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
+      ),
+      'print' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -304,6 +314,12 @@ function osha_legislation_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
+      ),
+      'print' => array(
         'custom_settings' => FALSE,
       ),
     ),

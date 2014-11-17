@@ -69,16 +69,16 @@ function osha_homepage_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_slideshow' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'highlights_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'newsletter_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'osha_wiki' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
@@ -96,6 +96,12 @@ function osha_homepage_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print' => array(
         'custom_settings' => FALSE,
       ),
     ),

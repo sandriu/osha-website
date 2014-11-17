@@ -38,7 +38,7 @@ function drush_downsync($source = NULL, $destination = NULL) {
 
   $target_dump = drush_get_option('target-dump');
   if (!isset($target_dump)) {
-    drush_set_option('target-dump', '/tmp/target-dump.sql');
+    drush_set_option('target-dump', '/tmp/target-dump.sql.gz');
   }
 
   // Execute a drush sql-sync

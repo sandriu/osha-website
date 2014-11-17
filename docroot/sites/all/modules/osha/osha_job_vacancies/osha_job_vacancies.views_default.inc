@@ -32,6 +32,11 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: Content revision: Content */
+  $handler->display->display_options['relationships']['vid']['id'] = 'vid';
+  $handler->display->display_options['relationships']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['vid']['field'] = 'vid';
+  $handler->display->display_options['relationships']['vid']['required'] = TRUE;
   /* Field: Content: Publication Date */
   $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
@@ -99,6 +104,15 @@ function osha_job_vacancies_views_default_views() {
   $handler = $view->new_display('page', 'Open job vacancies', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Open job vacancies';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Message';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -126,6 +140,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['id'] = 'published';
   $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
   /* Filter criterion: Content: Publication Date (field_publication_date) */
@@ -187,6 +202,15 @@ function osha_job_vacancies_views_default_views() {
   $handler = $view->new_display('page', 'Ongoing job vacancies', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Ongoing job vacancies';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Message';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -214,6 +238,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['id'] = 'published';
   $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
   /* Filter criterion: Content: Publication Date (field_publication_date) */
@@ -269,6 +294,15 @@ function osha_job_vacancies_views_default_views() {
   $handler = $view->new_display('page', 'Shortlisted job vacancies', 'page_4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Shortlisted job vacancies';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Message';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -296,6 +330,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['id'] = 'published';
   $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
   /* Filter criterion: Content: Publication Date (field_publication_date) */
@@ -346,7 +381,22 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="/articles/careers">Careers</a>';
+  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="articles/careers">Careers</a>';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Messege';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content revision: Content */
+  $handler->display->display_options['relationships']['vid']['id'] = 'vid';
+  $handler->display->display_options['relationships']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['vid']['field'] = 'vid';
+  $handler->display->display_options['relationships']['vid']['required'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -368,12 +418,19 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['id'] = 'published';
   $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
+  $handler->display->display_options['filters']['published']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['published']['expose']['label'] = 'Published';
+  $handler->display->display_options['filters']['published']['expose']['operator'] = 'published_op';
+  $handler->display->display_options['filters']['published']['expose']['identifier'] = 'published';
+  $handler->display->display_options['filters']['published']['expose']['required'] = TRUE;
   /* Filter criterion: Content: Deadline (field_job_vacancies_deadline) */
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['id'] = 'field_job_vacancies_deadline_value';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['table'] = 'field_data_field_job_vacancies_deadline';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['field'] = 'field_job_vacancies_deadline_value';
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['relationship'] = 'vid';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['operator'] = '<';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['group'] = 1;
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
@@ -382,12 +439,15 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['id'] = 'field_expiration_date_value';
   $handler->display->display_options['filters']['field_expiration_date_value']['table'] = 'field_data_field_expiration_date';
   $handler->display->display_options['filters']['field_expiration_date_value']['field'] = 'field_expiration_date_value';
-  $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_expiration_date_value']['relationship'] = 'vid';
+  $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_expiration_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
   /* Filter criterion: Content: Shortlisted (field_job_vacancies_shortlisted) */
   $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['id'] = 'field_job_vacancies_shortlisted_value';
   $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['table'] = 'field_data_field_job_vacancies_shortlisted';
   $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['field'] = 'field_job_vacancies_shortlisted_value';
+  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['relationship'] = 'vid';
   $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['value'] = array(
     0 => '0',
   );
@@ -430,6 +490,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['id'] = 'published';
   $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
   /* Filter criterion: Content: Publication Date (field_publication_date) */
@@ -502,6 +563,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['id'] = 'published';
   $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
   /* Filter criterion: Content: Deadline (field_job_vacancies_deadline) */
@@ -562,6 +624,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['id'] = 'published';
   $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
   /* Filter criterion: Content: Shortlisted (field_job_vacancies_shortlisted) */
@@ -594,10 +657,15 @@ function osha_job_vacancies_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
+    t('Get the actual content from a content revision.'),
     t('Open job vacancies'),
+    t('No Results Message'),
+    t('Currently, there are no vacancies available in this section.'),
     t('Ongoing job vacancies'),
     t('Shortlisted job vacancies'),
-    t('<a href="/articles/careers">Careers</a>'),
+    t('<a href="articles/careers">Careers</a>'),
+    t('No Results Messege'),
+    t('Published'),
     t('Open Vacancies block'),
     t('Ongoing Vacancies block'),
     t('Shortlisted Vacancies block'),

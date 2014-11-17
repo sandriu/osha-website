@@ -203,6 +203,14 @@ function osha_workflow_update_7002() {
     variable_set('views_defaults', $status);
   }
 
+  // New transition installed before perm.
+  $transition = array(
+    'from_name' => 'ready_to_publish',
+    'to_name' => 'published',
+    'name' => 'Publishing',
+  );
+  workbench_moderation_transition_save((object) $transition);
+
   require_once 'osha_workflow.permissions.inc';
   // Give new permissions to Review Manager.
   $role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);

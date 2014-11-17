@@ -58,6 +58,7 @@ function drush_osha_tmgmt_statistics()
   );
   foreach ($rows as $row) {
     $node = node_load($row->nid);
+    $node = workbench_moderation_node_current_load($node);
     OshaTMGMTStatistics::computeEntityStatistics($node, 'node');
     $fake = new stdClass();
     $fake->id = $node->nid;

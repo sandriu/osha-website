@@ -342,9 +342,44 @@ function osha_resources_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_external_url';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_external_url'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_file';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_flickr';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_flickr'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_hide_translation_links_resources';
   $strongarm->value = 1;
   $export['entity_translation_hide_translation_links_resources'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_slideshare';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_slideshare'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_youtube';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_youtube'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -356,6 +391,151 @@ function osha_resources_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_external_url';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 'teaser',
+    'osha_resources' => 'osha_resources',
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
+    'osha_wiki' => 0,
+    'print' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_external_url'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_file';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 'teaser',
+    'osha_resources' => 'osha_resources',
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
+    'osha_wiki' => 0,
+    'print' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_flickr';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 'teaser',
+    'osha_resources' => 'osha_resources',
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
+    'osha_wiki' => 0,
+    'print' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_flickr'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_slideshare';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 'teaser',
+    'osha_resources' => 'osha_resources',
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
+    'osha_wiki' => 0,
+    'print' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_slideshare'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_youtube';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 'teaser',
+    'osha_resources' => 'osha_resources',
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
+    'osha_wiki' => 0,
+    'print' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_youtube'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_external_url';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_external_url'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_file';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_flickr';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_flickr'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_slideshare';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_slideshare'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_youtube';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_youtube'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__external_url';
   $strongarm->value = array(
     'view_modes' => array(
@@ -363,16 +543,16 @@ function osha_resources_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_slideshow' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'highlights_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'newsletter_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'osha_wiki' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
@@ -394,6 +574,9 @@ function osha_resources_strongarm() {
       ),
       'token' => array(
         'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
@@ -426,16 +609,16 @@ function osha_resources_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_slideshow' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'highlights_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'newsletter_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'osha_wiki' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
@@ -457,6 +640,9 @@ function osha_resources_strongarm() {
       ),
       'token' => array(
         'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
@@ -489,16 +675,16 @@ function osha_resources_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_slideshow' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'highlights_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'newsletter_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'osha_wiki' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
@@ -520,6 +706,9 @@ function osha_resources_strongarm() {
       ),
       'token' => array(
         'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
@@ -618,16 +807,16 @@ function osha_resources_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_slideshow' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'highlights_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'newsletter_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'osha_wiki' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
@@ -649,6 +838,9 @@ function osha_resources_strongarm() {
       ),
       'token' => array(
         'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
@@ -681,16 +873,16 @@ function osha_resources_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_slideshow' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'highlights_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'newsletter_item' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'osha_wiki' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
@@ -712,6 +904,9 @@ function osha_resources_strongarm() {
       ),
       'token' => array(
         'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
@@ -1042,21 +1237,27 @@ function osha_resources_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_external_url';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'status',
+  );
   $export['node_options_external_url'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_file';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'status',
+  );
   $export['node_options_file'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_flickr';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'status',
+  );
   $export['node_options_flickr'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -1070,14 +1271,18 @@ function osha_resources_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_slideshare';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'status',
+  );
   $export['node_options_slideshare'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_youtube';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'status',
+  );
   $export['node_options_youtube'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -1126,14 +1331,14 @@ function osha_resources_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_external_url';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_external_url'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_file';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_file'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -1237,6 +1442,27 @@ function osha_resources_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_external_url';
+  $strongarm->value = 0;
+  $export['workbench_access_node_type_external_url'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_file';
+  $strongarm->value = 0;
+  $export['workbench_access_node_type_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_flickr';
+  $strongarm->value = 0;
+  $export['workbench_access_node_type_flickr'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_node_type_resources';
   $strongarm->value = 0;
   $export['workbench_access_node_type_resources'] = $strongarm;
@@ -1244,9 +1470,58 @@ function osha_resources_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_slideshare';
+  $strongarm->value = 0;
+  $export['workbench_access_node_type_slideshare'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_youtube';
+  $strongarm->value = 0;
+  $export['workbench_access_node_type_youtube'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_external_url';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_external_url'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_file';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_flickr';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_flickr'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'workbench_moderation_default_state_resources';
   $strongarm->value = 'draft';
   $export['workbench_moderation_default_state_resources'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_slideshare';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_slideshare'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_youtube';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_youtube'] = $strongarm;
 
   return $export;
 }

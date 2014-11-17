@@ -162,7 +162,7 @@ function osha_search_default_search_api_index() {
         "field_tags:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_thesaurus" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_updated" : { "type" : "date" },
-        "field_wiki_categories" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_wiki_categories" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_wiki_page_url:title" : { "type" : "text" },
         "field_wiki_page_url:url" : { "type" : "uri" },
         "language" : { "type" : "string" },

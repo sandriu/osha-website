@@ -21,7 +21,7 @@ function osha_seminar_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Event Details',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'field_seminar_end_date',
       1 => 'field_seminar_location',

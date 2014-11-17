@@ -60,11 +60,26 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $this->writeElement('FriendlyUrlName', 'NO FRIENDLY URL');
     $this->writeElement('Keywords', 'NO KEYWORDS');
 
+    $data = array_filter(tmgmt_flatten_data($item->getData()), '_tmgmt_filter_data');
+    foreach ($data as $key => $field) {
+      $this->startElement('DynamicElement');
+      $this->writeAttribute('dynamicElementKind', 'TextArea');
+      $this->writeAttribute('indexType', $item->item_type);
+      $this->writeAttribute('instanceId', $item->item_id);
+      $this->writeAttribute('name', ']['.$key);
+      $this->writeAttribute('repeatable', 'false');
+      $this->startElement('DynamicContent');
+      $this->writeCdata($field['#text']);
+      // </DynamicContent>
+      $this->endElement();
+      // </DynamicElement>
+      $this->endElement();
+    }
+
+    /*
     foreach ($item->getData() as $key => $field) {
       $text = NULL;
-      if ($key == "node_title") {
-        continue;
-      }
+
       if (isset($field['#text'])) {
         $text = $field['#text'];
       }
@@ -101,7 +116,7 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
         // </DynamicElement>
         $this->endElement();
       }
-    }
+    }*/
     // </Translation>
     $this->endElement();
   }

@@ -67,7 +67,6 @@ function osha_press_release_views_default_views() {
   $handler->display->display_options['filters']['published']['id'] = 'published';
   $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['published']['field'] = 'published';
-  $handler->display->display_options['filters']['published']['relationship'] = 'nid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   /* Filter criterion: Content: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
