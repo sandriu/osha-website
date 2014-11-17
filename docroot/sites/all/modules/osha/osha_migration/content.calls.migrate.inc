@@ -44,7 +44,7 @@ class MigrateOshaCalls extends OSHADynamicMigration {
     $this->addFieldMapping('field_publication_date', 'publication_date');
     $this->addFieldMapping('field_archived', 'archived');
     $this->addFieldMapping('field_expiration_date', 'expiration_date');
-    $this->addMultilingualFileFieldMapping('field_file', 'file');
+    $this->addMultilingualFileFieldMapping('field_related_resources', 'file');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
@@ -79,15 +79,15 @@ class MigrateOshaCalls extends OSHADynamicMigration {
       'field_calls_info',
       'field_calls_info:format',
       'field_calls_info:language',
-      'field_file:file_class',
-      'field_file:language',
-      'field_file:destination_dir',
+      'field_related_resources:file_class',
+      'field_related_resources:language',
+      'field_related_resources:destination_dir',
+      'field_related_resources:description',
       'field_summary',
       'field_summary:format',
       'field_summary:language',
       'title_field',
       'title_field:language',
-      'field_file:description',
       'path',
     ));
   }
@@ -156,9 +156,9 @@ class MigrateOshaCalls extends OSHADynamicMigration {
         $entity->title_field[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->title_field[$language]);
         $has_translation = TRUE;
       }
-      if (!empty($entity->field_file[$language])) {
+      if (!empty($entity->field_related_resources[$language])) {
         // Attach field_description to the file.
-        foreach ($entity->field_file[$language] as $idx => &$file) {
+        foreach ($entity->field_related_resources[$language] as $idx => &$file) {
           $file['description'] = $row->file_description[$language][$idx];
         }
         $has_translation = TRUE;

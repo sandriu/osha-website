@@ -137,7 +137,7 @@ function osha_calls_workbench_access_node_element_alter(&$element, $form_state, 
  */
 function osha_calls_field_widget_form_alter(&$element, &$form_state) {
   if (!empty($element['#field_name'])
-      && $element['#field_name'] == 'field_file') {
+      && $element['#field_name'] == 'field_related_resources') {
     $node = $form_state['node'];
     if ($node->type == 'calls') {
       foreach (element_children($element) as $i) {

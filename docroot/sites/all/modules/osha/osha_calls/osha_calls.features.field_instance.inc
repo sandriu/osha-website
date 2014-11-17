@@ -581,8 +581,8 @@ function osha_calls_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-calls-field_file'
-  $field_instances['node-calls-field_file'] = array(
+  // Exported field_instance: 'node-calls-field_related_resources'
+  $field_instances['node-calls-field_related_resources'] = array(
     'bundle' => 'calls',
     'deleted' => 0,
     'description' => '',
@@ -626,7 +626,7 @@ function osha_calls_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_file',
+    'field_name' => 'field_related_resources',
     'label' => 'Documents',
     'required' => 0,
     'settings' => array(
