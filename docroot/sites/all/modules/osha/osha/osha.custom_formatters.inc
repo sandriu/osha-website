@@ -167,8 +167,7 @@ foreach ($object as $obj) {
 		       "file" => file_load($obj[\'fid\']),
 		       "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
 		   ));
-	$output .= \'<span>\'.$name.\'</span><span>\';
-	$output .=  format_size(filesize($obj[\'uri\'])) . \'</span></a></li>\';
+	$output .= \'<span>\'.$name.\'</span></a></li>\';
 }
 $output .= \'</ul>\';
 

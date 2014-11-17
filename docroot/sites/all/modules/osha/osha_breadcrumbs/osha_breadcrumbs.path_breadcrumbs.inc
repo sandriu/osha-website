@@ -427,7 +427,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
       1 => 'Publications',
     ),
     'paths' => array(
-      0 => 'articles/tools-and-resources',
+      0 => 'articles/tools-and-publications',
       1 => '<none>',
     ),
     'home' => 1,
@@ -515,7 +515,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
       1 => '!page_title',
     ),
     'paths' => array(
-      0 => 'articles/tools-and-resources',
+      0 => 'articles/tools-and-publications',
       1 => '<none>',
     ),
     'home' => 1,
