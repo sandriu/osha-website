@@ -53,3 +53,28 @@ function osha_legislation_workbench_access_node_element_alter(&$element, $form_s
     }
   }
 }
+
+/**
+ * Implements hook_form_node_form_alter().
+ */
+function osha_legislation_form_node_form_alter(&$form, $form_state) {
+  if (isset($form_state['build_info']['form_id']) &&
+    $form_state['build_info']['form_id'] == 'directive_node_form' &&
+    !isset($form['nid']['#value'])
+  ) {
+    if (isset($form['field_legislation_category']['und']['#options'])) {
+      // $options contains options as $key => $name
+      $options = $form['field_legislation_category']['und']['#options'];
+      // tids of terms from select list
+      $tids = array_keys($options);
+      $terms = taxonomy_term_load_multiple($tids);
+      foreach ($terms as $tid => $term) {
+        // CW-886 unset first term
+        if (!empty($term->name) && $term->name == 'The OSH Framework Directive') {
+          unset($form['field_legislation_category']['und']['#options'][$tid]);
+          break;
+        }
+      }
+    }
+  }
+}
