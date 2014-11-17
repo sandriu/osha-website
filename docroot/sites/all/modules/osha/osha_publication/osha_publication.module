@@ -54,3 +54,183 @@ function osha_publication_workbench_access_node_element_alter(&$element, $form_s
     }
   }
 }
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function osha_publication_field_formatter_info() {
+  $info = array(
+    'file_publication_file' => array(
+      'label' => 'Publication file',
+      'field types' => array('file'),
+      'description' => 'Displays default icon per file type and lists all languages of the attachment.',
+    ),
+    'file_publication_related_res' => array(
+      'label' => 'Publication related resources',
+      'field types' => array('file'),
+      'description' => 'Displays default icon per file type and file description.',
+    ),
+    'publication_bookshop_id' => array(
+      'label' => 'Publication bookshop link',
+      'field types' => array('text'),
+      'description' => 'Displays link to EU bookshop.',
+    ),
+    'publication_twin_publications' => array(
+      'label' => 'Publication twin publications',
+      'field types' => array('entityreference'),
+      'description' => 'Displays twin publications as title and link to file in all languages.',
+    ),
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_publication_theme() {
+  return array(
+    'osha_publication_file_publication_file_format' => array(
+      'variables' => array('entity' => NULL, 'file' => NULL, 'delta' => NULL),
+    ),
+    'osha_publication_file_publication_related_res_format' => array(
+      'variables' => array('file' => NULL, 'delta' => NULL),
+    ),
+    'osha_publication_bookshop_id_format' => array(
+      'variables' => array('bookshop_id' => NULL, 'delta' => NULL),
+    ),
+    'osha_publication_twin_publications_format' => array(
+      'variables' => array('items' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_publication_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    case 'file_publication_file':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#theme' => 'osha_publication_file_publication_file_format',
+          '#entity' => $entity,
+          '#file' => $item,
+          '#delta' => $delta,
+        );
+      }
+      break;
+    case 'file_publication_related_res':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#theme' => 'osha_publication_file_publication_related_res_format',
+          '#file' => $item,
+          '#delta' => $delta,
+        );
+      }
+      break;
+    case 'publication_bookshop_id':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#theme' => 'osha_publication_bookshop_id_format',
+          '#bookshop_id' => $item,
+          '#delta' => $delta,
+        );
+      }
+      break;
+    case 'publication_twin_publications':
+      foreach ($items as $delta => $item) {
+
+      }
+      $element[0] = array(
+        '#theme' => 'osha_publication_twin_publications_format',
+        '#items' => $items,
+      );
+      break;
+  }
+  return $element;
+}
+
+/*
+ * Formats the main attachment and show links in all languages
+ */
+function theme_osha_publication_file_publication_file_format($element) {
+  $node = $element['entity'];
+  $file = (object) $element['file'];
+  $icon_directory = drupal_get_path('theme', 'osha_frontend') . '/images/file_icons';
+
+  $output = "<span class='label_publication_file'>Download</span>";
+  $output .= theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
+  $output .= "<span class='label_publication_file'>in:</span>";
+
+  $file_fid = isset($node->field_file[$node->language][0]['fid']) ? $node->field_file[$node->language][0]['fid'] : NULL;
+
+  foreach ($node->field_file as $lang => $object) {
+    if ( $lang == $node->language || $file_fid != $object[0]['fid'] ) {
+      $output .= '<a href="' . file_create_url($object[0]['uri']) . '">' . strtoupper($lang) . '</a> | ';
+    }
+  }
+  $output = substr($output, 0, -3);
+  return $output;
+}
+
+/*
+ * Formats the related resources (attached files) as icon and description/filename
+ */
+function theme_osha_publication_file_publication_related_res_format($element) {
+  $file = (object) $element['file'];
+  $icon_directory = drupal_get_path('theme', 'osha_frontend') . '/images/file_icons';
+
+  $name = ($file->description != NULL) ? $file->description : $file->filename;
+  $output = '<a href="' . file_create_url($file->uri) . '">';
+  $output .= theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
+  $output .= '<span>'.$name.'</span></a>';
+
+  return $output;
+}
+
+/*
+ * Formats the bookshop id as link to bookshop.europa.eu
+ */
+function theme_osha_publication_bookshop_id_format($element) {
+  $code = $element['bookshop_id']['value'];
+  $url = 'http://bookshop.europa.eu/is-bin/INTERSHOP.enfinity/WFS/EU-Bookshop-Site/en_GB/-/EUR/ViewPublication-Start?PublicationKey='.$code;
+  $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/eu_bookshop.gif';
+
+  return empty($code)?'':'<span>'.t('Order a printed copy').
+    '<a href="'.$url.'"><img src="/'.$image_path.
+    '" alt="'.t('EU Bookshop: You can order a printed copy of this document').
+    '" title="'.t('EU Bookshop: You can order a printed copy of this document').
+    '"></a></span>';
+}
+
+/*
+ * Formats the related resources (attached files) as icon and description/filename
+ */
+function theme_osha_publication_twin_publications_format($element) {
+  $related_pubs = $element['items'];
+  $output = '<h3>Summary &amp; Resources</h3>';
+  $output .= '<ul id="publication_related_publications">';
+  foreach ($related_pubs as $pub) {
+    $output .= '<li>';
+    $node = node_load($pub['target_id']);
+    $curr_lang = 'en';
+    $title = isset($node->title_field[$curr_lang][0]) ? $node->title_field[$curr_lang][0]['value'] : $node->title_field['en'][0]['value'];
+    $output .=  '<a href="' . url('node/' . $node->nid, array('absolute' => TRUE)) . '">' . $title . '</a>';
+    $output .= '<span>Download</span>';
+    $file = isset($node->field_file[$curr_lang][0]) ? $node->field_file[$curr_lang][0] : $node->field_file['en'][0];
+    $output .= theme_file_icon(
+      array(
+        "file" => file_load($file['fid']),
+        "icon_directory" => drupal_get_path('theme', 'osha_frontend') . '/images/file_icons'
+      ));
+    $output .='<span>in:</span>';
+    foreach ($node->field_file as $lang => $object) {
+      $output .=  ' <a href="' . file_create_url($object[0]['uri']) . '">' . strtoupper($lang) . '</a> | ';
+    }
+    $output = substr($output, 0, -3);
+    $output .= '</li>';
+  }
+  $output .= '</ul>';
+  return $output;
+}

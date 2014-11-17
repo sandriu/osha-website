@@ -468,7 +468,7 @@ function osha_news_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
+          'image_link' => 'file',
           'image_style' => 'medium',
         ),
         'type' => 'image',

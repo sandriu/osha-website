@@ -207,58 +207,49 @@ function osha_tmgmt_get_users_from_collection($tg_eid) {
  */
 function osha_tmgmt_translation_validators_submit($form, &$form_state) {
   if (!empty($form_state['values']['translation_validators']['translation_group'])) {
-    foreach ($form_state['tmgmt_job_items'] as $job_item) {
+    /* @var TMGMTJobItem $job */
+    $job = $form_state['tmgmt_job'];
+    $job_items = $job->getItems();
+    foreach ($job_items as $job_item) {
       if ($job_item->state != OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish) {
-        $existing_validators = osha_tmgmt_load_validators_by_job_item($job_item);
-        // Don't override existing assigned validators.
-        if (empty($existing_validators)) {
-          $group_id = $form_state['values']['translation_validators']['translation_group'];
-          $entity_group = entity_collection_load($group_id);
-          $users = osha_tmgmt_get_users_from_collection($group_id);
-          $users = osha_workflow_users_group_by_lang_skills($users, $job_item->source_language);
-          // Cancel existing validators.
-          osha_tmgmt_remove_current_translation_validators($job_item);
-          if (!empty($users[$job_item->target_language])) {
-            $users_name = array();
-            foreach ($users[$job_item->target_language] as $idx => $u) {
-              $next = 0;
-              if ($idx == 0) {
-                $next = 1;
-              }
-              $users_name[] = $u->name;
-              osha_tmgmt_add_translation_validator($u->uid, $job_item, $idx, $next);
+        $group_id = $form_state['values']['translation_validators']['translation_group'];
+        $entity_group = entity_collection_load($group_id);
+        $users = osha_tmgmt_get_users_from_collection($group_id);
+        $users = osha_workflow_users_group_by_lang_skills($users, $job_item->source_language);
+        // Cancel existing validators.
+        osha_tmgmt_remove_current_translation_validators($job_item);
+        if (!empty($users[$job_item->target_language])) {
+          $users_name = array();
+          foreach ($users[$job_item->target_language] as $idx => $u) {
+            $next = 0;
+            if ($idx == 0) {
+              $next = 1;
             }
-            global $user;
-            $msg = t('@name assigned validators: @validators to @language',
-              array(
-                '@name' => $user->name,
-                '@language' => locale_language_name($job_item->target_language),
-                '@group' => $entity_group->name,
-                '@validators' => implode(', ', $users_name),
-              ));
-            drupal_set_message($msg);
-            $job_item->addMessage($msg);
+            $users_name[] = $u->name;
+            osha_tmgmt_add_translation_validator($u->uid, $job_item, $idx, $next);
           }
-          else {
-            drupal_set_message(
-              t(
-                'No translator available for @language',
-                array('@language' => locale_language_name($job_item->target_language))
-              ),
-              'warning'
-            );
-          }
-          $job_item->eid = $group_id;
-          $job_item->save();
+          global $user;
+          $msg = t('@name assigned validators: @validators to @language',
+            array(
+              '@name' => $user->name,
+              '@language' => locale_language_name($job_item->target_language),
+              '@group' => $entity_group->name,
+              '@validators' => implode(', ', $users_name),
+            ));
+          drupal_set_message($msg);
+          $job_item->addMessage($msg);
         }
         else {
           drupal_set_message(
-            t('Skipped assignment to !to, already has validators assigned',
-              array('!to' => locale_language_name($job_item->target_language))
+            t(
+              'No translator available for @language',
+              array('@language' => locale_language_name($job_item->target_language))
             ),
             'warning'
           );
         }
+        $job_item->eid = $group_id;
+        $job_item->save();
       }
     }
   }

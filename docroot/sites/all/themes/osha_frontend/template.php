@@ -343,6 +343,24 @@ function osha_frontend_aggregator_block_item($variables) {
   return $element;
 }
 
+function osha_frontend_menu_link__menu_block__main_menu($data) {
+  $el = $data['element'];
+  $attr = drupal_attributes($el['#attributes']);
+  if (isset($data['element']['#title']) &&
+    $data['element']['#title'] == 'Home' &&
+    isset($el['#localized_options']['content']['image'])
+  ) {
+    $path = file_create_url($el['#localized_options']['content']['image']);
+    $link = l('<img src="' . $path . '" />', $el['#href'], array('html' => TRUE));
+    return sprintf("\n<li %s>%s</li>", $attr, $link);
+  }
+  else {
+    $link = l($el['#title'], $el['#href'], $el['#localized_options']);
+    $sub_menu = drupal_render($el['#below']);
+    return sprintf("\n<li %s>%s %s</li>", $attr, $link, $sub_menu);
+  }
+}
+
 /**
  * @todo @Ivan: Edit only below
  */

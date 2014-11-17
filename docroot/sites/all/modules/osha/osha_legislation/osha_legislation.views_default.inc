@@ -127,6 +127,11 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['fields']['field_directive_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_directive_type']['type'] = 'taxonomy_term_reference_plain';
   /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight_1']['relationship'] = 'field_directive_type_tid';
+  /* Sort criterion: Taxonomy term: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';

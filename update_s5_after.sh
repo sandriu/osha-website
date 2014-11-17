@@ -11,6 +11,8 @@ drush cron
 
 drush cc all
 
+mkdir ../docroot/sites/default/files/slideshare
+
 echo "Migrating new data"
 drush mr PressRelease
 drush mi NoteToEditor
