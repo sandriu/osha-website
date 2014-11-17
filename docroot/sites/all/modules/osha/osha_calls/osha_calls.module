@@ -9,6 +9,92 @@ include_once 'osha_calls.features.inc';
 define('OSHA_CALLS_CONTENT_TYPE_CALLS', 'calls');
 
 /**
+ * Implements hook_field_formatter_info().
+ */
+function osha_calls_field_formatter_info() {
+  $info = array(
+    'file_taxonomy_description' => array(
+      'label' => t('File with description as taxonomy'),
+      'field types' => array('file'),
+      'description' => t('Displays description from taxonomy <b>Attachment file type</b>.'),
+    ),
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_calls_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    case 'file_taxonomy_description':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#theme' => 'osha_calls_file_taxonomy_description',
+          '#file' => $item,
+          '#delta' => $delta,
+        );
+      }
+      break;
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_calls_theme() {
+  return array(
+    'osha_calls_file_taxonomy_description' => array(
+      'variables' => array('file' => NULL, 'delta' => NULL),
+    ),
+  );
+}
+
+/**
+ * Theme the file_taxonomy_description formatter.
+ *
+ * @param array $element
+ *   Array containing the file entity and its delta.
+ *
+ * @return string
+ *   HTML rendered string
+ */
+function theme_osha_calls_file_taxonomy_description($element) {
+  $file = (object) $element['file'];
+  $icon_directory = drupal_get_path('theme', 'osha_frontend') . '/images/file_icons';
+  $url = file_create_url($file->uri);
+  $icon = theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
+  // Set options as per anchor format described at
+  // http://microformats.org/wiki/file-format-examples
+  $options = array(
+    'attributes' => array(
+      'type' => $file->filemime . '; length=' . $file->filesize,
+    ),
+    'html' => TRUE,
+  );
+  // Use the description as the link text if available.
+  if (empty($file->description)) {
+    $link_text = $file->filename;
+  }
+  else {
+    if ($term = taxonomy_term_load($file->description)) {
+      $link_text = $term->name;
+    }
+    else {
+      $link_text = $file->description;
+    }
+    $options['attributes']['title'] = check_plain($file->filename);
+  }
+  $link_text .= ' <span class="file-icon">' . $icon . '</span>';
+  if ($size = filesize($file->uri)) {
+    $link_text .= '<span class="file-size">' . format_size($size) . '</span>';
+  }
+  return '<span class="file">' . l($link_text, $url, $options) . '</span>';
+}
+
+/**
  * Implements hook_post_features_enable_feature().
  *
  * {@inheritdoc}
@@ -42,4 +128,50 @@ function osha_calls_workbench_access_node_element_alter(&$element, $form_state, 
       }
     }
   }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_calls_field_widget_form_alter(&$element, &$form_state) {
+  if (!empty($element['#field_name'])
+      && $element['#field_name'] == 'field_file') {
+    $node = $form_state['node'];
+    if ($node->type == 'calls') {
+      foreach (element_children($element) as $i) {
+        $ctrl = &$element[$i];
+        $ctrl['#process'] = array_merge($ctrl['#process'], array('osha_calls_file_field_widget_process'));
+      }
+    }
+  }
+}
+
+/**
+ * Widget processing function to replace text input with select widget.
+ *
+ * @param array $element
+ *   Element to process.
+ *
+ * @return array
+ *   Updated widget.
+ */
+function osha_calls_file_field_widget_process($element) {
+  $file_types = &drupal_static(__FUNCTION__);
+  if (!isset($file_types)) {
+    $voc = taxonomy_vocabulary_machine_name_load('attachment_file_type');
+    $types = taxonomy_get_tree($voc->vid);
+    $file_types[''] = t('-- Please select type --');
+    foreach ($types as $term) {
+      $file_types[$term->tid] = $term->name;
+    }
+  }
+  if (isset($element['description'])) {
+    $description = &$element['description'];
+    $description['#type'] = 'select';
+    $description['#options'] = $file_types;
+    $description['#title'] = t('Type');
+  }
+  return $element;
 }
