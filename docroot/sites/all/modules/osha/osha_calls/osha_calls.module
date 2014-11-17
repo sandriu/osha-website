@@ -175,3 +175,10 @@ function osha_calls_file_field_widget_process($element) {
   }
   return $element;
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_calls_form_calls_node_form_alter(&$form) {
+  $form['body']['#access'] = FALSE;
+}
