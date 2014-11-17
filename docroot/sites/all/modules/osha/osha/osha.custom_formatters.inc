@@ -161,13 +161,14 @@ $curr_lang = $language->language;
 $object = isset($variables[\'#object\']->field_publication_related_res[$curr_lang]) ? $variables[\'#object\']->field_publication_related_res[$curr_lang] :$variables[\'#object\']->field_publication_related_res[\'en\'];
 foreach ($object as $obj) {
 	$name = ($obj[\'description\'] != NULL) ? $obj[\'description\'] : $obj[\'filename\'];
-	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $name . \' - \';
+	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\';
 	$output .= theme_file_icon(
 		   array(
 		       "file" => file_load($obj[\'fid\']),
 		       "icon_directory" => drupal_get_path(\'theme\', \'osha_frontend\') . \'/images/file_icons\'
 		   ));
-	$output .=  format_size(filesize($obj[\'uri\'])) . \'</a></li>\';
+	$output .= \'<span>\'.$name.\'</span><span>\';
+	$output .=  format_size(filesize($obj[\'uri\'])) . \'</span></a></li>\';
 }
 $output .= \'</ul>\';
 
