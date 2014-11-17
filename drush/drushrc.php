@@ -407,6 +407,7 @@ $options['init-modules'] = array(
   'osha_slideshare',
 
   'linkchecker',
+  'osha_linkchecker',
 
   'facetapi',
   'search_api_facetapi',
