@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * Implements hook_cron().
+ */
+function osha_reminders_cron() {
+  // Check if to notify PM about their content.
+  $last_run = variable_get('osha_reminders_pm_notify_last_run', REQUEST_TIME);
+  $last_run = new DateTime(date("c", $last_run));
+  $notify_interval = variable_get('osha_reminders_cron_notification_interval_months', 6);
+  $now = new DateTime();
+  $since_last_run = $now->diff($last_run);
+  if ($since_last_run->m >= $notify_interval) {
+    osha_reminders_notify_pm();
+    variable_set('osha_reminders_pm_notify_last_run', REQUEST_TIME);
+  }
+
+  // Check if ot notify heads about content.
+  $heads_last_run = variable_get('osha_reminders_heads_notify_last_run', REQUEST_TIME);
+  $heads_last_run = new DateTime(date("c", $heads_last_run));
+  $heads_since_last_run = $now->diff($heads_last_run);
+  $heads_pm_diff = $last_run->diff($heads_last_run);
+  if ($heads_since_last_run->m > $notify_interval
+    && $heads_pm_diff->m >= 1) {
+    osha_reminders_notify_heads();
+    variable_set('osha_reminders_heads_notify_last_run', REQUEST_TIME);
+  }
+}
+
+/**
+ * Send notifications to PM about their sections.
+ */
+function osha_reminders_notify_pm() {
+  $users = osha_reminders_get_sections_pm();
+  $params = array();
+  $module = 'osha_reminders';
+  osha_reminders_send_email($users, $params, $module, 'osha_reminders_pm_section');
+}
+
+/**
+ * Send notifications to Heads about Sections review statuses.
+ */
+function osha_reminders_notify_heads() {
+  // @todo
+}
+
+/**
+ * Get PM users that have a section assigned.
+ */
+function osha_reminders_get_sections_pm() {
+  $pms = db_select('osha_workflow_access_pm', 'owa')
+    ->fields('owa')
+    ->execute()
+    ->fetchAllAssoc('uid');
+  return user_load_multiple(array_keys($pms));
+}
+
+/**
+ * Send bulk emails to a list of users.
+ */
+function osha_reminders_send_email($users, $params, $module, $key = 'osha_reminders_pm_section') {
+  if (empty($users)) {
+    drupal_set_message('There are no users to notify about your action. Please report this to system administrator.', 'warning');
+    return;
+  }
+  if (!is_array($users)) {
+    $users = array($users);
+  }
+  foreach ($users as $user) {
+    if (OshaWorkflowNotifications::userAllowsEmailNotifications($user)) {
+      $params['user'] = $user;
+      drupal_mail($module, $key, $user->mail, user_preferred_language($user), $params);
+    }
+  }
+}
+
+/**
+ * Implements hook_mail().
+ *
+ * {@inheritdoc}
+ */
+function osha_reminders_mail($key, &$message, $params) {
+  $subject = variable_get('osha_reminder_template_pm_subject', '[OSHA Website] Reminders: Review your Sections');
+  $body = variable_get('osha_reminder_template_pm_body',
+    'Dear [user:name],
+     This is a reminder for you to check your sections and mark them as reviewed <a href="[site:url]/admin/config/workbench/access/managers">in this screen</a>
+
+     You can check the broken links in <a href="[site:url]/admin/content/linkchecker-broken-links">this page</a>
+
+      Thank you,'
+  );
+  $message['subject'] = token_replace($subject, $params);
+  $message['body'] = token_replace($body, $params);
+}
