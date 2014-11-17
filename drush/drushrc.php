@@ -406,6 +406,8 @@ $options['init-modules'] = array(
   'osha_resources',
   'osha_slideshare',
 
+  'linkchecker',
+
   'facetapi',
   'search_api_facetapi',
   'search_autocomplete',
