@@ -40,18 +40,29 @@ function osha_workflow_menu() {
     'description' => 'Assignment of project managers for each website section.',
     'page callback' => 'osha_workflow_workbench_project_managers',
     'page arguments' => array(),
-    'access arguments' => array('assign workbench access'),
+    'access arguments' => array('view workbench access information'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
     'file' => 'osha_workflow.admin.inc',
   );
-  $items['admin/config/workbench/access/managers'] = array(
-    'title' => 'Project Managers',
+
+  $items['admin/workbench/workbench-access'] = array(
+    'title' => 'Sections',
     'description' => 'Assignment of project managers for each website section.',
-    'page callback' => 'osha_workflow_workbench_project_managers',
-    'access arguments' => array('assign workbench access'),
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/config/workbench/access/managers'),
+    'access arguments' => array('view workbench access information'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
+    'file' => 'osha_workflow.admin.inc',
+  );
+
+  $items['admin/config/workbench/access/managers/review'] = array(
+    'title' => 'Section Review',
+    'description' => 'Mark section as Reviewd.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_workflow_access_section_review_form'),
+    'access arguments' => array('view workbench access information'),
     'file' => 'osha_workflow.admin.inc',
   );
 
@@ -94,6 +105,8 @@ function osha_workflow_menu() {
  * Implements hook_menu_alter().
  */
 function osha_workflow_menu_alter(&$items) {
+  unseT($items['admin/config/workbench/access']['access callback']);
+  $items['admin/config/workbench/access']['access arguments'] = array('view workbench access information');
   // Disable Section Menu from Workbench Dashboard.
   $items['admin/workbench/sections']['access callback'] = FALSE;
 
@@ -224,147 +237,6 @@ function osha_workflow_entity_property_info() {
   );
 
   return $info;
-}
-
-/**
- * Implements hook_schema().
- */
-function osha_workflow_schema() {
-  $schema = array();
-  $schema['osha_workflow_node_project_managers'] = array(
-    'description' => 'Base table for the content review workflow',
-    'fields' => array(
-      'npmid' => array(
-        'description' => 'Identifier',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => 'Node under review',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'uid' => array(
-        'description' => 'Project manager account',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-    ),
-    'primary key' => array('npmid'),
-    'indexes' => array(
-      'osha_workflow_review_uid' => array('uid'),
-    ),
-    'foreign keys' => array(
-      'uid' => array(
-        'table' => 'users',
-        'columns' => array('uid' => 'uid'),
-      ),
-      'nid' => array(
-        'table' => 'node',
-        'columns' => array('nid' => 'nid'),
-      ),
-    ),
-  );
-
-  $schema['osha_workflow_node_approval'] = array(
-    'description' => 'Base table for node approval entity',
-    'fields' => array(
-      'apid' => array(
-        'description' => 'Identifier for the approved item',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => 'Moderated node ID (nid)',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'uid' => array(
-        'description' => 'Account doing the moderation',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'approved' => array(
-        'description' => 'NULL not voted, approved or rejected',
-        'type' => 'varchar',
-        'length' => 64,
-        'default' => NULL,
-        'not null' => FALSE,
-      ),
-      'next' => array(
-        'description' => '0 - no, 1 - yes',
-        'type' => 'int',
-        'default' => 0,
-        'not null' => TRUE,
-      ),
-      'weight' => array(
-        'description' => 'Order of moderation, lowest first',
-        'type' => 'int',
-        'default' => 0,
-        'not null' => TRUE,
-      ),
-      'message' => array(
-        'description' => 'Message left by the moderator',
-        'type' => 'text',
-        'size' => 'medium',
-      ),
-    ),
-    'primary key' => array('apid'),
-    'indexes' => array(
-      'moderator_uid' => array('uid'),
-    ),
-    'unique keys' => array(
-      'moderation_unique' => array('nid', 'uid'),
-    ),
-    'foreign keys' => array(
-      'uid' => array(
-        'table' => 'users',
-        'columns' => array('uid' => 'uid'),
-      ),
-      'nid' => array(
-        'table' => 'node',
-        'columns' => array('nid' => 'nid'),
-      ),
-    ),
-  );
-
-  $schema['osha_workflow_access_pm'] = array(
-    'description' => 'Maps Project Managers access to sections',
-    'fields' => array(
-      'uid' => array(
-        'description' => 'The user identifier. Foreign key to {users}.',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'access_id' => array(
-        'description' => 'The section identifier. Foreign key to {workbench_access}.',
-        'type' => 'varchar',
-        'length' => '80',
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'access_scheme' => array(
-        'description' => 'The module responsbile for this access system.',
-        'type' => 'varchar',
-        'length' => '40',
-        'not null' => TRUE,
-        'default' => '',
-      ),
-    ),
-    'primary key' => array('uid', 'access_id', 'access_scheme'),
-    'foreign keys' => array(
-      'section_id' => array('workbench_access' => array('access_id', 'access_scheme')),
-      'uid' => array('users' => 'uid'),
-    ),
-  );
-
-  return $schema;
 }
 
 /**

@@ -74,13 +74,21 @@ function osha_workflow_access_find_pm(&$section_tree, $section_id) {
  * Get PM of a section.
  */
 function osha_workflow_access_pm_get_pm($access_id, $access_scheme) {
+  return user_load_multiple(
+    osha_workflow_access_pm_get_pm_uid($access_id, $access_scheme));
+}
+
+/**
+ * Get PM of a section.
+ */
+function osha_workflow_access_pm_get_pm_uid($access_id, $access_scheme) {
   $users = db_select('osha_workflow_access_pm', 'owa')
     ->fields('owa', array('uid'))
     ->condition('access_id', $access_id)
     ->condition('access_scheme', $access_scheme)
     ->execute()
     ->fetchAllAssoc('uid');
-  return user_load_multiple(array_keys($users));
+  return array_keys($users);
 }
 
 /**
@@ -105,6 +113,7 @@ function osha_workflow_access_pm_check_root() {
   }
   return FALSE;
 }
+
 /**
  * Assign project manager to a node.
  *
