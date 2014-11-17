@@ -20,3 +20,4 @@
 /* SMACSS theme rules */
  @import "osha_theme_global.css"; 
  @import "osha_theme_default.css"; 
+ @import "osha_theme_tablet_7.css"; 
