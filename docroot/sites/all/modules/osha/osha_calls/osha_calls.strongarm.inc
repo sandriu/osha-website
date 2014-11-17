@@ -161,7 +161,7 @@ function osha_calls_strongarm() {
         'custom_settings' => FALSE,
       ),
       'osha_resources' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'print' => array(
         'custom_settings' => FALSE,
