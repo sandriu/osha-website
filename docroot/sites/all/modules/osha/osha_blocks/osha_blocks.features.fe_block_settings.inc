@@ -303,7 +303,6 @@ function osha_blocks_default_fe_block_settings() {
     'module' => 'blockgroup',
     'node_types' => array(
       0 => 'article',
-      1 => 'seminar',
     ),
     'pages' => '',
     'roles' => array(),
