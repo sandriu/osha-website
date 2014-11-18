@@ -548,9 +548,9 @@ function osha_seminar_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'custom_formatters',
+        'module' => 'osha_seminar',
         'settings' => array(),
-        'type' => 'custom_formatters_seminar_related_resources',
+        'type' => 'field_related_resources',
         'weight' => 3,
       ),
       'highlights_item' => array(
