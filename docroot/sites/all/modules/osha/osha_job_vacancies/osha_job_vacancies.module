@@ -103,3 +103,14 @@ function osha_job_vacancies_workbench_access_node_element_alter(&$element, $form
     }
   }
 }
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_job_vacancies_form_job_vacancies_node_form_alter(&$form) {
+  if (empty($form['nid']['#value'])) {
+    // CW-859 disable body for new vacancies
+    $form['body']['#access'] = FALSE;
+  }
+}
