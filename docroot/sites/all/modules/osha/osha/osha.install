@@ -75,3 +75,12 @@ function osha_update_7001() {
     drupal_set_message('The indexing workflow was successfully edited. All content was scheduled for re-indexing so the new settings can take effect.');
   }
 }
+
+/**
+ * Remove the admin_views_node view.
+ */
+function osha_update_7002() {
+  if ($view = views_get_view('admin_views_node')) {
+    views_delete_view($view);
+  }
+}
