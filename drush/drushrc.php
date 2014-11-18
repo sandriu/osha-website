@@ -382,6 +382,9 @@ $options['init-modules'] = array(
   'flickr_block',
   'flickrfield',
 
+  //Allow anonymous comments per node type
+  'comment_allow_anonymous',
+
   'osha_taxonomies',
   'osha',
   'osha_migration',

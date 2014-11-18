@@ -131,6 +131,12 @@ function osha_blog_strongarm() {
       'osha_wiki' => array(
         'custom_settings' => TRUE,
       ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

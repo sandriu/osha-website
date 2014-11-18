@@ -3830,3 +3830,21 @@ div.contextual-links-wrapper a{
 .recaptcha_only_if_image{
 	padding-top:1em;
 }
+
+/*blog styles*/
+div.blog-archive-block h3 {
+    cursor: pointer;
+    margin: 0;
+    font-size: 1em;
+    font-weight: normal;
+    padding: 6px 0;
+}
+div.blog-archive-block ul {
+    padding: 0 0 0 10px;
+    list-style: none;
+}
+div.blog-archive-block ul li {
+    background: none;
+    line-height: 130%;
+    padding: 3px 0 5px;
+}

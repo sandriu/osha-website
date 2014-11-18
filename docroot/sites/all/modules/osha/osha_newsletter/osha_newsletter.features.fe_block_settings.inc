@@ -78,7 +78,10 @@ open_job_vacancies
 jobs_archive
 articles/careers
 calls_archive
-articles/procurement',
+articles/procurement
+articles/blog
+blog/*
+*/blog/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

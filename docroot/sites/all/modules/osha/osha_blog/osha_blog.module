@@ -31,10 +31,53 @@ function osha_blog_post_features_enable_feature($component) {
   }
 
   //Add recaptcha validation for blog comment form
+  $query = db_query("SELECT * FROM captcha_points WHERE form_id = 'comment_node_blog_form' ")->fetchField();
+
   $data = array(
     'form_id' => 'comment_node_blog_form',
     'module' => 'recaptcha',
     'captcha_type' => 'reCAPTCHA',
   );
-  drupal_write_record('captcha_points', $data, 'form_id');
+
+  if($query)
+    drupal_write_record('captcha_points', $data, 'form_id');
+  else
+    drupal_write_record('captcha_points', $data);
+}
+
+/**
+ * Implements hook_views_pre_render
+ * @param $view
+ */
+function osha_blog_views_pre_render(&$view) {
+  if ($view->name == 'blog' && $view->current_display == 'block_2') {
+    drupal_add_js(drupal_get_path('module', 'osha_blog') .'/includes/js/collapse_block.js');
+    drupal_set_title(set_view_title());
+
+    $month = '';
+    foreach($view->result as $key => $result){
+      //dpm($result);
+      $row_month = date('F', strtotime($result->field_field_publication_date[0]['raw']['value']));
+      $row_month_raw = date('m', strtotime($result->field_field_publication_date[0]['raw']['value']));
+      $row_year = date('Y', strtotime($result->field_field_publication_date_1[0]['raw']['value']));
+
+      //remove from display if publication date is in the same month
+      if($month == $row_month){
+        unset($view->result[$key]);
+        continue;
+      }
+
+      $month = $row_month;
+      $result->field_field_publication_date[0]['rendered']['#markup'] = "<a href='/blog/{$row_year}-{$row_month_raw}'>".$row_month."</a>";
+    }
+  }
+}
+
+function set_view_title(){
+  $title = drupal_get_title();
+  if(preg_match('/([\d]{2}\/[\d]{4})/', $title)){
+    $title = date('F Y', mktime(0, 0, 0, substr($title,0,2), 1, substr($title, 3, 4)));
+    $title = t('@data posts', array('@data' => $title));
+  }
+  return $title;
 }
