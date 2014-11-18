@@ -5,3 +5,5 @@ package = OSHA
 version = 7.x-1.0
 project = osha_reminders
 dependencies[] = osha_workflow
+
+configure = admin/config/system/osha_reminders
