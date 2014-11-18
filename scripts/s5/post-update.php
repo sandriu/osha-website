@@ -3,10 +3,6 @@
 /* Add new stuff for deployment of sprint-5 branch here. To avoid conflicts, add them after your name 
  * Also include the ticket number, see example below
  */
-// andrei
-// cristi
-// dragos
-// claudia
 
 osha_add_menu_position_rules();
 delete_extra_fields();
@@ -42,24 +38,33 @@ function osha_add_menu_position_rules() {
   }
 }
 
-// radu
-drush_log('Dropping field: field_flickr_tags', 'ok');
-field_delete_field('field_flickr_tags');
 
 function delete_extra_fields() {
-  if ($instance = field_info_instance('node', 'field_related_oshwiki_articles', 'highlight')) {
-    field_delete_instance($instance);
-  }
-  if ($instance = field_info_instance('node', 'field_related_oshwiki_articles', 'news')) {
-    field_delete_instance($instance);
-  }
-  if ($instance = field_info_instance('node', 'field_file', 'seminar')) {
-    field_delete_instance($instance);
-  }
-  if ($instance = field_info_instance('node', 'field_author', 'guideline')) {
-    field_delete_instance($instance);
-  }
-  if ($instance = field_info_instance('node', 'field_author', 'directive')) {
+
+  drush_log('Dropping field: field_flickr_tags', 'ok');
+  field_delete_field('field_flickr_tags');
+  safe_delete_field_instance('field_related_oshwiki_articles', 'highlight');
+  safe_delete_field_instance('field_related_oshwiki_articles', 'news');
+  safe_delete_field_instance('field_file', 'seminar');
+  safe_delete_field_instance('field_author', 'guideline');
+  safe_delete_field_instance('field_author', 'directive');
+  // CW-415 extra fields from seminars
+  safe_delete_field_instance('field_summary', 'seminar');
+  drush_log('Dropping extra fields from seminars', 'ok');
+  field_delete_field('field_sem_date_to_be_confirmed');
+  field_delete_field('field_seminar_attendees');
+  field_delete_field('field_seminar_event_url');
+  field_delete_field('field_seminar_contact_name');
+  field_delete_field('field_seminar_contact_phone');
+  field_delete_field('field_seminar_contact_email');
+  field_delete_field('field_seminar_attachment');
+  field_delete_field('field_seminar_conclusions');
+  field_delete_field('field_seminar_further_actions');
+  field_delete_field('field_seminar_show_roster_hour');
+}
+
+function safe_delete_field_instance($field_base, $bundle) {
+  if ($instance = field_info_instance('node', $field_base, $bundle)) {
     field_delete_instance($instance);
   }
 }
