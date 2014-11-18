@@ -45,13 +45,13 @@ class MigrateOshaCalls extends OSHADynamicMigration {
     $this->addFieldMapping('field_archived', 'archived');
     $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
-    $this->addMultilingualFileFieldMapping('field_calls_contract_notice', 'contract_notice');
-    $this->addMultilingualFileFieldMapping('field_calls_contract_n_corrig', 'contract_notice_corrigendum');
-    $this->addMultilingualFileFieldMapping('field_calls_technical_specs', 'technical_specifications');
-    $this->addMultilingualFileFieldMapping('field_calls_amendments', 'amendments');
-    $this->addMultilingualFileFieldMapping('field_calls_agency_responses', 'agency_responses');
-    $this->addMultilingualFileFieldMapping('field_calls_award_notice', 'award_notice');
-    $this->addMultilingualFileFieldMapping('field_calls_award_n_corrig', 'award_notice_corrigendum');
+    $this->addFieldMapping('field_related_resources', 'files');
+    $this->addFieldMapping('field_related_resources:file_class')->defaultValue('OSHAMigrateFileUri');
+    $this->addFieldmapping('field_related_resources:preserve_files')->defaultValue(TRUE);
+    $this->addFieldMapping('field_related_resources:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_related_resources:source_dir')->defaultValue(osha_migration_get_data_dir() . '/export/');
+    $this->addFieldMapping('field_related_resources:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'files');
+    $this->addFieldMapping('field_related_resources:multilingual')->defaultValue(TRUE);
 
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
@@ -84,30 +84,12 @@ class MigrateOshaCalls extends OSHADynamicMigration {
       'field_author',
       'field_author:language',
       'comment',
-      'field_calls_agency_responses:file_class',
-      'field_calls_agency_responses:language',
-      'field_calls_agency_responses:destination_dir',
-      'field_calls_amendments:file_class',
-      'field_calls_amendments:language',
-      'field_calls_amendments:destination_dir',
-      'field_calls_award_n_corrig:file_class',
-      'field_calls_award_n_corrig:language',
-      'field_calls_award_n_corrig:destination_dir',
-      'field_calls_award_notice:file_class',
-      'field_calls_award_notice:language',
-      'field_calls_award_notice:destination_dir',
-      'field_calls_contract_n_corrig:file_class',
-      'field_calls_contract_n_corrig:language',
-      'field_calls_contract_n_corrig:destination_dir',
-      'field_calls_contract_notice:file_class',
-      'field_calls_contract_notice:language',
-      'field_calls_contract_notice:destination_dir',
       'field_calls_info',
       'field_calls_info:format',
       'field_calls_info:language',
-      'field_calls_technical_specs:file_class',
-      'field_calls_technical_specs:language',
-      'field_calls_technical_specs:destination_dir',
+      'field_related_resources:language',
+      'field_related_resources:destination_dir',
+      'field_related_resources:description',
       'field_summary',
       'field_summary:format',
       'field_summary:language',
@@ -115,23 +97,6 @@ class MigrateOshaCalls extends OSHADynamicMigration {
       'title_field:language',
       'path',
     ));
-  }
-
-  /**
-   * Function that does all the mapping for multilingual files.
-   *
-   * @param string $destination
-   *   The destination multilingual file field
-   * @param string $source
-   *   The string multilingual file field
-   */
-  private function addMultilingualFileFieldMapping($destination, $source) {
-    $this->addFieldMapping($destination, $source);
-    $this->addFieldMapping("$destination:file_replace")->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldmapping("$destination:preserve_files")->defaultValue(TRUE);
-    $this->addFieldMapping("$destination:source_dir")->defaultValue(osha_migration_get_data_dir() . '/export/');
-    $this->addFieldMapping("$destination:destination_file", OSHA_MIGRATION_REPLACED_PATH_PREFIX . $source);
-    $this->addFieldMapping("$destination:multilingual")->defaultValue(TRUE);
   }
 
   /**
@@ -153,16 +118,7 @@ class MigrateOshaCalls extends OSHADynamicMigration {
     if (MigrationUtil::entityRowValidator($row, $this) === FALSE) {
       return FALSE;
     }
-
-    MigrationUtil::cleanMigratedFileField($row, 'contract_notice', 'public://calls/documents');
-    MigrationUtil::cleanMigratedFileField($row, 'contract_notice_corrigendum', 'public://calls/documents');
-    MigrationUtil::cleanMigratedFileField($row, 'technical_specifications', 'public://calls/documents');
-    MigrationUtil::cleanMigratedFileField($row, 'amendments', 'public://calls/documents');
-    MigrationUtil::cleanMigratedFileField($row, 'agency_responses', 'public://calls/documents');
-    MigrationUtil::cleanMigratedFileField($row, 'award_notice', 'public://calls/documents');
-    MigrationUtil::cleanMigratedFileField($row, 'award_notice_corrigendum', 'public://calls/documents');
-
-
+    MigrationUtil::cleanMigratedFileField($row, 'files', 'public://calls/documents');
     return TRUE;
   }
 
@@ -188,6 +144,13 @@ class MigrateOshaCalls extends OSHADynamicMigration {
       $has_translation = FALSE;
       if (!empty($row->title_field[$language])) {
         $entity->title_field[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->title_field[$language]);
+        $has_translation = TRUE;
+      }
+      if (!empty($entity->field_related_resources[$language])) {
+        // Attach field_description to the file.
+        foreach ($entity->field_related_resources[$language] as $idx => &$file) {
+          $file['description'] = $row->file_description[$language][$idx];
+        }
         $has_translation = TRUE;
       }
       if (!empty($row->author[$language])) {
@@ -232,19 +195,14 @@ class MigrateOshaCalls extends OSHADynamicMigration {
       'modification_date' => '',
       'publication_date' => '',
       'title' => '',
+      'files' => 'Attached files',
+      'file_description' => 'File description (category)',
       'field_title' => '',
       'info' => '',
       'deadline' => '',
       'creator' => 'Author user id from the old website',
       'description' => '',
       'text' => 'Body of the case study',
-      'contract_notice' => '',
-      'contract_notice_corrigendum' => '',
-      'technical_specifications' => '',
-      'amendments' => '',
-      'agency_responses' => '',
-      'award_notice' => '',
-      'award_notice_corrigendum' => '',
       'archived' => '',
       'expiration_date' => '',
     );
@@ -294,6 +252,9 @@ class CallsMigrateList extends MigrateList {
         continue;
       }
       foreach ($fields as $key => $field) {
+        if (empty($raw_data[$key])) {
+          continue;
+        }
         switch ($field) {
           case 'title':
             if ($language == 'en') {
@@ -303,12 +264,47 @@ class CallsMigrateList extends MigrateList {
             break;
 
           case 'contract_notice':
+            self::$data[$path]['files'][$language][] = $raw_data[$key];
+            $term = taxonomy_get_term_by_name('Contract notice', 'attachment_file_type');
+            self::$data[$path]['file_description'][$language][] = empty($term) ? 'Contract notice' : current(array_keys($term));
+            break;
+
           case 'contract_notice_corrigendum':
+            self::$data[$path]['files'][$language][] = $raw_data[$key];
+            $term = taxonomy_get_term_by_name('Contract Notice Corrigendum', 'attachment_file_type');
+            self::$data[$path]['file_description'][$language][] = empty($term) ? 'Contract Notice Corrigendum' : current(array_keys($term));
+            break;
+
           case 'technical_specifications':
+            self::$data[$path]['files'][$language][] = $raw_data[$key];
+            $term = taxonomy_get_term_by_name('Technical Specs', 'attachment_file_type');
+            self::$data[$path]['file_description'][$language][] = empty($term) ? 'Technical Specs' : current(array_keys($term));
+            break;
+
           case 'amendments':
+            self::$data[$path]['files'][$language][] = $raw_data[$key];
+            $term = taxonomy_get_term_by_name('Amendments', 'attachment_file_type');
+            self::$data[$path]['file_description'][$language][] = empty($term) ? 'Amendments' : current(array_keys($term));
+            break;
+
           case 'agency_responses':
+            self::$data[$path]['files'][$language][] = $raw_data[$key];
+            $term = taxonomy_get_term_by_name('Clarifications to questions', 'attachment_file_type');
+            self::$data[$path]['file_description'][$language][] = empty($term) ? 'Clarifications to questions' : current(array_keys($term));
+            break;
+
           case 'award_notice':
+            self::$data[$path]['files'][$language][] = $raw_data[$key];
+            $term = taxonomy_get_term_by_name('Award Notice', 'attachment_file_type');
+            self::$data[$path]['file_description'][$language][] = empty($term) ? 'Award Notice' : current(array_keys($term));
+            break;
+
           case 'award_notice_corrigendum':
+            self::$data[$path]['files'][$language][] = $raw_data[$key];
+            $term = taxonomy_get_term_by_name('Award Notice Corrigendum', 'attachment_file_type');
+            self::$data[$path]['file_description'][$language] = empty($term) ? 'Award Notice Corrigendum' : current(array_keys($term));
+            break;
+
           case 'info':
           case 'author':
           case 'text':
@@ -330,6 +326,7 @@ class CallsMigrateList extends MigrateList {
       }
     }
   }
+
   /**
    * {@inheritdoc}
    */

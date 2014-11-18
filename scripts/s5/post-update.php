@@ -56,4 +56,10 @@ function delete_extra_fields() {
   if ($instance = field_info_instance('node', 'field_file', 'seminar')) {
     field_delete_instance($instance);
   }
+  if ($instance = field_info_instance('node', 'field_author', 'guideline')) {
+    field_delete_instance($instance);
+  }
+  if ($instance = field_info_instance('node', 'field_author', 'directive')) {
+    field_delete_instance($instance);
+  }
 }

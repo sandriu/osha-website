@@ -150,7 +150,7 @@ function osha_job_vacancies_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_activity',
     'label' => 'Activity',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -436,7 +436,7 @@ function osha_job_vacancies_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_expiration_date',
     'label' => 'Expiration Date',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -529,7 +529,7 @@ function osha_job_vacancies_field_default_field_instances() {
     'label' => 'Deadline',
     'required' => 1,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',

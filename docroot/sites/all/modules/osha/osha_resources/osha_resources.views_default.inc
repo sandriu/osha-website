@@ -66,8 +66,10 @@ function osha_resources_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'external_url' => 'external_url',
+    'events' => 'events',
     'file' => 'file',
     'flickr' => 'flickr',
+    'news' => 'news',
     'publication' => 'publication',
     'slideshare' => 'slideshare',
     'youtube' => 'youtube',

@@ -155,7 +155,7 @@ function osha_homepage_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -238,7 +238,7 @@ function osha_homepage_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -303,7 +303,7 @@ function osha_homepage_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 12,
+      'weight' => 10,
     ),
   );
 
@@ -443,6 +443,52 @@ function osha_homepage_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-banner-field_summary'
+  $field_instances['node-banner-field_summary'] = array(
+    'bundle' => 'banner',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_summary',
+    'label' => 'Summary',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-banner-title_field'
   $field_instances['node-banner-title_field'] = array(
     'bundle' => 'banner',
@@ -513,7 +559,7 @@ function osha_homepage_field_default_field_instances() {
         'size' => 255,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -527,6 +573,7 @@ function osha_homepage_field_default_field_instances() {
   t('Page count');
   t('Show in footer');
   t('Show in top banner');
+  t('Summary');
   t('Title');
 
   return $field_instances;

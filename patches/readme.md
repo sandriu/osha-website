@@ -7,6 +7,17 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* drupal (core)
+  * Node preview removes file values from node edit form for non-displayed items
+  * drupal/1289336-112.patch
+  * https://www.drupal.org/node/1289336
+
+* workbench_access
+  * Preview error (Warning: array_keys() expects parameter 1 to be array, string given in workbench_access_node_form_element() (line 1467 of ...
+  * workbench_access/1935190-wa-array-keys_0_1.patch
+  * https://www.drupal.org/node/1935190#pift-results-1935190
+  * https://www.drupal.org/files/1935190-wa-array-keys_0_1.patch
+
 * nodeblock
   * Default options on/off for nodeblock
   * 2072427-default-on-off-6.patch

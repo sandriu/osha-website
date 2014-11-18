@@ -19,16 +19,14 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
     'titles' => array(
       0 => 'Legislation',
       1 => 'European Directives',
-      2 => '%node:field-directive-type:name',
-      3 => '%node:field-legislation-category:name',
-      4 => '!page_title',
+      2 => '%node:field-legislation-category:name',
+      3 => '!page_title',
     ),
     'paths' => array(
       0 => 'articles/safety-and-health-legislation',
       1 => 'articles/european-directives',
-      2 => '%node:field-directive-type:url',
-      3 => 'legislation/directives/%node:field-legislation-category:field-directive-category-code',
-      4 => '<none>',
+      2 => 'legislation/directives/%node:field-legislation-category:field-directive-category-code',
+      3 => '<none>',
     ),
     'home' => 1,
     'translatable' => 0,
@@ -59,6 +57,28 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
   );
   $path_breadcrumb->weight = 0;
   $export['directive'] = $path_breadcrumb;
+
+  $path_breadcrumb = new stdClass();
+  $path_breadcrumb->api_version = 1;
+  $path_breadcrumb->machine_name = 'directive_search';
+  $path_breadcrumb->name = 'Directive search';
+  $path_breadcrumb->path = 'search/directives';
+  $path_breadcrumb->data = array(
+    'titles' => array(
+      0 => 'Legislation',
+      1 => 'European Directives',
+    ),
+    'paths' => array(
+      0 => 'articles/safety-and-health-legislation',
+      1 => 'articles/european-directives',
+    ),
+    'home' => 1,
+    'translatable' => 0,
+    'arguments' => array(),
+    'access' => array(),
+  );
+  $path_breadcrumb->weight = 0;
+  $export['directive_search'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
   $path_breadcrumb->api_version = 1;
@@ -407,7 +427,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
       1 => 'Publications',
     ),
     'paths' => array(
-      0 => 'articles/tools-and-resources',
+      0 => 'articles/tools-and-publications',
       1 => '<none>',
     ),
     'home' => 1,
@@ -495,7 +515,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
       1 => '!page_title',
     ),
     'paths' => array(
-      0 => 'articles/tools-and-resources',
+      0 => 'articles/tools-and-publications',
       1 => '<none>',
     ),
     'home' => 1,
