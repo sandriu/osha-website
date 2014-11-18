@@ -630,18 +630,25 @@ class OshaWorkflowPermissions {
   /**
    * Get the users by role name.
    *
-   * @param string $role_name
-   *   Role name
+   * @param string|int $role
+   *   Role name on rid
    *
    * @return mixed
    *   FALSE or array of user object.
    */
-  public static function getUsersByRole($role_name) {
-    $role = user_role_load_by_name($role_name);
+  public static function getUsersByRole($role) {
+    if (is_numeric($role)) {
+      $rid = $role;
+    }
+    else {
+      $role = user_role_load_by_name($role);
+      $rid = $role->rid;
+    }
+
     $query = db_select('users', 'u');
     $query->fields('u', array('uid'));
     $query->join('users_roles', 'ur', 'ur.uid = u.uid');
-    $query->condition('ur.rid', $role->rid);
+    $query->condition('ur.rid', $rid);
     $result = $query->execute()->fetchAllAssoc('uid');
     $uids = array_keys($result);
     return user_load_multiple($uids);
