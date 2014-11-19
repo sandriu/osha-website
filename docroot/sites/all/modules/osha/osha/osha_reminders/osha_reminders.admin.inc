@@ -111,12 +111,12 @@ Thank you,'
     . '<p>Last email sent to Head of Units: ' . $heads_last_run_info . '<p>',
   );
 
-  $form['change_dates']['osha_reminders_pm_last'] = array(
+  $form['change_dates']['osha_reminders_pm_notify_last_run'] = array(
     '#type' => 'date',
     '#title' => 'Change date of last mail sent to PM',
   );
 
-  $form['change_dates']['osha_reminders_heads_last'] = array(
+  $form['change_dates']['osha_reminders_heads_notify_last_run'] = array(
     '#type' => 'date',
     '#title' => 'Change date of last mail sent to Head of Units',
   );
@@ -146,27 +146,11 @@ Thank you,'
  * Submit callback for settings form of the module.
  */
 function osha_reminders_admin_form_submit($form, &$form_state) {
-  // Save intervals.
-  variable_set('osha_reminders_cron_notification_heads_months',
-    $form_state['values']['osha_reminders_cron_notification_heads_months']);
-  variable_set('osha_reminders_cron_notification_interval_months',
-    $form_state['values']['osha_reminders_cron_notification_interval_months']);
-  variable_set('osha_reminders_heads_role',
-    $form_state['values']['osha_reminders_heads_role']);
-
-
-  // Save pm email template.
-  variable_set('osha_reminder_template_pm_subject',
-    $form_state['values']['osha_reminder_template_pm_subject']);
-  variable_set('osha_reminder_template_pm_body',
-    $form_state['values']['osha_reminder_template_pm_body']);
-
-  // Save heads email template.
-  variable_set('osha_reminder_template_heads_subject',
-    $form_state['values']['osha_reminder_template_heads_subject']);
-  variable_set('osha_reminder_template_heads_body',
-    $form_state['values']['osha_reminder_template_heads_body']);
-
+  // Unset dates.
+  unset($form_state['values']['osha_reminders_pm_notify_last_run']);
+  unset($form_state['values']['osha_reminders_heads_notify_last_run']);
+  // Save settings
+  system_settings_form_submit($form, $form_state);
   drupal_set_message(t('Settings saved successfully'));
 }
 
@@ -174,12 +158,13 @@ function osha_reminders_admin_form_submit($form, &$form_state) {
  * Submit callback for change dates of the module.
  */
 function osha_reminders_admin_form_change_dates_submit($form, &$form_submit) {
-  $last_run = $form_submit['values']['osha_reminders_pm_last'];
+  // Save dates.
+  $last_run = $form_submit['values']['osha_reminders_pm_notify_last_run'];
   $last_run = $last_run['year'] . '-' . $last_run['month'] . '-' . $last_run['day'];
   $last_run = strtotime($last_run);
   variable_set('osha_reminders_pm_notify_last_run', $last_run);
 
-  $heads_last_run = $form_submit['values']['osha_reminders_heads_last'];
+  $heads_last_run = $form_submit['values']['osha_reminders_heads_notify_last_run'];
   $heads_last_run = $heads_last_run['year'] . '-' . $heads_last_run['month'] . '-' . $heads_last_run['day'];
   $heads_last_run = strtotime($heads_last_run);
   variable_set('osha_reminders_heads_notify_last_run', $heads_last_run);
@@ -191,12 +176,16 @@ function osha_reminders_admin_form_change_dates_submit($form, &$form_submit) {
  * Submit Callback for button Notify PM now.
  */
 function osha_reminders_admin_form_notify_pm_submit($form, &$form_submit) {
+  variable_set('osha_reminders_pm_notify_last_run', REQUEST_TIME);
   osha_reminders_notify_pm();
+  drupal_set_message(t('PMs are notified!'));
 }
 
 /**
  * Submit callback for Notify Head of Units now.
  */
 function osha_reminders_admin_form_notify_heads_submit($form, &$form_submit) {
+  variable_set('osha_reminders_heads_notify_last_run', REQUEST_TIME);
   osha_reminders_notify_heads();
+  drupal_set_message(t('Head of units are notified!'));
 }
