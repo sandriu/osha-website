@@ -64,6 +64,7 @@ function delete_extra_fields() {
   field_delete_field('field_seminar_conclusions');
   field_delete_field('field_seminar_further_actions');
   field_delete_field('field_seminar_show_roster_hour');
+  safe_delete_field_instance('field_image', 'seminar');
 }
 
 function safe_delete_field_instance($field_base, $bundle) {
