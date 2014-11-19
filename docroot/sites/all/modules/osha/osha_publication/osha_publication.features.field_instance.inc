@@ -161,7 +161,9 @@ function osha_publication_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 18,
     ),
@@ -793,7 +795,7 @@ function osha_publication_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'term_reference_tree',
+      'module' => 'multiple_selects',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
         'cascading_selection' => 0,
@@ -807,7 +809,7 @@ function osha_publication_field_default_field_instances() {
         'token_display' => '[term:field-nace-code] [term:name]',
         'track_list' => 1,
       ),
-      'type' => 'term_reference_tree',
+      'type' => 'multiple_selects',
       'weight' => 9,
     ),
     'workbench_access_field' => 0,
@@ -1248,7 +1250,9 @@ function osha_publication_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 1,
     ),
@@ -1475,6 +1479,7 @@ function osha_publication_field_default_field_instances() {
       'active' => 0,
       'module' => 'options',
       'settings' => array(
+        'apply_chosen' => '',
         'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
@@ -1550,7 +1555,7 @@ function osha_publication_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'term_reference_tree',
+      'module' => 'multiple_selects',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
         'cascading_selection' => 0,
@@ -1564,7 +1569,7 @@ function osha_publication_field_default_field_instances() {
         'token_display' => '[term:field-thesaurus-code] [term:name]',
         'track_list' => 1,
       ),
-      'type' => 'term_reference_tree',
+      'type' => 'multiple_selects',
       'weight' => 8,
     ),
     'workbench_access_field' => 0,
@@ -1631,7 +1636,9 @@ function osha_publication_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 17,
     ),
