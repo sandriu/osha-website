@@ -2,6 +2,21 @@
 
 include_once 'osha_linkchecker.features.inc';
 
+function osha_linkchecker_cron() {
+  $last_run = variable_get('osha_linkchecker_cron_last_run', REQUEST_TIME);
+  $last_run = new DateTime(date("c", $last_run));
+  $rescan_interval = 1;
+  $now = new DateTime();
+  $since_last_run = $now->diff($last_run);
+  // Re-scan nodes for links.
+  if ($since_last_run->m >= $rescan_interval) {
+    if (drupal_is_cli()) {
+      osha_linkchecker_scan_for_links();
+      variable_set('osha_linkchecker_cron_last_run', REQUEST_TIME);
+    }
+  }
+}
+
 /**
  * Implements hook_entity_info().
  */
@@ -88,6 +103,54 @@ function osha_linkchecker_views_query_alter(&$view, &$query) {
   if ($view->name == 'broken_links') {
     // Fix workbench Access fitler.
     $query->where[2]['conditions'][0]['field'] = 'linkchecker_node_linkchecker_link.nid';
+  }
+}
+
+/**
+ * Scan for links. To be used when in console.
+ */
+function osha_linkchecker_scan_for_links() {
+  watchdog('osha_linkchecker', 'Scanning links on all nodes...');
+  print 'Scanning link in all nodes...';
+  $node_types = variable_get('linkchecker_scan_nodetypes', array());
+  $result = db_query(
+    'SELECT n.nid FROM {node} n WHERE n.status = :status AND n.type IN (:types) ORDER BY n.nid', array(':status' => 1, ':types' => $node_types));
+  foreach ($result as $row) {
+    $node = node_load($row->nid, NULL, TRUE);
+    $links = array_keys(_linkchecker_extract_node_links($node));
+
+    // Node have links.
+    if (!empty($links)) {
+      // Remove all links from the links array already in the database and only
+      // add missing links to database.
+      $missing_links = _linkchecker_node_links_missing($node->nid, $links);
+
+      // Only add links to database that do not exists.
+      $i = 0;
+      foreach ($missing_links as $url) {
+        $urlhash = drupal_hash_base64($url);
+        $link = db_query('SELECT lid FROM {linkchecker_link} WHERE urlhash = :urlhash', array(':urlhash' => $urlhash))->fetchObject();
+        if (!$link) {
+          $link = new stdClass();
+          $link->urlhash = $urlhash;
+          $link->url = $url;
+          $link->status = _linkchecker_link_check_status_filter($url);
+          drupal_write_record('linkchecker_link', $link);
+        }
+        db_insert('linkchecker_node')
+          ->fields(array(
+            'nid' => $node->nid,
+            'lid' => $link->lid,
+          ))
+          ->execute();
+
+        // Break processing if max links limit per run has been reached.
+        $i++;
+        if ($i >= LINKCHECKER_SCAN_MAX_LINKS_PER_RUN) {
+          break;
+        }
+      }
+    }
   }
 }
 
