@@ -193,6 +193,7 @@ function osha_date_format_types() {
     'year'  => t('Year'),
     'short_date_eu'  => t('EU short date'),
     'osha_day_only'  => t('Day only'),
+    'month' => t('Month: F'),
   );
 }
 
@@ -209,6 +210,9 @@ function osha_date_formats() {
     ),
     array(
       'type' => 'osha_day_only', 'format'  => 'd/m/Y', 'locales' => array(),
+    ),
+    array(
+      'type' => 'month', 'format' => 'F', 'locales' => array(),
     ),
   );
   foreach ($formats as $format) {

@@ -22,7 +22,10 @@ function osha_news_default_fe_block_settings() {
     'node_types' => array(),
     'pages' => '<front>
 seminars/*
-seminar/*',
+seminar/*
+articles/blog
+blog/*
+*/blog/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

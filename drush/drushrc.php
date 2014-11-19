@@ -383,6 +383,9 @@ $options['init-modules'] = array(
   'flickrfield',
   'chosen',
 
+  //Allow anonymous comments per node type
+  'comment_allow_anonymous',
+
   'osha_taxonomies',
   'osha',
   'osha_migration',
@@ -464,7 +467,7 @@ $command_specific['devify'] = array(
       'stage_file_proxy_hotlink' => TRUE,
       'reroute_email_address' => $cfg->variables->site_mail,
     )
-  , (array) $cfg->variables),
+    , (array) $cfg->variables),
 );
 
 $command_specific['devify_solr'] = array(
