@@ -6,6 +6,11 @@
 
 osha_add_menu_position_rules();
 delete_extra_fields();
+
+variable_set('chosen_minimum_multiple', '32');
+variable_set('chosen_minimum_single', '32');
+variable_set('chosen_minimum_width', '300');
+
 /**
  * Add menu position rules.
  */
