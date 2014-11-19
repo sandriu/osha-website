@@ -408,6 +408,7 @@ $options['init-modules'] = array(
 
   'linkchecker',
   'osha_linkchecker',
+  'osha_reminders',
 
   'facetapi',
   'search_api_facetapi',
