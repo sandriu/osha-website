@@ -34,11 +34,10 @@ drush php-script ../scripts/s5/post-update.php
 drush cc all
 
 # Delete admin_views module
-rm -rf sites/all/modules/contrib/admin_views
-
-rm -rf sites/all/modules/contrib/apachesolr
-rm -rf sites/all/modules/contrib/apachesolr_multilingual
-rm -rf sites/all/modules/contrib/apachesolr_views
+#rm -rf sites/all/modules/contrib/admin_views
+#rm -rf sites/all/modules/contrib/apachesolr
+#rm -rf sites/all/modules/contrib/apachesolr_multilingual
+#rm -rf sites/all/modules/contrib/apachesolr_views
 
 echo "Running cron to cleanup ..."
 drush cron
