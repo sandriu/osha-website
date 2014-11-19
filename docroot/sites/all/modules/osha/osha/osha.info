@@ -257,6 +257,7 @@ features[variable][] = uuid_features_file_file
 features[variable][] = uuid_features_file_mode
 features[variable][] = uuid_features_file_node
 features[variable][] = uuid_features_file_supported_fields
+features[variable][] = date_format_month
 features[views_view][] = media_browser_osha
 features[wysiwyg][] = filtered_html
 features[wysiwyg][] = full_html

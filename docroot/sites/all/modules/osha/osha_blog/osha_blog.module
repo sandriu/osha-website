@@ -73,6 +73,10 @@ function osha_blog_views_pre_render(&$view) {
   }
 }
 
+/**
+ * Display custom title for monthly views
+ * @return bool|null|string
+ */
 function set_view_title(){
   $title = drupal_get_title();
   if(preg_match('/([\d]{2}\/[\d]{4})/', $title)){
