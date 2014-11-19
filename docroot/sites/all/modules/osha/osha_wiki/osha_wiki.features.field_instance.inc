@@ -284,6 +284,7 @@ function osha_wiki_field_default_field_instances() {
       'active' => 0,
       'module' => 'options',
       'settings' => array(
+        'apply_chosen' => '',
         'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
@@ -485,6 +486,7 @@ function osha_wiki_field_default_field_instances() {
       'active' => 0,
       'module' => 'options',
       'settings' => array(
+        'apply_chosen' => '',
         'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),

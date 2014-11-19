@@ -7,9 +7,7 @@
 osha_add_menu_position_rules();
 delete_extra_fields();
 
-variable_set('chosen_minimum_multiple', '32');
-variable_set('chosen_minimum_single', '32');
-variable_set('chosen_minimum_width', '300');
+configure_chosen();
 
 /**
  * Add menu position rules.
@@ -72,4 +70,11 @@ function safe_delete_field_instance($field_base, $bundle) {
   if ($instance = field_info_instance('node', $field_base, $bundle)) {
     field_delete_instance($instance);
   }
+}
+
+function configure_chosen() {
+  variable_set('chosen_minimum_multiple', '10');
+  variable_set('chosen_minimum_single', '99');
+  variable_set('chosen_disable_search_threshold', '32');
+  variable_set('chosen_minimum_width', '300');
 }
