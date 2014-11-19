@@ -187,3 +187,29 @@ function osha_calls_form_calls_node_form_alter(&$form) {
     $form['body']['#access'] = FALSE;
   }
 }
+
+/**
+ * Implements hook_node_validate().
+ *
+ * {@inheritdoc}
+ */
+function osha_calls_node_validate($node, $form, &$form_state) {
+  $values = $form_state['values'];
+  if ($node->type == 'calls' &&
+      !empty($values['field_calls_deadline'][LANGUAGE_NONE][0]['value']) &&
+      !empty($values['field_publication_date'][LANGUAGE_NONE][0]['value'])
+  ) {
+    $deadline_date = strtotime($values['field_calls_deadline'][LANGUAGE_NONE][0]['value']);
+    $publication_date = strtotime($values['field_publication_date'][LANGUAGE_NONE][0]['value']);
+    // Assume that all fields use the same timezone handling settings.
+    if ($deadline_date < $publication_date) {
+      form_set_error('field_calls_deadline', 'Deadline must be after the publication date');
+    }
+    if (!empty($values['field_expiration_date'][LANGUAGE_NONE][0]['value'])) {
+      $expiration_date = strtotime($values['field_expiration_date'][LANGUAGE_NONE][0]['value']);
+      if ($expiration_date < $deadline_date) {
+        form_set_error('field_expiration_date', 'Item must expire after the deadline');
+      }
+    }
+  }
+}
