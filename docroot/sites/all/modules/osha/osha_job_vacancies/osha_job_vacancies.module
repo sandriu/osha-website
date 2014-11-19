@@ -64,25 +64,25 @@ function osha_job_vacancies_post_features_revert($component) {
 
 /**
  * Implements hook_node_validate().
- * @param $node
- * @param $form
- * @param $form_state
+ *
+ * {@inheritdoc}
  */
 function osha_job_vacancies_node_validate($node, $form, &$form_state) {
+  $values = $form_state['values'];
   if ($node->type == 'job_vacancies' &&
-    isset($node->field_job_vacancies_deadline[LANGUAGE_NONE][0]['value']) &&
-    isset($node->field_publication_date[LANGUAGE_NONE][0]['value'])
+      !empty($values['field_job_vacancies_deadline'][LANGUAGE_NONE][0]['value']) &&
+      !empty($values['field_publication_date'][LANGUAGE_NONE][0]['value'])
   ) {
-    $publication_date = $node->field_publication_date[LANGUAGE_NONE][0]['value'];
-    $deadline_date = $node->field_job_vacancies_deadline[LANGUAGE_NONE][0]['value'];
-    // comparisons assume that all fields use the same timezone handling settings
+    $deadline_date = strtotime($values['field_job_vacancies_deadline'][LANGUAGE_NONE][0]['value']);
+    $publication_date = strtotime($values['field_publication_date'][LANGUAGE_NONE][0]['value']);
+    // Assume that all fields use the same timezone handling settings.
     if ($deadline_date < $publication_date) {
-      form_set_error('field_job_vacancies_deadline', t('The deadline date must be greater than publication date.'));
+      form_set_error('field_job_vacancies_deadline', 'Deadline must be after the publication date');
     }
-    if (isset($node->field_expiration_date[LANGUAGE_NONE][0]['value'])) {
-      $expiration_date = $node->field_expiration_date[LANGUAGE_NONE][0]['value'];
+    if (!empty($values['field_expiration_date'][LANGUAGE_NONE][0]['value'])) {
+      $expiration_date = strtotime($values['field_expiration_date'][LANGUAGE_NONE][0]['value']);
       if ($expiration_date < $deadline_date) {
-        form_set_error('field_expiration_date', t('The expiration date must be greater than deadline date.'));
+        form_set_error('field_expiration_date', 'Item must expire after the deadline');
       }
     }
   }
