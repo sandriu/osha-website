@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Implements hook_entity_info().
+ */
+function osha_alert_service_entity_info() {
+  $info = array();
+  $info['osha_alert_service'] = array(
+    'label' => t('OSHA Alert'),
+    'base table' => 'osha_alert_service',
+    'entity keys' => array(
+      'id' => 'id',
+    ),
+    'module' => 'osha_alert_service',
+    'entity class' => 'Entity',
+    'controller class' => 'EntityAPIController',
+  );
+  return $info;
+}

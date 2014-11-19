@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function osha_alert_service_schema() {
+  $schema = array();
+  $schema['osha_alert_service'] = array(
+    'description' => 'Alert Service entity base table',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary key of the Alert Service entity',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'email' => array(
+        'description' => 'Email address for the registered user',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'filters' => array(
+        'description' => 'Serialized array with filter settings',
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'schedule' => array(
+        'description' => 'How often user wants to receive alerts',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the entry was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'last' => array(
+        'description' => 'The Unix timestamp when the last batch was sent',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
