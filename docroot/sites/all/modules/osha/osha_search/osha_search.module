@@ -117,7 +117,7 @@ function osha_search_form_views_exposed_form_alter(&$form, &$form_state) {
         $years_options['field_date_of_directive:' . $year] = $year;
       }
       $form['f[0]'] = array(
-        '#title' => t('Directive\'s year'),
+        '#title' => t('Date of directive'),
         '#type' => 'select',
         '#options' => array_merge(array('' => '- Any -'), $years_options),
         '#weight' => '0',
