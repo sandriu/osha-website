@@ -1,7 +1,7 @@
 name = osha
 core = 7.x
 package = OSHA
-version = 7.x-1.17
+version = 7.x-1.18
 project = osha
 dependencies[] = admin_views
 dependencies[] = aggregator
@@ -161,6 +161,7 @@ features[node][] = page
 features[user_permission][] = access PDF version
 features[user_permission][] = access news feeds
 features[user_permission][] = post comments
+features[user_permission][] = skip comment approval
 features[variable][] = comment_anonymous_article
 features[variable][] = comment_anonymous_page
 features[variable][] = comment_article
