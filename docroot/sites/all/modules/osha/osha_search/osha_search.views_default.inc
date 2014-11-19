@@ -467,7 +467,7 @@ function osha_search_views_default_views() {
   );
   $handler->display->display_options['path'] = 'search/site';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Website';
+  $handler->display->display_options['menu']['title'] = 'Site';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'menu-search';
   $handler->display->display_options['menu']['context'] = 0;

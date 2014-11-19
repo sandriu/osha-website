@@ -98,6 +98,36 @@ function osha_seminar_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['path'] = 'search/seminars';
+
+  /* Display: Facets block */
+  $handler = $view->new_display('search_api_views_facets_block', 'Facets block', 'search_api_views_facets_block_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Indexed Multilingual Node: Tags */
+  $handler->display->display_options['fields']['field_tags']['id'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['field_tags']['field'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['field_tags']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_tags']['bypass_access'] = 0;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Search: Fulltext search */
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['search_api_views_fulltext']['not'] = 0;
+  $handler->display->display_options['block_description'] = 'Seminar Topics Facet';
+  $handler->display->display_options['linked_path'] = 'search/seminars';
+  $handler->display->display_options['facet_field'] = 'field_tags';
   $translatables['search_seminars'] = array(
     t('Master'),
     t('Search Seminars'),
@@ -112,6 +142,10 @@ function osha_seminar_views_default_views() {
     t('Multilingual ID'),
     t('Free text search'),
     t('Page'),
+    t('Facets block'),
+    t('Tags'),
+    t('All'),
+    t('Seminar Topics Facet'),
   );
   $export['search_seminars'] = $view;
 
