@@ -74,13 +74,21 @@ function osha_workflow_access_find_pm(&$section_tree, $section_id) {
  * Get PM of a section.
  */
 function osha_workflow_access_pm_get_pm($access_id, $access_scheme) {
+  return user_load_multiple(
+    osha_workflow_access_pm_get_pm_uid($access_id, $access_scheme));
+}
+
+/**
+ * Get PM of a section.
+ */
+function osha_workflow_access_pm_get_pm_uid($access_id, $access_scheme) {
   $users = db_select('osha_workflow_access_pm', 'owa')
     ->fields('owa', array('uid'))
     ->condition('access_id', $access_id)
     ->condition('access_scheme', $access_scheme)
     ->execute()
     ->fetchAllAssoc('uid');
-  return user_load_multiple(array_keys($users));
+  return array_keys($users);
 }
 
 /**
@@ -105,6 +113,7 @@ function osha_workflow_access_pm_check_root() {
   }
   return FALSE;
 }
+
 /**
  * Assign project manager to a node.
  *
@@ -621,18 +630,25 @@ class OshaWorkflowPermissions {
   /**
    * Get the users by role name.
    *
-   * @param string $role_name
-   *   Role name
+   * @param string|int $role
+   *   Role name on rid
    *
    * @return mixed
    *   FALSE or array of user object.
    */
-  public static function getUsersByRole($role_name) {
-    $role = user_role_load_by_name($role_name);
+  public static function getUsersByRole($role) {
+    if (is_numeric($role)) {
+      $rid = $role;
+    }
+    else {
+      $role = user_role_load_by_name($role);
+      $rid = $role->rid;
+    }
+
     $query = db_select('users', 'u');
     $query->fields('u', array('uid'));
     $query->join('users_roles', 'ur', 'ur.uid = u.uid');
-    $query->condition('ur.rid', $role->rid);
+    $query->condition('ur.rid', $rid);
     $result = $query->execute()->fetchAllAssoc('uid');
     $uids = array_keys($result);
     return user_load_multiple($uids);
