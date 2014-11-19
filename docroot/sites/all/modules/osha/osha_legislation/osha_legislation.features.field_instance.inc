@@ -293,7 +293,9 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 3,
     ),
@@ -437,7 +439,9 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 4,
     ),
@@ -503,12 +507,12 @@ function osha_legislation_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'taxonomy',
+      'module' => 'multiple_selects',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'taxonomy_autocomplete',
+      'type' => 'multiple_selects',
       'weight' => 11,
     ),
   );
@@ -728,7 +732,9 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => 1,
+      ),
       'type' => 'options_select',
       'weight' => 10,
     ),
@@ -794,12 +800,12 @@ function osha_legislation_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'taxonomy',
+      'module' => 'multiple_selects',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'taxonomy_autocomplete',
+      'type' => 'multiple_selects',
       'weight' => 12,
     ),
   );
@@ -1107,7 +1113,9 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 8,
     ),
@@ -1341,7 +1349,9 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 3,
     ),
@@ -1407,12 +1417,12 @@ function osha_legislation_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'taxonomy',
+      'module' => 'multiple_selects',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'taxonomy_autocomplete',
+      'type' => 'multiple_selects',
       'weight' => 11,
     ),
   );
@@ -1631,7 +1641,9 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 10,
     ),
@@ -1697,12 +1709,12 @@ function osha_legislation_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'taxonomy',
+      'module' => 'multiple_selects',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'taxonomy_autocomplete',
+      'type' => 'multiple_selects',
       'weight' => 12,
     ),
   );

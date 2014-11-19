@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Update the search page link title.
+ */
+function osha_search_update_7001() {
+  if ($link = menu_link_load(1081)) {
+    $link['link_title'] = 'Website';
+    if (menu_link_save($link) === FALSE) {
+      drupal_set_message('Failed to rename link title from Site to Website', 'error');
+    }
+  }
+  else {
+    drupal_set_message('Failed to find search page menu link Site', 'error');
+  }
+}

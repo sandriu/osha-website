@@ -381,6 +381,7 @@ $options['init-modules'] = array(
   'flickr',
   'flickr_block',
   'flickrfield',
+  'chosen',
 
   'osha_taxonomies',
   'osha',

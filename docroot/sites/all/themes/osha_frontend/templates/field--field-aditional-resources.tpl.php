@@ -23,8 +23,8 @@
           $value = reset($item['node']);
           if ($node_type != $value['#bundle']) {
             // this is a new bundle type
-            print '</div><div class="additional_resource_group '.$node_type.'"><span>'.$bundles[$value['#bundle']].'</span>';
             $node_type = $value['#bundle'];
+            print '</div><div class="additional_resource_group '.$node_type.'"><span>'.$bundles[$node_type].'</span>';
           }
         }
       ?>

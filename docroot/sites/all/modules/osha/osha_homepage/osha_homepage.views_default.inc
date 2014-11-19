@@ -133,11 +133,7 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['label'] = '';
   $handler->display->display_options['fields']['field_image']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="[field_banner_link_1]">
-<div class="views-field-title"><span>[field_summary]</span></div>
-[field_image]
-<span class="views-field-field-banner-link">[field_banner_link]</span>
-</a>';
+  $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="[field_banner_link_1]"><div class="views-field-title"><span>[field_summary]</span></div>[field_image]<span class="views-field-field-banner-link">[field_banner_link]</span></a>';
   $handler->display->display_options['fields']['field_image']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_image']['alter']['nl2br'] = TRUE;
   $handler->display->display_options['fields']['field_image']['element_class'] = 'view-osha-home-banner-top';
@@ -258,11 +254,7 @@ function osha_homepage_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Home page banner top'),
-    t('<a href="[field_banner_link_1]">
-<div class="views-field-title"><span>[field_summary]</span></div>
-[field_image]
-<span class="views-field-field-banner-link">[field_banner_link]</span>
-</a>'),
+    t('<a href="[field_banner_link_1]"><div class="views-field-title"><span>[field_summary]</span></div>[field_image]<span class="views-field-field-banner-link">[field_banner_link]</span></a>'),
     t('Home page banner footer'),
     t('<a href="[field_banner_link_1]">
 <div class="views-field-title"><span>[title_field]</span></div>
