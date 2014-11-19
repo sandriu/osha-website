@@ -34,12 +34,10 @@ class osha_workbench_moderation_handler_filter_state extends workbench_moderatio
       $unmoderated = array();
       $types = node_type_get_types();
       foreach ($types as $type) {
-        // Is this content even in moderatation?
         if (!workbench_moderation_node_type_moderated($type->type)) {
           $unmoderated[] = $type->type;
         }
       }
-      $unmoderated = array_intersect($unmoderated, $this->view->filter['type']->value);
       $this->query->add_where($this->options['group'],
         // ((workbench_moderation_node_history.state IN
         // ('ready_to_publish', 'published'))
