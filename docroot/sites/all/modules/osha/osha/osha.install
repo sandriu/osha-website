@@ -78,9 +78,32 @@ function osha_update_7001() {
 
 /**
  * Remove the admin_views_node view.
+ *
+ * Configure jquery_update and responsive_menus
  */
 function osha_update_7002() {
   if ($view = views_get_view('admin_views_node')) {
     views_delete_view($view);
   }
+
+  // Config jquery_update.
+  variable_set('jquery_update_jquery_version', '1.10');
+
+  // Config responsive_menus.
+  variable_set('responsive_menus_no_jquery_update', array('1' => 0));
+  variable_set('responsive_menus_ignore_admin', array('1' => 1));
+  variable_set('responsive_menus_style', 'mean_menu');
+  variable_set('responsive_menus_mean_menu_css_selectors', '#block-menu-block-1');
+  variable_set('responsive_menus_mean_menu_container', 'body');
+  variable_set('responsive_menus_mean_menu_trigger_txt', '<span /><span /><span />');
+  variable_set('responsive_menus_mean_menu_close_txt', 'X');
+  variable_set('responsive_menus_mean_menu_close_size', '18px');
+  variable_set('responsive_menus_mean_menu_position', 'right');
+  variable_set('responsive_menus_mean_menu_media_size', '960');
+  variable_set('responsive_menus_mean_menu_show_children', 1);
+  variable_set('responsive_menus_mean_menu_expand_txt', '+');
+  variable_set('responsive_menus_mean_menu_contract_txt', '-');
+  variable_set('responsive_menus_mean_menu_remove_attrs', 1);
+
+
 }
