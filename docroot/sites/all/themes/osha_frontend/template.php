@@ -145,20 +145,34 @@ function fill_related_publications(&$vars) {
     $excluded_nids = array();
     array_push($excluded_nids, $vars['node']->nid);
 
-    $result = $query->entityCondition('entity_type', 'node')
+    $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'publication')
       ->entityCondition('entity_id', $excluded_nids, 'NOT IN')
       ->fieldCondition('field_tags', 'tid', $tids, 'IN')
-      ->propertyOrderBy('changed', 'DESC')
-      ->pager(3)
-      ->execute();
+      ->propertyOrderBy('changed', 'DESC');
 
+    $result = $query->execute();
+    $limit = 3;
+    global $user;
     if (!empty($result)) {
       $vars['total_related_publications'] = sizeof($result['node']);
       $vars['tagged_related_publications'] = array();
+      $count = 0;
       foreach ($result['node'] as $n) {
         $node = node_load($n->nid);
-        $vars['tagged_related_publications'][] = node_view($node,'teaser');
+        if ($node->status == 0 ) {
+          // add unpublished only for admin, do not include in count
+          if (OshaWorkflowPermissions::userHasRole('administrator', $user)) {
+            $vars['tagged_related_publications'][] = node_view($node,'teaser');
+          }
+        } else {
+          $vars['tagged_related_publications'][] = node_view($node,'teaser');
+          $count++;
+        }
+        if ($count == $limit) {
+          // max 3 related publications
+          break;
+        }
       }
     }
   }
