@@ -90,8 +90,7 @@ function osha_alert_service_subscribe_form($form, $form_state) {
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => t('E-mail'),
-    '#value' => $email,
-    '#default_value' => '',
+    '#default_value' => $email,
     '#required' => TRUE,
   );
 
