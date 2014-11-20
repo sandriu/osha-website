@@ -424,6 +424,7 @@ $options['init-modules'] = array(
   // Captcha
   'captcha',
   'recaptcha',
+  'image_captcha',
 
   // Social share
   'addtoany',
