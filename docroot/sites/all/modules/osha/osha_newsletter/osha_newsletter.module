@@ -397,7 +397,6 @@ function osha_newsletter_subscribe_extra_form() {
   $form['email'] = array(
     '#type' => 'textfield',
     '#size' => 30,
-    '#required' => TRUE,
     '#attributes' => array('placeholder' => t('E-mail address'))
   );
   $form['captcha'] = array(
@@ -436,13 +435,11 @@ function osha_newsletter_subscribe_form() {
   $form['email'] = array(
     '#type' => 'textfield',
     '#size' => 30,
-    '#required' => TRUE,
     '#attributes' => array('placeholder' => t('E-mail address'))
   );
   $form['captcha'] = array(
     '#type' => 'captcha',
     '#captcha_type' => 'recaptcha/reCAPTCHA',
-
   );
   $link_label = variable_get('subscribe_block_details_link_label', t('Privacy policy'));
   $link_url = variable_get('subscribe_block_details_link_url', url(OSHA_PRIVACY_PAGE_URL));
@@ -467,7 +464,6 @@ function osha_newsletter_unsubscribe_form() {
   $form['email'] = array(
     '#type' => 'textfield',
     '#size' => 30,
-    '#required' => TRUE,
     '#attributes' => array('placeholder' => t('E-mail address'))
   );
   $form['captcha'] = array(
@@ -486,8 +482,27 @@ function osha_newsletter_unsubscribe_form() {
  * Subscribe form validation.
  */
 function osha_newsletter_subscribe_form_validate($form, &$form_state) {
-  if (!valid_email_address($form_state['values']['email'])) {
-    form_set_error('email', t('That e-mail address is not valid.'));
+  $email = trim($form_state['values']['email']);
+  if (strlen($email) != 0) {
+    if (!valid_email_address($form_state['values']['email'])) {
+      form_set_error('email', t('The e-mail address is not valid.'));
+    }
+  } else {
+    form_set_error('email', t('Please enter the e-mail address.'));
+  }
+}
+
+/**
+ * Extra Subscribe form validation.
+ */
+function osha_newsletter_subscribe_extra_form_validate($form, &$form_state) {
+  $email = trim($form_state['values']['email']);
+  if (strlen($email) != 0) {
+    if (!valid_email_address($form_state['values']['email'])) {
+      form_set_error('email', t('The e-mail address is not valid.'));
+    }
+  } else {
+    form_set_error('email', t('Please enter the e-mail address.'));
   }
 }
 
@@ -495,8 +510,13 @@ function osha_newsletter_subscribe_form_validate($form, &$form_state) {
  * Unsubscribe form validation.
  */
 function osha_newsletter_unsubscribe_form_validate($form, &$form_state) {
-  if (!valid_email_address($form_state['values']['email'])) {
-    form_set_error('email', t('That e-mail address is not valid.'));
+  $email = trim($form_state['values']['email']);
+  if (strlen($email) != 0) {
+    if (!valid_email_address($form_state['values']['email'])) {
+      form_set_error('email', t('The e-mail address is not valid.'));
+    }
+  } else {
+    form_set_error('email', t('Please enter the e-mail address.'));
   }
 }
 
