@@ -238,10 +238,13 @@ function osha_alert_service_unsubscribe_form_submit($form, $form_state) {
  * {@inheritdoc}
  */
 function osha_alert_service_mail($key, &$message, $params) {
+  global $base_url;
   $keys = array();
+  $params['base_url'] = $base_url;
   foreach ($params as $k => $v) {
     $keys[] = '[' . $k . ']';
   }
+
   switch ($key) {
     case 'subscribe':
       $subject = variable_get('osha_mail_template_alert_service_subscribe_subject', 'Your subscription to OSHA Alert Service');
@@ -249,8 +252,8 @@ function osha_alert_service_mail($key, &$message, $params) {
 <<<EOT
 EU-OSHA received a request to start sending alerts to [email].
 
-Verify this EU-OSHA alert request: https://osha.europa.eu/alertservice/verify_alert?token=[token]
-Cancel this EU-OSHA alert request: https://osha.europa.eu/alertservice/remove_alert?token=[token]
+Verify this EU-OSHA alert request: [base_url]/[language]/alertservice/verify_alert?token=[token]
+Cancel this EU-OSHA alert request: [base_url]/[language]/alertservice/remove_alert?token=[token]
 If you are not able to click on the link, you can cut and paste it into your browser's address bar.
 
 If you did not initiate this request or believe it was sent in error you can safely ignore this message.
@@ -268,7 +271,7 @@ EOT
         <<<EOT
         EU-OSHA received a request to cancel alerts sent to [email].
 
-Cancel this EU-OSHA alert request: https://osha.europa.eu/alertservice/remove_alert?token=[token]
+Cancel this EU-OSHA alert request: [base_url]/[language]/alertservice/remove_alert?token=[token]
 If you are not able to click on the link, you can cut and paste it into your browser's address bar.
 
 If you did not initiate this request or believe it was sent in error you can safely ignore this message.
