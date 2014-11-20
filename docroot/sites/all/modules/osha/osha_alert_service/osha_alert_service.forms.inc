@@ -55,8 +55,8 @@ function osha_alert_service_subscribe_form() {
 
   $types = array();
   $allowed = array(
-    'article', 'blog', 'job_vacancies', 'highlight', 'news',
-    'publication', 'press_release', 'seminar', 'directive', 'guideline',
+    'article', 'blog', 'directive', 'guideline', 'highlight', 'job_vacancies', 'news',
+    'press_release', 'publication', 'seminar',
   );
   $alltypes = node_type_get_types();
   foreach ($alltypes as $machine_name => $type) {
