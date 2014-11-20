@@ -389,6 +389,9 @@ $options['init-modules'] = array(
   //Allow anonymous comments per node type
   'comment_allow_anonymous',
 
+  //create blocks which display embedded tweets
+  'twitter_block',
+
   'osha_taxonomies',
   'osha',
   'osha_migration',
