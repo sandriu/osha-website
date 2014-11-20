@@ -148,7 +148,7 @@ function osha_alert_service_subscribe_form_submit($form, $form_state) {
       'created' => $created,
       'token' => $token,
       'confirmed' => 0,
-      'last_alert' => NULL,
+      'last_alert' => $created,
     )
   );
   entity_save('osha_alert_service', $entity);
