@@ -55,14 +55,26 @@ function osha_alert_service_schema() {
         'length' => 255,
         'not null' => TRUE,
       ),
+      'token' => array(
+        'description' => 'Token sent via e-mail in order to confirm the address',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'confirmed' => array(
+        'description' => 'User has confirmed the address',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => 0,
+      ),
       'created' => array(
         'description' => 'The Unix timestamp when the entry was created.',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
       ),
-      'last' => array(
-        'description' => 'The Unix timestamp when the last batch was sent',
+      'last_alert' => array(
+        'description' => 'The Unix timestamp when the last alert was sent',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
