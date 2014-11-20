@@ -254,6 +254,16 @@ function osha_frontend_process_node(&$vars) {
 }
 
 /**
+ * Implements hook_preprocess_page
+ */
+function osha_frontend_preprocess_page(&$variables){
+  $variables['blog'] = FALSE;
+  if(preg_match('/(.)*(blog)(.)*/', $_SERVER['REQUEST_URI'])){
+    $variables['blog'] = TRUE;
+  }
+}
+
+/**
  * Called from hook_preprocess_node()
  * Insert view or custom blocks in node when meet a specific markup
  * The markup is like <!--[name-of-the-block]-->
