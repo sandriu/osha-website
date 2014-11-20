@@ -540,6 +540,8 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
     OshaWorkflowNotifications::notifyNodeIsReadyToPublish($node);
   }
 
+  OshaWorkflowNotifications::notifyWebTeamStatusChanged($node, $old, $new);
+
   // Mark the node dirty for search re-indexing
   $languages = array($node->language);
   foreach ($languages as $language) {
@@ -787,11 +789,22 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
 function osha_workflow_mail($key, &$message, $params) {
   $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
   $body = variable_get('osha_mail_template_approval_body',
-    'Dear [user:name],
-      You have a content to be reviewed [node:url].
+    'Dear <b>[user:name]</b>,
+
+    You have a content to be reviewed <a href="[node:url]">[node:title-field]</a>.
+
+    Thank you,'
+  );
+
+  if ($key == 'osha_workflow_notification_admin') {
+    $body = variable_get('osha_mail_template_approval_body',
+      'Dear <b>[user:name]</b>,
+
+      There was a status change (from <b>' . $params['from'] . '</b> to <b>' . $params['to'] . '</b>) for <a href="[node:url]">[node:title-field]</a>.
 
       Thank you,'
-  );
+    );
+  }
   $message['subject'] = token_replace($subject, $params);
   $message['body'] = token_replace($body, $params);
 }
