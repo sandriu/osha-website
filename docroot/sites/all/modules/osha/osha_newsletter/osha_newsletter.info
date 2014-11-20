@@ -18,7 +18,6 @@ dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = title
 dependencies[] = uuid
-dependencies[] = uuid_features
 dependencies[] = views
 __drupal_alter_by_ref[][node][page] = page
 features[ctools][] = entity_collection:entity_collection_bundles_default:1

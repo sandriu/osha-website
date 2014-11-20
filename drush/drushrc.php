@@ -357,6 +357,7 @@ $options['init-modules'] = array(
   'scanner',
   'search_and_replace',
   'nodeblock',
+  'quicktabs',
 
   // Enable last (conflict with rules)
   'uuid',

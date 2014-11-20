@@ -27,5 +27,8 @@ function osha_breadcrumbs_path_breadcrumbs_view_alter(&$breadcrumbs, $path_bread
         array_splice($breadcrumbs,$idx,1);
       }
     }
+
+    //remove duplicates
+    $breadcrumbs = array_keys(array_count_values($breadcrumbs));
   }
 }
