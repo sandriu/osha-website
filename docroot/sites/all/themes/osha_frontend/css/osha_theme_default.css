@@ -4151,9 +4151,9 @@ a.tabs-primary__tab-link{
 	margin: 0;
 }	
 
-.view-events-index .date-display-single{
+.view-events-index  .views-field-field-start-date .field-content{
 	float:left;
-	padding-right: 0.3em;
+	padding-right: 0.2em;
 }
 
 .view-events-index .country{
@@ -4197,6 +4197,149 @@ a.tabs-primary__tab-link{
 }
 
 /* END EVENTS HOME*/
+
+/* EVENTS LIST */
+
+.event_header_block  .events_summary{
+	float: left;
+	width: 43%;
+	padding-right: 0.5em;
+}
+
+.event_header_block  .events_summary  .summary{
+	color:#003399;
+}
+
+.event_header_block  .image_events{
+	float:left;
+	padding-top: 1.9em;
+}
+
+.event_header_block  .image_events .field-label{
+	display:none;
+}
+
+#content .view-events-index {
+	clear:both;
+}
+
+#content .view-events-index .views-row {
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	padding-bottom: 3em;
+	padding-left: 0.6em;
+}
+
+.view-events-index .views-exposed-form{
+	background-image: url("../images/separator_home.jpg"), url("../images/separator_home.jpg");
+	background-position: left top, left bottom;
+	background-repeat: repeat-x;
+	padding:1em;
+}
+
+.view-events-index #edit-search-api-views-fulltext-wrapper{
+	background:none;
+}
+
+.view-events-index .form-item-field-start-date-date{
+	margin-top:0.5em;
+}
+
+.view-events-index #edit-search-api-views-fulltext-wrapper label {
+	margin-top: -0.5em;
+	padding-bottom: 0.7em;
+}
+
+.view-events-index .form-item-search-api-views-fulltext input{
+	width:12em;
+}
+
+.view-events-index .form-item-field-start-date-date input{
+	width:7em;
+}
+
+.view-events-index .form-item-field-start-date-date label{
+	display:none;
+}
+
+.view-events-index .form-item-field-end-date{
+	margin-top:0.5em;
+}
+
+.view-events-index .form-item-field-end-date input{
+	width:7em;
+}
+
+.view-events-index .form-item-field-end-date label{
+	display:none;
+}
+
+.view-events-index #edit-field-country-code{
+	margin-top:0.5em;
+	width:12em;
+}
+
+.view-events-index h3{
+	height: auto;
+	font-family: 'Oswald';
+	font-size: 1.35em;
+	font-weight: 400;
+	color: #003399;
+	background: #e8eef7;
+	padding-left: 10px;
+	padding-bottom: 0.3em;
+	border: 0px;
+	margin-bottom: 0.5em;
+	padding-top: 0.3em;
+}
+
+.view-events-index .views-row .views-field-view-node .field-content a {
+	background: url("../images/flecha.png") no-repeat scroll 85% 61% transparent;
+	color: #003399;
+	float: right;
+	font-family: "Oswald",sans-serif!important;
+	font-size: 1.1em;
+	padding-right: 2.5em;
+	text-decoration: none;
+	border-bottom: 0px!important;
+	font-weight:normal;
+}
+
+#content .view-events-index .views-row  .views-field-title-field{
+	clear:both;
+	border-bottom: 0 none !important;
+    font-family: "Oswald",sans-serif !important;
+    font-size: 1.4em;
+	color: #003399;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+}
+
+#content .view-events-index .views-row  .views-field-field-country-code span{
+	float:left;
+	padding-right:0.3em;
+}
+
+#content .view-events-index .views-row  .views-field-field-city span{
+	clear:both;
+}
+
+#content .view-events-index  .views-field-field-country-code .views-label-field-country-code{
+	font-weight: lighter;
+	font-family: arial!important;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
+#content .view-events-index  .views-field-field-organization .iews-label-field-organization{
+	font-weight: lighter;
+	font-family: arial!important;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
+
+
+/* END EVENTS LIST */
 
 /* EVENTS DETAIL */
 
