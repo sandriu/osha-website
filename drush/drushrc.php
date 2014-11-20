@@ -366,6 +366,9 @@ $options['init-modules'] = array(
   'path_breadcrumbs_ui',
   'path_breadcrumbs_i18n',
 
+  'jquery_update',
+  'responsive_menus',
+
   'workbench',
   'workbench_access',
   'workbench_moderation',
