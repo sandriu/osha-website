@@ -384,7 +384,6 @@ function osha_press_contact_views_default_views() {
     3 => array(),
   );
   $handler->display->display_options['path'] = 'admin/content/press-contacts';
-  $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Press Contacts';
   $handler->display->display_options['menu']['description'] = 'Press Contacts Administration Interface';
   $handler->display->display_options['menu']['weight'] = '0';
