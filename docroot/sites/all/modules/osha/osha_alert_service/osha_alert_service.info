@@ -6,3 +6,4 @@ project = osha_alert_service
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = features
+files[] = osha_alert_service.forms.inc
