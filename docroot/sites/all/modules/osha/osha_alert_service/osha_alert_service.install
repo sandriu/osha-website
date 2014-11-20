@@ -16,9 +16,14 @@ function osha_alert_service_install() {
     $alert_page->format        = 2;
     $alert_page->status        = NODE_PUBLISHED;
     $alert_page->promote       = 0;
-    $alert_page->path['alias'] = 'alertservice';
     $alert_node                = node_submit($alert_page);
     node_save($alert_node);
+    $path = array(
+      'source' => 'node/' . $alert_node->nid,
+      'alias' => 'alertservice',
+      'language' => LANGUAGE_NONE,
+    );
+    path_save($path);
   }
 }
 
