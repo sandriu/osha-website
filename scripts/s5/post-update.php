@@ -75,7 +75,7 @@ function safe_delete_field_instance($field_base, $bundle) {
 
 function configure_chosen() {
   drush_log('Configuring chosen', 'ok');
-  variable_set('chosen_minimum_multiple', '10');
+  variable_set('chosen_minimum_multiple', '26');
   variable_set('chosen_minimum_single', '99');
   variable_set('chosen_disable_search_threshold', '32');
   variable_set('chosen_minimum_width', '300');
