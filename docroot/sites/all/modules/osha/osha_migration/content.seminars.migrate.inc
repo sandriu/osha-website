@@ -49,14 +49,6 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
     $this->addFieldMapping('field_archived', 'archived');
     $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
-    $this->addFieldMapping('field_image', 'logo');
-    $this->addFieldMapping('field_image:file_class')->defaultValue('OSHAMigrateFileUri');
-    $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_image:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'logo');
-    $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
-
     $this->addFieldMapping('field_related_resources', 'files');
     $this->addFieldMapping('field_related_resources:file_class')->defaultValue('OSHAMigrateFileUri');
     $this->addFieldMapping('field_related_resources:description', 'file_descriptions');
@@ -91,6 +83,7 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
       'eventUrl',
       'furtherActions',
       'showRosterHour',
+      'logo'
     ));
 
     $this->addUnmigratedDestinations(array(
@@ -105,9 +98,6 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
       'revision_uid',
       'is_new',
       'body:summary',
-      'field_image:language',
-      'field_image:destination_dir',
-      'field_image:alt',
       'field_publication_date:timezone',
       'field_publication_date:rrule',
       'field_publication_date:to',
@@ -153,7 +143,6 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
       $row->multilingual_thesaurus = NULL;
     }
 
-    MigrationUtil::cleanMigratedFileField($row, 'logo', 'public://seminars/logos');
     MigrationUtil::cleanMigratedFileField($row, 'files', 'public://seminars/documents');
 
     return TRUE;
@@ -329,7 +318,6 @@ class SeminarsListCSV extends MigrateList {
             break;
 
           case 'description':
-          case 'logo':
             self::$data[$path][$field][$language] = $raw_data[$key];
             break;
 

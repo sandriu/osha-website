@@ -64,6 +64,7 @@ function delete_extra_fields() {
   field_delete_field('field_seminar_conclusions');
   field_delete_field('field_seminar_further_actions');
   field_delete_field('field_seminar_show_roster_hour');
+  safe_delete_field_instance('field_image', 'seminar');
 }
 
 function safe_delete_field_instance($field_base, $bundle) {
@@ -73,7 +74,8 @@ function safe_delete_field_instance($field_base, $bundle) {
 }
 
 function configure_chosen() {
-  variable_set('chosen_minimum_multiple', '10');
+  drush_log('Configuring chosen', 'ok');
+  variable_set('chosen_minimum_multiple', '26');
   variable_set('chosen_minimum_single', '99');
   variable_set('chosen_disable_search_threshold', '32');
   variable_set('chosen_minimum_width', '300');
