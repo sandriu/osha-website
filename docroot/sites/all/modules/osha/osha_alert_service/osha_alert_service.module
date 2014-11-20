@@ -17,3 +17,172 @@ function osha_alert_service_entity_info() {
   );
   return $info;
 }
+
+/**
+ * Implements hook_block_info().
+ */
+function osha_alert_service_block_info() {
+  $path = drupal_lookup_path('source', 'alertservice');
+  $pages = 'alertservice';
+  if ($node = menu_get_object('node', 1, $path)) {
+    $pages .= "\r\nnode/" . $node->nid;
+  }
+  return array(
+    'osha_alert_service_subscribe' => array(
+      'info' => 'Alert Service Subscription',
+      'cache' => DRUPAL_CACHE_GLOBAL,
+      'status' => 1,
+      'region' => 'content',
+      'visibility' => BLOCK_VISIBILITY_LISTED,
+      'pages' => $pages,
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * {@inheritdoc}
+ */
+function osha_alert_service_block_view($delta = '') {
+  $ret = array();
+  switch ($delta) {
+    case 'osha_alert_service_subscribe':
+      $ret['content'] = osha_alert_service_subscribe_view();
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Render the subscription block.
+ *
+ * @return array
+ *   Renderable array
+ */
+function osha_alert_service_subscribe_view() {
+  $block = array();
+  $form = drupal_get_form('osha_alert_subscribe_form');
+  $block['form'] = array(
+    '#type' => 'item',
+    '#markup' => drupal_render($form),
+  );
+  return $block;
+}
+
+function osha_alert_subscribe_form($form, $form_state) {
+  $form = array(
+    '#tree' => FALSE,
+  );
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('E-mail'),
+    '#default_value' => '',
+    '#required' => TRUE,
+  );
+
+  $sections = workbench_access_active_options();
+  // $tree = workbench_access_get_active_tree();
+  // $sections = array();
+  $form['section'] = array(
+    '#type' => 'select',
+    '#multiple' => TRUE, '#size' => 10,
+    '#title' => t('Subjects of interest'),
+    '#required' => TRUE,
+    '#options' => $sections,
+  );
+
+  $types = array();
+  $alltypes = node_type_get_types();
+  foreach ($alltypes as $machine_name => $type) {
+    $types[$machine_name] = $type->name;
+  }
+  $form['type'] = array(
+    '#type' => 'select',
+    '#multiple' => TRUE, '#size' => 10,
+    '#title' => t('Item type'),
+    '#required' => TRUE,
+    '#options' => $types,
+  );
+
+  $form['schedule'] = array(
+    '#type' => 'select',
+    '#multiple' => FALSE,
+    '#title' => t('Item type'),
+    '#options' => array(
+      'daily' => t('Daily'),
+      'weekly' => t('Weekly'),
+      'monthly' => t('Monthly'),
+    ),
+    '#default_value' => 'monthly',
+  );
+
+  $languages = array();
+  $alllanguages = language_list();
+  unset($alllanguages['en']);
+  foreach ($alllanguages as $code => $language) {
+    $languages[$code] = $language->native;
+  }
+  $form['languages'] = array(
+    '#type' => 'select',
+    '#multiple' => TRUE, '#size' => 10,
+    '#title' => t('Additional languages'),
+    '#options' => $languages,
+    '#description' => t('Alerts are sent in English. If the content is translated, you can choose to receive it in additional languages.'),
+  );
+
+  $form['help'] = array(
+    '#type' => 'item',
+    '#markup' => t('<b>Note</b>: In order to choose more than one item from the list, press the key CTRL on your keyboard (CMD on Mac), and select the item with your mouse.'),
+  );
+
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#name' => 'subscribe',
+    '#value' => t('Subscribe'),
+    '#attributes' => array('class' => array('container-inline')),
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_form_validate().
+ *
+ * {@inheritdoc}
+ */
+function osha_alert_subscribe_form_validate($form, $form_state) {
+  if (empty($form_state['values']['email']) || !valid_email_address($form_state['values']['email'])) {
+    form_set_error('email', t('Please input an valid email address'));
+  };
+}
+
+/**
+ * Implements hook_form_submit().
+ *
+ * {@inheritdoc}
+ */
+function osha_alert_subscribe_form_submit($form, $form_state) {
+  $values = $form_state['values'];
+  $filters = array(
+    'section' => array_values($values['section']),
+    'type' => array_values($values['type']),
+    'languages' => array_values($values['languages']),
+  );
+  $created = time();
+  $entity = entity_create(
+    'osha_alert_service',
+    array(
+      'email' => $values['email'],
+      'filters' => json_encode($filters),
+      'schedule' => $values['schedule'],
+      'created' => $created,
+      'token' => sha1('TIMESTAMP:' . $created),
+      'confirmed' => 0,
+      'last_alert' => NULL,
+    )
+  );
+  entity_save('osha_alert_service', $entity);
+  drupal_set_message(t('Your request request has been registered. Please check your email for further instructions'));
+  // @todo: Send email.
+}
