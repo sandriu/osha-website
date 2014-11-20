@@ -139,5 +139,17 @@ EOT
       $message['subject'] = $subject;
       $message['body'] = str_replace($keys, array_values($params), $body);
       break;
+
+    case 'broken_subscription':
+      $subject = 'Your subscription page is broken';
+      $body = <<<EOT
+        Please visit the subscription page ($base_url/alertservice) and fix it. Taxonomy Tags is empty!
+
+        Thank you,
+        Your faithful employee.
+EOT;
+      $message['subject'] = $subject;
+      $message['body'] = str_replace($keys, array_values($params), $body);
+      break;
   }
 }

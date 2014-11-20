@@ -19,6 +19,25 @@ function osha_alert_service_subscribe_form() {
   if (!empty($user->mail)) {
     $email = $user->mail;
   }
+  $sections = array();
+  if ($voc = taxonomy_vocabulary_machine_name_load('tags')) {
+    $terms = taxonomy_get_tree($voc->vid);
+    foreach ($terms as $tid => $term) {
+      $sections[$tid] = $term->name;
+    }
+  }
+  if (empty($sections)) {
+    drupal_set_message(
+      t(
+        "Internal error due to missing categories. Self-destructing in 3 .. 2 .."),
+        'error'
+    );
+    if ($site_email = variable_get('site_mail', FALSE)) {
+      drupal_mail('osha_alert_service', 'broken_subscription', $site_email, 'en', array());
+    }
+    return $form;
+  }
+
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => t('E-mail'),
@@ -26,9 +45,6 @@ function osha_alert_service_subscribe_form() {
     '#required' => TRUE,
   );
 
-  $sections = workbench_access_active_options();
-  // $tree = workbench_access_get_active_tree();
-  // $sections = array();
   $form['section'] = array(
     '#type' => 'select',
     '#multiple' => TRUE, '#size' => 10,
