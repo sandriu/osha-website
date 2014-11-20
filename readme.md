@@ -76,7 +76,7 @@ to `config.json` and customize to suit your environment
             }
     ```
 
-3 Create file drush/alaises/aliases.local.php and define your drush local alias (see example in drush/alaises/osha.aliases.drushrc.php)
+3 Create file drush/aliases/aliases.local.php and define your drush local alias (see example in drush/aliases/osha.aliases.drushrc.php)
   Redefine your osha.staging.sync alias as you need. Default one might not be accessible to you.
 
 4 Run install_from_staging.sh
