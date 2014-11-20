@@ -54,10 +54,17 @@ function osha_alert_service_subscribe_form() {
   );
 
   $types = array();
+  $allowed = array(
+    'article', 'blog', 'job_vacancies', 'highlight', 'news',
+    'publication', 'press_release', 'seminar', 'directive', 'guideline',
+  );
   $alltypes = node_type_get_types();
   foreach ($alltypes as $machine_name => $type) {
-    $types[$machine_name] = $type->name;
+    if (in_array($machine_name, $allowed)) {
+      $types[$machine_name] = $type->name;
+    }
   }
+  ksort($types);
   $form['type'] = array(
     '#type' => 'select',
     '#multiple' => TRUE, '#size' => 10,
