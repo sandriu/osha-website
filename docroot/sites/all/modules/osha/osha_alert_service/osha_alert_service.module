@@ -19,6 +19,74 @@ function osha_alert_service_entity_info() {
 }
 
 /**
+ * Load a single entity of type osha_alert_service by its token.
+ *
+ * @param string $token
+ *   Secret token.
+ *
+ * @return mixed
+ *   An array of entity objects indexed by their ids. When no results are
+ *   found, an empty array is returned.
+ */
+function osha_alert_service_osha_alert_service_load_by_token($token) {
+  $query = db_select('osha_alert_service', 's')
+    ->fields('s', array('id'))
+    ->condition('token', $token);
+  $ids = $query->execute()->fetchCol(0);
+  if (isset($ids[0])) {
+    return entity_load_single('osha_alert_service', $ids[0]);
+  }
+  return NULL;
+}
+
+/**
+ * Load multiple entities of type osha_alert_service by emails.
+ *
+ * @param string $email
+ *   User email.
+ *
+ * @return mixed
+ *   An array of entity objects indexed by their ids. When no results are
+ *   found, an empty array is returned.
+ */
+function osha_alert_service_osha_alert_service_load_by_email($email) {
+  $query = db_select('osha_alert_service', 's')
+    ->fields('s', array('id'))
+    ->condition('email', $email);
+  $ids = $query->execute()->fetchCol(0);
+  if (!empty($ids)) {
+    return entity_load('osha_alert_service', array_values($ids));
+  }
+  return NULL;
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function osha_alert_service_menu() {
+  $menu['alertservice/verify_alert'] = array(
+    'title' => 'Validate Alert Service Subscription',
+    'description' => 'Endpoint where subscribers validate their subscription',
+    'page callback' => 'osha_alert_service_verify_alert_form',
+    'page arguments' => array(),
+    'access arguments' => array('view published content'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -12,
+  );
+  $menu['alertservice/remove_alert'] = array(
+    'title' => 'Remove Alert Service Subscription',
+    'description' => 'Endpoint where subscribers remove from subscription',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_alert_service_remove_alert_form'),
+    'access arguments' => array('view published content'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -12,
+  );
+  return $menu;
+}
+
+/**
  * Implements hook_block_info().
  */
 function osha_alert_service_block_info() {
@@ -188,29 +256,67 @@ function osha_alert_service_subscribe_form_submit($form, $form_state) {
   drupal_mail('osha_alert_service', 'subscribe', $email, $language->language, $params);
 }
 
-function osha_alert_service_unsubscribe_form($form, $form_state) {
+/**
+ * Menu handler for alert verification.
+ */
+function osha_alert_service_remove_alert_form($form, &$form_state) {
   $form = array(
     '#tree' => FALSE,
   );
-  $form['email'] = array(
-    '#type' => 'textfield',
-    '#title' => t('E-mail'),
-    '#default_value' => '',
-    '#required' => TRUE,
-  );
-  $form['actions']['submit'] = array(
-    '#type' => 'submit',
-    '#name' => 'subscribe',
-    '#value' => t('Unsubscribe'),
-    '#attributes' => array('class' => array('container-inline')),
-  );
+  $request = drupal_get_query_parameters();
+  if (isset($request['token']) && $entity = osha_alert_service_osha_alert_service_load_by_token($request['token'])) {
+    $form_state['entity'] = $entity;
+    $form['email'] = array(
+      '#type' => 'item',
+      '#markup' => t(
+        'Unsubscribe !email from receiving EU-OSHA Alert Service notifications?',
+        array('!email' => $entity->email)
+      ),
+    );
+    $form['actions']['submit'] = array(
+      '#type'       => 'submit',
+      '#name'       => 'unsubscribe',
+      '#value'      => t('Unsubscribe'),
+      '#attributes' => array('class' => array('container-inline')),
+    );
+  }
+  else {
+    drupal_set_message(t("Invalid request, and I hope it's a test!"), 'error');
+  }
   return $form;
 }
 
-function osha_alert_service_unsubscribe_form_submit($form, $form_state) {
-
+function osha_alert_service_remove_alert_form_submit($form, $form_state) {
+  if (isset($form_state['entity'])) {
+    $entity = $form_state['entity'];
+    $entity->confirmed = 1;
+    entity_delete('osha_alert_service', $form_state['entity']->id);
+    drupal_set_message(t('You have been successfully unsubscribed from alert'));
+    drupal_goto('<front>');
+  }
 }
 
+/**
+ * Menu handler for alert removal.
+ */
+function osha_alert_service_verify_alert_form() {
+  $request = drupal_get_query_parameters();
+  if (isset($request['token']) && $entity = osha_alert_service_osha_alert_service_load_by_token($request['token'])) {
+    if ($entity->confirmed <> 1) {
+      $entity->confirmed = 1;
+      if (entity_save('osha_alert_service', $entity)) {
+        drupal_set_message(t("You subscription has been confirmed, thank you"));
+      }
+    }
+    else {
+      drupal_set_message(t("You subscription is already confirmed, there's nothing you need to do"), 'warning');
+    }
+  }
+  else {
+    drupal_set_message(t("Hmm ... an invalid request, I hope that's a test!"), 'error');
+  }
+  drupal_goto('<front>');
+}
 
 /**
  * Implements hook_mail().
