@@ -27,10 +27,6 @@ function osha_alert_service_block_info() {
   if ($node = menu_get_object('node', 1, $path)) {
     $pages .= "\r\nnode/" . $node->nid;
   }
-  $pages_unsubscribe = 'alertservice/unsubscribe';
-  if ($node = menu_get_object('node', 1, $path)) {
-    $pages_unsubscribe .= "\r\nnode/" . $node->nid;
-  }
   return array(
     'osha_alert_service_subscribe' => array(
       'info' => 'Alert Service Subscription',
@@ -39,14 +35,6 @@ function osha_alert_service_block_info() {
       'region' => 'content',
       'visibility' => BLOCK_VISIBILITY_LISTED,
       'pages' => $pages,
-    ),
-    'osha_alert_service_unsubscribe' => array(
-      'info' => 'Unsubscribe from the alert service',
-      'cache' => DRUPAL_CACHE_GLOBAL,
-      'status' => 1,
-      'region' => 'content',
-      'visibility' => BLOCK_VISIBILITY_LISTED,
-      'pages' => $pages_unsubscribe,
     ),
   );
 }
@@ -61,14 +49,6 @@ function osha_alert_service_block_view($delta = '') {
   switch ($delta) {
     case 'osha_alert_service_subscribe':
       $form = drupal_get_form('osha_alert_service_subscribe_form');
-      $ret['content'] = array(
-        '#type' => 'item',
-        '#markup' => drupal_render($form),
-      );
-      break;
-
-    case 'osha_alert_service_unsubscribe':
-      $form = drupal_get_form('osha_alert_service_unsubscribe_form');
       $ret['content'] = array(
         '#type' => 'item',
         '#markup' => drupal_render($form),
@@ -263,24 +243,6 @@ EOT
       );
       $message['subject'] = $subject;
       $message['body'] = str_replace($keys, array_values($params), $body);
-      break;
-
-    case 'unsubscribe':
-      $subject = variable_get('osha_mail_template_alert_service_unsubscribe_subject', 'Unsubscribe from OSHA Alert Service');
-      $body = variable_get('osha_mail_template_alert_service_unsubscribe_body',
-        <<<EOT
-        EU-OSHA received a request to cancel alerts sent to [email].
-
-Cancel this EU-OSHA alert request: [base_url]/[language]/alertservice/remove_alert?token=[token]
-If you are not able to click on the link, you can cut and paste it into your browser's address bar.
-
-If you did not initiate this request or believe it was sent in error you can safely ignore this message.
-Thanks,
-The EU-OSHA Alerts Team
-EOT
-      );
-      $message['subject'] = $subject;
-      $message['body'] = str_replace(array_keys($params), array_values($params), $body);
       break;
   }
 }
