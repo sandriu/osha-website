@@ -387,8 +387,18 @@ $options['init-modules'] = array(
   'flickrfield',
   'chosen',
 
+  'calendar',
+  'feeds',
+  'feeds_import',
+  'feeds_ui',
+  'feeds_tamper',
+  'feeds_tamper_ui',
+
   //Allow anonymous comments per node type
   'comment_allow_anonymous',
+
+  //create blocks which display embedded tweets
+  'twitter_block',
 
   'osha_taxonomies',
   'osha',
@@ -413,6 +423,7 @@ $options['init-modules'] = array(
   'osha_short_messages',
   'osha_resources',
   'osha_slideshare',
+  'osha_events',
 
   'linkchecker',
   'osha_linkchecker',

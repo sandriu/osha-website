@@ -65,6 +65,7 @@ function osha_tmgmt_workflow_permissions_common() {
     'view the administration theme',
     'access toolbar',
     'view translation job',
+    'use text format full_html',
     // TODO checko why fails on install if access workbench permission added here.
 //    'access workbench',
 

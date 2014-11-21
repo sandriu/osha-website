@@ -344,14 +344,16 @@ function _osha_newsletter_latest_block_content(){
   $entity_collections = entity_load_multiple_by_name('entity_collection');
 
   foreach ($entity_collections as $element) {
-    if ($element->bundle == 'newsletter_content_collection') {
-      $collections[] = $element;
+    if ($element->bundle == 'newsletter_content_collection' && !empty($element->field_publication_date)) {
+      if(time() > strtotime($element->field_publication_date[LANGUAGE_NONE][0]['value'])){
+        $collections[] = $element;
+      }
     }
   }
 
   usort($collections, function($a, $b){
-    $a_date = strtotime($a->field_created[LANGUAGE_NONE][0]['value']);
-    $b_date = strtotime($b->field_created[LANGUAGE_NONE][0]['value']);
+    $a_date = strtotime($a->field_publication_date[LANGUAGE_NONE][0]['value']);
+    $b_date = strtotime($b->field_publication_date[LANGUAGE_NONE][0]['value']);
     return $a_date < $b_date;
   });
 
@@ -1028,6 +1030,9 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
   $newsletter_title = $source->title;
   $newsletter_id = $source->eid;
   $newsletter_date = $source->field_created[LANGUAGE_NONE][0]['value'];
+  if (!empty($source->field_publication_date)) {
+    $newsletter_date = $source->field_publication_date[LANGUAGE_NONE][0]['value'];
+  }
 
   $items = $content->children;
   $elements = array();
