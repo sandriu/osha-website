@@ -157,7 +157,7 @@ function osha_blog_views_default_views() {
   /* Display: Post by date */
   $handler = $view->new_display('block', 'Post by date', 'block_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Post by date';
+  $handler->display->display_options['title'] = 'Posts by date';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['query'] = FALSE;
@@ -322,6 +322,13 @@ function osha_blog_views_default_views() {
     'blog' => 'blog',
   );
   $handler->display->display_options['path'] = 'blog/%';
+
+  /* Display: Feed */
+  $handler = $view->new_display('feed', 'Feed', 'feed_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'rss';
+  $handler->display->display_options['row_plugin'] = 'node_rss';
+  $handler->display->display_options['path'] = 'blog/feed';
   $translatables['blog'] = array(
     t('Master'),
     t('Latest posts'),
@@ -340,11 +347,13 @@ function osha_blog_views_default_views() {
     t('last »'),
     t('Read more'),
     t('Post by date'),
+    t('Posts by date'),
     t('<span class="collapse-icon">►</span>'),
     t('A'),
     t('Monthly posts'),
     t('All'),
     t('%1'),
+    t('Feed'),
   );
   $export['blog'] = $view;
 
