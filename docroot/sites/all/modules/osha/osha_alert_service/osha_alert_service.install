@@ -1,6 +1,21 @@
 <?php
 
 /**
+ * Implements hook_uninstall().
+ */
+function osha_alert_service_uninstall() {
+
+  $path = drupal_lookup_path('source', 'alertservice');
+  if ($node = menu_get_object('node', 1, $path)) {
+    node_delete($node->nid);
+  }
+  $path = drupal_lookup_path('source', 'rss-feeds');
+  if ($node = menu_get_object('node', 1, $path)) {
+    node_delete($node->nid);
+  }
+}
+
+/**
  * Implements hook_install().
  */
 function osha_alert_service_install() {
@@ -19,6 +34,26 @@ function osha_alert_service_install() {
     $path = array(
       'source' => 'node/' . $alert_node->nid,
       'alias' => 'alertservice',
+      'language' => LANGUAGE_NONE,
+    );
+    path_save($path);
+  }
+  $path = drupal_lookup_path('source', 'rss-feeds');
+  if (!menu_get_object('node', 1, $path)) {
+    $page                = new stdClass();
+    $page->title         = 'Alert Service';
+    $page->uid           = $user->uid;
+    $page->name          = $user->name;
+    $page->type          = 'page';
+    $page->status        = NODE_PUBLISHED;
+    $page->promote       = 0;
+    $page->body['en'][0]['value'] = file_get_contents(drupal_get_path('module', 'osha_alert_service') . '/rss.html');
+    $page->body['en'][0]['format'] = 'full_html';
+    $node = node_submit($page);
+    node_save($node);
+    $path = array(
+      'source' => 'node/' . $node->nid,
+      'alias' => 'rss-feeds',
       'language' => LANGUAGE_NONE,
     );
     path_save($path);
