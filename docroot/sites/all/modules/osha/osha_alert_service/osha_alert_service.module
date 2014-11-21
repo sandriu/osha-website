@@ -150,5 +150,106 @@ EOT;
       $message['subject'] = $subject;
       $message['body'] = str_replace($keys, array_values($params), $body);
       break;
+
+    case 'alert':
+      $message['subject'] = variable_get('osha_mail_template_alert_service_alert_subject', 'EU-OSHA Alert');
+      $message['body'] = $params['body'];
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_alert_service_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-alert-service-subscription-default') {
+    $form['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function osha_alert_service_cron_queue_info() {
+  $queues['osha_alert_service_queue'] = array(
+    'worker callback' => 'osha_alert_service_send_alert',
+    'time' => variable_get('osha_alert_service_send_alert_process_time', 15),
+  );
+  return $queues;
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Queue all alerts we need to send into osha_alert_service_queue.
+ */
+function osha_alert_service_cron() {
+  /*
+  SELECT a.id FROM osha_alert_service a
+  WHERE (a.confirmed = 1 AND a.last_alert > 0)
+  AND (
+  (schedule = 'monthly' AND (UNIX_TIMESTAMP() - last_alert) > 2592000000)
+  OR (schedule = 'weekly' AND (UNIX_TIMESTAMP() - last_alert) > 604800000)
+  OR (schedule = 'daily' AND (UNIX_TIMESTAMP() - last_alert) > 86400000)
+  );
+  */
+  $query = db_select('osha_alert_service', 'a')
+    ->fields('a', array('id'))
+    ->where(<<<EOT
+        (a.confirmed = 1 AND a.last_alert > 0)
+        AND (
+          (schedule = 'monthly' AND (UNIX_TIMESTAMP() - last_alert) > 2592000000)
+          OR (schedule = 'weekly' AND (UNIX_TIMESTAMP() - last_alert) > 604800000)
+          OR (schedule = 'daily' AND (UNIX_TIMESTAMP() - last_alert) > 86400000)
+        )
+EOT
+  );
+  $ids = $query->execute()->fetchCol(0);
+  if (!empty($ids)) {
+    $subscribers = entity_load('osha_alert_service', array_values($ids));
+    /* @var DrupalQueue $queue */
+    $queue = DrupalQueue::get('osha_alert_service_queue', TRUE);
+    foreach ($subscribers as $item) {
+      $queue->createItem($item->id);
+    }
+  }
+}
+
+/**
+ *
+ * @param $registered_user
+ */
+function osha_alert_service_render_alert($entity) {
+  // Find the users we need to alert
+  $view = views_get_view('alert_service_subscription');
+  $settings = json_decode($entity->filters);
+  $limit = date('Y-m-d H:i:s', $entity->last_alert);
+  $view->set_display('default');
+  $view->is_cacheable = FALSE;
+  $view->exposed_input['type'] = $settings->type;
+  $view->exposed_input['field_tags_tid'] = $settings->section;
+  $view->exposed_input['created'] = $limit;
+  $view->osha_hide_exposed_filters = TRUE;
+  $view->pre_execute();
+  $view->execute();
+  var_dump($limit);
+  return 'XXX'; // $view->render();
+}
+
+/**
+ * Queue processing handler. Invoked for each item from the queue.
+ *
+ * @param int $item_id
+ *   osha_alert_service entity ID.
+ */
+function osha_alert_service_send_alert($item_id) {
+  // User still holds a valid subscription from last check.
+  if ($entity = entity_load_single('osha_alert_service', $item_id)) {
+    $html = osha_alert_service_render_alert($entity);
+    $params = array(
+      'entity' => $entity,
+      'body' => $html,
+    );
+    drupal_mail('osha_alert_service', 'alert', $entity->email, 'en', $params);
   }
 }
