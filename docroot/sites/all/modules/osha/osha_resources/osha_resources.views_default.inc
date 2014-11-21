@@ -389,7 +389,7 @@ function osha_resources_views_default_views() {
   $handler->display->display_options['filters']['access_id']['field'] = 'access_id';
   $handler->display->display_options['filters']['access_id']['exposed'] = TRUE;
   $handler->display->display_options['filters']['access_id']['expose']['operator_id'] = 'access_id_op';
-  $handler->display->display_options['filters']['access_id']['expose']['label'] = 'Access filter';
+  $handler->display->display_options['filters']['access_id']['expose']['label'] = 'Section';
   $handler->display->display_options['filters']['access_id']['expose']['operator'] = 'access_id_op';
   $handler->display->display_options['filters']['access_id']['expose']['identifier'] = 'access_id';
   $handler->display->display_options['filters']['access_id']['expose']['remember_roles'] = array(
@@ -440,7 +440,7 @@ function osha_resources_views_default_views() {
     t('delete'),
     t('Operations'),
     t('[edit_node] [delete_node]'),
-    t('Access filter'),
+    t('Section'),
   );
   $export['additional_resources_admin'] = $view;
 
