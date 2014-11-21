@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the OSHA Events feature.
+ */
+
+include_once 'osha_events.features.inc';
