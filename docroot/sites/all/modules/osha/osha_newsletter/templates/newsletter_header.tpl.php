@@ -58,9 +58,15 @@
                       <td style="font-size: 12px; padding-left: 30px; padding-right: 30px; font-family: Arial,sans-serif;">
                         <?php
                          if ($languages) {
-                            $last_lang = array_pop($languages);
-                            foreach ($languages as $language):?>
-                            <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $language));?>" style="text-decoration: none; color: #003399;"><?php print $language->native . ' | ';?></a><?php  endforeach; ?> <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $last_lang));?>" style="text-decoration: none; color: #003399;"><?php print $last_lang->native;?></a>
+                           $newsletter_languages = array();
+                           foreach ($languages as $l) {
+                             if ($l->language != "tr" && $l->language != "ru") {
+                               $newsletter_languages[] = $l;
+                             }
+                           }
+                           $last_lang = array_pop($newsletter_languages);
+                           foreach ($newsletter_languages as $language):?>
+                             <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $language));?>" style="text-decoration: none; color: #003399;"><?php print $language->native . ' | ';?></a><?php  endforeach; ?> <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $last_lang));?>" style="text-decoration: none; color: #003399;"><?php print $last_lang->native;?></a>
                          <?php
                          }
                         ?>

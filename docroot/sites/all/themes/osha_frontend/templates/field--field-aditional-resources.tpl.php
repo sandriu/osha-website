@@ -24,7 +24,7 @@
           if ($node_type != $value['#bundle']) {
             // this is a new bundle type
             $node_type = $value['#bundle'];
-            print '</div><div class="additional_resource_group '.$node_type.'"><span>'.$bundles[$node_type].'</span>';
+            print '</div><div class="additional_resource_group '.$node_type.'"><span class="additional_resource_title">'.$bundles[$node_type].'</span>';
           }
         }
       ?>
@@ -34,4 +34,4 @@
     <?php endforeach;?>
     </div>
   </div>
-</div> 
+</div>
