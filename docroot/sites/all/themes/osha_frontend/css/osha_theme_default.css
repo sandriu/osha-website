@@ -3530,7 +3530,7 @@ font-weight: normal;
     font-family: arial !important;
     font-size: 0.9em !important;
     font-weight: bold !important;
-    padding-bottom: 0.2em;
+    padding-bottom: 0.1em;
 
 }
 
@@ -4289,6 +4289,11 @@ a.tabs-primary__tab-link{
 	padding:1em;
 }
 
+.view-events-index .views-exposed-form #edit-field-start-date{
+	margin-top:0.6em;
+}
+
+
 .view-events-index #edit-search-api-views-fulltext-wrapper{
 	background:none;
 }
@@ -4510,7 +4515,7 @@ a.tabs-primary__tab-link{
 	
 }
 
-#block-block-8  a {
+#block-block-9  a {
 	background: url("../images/flecha-izq.png") no-repeat scroll 87% center transparent;
 	color: #003399;
 	float: right;
