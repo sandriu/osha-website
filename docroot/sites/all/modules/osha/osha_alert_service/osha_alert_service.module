@@ -1,5 +1,13 @@
 <?php
 /**
+ * @file
+ * Code for the osha_alert_service feature.
+ */
+
+include_once 'osha_alert_service.features.inc';
+
+
+/**
  * Implements hook_entity_info().
  */
 function osha_alert_service_entity_info() {
@@ -102,8 +110,25 @@ function osha_alert_service_block_view($delta = '') {
         '#markup' => drupal_render($form),
       );
       break;
+
+    case 'osha_alert_service_block_front_view':
+      $form = osha_alert_service_block_front_view();
+      $ret['content'] = array(
+        '#type' => 'item',
+        '#markup' => drupal_render($form),
+      );
+      break;
   }
   return $ret;
+}
+
+
+function osha_alert_service_block_front_view() {
+  $form['block'] = array(
+    '#type' => 'item',
+    '#markup' => t('<b>Note</b>: In order to choose more than one item from the list, press the key CTRL on your keyboard (CMD on Mac), and select the item with your mouse.'),
+  );
+  return $form;
 }
 
 /**

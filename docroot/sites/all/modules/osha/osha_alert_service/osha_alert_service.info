@@ -1,9 +1,11 @@
-name = Alert Service
+name = OSHA Alert Service
+description = OSHA alert service module
 core = 7.x
 package = OSHA
 version = 7.x-0.1
 project = osha_alert_service
-dependencies[] = ctools
-dependencies[] = date
-dependencies[] = features
-files[] = osha_alert_service.forms.inc
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = alert_service_subscription
+features_exclude[dependencies][ctools] = ctools
