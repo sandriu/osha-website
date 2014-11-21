@@ -28,8 +28,11 @@ class osha_workbench_moderation_handler_filter_state extends workbench_moderatio
     // array addition problems.
 
     // Limit the damage to tmgmt_node_selection_view.
-    if ($this->view->name == 'tmgmt_node_selection_view'
-        && in_array(OSHA_WORKFLOW_STATE_PUBLISHED, $this->value)) {
+    if ((in_array(OSHA_WORKFLOW_STATE_PUBLISHED, $this->value)
+        && $this->view->name == 'tmgmt_node_selection_view')
+        || (in_array(OSHA_WORKFLOW_STATE_PUBLISHED, $this->value)
+            &&$this->view->name == 'administration_content')
+    ) {
 
       $unmoderated = array();
       $types = node_type_get_types();

@@ -1,6 +1,22 @@
 <?php
 
 /**
+ * Implements hook_views_data_alter().
+ *
+ * We override the filter handler for table workbench_moderation_node_history
+ * to allow proper filtering for non-moderated content in content selection
+ * screen.
+ *
+ * {@inheritdoc}
+ */
+function osha_tmgmt_views_data_alter(&$data) {
+  // Used by tmgmt_node_selection_view.
+  if (isset($data['workbench_moderation_node_history']['state']['filter']['handler'])) {
+    $data['workbench_moderation_node_history']['state']['filter']['handler'] = 'osha_workbench_moderation_handler_filter_state';
+  }
+}
+
+/**
  * Alter the view tmgmt_node_selection_view to show latest node state.
  *
  * Alter LEFT JOIN node_revision ON node.vid = node_revision.vid
@@ -54,22 +70,6 @@ function osha_tmgmt_views_query_alter(&$view, &$query) {
     if (isset($query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type)) {
       $query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type = 'LEFT';
     }
-  }
-}
-
-/**
- * Implements hook_views_data_alter().
- *
- * We override the filter handler for table workbench_moderation_node_history
- * to allow proper filtering for non-moderated content in content selection
- * screen.
- *
- * {@inheritdoc}
- */
-function osha_tmgmt_views_data_alter(&$data) {
-  // Used by tmgmt_node_selection_view.
-  if (isset($data['workbench_moderation_node_history']['state']['filter']['handler'])) {
-    $data['workbench_moderation_node_history']['state']['filter']['handler'] = 'osha_workbench_moderation_handler_filter_state';
   }
 }
 
