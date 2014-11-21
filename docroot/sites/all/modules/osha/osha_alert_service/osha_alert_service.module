@@ -232,8 +232,7 @@ function osha_alert_service_render_alert($entity) {
   $view->osha_hide_exposed_filters = TRUE;
   $view->pre_execute();
   $view->execute();
-  var_dump($limit);
-  return 'XXX'; // $view->render();
+  return $view->render();
 }
 
 /**
