@@ -143,54 +143,5 @@ function osha_taxonomies_strongarm() {
   $strongarm->value = 'thesaurus/[term:field_thesaurus_code]';
   $export['pathauto_taxonomy_term_thesaurus_pattern'] = $strongarm;
 
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'uuid_features_entity_taxonomy_term';
-  $strongarm->value = array(
-    'tags' => 'tags',
-    'activity' => 'activity',
-    'article_types' => 'article_types',
-    'directive_type' => 'directive_type',
-    'esener' => 'esener',
-    'legislation_category' => 'legislation_category',
-    'wiki_categories' => 'wiki_categories',
-    'publication_types' => 'publication_types',
-    'newsletter_sections' => 'newsletter_sections',
-    'nace_codes' => 0,
-    'section' => 0,
-    'thesaurus' => 0,
-    'workflow_status' => 0,
-  );
-  $export['uuid_features_entity_taxonomy_term'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'uuid_features_file_taxonomy_term';
-  $strongarm->value = array(
-    'tags' => 0,
-    'activity' => 0,
-    'article_types' => 0,
-    'directive_type' => 0,
-    'esener' => 0,
-    'legislation_category' => 0,
-    'nace_codes' => 0,
-    'section' => 0,
-    'thesaurus' => 0,
-    'wiki_categories' => 0,
-    'workflow_status' => 0,
-    'publication_types' => 0,
-    'newsletter_sections' => 0,
-  );
-  $export['uuid_features_file_taxonomy_term'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'uuid_features_vocabulary_terms';
-  $strongarm->value = 0;
-  $export['uuid_features_vocabulary_terms'] = $strongarm;
-
   return $export;
 }

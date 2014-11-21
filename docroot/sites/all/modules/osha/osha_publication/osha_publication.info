@@ -34,7 +34,6 @@ dependencies[] = term_reference_tree
 dependencies[] = text
 dependencies[] = title
 dependencies[] = uuid
-dependencies[] = uuid_features
 dependencies[] = views
 dependencies[] = views_slideshow
 features[ctools][] = field_group:field_group:1

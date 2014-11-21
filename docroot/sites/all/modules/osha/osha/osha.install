@@ -80,6 +80,7 @@ function osha_update_7001() {
  * Remove the admin_views_node view.
  *
  * Configure jquery_update and responsive_menus
+ * uuid features remove configuration.
  */
 function osha_update_7002() {
   if ($view = views_get_view('admin_views_node')) {
@@ -105,5 +106,12 @@ function osha_update_7002() {
   variable_set('responsive_menus_mean_menu_contract_txt', '-');
   variable_set('responsive_menus_mean_menu_remove_attrs', 1);
 
-
+  // Unset the settings for uuid_features to prevent heavy rendering
+  // on features create/recreate.
+  variable_set('uuid_features_entity_taxonomy_term', NULL);
+  variable_set('uuid_features_entity_node', NULL);
+  variable_set('uuid_features_entity_file', NULL);
+  variable_set('uuid_features_file_file', NULL);
+  variable_set('uuid_features_file_mode', NULL);
+  variable_set('uuid_features_file_node', NULL);
 }

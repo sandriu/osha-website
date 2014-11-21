@@ -546,6 +546,29 @@ function osha_node_view($node, $view_mode, $langcode) {
 }
 
 /**
+ * Implements hook_file_view().
+ */
+function osha_file_view($file, $view_mode, $langcode) {
+  // Serve File  directly, not file entity view
+  // For requests with /view skip this.
+  if (!in_array('view', arg()) && $view_mode == 'full') {
+    if ($view_mode == 'full') {
+      $headers = array(
+        'Content-Type'              => $file->filemime,
+        'Content-Disposition'       => 'filename="' . $file->filename . '"',
+        'Content-Length'            => $file->filesize,
+        'Content-Transfer-Encoding' => 'binary',
+        'Pragma'                    => 'no-cache',
+        'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+        'Expires'                   => '0',
+        'Accept-Ranges'             => 'bytes',
+      );
+      file_transfer($file->uri, $headers);
+    }
+  }
+}
+
+/**
  * Implements hook_date_formatter_dates_alter().
  */
 function osha_date_formatter_dates_alter(&$dates, $context) {

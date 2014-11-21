@@ -58,7 +58,6 @@ features[variable][] = node_preview_highlight
 features[variable][] = node_submitted_highlight
 features[views_view][] = highlight
 features_exclude[dependencies][title] = title
-features_exclude[dependencies][uuid_features] = uuid_features
 features_exclude[dependencies][osha_seminar] = osha_seminar
 features_exclude[dependencies][osha_wiki] = osha_wiki
 features_exclude[field_base][field_image] = field_image

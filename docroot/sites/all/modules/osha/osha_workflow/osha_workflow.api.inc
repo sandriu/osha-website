@@ -771,6 +771,19 @@ class OshaWorkflowNotifications {
   }
 
   /**
+   * REV_RM_US_15 Notification sent to WebTeam when a node had status changed.
+   */
+  public static function notifyWebTeamStatusChanged($node, $from_state, $to_state) {
+    $params = array(
+      'node' => $node,
+      'from' => $from_state,
+      'to' => $to_state,
+    );
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR);
+    OshaWorkflowNotifications::sendEmail($users, $params, 'osha_workflow', 'osha_workflow_notification_admin');
+  }
+
+  /**
    * Notification First approver that the approval workflow begins.
    *
    * (Approved => ReadyToPublish)
