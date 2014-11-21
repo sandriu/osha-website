@@ -897,6 +897,10 @@ class OshaWorkflowNotifications {
       drupal_set_message('There are no users to notify about your action. Please report this to system administrator.', 'warning');
       return;
     }
+    if (drupal_is_cli()) {
+      drupal_set_message('Not sending emails from cli.', 'status');
+      return;
+    }
     if (!is_array($users)) {
       $users = array($users);
     }
