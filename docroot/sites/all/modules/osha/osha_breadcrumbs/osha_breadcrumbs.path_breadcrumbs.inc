@@ -331,6 +331,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
           'name' => 'node_type',
           'settings' => array(
             'type' => array(
+              'blog' => 'blog',
               'highlight' => 'highlight',
               'directive' => 'directive',
               'guideline' => 'guideline',

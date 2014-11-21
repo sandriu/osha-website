@@ -58,11 +58,9 @@ function osha_blog_post_features_revert($component){
 function osha_blog_views_pre_render(&$view) {
   if ($view->name == 'blog' && $view->current_display == 'block_2') {
     drupal_add_js(drupal_get_path('module', 'osha_blog') .'/includes/js/collapse_block.js');
-    drupal_set_title(set_view_title());
 
     $month = '';
     foreach($view->result as $key => $result){
-      //dpm($result);
       $row_month = date('F', strtotime($result->field_field_publication_date[0]['raw']['value']));
       $row_month_raw = date('m', strtotime($result->field_field_publication_date[0]['raw']['value']));
       $row_year = date('Y', strtotime($result->field_field_publication_date_1[0]['raw']['value']));
@@ -77,16 +75,59 @@ function osha_blog_views_pre_render(&$view) {
       $result->field_field_publication_date[0]['rendered']['#markup'] = "<a href='/blog/{$row_year}-{$row_month_raw}'>".$row_month."</a>";
     }
   }
+
+  if ($view->name == 'blog' && $view->current_display == 'page_1') {
+    $title = isset($view->args[0])? get_view_title($view->args[0]): '';
+    //set view title
+    $view->build_info['title'] = $title;
+    //set view breadcrumb
+    drupal_set_breadcrumb(
+      array(
+        l(t('Home'), NULL),
+        l('Blog', 'articles/blog'),
+        $title,
+      )
+    );
+  }
+}
+
+/**
+ * Implements hook_node_view_alter
+ * Set custom breadcrumb
+ * @param $build
+ */
+function osha_blog_node_view_alter(&$build){
+  $breadcrumb = array();
+  $node = $build['#node'];
+  if ($build['#view_mode'] == 'full' && $node->type == 'blog'){
+    $date = strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']);
+    $breadcrumb[] = l(t('Home'), NULL);
+    $breadcrumb[] = l('Blog', 'articles/blog');
+    $breadcrumb[] = l(date('F Y', $date), 'blog/'.date('Y-m', $date));
+    $breadcrumb[] = drupal_get_title();
+    drupal_set_breadcrumb($breadcrumb);
+  }
+}
+
+/**
+ * Implements hook_node_view
+ * @param $node
+ * @param $view_mode
+ * @param $langcode
+ */
+function osha_blog_node_view($node, $view_mode, $langcode){
+  //hide title for intro article Blog
+  if($node->type == 'article' && $node->path['alias'] == 'articles/blog')
+    hide($node->content['title_field']);
 }
 
 /**
  * Display custom title for monthly views
  * @return bool|null|string
  */
-function set_view_title(){
-  $title = drupal_get_title();
-  if(preg_match('/([\d]{2}\/[\d]{4})/', $title)){
-    $title = date('F Y', mktime(0, 0, 0, substr($title,0,2), 1, substr($title, 3, 4)));
+function get_view_title($title){
+  if(preg_match('/([\d]{4}\-[\d]{2})/', $title)){
+    $title = date('F Y', mktime(0, 0, 0, substr($title,5,2), 1, substr($title, 0, 4)));
     $title = t('@data posts', array('@data' => $title));
   }
   return $title;
