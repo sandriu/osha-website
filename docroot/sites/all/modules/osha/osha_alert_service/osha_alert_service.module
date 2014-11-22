@@ -257,7 +257,6 @@ EOT
  * @param $registered_user
  */
 function osha_alert_service_render_alert($entity) {
-  // Find the users we need to alert
   $view = views_get_view('alert_service_subscription');
   $settings = json_decode($entity->filters);
   $limit = date('Y-m-d H:i:s', $entity->last_alert);
@@ -287,5 +286,7 @@ function osha_alert_service_send_alert($item_id) {
       'body' => $html,
     );
     drupal_mail('osha_alert_service', 'alert', $entity->email, 'en', $params);
+    $entity->last_alert = time();
+    entity_save('osha_alert_service', $entity);
   }
 }
