@@ -225,9 +225,9 @@ function osha_alert_service_cron() {
   SELECT a.id FROM osha_alert_service a
   WHERE (a.confirmed = 1 AND a.last_alert > 0)
   AND (
-  (schedule = 'monthly' AND (UNIX_TIMESTAMP() - last_alert) > 2592000000)
-  OR (schedule = 'weekly' AND (UNIX_TIMESTAMP() - last_alert) > 604800000)
-  OR (schedule = 'daily' AND (UNIX_TIMESTAMP() - last_alert) > 86400000)
+  (schedule = 'monthly' AND (UNIX_TIMESTAMP() - last_alert) > 2592000)
+  OR (schedule = 'weekly' AND (UNIX_TIMESTAMP() - last_alert) > 604800)
+  OR (schedule = 'daily' AND (UNIX_TIMESTAMP() - last_alert) > 86400)
   );
   */
   $query = db_select('osha_alert_service', 'a')
@@ -235,9 +235,9 @@ function osha_alert_service_cron() {
     ->where(<<<EOT
         (a.confirmed = 1 AND a.last_alert > 0)
         AND (
-          (schedule = 'monthly' AND (UNIX_TIMESTAMP() - last_alert) > 2592000000)
-          OR (schedule = 'weekly' AND (UNIX_TIMESTAMP() - last_alert) > 604800000)
-          OR (schedule = 'daily' AND (UNIX_TIMESTAMP() - last_alert) > 86400000)
+          (schedule = 'monthly' AND (UNIX_TIMESTAMP() - last_alert) > 2592000)
+          OR (schedule = 'weekly' AND (UNIX_TIMESTAMP() - last_alert) > 604800)
+          OR (schedule = 'daily' AND (UNIX_TIMESTAMP() - last_alert) > 86400)
         )
 EOT
   );
