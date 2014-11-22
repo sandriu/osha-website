@@ -41,7 +41,7 @@ seminar/*',
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -27,
+        'weight' => 5,
       ),
       'seven' => array(
         'region' => '',
