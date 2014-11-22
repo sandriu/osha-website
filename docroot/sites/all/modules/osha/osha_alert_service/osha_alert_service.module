@@ -91,6 +91,15 @@ function osha_alert_service_block_info() {
       'visibility' => BLOCK_VISIBILITY_LISTED,
       'pages' => $pages,
     ),
+    'osha_alert_block_front_view' => array(
+      'info' => 'Block with link to alerts page',
+      'cache' => DRUPAL_CACHE_GLOBAL,
+      'status' => 1,
+      'region' => 'sidebar_second',
+      'weight' => -28,
+      'visibility' => BLOCK_VISIBILITY_LISTED,
+      'pages' => '<front>',
+    ),
   );
 }
 
@@ -111,8 +120,8 @@ function osha_alert_service_block_view($delta = '') {
       );
       break;
 
-    case 'osha_alert_service_block_front_view':
-      $form = osha_alert_service_block_front_view();
+    case 'osha_alert_block_front_view':
+      $form = osha_alert_block_front_view();
       $ret['content'] = array(
         '#type' => 'item',
         '#markup' => drupal_render($form),
@@ -123,10 +132,13 @@ function osha_alert_service_block_view($delta = '') {
 }
 
 
-function osha_alert_service_block_front_view() {
+function osha_alert_block_front_view() {
+  $url = 'alertservice';
   $form['block'] = array(
     '#type' => 'item',
-    '#markup' => t('<b>Note</b>: In order to choose more than one item from the list, press the key CTRL on your keyboard (CMD on Mac), and select the item with your mouse.'),
+    '#markup' => t(
+      '<div class="link"><span>Interested in specific topics?</span><a href="!url">Try Alert Service</a></div>',
+      array('!url' => $url)),
   );
   return $form;
 }
