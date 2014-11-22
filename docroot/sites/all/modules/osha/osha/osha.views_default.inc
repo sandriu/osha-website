@@ -360,16 +360,16 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Operations';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[edit_node] [delete_node]';
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['current']['id'] = 'current';
-  $handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['current']['field'] = 'current';
-  $handler->display->display_options['filters']['current']['value'] = '1';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -416,6 +416,7 @@ function osha_views_default_views() {
     'wiki_page' => 'wiki_page',
     'youtube' => 'youtube',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
@@ -441,6 +442,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['uid']['field'] = 'uid';
   $handler->display->display_options['filters']['uid']['relationship'] = 'uid';
   $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['group'] = 1;
   $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
   $handler->display->display_options['filters']['uid']['expose']['label'] = 'Name';
@@ -464,6 +466,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 'All';
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Published';
@@ -488,6 +491,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['vid']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['filters']['vid']['field'] = 'vid';
   $handler->display->display_options['filters']['vid']['relationship'] = 'term_node_tid';
+  $handler->display->display_options['filters']['vid']['group'] = 1;
   $handler->display->display_options['filters']['vid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['vid']['expose']['operator_id'] = 'vid_op';
   $handler->display->display_options['filters']['vid']['expose']['label'] = 'Vocabulary';
@@ -537,6 +541,7 @@ function osha_views_default_views() {
     'sl' => 'sl',
     'sv' => 'sv',
   );
+  $handler->display->display_options['filters']['translation_exists']['group'] = 1;
   $handler->display->display_options['filters']['translation_exists']['exposed'] = TRUE;
   $handler->display->display_options['filters']['translation_exists']['expose']['operator_id'] = 'translation_exists_op';
   $handler->display->display_options['filters']['translation_exists']['expose']['label'] = 'Not translated in';
@@ -559,34 +564,11 @@ function osha_views_default_views() {
   );
   $handler->display->display_options['filters']['translation_exists']['expose']['reduce'] = TRUE;
   $handler->display->display_options['filters']['translation_exists']['entity_type'] = 'node';
-  /* Filter criterion: Workbench Access: Access filter */
-  $handler->display->display_options['filters']['access_id']['id'] = 'access_id';
-  $handler->display->display_options['filters']['access_id']['table'] = 'workbench_access';
-  $handler->display->display_options['filters']['access_id']['field'] = 'access_id';
-  $handler->display->display_options['filters']['access_id']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['access_id']['expose']['operator_id'] = 'access_id_op';
-  $handler->display->display_options['filters']['access_id']['expose']['label'] = 'Section';
-  $handler->display->display_options['filters']['access_id']['expose']['operator'] = 'access_id_op';
-  $handler->display->display_options['filters']['access_id']['expose']['identifier'] = 'access_id';
-  $handler->display->display_options['filters']['access_id']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    5 => 0,
-    6 => 0,
-    7 => 0,
-    8 => 0,
-    9 => 0,
-    10 => 0,
-    11 => 0,
-  );
-  $handler->display->display_options['filters']['access_id']['access_id'] = array();
-  $handler->display->display_options['filters']['access_id']['size'] = '5';
   /* Filter criterion: Workbench Moderation: State */
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['group'] = 2;
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
   $handler->display->display_options['filters']['state']['expose']['label'] = 'State';
@@ -606,6 +588,51 @@ function osha_views_default_views() {
     10 => 0,
     11 => 0,
   );
+  $handler->display->display_options['filters']['state']['group_info']['label'] = 'State';
+  $handler->display->display_options['filters']['state']['group_info']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['state']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
+  /* Filter criterion: Workbench Moderation: Current */
+  $handler->display->display_options['filters']['current']['id'] = 'current';
+  $handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['current']['field'] = 'current';
+  $handler->display->display_options['filters']['current']['value'] = '1';
+  $handler->display->display_options['filters']['current']['group'] = 2;
+  /* Filter criterion: Workbench Moderation: Type is moderated */
+  $handler->display->display_options['filters']['workbench_moderation_moderated_type']['id'] = 'workbench_moderation_moderated_type';
+  $handler->display->display_options['filters']['workbench_moderation_moderated_type']['table'] = 'node';
+  $handler->display->display_options['filters']['workbench_moderation_moderated_type']['field'] = 'workbench_moderation_moderated_type';
+  $handler->display->display_options['filters']['workbench_moderation_moderated_type']['value'] = '0';
+  $handler->display->display_options['filters']['workbench_moderation_moderated_type']['group'] = 2;
+  /* Filter criterion: Workbench Access: Access filter */
+  $handler->display->display_options['filters']['access_id']['id'] = 'access_id';
+  $handler->display->display_options['filters']['access_id']['table'] = 'workbench_access';
+  $handler->display->display_options['filters']['access_id']['field'] = 'access_id';
+  $handler->display->display_options['filters']['access_id']['group'] = 1;
+  $handler->display->display_options['filters']['access_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['access_id']['expose']['operator_id'] = 'access_id_op';
+  $handler->display->display_options['filters']['access_id']['expose']['label'] = 'Access filter';
+  $handler->display->display_options['filters']['access_id']['expose']['operator'] = 'access_id_op';
+  $handler->display->display_options['filters']['access_id']['expose']['identifier'] = 'access_id';
+  $handler->display->display_options['filters']['access_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+  );
+  $handler->display->display_options['filters']['access_id']['access_id'] = array();
+  $handler->display->display_options['filters']['access_id']['size'] = '5';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'main_page');
@@ -648,6 +675,7 @@ function osha_views_default_views() {
     t('Vocabulary'),
     t('Not translated in'),
     t('State'),
+    t('Access filter'),
     t('Page'),
   );
   $export['administration_content'] = $view;
