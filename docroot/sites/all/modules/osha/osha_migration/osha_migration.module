@@ -317,7 +317,7 @@ class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
     $file = $source->processFile($path, $owner);
     // Assuming we got back a valid file ID, build the proper field
     // array out of it. We assume that if we did not get back a fid, the
-    // MigrateFile class has saved a message indicating why.
+    // MigrateFile class has saved a message indicating why
     if ($file) {
       $field_array = array('fid' => $file->fid);
       $return[$language][] = $this->buildFieldArray($field_array, $instance_arguments, $delta);
