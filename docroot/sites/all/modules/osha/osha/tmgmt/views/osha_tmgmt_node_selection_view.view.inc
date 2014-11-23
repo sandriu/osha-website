@@ -569,7 +569,7 @@ $handler->display->display_options['filters']['access_id']['field'] = 'access_id
 $handler->display->display_options['filters']['access_id']['group'] = 1;
 $handler->display->display_options['filters']['access_id']['exposed'] = TRUE;
 $handler->display->display_options['filters']['access_id']['expose']['operator_id'] = 'access_id_op';
-$handler->display->display_options['filters']['access_id']['expose']['label'] = 'Access filter';
+$handler->display->display_options['filters']['access_id']['expose']['label'] = 'Section';
 $handler->display->display_options['filters']['access_id']['expose']['description'] = 'Use CTRL to select multiple items';
 $handler->display->display_options['filters']['access_id']['expose']['operator'] = 'access_id_op';
 $handler->display->display_options['filters']['access_id']['expose']['identifier'] = 'access_id';
@@ -749,6 +749,6 @@ $translatables['tmgmt_node_selection_view'] = array(
   t('Select an interval for filtering'),
   t('Not translated in'),
   t('Activity'),
-  t('Access filter'),
+  t('Section'),
   t('Published includes also items without publishing workflow. Use CTRL to select multiple items'),
 );
