@@ -320,4 +320,6 @@ function osha_tmgmt_update_7002() {
       'view workbench access information',
       'access workbench access by role'
     ));
+  module_load_include('inc', 'workbench_moderation', 'workbench_moderation.admin');
+  workbench_access_role_section_save($role->rid, 'main-menu', 'menu');
 }
