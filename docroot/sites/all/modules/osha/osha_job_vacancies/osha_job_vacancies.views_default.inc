@@ -37,7 +37,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['relationships']['vid']['table'] = 'node_revision';
   $handler->display->display_options['relationships']['vid']['field'] = 'vid';
   $handler->display->display_options['relationships']['vid']['required'] = TRUE;
-  /* Field: Content: Publication Date */
+  /* Field: Field: Publication Date */
   $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
@@ -58,7 +58,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Publication Date (field_publication_date) */
+  /* Sort criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -84,7 +84,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['field'] = 'published';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -143,7 +143,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -158,7 +158,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['group'] = 3;
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['year_range'] = '-10:+10';
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value_1']['id'] = 'field_publication_date_value_1';
   $handler->display->display_options['filters']['field_publication_date_value_1']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value_1']['field'] = 'field_publication_date_value';
@@ -241,7 +241,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -256,7 +256,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['group'] = 3;
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['year_range'] = '-10:+10';
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value_1']['id'] = 'field_publication_date_value_1';
   $handler->display->display_options['filters']['field_publication_date_value_1']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value_1']['field'] = 'field_publication_date_value';
@@ -333,14 +333,14 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_publication_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value_1']['id'] = 'field_publication_date_value_1';
   $handler->display->display_options['filters']['field_publication_date_value_1']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value_1']['field'] = 'field_publication_date_value';
@@ -493,14 +493,14 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['published']['relationship'] = 'vid';
   $handler->display->display_options['filters']['published']['value'] = '1';
   $handler->display->display_options['filters']['published']['group'] = 1;
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_publication_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value_1']['id'] = 'field_publication_date_value_1';
   $handler->display->display_options['filters']['field_publication_date_value_1']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value_1']['field'] = 'field_publication_date_value';
@@ -533,6 +533,13 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value_1']['field'] = 'field_expiration_date_value';
   $handler->display->display_options['filters']['field_expiration_date_value_1']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_expiration_date_value_1']['group'] = 4;
+  /* Filter criterion: Content: Shortlisted (field_job_vacancies_shortlisted) */
+  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['id'] = 'field_job_vacancies_shortlisted_value';
+  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['table'] = 'field_data_field_job_vacancies_shortlisted';
+  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['field'] = 'field_job_vacancies_shortlisted_value';
+  $handler->display->display_options['filters']['field_job_vacancies_shortlisted_value']['value'] = array(
+    0 => '0',
+  );
 
   /* Display: Ongoing Vacancies block */
   $handler = $view->new_display('block', 'Ongoing Vacancies block', 'block_1');
@@ -648,6 +655,12 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value_1']['field'] = 'field_expiration_date_value';
   $handler->display->display_options['filters']['field_expiration_date_value_1']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_expiration_date_value_1']['group'] = 2;
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $translatables['vacancies'] = array(
     t('Master'),
     t('Closed job vacancies'),
