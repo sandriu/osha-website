@@ -840,7 +840,7 @@ function osha_news_field_default_field_instances() {
     'bundle' => 'news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'You may select multiple items from the list by holding CTRL',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -916,7 +916,7 @@ function osha_news_field_default_field_instances() {
     'bundle' => 'news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1110,8 +1110,6 @@ function osha_news_field_default_field_instances() {
   t('Tags');
   t('Thesaurus');
   t('Title');
-  t('Use comma ( , ) to assign multiple terms');
-  t('You may select multiple items from the list by holding CTRL');
 
   return $field_instances;
 }

@@ -23,6 +23,7 @@ features[path_breadcrumbs][] = osh_news
 features[path_breadcrumbs][] = osh_publications
 features[path_breadcrumbs][] = oshmail_newsletter
 features[path_breadcrumbs][] = press_releases_view
+features[path_breadcrumbs][] = calls_archive_view
 features[path_breadcrumbs][] = press_room_view
 features[path_breadcrumbs][] = publications
 features[path_breadcrumbs][] = shortlisted_job_vacancies

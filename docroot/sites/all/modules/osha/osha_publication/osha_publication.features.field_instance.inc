@@ -1424,7 +1424,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'You may select multiple items from the list by holding CTRL',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1789,7 +1789,6 @@ function osha_publication_field_default_field_instances() {
   t('Thesaurus');
   t('Title');
   t('Twin publications');
-  t('You may select multiple items from the list by holding CTRL');
 
   return $field_instances;
 }

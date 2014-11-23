@@ -1231,7 +1231,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1622,7 +1622,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'You may select multiple items from the list by holding CTRL',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1698,7 +1698,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use comma ( , ) to assign multiple terms',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -2359,8 +2359,6 @@ function osha_field_default_field_instances() {
   t('Title');
   t('Title Text');
   t('Title text is used in the tool tip when a user hovers their mouse over the image. Adding title text makes it easier to understand the context of an image and improves usability.');
-  t('Use comma ( , ) to assign multiple terms');
-  t('You may select multiple items from the list by holding CTRL');
 
   return $field_instances;
 }

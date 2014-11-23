@@ -116,11 +116,9 @@ function osha_osha_tmgmt_i18n_string_list() {
     'To Be Reviewed',
     'Type',
     'Upload date',
-    'Use comma ( , ) to assign multiple terms',
     'Use count',
     'User who uploaded',
     'Year',
-    'You may select multiple items from the list by holding CTRL',
     "Use <em>basic pages</em> for your static content, such as an 'About us' page.",
   );
 }

@@ -321,10 +321,17 @@ class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
     if ($file) {
       $field_array = array('fid' => $file->fid);
       $return[$language][] = $this->buildFieldArray($field_array, $instance_arguments, $delta);
+      if (substr($path, 3, 1) == '/') {
+        // Assume path starts with /LL/, so remove language.
+        $path = substr($path, strlen('/en/'));
+      } else {
+        // Remove only first /
+        $path = substr($path, 1);
+      }
       $args = array(
         'source' => 'file/' . $file->fid,
-        'alias' => substr($path, strlen('/en/')),
-        'language' => $language,
+        'alias' => $path,
+        'language' => LANGUAGE_NONE,
       );
       path_save($args);
     }
