@@ -484,6 +484,30 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
 
   $path_breadcrumb = new stdClass();
   $path_breadcrumb->api_version = 1;
+  $path_breadcrumb->machine_name = 'calls_archive_view';
+  $path_breadcrumb->name = 'Calls archive view';
+  $path_breadcrumb->path = 'calls_archive';
+  $path_breadcrumb->data = array(
+    'titles' => array(
+      0 => 'Inside EU-OSHA',
+      1 => 'Procurement',
+      2 => '!page_title',
+    ),
+    'paths' => array(
+      0 => 'articles/inside-eu-osha',
+      1 => 'articles/procurement',
+      2 => '<none>',
+    ),
+    'home' => 1,
+    'translatable' => 0,
+    'arguments' => array(),
+    'access' => array(),
+  );
+  $path_breadcrumb->weight = 0;
+  $export['calls_archive_view'] = $path_breadcrumb;
+
+  $path_breadcrumb = new stdClass();
+  $path_breadcrumb->api_version = 1;
   $path_breadcrumb->machine_name = 'press_room_view';
   $path_breadcrumb->name = 'Press Room view';
   $path_breadcrumb->path = 'press-room';
