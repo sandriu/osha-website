@@ -445,7 +445,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['uid']['group'] = 1;
   $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
-  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Name';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Author';
   $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
   $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
   $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
@@ -460,6 +460,7 @@ function osha_views_default_views() {
     9 => 0,
     10 => 0,
     11 => 0,
+    12 => 0,
   );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -671,7 +672,6 @@ function osha_views_default_views() {
     t('[edit_node] [delete_node]'),
     t('Operations'),
     t('Type'),
-    t('Name'),
     t('Vocabulary'),
     t('Not translated in'),
     t('State'),
