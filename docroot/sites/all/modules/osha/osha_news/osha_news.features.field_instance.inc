@@ -537,7 +537,7 @@ function osha_news_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 0,
+      'default_image' => 32946,
       'entity_translation_sync' => 0,
       'file_directory' => 'news',
       'file_extensions' => 'png gif jpg jpeg',
@@ -553,14 +553,21 @@ function osha_news_field_default_field_instances() {
       'module' => 'media',
       'settings' => array(
         'allowed_schemes' => array(
-          0 => 'public',
+          'public' => 'public',
         ),
         'allowed_types' => array(
-          0 => 'image',
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
         ),
-        'browser_plugins' => array(),
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'throbber',
+        'browser_plugins' => array(
+          'media_browser_osha--media_browser_2' => 0,
+          'media_browser_osha--media_browser_3' => 0,
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
       ),
       'type' => 'media_generic',
       'weight' => 4,
