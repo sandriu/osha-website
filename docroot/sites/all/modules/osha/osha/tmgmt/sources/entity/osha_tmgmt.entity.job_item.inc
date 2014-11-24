@@ -68,7 +68,23 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
    * When re-enabled the translation by t manager.
    */
   public function toOnTranslation($message = '') {
-    $this->state = TMGMT_JOB_ITEM_STATE_ACTIVE;
+    // Reset validators.
+    $validators = osha_tmgmt_load_validators_by_job_item($this);
+    if (!empty($validators)) {
+      $index = 0;
+      foreach ($validators as $validator) {
+        $validator->message = '';
+        $validator->approved = NULL;
+        $validator->next = 0;
+        if ($index == 0) {
+          $validator->next = 1;
+        }
+        entity_save('translation_validator', $validator);
+        $index++;
+      }
+      $this->state = TMGMT_JOB_ITEM_STATE_ACTIVE;
+    }
+    // Save job.
     global $user;
     $this->save();
     $this->addMessage('@name re-enabled the translation. Job item is now "@state". Message: @message',

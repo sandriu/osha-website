@@ -16,7 +16,7 @@ class OshaTMGMTJob extends TMGMTJob {
         $job_item = $items[$item_id];
         $job_item->addTranslatedData($data, $key);
         if ($job_item->isAborted()) {
-          $job_item->setState(TMGMT_JOB_ITEM_STATE_ACTIVE);
+          $job_item->toOnTranslation();
         }
       }
     }
@@ -27,7 +27,7 @@ class OshaTMGMTJob extends TMGMTJob {
           $job_item = $items[$key];
           $job_item->addTranslatedData($value);
           if ($job_item->isAborted()) {
-            $job_item->setState(TMGMT_JOB_ITEM_STATE_ACTIVE);
+            $job_item->toOnTranslation();
           }
         }
       }

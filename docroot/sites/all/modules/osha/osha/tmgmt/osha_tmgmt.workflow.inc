@@ -785,18 +785,6 @@ function osha_tmgmt_job_item_translation_enable($form, &$form_state) {
     $message = $form_state['values']['action_message'];
   }
   $job_item->toOnTranslation($message);
-  $validators = osha_tmgmt_load_validators_by_job_item($job_item);
-  $index = 0;
-  foreach ($validators as $validator) {
-    $validator->message = '';
-    $validator->approved = null;
-    $validator->next = 0;
-    if ($index == 0) {
-      $validator->next = 1;
-    }
-    entity_save('translation_validator', $validator);
-    $index++;
-  }
 }
 
 /**
