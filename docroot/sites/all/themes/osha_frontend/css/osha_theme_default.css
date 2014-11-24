@@ -452,6 +452,8 @@ padding-left: 1em;
 #agencyLogo {
 	float:left;
 	margin-left: 1em;
+	position:relative;
+	z-index:9999999999;
 }
 
 #agencyLogo img{
@@ -459,8 +461,10 @@ padding-left: 1em;
 }
 
 #europeLogo {
- float: left;
- margin: 2em 2em 1em 2.7em;
+	 float: left;
+	 margin: 2em 2em 1em 2.7em;
+	 z-index:999999;
+	 position:relative;
 }
 
 .breadcrumb
@@ -4515,7 +4519,7 @@ a.tabs-primary__tab-link{
 	
 }
 
-#block-block-9  a {
+#block-block-10  a {
 	background: url("../images/flecha-izq.png") no-repeat scroll 87% center transparent;
 	color: #003399;
 	float: right;
@@ -4882,6 +4886,39 @@ a.tabs-primary__tab-link{
 	margin:0em;
 }
 
+#block-block-8 p  {
+	margin-top:0em;
+}
+
+#block-block-8 p a  {
+	color: #003399;
+	background: url("../images/rss.png") no-repeat scroll 0 100% transparent;
+	padding-left:2em;
+	padding-top:1em;
+	text-decoration:none;
+}
+
+#secondary-menu a{
+	background: url("../images/external_link.png") no-repeat scroll 0 72% transparent;
+    color: #003399;
+    display: block;
+    padding-left: 1.5em;
+    padding-right: 2em;
+    padding-top: 1em;
+    text-decoration: none;
+	font-weight:bold;
+	font-size:0.8em;
+}
+
+#block-twitter-block-1 h2 {
+	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
+    color: #000;
+    font-family: "Oswald",sans-serif;
+    font-size: 1.45em;
+    font-weight: lighter;
+    margin: 0;
+    padding: 0 0 0.3em;
+}
 
 /* END BLOG LIST */
 
