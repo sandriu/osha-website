@@ -283,6 +283,7 @@ class CaseStudyContentListCSV extends MigrateList {
             break;
 
           case 'files':
+          case 'aliases':
           case 'text':
             self::$data[$path][$field][$language] = $raw_data[$key];
             break;

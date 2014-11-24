@@ -305,6 +305,7 @@ class CallsMigrateList extends MigrateList {
             self::$data[$path]['file_description'][$language] = empty($term) ? 'Award Notice Corrigendum' : current(array_keys($term));
             break;
 
+          case 'aliases':
           case 'info':
           case 'author':
           case 'text':

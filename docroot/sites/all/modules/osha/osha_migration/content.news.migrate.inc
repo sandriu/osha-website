@@ -270,6 +270,7 @@ class NewsContentListCSV extends MigrateList {
             break;
 
           case 'image':
+          case 'aliases':
           case 'description':
           case 'text':
             self::$data[$path][$field][$language] = $raw_data[$key];

@@ -456,6 +456,7 @@ class PublicationMigrateList extends MigrateList {
             break;
 
           case 'description':
+          case 'aliases':
           case 'order_id':
           case 'file':
           case 'cover_image':

@@ -293,6 +293,7 @@ class ArticleMigrateList extends MigrateList {
             break;
 
           case 'relatedItems':
+          case 'aliases':
           case 'description':
           case 'text':
             $this->data[$path][$field][$language] = $raw_data[$key];
