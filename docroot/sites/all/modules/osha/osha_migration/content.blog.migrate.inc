@@ -275,6 +275,7 @@ class BlogContentListCSV extends MigrateList {
             self::$data[$path]['title_field'][$language] = $raw_data[$key];
             break;
 
+          case 'aliases':
           case 'description':
           case 'image':
           case 'imageCaption':

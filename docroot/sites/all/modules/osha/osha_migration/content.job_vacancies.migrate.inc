@@ -253,6 +253,7 @@ class JobVacanciesMigrateList extends MigrateList {
             self::$data[$path][$field][$language] = $path_language[2];
             continue;
 
+          case 'aliases':
           case 'description':
           case 'text':
             self::$data[$path][$field][$language] = $raw_data[$key];
