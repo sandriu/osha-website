@@ -776,6 +776,30 @@ function osha_tmgmt_job_item_accept_submit($form, &$form_state) {
 }
 
 /**
+ * Callback for Enable Translation
+ */
+function osha_tmgmt_job_item_translation_enable($form, &$form_state) {
+  $job_item = $form_state['item'];
+  $message = '';
+  if (!empty($form_state['values']['action_message'])) {
+    $message = $form_state['values']['action_message'];
+  }
+  $job_item->toOnTranslation($message);
+  $validators = osha_tmgmt_load_validators_by_job_item($job_item);
+  $index = 0;
+  foreach ($validators as $validator) {
+    $validator->message = '';
+    $validator->approved = null;
+    $validator->next = 0;
+    if ($index == 0) {
+      $validator->next = 1;
+    }
+    entity_save('translation_validator', $validator);
+    $index++;
+  }
+}
+
+/**
  * Extra callback for Uploading XML file on a job.
  */
 function osha_tmgmt_file_translation_upload_submit($form, &$form_state) {

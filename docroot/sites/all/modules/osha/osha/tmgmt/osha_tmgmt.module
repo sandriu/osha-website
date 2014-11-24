@@ -1086,7 +1086,14 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
         break;
 
       case TMGMT_JOB_ITEM_STATE_ABORTED:
-        $form['actions']['#access'] = FALSE;
+        $form['actions']['enable'] = array(
+          '#type' => 'submit',
+          '#submit' => array('osha_tmgmt_job_item_translation_enable'),
+          '#validate' => array(),
+          '#value' => 'Enable Translation',
+          '#access' => true,
+        );
+        $form['actions']['reject']['#access'] = FALSE;
         break;
 
       case TMGMT_JOB_ITEM_STATE_ACCEPTED:

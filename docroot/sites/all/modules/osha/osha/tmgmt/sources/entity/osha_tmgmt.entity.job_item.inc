@@ -63,6 +63,25 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
   }
 
   /**
+   * Move the Job Item to On Translation state.
+   *
+   * When re-enabled the translation by t manager.
+   */
+  public function toOnTranslation($message = '') {
+    $this->state = TMGMT_JOB_ITEM_STATE_ACTIVE;
+    global $user;
+    $this->save();
+    $this->addMessage('@name re-enabled the translation. Job item is now "@state". Message: @message',
+      array(
+        '@name' => $user->name,
+        '@state' => osha_tmgmt_get_job_item_state_label(TMGMT_JOB_ITEM_STATE_ACTIVE),
+        '@message' => $message,
+      ));
+    OshaWorkflowNotifications::notifyTranslationLayoutApprovers($this);
+    drupal_set_message(t('You have Enabled the Translation'));
+  }
+
+  /**
    * Move the Job Item to Translation Validated state.
    */
   public function toTranslationValidated($message = '') {
@@ -109,7 +128,7 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
         '@state' => osha_tmgmt_get_job_item_state_label(OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired),
         '@message' => $message,
       ));
-    OshaWorkflowNotifications::notifyTranslationValidators($this);
+    OshaWorkflowNotifications::notifyTranslationRejected($this);
     drupal_set_message(t('You have Rejected this translation'));
   }
 
