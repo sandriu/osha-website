@@ -60,10 +60,17 @@ function osha_blog_views_pre_render(&$view) {
     drupal_add_js(drupal_get_path('module', 'osha_blog') .'/includes/js/collapse_block.js');
 
     $month = '';
+    $current_year = date('Y', time());
+
     foreach($view->result as $key => $result){
       $row_month = date('F', strtotime($result->field_field_publication_date[0]['raw']['value']));
       $row_month_raw = date('m', strtotime($result->field_field_publication_date[0]['raw']['value']));
       $row_year = date('Y', strtotime($result->field_field_publication_date_1[0]['raw']['value']));
+
+      //remove current year
+      if($current_year == $row_year){
+        unset($result->field_field_publication_date_1[0]);
+      }
 
       //remove from display if publication date is in the same month
       if($month == $row_month){
