@@ -388,6 +388,7 @@ $options['init-modules'] = array(
   'chosen',
 
   'calendar',
+  'date_popup',
   'feeds',
   'feeds_import',
   'feeds_ui',
