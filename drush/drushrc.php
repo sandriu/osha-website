@@ -174,8 +174,15 @@
  * a structure-tables-key is provided. You may add new tables to the existing
  * array or add a new element.
  */
-# $options['structure-tables']['common'] = array('cache', 'cache_filter', 'cache_menu', 'cache_page', 'history', 'sessions', 'watchdog');
-
+$options['structure-tables']['common'] = array(
+  'cache',
+  'cache_filter',
+  'cache_menu',
+  'cache_page',
+  'history',
+  'sessions',
+  'watchdog',
+);
 /**
  * Customize this associative array with your own tables. This is the list of
  * tables that are entirely omitted by the 'sql-dump' and 'sql-sync' commands
@@ -259,7 +266,6 @@ if(file_exists($json_path)) {
     'db-su' => $cfg->db->root_username, 'db-su-pw' => $cfg->db->root_password
   );
 }
-$environment = $cfg->variables->environment;
 
 $options['init-modules'] = array(
   'ctools',
@@ -293,6 +299,7 @@ $options['init-modules'] = array(
 
   'field_group',
   'entityreference',
+  'entityreference_view_widget',
   'link',
   'title',
   'wysiwyg',
@@ -307,7 +314,6 @@ $options['init-modules'] = array(
   'tmgmt',
   'tmgmt_local',
   'tmgmt_locale',
-  /* 'tmgmt_node', */
   'tmgmt_entity',
   'tmgmt_entity_ui',
   'tmgmt_ui',
@@ -330,6 +336,7 @@ $options['init-modules'] = array(
   'menu_block',
   'menuimage',
   'lang_dropdown',
+  'multiple_selects',
 
   'imce_wysiwyg',
   'wysiwyg_accordion',
@@ -350,6 +357,7 @@ $options['init-modules'] = array(
   'scanner',
   'search_and_replace',
   'nodeblock',
+  'quicktabs',
 
   // Enable last (conflict with rules)
   'uuid',
@@ -359,27 +367,50 @@ $options['init-modules'] = array(
   'path_breadcrumbs_ui',
   'path_breadcrumbs_i18n',
 
+  'jquery_update',
+  'responsive_menus',
+
   'workbench',
   'workbench_access',
   'workbench_moderation',
 
   // print and generate pdf - per node action
-  //'print',
-  //'print_ui',
-  //'print_pdf_tcpdf',
-  //'print_pdf',
+  'print',
+  'print_ui',
+  'print_pdf_tcpdf',
+  'print_pdf',
+
+  //Youtube and Flickr field
+  'youtube',
+  'flickr',
+  'flickr_block',
+  'flickrfield',
+  'chosen',
+
+  'calendar',
+  'feeds',
+  'feeds_import',
+  'feeds_ui',
+  'feeds_tamper',
+  'feeds_tamper_ui',
+
+  //Allow anonymous comments per node type
+  'comment_allow_anonymous',
+
+  //create blocks which display embedded tweets
+  'twitter_block',
 
   'osha_taxonomies',
   'osha',
   'osha_migration',
   'osha_news',
-//  'osha_note_to_editor',
+  'osha_note_to_editor',
   'osha_publication',
   'osha_calls',
   'osha_blog',
   'osha_tmgmt',
   'osha_highlight',
-  //'osha_press_contact',
+  'osha_press_contact',
   'osha_press_release',
   'osha_homepage',
   'osha_menu',
@@ -389,7 +420,14 @@ $options['init-modules'] = array(
   'osha_blocks',
   'osha_breadcrumbs',
   'osha_legislation',
-  //'osha_short_messages',
+  'osha_short_messages',
+  'osha_resources',
+  'osha_slideshare',
+  'osha_events',
+
+  'linkchecker',
+  'osha_linkchecker',
+  'osha_reminders',
 
   'facetapi',
   'search_api_facetapi',
@@ -398,6 +436,7 @@ $options['init-modules'] = array(
   'search_api_et_solr',
   'search_api_views',
   'osha_search',
+  'osha_content',
 
   // Newsletter modules.
   'entity_collection',
@@ -407,6 +446,7 @@ $options['init-modules'] = array(
   // Captcha
   'captcha',
   'recaptcha',
+  'image_captcha',
 
   // Social share
   'addtoany',
@@ -421,17 +461,39 @@ $options['init-modules'] = array(
   'diff',
 );
 
-if ($environment == 'development') {
-  $options['init-modules'][] = 'reroute_email';
-  $options['init-modules'][] = 'simpletest';
-  // Module installed during development
-}
 
 $options['init-themes'] = array(
   'osha_admin',
   'osha_frontend'
 );
 
+// Add specific settings for development or demo.
+$command_specific['devify'] = array(
+  'enable-modules' => array(
+    'reroute_email',
+    'simpletest',
+    'devel',
+    'devel_node_access',
+    'stage_file_proxy',
+  ),
+//  'disable-modules' => array('varnish', 'memcache_admin'),
+  'delete-variables' => array('googleanalytics_account'),
+  'reset-variables' => array_merge(
+    array(
+      'reroute_email_enable_message' => TRUE,
+      'reroute_email_enable' => TRUE,
+      'stage_file_proxy_origin' => 'http://osha-corp-staging03.mainstrat.com',
+      'stage_file_proxy_use_imagecache_root' => TRUE,
+      'stage_file_proxy_hotlink' => TRUE,
+      'reroute_email_address' => $cfg->variables->site_mail,
+    )
+    , (array) $cfg->variables),
+);
+
+$command_specific['devify_solr'] = array(
+  'solr_server' => (array) $cfg->solr_server,
+);
+
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
-  include_once dirname(__FILE__) . '/drushrc.local.php';
+  include dirname(__FILE__) . '/drushrc.local.php';
 }

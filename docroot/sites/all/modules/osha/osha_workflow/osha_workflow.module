@@ -40,18 +40,29 @@ function osha_workflow_menu() {
     'description' => 'Assignment of project managers for each website section.',
     'page callback' => 'osha_workflow_workbench_project_managers',
     'page arguments' => array(),
-    'access arguments' => array('assign workbench access'),
+    'access arguments' => array('view workbench access information'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
     'file' => 'osha_workflow.admin.inc',
   );
-  $items['admin/config/workbench/access/managers'] = array(
-    'title' => 'Project Managers',
+
+  $items['admin/workbench/workbench-access'] = array(
+    'title' => 'Sections',
     'description' => 'Assignment of project managers for each website section.',
-    'page callback' => 'osha_workflow_workbench_project_managers',
-    'access arguments' => array('assign workbench access'),
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/config/workbench/access/managers'),
+    'access arguments' => array('view workbench access information'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
+    'file' => 'osha_workflow.admin.inc',
+  );
+
+  $items['admin/config/workbench/access/managers/review'] = array(
+    'title' => 'Section Review',
+    'description' => 'Mark section as Reviewd.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_workflow_access_section_review_form'),
+    'access arguments' => array('view workbench access information'),
     'file' => 'osha_workflow.admin.inc',
   );
 
@@ -90,7 +101,12 @@ function osha_workflow_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_menu_alter().
+ */
 function osha_workflow_menu_alter(&$items) {
+  unseT($items['admin/config/workbench/access']['access callback']);
+  $items['admin/config/workbench/access']['access arguments'] = array('view workbench access information');
   // Disable Section Menu from Workbench Dashboard.
   $items['admin/workbench/sections']['access callback'] = FALSE;
 
@@ -98,6 +114,8 @@ function osha_workflow_menu_alter(&$items) {
   $items['admin/config/workbench/access']['page callback'] = 'workbench_access_roles';
   $items['admin/config/workbench/access/editors']['access callback'] = FALSE;
 
+  $items['admin/workbench']['page callback'] = 'views_embed_view';
+  $items['admin/workbench']['page arguments'] = array('osh_workflow_admin', 'my_content');
 }
 
 function osha_workflow_editor_page() {
@@ -222,147 +240,6 @@ function osha_workflow_entity_property_info() {
 }
 
 /**
- * Implements hook_schema().
- */
-function osha_workflow_schema() {
-  $schema = array();
-  $schema['osha_workflow_node_project_managers'] = array(
-    'description' => 'Base table for the content review workflow',
-    'fields' => array(
-      'npmid' => array(
-        'description' => 'Identifier',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => 'Node under review',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'uid' => array(
-        'description' => 'Project manager account',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-    ),
-    'primary key' => array('npmid'),
-    'indexes' => array(
-      'osha_workflow_review_uid' => array('uid'),
-    ),
-    'foreign keys' => array(
-      'uid' => array(
-        'table' => 'users',
-        'columns' => array('uid' => 'uid'),
-      ),
-      'nid' => array(
-        'table' => 'node',
-        'columns' => array('nid' => 'nid'),
-      ),
-    ),
-  );
-
-  $schema['osha_workflow_node_approval'] = array(
-    'description' => 'Base table for node approval entity',
-    'fields' => array(
-      'apid' => array(
-        'description' => 'Identifier for the approved item',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => 'Moderated node ID (nid)',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'uid' => array(
-        'description' => 'Account doing the moderation',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'approved' => array(
-        'description' => 'NULL not voted, approved or rejected',
-        'type' => 'varchar',
-        'length' => 64,
-        'default' => NULL,
-        'not null' => FALSE,
-      ),
-      'next' => array(
-        'description' => '0 - no, 1 - yes',
-        'type' => 'int',
-        'default' => 0,
-        'not null' => TRUE,
-      ),
-      'weight' => array(
-        'description' => 'Order of moderation, lowest first',
-        'type' => 'int',
-        'default' => 0,
-        'not null' => TRUE,
-      ),
-      'message' => array(
-        'description' => 'Message left by the moderator',
-        'type' => 'text',
-        'size' => 'medium',
-      ),
-    ),
-    'primary key' => array('apid'),
-    'indexes' => array(
-      'moderator_uid' => array('uid'),
-    ),
-    'unique keys' => array(
-      'moderation_unique' => array('nid', 'uid'),
-    ),
-    'foreign keys' => array(
-      'uid' => array(
-        'table' => 'users',
-        'columns' => array('uid' => 'uid'),
-      ),
-      'nid' => array(
-        'table' => 'node',
-        'columns' => array('nid' => 'nid'),
-      ),
-    ),
-  );
-
-  $schema['osha_workflow_access_pm'] = array(
-    'description' => 'Maps Project Managers access to sections',
-    'fields' => array(
-      'uid' => array(
-        'description' => 'The user identifier. Foreign key to {users}.',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'access_id' => array(
-        'description' => 'The section identifier. Foreign key to {workbench_access}.',
-        'type' => 'varchar',
-        'length' => '80',
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'access_scheme' => array(
-        'description' => 'The module responsbile for this access system.',
-        'type' => 'varchar',
-        'length' => '40',
-        'not null' => TRUE,
-        'default' => '',
-      ),
-    ),
-    'primary key' => array('uid', 'access_id', 'access_scheme'),
-    'foreign keys' => array(
-      'section_id' => array('workbench_access' => array('access_id', 'access_scheme')),
-      'uid' => array('users' => 'uid'),
-    ),
-  );
-
-  return $schema;
-}
-
-/**
  * Implements hook_permission().
  *
  * We need this to define permissions granted to content moderators.
@@ -381,6 +258,7 @@ function osha_workflow_permission() {
   $permissions['view osh review manager needs review tab'] = array('title' => t("View Review Manager's 'Needs RM Review' tab in My Workbench"));
   $permissions['view osh project manager needs review tab'] = array('title' => t("View Project Manager's 'Needs PM Review' tab in My Workbench"));
   $permissions['view osh content tab'] = array('title' => t("View 'Content' tab in My Workbench"));
+  $permissions['mark access section as reviewed'] = array('title' => t("Can mark as Reviewed Access section PM"));
 
   return $permissions;
 }
@@ -533,6 +411,20 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   }
   if ($new == OSHA_WORKFLOW_STATE_READY_TO_PUBLISH) {
     OshaWorkflowNotifications::notifyNodeIsReadyToPublish($node);
+  }
+
+  OshaWorkflowNotifications::notifyWebTeamStatusChanged($node, $old, $new);
+
+  // Mark the node dirty for search re-indexing
+  $languages = array($node->language);
+  foreach ($languages as $language) {
+    $item_id = $language . '_' . $node->nid;
+    if ($new == OSHA_WORKFLOW_STATE_PUBLISHED) {
+      search_api_track_item_change('search_api_et_node', array($item_id));
+    }
+    else {
+      search_api_track_item_change('search_api_et_node', array($item_id));
+    }
   }
 }
 
@@ -770,11 +662,22 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
 function osha_workflow_mail($key, &$message, $params) {
   $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
   $body = variable_get('osha_mail_template_approval_body',
-    'Dear [user:name],
-      You have a content to be reviewed [node:url].
+    'Dear <b>[user:name]</b>,
+
+    You have a content to be reviewed <a href="[node:url]">[node:title-field]</a>.
+
+    Thank you,'
+  );
+
+  if ($key == 'osha_workflow_notification_admin') {
+    $body = variable_get('osha_mail_template_approval_body',
+      'Dear <b>[user:name]</b>,
+
+      There was a status change (from <b>' . $params['from'] . '</b> to <b>' . $params['to'] . '</b>) for <a href="[node:url]">[node:title-field]</a>.
 
       Thank you,'
-  );
+    );
+  }
   $message['subject'] = token_replace($subject, $params);
   $message['body'] = token_replace($body, $params);
 }

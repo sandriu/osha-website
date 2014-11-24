@@ -16,17 +16,30 @@ osha_configure_permissions();
 osha_config_development();
 osha_configure_recaptcha();
 osha_configure_on_the_web();
+osha_configure_search_index();
 osha_add_menu_position_rules();
-// osha_add_agregator_rss_feeds();
 
 variable_set('admin_theme', 'osha_admin');
 variable_set('theme_default', 'osha_frontend');
+variable_set('menu_position_active_link_display', 'parent');
 
 // @todo: Workflow configuration - hook_enable throws errors.
 variable_set('workbench_moderation_per_node_type', 1);
 osha_workflow_create_roles();
 
 module_disable(array('overlay'));
+
+/**
+ * Configure the index to exclude unpublished nodes.
+ */
+function osha_configure_search_index() {
+  if ($index = search_api_index_load('default_multilingual_node_index')) {
+    $index->options['data_alter_callbacks']['search_api_alter_node_status']['status'] = 1;
+    $index->save();
+    $index->reindex();
+    drupal_set_message(t("The indexing workflow was successfully edited. All content was scheduled for re-indexing so the new settings can take effect."));
+  }
+}
 
 /**
  * Configure permissions.
@@ -251,97 +264,6 @@ function osha_configure_recaptcha() {
 }
 
 /**
- * Add menu position rules for publication content type.
- */
-function osha_add_menu_position_rules() {
-  if (module_exists('menu_position') && module_load_include('inc', 'menu_position', 'menu_position.admin')) {
-    drupal_set_message('Create menu position rules ...');
-
-    // Config menu_position contrib module.
-    variable_set('menu_position_active_link_display', 'parent');
-
-    $options = menu_parent_options(menu_get_menus(), array('mlid' => 0));
-    $publications_menu = array_search('------ Publications', $options);
-
-    $form_state = array(
-      'values' => array(
-        'admin_title' => 'Publications Menu Rule',
-        'plid' => $publications_menu !== NULL ? $publications_menu : 'main-menu:0',
-        'content_type' => array('publication' => 'publication'),
-        'op' => 'Save',
-      ),
-    );
-
-    drupal_form_submit('menu_position_add_rule_form', $form_state);
-
-    /* disabled temporarily for release branch
-    $press_menu_entry = array_search('------ Press room', $options);
-
-    $form_state = array(
-      'values' => array(
-        'admin_title' => 'Press room Menu Rule',
-        'plid' => $press_menu_entry !== NULL ? $press_menu_entry : 'main-menu:0',
-        'content_type' => array('press_release' => 'press_release'),
-        'op' => 'Save',
-      ),
-    );
-    */
-
-    drupal_form_submit('menu_position_add_rule_form', $form_state);
-
-    //menu position rule for Directive
-    $directive_menu_entry = array_search('------ EU Directives', $options);
-
-    $form_state = array(
-      'values' => array(
-        'admin_title' => 'Directive Menu Rule',
-        'plid' => $directive_menu_entry !== NULL ? $directive_menu_entry : 'main-menu:0',
-        'pages' => 'legislation/directives/*'.PHP_EOL.'legislation/directive/*',
-        'op' => 'Save'
-      )
-    );
-    drupal_form_submit('menu_position_add_rule_form', $form_state);
-
-    //menu position rule for Guideline
-    $guideline_menu_entry = array_search('------ EU Guidelines', $options);
-
-    $form_state = array(
-      'values' => array(
-        'admin_title' => 'Guideline Menu Rule',
-        'plid' => $guideline_menu_entry !== NULL ? $guideline_menu_entry : 'main-menu:0',
-        'pages' => 'legislation/guidelines/*',
-        'op' => 'Save'
-      )
-    );
-    drupal_form_submit('menu_position_add_rule_form', $form_state);
-  }
-}
-
-/**
- * Add press releases rss feed.
- */
-function osha_add_agregator_rss_feeds(){
-  if (module_exists('aggregator') && module_load_include('inc', 'aggregator', 'aggregator.admin')) {
-    drupal_set_message('Add press releases rss feed ...');
-
-    $form_state = array(
-      'values' => array(
-        'title' => 'EU-OSHA in the media',
-        'url' => 'http://portal.kantarmedia.de/rss/index/1002043/100000063/1024803/9a7b629357e748080ff47e4d0db7ec57cffff3fe',
-        'refresh' => 900,
-        'block' => 2,
-        'op' => 'Save',
-      ),
-    );
-
-    drupal_form_submit('aggregator_form_feed', $form_state);
-
-    drupal_cron_run();
-    cache_clear_all();
-  }
-}
-
-/**
  * Add configuration for on_the_web contrib module.
  */
 function osha_configure_on_the_web() {
@@ -378,4 +300,36 @@ function osha_disable_blocks(){
 
   // Flush cache.
   cache_clear_all();
+}
+
+/**
+ * Add menu position rules.
+ */
+function osha_add_menu_position_rules() {
+  if (module_exists('osha') && module_load_include('inc', 'osha', 'osha.utils')) {
+    // Menu position rule for Press Release content type.
+    $parent_menu = '------ Press room';
+    $condition = array('content_type' => array('press_release' => 'press_release'));
+    osha_add_menu_position_rule('Press room Menu Rule', $parent_menu, $condition);
+    
+    // Menu position rule for See all Press Releases Menu Rule.
+    $condition = array('pages' => 'press-releases');
+    osha_add_menu_position_rule('See all Press Releases Menu Rule', $parent_menu, $condition);
+
+    // Menu position rule for Publication content type
+    $condition = array('content_type' => array('publication' => 'publication'));
+    osha_add_menu_position_rule('Publications Menu Rule', '------ Publications', $condition);
+
+    // Menu position rule for Seminar content type
+    $condition = array('content_type' => array('seminar' => 'seminar'));
+    osha_add_menu_position_rule('Seminar Menu Rule', '------ Our seminars', $condition);
+
+    // Menu position rule for Calls content type
+    $condition = array('content_type' => array('calls' => 'calls'));
+    osha_add_menu_position_rule('Calls Menu Rule', '------ Procurement', $condition);
+
+    // Menu position rule for Job vacancies content type
+    $condition = array('content_type' => array('job_vacancies' => 'job_vacancies'));
+    osha_add_menu_position_rule('Job vacancies Menu Rule', '------ Careers', $condition);
+  }
 }

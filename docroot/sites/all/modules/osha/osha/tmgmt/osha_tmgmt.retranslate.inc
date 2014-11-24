@@ -15,6 +15,7 @@ class OshaTMGMTRetranslate {
     // Get all existing ID's and compute max.
     $max = 0;
     for ($i = 0; $i < $items->length; $i++) {
+      // First pass, compute max(id)
       if (get_class($items->item($i)) != 'DOMElement') {
         // Ignore text between tags and comments, can happen during migration.
         continue;
@@ -102,6 +103,7 @@ class OshaTMGMTRetranslate {
   /*
    * Set checkbox if a revision has been translated and body has been changed
    */
+  /*
   public static function mark_dirty($node) {
     $node_lang = $node->translations->original;
     if (empty($node->body[$node_lang])) {
@@ -121,20 +123,19 @@ class OshaTMGMTRetranslate {
       $node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 1;
     }
   }
+  */
 
   /*
    * Return latest revision where original language is synchronized with translations.
    */
   public static function get_latest_clean_revision($entity_id) {
-    $rev = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
-      WHERE f.entity_id = :entity_id AND f.field_needs_retranslation_value = 0",
-      array(':entity_id' => $entity_id)
+    // Get the latest published revision.
+    $rev = db_query("SELECT MAX(vid) FROM {workbench_moderation_node_history} WHERE
+      nid = :entity_id AND published=1" ,array(':entity_id' => $entity_id)
     )->fetchField();
-    if (!$rev) {
-      // No clean revision found, probably field_needs_retranslation_value
-      // was not there. Return the first available revision.
-      $rev = db_query("SELECT MIN(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
-        array(':entity_id' => $entity_id)
+    if (!$rev ) {
+      $rev = db_query("SELECT MAX(nr.vid) FROM {node_revision} nr WHERE
+      nr.nid = :entity_id AND status=1",array(':entity_id' => $entity_id)
       )->fetchField();
     }
     return $rev;
@@ -144,15 +145,14 @@ class OshaTMGMTRetranslate {
    * Returns latest revision where original language is synchronized with translations.
    */
   public static function get_latest_revision($entity_id) {
-    $rev = db_query("SELECT MAX(f.revision_id) FROM {field_revision_field_needs_retranslation} f
-      WHERE f.entity_id = :entity_id",
-      array(':entity_id' => $entity_id)
+    // Get the current revision from workbench moderation.
+    $rev = db_query("SELECT MAX(vid) FROM {workbench_moderation_node_history} WHERE
+      nid = :entity_id AND current=1" ,array(':entity_id' => $entity_id)
     )->fetchField();
-    if (!$rev) {
-      // No revision found, probably field_needs_retranslation_value
-      // was not there. Return the latest available revision.
-      $rev = db_query("SELECT MAX(nr.vid) FROM {node_revision} nr WHERE nr.nid = :entity_id",
-        array(':entity_id' => $entity_id)
+    if (!$rev ) {
+      // Get the latest available revision.
+      $rev = db_query("SELECT MAX(nr.vid) FROM {node_revision} nr WHERE
+        nr.nid = :entity_id", array(':entity_id' => $entity_id)
       )->fetchField();
     }
     return $rev;
@@ -175,8 +175,13 @@ class OshaTMGMTRetranslate {
       return NULL;
     }
     if (isset($field[$lang][0]['fid'])) {
-      // @todo handle files and image
+      // @todo handle files and images
       return NULL;
+    }
+    if (isset($field[$lang][0]['url'])) {
+      // Handle link field type
+      // @todo check the import of translations
+      return $field[$lang][0]['title'];
     }
     return $field[$lang][0]['value'];
   }
@@ -194,8 +199,16 @@ class OshaTMGMTRetranslate {
       $new_id = $new_item->getAttribute('id');
       // Check if added or existing.
       $old_item = self::getElementById($old_items, $new_id);
-      if (!$old_item || $old_item->nodeValue !== $new_item->nodeValue ) {
+      if (!$old_item) {
+        // Item is new.
         $changes[] = $new_id;
+      } else {
+        // Compare nodeValues without whitespace.
+        $new_text_plain = preg_replace("/\s+/", "", $new_item->nodeValue);
+        $old_text_plain = preg_replace("/\s+/", "", $old_item->nodeValue);
+        if ( $new_text_plain !== $old_text_plain ) {
+          $changes[] = $new_id;
+        }
       }
     }
     return $changes;
@@ -205,10 +218,15 @@ class OshaTMGMTRetranslate {
                                                  $source_lang, $target_lang,
                                                  $field_name = 'body') {
     $revision = self::get_latest_revision($entity_id);
-    $clean_revision = self::get_latest_clean_revision($entity_id);
-
     // This is the latest version in the source language.
     $source_text = self::get_field_value($entity_id, $bundle, $revision, $source_lang, $field_name);
+    if (!workbench_moderation_node_type_moderated($bundle)) {
+      // Node type is not moderated, always return text for full translation.
+      return $source_text;
+    }
+
+    $clean_revision = self::get_latest_clean_revision($entity_id);
+
     if (!$clean_revision) {
       // All text must be translated.
       return $source_text;
@@ -219,9 +237,8 @@ class OshaTMGMTRetranslate {
     if ($field_name != 'body' && $source_text != $clean_source_text) {
       return $source_text;
     }
-    // For body, get the different paragraphs only.
-    // The latest version in the target language.
-    $translated_text = self::get_field_value($entity_id, $bundle, $revision, $target_lang, $field_name);
+    // The latest published version in the target language.
+    $translated_text = self::get_field_value($entity_id, $bundle, $clean_revision, $target_lang, $field_name);
     if (!$translated_text) {
       return $source_text;
     }
@@ -230,7 +247,7 @@ class OshaTMGMTRetranslate {
       // but field has not been changed, so no re-translation is needed.
       return NULL;
     }
-
+    // For body, get the different paragraphs only.
     // Just a list of element id's (changed or added in the source language).
     $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
 
@@ -278,38 +295,59 @@ class OshaTMGMTRetranslate {
     if (!isset($node->nid)) {
       throw new TMGMTException('node->nid not provided');
     }
-    $vid = self::get_latest_clean_revision($node->nid);
-    $old_node = node_load($node->nid, $vid);
-    $orig_lang = $old_node->translations->original;
-    if (empty($old_node->body)) {
-      $clean_source_text = '';
-      $orig_structure = array();
-    } else {
-      $clean_source_text = $old_node->body[$orig_lang][0]['value'];
-      $orig_structure = self::getHTMLStructure($old_node->body[$orig_lang][0]['value']);
+    $nid = $node->nid;
+    $published_rev = self::get_latest_clean_revision($nid);
+    $node_published = node_load($nid, $published_rev);
+    if (!workbench_moderation_node_type_moderated($node_published->type)) {
+      // Node type is not moderated, always return text for full translation.
+      $messages['status'][] = t('This node has no revisions, retranslation not applicable.');
+      return NULL;
     }
-    $latest_rev = self::get_latest_revision($node->nid);
+    if (!$published_rev) {
+      $messages['status'][] = t('This node has no published revision, retranslation not applicable.');
+      return NULL;
+    }
+
+    if(!isset($node_published->body)) {
+      // body is not present on this node
+      $messages['status'][] = t('This node has no body field, retranslation not applicable.');
+      return NULL;
+    }
+    $orig_lang = $node_published->translations->original;
+    if (empty($node_published->body)) {
+      $published_source_text = '';
+      $published_source_structure = array();
+    } else {
+      $published_source_text = $node_published->body[$orig_lang][0]['value'];
+      $published_source_structure = self::getHTMLStructure($published_source_text);
+    }
+    // Get the list of languages from the published revision.
+    // Get the keys from body, because ->translations considers the latest revision
+    //$languages = array_diff(array_keys($node_published->translations->data), [$orig_lang]);
+    $languages = array_diff(array_keys($node_published->body), [$orig_lang]);
+
+    $latest_rev = self::get_latest_revision($nid);
     $messages['status'][] = t('Comparing revision @latest to revision @original in source language @lang',
-      array('@latest' => $latest_rev, '@original' => $vid, '@lang' => strtoupper($orig_lang)));
+      array('@latest' => $latest_rev, '@original' => $published_rev, '@lang' => strtoupper($orig_lang)));
 
-    $node = node_load($node->nid, $latest_rev);
+    $node = node_load($nid, $latest_rev);
     if (empty($node->body)) {
-      $source_text = '';
-      $new_structure = array();
+      $latest_source_text = '';
+      $latest_source_structure = array();
     } else {
-      $source_text = $node->body[$orig_lang][0]['value'];
-      $new_structure = self::getHTMLStructure($source_text);
+      $latest_source_text = $node->body[$orig_lang][0]['value'];
+      $latest_source_structure = self::getHTMLStructure($latest_source_text);
     }
 
-    $languages = array_diff(array_keys($node->translations->data), [$orig_lang]);
     if (!empty($languages)) {
       // Check if source language has been changed and retranslation is possible.
-      $result = self::check_same_tags_in_translation($vid, $latest_rev, $orig_structure, $new_structure);
+      // Compare latest revision with published revision (both in source language).
+      $result = self::check_same_tags($published_rev, $latest_rev, $published_source_structure, $latest_source_structure);
       if (!empty($result)) {
         foreach ($languages as $lang) {
           $result[$lang] = t('Incompatible change in @lang from @tag1 to @tag2', array(
             '@lang' => strtoupper($orig_lang),
-            '@tag1' => $result[$vid],
+            '@tag1' => $result[$published_rev],
             '@tag2' => $result[$latest_rev]
           ));
           $invalid_languages[$lang] = $result;
@@ -319,41 +357,40 @@ class OshaTMGMTRetranslate {
         return;
       }
     }
-    // Check if source language has been changed.
-    $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
+    // Get changes in source language.
+    $changed_ids = self::get_changed_ids($published_source_text, $latest_source_text);
     if (empty($changed_ids)) {
       $messages['status'][] = t('No changes detected in language @lang.',
         array('@lang' => strtoupper($orig_lang)));
     } else {
       $msg = ' ';
       foreach ($changed_ids as $id) {
-        $msg = $msg . '<' . $new_structure[$id] . ' id="' . $id . '">,';
+        $msg = $msg . '<' . $latest_source_structure[$id] . ' id="' . $id . '">,';
       }
       $messages['status'][] = t('Detected changes in @lang: @msg',
         array('@lang' => strtoupper($orig_lang), '@msg' => substr($msg, 0, -1)));
     }
 
+    if ( empty($languages)) {
+      $messages['status'][] = t('Full translation in all languages.');
+    }
+    // This array will store the languages eligible for retranslation
     $valid_languages = array();
     // Check for incompatibilities
     foreach ($languages as $lang) {
-      $translated_structure = self::getHTMLStructure($node->body[$lang][0]['value']);
+      $published_trans_structure = self::getHTMLStructure($node_published->body[$lang][0]['value']);
       // Check if tags in translations match the tags in source language.
-      $result = self::check_same_tags_in_translation($orig_lang, $lang, $orig_structure, $translated_structure);
-      if (!empty($result)) {
-        $invalid_languages[$lang] = $result;
-        continue;
-      }
-      // Check same tags in latest version
-      $result = self::check_same_tags_in_translation($orig_lang, $lang, $new_structure, $translated_structure);
+      $result = self::check_same_tags($orig_lang, $lang, $published_source_structure, $published_trans_structure);
       if (!empty($result)) {
         $invalid_languages[$lang] = $result;
         continue;
       }
 
-      // Check if the latest revision of target language contains more tags
-      // than the initial revision of the source language.
+      // Check if the latest revision of target language contains tags
+      // that are not found in the published revision of the source language.
+      $latest_trans_structure = self::getHTMLStructure($node_published->body[$lang][0]['value']);
       $result = self::check_more_tags_in_translation(
-        $orig_lang, $lang, $orig_structure, $translated_structure);
+        $orig_lang, $lang, $published_source_structure, $latest_trans_structure);
       if (!empty($result)) {
         $invalid_languages[$lang] = $result;
         continue;
@@ -361,7 +398,7 @@ class OshaTMGMTRetranslate {
       // Check if source language has been changed.
       if (!empty($changed_ids)) {
         // Check if target language really needs retranslation and show changes for each valid language.
-        $changed_text = self::get_text_to_retranslate($node->nid, $node->type, $orig_lang, $lang, 'body');
+        $changed_text = self::get_text_to_retranslate($nid, $node->type, $orig_lang, $lang, 'body');
         if (empty($changed_text)) {
           $messages['status'][] = t('Language @lang does not need retranslation',
             array('@lang' => strtoupper($lang)));
@@ -384,14 +421,14 @@ class OshaTMGMTRetranslate {
     }
   }
 
-  protected static function check_same_tags_in_translation($orig_lang, $lang, $orig_structure, $translated_structure) {
+  protected static function check_same_tags($orig_lang, $lang, $orig_structure, $new_structure) {
     foreach ($orig_structure as $id => $tag) {
-      if (isset($translated_structure[$id]) && $tag != $translated_structure[$id]) {
+      if (isset($new_structure[$id]) && $tag != $new_structure[$id]) {
         return array(
           'id' => $id,
           'source' => $orig_lang,
           $orig_lang => $tag,
-          $lang => $translated_structure[$id],
+          $lang => $new_structure[$id],
         );
       }
     }
@@ -407,7 +444,6 @@ class OshaTMGMTRetranslate {
           $orig_lang => NULL,
           $lang => $tag,
         );
-        $diffs[$id] = $tag;
       }
     }
     return NULL;
@@ -481,7 +517,7 @@ class OshaTMGMTRetranslate {
       return $job_data;
     }
     foreach ($job_data as $field => $field_data) {
-      if ($field == 'body') {
+      if ($field == 'body' && isset($field_data[0]['value']['#translation']['#text'])) {
         // Get full reference text from source lang of latest revision.
         $source_text = $node->{$field}[$source_lang][0]['value'];
         $old_translation = self::get_field_value($node->nid, $node->type, $revision, $target_lang, $field);
@@ -501,4 +537,39 @@ class OshaTMGMTRetranslate {
     // Return the array, passed by value.
     return $job_data;
   }
+
+  public static function validate_translation_structure($job_item) {
+    // Validate that structure is the same in field body
+    if (isset($job_item->data['body'][0]['value'])) {
+      $orig_text = $job_item->data['body'][0]['value']['#text'];
+      $trans_text = $job_item->data['body'][0]['value']['#translation']['#text'];
+      $orig_structure = self::getHTMLStructure($orig_text);
+      $trans_structure = self::getHTMLStructure($trans_text);
+      $result = self::check_same_tags(
+        $job_item->source_language, $job_item->target_language,
+        $orig_structure, $trans_structure);
+      if (!empty($result)) {
+        return t('Tag @id changed from @tag1 to @tag2.', array(
+          '@id' => $result['id'],
+          '@tag1' => $result[$job_item->source_language],
+          '@tag2' => $result[$job_item->target_language]
+        ));
+      }
+      // check missing tags
+      $orig_id_list = array_keys($orig_structure);
+      $trans_id_list = array_keys($trans_structure);
+      $missing_tags = array_diff($orig_id_list, $trans_id_list);
+      if (!empty($missing_tags)) {
+        $first = array_pop($missing_tags);
+        return 'Tag '.$orig_structure[$first].' id="'.$first.'" missing in translation.';
+      }
+      $extra_tags = array_diff($trans_id_list, $orig_id_list);
+      if (!empty($extra_tags)) {
+        $first = array_pop($extra_tags);
+        return 'Unexpected tag '.$trans_structure[$first].' id="'.$first.'" in translation.';
+      }
+    }
+    return NULL;
+  }
+
 }

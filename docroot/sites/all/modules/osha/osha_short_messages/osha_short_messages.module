@@ -44,45 +44,42 @@ function osha_short_messages_form($form, &$form_state){
   $node = osha_short_messages_node();
 
   //get the list of languages
-  $languages = language_list();
-  usort($languages, function ($a, $b) {
+  $languages = language_list('enabled');
+  usort($languages[1], function ($a, $b) {
     return strcmp($a->name, $b->name);
   });
+
+  $languages = $languages[1];
+
+  //hide some languages
+  $hided_lng = array('ru', 'tr');
+  foreach($languages as $key => $language){
+    if(in_array($language->language, $hided_lng))
+      unset($languages[$key]);
+  }
 
   //compose header, content and footer
   $header = theme('short_messages_header', array(
     'languages' => $languages,
     'node_title' => $node->title,
     'node_id' => $node->nid,
-    'published_date' => $node->field_publication_date[LANGUAGE_NONE][0]['value']));
+  ));
   $footer = theme('short_messages_footer');
 
   //get a content type display mode
   $display = node_view($node, 'default', 'en');
+  if(isset($display['field_publication_date']))
+    $display['field_publication_date'][0]['#markup'] = alter_published_date($node);
 
   //remove links
   $display['links'] = FALSE;
   $display['#contextual_links'] = FALSE;
-  //remove publication formatter links
-  $fields_with_formatters = array(
-    'field_file',
-    'field_publication_bookshop_id',
-    'field_related_publications',
-    'field_related_resources',
-    'field_publication_related_res'
-  );
-  foreach ($fields_with_formatters as $field) {
-    if (!empty($display[$field])) {
-      foreach($display[$field] as $key => $field_value){
-        if(is_array($field_value) && isset($field_value['contextual_links']))
-          unset($display[$field][$key]['contextual_links']);
-      }
-    }
-  }
+
+  //remove all contextual links
+  removeArrayKey($display, array('contextual_links'));
 
   //remove some fields from default view
   $display['title_field'] = FALSE;
-  $display['field_publication_date'] = FALSE;
   
   $body = theme('short_messages_body', array(
     'body_content' => drupal_render($display),
@@ -94,7 +91,6 @@ function osha_short_messages_form($form, &$form_state){
     '#rows' => '20',
     '#format' => 'full_html',
     '#title' => t('Content'),
-    '#description' => t('Click on the Disable rich-text link to get the HTML code'),
     '#default_value' => $header.$body.$footer,
   );
 
@@ -107,6 +103,15 @@ function osha_short_messages_form($form, &$form_state){
     ),
   );
 
+  //copy to clipboard button
+  $form['short_messages_clipboard'] = array(
+    '#type' => 'button',
+    '#value' => t('Copy Html to Clipboard'),
+    '#attributes' => array(
+      'onclick' => 'return false;',
+    ),
+  );
+
   //the container for preview content
   $form['short_messages_markup'] = array(
     '#type' => 'markup',
@@ -115,6 +120,8 @@ function osha_short_messages_form($form, &$form_state){
   );
 
   $form['#attached']['js'][] = drupal_get_path('module', 'osha_short_messages') . '/includes/js/popup.js';
+  $form['#attached']['js'][] = drupal_get_path('module', 'osha_short_messages') . '/includes/js/copytoclipboard.js';
+  $form['#attached']['js'][] = libraries_get_path('zeroclipboard') . '/ZeroClipboard.js';
 
   return $form;
 }
@@ -159,4 +166,49 @@ function osha_short_messages_theme() {
 function osha_short_messages_node(){
   $node = menu_get_object();
   return $node;
+}
+
+/**
+ * Remove or set to FALSE one or more array keys
+ * @param $array
+ * @param $keys
+ */
+function removeArrayKey(&$array, $keys) {
+  foreach ($array as $key => &$value) {
+    if (is_array($value)) {
+      removeArrayKey($value, $keys);
+    } else {
+      if (in_array($key, $keys)){
+        $array[$key] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Alter published date
+ * @param $node
+ * @return string
+ */
+function alter_published_date($node) {
+  //$output = format_date(strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']), 'short_date_eu');
+  $output = '';
+
+  if ($node->type == 'press_release') {
+    if (!empty($node->field_pr_embargo_date)) {
+      $embargo_date = strtotime($node->field_pr_embargo_date[LANGUAGE_NONE][0]['value']);
+      $str_embargo_date = format_date($embargo_date, 'short_date_eu');
+      if ($embargo_date - strtotime('now') > 0) {
+        $message = t('HOLD ON FOR PRESS RELEASE UNTIL').' '.$str_embargo_date;
+      }
+    }
+    if (!isset($message)) {
+      $publication_date = strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']);
+      $str_publication_date = format_date($publication_date, 'short_date_eu');
+      $message = t('FOR IMMEDIATE RELEASE').' - '.$str_publication_date;
+    }
+    $output = '<span class="press-release-date">'.$message.'</span>';
+  }
+
+  return $output;
 }

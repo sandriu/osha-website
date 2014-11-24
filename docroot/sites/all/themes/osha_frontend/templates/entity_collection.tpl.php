@@ -11,6 +11,9 @@ if (module_exists('osha_newsletter') && isset($variables['element'])) {
     $newsletter_title = $source->title;
     $newsletter_id = $source->eid;
     $newsletter_date = $source->field_created[LANGUAGE_NONE][0]['value'];
+    if (!empty($source->field_publication_date)) {
+      $newsletter_date = $source->field_publication_date[LANGUAGE_NONE][0]['value'];
+    }
 
     $elements = array();
     $last_section = NULL;

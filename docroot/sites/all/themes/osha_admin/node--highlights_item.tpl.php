@@ -89,9 +89,9 @@
                 <?php
                   print l(theme('image_style', array(
                     'style_name' => 'thumbnail',
-                    'path' => $field_image[0]['uri'],
+                    'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
                     'width' => 100,
-                    'alt' => $field_image[0]['alt'],
+                    'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
                     'attributes' => array('style' => 'border: 0px;')
                   )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                     'html' => TRUE,

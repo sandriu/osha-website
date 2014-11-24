@@ -61,3 +61,57 @@ function osha_configure_imce() {
     throw new Exception('Cannot assign IMCE profile User-1 to administrator - role administrator not found.');
   }
 }
+
+/**
+ * Update date formats/timezone settings. Update search index configuration.
+ */
+function osha_update_7001() {
+  osha_configure_date_settings();
+
+  if ($index = search_api_index_load('default_multilingual_node_index')) {
+    $index->options['data_alter_callbacks']['search_api_alter_node_status']['status'] = 1;
+    $index->save();
+    $index->reindex();
+    drupal_set_message('The indexing workflow was successfully edited. All content was scheduled for re-indexing so the new settings can take effect.');
+  }
+}
+
+/**
+ * Remove the admin_views_node view.
+ *
+ * Configure jquery_update and responsive_menus
+ * uuid features remove configuration.
+ */
+function osha_update_7002() {
+  if ($view = views_get_view('admin_views_node')) {
+    views_delete_view($view);
+  }
+
+  // Config jquery_update.
+  variable_set('jquery_update_jquery_version', '1.10');
+
+  // Config responsive_menus.
+  variable_set('responsive_menus_no_jquery_update', array('1' => 0));
+  variable_set('responsive_menus_ignore_admin', array('1' => 1));
+  variable_set('responsive_menus_style', 'mean_menu');
+  variable_set('responsive_menus_mean_menu_css_selectors', '#block-menu-block-1');
+  variable_set('responsive_menus_mean_menu_container', 'body');
+  variable_set('responsive_menus_mean_menu_trigger_txt', '<span /><span /><span />');
+  variable_set('responsive_menus_mean_menu_close_txt', 'X');
+  variable_set('responsive_menus_mean_menu_close_size', '18px');
+  variable_set('responsive_menus_mean_menu_position', 'right');
+  variable_set('responsive_menus_mean_menu_media_size', '960');
+  variable_set('responsive_menus_mean_menu_show_children', 1);
+  variable_set('responsive_menus_mean_menu_expand_txt', '+');
+  variable_set('responsive_menus_mean_menu_contract_txt', '-');
+  variable_set('responsive_menus_mean_menu_remove_attrs', 1);
+
+  // Unset the settings for uuid_features to prevent heavy rendering
+  // on features create/recreate.
+  variable_set('uuid_features_entity_taxonomy_term', NULL);
+  variable_set('uuid_features_entity_node', NULL);
+  variable_set('uuid_features_entity_file', NULL);
+  variable_set('uuid_features_file_file', NULL);
+  variable_set('uuid_features_file_mode', NULL);
+  variable_set('uuid_features_file_node', NULL);
+}

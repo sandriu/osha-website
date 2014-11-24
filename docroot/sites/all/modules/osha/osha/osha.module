@@ -3,6 +3,7 @@
 include_once 'osha.features.inc';
 
 define('OSHA_ARTICLE_CONTENT_TYPE_ARTICLE', 'article');
+define('OSHA', 'OSHA');
 
 function osha_menu() {
   $items = array();
@@ -43,6 +44,85 @@ function osha_users_autocomplete($role_name, $name) {
   }
   drupal_json_output($output);
 }
+
+/**
+ * Implements hook_osha_tmgmt_i18n_string_list().
+ */
+function osha_osha_tmgmt_i18n_string_list() {
+  return array(
+    '- All -',
+    '‹ previous',
+    '« first',
+    'Activity',
+    'Alt Text',
+    'Alternative text is used by screen readers, search engines, and when the image cannot be loaded. By adding alt text you improve accessibility and search engine optimization.',
+    'Apply',
+    'Approved',
+    'Archived',
+    'Article type',
+    'Asc',
+    'Automatically calculated when saving. The count of characters found in the default language text (English).',
+    'Automatically calculated when saving. The count of pages of text in the default language (English).',
+    'Basic page setup error: !error',
+    'Body',
+    'Calendar page',
+    'Character count',
+    'Day only',
+    'Default',
+    'Desc',
+    'Description',
+    'Draft',
+    'EU short date',
+    'Expiration Date',
+    'File name',
+    'Image',
+    'Items per page',
+    'Language',
+    'last »',
+    'Master',
+    'Media browser',
+    'more',
+    'My files (OSHA)',
+    'My files',
+    'Nace',
+    'Needs Retranslation',
+    'next ›',
+    'No files available.',
+    'Offset',
+    'OSHA Library ',
+    'Osha Slideshow',
+    'OSHWiki Category',
+    'OSHWiki featured articles',
+    'Page count',
+    'Publication date',
+    'Published',
+    'Ready To Publish',
+    'Rejected',
+    'Replacing title_field for !bundle',
+    'Reset',
+    'Save',
+    'Show using theme @theme',
+    'Sort by',
+    'Summary',
+    'Tags setup error: !error',
+    'Tags',
+    'Theme:',
+    'Thesaurus',
+    'This node is in the translation cart!',
+    'Title text is used in the tool tip when a user hovers their mouse over the image. Adding title text makes it easier to understand the context of an image and improves usability.',
+    'Title Text',
+    'Title',
+    'To Be Approved',
+    'To Be Reviewed',
+    'Type',
+    'Upload date',
+    'Use count',
+    'User who uploaded',
+    'Year',
+    "Use <em>basic pages</em> for your static content, such as an 'About us' page.",
+  );
+}
+
 
 /**
  * Implements hook_schema_alter().
@@ -111,6 +191,7 @@ function osha_date_format_types() {
     'year'  => t('Year'),
     'short_date_eu'  => t('EU short date'),
     'osha_day_only'  => t('Day only'),
+    'month' => t('Month: F'),
   );
 }
 
@@ -128,6 +209,9 @@ function osha_date_formats() {
     array(
       'type' => 'osha_day_only', 'format'  => 'd/m/Y', 'locales' => array(),
     ),
+    array(
+      'type' => 'month', 'format' => 'F', 'locales' => array(),
+    ),
   );
   foreach ($formats as $format) {
     variable_set('date_format_' . $format['type'], $format['format']);
@@ -141,9 +225,25 @@ function osha_date_formats() {
 function osha_configure_date_settings() {
   variable_set('date_first_day', '1');
   variable_set('site_default_country', 'ES');
-  variable_set('date_default_timezone', 'UTC');
+  variable_set('date_default_timezone', 'Europe/Madrid');
   variable_set('configurable_timezones', '0');
   variable_set('user_default_timezone', '0');
+
+  // Create the format for OSHA date.
+  module_load_include('inc', 'system', 'system.admin');
+  $osha_long_format = 'd/m/Y - H:i';
+  $formats = system_get_date_formats('custom');
+  if (empty($formats) || is_array($formats) && !array_key_exists($osha_long_format, $formats)) {
+    $form_state = array('values' => array('date_format' => $osha_long_format));
+    drupal_form_submit('system_configure_date_formats_form', $form_state);
+  }
+  else {
+    drupal_set_message('OSHA long date format already exists ... skipping', 'warning');
+  }
+  drupal_set_message('Setting short, medium and long date formats to DD/MM/YYYY - HH:MM');
+  variable_set('date_format_long', $osha_long_format);
+  variable_set('date_format_medium', $osha_long_format);
+  variable_set('date_format_short', $osha_long_format);
 }
 
 /**
@@ -327,7 +427,7 @@ function osha_enable_field_image_translations() {
       drupal_form_submit('entity_translation_translatable_form', $form_state, 'field_image');
     }
     else {
-      drupal_set_message(t("field_image field not available yet"), 'error');
+      drupal_set_message('field_image field not available yet', 'error');
     }
   }
   else {
@@ -441,6 +541,29 @@ function osha_node_view($node, $view_mode, $langcode) {
         $node->article_type_code = $term->field_article_type_code[LANGUAGE_NONE][0]['value'];
       }
     }
+}
+
+/**
+ * Implements hook_file_view().
+ */
+function osha_file_view($file, $view_mode, $langcode) {
+  // Serve File  directly, not file entity view
+  // For requests with /view skip this.
+  if (!in_array('view', arg()) && $view_mode == 'full') {
+    if ($view_mode == 'full') {
+      $headers = array(
+        'Content-Type'              => $file->filemime,
+        'Content-Disposition'       => 'filename="' . $file->filename . '"',
+        'Content-Length'            => $file->filesize,
+        'Content-Transfer-Encoding' => 'binary',
+        'Pragma'                    => 'no-cache',
+        'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+        'Expires'                   => '0',
+        'Accept-Ranges'             => 'bytes',
+      );
+      file_transfer($file->uri, $headers);
+    }
+  }
 }
 
 /**

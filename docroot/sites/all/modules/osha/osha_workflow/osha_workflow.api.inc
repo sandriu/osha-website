@@ -74,13 +74,21 @@ function osha_workflow_access_find_pm(&$section_tree, $section_id) {
  * Get PM of a section.
  */
 function osha_workflow_access_pm_get_pm($access_id, $access_scheme) {
+  return user_load_multiple(
+    osha_workflow_access_pm_get_pm_uid($access_id, $access_scheme));
+}
+
+/**
+ * Get PM of a section.
+ */
+function osha_workflow_access_pm_get_pm_uid($access_id, $access_scheme) {
   $users = db_select('osha_workflow_access_pm', 'owa')
     ->fields('owa', array('uid'))
     ->condition('access_id', $access_id)
     ->condition('access_scheme', $access_scheme)
     ->execute()
     ->fetchAllAssoc('uid');
-  return user_load_multiple(array_keys($users));
+  return array_keys($users);
 }
 
 /**
@@ -105,6 +113,7 @@ function osha_workflow_access_pm_check_root() {
   }
   return FALSE;
 }
+
 /**
  * Assign project manager to a node.
  *
@@ -621,18 +630,25 @@ class OshaWorkflowPermissions {
   /**
    * Get the users by role name.
    *
-   * @param string $role_name
-   *   Role name
+   * @param string|int $role
+   *   Role name on rid
    *
    * @return mixed
    *   FALSE or array of user object.
    */
-  public static function getUsersByRole($role_name) {
-    $role = user_role_load_by_name($role_name);
+  public static function getUsersByRole($role) {
+    if (is_numeric($role)) {
+      $rid = $role;
+    }
+    else {
+      $role = user_role_load_by_name($role);
+      $rid = $role->rid;
+    }
+
     $query = db_select('users', 'u');
     $query->fields('u', array('uid'));
     $query->join('users_roles', 'ur', 'ur.uid = u.uid');
-    $query->condition('ur.rid', $role->rid);
+    $query->condition('ur.rid', $rid);
     $result = $query->execute()->fetchAllAssoc('uid');
     $uids = array_keys($result);
     return user_load_multiple($uids);
@@ -755,6 +771,19 @@ class OshaWorkflowNotifications {
   }
 
   /**
+   * REV_RM_US_15 Notification sent to WebTeam when a node had status changed.
+   */
+  public static function notifyWebTeamStatusChanged($node, $from_state, $to_state) {
+    $params = array(
+      'node' => $node,
+      'from' => $from_state,
+      'to' => $to_state,
+    );
+    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR);
+    OshaWorkflowNotifications::sendEmail($users, $params, 'osha_workflow', 'osha_workflow_notification_admin');
+  }
+
+  /**
    * Notification First approver that the approval workflow begins.
    *
    * (Approved => ReadyToPublish)
@@ -785,8 +814,9 @@ class OshaWorkflowNotifications {
    *   Job created
    */
   public static function notifyTranslationUploadedFile($tmgmt_job) {
-    $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
-    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job' => $tmgmt_job), 'osha_tmgmt');
+    // See CW-696 (Notification not needed)
+    // $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    // OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job' => $tmgmt_job), 'osha_tmgmt');
   }
 
   /**
@@ -881,6 +911,10 @@ class OshaWorkflowNotifications {
   public static function sendEmail($users, $params, $module, $key = 'osha_workflow_notification') {
     if (empty($users)) {
       drupal_set_message('There are no users to notify about your action. Please report this to system administrator.', 'warning');
+      return;
+    }
+    if (drupal_is_cli()) {
+      drupal_set_message('Not sending emails from cli.', 'status');
       return;
     }
     if (!is_array($users)) {

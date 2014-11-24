@@ -39,12 +39,7 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
         }
       }
       if ($finished) {
-        // There are no unfinished elements left.
-        if ($this->getJob()->getTranslator()->getSetting('auto_accept')) {
-          // If the job item is going to be auto-accepted, set to review without
-          // a message.
-          $this->needsReview(FALSE);
-        }
+        $this->needsReview(t('Translation was accepted'));
       }
     }
     $this->save();
@@ -106,7 +101,6 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
    */
   public function toTranslationRejected($message = '') {
     $this->state = TMGMT_JOB_ITEM_STATE_ABORTED;
-    $this->setTranslationDataStatusPendingRecursive($this->data);
     global $user;
     $this->save();
     $this->addMessage('@name: Translation Rejected. Job item is now "@state". Message: @message',
@@ -117,20 +111,6 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
       ));
     OshaWorkflowNotifications::notifyTranslationValidators($this);
     drupal_set_message(t('You have Rejected this translation'));
-  }
-
-
-  private function setTranslationDataStatusPendingRecursive($translation, $key = array()) {
-    if (isset($translation['#text']) && isset($translation['#status'])) {
-      $values = array(
-        '#translation' => $translation,
-        '#status' => TMGMT_DATA_ITEM_STATE_PENDING,
-      );
-      $this->updateData($key, $values);
-    }
-    foreach (element_children($translation) as $item) {
-      $this->setTranslationDataStatusPendingRecursive($translation[$item], array_merge($key, array($item)));
-    }
   }
 
   /**

@@ -49,14 +49,6 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
     $this->addFieldMapping('field_archived', 'archived');
     $this->addFieldMapping('field_expiration_date', 'expiration_date');
 
-    $this->addFieldMapping('field_image', 'logo');
-    $this->addFieldMapping('field_image:file_class')->defaultValue('OSHAMigrateFileUri');
-    $this->addFieldmapping('field_image:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_image:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldMapping('field_image:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_image:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'logo');
-    $this->addFieldMapping('field_image:multilingual')->defaultValue(TRUE);
-
     $this->addFieldMapping('field_related_resources', 'files');
     $this->addFieldMapping('field_related_resources:file_class')->defaultValue('OSHAMigrateFileUri');
     $this->addFieldMapping('field_related_resources:description', 'file_descriptions');
@@ -65,33 +57,56 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
     $this->addFieldMapping('field_related_resources:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_related_resources:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'files');
     $this->addFieldMapping('field_related_resources:multilingual')->defaultValue(TRUE);
-
-    $this->addFieldMapping('field_seminar_attachment', 'attachment');
-    $this->addFieldMapping('field_seminar_attachment:file_class')->defaultValue('OSHAMigrateFileUri');
-    $this->addFieldmapping('field_seminar_attachment:preserve_files')->defaultValue(TRUE);
-    $this->addFieldMapping('field_seminar_attachment:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    $this->addFieldMapping('field_seminar_attachment:source_dir')->defaultValue($data_path . '/export/');
-    $this->addFieldMapping('field_seminar_attachment:destination_file', OSHA_MIGRATION_REPLACED_PATH_PREFIX . 'attachment');
-    $this->addFieldMapping('field_seminar_attachment:multilingual')->defaultValue(TRUE);
-
-    $this->addFieldMapping('field_seminar_contact_name', 'contactName');
-    $this->addFieldMapping('field_seminar_contact_phone', 'contactPhone');
-    $this->addFieldMapping('field_seminar_contact_email', 'contactEmail');
     $this->addFieldMapping('field_seminar_start_date', 'startDate');
     $this->addFieldMapping('field_seminar_end_date', 'endDate');
-    $this->addFieldMapping('field_sem_date_to_be_confirmed', 'dateToBeConfirmed');
-    $this->addFieldMapping('field_seminar_show_roster_hour', 'showRosterHour');
+    $this->addFieldMapping('field_seminar_location', 'location');
 
     $this->addFieldMapping('body', 'description');
-    $this->addFieldMapping('body:format')->defaultValue('plain_text');
+    $this->addFieldMapping('body:format')->defaultValue('full_html');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
-    $this->addFieldMapping('field_needs_retranslation')->defaultValue(0);
 
-    // TODO add unmigrated sources!
+    $this->addUnmigratedSources(array(
+      'path',
+      'language',
+      'workflow_state',
+      'creator',
+      'summary',
+      'attendees',
+      'country',
+      'contactName',
+      'contactPhone',
+      'contactEmail',
+      'conclusions',
+      'dateToBeConfirmed',
+      'eventUrl',
+      'furtherActions',
+      'showRosterHour',
+      'logo'
+    ));
 
-    // TODO add unmigrated destinations!
+    $this->addUnmigratedDestinations(array(
+      'promote',
+      'status',
+      'sticky',
+      'revision',
+      'log',
+      'language',
+      'tnid',
+      'translate',
+      'revision_uid',
+      'is_new',
+      'body:summary',
+      'field_publication_date:timezone',
+      'field_publication_date:rrule',
+      'field_publication_date:to',
+      'field_tags:create_term',
+      'field_tags:ignore_case',
+      'field_thesaurus:create_term',
+      'field_thesaurus:ignore_case',
+      'comment',
+    ));
   }
 
   /**
@@ -128,8 +143,6 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
       $row->multilingual_thesaurus = NULL;
     }
 
-    MigrationUtil::cleanMigratedFileField($row, 'logo', 'public://seminars/logos');
-    MigrationUtil::cleanMigratedFileField($row, 'attachment', 'public://seminars/documents');
     MigrationUtil::cleanMigratedFileField($row, 'files', 'public://seminars/documents');
 
     return TRUE;
@@ -164,16 +177,19 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
         $entity->body[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
+      /*
       if (!empty($row->summary[$language])) {
         $entity->field_summary[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->summary[$language]);
         $entity->field_summary[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
+      */
       if (!empty($row->location[$language])) {
         $entity->field_seminar_location[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->location[$language]);
         $entity->field_seminar_location[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
+      /*
       if (!empty($row->attendees[$language])) {
         $entity->field_seminar_attendees[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->attendees[$language]);
         $entity->field_seminar_attendees[$language][0]['format'] = 'full_html';
@@ -193,6 +209,7 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
         $entity->field_seminar_further_actions[$language][0]['format'] = 'full_html';
         $has_translation = TRUE;
       }
+      */
 
       if ($has_translation) {
         MigrationUtil::setTranslation($translation_handler, $entity, $row, $language);
@@ -218,7 +235,7 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
       'creator' => 'Author user id from the old website',
       'title' => '',
       'summary' => '',
-      'description' => 'Body of the news',
+      'description' => 'Body of the seminar',
       'logo' => 'Path to image file',
       'subject' => 'Categories/Tags',
       'subcategory' => 'Merged into categories',
@@ -232,7 +249,6 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
       'contactName' => '',
       'contactEmail' => '',
       'contactPhone' => '',
-      'attachment' => '',
       'conclusions' => '',
       'furtherActions' => '',
       'showRosterHour' => '',
@@ -302,14 +318,6 @@ class SeminarsListCSV extends MigrateList {
             break;
 
           case 'description':
-          case 'summary':
-          case 'conclusions':
-          case 'furtherActions':
-          case 'attendees':
-          case 'location':
-          case 'eventUrl':
-          case 'attachment':
-          case 'logo':
             self::$data[$path][$field][$language] = $raw_data[$key];
             break;
 

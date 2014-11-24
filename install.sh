@@ -86,6 +86,9 @@ do
         echo "Importing Calls content"
         drush migrate-import Calls
 
+        echo "Importing Notes to editors for press releases"
+        drush migrate-import NoteToEditor
+
         echo "Importing PressRelease content"
         drush migrate-import PressRelease
 

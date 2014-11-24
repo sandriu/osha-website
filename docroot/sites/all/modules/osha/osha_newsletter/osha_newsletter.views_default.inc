@@ -46,7 +46,6 @@ function osha_newsletter_views_default_views() {
     'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
     'type' => 'type',
-    'field_workflow_status' => 'field_workflow_status',
     'name' => 'name',
     'changed' => 'changed',
     'edit_node' => 'edit_node',
@@ -66,13 +65,6 @@ function osha_newsletter_views_default_views() {
       'empty_column' => 0,
     ),
     'type' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_workflow_status' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -287,11 +279,6 @@ function osha_newsletter_views_default_views() {
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['label'] = 'Type of content';
-  /* Field: Content: Workflow status */
-  $handler->display->display_options['fields']['field_workflow_status']['id'] = 'field_workflow_status';
-  $handler->display->display_options['fields']['field_workflow_status']['table'] = 'field_data_field_workflow_status';
-  $handler->display->display_options['fields']['field_workflow_status']['field'] = 'field_workflow_status';
-  $handler->display->display_options['fields']['field_workflow_status']['label'] = 'Status';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -418,22 +405,6 @@ function osha_newsletter_views_default_views() {
   );
   $handler->display->display_options['filters']['field_activity_tid']['vocabulary'] = 'activity';
   $handler->display->display_options['filters']['field_activity_tid']['hierarchy'] = 1;
-  /* Filter criterion: Broken/missing handler */
-  $handler->display->display_options['filters']['field_section_tid']['id'] = 'field_section_tid';
-  $handler->display->display_options['filters']['field_section_tid']['table'] = 'field_data_field_section';
-  $handler->display->display_options['filters']['field_section_tid']['field'] = 'field_section_tid';
-  $handler->display->display_options['filters']['field_section_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_section_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_section_tid']['expose']['operator_id'] = 'field_section_tid_op';
-  $handler->display->display_options['filters']['field_section_tid']['expose']['label'] = 'Section';
-  $handler->display->display_options['filters']['field_section_tid']['expose']['operator'] = 'field_section_tid_op';
-  $handler->display->display_options['filters']['field_section_tid']['expose']['identifier'] = 'field_section_tid';
-  $handler->display->display_options['filters']['field_section_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_section_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
   /* Filter criterion: Field: Nace (field_nace_codes) */
   $handler->display->display_options['filters']['field_nace_codes_tid']['id'] = 'field_nace_codes_tid';
   $handler->display->display_options['filters']['field_nace_codes_tid']['table'] = 'field_data_field_nace_codes';
@@ -470,24 +441,6 @@ function osha_newsletter_views_default_views() {
     3 => 0,
   );
   $handler->display->display_options['filters']['field_thesaurus_tid']['vocabulary'] = 'thesaurus';
-  /* Filter criterion: Content: Workflow status (field_workflow_status) */
-  $handler->display->display_options['filters']['field_workflow_status_tid']['id'] = 'field_workflow_status_tid';
-  $handler->display->display_options['filters']['field_workflow_status_tid']['table'] = 'field_data_field_workflow_status';
-  $handler->display->display_options['filters']['field_workflow_status_tid']['field'] = 'field_workflow_status_tid';
-  $handler->display->display_options['filters']['field_workflow_status_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_workflow_status_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_workflow_status_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_workflow_status_tid']['expose']['operator_id'] = 'field_workflow_status_tid_op';
-  $handler->display->display_options['filters']['field_workflow_status_tid']['expose']['label'] = 'Workflow status';
-  $handler->display->display_options['filters']['field_workflow_status_tid']['expose']['operator'] = 'field_workflow_status_tid_op';
-  $handler->display->display_options['filters']['field_workflow_status_tid']['expose']['identifier'] = 'field_workflow_status_tid';
-  $handler->display->display_options['filters']['field_workflow_status_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_workflow_status_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_workflow_status_tid']['vocabulary'] = 'workflow_status';
   /* Filter criterion: User: Name (raw) */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'users';
@@ -523,6 +476,37 @@ function osha_newsletter_views_default_views() {
     1 => 0,
     3 => 0,
   );
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'published' => 'published',
+  );
+  /* Filter criterion: Workbench Access: Access filter */
+  $handler->display->display_options['filters']['access_id']['id'] = 'access_id';
+  $handler->display->display_options['filters']['access_id']['table'] = 'workbench_access';
+  $handler->display->display_options['filters']['access_id']['field'] = 'access_id';
+  $handler->display->display_options['filters']['access_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['access_id']['expose']['operator_id'] = 'access_id_op';
+  $handler->display->display_options['filters']['access_id']['expose']['label'] = 'Section';
+  $handler->display->display_options['filters']['access_id']['expose']['operator'] = 'access_id_op';
+  $handler->display->display_options['filters']['access_id']['expose']['identifier'] = 'access_id';
+  $handler->display->display_options['filters']['access_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+  );
+  $handler->display->display_options['filters']['access_id']['access_id'] = array();
+  $handler->display->display_options['filters']['access_id']['size'] = '5';
 
   /* Display: Newsletter content selection */
   $handler = $view->new_display('page', 'Newsletter content selection', 'newsletter_selection_view_page');
@@ -553,7 +537,6 @@ function osha_newsletter_views_default_views() {
     t('- Choose an operation -'),
     t('Title'),
     t('Type of content'),
-    t('Status'),
     t('Author'),
     t('Updated'),
     t('Edit'),
@@ -564,12 +547,11 @@ function osha_newsletter_views_default_views() {
     t('Node ID'),
     t('Activity'),
     t('Activity (field_activity)'),
-    t('Section'),
     t('Nace Codes'),
     t('Thesaurus'),
-    t('Workflow status'),
     t('Enter name or part of author\'s name'),
     t('Select an interval for filtering'),
+    t('Section'),
   );
   $export['newsletter_node_selection'] = $view;
 

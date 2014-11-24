@@ -127,6 +127,11 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['fields']['field_directive_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_directive_type']['type'] = 'taxonomy_term_reference_plain';
   /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight_1']['relationship'] = 'field_directive_type_tid';
+  /* Sort criterion: Taxonomy term: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
@@ -159,7 +164,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['filters']['current']['field'] = 'current';
   $handler->display->display_options['filters']['current']['relationship'] = 'nid';
   $handler->display->display_options['filters']['current']['value'] = '1';
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -241,7 +246,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['fields']['field_legislation_category']['label'] = '';
   $handler->display->display_options['fields']['field_legislation_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_legislation_category']['element_label_colon'] = FALSE;
-  /* Sort criterion: Content: Publication Date (field_publication_date) */
+  /* Sort criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -276,7 +281,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'guideline' => 'guideline',
   );
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
+  /* Filter criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -356,7 +361,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['sorts']['weight']['relationship'] = 'field_legislation_category_tid';
-  /* Sort criterion: Content: Publication Date (field_publication_date) */
+  /* Sort criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';

@@ -83,6 +83,35 @@ function osha_calls_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_calls';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 'teaser',
+    'highlights_item' => 'highlights_item',
+    'newsletter_item' => 'newsletter_item',
+    'osha_resources' => 'osha_resources',
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'osha_wiki' => 0,
+    'print' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_calls'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_calls';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_calls'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__calls';
   $strongarm->value = array(
     'view_modes' => array(
@@ -120,7 +149,7 @@ function osha_calls_strongarm() {
         'custom_settings' => FALSE,
       ),
       'osha_slideshow' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'highlights_item' => array(
         'custom_settings' => TRUE,
@@ -129,22 +158,28 @@ function osha_calls_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_wiki' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '21',
+          'weight' => '20',
         ),
         'redirect' => array(
-          'weight' => '20',
+          'weight' => '19',
         ),
         'language' => array(
           'weight' => '1',
         ),
         'metatags' => array(
-          'weight' => '22',
+          'weight' => '21',
         ),
         'workbench_access' => array(
           'weight' => '0',

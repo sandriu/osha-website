@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Code for the Resources feature.
+ */
+
+include_once 'osha_resources.features.inc';
+
+/**
+ * Define custom view mode for entities - wiki
+ */
+function osha_resources_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['osha_resources'] = array(
+    'label' => t('Additional Resource'),
+    'custom settings' => TRUE,
+  );
+}

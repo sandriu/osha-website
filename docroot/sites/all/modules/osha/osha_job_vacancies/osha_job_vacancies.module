@@ -61,3 +61,55 @@ function osha_job_vacancies_post_features_revert($component) {
       ->execute();
   }
 }
+
+/**
+ * Implements hook_node_validate().
+ *
+ * {@inheritdoc}
+ */
+function osha_job_vacancies_node_validate($node, $form, &$form_state) {
+  $values = $form_state['values'];
+  if ($node->type == 'job_vacancies' &&
+      !empty($values['field_job_vacancies_deadline'][LANGUAGE_NONE][0]['value']) &&
+      !empty($values['field_publication_date'][LANGUAGE_NONE][0]['value'])
+  ) {
+    $deadline_date = strtotime($values['field_job_vacancies_deadline'][LANGUAGE_NONE][0]['value']);
+    $publication_date = strtotime($values['field_publication_date'][LANGUAGE_NONE][0]['value']);
+    // Assume that all fields use the same timezone handling settings.
+    if ($deadline_date < $publication_date) {
+      form_set_error('field_job_vacancies_deadline', 'Deadline must be after the publication date');
+    }
+    if (!empty($values['field_expiration_date'][LANGUAGE_NONE][0]['value'])) {
+      $expiration_date = strtotime($values['field_expiration_date'][LANGUAGE_NONE][0]['value']);
+      if ($expiration_date < $deadline_date) {
+        form_set_error('field_expiration_date', 'Item must expire after the deadline');
+      }
+    }
+  }
+}
+
+function osha_job_vacancies_workbench_access_node_element_alter(&$element, $form_state, $active) {
+  if (isset($form_state['build_info']['form_id']) && $form_state['build_info']['form_id'] == 'job_vacancies_node_form' ) {
+    // CW-865 default value for Section
+    $element['#required'] = FALSE;
+    foreach ($element['#options'] as $key=>$option) {
+      if (preg_match('/^[-\\s]*Careers/', $option)) {
+        $element['#default_value'] = $key;
+        break;
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_job_vacancies_form_job_vacancies_node_form_alter(&$form) {
+  if (empty($form['nid']['#value']) ||
+    (isset($form['body']['#language']) &&
+      empty($form['body'][$form['body']['#language']][0]['#default_value']))) {
+    // CW-859 disable body for new vacancies and for existing nodes with empty body
+    $form['body']['#access'] = FALSE;
+  }
+}

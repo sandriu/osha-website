@@ -110,9 +110,33 @@ function osha_workflow_workbench_project_managers($access_type = NULL, $access_t
         )->fetchField();
       }
       $row[] = l(format_plural($count, '1 Project Manager', '@count Project Managers'), 'admin/config/workbench/access/managers/' . $active['access_scheme']['access_type'] . '/' . $access_id);
+
+      $review = osha_workflow_get_section_reviews($access_id);
+
+      if (empty($review)) {
+        $row[] = l(t('Not reviewed yet.'), 'admin/config/workbench/access/managers/review/' . $active['access_scheme']['access_type'] . '/' . $access_id);
+      }
+      else {
+        $review = current($review);
+        $user = user_load($review->uid);
+        $last_review = new DateTime(date("c", $review->created));
+        $now = new DateTime();
+        $since_last_review = $now->diff($last_review);
+        $row[] = l(
+          t('Last reviewed by @name on @created (@months months ago)',
+            array(
+              '@name' => $user->name,
+              '@created' => date('d-m-Y', $review->created),
+              '@months' => $since_last_review->m,
+            )
+          ),
+          'admin/config/workbench/access/managers/review/' . $active['access_scheme']['access_type'] . '/' . $access_id);
+      }
+
       $rows[] = $row;
     }
-    $header = array(t('Section'), t('@types', array('@type' => 'Managers')));
+    $header = array(t('Section'), t('@types', array('@type' => 'Managers')),
+      t('Review'));
     $output .= theme('table', array('header' => $header, 'rows' => $rows));
     $build['content']['#markup'] = $output;
     return $build;
@@ -555,4 +579,141 @@ function osha_workflow_node_approval_form_submit($form, $form_state) {
     ksort($users);
   }
   osha_workflow_set_node_approvers($node->nid, $users);
+}
+
+/**
+ * PM Review Section form.
+ */
+function osha_workflow_access_section_review_form($form, &$form_state, $access_type, $access_type_id) {
+  $access_info = workbench_access_load($access_type, $access_type_id);
+  $output = '<h2>' . t('%name PM section review', array('%name' => $access_info['name'])) . '</h2>';
+
+  $form_state['access_id'] = $access_type_id;
+  $form_state['access_scheme'] = $access_type;
+  $form['title'] = array(
+    '#markup' => $output,
+  );
+
+  $form['actions'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Reviews'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#access' => array('mark access section as reviewed'),
+  );
+  $form['actions']['review_message'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Message',
+    '#description' => t('You can enter a message for your review.'),
+  );
+  $form['actions']['mark_as_reviewed'] = array(
+    '#type' => 'submit',
+    '#submit' => array('osha_workflow_access_section_review_form_submit'),
+    '#validate' => array(),
+    '#value' => 'Mark this section as Reviewed',
+    '#access' => array('mark access section as reviewed'),
+  );
+  $form['go_back'] = array(
+    '#theme' => 'link',
+    '#text' => t('Go back'),
+    '#path' => 'admin/config/workbench/access/managers',
+    '#options' => array(
+      'attributes' => array(),
+      'html' => FALSE,
+    ),
+  );
+
+  global $user;
+  $pm_uids = osha_workflow_access_pm_get_pm_uid($access_type_id, $access_type);
+  if (!in_array('administrator', $user->roles)
+    && !in_array($user->uid, $pm_uids)) {
+    $form['actions']['#access'] = FALSE;
+  }
+
+  // Add review history.
+  $form['reviews'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Reviews'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $reviews = osha_workflow_get_section_reviews($access_type_id);
+  $rows = array();
+  foreach ($reviews as $review) {
+    $reviewer = user_load($review->uid);
+    $rows[] = array(
+      $reviewer->name,
+      date('d-m-Y', $review->created),
+      $review->message,
+    );
+  }
+  $header = array('Reviewer', 'Data', 'Mesaj');
+  $form['reviews']['table'] = array(
+    '#markup' => theme('table', array('header' => $header, 'rows' => $rows)),
+  );
+
+  return $form;
+}
+
+function osha_workflow_access_section_review_form_validate($form, &$form_state) {
+  global $user;
+  $access_id = $form_state['access_id'];
+  $access_scheme = $form_state['access_scheme'];
+  $pm_uids = osha_workflow_access_pm_get_pm_uid($access_id, $access_scheme);
+  if (!in_array($user->uid, $pm_uids)) {
+
+  }
+}
+
+/**
+ * Submit callback for PM Review Section.
+ */
+function osha_workflow_access_section_review_form_submit($form, &$form_state) {
+  global $user;
+  $access_id = $form_state['access_id'];
+  $message = $form_state['values']['review_message'];
+  $review = array(
+    'uid' => $user->uid,
+    'access_id' => $access_id,
+    'message' => $message,
+    'created' => REQUEST_TIME,
+  );
+  // Add the review.
+  drupal_write_record('osha_workflow_sections_review', $review);
+
+  $active_tree = workbench_access_get_active_tree();
+  if (!empty($active_tree['tree'][$access_id]['children'])) {
+    // Get the access ids that have PM assigned.
+    $aids = db_select('osha_workflow_access_pm', 'owa')
+      ->fields('owa')
+      ->execute()
+      ->fetchAllAssoc('access_id');
+    $aids = array_keys($aids);
+
+    // Mark as reviewed all children section that have no PM assigned.
+    foreach ($active_tree['tree'][$access_id]['children'] as $access) {
+      if (!in_array($access, $aids)) {
+        unset($review['srid']);
+        $review['access_id'] = $access;
+        drupal_write_record('osha_workflow_sections_review', $review);
+      }
+    }
+  }
+
+  drupal_set_message(t('Section reviewed successfully!'));
+
+  $form_state['redirect'] = 'admin/config/workbench/access/managers';
+}
+
+/**
+ * Get the reviews of a section.
+ */
+function osha_workflow_get_section_reviews($access_id) {
+  $review = db_select('osha_workflow_sections_review', 'sr')
+    ->fields('sr')
+    ->condition('sr.access_id', $access_id)
+    ->orderBy('sr.srid', 'DESC')
+    ->execute()
+    ->fetchAllAssoc('srid');
+  return $review;
 }

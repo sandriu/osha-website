@@ -65,6 +65,7 @@ function osha_tmgmt_workflow_permissions_common() {
     'view the administration theme',
     'access toolbar',
     'view translation job',
+    'use text format full_html',
     // TODO checko why fails on install if access workbench permission added here.
 //    'access workbench',
 
@@ -111,6 +112,10 @@ function osha_tmgmt_workflow_permissions_role_translation_manager() {
       // Translate tab on nodes.
       'translate node entities',
       'manage content in translators group entity collections',
+
+      // CW-928, CW-911 - needed for filter by Section
+      'view workbench access information',
+      'access workbench access by role',
     ),
     osha_tmgmt_workflow_permissions_common()
   );

@@ -1,13 +1,167 @@
 /**
  * Use 3 grid columns for smaller screens.
  */
-@media all and (max-width: 600px) {
+ 
+@media all and (max-width: 768px) {
+
+body {
+    background: none repeat scroll 0 0 #FFFFFF!important;
+}
+
+#page{
+	clear:both;
+}
+
+
+
+/* HEADER */
+#socialNetworksBlue{
+	display:none;
+}
+
+#languagesAndSearch{
+	display:block;
+}
+
+#languagesAndSearch #contact{ 
+	display:none;
+}
+
+#agencyLogo{
+	display:none;
+}
+
+#europeLogo{
+	display:none;
+}
+
+#lang-dropdown-select-language_content {
+    float: left !important;
+    margin-bottom: 1em;
+    margin-left: 1em !important;
+    margin-right: 0 !important;
+    margin-top: -1em !important;
+}
+
+#block-search-form{
+	clear: both;
+    float: left !important;
+    margin-left: 1em;
+    margin-top: -0.5em !important;
+}
+
+.form-item.form-type-select.form-item-lang-dropdown-select{
+	margin-top: 2em!important;
+}
+
+#languagesAndSearch img {
+    left: 14em;
+    margin-top: 1em!important;
+    position: absolute;
+    vertical-align: middle;
+ }
+
+/* END HEADER */
+
+
+/* MENU RESPONSIVE */
+.mean-container .mean-bar{
+	float:none;
+	background: url("../images/agencyLogoMobile.png") no-repeat scroll 50% 20% #fff;
+	padding:1em;
+	margin-top: 0.5em;
+	border-bottom: 3px solid #003399;
+}
+
+.mean-container a.meanmenu-reveal{
+	width:30px;
+	left:0em!important;
+}
+
+.mean-container a.meanmenu-reveal span{
+	background:#003399;
+	margin-bottom: 5px;
+}
+
+.meanmenu-reveal.meanclose{
+	color:#003399!important;
+}
+
+.mean-container .mean-nav{
+	margin-top:4.1em;
+	margin-left: -1em;
+	background: none repeat scroll 0 0 #edf1f8;
+	color:#57575a;
+}
+
+.mean-container .mean-nav a{ 
+	color:#57575a!important;
+	padding:0!important;
+	text-transform:none!important;
+}
+
+.mean-container .mean-nav ul li a{
+	border-top:0px!important;
+}
+
+.mean-container .mean-nav ul li a.mean-expand{
+	color:#dc2f82!important;
+	border:0px!important;
+	left:14em;
+}
+
+.mean-container .mean-nav ul li{
+	padding:1em;
+}
+
+.mean-container .mean-nav ul li ul li {
+	padding:1em;
+}
+
+.mean-container .mean-nav ul li ul li  ul li {
+	padding:0em 0em 0em 1em;
+}
+
+
+.mean-container .mean-nav ul li ul a.mean-expand {
+	margin-top:0em;
+	color: #dc2f82 !important;
+}
+
+.mean-container .mean-nav ul li a.mean-expand:hover{
+	 background: none repeat scroll 0 0 #edf1f8 ;
+	 border:0px!important;
+	 border-width: 0 0 0px 0px;
+}
+
+
+.mean-container .mean-nav ul li li a{
+    color: #003399 !important;
+    font-weight: bold;
+    padding:0;
+    width: 80%;
+	border:0px;
+	font-size:0.8em;
+	text-transform: none;
+}
+
+/* END MENU RESPONSIVE */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
-	h1{
-		color:red;
-	}
-
-
 }
 
 

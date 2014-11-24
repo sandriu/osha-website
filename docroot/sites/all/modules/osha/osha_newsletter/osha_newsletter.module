@@ -135,7 +135,11 @@ highlight/*
 teaser/*
 news/*
 seminar/*
-seminars/*',
+seminars/*
+about/calls/*
+calls/*
+about/jobs/*
+job-vacancies/*',
     'cache' => DRUPAL_NO_CACHE,
     'weight' => -30
   );
@@ -340,14 +344,16 @@ function _osha_newsletter_latest_block_content(){
   $entity_collections = entity_load_multiple_by_name('entity_collection');
 
   foreach ($entity_collections as $element) {
-    if ($element->bundle == 'newsletter_content_collection') {
-      $collections[] = $element;
+    if ($element->bundle == 'newsletter_content_collection' && !empty($element->field_publication_date)) {
+      if(time() > strtotime($element->field_publication_date[LANGUAGE_NONE][0]['value'])){
+        $collections[] = $element;
+      }
     }
   }
 
   usort($collections, function($a, $b){
-    $a_date = strtotime($a->field_created[LANGUAGE_NONE][0]['value']);
-    $b_date = strtotime($b->field_created[LANGUAGE_NONE][0]['value']);
+    $a_date = strtotime($a->field_publication_date[LANGUAGE_NONE][0]['value']);
+    $b_date = strtotime($b->field_publication_date[LANGUAGE_NONE][0]['value']);
     return $a_date < $b_date;
   });
 
@@ -393,12 +399,12 @@ function osha_newsletter_subscribe_extra_form() {
   $form['email'] = array(
     '#type' => 'textfield',
     '#size' => 30,
-    '#required' => TRUE,
     '#attributes' => array('placeholder' => t('E-mail address'))
   );
   $form['captcha'] = array(
     '#type' => 'captcha',
-    '#captcha_type' => 'recaptcha/reCAPTCHA',
+    //'#captcha_type' => 'recaptcha/reCAPTCHA',
+    '#captcha_type' => 'image_captcha/Image',
   );
   $link_label = variable_get('subscribe_extra_block_details_link_label', t('How will EU-OSHA use my details?'));
   $link_url = variable_get('subscribe_extra_block_details_link_url', url(OSHA_NEWSLETTER_PAGE_URL));
@@ -432,13 +438,12 @@ function osha_newsletter_subscribe_form() {
   $form['email'] = array(
     '#type' => 'textfield',
     '#size' => 30,
-    '#required' => TRUE,
     '#attributes' => array('placeholder' => t('E-mail address'))
   );
   $form['captcha'] = array(
     '#type' => 'captcha',
-    '#captcha_type' => 'recaptcha/reCAPTCHA',
-
+    '#captcha_type' => 'image_captcha/Image',
+    //'#captcha_type' => 'recaptcha/reCAPTCHA',
   );
   $link_label = variable_get('subscribe_block_details_link_label', t('Privacy policy'));
   $link_url = variable_get('subscribe_block_details_link_url', url(OSHA_PRIVACY_PAGE_URL));
@@ -463,12 +468,12 @@ function osha_newsletter_unsubscribe_form() {
   $form['email'] = array(
     '#type' => 'textfield',
     '#size' => 30,
-    '#required' => TRUE,
     '#attributes' => array('placeholder' => t('E-mail address'))
   );
   $form['captcha'] = array(
     '#type' => 'captcha',
-    '#captcha_type' => 'recaptcha/reCAPTCHA',
+    '#captcha_type' => 'image_captcha/Image',
+    //'#captcha_type' => 'recaptcha/reCAPTCHA',
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -482,8 +487,27 @@ function osha_newsletter_unsubscribe_form() {
  * Subscribe form validation.
  */
 function osha_newsletter_subscribe_form_validate($form, &$form_state) {
-  if (!valid_email_address($form_state['values']['email'])) {
-    form_set_error('email', t('That e-mail address is not valid.'));
+  $email = trim($form_state['values']['email']);
+  if (strlen($email) != 0) {
+    if (!valid_email_address($form_state['values']['email'])) {
+      form_set_error('email', t('The e-mail address is not valid.'));
+    }
+  } else {
+    form_set_error('email', t('Please enter the e-mail address.'));
+  }
+}
+
+/**
+ * Extra Subscribe form validation.
+ */
+function osha_newsletter_subscribe_extra_form_validate($form, &$form_state) {
+  $email = trim($form_state['values']['email']);
+  if (strlen($email) != 0) {
+    if (!valid_email_address($form_state['values']['email'])) {
+      form_set_error('email', t('The e-mail address is not valid.'));
+    }
+  } else {
+    form_set_error('email', t('Please enter the e-mail address.'));
   }
 }
 
@@ -491,8 +515,13 @@ function osha_newsletter_subscribe_form_validate($form, &$form_state) {
  * Unsubscribe form validation.
  */
 function osha_newsletter_unsubscribe_form_validate($form, &$form_state) {
-  if (!valid_email_address($form_state['values']['email'])) {
-    form_set_error('email', t('That e-mail address is not valid.'));
+  $email = trim($form_state['values']['email']);
+  if (strlen($email) != 0) {
+    if (!valid_email_address($form_state['values']['email'])) {
+      form_set_error('email', t('The e-mail address is not valid.'));
+    }
+  } else {
+    form_set_error('email', t('Please enter the e-mail address.'));
   }
 }
 
@@ -1001,6 +1030,9 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
   $newsletter_title = $source->title;
   $newsletter_id = $source->eid;
   $newsletter_date = $source->field_created[LANGUAGE_NONE][0]['value'];
+  if (!empty($source->field_publication_date)) {
+    $newsletter_date = $source->field_publication_date[LANGUAGE_NONE][0]['value'];
+  }
 
   $items = $content->children;
   $elements = array();
@@ -1038,10 +1070,19 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
     }
   }
 
-  $languages = language_list();
-  usort($languages, function ($a, $b) {
+  $languages = language_list('enabled');
+  usort($languages[1], function ($a, $b) {
     return strcmp($a->name, $b->name);
   });
+
+  $languages = $languages[1];
+
+  //hide some languages
+  $hided_lng = array('ru', 'tr');
+  foreach($languages as $key => $language){
+    if(in_array($language->language, $hided_lng))
+      unset($languages[$key]);
+  }
 
   // Get message data from source.
   $message['subject'] = $source->title;

@@ -101,6 +101,29 @@ function osha_search_form_views_exposed_form_alter(&$form, &$form_state) {
       $form['search_api_language']['#default_value'] = $language->language;
     }
   }
+
+  if ($form['#id'] == 'views-exposed-form-search-directives-page') {
+    // Add Directives Year dropdown to non-search pages.
+    if ($form['#action'] != '/' . request_path()) {
+      $years = db_query(
+        'SELECT DISTINCT DATE_FORMAT(field_date_of_directive_value, \'%Y\') year
+        FROM field_data_field_date_of_directive
+        WHERE field_date_of_directive_value IS NOT NULL
+        ORDER BY year DESC')
+      ->fetchAllAssoc('year');
+
+      $years_options = array();
+      foreach ($years as $year => $year_ob) {
+        $years_options['field_date_of_directive:' . $year] = $year;
+      }
+      $form['f[0]'] = array(
+        '#title' => t('Date of directive'),
+        '#type' => 'select',
+        '#options' => array_merge(array('' => '- Any -'), $years_options),
+        '#weight' => '0',
+      );
+    }
+  }
 }
 
 /**
@@ -108,4 +131,54 @@ function osha_search_form_views_exposed_form_alter(&$form, &$form_state) {
  */
 function osha_search_post_features_enable_feature($component) {
   features_revert_module('osha_search');
+}
+
+/**
+ * Implements hook_facetapi_widgets().
+ *
+ * Add selector widget for facets.
+ */
+function osha_search_facetapi_widgets() {
+  return array(
+    'facetapi_dropdown' => array(
+      'handler' => array(
+        'label' => t('Dropdown'),
+        'class' => 'OshaSearchWidgetDropdown',
+        'query types' => array('date'),
+      ),
+    ),
+  );
+}
+
+/**
+ * Widget that renders facets as a dropdown.
+ *
+ * This widget renders facets in the same way as FacetapiWidgetLinks but uses
+ * JavaScript to transform the links drowpdown.
+ *
+ * Inspired from checkbox FacetapiWidgetCheckboxLinks
+ */
+class OshaSearchWidgetDropdown extends FacetapiWidgetLinks {
+
+  /**
+   * Overrides FacetapiWidgetLinks::init().
+   *
+   * Adds additional JavaScript settings and CSS.
+   */
+  public function init() {
+    parent::init();
+    $this->jsSettings['makeDropdown'] = 1;
+    drupal_add_js(drupal_get_path('module', 'osha_search') . '/facet.js', array('weight' => 20));
+    drupal_add_js(array('osha_search' => array('any_option' => t('- Any -'))), 'setting');
+    drupal_add_css(drupal_get_path('module', 'facetapi') . '/facetapi.css');
+  }
+
+  /**
+   * Overrides FacetapiWidgetLinks::getItemClasses().
+   *
+   * Sets the base class for checkbox facet items.
+   */
+  public function getItemClasses() {
+    return array('facetapi-dropdown');
+  }
 }

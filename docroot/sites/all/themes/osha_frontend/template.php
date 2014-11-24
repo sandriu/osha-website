@@ -145,20 +145,34 @@ function fill_related_publications(&$vars) {
     $excluded_nids = array();
     array_push($excluded_nids, $vars['node']->nid);
 
-    $result = $query->entityCondition('entity_type', 'node')
+    $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'publication')
       ->entityCondition('entity_id', $excluded_nids, 'NOT IN')
       ->fieldCondition('field_tags', 'tid', $tids, 'IN')
-      ->propertyOrderBy('changed', 'DESC')
-      ->pager(3)
-      ->execute();
+      ->propertyOrderBy('changed', 'DESC');
 
+    $result = $query->execute();
+    $limit = 3;
+    global $user;
     if (!empty($result)) {
       $vars['total_related_publications'] = sizeof($result['node']);
       $vars['tagged_related_publications'] = array();
+      $count = 0;
       foreach ($result['node'] as $n) {
         $node = node_load($n->nid);
-        $vars['tagged_related_publications'][] = node_view($node,'teaser');
+        if ($node->status == 0 ) {
+          // add unpublished only for admin, do not include in count
+          if (OshaWorkflowPermissions::userHasRole('administrator', $user)) {
+            $vars['tagged_related_publications'][] = node_view($node,'teaser');
+          }
+        } else {
+          $vars['tagged_related_publications'][] = node_view($node,'teaser');
+          $count++;
+        }
+        if ($count == $limit) {
+          // max 3 related publications
+          break;
+        }
       }
     }
   }
@@ -254,6 +268,16 @@ function osha_frontend_process_node(&$vars) {
 }
 
 /**
+ * Implements hook_preprocess_page
+ */
+function osha_frontend_preprocess_page(&$variables){
+  $variables['blog'] = FALSE;
+  if(preg_match('/(.)*(blog)(.)*/', $_SERVER['REQUEST_URI'])){
+    $variables['blog'] = TRUE;
+  }
+}
+
+/**
  * Called from hook_preprocess_node()
  * Insert view or custom blocks in node when meet a specific markup
  * The markup is like <!--[name-of-the-block]-->
@@ -285,8 +309,13 @@ function add_blocks_inside_content(&$vars){
  * Implements hook_form_alter().
  */
 function osha_frontend_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'search_block_form') {
-    $form['search_block_form']['#attributes']['placeholder'] = t('Search');
+  switch($form_id){
+    case 'search_block_form':
+      $form['search_block_form']['#attributes']['placeholder'] = t('Search');
+      break;
+    case 'comment_node_blog_form':
+      $form['author']['homepage']['#access'] = FALSE;
+      break;
   }
 }
 
@@ -341,6 +370,24 @@ function osha_frontend_aggregator_block_item($variables) {
   $element .= '<br/>';
   $element .= '<a href="' . check_url($item->link) . '">' . check_plain($variables['item']->title) . "</a>\n";
   return $element;
+}
+
+function osha_frontend_menu_link__menu_block__main_menu($data) {
+  $el = $data['element'];
+  $attr = drupal_attributes($el['#attributes']);
+  if (isset($data['element']['#title']) &&
+    $data['element']['#title'] == 'Home' &&
+    isset($el['#localized_options']['content']['image'])
+  ) {
+    $path = file_create_url($el['#localized_options']['content']['image']);
+    $link = l('<img src="' . $path . '" />', $el['#href'], array('html' => TRUE));
+    return sprintf("\n<li %s>%s</li>", $attr, $link);
+  }
+  else {
+    $link = l($el['#title'], $el['#href'], $el['#localized_options']);
+    $sub_menu = drupal_render($el['#below']);
+    return sprintf("\n<li %s>%s %s</li>", $attr, $link, $sub_menu);
+  }
 }
 
 /**

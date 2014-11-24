@@ -39,7 +39,7 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
       $new_job_data = OshaTMGMTRetranslate::apply_partial_translation(
         $entity, $job_item->getData(), $job_item->source_language, $job_item->target_language);
       tmgmt_field_populate_entity($job_item->item_type, $entity, $job_item->target_language, $new_job_data);
-      $entity->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 0;
+      //$entity->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 0;
     } else {
       tmgmt_field_populate_entity($job_item->item_type, $entity, $job_item->target_language, $job_item->getData());
     }
@@ -48,6 +48,10 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
     $handler = entity_translation_get_handler($job_item->item_type, $entity);
     $handler->setFormLanguage($job_item->target_language);
 
+    if ( $job_item->item_type == 'node' && workbench_moderation_node_type_moderated($entity->type) ) {
+      // Force the same state in order to avoid creation of new weird transitions.
+      $entity->workbench_moderation_state_new = $entity->workbench_moderation['current']->state;
+    }
     entity_save($job_item->item_type, $entity);
 
     $translation = array(
@@ -70,6 +74,7 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
  * @see tmgmt_field_get_source_data
  */
 function osha_tmgmt_field_get_source_data($job_item, $entity, $only_translatable = FALSE) {
+
   $entity_type = $job_item->item_type;
   $langcode = $job_item->source_language;
   try {
@@ -81,6 +86,8 @@ function osha_tmgmt_field_get_source_data($job_item, $entity, $only_translatable
   }
 
   $fields = array();
+  // Static reset because it returns LANGUAGE_NONE for field_author because of a previous call
+  drupal_static_reset('field_language');
   foreach (field_info_instances($entity_type, $bundle) as $field_name => $instance) {
     $field = field_info_field($field_name);
     $items = field_get_items($entity_type, $entity, $field_name, $langcode);

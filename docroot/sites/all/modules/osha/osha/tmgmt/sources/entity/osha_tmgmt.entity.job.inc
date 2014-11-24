@@ -65,7 +65,9 @@ class OshaTMGMTJob extends TMGMTJob {
    * @throws TMGMTException
    *   On zero item word count.
    */
-  public function addItem($plugin, $item_type, $item_id, $source_language = NULL, $target_language = NULL) {
+  public function addItem($plugin, $item_type, $item_id,
+                          $source_language = NULL, $target_language = NULL,
+                          $is_full_translation = FALSE) {
 
     $transaction = db_transaction();
     $is_new = FALSE;
@@ -74,8 +76,13 @@ class OshaTMGMTJob extends TMGMTJob {
       $this->save();
       $is_new = TRUE;
     }
-
     $item = tmgmt_job_item_create($plugin, $item_type, $item_id, array('tjid' => $this->tjid));
+    if ($item_type == 'node') {
+      $item->is_full_translation = $is_full_translation;
+      $node = node_load($item_id);
+      $current_rev = workbench_moderation_node_current_load($node);
+      $item->vid = $current_rev->vid;
+    }
     $item->source_language = $source_language;
     $item->target_language = $target_language;
 

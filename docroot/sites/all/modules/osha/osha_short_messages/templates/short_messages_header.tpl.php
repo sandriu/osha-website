@@ -26,12 +26,7 @@
         ?>
       </td>
       <td>
-        <?php
-        $newsletter_ready_date = date('M Y');
-        if($published_date) {
-          $newsletter_ready_date = date('M Y', strtotime($published_date));
-        }?>
-        <div class="newsletter-number" style="color: #003399; font-size: 24px; font-weight: 300; text-align: right;"><?php print $node_title?></div>
+        <div class="newsletter-number" style="color: #003399; font-size: 24px; font-weight: 300; text-align: right;"><?php print t('EU-OSHA news') ?></div>
       </td>
     </tr>
   </tbody>

@@ -62,7 +62,6 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
     $this->addFieldMapping('field_directive_type:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
     $this->addFieldMapping('field_date_of_directive', 'directive_date');
-    $this->addFieldMapping('field_needs_retranslation')->defaultValue(0);
 
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
@@ -210,18 +209,22 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
    *   Source row
    */
   public function complete($entity, $row) {
-    if (!empty($row->path)) {
-      // create redirects
+    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
+      //create alias
+      $args = array(
+        'source' => 'node/'.$entity->nid,
+        'alias' => 'legislation/directives/'.$matches[4],
+        'language' => 'en'
+      );
+      path_save($args);
+
+      // create redirect
       $path = substr($row->path, 4);
       MigrationUtil::createRedirects($entity, $path);
+    }else{
+      // call MigrationUtil::createAliases
+      parent::complete($entity, $row);
     }
-
-    //extract directive title from path
-    if(preg_match(self::PATH_PATTERN, $row->path, $matches)){
-      $row->id = 'legislation/directive/'.$matches[4];
-    }
-    // call MigrationUtil::createAliases
-    parent::complete($entity, $row);
   }
 
   /**

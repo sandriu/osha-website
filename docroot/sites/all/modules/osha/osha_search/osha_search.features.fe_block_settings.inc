@@ -387,7 +387,8 @@ search/*',
     'pages' => 'search/directives
 legislation/directives
 legislation/directives/*
-legislation/directive/*',
+legislation/directive/*
+articles/european-directives',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

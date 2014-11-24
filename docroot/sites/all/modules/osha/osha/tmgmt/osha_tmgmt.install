@@ -104,6 +104,16 @@ function osha_tmgmt_install() {
     db_add_field('tmgmt_job_item', 'eid', $field);
   }
 
+  if (!db_field_exists('tmgmt_job_item', 'vid')) {
+    $field = array(
+      'description' => 'Translated Revision',
+      'type' => 'int',
+      'default' => NULL,
+      'not null' => FALSE,
+    );
+    db_add_field('tmgmt_job_item', 'vid', $field);
+  }
+
 
   // tmgmt_job alteration.
   if (!db_field_exists('tmgmt_job', 'character_count')) {
@@ -264,4 +274,52 @@ function osha_tmgmt_update_7001() {
     );
     db_add_field('tmgmt_job_item', 'eid', $field);
   }
+}
+
+/**
+ * Add field VID to job item.
+ */
+function osha_tmgmt_update_7002() {
+  if (!db_field_exists('tmgmt_job_item', 'vid')) {
+    $field = array(
+      'description' => 'Translated Revision',
+      'type' => 'int',
+      'default' => NULL,
+      'not null' => FALSE,
+    );
+    db_add_field('tmgmt_job_item', 'vid', $field);
+  }
+
+  // Disable defautl view - replaced by osha_translation_job_overview.
+  $view = views_get_view('tmgmt_ui_job_overview');
+  if (!empty($view)) {
+    // Revert the view before disable it.
+    $view->delete();
+    ctools_include('object-cache');
+    ctools_object_cache_clear('view', 'tmgmt_ui_job_overview');
+    $status = variable_get('views_defaults', array());
+    $status['tmgmt_ui_job_overview'] = TRUE;
+    variable_set('views_defaults', $status);
+  }
+
+  // CW-903, full_html permissions for content validator and layout validator
+  $role_names = array(
+    'Translation Manager',
+    'Translation Liaison',
+    'Layout Validator',
+    'Content Validator'
+  );
+  foreach ($role_names as $role_name) {
+    $role = user_role_load_by_name($role_name);
+    user_role_grant_permissions($role->rid, array('use text format full_html'));
+  }
+  // CW-928, workbench access permissions for translation manager
+  $role = user_role_load_by_name('Translation Manager');
+  user_role_grant_permissions($role->rid,
+    array(
+      'view workbench access information',
+      'access workbench access by role'
+    ));
+  module_load_include('inc', 'workbench_moderation', 'workbench_moderation.admin');
+  workbench_access_role_section_save($role->rid, 'main-menu', 'menu');
 }

@@ -75,14 +75,20 @@ to `config.json` and customize to suit your environment
                 $options['alias-path'] = $repo . '/drush/aliases';
             }
     ```
-    
-3. Run [install.sh](https://github.com/EU-OSHA/osha-website/blob/master/install.sh) (wrapper around few drush commands)
+
+3 Create file drush/aliases/aliases.local.php and define your drush local alias (see example in drush/aliases/osha.aliases.drushrc.php)
+  Redefine your osha.staging.sync alias as you need. Default one might not be accessible to you.
+
+4 Run install_from_staging.sh
+  ex: ./install_from_staging.sh -b update_s4_before.sh -a update_s4_after.sh
+
+3 (deprecated). Run [install.sh](https://github.com/EU-OSHA/osha-website/blob/master/install.sh) (wrapper around few drush commands)
 
 *Warning*: Running install.sh on an existing instance *will destroy* that instance (database) loosing all customisations
 
 *Note:* You have to pass `--migrate` to install the migrations (taxonomies)
 
-4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
+4. (deprecated) (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
 
 Updating an existing instance
 =============================

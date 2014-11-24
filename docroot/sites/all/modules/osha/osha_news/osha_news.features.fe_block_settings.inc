@@ -20,7 +20,12 @@ function osha_news_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '<front>',
+    'pages' => '<front>
+seminars/*
+seminar/*
+articles/blog
+blog/*
+*/blog/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -39,7 +44,7 @@ function osha_news_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -27,
+        'weight' => 5,
       ),
       'seven' => array(
         'region' => '',
