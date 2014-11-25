@@ -810,7 +810,46 @@ function osha_tmgmt_job_item_translation_enable($form, &$form_state) {
  * Extra callback for Uploading XML file on a job.
  */
 function osha_tmgmt_file_translation_upload_submit($form, &$form_state) {
-  OshaWorkflowNotifications::notifyTranslationUploadedFile($form_state['tmgmt_job']);
+  // Ensure we have the file uploaded.
+  $job = $form_state['tmgmt_job'];
+  $supported_formats = array_keys(tmgmt_file_format_plugin_info());
+  if ($file = file_save_upload('file', array('file_validate_extensions' => array(implode(' ', $supported_formats))))) {
+    $extension = pathinfo($file->uri, PATHINFO_EXTENSION);
+    $controller = tmgmt_file_format_controller($extension);
+    if ($controller) {
+      // Validate the file.
+      $validated_job = $controller->validateImport($file->uri);
+      if (!$validated_job) {
+        $job->addMessage('Failed to validate file, import aborted.', array(), 'error');
+      }
+      elseif ($validated_job->tjid != $job->tjid) {
+        $uri = $validated_job->uri();
+        $label = $validated_job->label();
+        $job->addMessage('Import file is from job <a href="@url">@label</a>, import aborted.', array('@url' => url($uri['path']), '@label' => $label));
+      }
+      else {
+        try {
+          // Validation successful, start import.
+          $job->addTranslatedData($controller->import($file->uri));
+          $job->addMessage('Successfully imported file.');
+          OshaWorkflowNotifications::notifyTranslationUploadedFile($form_state['tmgmt_job']);
+          $job->has_file_uploaded = 1;
+          $job->save();
+        } catch (Exception $e) {
+          $job->addMessage('File import failed with the following message: @message', array('@message' => $e->getMessage()), 'error');
+        }
+      }
+    }
+  }
+  foreach ($job->getMessagesSince() as $message) {
+    // Ignore debug messages.
+    if ($message->type == 'debug') {
+      continue;
+    }
+    if ($text = $message->getMessage()) {
+      drupal_set_message(filter_xss($text), $message->type);
+    }
+  }
 }
 
   /**
