@@ -39,7 +39,7 @@ function osha_blog_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Publication Date */
+  /* Field: Field: Publication Date */
   $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
@@ -81,7 +81,7 @@ function osha_blog_views_default_views() {
   $handler->display->display_options['fields']['view_node']['label'] = '';
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_node']['text'] = 'Read more';
-  /* Sort criterion: Content: Publication Date (field_publication_date) */
+  /* Sort criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -122,7 +122,7 @@ function osha_blog_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Publication Date */
+  /* Field: Field: Publication Date */
   $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
@@ -180,7 +180,7 @@ function osha_blog_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Publication Date */
+  /* Field: Field: Publication Date */
   $handler->display->display_options['fields']['field_publication_date_1']['id'] = 'field_publication_date_1';
   $handler->display->display_options['fields']['field_publication_date_1']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['fields']['field_publication_date_1']['field'] = 'field_publication_date';
@@ -198,7 +198,7 @@ function osha_blog_views_default_views() {
     'osha_date_theme' => '',
   );
   $handler->display->display_options['fields']['field_publication_date_1']['group_column'] = 'entity_id';
-  /* Field: Content: Publication Date */
+  /* Field: Field: Publication Date */
   $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
@@ -216,7 +216,7 @@ function osha_blog_views_default_views() {
   );
   $handler->display->display_options['fields']['field_publication_date']['group_column'] = 'entity_id';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Publication Date (field_publication_date) */
+  /* Sort criterion: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';
@@ -262,7 +262,7 @@ function osha_blog_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Publication Date */
+  /* Field: Field: Publication Date */
   $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
@@ -294,7 +294,7 @@ function osha_blog_views_default_views() {
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_node']['text'] = 'Read more';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Publication Date (field_publication_date) */
+  /* Contextual filter: Field: Publication Date (field_publication_date) */
   $handler->display->display_options['arguments']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['arguments']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['arguments']['field_publication_date_value']['field'] = 'field_publication_date_value';

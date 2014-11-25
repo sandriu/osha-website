@@ -83,7 +83,7 @@ blog/*
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'seven' => array(
         'region' => '',
