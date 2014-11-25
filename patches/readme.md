@@ -165,6 +165,11 @@ List of patches (most recent first)
   * Generated image is saved on the revision and not for the published version
   * pdf_to_imagefield_save_to_revision.patch
 
+* link
+  * Duplicate fragment/query saved to database - https://www.drupal.org/node/1646360
+  * duplicate-fragment-query-1646360-1.patch
+  * Display url - ":" is converted to "%3A" and "?" to "&"
+  * link-character_conversion-1984398.patch
 
 Patch documentation should be in the following format:
 
