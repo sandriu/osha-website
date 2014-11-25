@@ -141,7 +141,7 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
     $this->addMessage('@name: Translation Rejected. Job item is now "@state". Message: @message',
       array(
         '@name' => $user->name,
-        '@state' => osha_tmgmt_get_job_item_state_label(OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired),
+        '@state' => osha_tmgmt_get_job_item_state_label(TMGMT_JOB_ITEM_STATE_ABORTED),
         '@message' => $message,
       ));
     OshaWorkflowNotifications::notifyTranslationRejected($this);
