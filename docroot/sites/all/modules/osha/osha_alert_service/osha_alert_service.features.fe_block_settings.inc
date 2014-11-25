@@ -45,14 +45,14 @@ blog/*
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
-        'region' => 'sidebar_second',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'bartik',
         'weight' => -28,
       ),
       'osha_admin' => array(
-        'region' => 'sidebar_second',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_admin',
         'weight' => -28,
       ),
@@ -60,7 +60,7 @@ blog/*
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -28,
+        'weight' => 1,
       ),
       'seven' => array(
         'region' => '',
