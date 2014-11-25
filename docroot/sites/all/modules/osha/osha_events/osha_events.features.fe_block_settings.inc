@@ -20,7 +20,7 @@ function osha_events_default_fe_block_settings() {
     'machine_name' => 'event_block_header',
     'module' => 'block',
     'node_types' => array(),
-    'pages' => 'events',
+    'pages' => '',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -36,10 +36,10 @@ function osha_events_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => -53,
       ),
       'seven' => array(
         'region' => '',
@@ -81,7 +81,7 @@ function osha_events_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 15,
+        'weight' => -43,
       ),
       'seven' => array(
         'region' => '',
