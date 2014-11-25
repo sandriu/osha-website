@@ -351,9 +351,14 @@ function osha_tmgmt_get_job_translation_validators_group($eid) {
  * @return array
  *   Array of users with the required skills.
  */
-function osha_tmgmt_get_content_validators_by_skill($target_language, $source_language = 'en') {
+function osha_tmgmt_get_content_validators_by_skill($target_language, $source_language = 'en', $group_id = NULL) {
   $ret = array();
-  $users = osha_workflow_users_get_users_from_role(OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR);
+  if ($group_id) {
+    $users = osha_tmgmt_get_users_from_collection($group_id);
+  }
+  else {
+    $users = osha_workflow_users_get_users_from_role(OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR);
+  }
   foreach ($users as $user) {
     if (!empty($user->tmgmt_translation_skills[LANGUAGE_NONE])) {
       foreach ($user->tmgmt_translation_skills[LANGUAGE_NONE] as $skill) {
@@ -374,9 +379,9 @@ function osha_tmgmt_get_content_validators_by_skill($target_language, $source_la
  * @return array
  *   Array rendered as options
  */
-function osha_tmgmt_get_content_validators_by_skill_as_options($target_language, $source_language = 'en') {
+function osha_tmgmt_get_content_validators_by_skill_as_options($target_language, $source_language = 'en', $group = NULL) {
   $ret = array();
-  $users = osha_tmgmt_get_content_validators_by_skill($target_language, $source_language);
+  $users = osha_tmgmt_get_content_validators_by_skill($target_language, $source_language, $group);
   foreach ($users as $user) {
     $ret[$user->uid] = $user->name;
   }
@@ -424,6 +429,21 @@ function osha_tmgmt_layout_validator_approve_submit($form, &$form_state) {
 function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
   module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
   module_load_include('inc', 'osha_workflow', 'osha_workflow.admin');
+  if (empty($job_item->eid)) {
+    drupal_set_message('Please set a content validators group to the job!', 'warning');
+    return;
+  }
+  $cvalidators = osha_tmgmt_get_content_validators_by_skill_as_options($job_item->target_language, $job_item->source_language, $job_item->eid);
+  if (empty($cvalidators)) {
+    $group = entity_collection_load($job_item->eid);
+    drupal_set_message(t('There are no users in group @group having @from to @to translation skill!',
+      array(
+        '@group' => $group->name,
+        '@from' => locale_language_name($job_item->source_language),
+        '@to' => locale_language_name($job_item->target_language),
+      )), 'warning');
+    return;
+  }
   $form_state['jobItem'] = $job_item;
   $can_edit = user_access('edit translation content validators');
   $form['#can_edit']  = $can_edit;
@@ -463,7 +483,6 @@ function osha_tmgmt_job_item_validators_form($form, &$form_state, $job_item) {
     );
     $weight++;
   }
-  $cvalidators = osha_tmgmt_get_content_validators_by_skill_as_options($job_item->target_language, $job_item->source_language);
   $form['add']['uid'] = array(
     '#type' => 'select',
     '#title' => t('Add validator'),
