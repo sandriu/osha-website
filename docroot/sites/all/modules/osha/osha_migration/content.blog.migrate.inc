@@ -64,6 +64,7 @@ class MigrateOshaBlog extends OSHADynamicMigration {
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
 
+    $this->addFieldMapping('field_author', 'creator');
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
@@ -72,7 +73,6 @@ class MigrateOshaBlog extends OSHADynamicMigration {
       'path',
       'language',
       'workflow_state',
-      'creator',
       'country',
     ));
 
@@ -125,6 +125,12 @@ class MigrateOshaBlog extends OSHADynamicMigration {
     if(MigrationUtil::entityRowValidator($row, $this) === FALSE) {
       return FALSE;
     }
+
+    //format publication date according to UTC timezone
+    $default_tz = date_default_timezone_get();
+    date_default_timezone_set('UTC');
+    $row->publication_date = strtotime($row->publication_date);
+    date_default_timezone_set($default_tz);
 
     $row->language = 'en';
     $tags = $row->subject . ',' . $row->subcategory;
