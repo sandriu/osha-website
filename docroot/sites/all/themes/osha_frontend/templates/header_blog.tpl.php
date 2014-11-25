@@ -16,7 +16,7 @@
   </div>
 <?php endif; ?>
 
-<nav class="header__secondary-menu" id="secondary-menu" role="navigation">
+<nav class="header__secondary-menu link_web_blog" id="secondary-menu" role="navigation">
   <?php print l(t('Go to EU-OSHA website'), ''); ?>
 </nav>
 
@@ -29,6 +29,6 @@
     <a href="https://osha.europa.eu/en/about/director_corner/blog"><img src="/sites/all/themes/osha_frontend/images/bloggerTop.png" alt="Blogger"></a>
   </div>
 </div>
-
-<div id="agencyLogo"><a href="/en"><img src="/sites/all/themes/osha_frontend/images/agencyLogo.png" alt="European Agency for Safety and Health at Work"></a></div>
-<div id="europeLogo"><img src="/sites/all/themes/osha_frontend/images/europeLogo.png" alt="Europe Flag"></div>
+<div id="blogLogo"><img src="/sites/all/themes/osha_frontend/images/logo-blog.png" alt="Blog"></div>
+<div id="europeLogoBlog"><img src="/sites/all/themes/osha_frontend/images/europeLogo.png" alt="Europe Flag"></div>
+<div id="agencyLogoBlog"><a href="/en"><img src="/sites/all/themes/osha_frontend/images/agencyLogo.png" alt="European Agency for Safety and Health at Work"></a></div>
