@@ -98,7 +98,28 @@ function osha_alert_service_block_info() {
       'region' => 'sidebar_second',
       'weight' => -28,
       'visibility' => BLOCK_VISIBILITY_LISTED,
-      'pages' => '<front>',
+      'pages' => '<front>
+oshnews
+highlights
+highlight/*
+teaser/*
+news/*
+seminar/*
+seminars/*
+about/calls/*
+calls/*
+about/jobs/*
+job-vacancies/*
+shortlisted_job_vacancies
+ongoing_job_vacancies
+open_job_vacancies
+jobs_archive
+articles/careers
+calls_archive
+articles/procurement
+articles/blog
+blog/*
+*/blog/*',
     ),
   );
 }
@@ -133,7 +154,7 @@ function osha_alert_service_block_view($delta = '') {
 
 
 function osha_alert_block_front_view() {
-  $url = 'alertservice';
+  $url = url('alertservice');
   $form['block'] = array(
     '#type' => 'item',
     '#markup' => t(
