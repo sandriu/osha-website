@@ -373,6 +373,18 @@ function _link_load($field, $item, $instance) {
  * Prepares the item attributes and url for storage.
  */
 function _link_process(&$item, $delta, $field, $entity) {
+  // Unset query to prevent duplicates
+  if (!empty($item['query'])) {
+    $item['url'] .= '?' . http_build_query($item['query']);
+    $item['query'] = array();
+  }
+
+  // Unset fragment to prevent duplicates
+  if (!empty($item['fragment'])) {
+    $item['url'] .= '#' . $item['fragment'];
+    $item['fragment'] = '';
+  }
+
   // Trim whitespace from URL.
   if (!empty($item['url'])) {
     $item['url'] = trim($item['url']);
