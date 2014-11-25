@@ -440,7 +440,6 @@ function osha_resources_views_default_views() {
     t('delete'),
     t('Operations'),
     t('[edit_node] [delete_node]'),
-    t('Section'),
   );
   $export['additional_resources_admin'] = $view;
 
