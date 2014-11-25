@@ -63,7 +63,7 @@ legislation/directive/*',
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'publications',
+    'pages' => 'search/publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -103,8 +103,7 @@ legislation/directive/*',
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'publications
-search/*',
+    'pages' => 'search/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -264,7 +263,7 @@ search/*',
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => 'publications',
+    'pages' => 'search/publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

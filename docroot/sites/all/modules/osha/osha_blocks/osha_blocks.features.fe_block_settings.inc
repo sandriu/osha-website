@@ -140,7 +140,7 @@ function osha_blocks_default_fe_block_settings() {
     'machine_name' => 'publications_header',
     'module' => 'block',
     'node_types' => array(),
-    'pages' => 'publications',
+    'pages' => 'search/publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
