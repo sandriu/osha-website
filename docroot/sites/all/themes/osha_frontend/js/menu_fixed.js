@@ -9,7 +9,14 @@ pos = nav.offset();
 		if ( (jQuery(this).scrollTop() >= 122)){
 		// Añadimos la clase fixes al menú y la clase stickey a breadcrumb para que se siga viendo
 			jQuery('#block-menu-block-1').addClass('fixed');
-			jQuery('.breadcrumb').addClass('stickey');
+			var text = '/blog';
+			var url_blog = jQuery(location).attr('href');
+			//If the URL have blog. Remove the class stickey
+			if (url_blog.indexOf(text) != -1) {
+				jQuery('.breadcrumb').removeClass('stickey');
+			}else{
+				jQuery('.breadcrumb').addClass('stickey');
+			}			
 		// Eliminamos las clases para volver a la posición original
 		} else if ( (jQuery(this).scrollTop() <= 122)){
 		// Elimina clase fixes y stickey
