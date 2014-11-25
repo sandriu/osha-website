@@ -891,10 +891,11 @@ function osha_blog_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 5,
       ),
       'highlights_item' => array(
         'label' => 'above',

@@ -83,8 +83,29 @@ function osha_blog_views_pre_render(&$view) {
     }
   }
 
+  //Breadcrumb and title for Montly Posts
   if ($view->name == 'blog' && $view->current_display == 'page_1') {
     $title = isset($view->args[0])? get_view_title($view->args[0]): '';
+    //set view title
+    $view->build_info['title'] = $title;
+    //set view breadcrumb
+    drupal_set_breadcrumb(
+      array(
+        l(t('Home'), NULL),
+        l('Blog', 'articles/blog'),
+        $title,
+      )
+    );
+  }
+
+  //Breadcrumb and title for Tags Posts
+  if ($view->name == 'blog' && $view->current_display == 'page_2') {
+    $title = '';
+    if(isset($view->args[0])){
+      $term = taxonomy_term_load($view->args[0]);
+      $title = $term? $term->name : '';
+    }
+
     //set view title
     $view->build_info['title'] = $title;
     //set view breadcrumb
@@ -126,6 +147,14 @@ function osha_blog_node_view($node, $view_mode, $langcode){
   //hide title for intro article Blog
   if($node->type == 'article' && $node->path['alias'] == 'articles/blog')
     hide($node->content['title_field']);
+}
+
+function osha_blog_process_field(&$vars){
+  if ($vars['element']['#field_name'] == 'field_tags') {
+    foreach($vars['element']['#object']->field_tags[LANGUAGE_NONE] as $key => $item){
+      $vars['items'][$key]['#markup'] = '<a href="/blog/tag/'.$item['tid'].'">'.$vars['items'][$key]['#markup'].'</a>';
+    }
+  }
 }
 
 /**

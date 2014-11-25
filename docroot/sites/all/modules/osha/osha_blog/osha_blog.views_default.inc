@@ -329,6 +329,23 @@ function osha_blog_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'rss';
   $handler->display->display_options['row_plugin'] = 'node_rss';
   $handler->display->display_options['path'] = 'blog/feed';
+
+  /* Display: Tags Posts */
+  $handler = $view->new_display('page', 'Tags Posts', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Tags posts';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Field: Tags (field_tags) */
+  $handler->display->display_options['arguments']['field_tags_tid']['id'] = 'field_tags_tid';
+  $handler->display->display_options['arguments']['field_tags_tid']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['arguments']['field_tags_tid']['field'] = 'field_tags_tid';
+  $handler->display->display_options['arguments']['field_tags_tid']['title_enable'] = TRUE;
+  $handler->display->display_options['arguments']['field_tags_tid']['title'] = '%1';
+  $handler->display->display_options['arguments']['field_tags_tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_tags_tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_tags_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_tags_tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'blog/tag/%';
   $translatables['blog'] = array(
     t('Master'),
     t('Latest posts'),
@@ -354,6 +371,8 @@ function osha_blog_views_default_views() {
     t('All'),
     t('%1'),
     t('Feed'),
+    t('Tags Posts'),
+    t('Tags posts'),
   );
   $export['blog'] = $view;
 
