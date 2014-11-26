@@ -1099,11 +1099,9 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_start_date_1']['ui_name'] = 'Start date for grouping';
   $handler->display->display_options['fields']['field_start_date_1']['label'] = '';
   $handler->display->display_options['fields']['field_start_date_1']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_start_date_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_start_date_1']['alter']['text'] = '[field_start_date_1] - Events';
   $handler->display->display_options['fields']['field_start_date_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_start_date_1']['settings'] = array(
-    'format_type' => 'month',
+    'format_type' => 'year_and_month',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -1394,7 +1392,6 @@ function osha_events_views_default_views() {
     t('[field_start_date] - '),
     t('LOCATION'),
     t('ORGANIZER'),
-    t('[field_start_date_1] - Events'),
     t('See details'),
     t('Search'),
     t('From'),
