@@ -217,6 +217,13 @@ $handler->display->display_options['fields']['changed']['id'] = 'changed';
 $handler->display->display_options['fields']['changed']['table'] = 'tmgmt_job';
 $handler->display->display_options['fields']['changed']['field'] = 'changed';
 $handler->display->display_options['fields']['changed']['ui_name'] = 'Changed';
+/* Field: Translation Management Job: Has File uploaded */
+$handler->display->display_options['fields']['has_file_uploaded']['id'] = 'has_file_uploaded';
+$handler->display->display_options['fields']['has_file_uploaded']['table'] = 'views_entity_tmgmt_job';
+$handler->display->display_options['fields']['has_file_uploaded']['field'] = 'has_file_uploaded';
+$handler->display->display_options['fields']['has_file_uploaded']['label'] = 'File uploaded';
+$handler->display->display_options['fields']['has_file_uploaded']['not'] = 0;
+$handler->display->display_options['fields']['has_file_uploaded']['link_to_entity'] = 0;
 /* Field: Operations */
 $handler->display->display_options['fields']['operations']['id'] = 'operations';
 $handler->display->display_options['fields']['operations']['table'] = 'tmgmt_job';
@@ -294,6 +301,30 @@ $handler->display->display_options['filters']['priority']['expose']['remember_ro
   11 => 0,
 );
 $handler->display->display_options['filters']['priority']['expose']['reduce'] = TRUE;
+/* Filter criterion: Translation Management Job: Has File uploaded */
+$handler->display->display_options['filters']['has_file_uploaded']['id'] = 'has_file_uploaded';
+$handler->display->display_options['filters']['has_file_uploaded']['table'] = 'tmgmt_job';
+$handler->display->display_options['filters']['has_file_uploaded']['field'] = 'has_file_uploaded';
+$handler->display->display_options['filters']['has_file_uploaded']['value'] = 'All';
+$handler->display->display_options['filters']['has_file_uploaded']['exposed'] = TRUE;
+$handler->display->display_options['filters']['has_file_uploaded']['expose']['operator_id'] = '';
+$handler->display->display_options['filters']['has_file_uploaded']['expose']['label'] = 'File Uploaded';
+$handler->display->display_options['filters']['has_file_uploaded']['expose']['operator'] = 'has_file_uploaded_op';
+$handler->display->display_options['filters']['has_file_uploaded']['expose']['identifier'] = 'has_file_uploaded';
+$handler->display->display_options['filters']['has_file_uploaded']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  3 => 0,
+  4 => 0,
+  5 => 0,
+  6 => 0,
+  7 => 0,
+  8 => 0,
+  9 => 0,
+  10 => 0,
+  11 => 0,
+  12 => 0,
+);
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');
@@ -336,6 +367,8 @@ $translatables['osha_translation_job_overview'] = array(
   t('Character count'),
   t('Progress'),
   t('Changed'),
+  t('File uploaded'),
   t('Operations'),
+  t('File Uploaded'),
   t('Page'),
 );
