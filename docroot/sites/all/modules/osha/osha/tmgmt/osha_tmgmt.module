@@ -1831,7 +1831,10 @@ class OshaTMGMTStatistics {
   protected static function count($item, &$count) {
     if (!empty($item['#text'])) {
       if (_tmgmt_filter_data($item)) {
-        $count += mb_strlen(str_replace("&nbsp;", "", preg_replace("/\s+/", "", strip_tags($item['#text']))), 'utf-8');
+        $text = strip_tags(html_entity_decode($item['#text']));
+        // C2A0 is unicode nbsp.
+        $text = preg_replace("/\x{00A0}|&nbsp;|\s/", '', $text);
+        $count += mb_strlen($text, 'utf-8');
       }
     }
     elseif (is_array($item)) {
