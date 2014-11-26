@@ -12,5 +12,6 @@ jQuery(document).ready(function()
     jQuery(".blog-archive-block h3").click(function()
     {
         jQuery(this).siblings("ul").slideToggle();
+		jQuery(this).toggleClass("expand");
     });
 });
