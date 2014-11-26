@@ -75,5 +75,4 @@ features_exclude[field_base][field_flickr_tags] = field_flickr_tags
 features_exclude[field_instance][node-blog-field_flickr_tags] = node-blog-field_flickr_tags
 features_exclude[taxonomy][tags] = tags
 features_exclude[taxonomy][flickr_tags] = flickr_tags
-features_exclude[field_instance][node-blog-field_flickr_tags] = node-blog-field_flickr_tags
-mtime = 1416998859
+mtime = 1417024630

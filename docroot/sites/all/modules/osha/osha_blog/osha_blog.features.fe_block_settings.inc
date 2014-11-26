@@ -136,7 +136,7 @@ blog/*
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['views-blog-block_1'] = array(
