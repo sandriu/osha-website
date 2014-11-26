@@ -100,28 +100,7 @@ function osha_newsletter_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'osha_newsletter',
     'node_types' => array(),
-    'pages' => '<front>
-oshnews
-highlights
-highlight/*
-teaser/*
-news/*
-seminar/*
-seminars/*
-about/calls/*
-calls/*
-about/jobs/*
-job-vacancies/*
-shortlisted_job_vacancies
-ongoing_job_vacancies
-open_job_vacancies
-jobs_archive
-articles/careers
-calls_archive
-articles/procurement
-articles/blog
-blog/*
-*/blog/*',
+    'pages' => '',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -150,7 +129,7 @@ blog/*
       ),
     ),
     'title' => '',
-    'visibility' => 1,
+    'visibility' => 0,
   );
 
   $export['osha_newsletter-osha_newsletter_subscribe_extra'] = array(

@@ -358,6 +358,9 @@ $options['init-modules'] = array(
   'search_and_replace',
   'nodeblock',
   'quicktabs',
+  'context',
+  'context_ui',
+  'context_block_visibility',
 
   // Enable last (conflict with rules)
   'uuid',
