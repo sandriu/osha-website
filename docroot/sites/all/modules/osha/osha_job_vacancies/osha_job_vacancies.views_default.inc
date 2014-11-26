@@ -453,16 +453,9 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['table'] = 'field_data_field_expiration_date';
   $handler->display->display_options['filters']['field_expiration_date_value']['field'] = 'field_expiration_date_value';
   $handler->display->display_options['filters']['field_expiration_date_value']['relationship'] = 'vid';
-  $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '<';
   $handler->display->display_options['filters']['field_expiration_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Expiration Date (field_expiration_date) */
-  $handler->display->display_options['filters']['field_expiration_date_value_1']['id'] = 'field_expiration_date_value_1';
-  $handler->display->display_options['filters']['field_expiration_date_value_1']['table'] = 'field_data_field_expiration_date';
-  $handler->display->display_options['filters']['field_expiration_date_value_1']['field'] = 'field_expiration_date_value';
-  $handler->display->display_options['filters']['field_expiration_date_value_1']['relationship'] = 'vid';
-  $handler->display->display_options['filters']['field_expiration_date_value_1']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_expiration_date_value_1']['group'] = 2;
   $handler->display->display_options['path'] = 'jobs_archive';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Closed job vacancies';
