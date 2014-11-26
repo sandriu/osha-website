@@ -2162,15 +2162,17 @@ font-weight: normal;
     border-radius: 20px;
     color: #ffffff;
     display: block;
+    float: right;
     font-family: "Oswald",sans-serif;
     font-size: 1.2em;
-    margin-left: 39em;
+    margin-left: 0;
+    margin-right: 5em;
     margin-top: -3em;
     padding-bottom: 0.2em;
     padding-left: 1em;
     padding-right: 1em;
-    position: absolute;
-    text-align: center;
+    position: relative;
+    text-align: right;
     width: auto;
 }
 
@@ -4892,12 +4894,13 @@ a.tabs-primary__tab-link{
     height: auto;
     margin-bottom: 0;
     margin-top: 0.5em;
+	padding-top: 2px;
     padding-bottom: 2px;
     padding-left: 10px;
 	cursor:pointer;
 }
 
-.blog-archive-block h3.show{
+.blog-archive-block h3.expand{
 	background: url("../images/triangle-expanded.png") no-repeat scroll 96% center #e8eef7 !important;
 }
 
