@@ -149,10 +149,32 @@ function osha_blog_node_view($node, $view_mode, $langcode){
     hide($node->content['title_field']);
 }
 
+/**
+ * Implements hook_process_field
+ * @param $vars
+ */
 function osha_blog_process_field(&$vars){
   if ($vars['element']['#field_name'] == 'field_tags') {
     foreach($vars['element']['#object']->field_tags[LANGUAGE_NONE] as $key => $item){
       $vars['items'][$key]['#markup'] = '<a href="/blog/tag/'.$item['tid'].'">'.$vars['items'][$key]['#markup'].'</a>';
+    }
+  }
+}
+
+/**
+ * Implements hook_workbench_access_node_element_alter
+ * @param $element
+ * @param $form_state
+ * @param $active
+ */
+function osha_blog_workbench_access_node_element_alter(&$element, $form_state, $active) {
+  if (isset($form_state['build_info']['form_id']) && $form_state['build_info']['form_id'] == 'blog_node_form' ) {
+    $element['#required'] = FALSE;
+    foreach ($element['#options'] as $key=>$option) {
+      if (preg_match('/^[-\\s]*Blog/', $option)) {
+        $element['#default_value'] = $key;
+        break;
+      }
     }
   }
 }
