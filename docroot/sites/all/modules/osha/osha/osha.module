@@ -486,6 +486,14 @@ function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+  // CW-931 Hide character count and page count
+  if (isset($form_state['field']['field_page_count'])) {
+    $form['field_page_count']['#access'] = FALSE;
+  }
+  if (isset($form_state['field']['field_character_count'])) {
+    $form['field_character_count']['#access'] = FALSE;
+  }
+
 }
 
 /**
