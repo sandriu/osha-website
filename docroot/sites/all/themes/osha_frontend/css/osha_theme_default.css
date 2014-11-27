@@ -4439,6 +4439,19 @@ a.tabs-primary__tab-link{
 	text-transform: uppercase;
 }
 
+#ui-datepicker-div {
+	background:#FFFFFF;
+}
+
+.ui-datepicker-calendar .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+	background:#FFFFFF;
+	color:#A2A2A2;
+}
+
+.ui-datepicker-calendar .ui-state-default.ui-state-highlight{
+	background:#DC2F82;
+	color:#FFFFFF;
+}
 
 
 /* END EVENTS LIST */
@@ -4961,6 +4974,22 @@ a.tabs-primary__tab-link{
     padding: 0 0 0.3em;
 }
 
+#block-views-exp-search-blog-page{
+	border-top:5px solid #003399;
+}
+
+#block-views-exp-search-blog-page #edit-filter{
+	width:10em;
+}
+
+#edit-submit-search-blog{
+	margin-top:1em;
+}
+
+#block-views-blog-block-1 .image-field-caption{
+	display:none;
+}
+
 /* END BLOG LIST */
 
 /* BLOG DETAIL*/
@@ -5112,3 +5141,55 @@ article.comment p {
 
 /* END BLOCK HOME TRY ALERT SERVICE */
 
+
+/* ALERTS */
+
+#osha-alert-service-subscribe-form {
+	margin-top:1em;
+}
+
+#osha-alert-service-subscribe-form label{
+	display: flex;
+}
+
+#osha-alert-service-subscribe-form span{
+	padding-top:0em;
+	padding-left:0.5em;
+	
+}
+
+#osha-alert-service-subscribe-form div div {
+	padding-top:0.5em;
+}
+
+#osha-alert-service-subscribe-form  input{
+	margin-top:0.5em;
+	width:300px;
+}
+
+#osha-alert-service-subscribe-form select{
+	margin-top:0.5em;
+	width:300px;
+}
+
+#osha-alert-service-subscribe-form  #edit-submit--3{
+	width:auto;
+}
+
+#osha-alert-service-subscribe-form .container-inline.form-submit{
+	background: url("../images/flecha.png") no-repeat scroll 96% center transparent;
+    border: 0 none;
+    color: #003399;
+    float: none;
+    font-family: "Oswald",sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 1em;
+    padding-bottom: 0.2em;
+    padding-right: 2.3em;
+    padding-top: 0.2em;
+    text-align: right;
+    width: 100%;
+}
+
+/* END ALERTS */
