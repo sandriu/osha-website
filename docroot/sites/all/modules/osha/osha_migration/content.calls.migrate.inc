@@ -118,6 +118,10 @@ class MigrateOshaCalls extends OSHADynamicMigration {
     if (MigrationUtil::entityRowValidator($row, $this) === FALSE) {
       return FALSE;
     }
+
+    //format publication date according to UTC timezone
+    $row->publication_date = MigrationUtil::getUTCTimestamp($row->publication_date);
+
     MigrationUtil::cleanMigratedFileField($row, 'files', 'public://calls/documents');
     return TRUE;
   }

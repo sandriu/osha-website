@@ -118,6 +118,9 @@ class OshaMigrateDirectives extends OSHADynamicMigration {
       return FALSE;
     }
 
+    //format publication date according to UTC timezone
+    $row->publication_date = MigrationUtil::getUTCTimestamp($row->publication_date);
+
     $row->language = 'en';
     $tags = $row->subject . ', ' . $row->subcategory;
     $row->subject = MigrationUtil::decodeTagsTerms($tags);

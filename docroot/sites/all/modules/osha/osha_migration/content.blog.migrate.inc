@@ -127,10 +127,7 @@ class MigrateOshaBlog extends OSHADynamicMigration {
     }
 
     //format publication date according to UTC timezone
-    $default_tz = date_default_timezone_get();
-    date_default_timezone_set('UTC');
-    $row->publication_date = strtotime($row->publication_date);
-    date_default_timezone_set($default_tz);
+    $row->publication_date = MigrationUtil::getUTCTimestamp($row->publication_date);
 
     $row->language = 'en';
     $tags = $row->subject . ',' . $row->subcategory;
