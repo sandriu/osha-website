@@ -1034,6 +1034,20 @@ span.date-display-single{
 
 }
 
+.node-publication  .field-name-field-publication-related-res{
+	margin-top: 1em;
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100%rgba(0, 0, 0, 0);
+	padding-bottom: 1em;
+}
+
+.node-publication  .field-name-field-publication-related-res a{
+	border-bottom:0px!important;
+	font-weight:bold;
+	font-size:0.8em;
+
+}
+
+
 .node-publication  .field-name-field-related-publications article  .field-name-title-field a{
 	list-style: none;
 	font-family: arial!important;
@@ -1738,7 +1752,7 @@ font-weight: normal;
 
 #block-views-exp-publications-index-page{
 	border-top:5px solid #aab7d9;
-	margin-top:200px;
+	margin-top:3em;
 }
 
 
@@ -2354,7 +2368,8 @@ font-weight: normal;
 }
 
 .view-id-highlight .view-content table tbody tr td .views-field-field-summary{
-	height:8em;
+	height:7em;
+	padding-top:1em;
 }
  
 .view-id-highlight .view-content table tbody tr td .views-field-field-summary p{ 
@@ -4561,6 +4576,8 @@ a.tabs-primary__tab-link{
 	border-bottom:0px!important;
 }
 
+
+
 .group-events-related-documents h3{
 	color: #000000;
 	font-family: "Oswald",sans-serif;
@@ -4570,6 +4587,16 @@ a.tabs-primary__tab-link{
 	padding-bottom: 0.5em;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
 	
+}
+
+
+.node-events .group-events-related-documents .field-name-field-related-documents a{
+	color: #003399;
+	text-decoration: none;
+	font-weight: bold;
+	padding-left: 0em;
+	font-size: 0.8em;
+	border-bottom:0px!important;
 }
 
 #block-block-10  a {
@@ -4752,7 +4779,8 @@ a.tabs-primary__tab-link{
 	font-size: 0.8em;
 	font-family: arial;
 	height: auto;
-	padding-bottom:1.5em;
+	padding-bottom: 1.5em;
+	font-weight: bold;
 }
 
 .additional_resource_group.file{
@@ -4825,6 +4853,14 @@ a.tabs-primary__tab-link{
     padding-right: 1.5em;
 }
 
+.field-name-field-aditional-resources a{
+	border-bottom:0px!important;
+}
+
+.field-name-field-youtube img {
+	float:left;
+	margin-right:0.3em;
+}
 
 /* END ADITIONAL RESOURCES */
 
@@ -5148,14 +5184,11 @@ article.comment p {
 	margin-top:1em;
 }
 
-#osha-alert-service-subscribe-form label{
-	display: flex;
-}
-
-#osha-alert-service-subscribe-form span{
+#osha-alert-service-subscribe-form span.form-required{
 	padding-top:0em;
 	padding-left:0.5em;
-	
+	display:initial;
+	clear:both;
 }
 
 #osha-alert-service-subscribe-form div div {
