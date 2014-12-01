@@ -397,6 +397,7 @@ $options['init-modules'] = array(
   'feeds_ui',
   'feeds_tamper',
   'feeds_tamper_ui',
+  'views_php',
 
   //Allow anonymous comments per node type
   'comment_allow_anonymous',

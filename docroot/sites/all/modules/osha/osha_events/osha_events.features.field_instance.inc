@@ -917,7 +917,11 @@ function osha_events_field_default_field_instances() {
   // Exported field_instance: 'node-events-field_event_in_amp'
   $field_instances['node-events-field_event_in_amp'] = array(
     'bundle' => 'events',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'Yes',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1051,7 +1055,11 @@ function osha_events_field_default_field_instances() {
   // Exported field_instance: 'node-events-field_number_of_attendees'
   $field_instances['node-events-field_number_of_attendees'] = array(
     'bundle' => 'events',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 20,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1360,7 +1368,11 @@ function osha_events_field_default_field_instances() {
   // Exported field_instance: 'node-events-field_satisfaction_rate'
   $field_instances['node-events-field_satisfaction_rate'] = array(
     'bundle' => 'events',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 50,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
