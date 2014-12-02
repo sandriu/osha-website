@@ -16,7 +16,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
   $quicktabs->machine_name = '_careers_accordion';
   $quicktabs->ajax = 0;
   $quicktabs->hide_empty_tabs = FALSE;
-  $quicktabs->default_tab = 999999;
+  $quicktabs->default_tab = 2;
   $quicktabs->title = ' Careers accordion';
   $quicktabs->tabs = array(
     0 => array(
