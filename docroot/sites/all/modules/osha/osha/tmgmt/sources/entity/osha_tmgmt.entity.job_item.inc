@@ -82,8 +82,8 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
         entity_save('translation_validator', $validator);
         $index++;
       }
-      $this->state = TMGMT_JOB_ITEM_STATE_ACTIVE;
     }
+    $this->state = TMGMT_JOB_ITEM_STATE_ACTIVE;
     // Save job.
     global $user;
     $this->save();
