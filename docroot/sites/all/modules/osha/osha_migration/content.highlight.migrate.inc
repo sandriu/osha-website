@@ -122,6 +122,9 @@ class MigrateOshaHighlight extends OSHADynamicMigration {
       return FALSE;
     }
 
+    //format publication date according to UTC timezone
+    $row->publication_date = MigrationUtil::getUTCTimestamp($row->publication_date);
+
     $type = strstr($row->id, '/', TRUE);
     if ($type !== 'teaser') {
       return FALSE;

@@ -623,6 +623,19 @@ class MigrationUtil {
 
     return $tid;
   }
+
+  /**
+   * @param string $date
+   * @return timestamp
+   */
+  public static function getUTCTimestamp($date){
+    $default_tz = date_default_timezone_get();
+    date_default_timezone_set('UTC');
+    $date = strtotime($date);
+    date_default_timezone_set($default_tz);
+
+    return $date;
+  }
 }
 
 class OSHAMigrationListJSON extends MigrateListJSON {
