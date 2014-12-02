@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Infographics feature.
+ */
+
+include_once 'osha_infographics.features.inc';
