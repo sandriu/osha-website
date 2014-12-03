@@ -162,7 +162,13 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
         '@message' => $message,
       ));
     OshaWorkflowNotifications::notifyTranslationProjectManager($this);
-    drupal_set_message(t('You have set Translation as Ready to Publish.'));
+    drupal_set_message(
+      t('You have set Translation as @state.',
+        array(
+          '@state' => osha_tmgmt_get_job_item_state_label(OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish),
+        )
+      )
+    );
   }
 
   public function acceptTranslationIntoEntity($message = '') {
