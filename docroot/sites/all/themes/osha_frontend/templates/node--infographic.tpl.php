@@ -42,12 +42,14 @@
     print render($content['body']);
 
     //display thumbnail
-    print theme_image_style(array(
-      'style_name' => 'medium',
-      'path' => $content['field_image']['#items'][0]['uri'],
-      'height' => NULL,
-      'width' => NULL,
-    ));
+    if(isset($content['field_image'])){
+      print theme_image_style(array(
+        'style_name' => 'medium',
+        'path' => $content['field_image']['#items'][0]['uri'],
+        'height' => NULL,
+        'width' => NULL,
+      ));
+    }
 
     print render($content['field_image']);
     print render($content['field_file']);
