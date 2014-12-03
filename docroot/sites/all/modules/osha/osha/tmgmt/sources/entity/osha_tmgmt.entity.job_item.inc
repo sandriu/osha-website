@@ -239,10 +239,13 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
             '#origin' => $translation['#origin'],
             '#timestamp' => $translation['#timestamp'],
           );
+          // Removed as asked in CW-791.
+          /*
           $this->addMessage('Translation for customized @key received. Revert your changes if you wish to use it.', array('@key' => tmgmt_ensure_keys_string($key)));
           // Unset text and origin so that the current translation does not
           // get overridden.
           unset($translation['#text'], $translation['#origin'], $translation['#timestamp']);
+          */
         }
         // Do the same if the translation was already reviewed and origin is
         // remote.
