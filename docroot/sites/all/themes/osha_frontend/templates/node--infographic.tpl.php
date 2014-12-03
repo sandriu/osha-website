@@ -5,8 +5,8 @@
  */
 ?>
 <?php if($page): ?>
-  <h1 id="page-title" class="page__title title"><?php print t('Infographics');?></h1>
-  <div class="view-header back"><?php print l(t('Back to Infographics'), 'articles/infographics'); ?></div>
+  <h1 id="page-title" class="page__title title">&nbsp;</h1>
+  <div class="view-header back"><?php print l(t('Back to Infographics'), 'infographics'); ?></div>
 <?php endif; ?>
 
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
@@ -37,20 +37,24 @@
   hide($content['comments']);
   hide($content['links']);
 
-  print render($content['title_field']);
-  print render($content['body']);
+  if($view_mode == 'full'){
+    print render($content['title_field']);
+    print render($content['body']);
 
-  //display thumbnail
-  print theme_image_style(array(
-    'style_name' => 'medium',
-    'path' => $content['field_image']['#items'][0]['uri'],
-    'height' => NULL,
-    'width' => NULL,
-  ));
+    //display thumbnail
+    print theme_image_style(array(
+      'style_name' => 'medium',
+      'path' => $content['field_image']['#items'][0]['uri'],
+      'height' => NULL,
+      'width' => NULL,
+    ));
 
-  print render($content['field_image']);
-  print render($content['field_file']);
-  print render($content['field_topic']);
+    print render($content['field_image']);
+    print render($content['field_file']);
+    print render($content['field_topic']);
+  }elseif($view_mode == 'teaser'){
+    print render($content);
+  }
   ?>
 
   <?php print render($content['links']); ?>
