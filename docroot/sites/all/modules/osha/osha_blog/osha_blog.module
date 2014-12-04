@@ -154,7 +154,7 @@ function osha_blog_node_view($node, $view_mode, $langcode){
  * @param $vars
  */
 function osha_blog_process_field(&$vars){
-  if ($vars['element']['#field_name'] == 'field_tags') {
+  if ($vars['element']['#field_name'] == 'field_tags' && $vars['element']['#bundle'] == 'blog') {
     foreach($vars['element']['#object']->field_tags[LANGUAGE_NONE] as $key => $item){
       $vars['items'][$key]['#markup'] = '<a href="/blog/tag/'.$item['tid'].'">'.$vars['items'][$key]['#markup'].'</a>';
     }

@@ -1,7 +1,7 @@
 name = osha
 core = 7.x
 package = OSHA
-version = 7.x-1.18
+version = 7.x-1.19
 project = osha
 dependencies[] = aggregator
 dependencies[] = comment
@@ -122,6 +122,8 @@ features[filter][] = full_html
 features[filter][] = plain_text
 features[formatters][] = call_contract_notice
 features[formatters][] = file_as_title
+features[formatters][] = multilanguage_file
+features[formatters][] = multilanguage_image
 features[formatters][] = publication_bookshop_id
 features[formatters][] = publication_file
 features[formatters][] = publication_related_publications
