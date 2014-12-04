@@ -137,14 +137,14 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['fields']['title_field']['element_class'] = 'views-field-title';
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
-  /* Field: Content: Summary */
-  $handler->display->display_options['fields']['field_summary']['id'] = 'field_summary';
-  $handler->display->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
-  $handler->display->display_options['fields']['field_summary']['field'] = 'field_summary';
-  $handler->display->display_options['fields']['field_summary']['label'] = '';
-  $handler->display->display_options['fields']['field_summary']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_summary']['type'] = 'text_trimmed';
-  $handler->display->display_options['fields']['field_summary']['settings'] = array(
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '300',
   );
   /* Field: Content: Link */
