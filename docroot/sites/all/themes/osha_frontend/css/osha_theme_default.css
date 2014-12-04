@@ -3086,9 +3086,12 @@ font-weight: normal;
 /*End Publication tein detail OSHWiki featured articles*/
 
 /*CAPTCHA */
-
 .captcha{
 	display:none;
+}
+
+#block-osha-alert-service-osha-alert-service-subscribe .captcha {
+    display: block !important;
 }
 
 .recaptcha_only_if_image{
