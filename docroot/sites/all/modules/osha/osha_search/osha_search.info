@@ -4,6 +4,7 @@ core = 7.x
 package = OSHA
 version = 7.x-1.1
 project = osha_search
+configure = admin/config/search/osha_search
 dependencies[] = better_exposed_filters
 dependencies[] = ctools
 dependencies[] = entity
