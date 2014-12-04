@@ -71,7 +71,6 @@ features[taxonomy][] = activity
 features[taxonomy][] = article_types
 features[taxonomy][] = directive_type
 features[taxonomy][] = esener
-features[taxonomy][] = infographic_topic
 features[taxonomy][] = legislation_category
 features[taxonomy][] = nace_codes
 features[taxonomy][] = section
@@ -97,4 +96,4 @@ features_exclude[field_instance][taxonomy_term-legislation_category-field_guidel
 features_exclude[taxonomy][newsletter_sections] = newsletter_sections
 features_exclude[taxonomy][tags] = tags
 files[] = osha_taxonomies.test
-mtime = 1416826538
+mtime = 1417681891

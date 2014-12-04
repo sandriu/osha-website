@@ -108,6 +108,38 @@ function osha_infographics_views_default_views() {
 
   /* Display: Related Infographics */
   $handler = $view->new_display('block', 'Related Infographics', 'block');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['not'] = TRUE;
+  /* Contextual filter: Content: Has taxonomy term ID (with depth) */
+  $handler->display->display_options['arguments']['term_node_tid_depth']['id'] = 'term_node_tid_depth';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['table'] = 'node';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['field'] = 'term_node_tid_depth';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['default_argument_options']['node'] = TRUE;
+  $handler->display->display_options['arguments']['term_node_tid_depth']['default_argument_options']['vocabularies'] = array(
+    'tags' => 'tags',
+  );
+  $handler->display->display_options['arguments']['term_node_tid_depth']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['depth'] = '0';
+  $handler->display->display_options['arguments']['term_node_tid_depth']['break_phrase'] = TRUE;
+  /* Contextual filter: Content: Has taxonomy term ID depth modifier */
+  $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['id'] = 'term_node_tid_depth_modifier';
+  $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['table'] = 'node';
+  $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['field'] = 'term_node_tid_depth_modifier';
+  $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['term_node_tid_depth_modifier']['summary']['format'] = 'default_summary';
 
   /* Display: Infographics */
   $handler = $view->new_display('block', 'Infographics', 'block_1');
@@ -118,17 +150,22 @@ function osha_infographics_views_default_views() {
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Topic (field_topic) */
-  $handler->display->display_options['filters']['field_topic_tid']['id'] = 'field_topic_tid';
-  $handler->display->display_options['filters']['field_topic_tid']['table'] = 'field_data_field_topic';
-  $handler->display->display_options['filters']['field_topic_tid']['field'] = 'field_topic_tid';
-  $handler->display->display_options['filters']['field_topic_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_topic_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_topic_tid']['expose']['operator_id'] = 'field_topic_tid_op';
-  $handler->display->display_options['filters']['field_topic_tid']['expose']['label'] = 'Show Infographics for';
-  $handler->display->display_options['filters']['field_topic_tid']['expose']['operator'] = 'field_topic_tid_op';
-  $handler->display->display_options['filters']['field_topic_tid']['expose']['identifier'] = 'field_topic_tid';
-  $handler->display->display_options['filters']['field_topic_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: Field: Tags (field_tags) */
+  $handler->display->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_tid']['value'] = array(
+    166 => '166',
+    46 => '46',
+    97 => '97',
+  );
+  $handler->display->display_options['filters']['field_tags_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['label'] = 'Show Infographics for';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -142,28 +179,10 @@ function osha_infographics_views_default_views() {
     11 => 0,
     12 => 0,
   );
-  $handler->display->display_options['filters']['field_topic_tid']['group_info']['label'] = 'Topic (field_topic)';
-  $handler->display->display_options['filters']['field_topic_tid']['group_info']['identifier'] = 'field_topic_tid';
-  $handler->display->display_options['filters']['field_topic_tid']['group_info']['group_items'] = array(
-    1 => array(
-      'title' => '',
-      'operator' => 'or',
-      'value' => array(),
-    ),
-    2 => array(
-      'title' => '',
-      'operator' => 'or',
-      'value' => array(),
-    ),
-    3 => array(
-      'title' => '',
-      'operator' => 'or',
-      'value' => array(),
-    ),
-  );
-  $handler->display->display_options['filters']['field_topic_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_topic_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_topic_tid']['vocabulary'] = 'infographic_topic';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['reduce'] = TRUE;
+  $handler->display->display_options['filters']['field_tags_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_tags_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -209,7 +228,6 @@ function osha_infographics_views_default_views() {
     t('All'),
     t('Infographics'),
     t('Show Infographics for'),
-    t('Topic (field_topic)'),
     t('Type'),
   );
   $export['infographic'] = $view;
