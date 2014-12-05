@@ -21,4 +21,4 @@ features[fe_block_settings][] = osha_alert_service-osha_seminar_rss
 features[features_api][] = api:2
 features[views_view][] = alert_service_subscription
 features[views_view][] = latest_items_rss_
-mtime = 1417798727
+mtime = 1417799795
