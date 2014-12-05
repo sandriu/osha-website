@@ -131,6 +131,9 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
     //format date according to UTC timezone
     $row->publication_date = MigrationUtil::getUTCTimestamp($row->publication_date);
     $row->expiration_date = MigrationUtil::getUTCTimestamp($row->expiration_date);
+    $row->startDate = MigrationUtil::getUTCTimestamp($row->startDate);
+    $row->endDate = MigrationUtil::getUTCTimestamp($row->endDate);
+
 
     $row->language = 'en';
     $tags = $row->subject . ', ' . $row->subcategory;
