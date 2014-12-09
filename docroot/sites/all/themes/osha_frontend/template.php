@@ -91,6 +91,27 @@ function osha_frontend_menu_link__menu_block($variables) {
     </li>';
 }
 
+function osha_frontend_menu_link__menu_block__menu_footer_menu($variables) {
+  $element = &$variables['element'];
+  $delta = $element['#bid']['delta'];
+  // Render or not the Menu Image.
+  // Get the variable provided by osha_menu module.
+  $render_img = variable_get('menu_block_' . $delta . '_' . OSHA_MENU_RENDER_IMG_VAR_NAME, 0);
+  if (!$render_img) {
+    return theme_menu_link($variables);
+  }
+
+  if (!empty($element['#localized_options']['content']['image'])
+    && $image_url = file_create_url($element['#localized_options']['content']['image'])) {
+    $image = '<img src="' . $image_url . '"/>';
+    $output_image = l($image, $element['#href'], array('html' => TRUE));
+    return '<li' . drupal_attributes($element['#attributes']) . '>' . $output_image . '</li>';
+  } else {
+    $output_link = l($element['#title'], $element['#href'], $element['#localized_options']);
+    return '<li' . drupal_attributes($element['#attributes']) . '>' . $output_link . '</li>';
+  }
+}
+
 /**
  * Implements hook_theme().
  */
