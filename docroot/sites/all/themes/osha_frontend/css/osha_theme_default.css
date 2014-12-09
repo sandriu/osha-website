@@ -68,7 +68,7 @@ header{
 	padding-right:0.2em;
 	font-size:1.5em;
 	border-bottom:0px!important;
-	
+
 }
 
 .a_big a{
@@ -220,7 +220,7 @@ header{
 	padding-left:0px;
 	height:39px;
 	margin-right:1px;
-	
+
 }
 
 #block-menu-block-1 .menu li span {
@@ -347,7 +347,7 @@ color: #003399;
 
 #content .field-name-field-image a{
 	border-bottom:0px solid #dc2f82!important;
-}  
+}
 
 
 .field.field-name-field-related-publications.field-type-entityreference.field-label-above .field-label{
@@ -406,7 +406,7 @@ a{
 	border-bottom:0px!important
 }
 
-#languagesAndSearch 
+#languagesAndSearch
 {
  color : #003399;
  float:right;
@@ -478,7 +478,7 @@ padding-left: 1em;
 }
 #searchText {
  margin: 0.5em 0 0;
- 
+
 }
 
 #blogLogo{
@@ -547,7 +547,7 @@ padding-left: 1em;
 	font-weight:bold;
 	text-decoration: none;
 	border-bottom: 1px solid #dc2f82;
-	
+
 }
 
 footer {
@@ -740,7 +740,7 @@ span.date-display-single{
 	background:none;
 	padding-top:0em;
 	padding-top:0em;
-	
+
 }
 
 .view-publications  .view-content .views-row{
@@ -786,7 +786,7 @@ span.date-display-single{
 	padding-left: 0.3em;
     padding-right: 0em;
 	border-bottom:0px!important
-	
+
 }
 
 
@@ -930,7 +930,7 @@ span.date-display-single{
     padding-bottom: 1em;
     padding-right: 0.5em;
     padding-left: 0.5em;
-	
+
 }
 
 .field-name-field-related-publications ul a{
@@ -1010,8 +1010,8 @@ span.date-display-single{
 	list-style:none;
 	margin-left:10em;
 	margin-top:-1em;
-	
-} 
+
+}
 
 .node-publication.view-mode-full .field-name-field-publication-related-res #publication_related_res li{
 	background: url("../images/separator_home.jpg") repeat-x scroll 100% 100% rgba(0, 0, 0, 0);
@@ -1024,7 +1024,7 @@ span.date-display-single{
 	font-size:0.9em;
 	border-bottom:0px!important;
 	margin-left:0.5em;
-} 
+}
 
 
 .node-publication .group-summary-resources  h3 {
@@ -1104,14 +1104,14 @@ span.date-display-single{
 
 .menu-block-3 ul{
 	list-style-type: none!important;
-	list-style-image:none!important; 
+	list-style-image:none!important;
 	margin:0;
 	padding:0;
 }
 
 .menu-block-3 ul li{
 	list-style-type: none!important;
-	list-style-image:none!important; 
+	list-style-image:none!important;
 	margin:0;
 	padding:0;
 	float: left;
@@ -1187,7 +1187,7 @@ span.date-display-single{
 	padding-left: 10px;
 	padding-bottom: 2px;
 	border:0px;
-	margin-bottom:0.5em;	
+	margin-bottom:0.5em;
 }
 
 .ui-accordion-header a{
@@ -1199,7 +1199,7 @@ span.date-display-single{
 	padding-left: 0px;
 	padding-bottom: 2px;
 	border:0px;
-	margin-bottom:0.5em;	
+	margin-bottom:0.5em;
 	border-bottom:0px!important;
 }
 
@@ -1242,7 +1242,7 @@ span.date-display-single{
 	padding-bottom: 2px;
 	border:0px;
 	margin-bottom:0.5em;
-}	
+}
 
 .ui-state-active .ui-icon{
 	background: url("../images/triangle-expanded.png") no-repeat scroll 96% center transparent!important;
@@ -1277,9 +1277,9 @@ padding-top: 1em;
 {
 	background-image: url("../img/oshwiki/oshwikidetail.jpg");
 	background-repeat: no-repeat;
-	
+
 	height:75px;
-	
+
 }
 
 #contentWikiZone
@@ -1391,7 +1391,7 @@ margin: 0.2em 0px 0.2em 0.3em;
 	line-height: 1.7em;
 }
 
-.OSHWiki .p2 span{ 
+.OSHWiki .p2 span{
 	font-weight: normal;
 	font-size:98%;
 	display:block;
@@ -1429,7 +1429,7 @@ margin: 0.2em 0px 0.2em 0.3em;
  width: 95%;
  padding-left: 1em;
  background: url("../img/vineta-lista.png") no-repeat;
- margin-top: 0.6em;  
+ margin-top: 0.6em;
   font-weight: bold;
 }
 
@@ -1490,14 +1490,14 @@ font-family : Arial;
 font-weight: bold;
 }
 
-.newsRelated 
+.newsRelated
 {
 float: left;
 font-family : Oswald;
 font-size : 0.875em;
 color : #000;
 font-weight: normal;
-	
+
 }
 .imgRelated
 {
@@ -1519,22 +1519,22 @@ font-weight: normal;
 	#block-views-related-content-block-4{
 		background-color:#e9edf6;
 	}
-	
+
 	#block-views-related-content-block-4 h2{
 		background: url("../images/oshwiki_logo.png") no-repeat scroll 5% 30% transparent;
 		padding-left:2em;
 	}
-	
+
 	#block-views-related-content-block-4  .view-id-related_content{
 		line-height: 1em;
 		width: 80%;
 	}
-	
+
 	#block-views-related-content-block-4 .views-field-title-field{
 		padding-left:1em;
 		padding-bottom:0.5em;
 	}
-	
+
 	#block-views-related-content-block-4 a{
 		color:#003399;
 		text-decoration:none;
@@ -1544,15 +1544,15 @@ font-weight: normal;
 		font-weight:bold;
 		border-bottom:0px!important
 	}
-	
-	
+
+
 	/*-- Publications */
 	#block-views-related-content-block-2{
 		background-color:#FFFFFF;
 		border-top: 5px solid #003399;
 		padding-bottom:1.5em;
 	}
-	
+
 	#block-views-related-content-block-2 h2{
 		background: url("../images/publications_logo.png") no-repeat scroll 5% 30% transparent;
 		padding-left:2em;
@@ -1562,12 +1562,12 @@ font-weight: normal;
 		font-weight: lighter;
 
 	}
-	
+
 	#block-views-related-content-block-2 .views-field-title-field{
 		padding-left:1em;
 		padding-bottom:0.5em;
 	}
-	
+
 	#block-views-related-content-block-2 a{
 		color:#003399;
 		text-decoration:none;
@@ -1577,9 +1577,9 @@ font-weight: normal;
 		font-weight:bold;
 		border-bottom:0px!important
 	}
-	
-	
-	
+
+
+
 	#block-views-related-content-block-2 .more-link a{
 		background: url("../images/flecha.png") no-repeat scroll 100% 28% transparent; /*porlet publications*/
 		color: #003399;
@@ -1589,10 +1589,10 @@ font-weight: normal;
 		padding-right:2em;
 		border-bottom:0px!important
 	}
-	
-	
+
+
 	/*-- Related*/
-	
+
 	.region-sidebar-second h4{
 		margin-bottom:0px;
 		background: url("../images/related_logo.png") no-repeat scroll 3% 106% transparent;
@@ -1607,13 +1607,13 @@ font-weight: normal;
 		margin-bottom:1em;
 		margin-top:0px;
 	}
-	
-	
+
+
 	/*-- News */
 	#block-views-related-content-block-1{
 		background-color:#FFFFFF;
 	}
-	
+
 	#block-views-related-content-block-1 h2{
 		background: url("../images/news_logo.png") no-repeat scroll 100% 30% transparent;
 		color: #000000;
@@ -1624,16 +1624,16 @@ font-weight: normal;
 		padding-bottom: 0;
 		padding-left: 0.5em;
 	}
-	
+
 	#block-views-related-content-block-1 .view-related-content{
 		background: url("../images/separator_home.jpg") repeat-x scroll 0% -7px rgba(0, 0, 0, 0);
 	}
-	
+
 	#block-views-related-content-block-1 .views-field-title-field{
 		padding-left:1em;
 		padding-bottom:0.5em;
 	}
-	
+
 	#block-views-related-content-block-1 a{
 		color:#003399;
 		text-decoration:none;
@@ -1643,12 +1643,12 @@ font-weight: normal;
 		font-weight:bold;
 		border-bottom:0px!important
 	}
-	
+
 
 /*END SIDEBAR SECOND*/
 
 /*RELATED WIKI IN SECTIONS*/
-	
+
 #related-wiki{
 	background-color:#e8ecf5;
 	margin-top:1em;
@@ -1972,8 +1972,8 @@ font-weight: normal;
 			margin: 0;
 			padding: 0;
 		}
-		
-		
+
+
 
 		#block-osha-newsletter-osha-newsletter-subscribe-extra div{
 			color: #000;
@@ -2003,7 +2003,7 @@ font-weight: normal;
 			font-family: arial;
 			font-size:0.8em;
 		}
-		
+
 		#block-osha-newsletter-osha-newsletter-subscribe-extra #edit-submit--3 {
 			background: url("../images/flecha.png") no-repeat scroll 96% center #b7c6e3;
 			border: 0 none;
@@ -2018,7 +2018,7 @@ font-weight: normal;
 			width: 100%;
 			margin-top: 0.5em;
 		}
-		
+
 		hr{
 			background: url("../images/separator_white.png") repeat-x scroll 100% 100% transparent;
 			border: 0 none;
@@ -2026,7 +2026,7 @@ font-weight: normal;
 			margin: 0.5em 0 6px;
 			padding: 0 0 5px;
 		}
-		
+
 		#block-osha-newsletter-osha-newsletter-subscribe-extra #edit-unsubscribe {
 			border: 0 none;
 			color: #003399;
@@ -2041,7 +2041,7 @@ font-weight: normal;
 			background:none;
 			float:right;
 		}
-		
+
 		#subscribe-extra  span{
 			font-size: 0.8em;
 			color: #565759;
@@ -2049,7 +2049,7 @@ font-weight: normal;
 			float: left;
 			padding-bottom: 0.7em;
 		}
-		
+
 		#edit-submit--4{
 			margin-top:1em;
 		}
@@ -2190,7 +2190,7 @@ font-weight: normal;
 	max-width:56%;
 }
 
-.view-osha-home-banner-top .views-field-title span{ 
+.view-osha-home-banner-top .views-field-title span{
 	display: block;
     padding: 0.6em 0.5em 0.5em;
 	line-height:1.5em;
@@ -2240,11 +2240,11 @@ font-weight: normal;
 			#recommended_resources {
 				width:930px!important;
 			}
-			
+
 			#num_slides {
 				width:804px!important;
 			}
-			
+
 		}
 
 .text_white{
@@ -2353,7 +2353,7 @@ font-weight: normal;
 	margin-top:0.5em;
 	padding-top:1em;
 	padding-left:1em;
-	
+
 }
 
 .separator_highlights_home{
@@ -2375,7 +2375,7 @@ font-weight: normal;
 	 background: none repeat scroll 0 0 #FFFFFF;
 	 padding-bottom:0px;
 	 padding-left:0px;
-	 
+
 }
 
 .field-name-field-related-oshwiki-articles .field-label {
@@ -2394,7 +2394,7 @@ font-weight: normal;
 	 font-family: 'Oswald', sans-serif;
 	 color:#003399;
 	 clear:both;
-	 margin-top: -2.5em; 
+	 margin-top: -2.5em;
 }
 
 .view-footer{
@@ -2420,8 +2420,8 @@ font-weight: normal;
 	height:7em;
 	padding-top:1em;
 }
- 
-.view-id-highlight .view-content table tbody tr td .views-field-field-summary p{ 
+
+.view-id-highlight .view-content table tbody tr td .views-field-field-summary p{
 	margin-top:0em!important;
 	margin-bottom:0em!important;
 }
@@ -2565,20 +2565,20 @@ font-weight: normal;
 .node-news .field-name-field-summary p{
 	margin:0;
 	padding:0;
-	font-family: Arial!important; 
+	font-family: Arial!important;
 	font-size: 0.9em;
 	color:#000000;
-	font-weight:normal;	
+	font-weight:normal;
 	padding: 0 0 12px;
 }
 
 .node-news .field-type-text-with-summary p{
 	margin:0;
 	padding:0;
-	font-family: Arial!important; 
+	font-family: Arial!important;
 	font-size: 0.9em;
 	color:#000000;
-	font-weight:normal;	
+	font-weight:normal;
 	padding: 0 0 12px;
 	line-height: 1.7em;
 }
@@ -2586,10 +2586,10 @@ font-weight: normal;
 .node-news .field-name-field-publication-date{
 	margin:0;
 	padding:0;
-	font-family: Arial!important; 
+	font-family: Arial!important;
 	font-size: 0.9em;
 	color:#000000;
-	font-weight:normal;	
+	font-weight:normal;
 }
 
 /*END NEWS LIST*/
@@ -2702,7 +2702,7 @@ font-weight: normal;
 
 /*SHARE LINKS*/
 
-#a2apage_dropdown{ 
+#a2apage_dropdown{
 	display:none!important; /*Display none to others social pages*/
 }
 
@@ -2711,13 +2711,13 @@ font-weight: normal;
     text-align: right;
     width: 100%;
 	padding-bottom:1.5em;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);	
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
 
 }
 
 .node-news ul.links.inline a{
 	border-bottom:0px!important;;
-	
+
 }
 
 .a2a_img.a2a_i_a2a.a2a_img_text{
@@ -2725,13 +2725,13 @@ font-weight: normal;
 }
 
 .a2a_img.a2a_i_twitter{
-	background: url("../images/share_twitter.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;	
+	background: url("../images/share_twitter.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
 	height:20px!important;
 	width:20px!important;
 }
 
 .a2a_img.a2a_i_facebook{
-	background: url("../images/share_facebook.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;	
+	background: url("../images/share_facebook.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
 	height:20px!important;
 	width:20px!important;
 }
@@ -2739,11 +2739,11 @@ font-weight: normal;
 .a2a_img.a2a_i_linkedin{
 	background: url("../images/share_in.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
 	height:20px!important;
-	width:20px!important;	
+	width:20px!important;
 }
 
 .a2a_img.a2a_i_google_plus{
-	background: url("../images/share_google.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;	
+	background: url("../images/share_google.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
 	height:20px!important;
 	width:20px!important;
 }
@@ -2752,7 +2752,7 @@ font-weight: normal;
 
 
 /*RELATED WIKI IN SECTIONS*/
-	
+
 #content #related-wiki-get-more{
 	background: url("../images/related_wiki_head.png") no-repeat scroll 0 100% #003399;
     height: 43px;
@@ -2798,12 +2798,12 @@ font-weight: normal;
 
 #block-block-4 div ul li {
 	list-style-type: none;
-	width: auto; 
-	color: #585858; 
-	vertical-align: top; 
-	display: inline-block; 
-	text-align: left; 
-	font-size: 1.2em; 
+	width: auto;
+	color: #585858;
+	vertical-align: top;
+	display: inline-block;
+	text-align: left;
+	font-size: 1.2em;
 	padding: 0px 10px;
 	border-left: 1px dashed rgb(0, 51, 153); color: rgb(88, 88, 88)
 }
@@ -2835,7 +2835,7 @@ font-weight: normal;
 	padding-bottom:0.5em;
 }
 
-.node-seminar .field-name-field-related-resources .field-label{ 
+.node-seminar .field-name-field-related-resources .field-label{
 	color: #000000;
     font-family: "Oswald",sans-serif;
     font-size: 1.6em;
@@ -2846,13 +2846,13 @@ font-weight: normal;
 	margin-top:1em;
 }
 
-.node-seminar .field-name-field-related-resources a{ 
+.node-seminar .field-name-field-related-resources a{
 	border-bottom:0px!important;
 }
 
-.node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items { 
+.node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items {
 	margin-bottom:1em;
-	
+
 }
 
 .node-seminar .field-name-field-seminar-location .field-label{
@@ -2889,20 +2889,20 @@ font-weight: normal;
     padding: 0 0 0 0.2em;
 }
 
-.node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items a{ 
+.node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items a{
 	color: #003399!important;
     font-family: arial!important;
     font-size: 0.8em;
 	font-weight:bold;
 	border-bottom:0px!important;
-	
+
 }
 
 .node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items span{
 	color: #003399!important;
     font-family: arial!important;
 	font-weight:normal;
-	background: url("../images/down_arrow.jpg") no-repeat scroll 100% 29% transparent;	
+	background: url("../images/down_arrow.jpg") no-repeat scroll 100% 29% transparent;
 	padding-right:2em;
 	padding-top:0.2em;
 	padding-left:0.3em;
@@ -2985,7 +2985,7 @@ font-weight: normal;
     font-size: 0.9em;
     padding-right: 0.5em;
 	padding-bottom:0.5em;
-	
+
 }
 
 #block-views-seminars-block .view-seminars ul li .views-field-field-seminar-location div p {
@@ -3026,12 +3026,12 @@ font-weight: normal;
     text-align: right;
     width: 100%;
 	padding-bottom:1.5em;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);	
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
 }
 
 .node-highlight ul.links.inline a{
 	border-bottom:0px!important
-	
+
 }
 
 /*END SHARE LINKS HIGHLIGHS*/
@@ -3137,11 +3137,16 @@ font-weight: normal;
 	display:none;
 }
 
+/*This shows captcha for alert services*/
+#block-osha-alert-service-osha-alert-service-subscribe .captcha {
+    display: block !important;
+}
+
 .recaptcha_only_if_image{
     margin-top: -1.5em!important;
 }
 
-.recaptcha_only_if_image a{	
+.recaptcha_only_if_image a{
 	border-bottom:0px!important;
 }
 
@@ -3373,7 +3378,7 @@ font-weight: normal;
 	padding:0.5em 0 0.5em 0;
 	margin:0em;
 	line-height:0em;
-	
+
 }
 
 .view-highlight h1{
@@ -3466,7 +3471,7 @@ font-weight: normal;
 	float:left;
 	padding:1em 3em 1em 1em;
 	height:100%;
-	
+
 
 }
 
@@ -3738,7 +3743,7 @@ font-weight: normal;
 	padding-left: 1.2em;
 	font-weight:bold;
 	font-size:0.9em;
-	
+
 }
 
 #block-views-press-contacts-block .view-footer {
@@ -3791,9 +3796,9 @@ font-weight: normal;
 .block-aggregator{
     border-top: 5px solid #003399;
 	clear:both;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% 
+	background: url("../images/separator_home.jpg") repeat-x scroll 0 100%
 }
-	
+
 .block-aggregator h2{
 	color: #000;
 	font-family: 'Oswald',sans-serif;
@@ -4018,7 +4023,7 @@ article.node-press-release .press-release-date {
 	font-weight: 300;
 	letter-spacing: -0.75px;
 	padding-bottom: 0.5em;
-	
+
 }
 
 .view-search-directives  .links {
@@ -4168,7 +4173,7 @@ div.contextual-links-wrapper a{
 #block-menu-menu-search a.tabs-primary__tab-link.is-active{
 	background-color:#EBF1F7!important;
 	background-image: none!important;
-	
+
 }
 
 a.tabs-primary__tab-link, a.tabs-primary__tab-link.is-active{
@@ -4185,7 +4190,7 @@ a.tabs-primary__tab-link, a.tabs-primary__tab-link.is-active{
 	border-top-right-radius: 0px;
 	text-shadow: none!important;
 	border:0px!important;
-	
+
 }
 
 a.tabs-primary__tab-link{
@@ -4254,7 +4259,7 @@ a.tabs-primary__tab-link{
 	border-bottom: 0 none !important;
     font-family: "Oswald",sans-serif !important;
     font-size: 1.5em;
-	
+
 }
 
 .view-search .views-row  .views-field-type{
@@ -4308,7 +4313,7 @@ a.tabs-primary__tab-link{
 	list-style:none;
 	padding: 0;
 	margin: 0;
-}	
+}
 
 .view-events-index  .views-field-field-start-date .field-content{
 	float:left;
@@ -4367,7 +4372,7 @@ a.tabs-primary__tab-link{
 #block-nodeblock-5322 .field-type-text-with-summary{
 	color:#003399
 }
- 
+
 .event_header_block  .events_summary{
 	float: left;
 	width: 43%;
@@ -4581,7 +4586,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-item{
 	color:#003399;
-	
+
 }
 
 .node-events .field-name-body .field-item{
@@ -4607,7 +4612,7 @@ a.tabs-primary__tab-link{
 	text-transform: uppercase;
 }
 
- 
+
 .group-events-links h3{
 	color: #000000;
 	font-family: "Oswald",sans-serif;
@@ -4616,7 +4621,7 @@ a.tabs-primary__tab-link{
 	margin-bottom: 0;
 	padding-bottom: 0.5em;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
-	
+
 }
 
 .node-events .field-name-field-website-of-event a{
@@ -4639,7 +4644,7 @@ a.tabs-primary__tab-link{
 	margin-bottom: 0;
 	padding-bottom: 0.5em;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
-	
+
 }
 
 
@@ -4974,7 +4979,7 @@ a.tabs-primary__tab-link{
 	border-top: 5px solid #003399;
 	padding-bottom:1.5em;
 }
-	
+
 #block-views-blog-block-2 h2{
 	color: #000;
 	font-family: 'Oswald',sans-serif;
