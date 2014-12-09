@@ -6,6 +6,7 @@
 
 include_once 'osha_alert_service.features.inc';
 module_load_include('inc', 'osha_alert_service', 'osha_alert_service.admin');
+//module_load_include('inc', 'osha_alert_service', 'osha_alert_service.forms');
 
 /**
  * Implements hook_entity_info().
@@ -55,7 +56,7 @@ function osha_alert_service_menu() {
     'description' => 'Endpoint where subscribers validate their subscription',
     'page callback' => 'osha_alert_service_verify_alert_form',
     'page arguments' => array(),
-    'access arguments' => array('view published content'),
+    'access arguments' => array('access content'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
     'file' => 'osha_alert_service.forms.inc',
@@ -65,7 +66,7 @@ function osha_alert_service_menu() {
     'description' => 'Endpoint where subscribers remove from subscription',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_alert_service_remove_alert_form'),
-    'access arguments' => array('view published content'),
+    'access arguments' => array('access content'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
     'file' => 'osha_alert_service.forms.inc',
