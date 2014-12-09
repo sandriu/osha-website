@@ -6,7 +6,6 @@
 
 include_once 'osha_alert_service.features.inc';
 module_load_include('inc', 'osha_alert_service', 'osha_alert_service.admin');
-//module_load_include('inc', 'osha_alert_service', 'osha_alert_service.forms');
 
 /**
  * Implements hook_entity_info().
