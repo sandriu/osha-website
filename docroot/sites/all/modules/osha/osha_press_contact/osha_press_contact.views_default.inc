@@ -471,7 +471,7 @@ function osha_press_contact_views_default_views() {
     t('Email (field_press_contact_email)'),
     t('Block'),
     t('Press contacts'),
-    t('<a class="press-kit-link" href="#">EU-OSHA Press kit</a>'),
+    t('<a class="press-kit-link" href="node/5428">EU-OSHA Press kit</a>'),
   );
   $export['press_contacts'] = $view;
 
