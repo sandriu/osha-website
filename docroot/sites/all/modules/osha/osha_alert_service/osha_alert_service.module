@@ -5,7 +5,7 @@
  */
 
 include_once 'osha_alert_service.features.inc';
-
+module_load_include('inc', 'osha_alert_service', 'osha_alert_service.admin');
 
 /**
  * Implements hook_entity_info().
@@ -69,6 +69,13 @@ function osha_alert_service_menu() {
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
     'file' => 'osha_alert_service.forms.inc',
+  );
+  $menu['admin/config/system/osha_alert_service'] = array(
+    'title' => 'OSHA Alert Service',
+    'description' => 'Config information for Osha Alert Service',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_alert_service_admin_form'),
+    'access arguments' => array('administer site configuration'),
   );
   return $menu;
 }
@@ -258,50 +265,44 @@ function osha_alert_block_front_view() {
  * {@inheritdoc}
  */
 function osha_alert_service_mail($key, &$message, $params) {
-  global $base_url;
-  $keys = array();
-  $params['base_url'] = $base_url;
-  foreach ($params as $k => $v) {
-    $keys[] = '[' . $k . ']';
-  }
-
   switch ($key) {
     case 'subscribe':
-      $subject = variable_get('osha_mail_template_alert_service_subscribe_subject', 'Your subscription to OSHA Alert Service');
-      $body = variable_get('osha_mail_template_alert_service_subscribe_body',
+      $message['subject'] = variable_get('osha_alert_service_subscribe_subject', 'Your subscription to OSHA Alert Service');
+      $message['body'] = variable_get('osha_alert_service_subscribe_body',
 <<<EOT
-EU-OSHA received a request to start sending alerts to [email].
+<p>EU-OSHA received a request to start sending alerts to <strong>[osha_alert_service:email]</strong>.</p>
 
-Verify this EU-OSHA alert request: [base_url]/[language]/alertservice/verify_alert?token=[token]
-Cancel this EU-OSHA alert request: [base_url]/[language]/alertservice/remove_alert?token=[token]
-If you are not able to click on the link, you can cut and paste it into your browser's address bar.
+<p>Verify this EU-OSHA alert request: [osha_alert_service:subscribe_conf_link]</p>
 
-If you did not initiate this request or believe it was sent in error you can safely ignore this message.
-Thanks,
-The EU-OSHA Alerts Team
+<p>Cancel this EU-OSHA alert request: [osha_alert_service:unsubscribe_link]</p>
+
+<p>If you are not able to click on the link, you can cut and paste it into your browser&#39;s address bar.</p>
+
+<p>If you did not initiate this request or believe it was sent in error you can safely ignore this message.</p>
+
+<p>Thanks,</p>
+<p><strong>The EU-OSHA Alerts Team</strong></p>
 EOT
       );
-      $message['subject'] = $subject;
-      $message['body'] = str_replace($keys, array_values($params), $body);
       break;
 
     case 'broken_subscription':
-      $subject = 'Your subscription page is broken';
-      $body = <<<EOT
-        Please visit the subscription page ($base_url/alertservice) and fix it. Taxonomy Tags is empty!
+      $message['subject'] = 'Your subscription page is broken';
+      $message['body'] = <<<EOT
+        Please visit the subscription page ([site:url]/alertservice) and fix it. Taxonomy Tags is empty!
 
         Thank you,
         Your faithful employee.
 EOT;
-      $message['subject'] = $subject;
-      $message['body'] = str_replace($keys, array_values($params), $body);
       break;
 
     case 'alert':
-      $message['subject'] = variable_get('osha_mail_template_alert_service_alert_subject', 'EU-OSHA Alert');
-      $message['body'] = $params['body'];
+      $message['subject'] = variable_get('osha_alert_service_alert_subject', 'EU-OSHA Alert');
+      $message['body'] = variable_get('osha_alert_service_alert_body', 'EU-OSHA Alert');
       break;
   }
+  $message['subject'] = token_replace($message['subject'], $params);
+  $message['body'] = token_replace($message['body'], $params);
 }
 
 /**
@@ -362,21 +363,29 @@ EOT
 }
 
 /**
- *
- * @param $registered_user
+ * Get the alert view filtered content.
  */
 function osha_alert_service_render_alert($entity) {
   $view = views_get_view('alert_service_subscription');
   $settings = json_decode($entity->filters);
-  $limit = date('Y-m-d H:i:s', $entity->last_alert);
   $view->set_display('default');
   $view->is_cacheable = FALSE;
-  $view->exposed_input['type'] = $settings->type;
-  $view->exposed_input['field_tags_tid'] = $settings->section;
-  $view->exposed_input['created'] = $limit;
-  $view->osha_hide_exposed_filters = TRUE;
+  $view->pre_execute();
+  if (!empty($settings->type)) {
+    $view->filter['type']->value = drupal_map_assoc($settings->type);
+  }
+  if (!empty($settings->section)) {
+    $view->filter['field_tags_tid']->value = drupal_map_assoc($settings->section);
+  }
+  if (!empty($entity->last_alert)) {
+    $view->filter['created']->value['value'] = date('Y-m-d H:i:s', $entity->last_alert);
+  }
   $view->pre_execute();
   $view->execute();
+  $view->osha_hide_exposed_filters = TRUE;
+  if (empty($view->result)) {
+    return NULL;
+  }
   return $view->render();
 }
 
@@ -387,30 +396,68 @@ function osha_alert_service_render_alert($entity) {
  *   osha_alert_service entity ID.
  */
 function osha_alert_service_send_alert($item_id) {
-  global $base_url;
-  $keys = array();
   // User still holds a valid subscription from last check.
   if ($entity = entity_load_single('osha_alert_service', $item_id)) {
-    $html = osha_alert_service_render_alert($entity);
     $params = array(
-      'entity' => $entity,
-      'body' => $html,
-      'base_url' => $base_url,
+      'osha_alert_service' => $entity,
       'language' => 'en',
-      'token' => $entity->token,
+      'view' => osha_alert_service_render_alert($entity),
     );
-    $keys = array();
-    $params['base_url'] = $base_url;
-    foreach ($params as $k => $v) {
-      $keys[] = '[' . $k . ']';
+    if (empty($params['view'])) {
+      return;
     }
-    $unsubscribe = <<<EOT
-
-If you wish to unsubscribe this alert, please click here: [base_url]/[language]/alertservice/remove_alert?token=[token]
-EOT;
-    $params['body'] .= str_replace($keys, array_values($params), $unsubscribe);
     drupal_mail('osha_alert_service', 'alert', $entity->email, 'en', $params);
     $entity->last_alert = time();
     entity_save('osha_alert_service', $entity);
   }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function osha_alert_service_token_info() {
+  $alert['subscribe_conf_link'] = array(
+    'name' => t('Confirm Subscription Link'),
+    'description' => t('Link to subscribing confirmation page.'),
+  );
+  $alert['unsubscribe_link'] = array(
+    'name' => t('Unsubscribe Link'),
+    'description' => t('Link to unsubscribe confirmation page.'),
+  );
+  $alert['alert_content'] = array(
+    'name' => t('Content of the alert'),
+    'description' => t('The html list of content.'),
+  );
+  $info['tokens']['osha_alert_service'] = $alert;
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function osha_alert_service_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  global $base_url;
+  $replacements = array();
+  if ($type == 'osha_alert_service' && !empty($data['osha_alert_service'])) {
+    $entity = $data['osha_alert_service'];
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        // Simple key values on the node.
+        case 'subscribe_conf_link':
+          $replacements[$original] = $base_url
+            . '/en/alertservice/verify_alert?token=' . $entity->token;
+          break;
+
+        case 'unsubscribe_link':
+          $replacements[$original] = $base_url
+            . '/en/alertservice/remove_alert?token=' . $entity->token;
+          break;
+
+        case 'alert_content':
+          $replacements[$original] = $data['view'];
+          break;
+      }
+    }
+  }
+  return $replacements;
 }

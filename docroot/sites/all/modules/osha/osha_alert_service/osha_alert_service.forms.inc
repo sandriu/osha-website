@@ -23,7 +23,7 @@ function osha_alert_service_subscribe_form() {
   if ($voc = taxonomy_vocabulary_machine_name_load('tags')) {
     $terms = taxonomy_get_tree($voc->vid);
     foreach ($terms as $tid => $term) {
-      $sections[$tid] = $term->name;
+      $sections[$term->tid] = $term->name;
     }
   }
   if (empty($sections)) {
@@ -161,8 +161,7 @@ function osha_alert_service_subscribe_form_submit($form, $form_state) {
 
   global $language;
   $params = array(
-    'email' => $email,
-    'token' => $token,
+    'osha_alert_service' => $entity,
     'language' => $language->language,
   );
   drupal_mail('osha_alert_service', 'subscribe', $email, $language->language, $params);
