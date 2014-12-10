@@ -362,6 +362,7 @@ $options['init-modules'] = array(
   'context_ui',
   'context_block_visibility',
   'site_map',
+  'smart_trim',
 
   // Enable last (conflict with rules)
   'uuid',
