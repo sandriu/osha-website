@@ -104,28 +104,7 @@ function osha_alert_service_block_info() {
     'region' => 'sidebar_second',
     'weight' => -28,
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => '<front>
-oshnews
-highlights
-highlight/*
-teaser/*
-news/*
-seminar/*
-seminars/*
-about/calls/*
-calls/*
-about/jobs/*
-job-vacancies/*
-shortlisted_job_vacancies
-ongoing_job_vacancies
-open_job_vacancies
-jobs_archive
-articles/careers
-calls_archive
-articles/procurement
-articles/blog
-blog/*
-*/blog/*',
+    'pages' => '<front>',
   );
   $blocks['osha_calls_rss'] = array(
     'info' => t('Calls feed'),
@@ -267,6 +246,13 @@ function osha_alert_block_front_view() {
       '<div class="link"><span>Interested in specific topics?</span><a href="!url">Try Alert Service</a></div>',
       array('!url' => $url)),
   );
+  // These variables are defined in osha_newsletter.module
+  $link_label = variable_get('subscribe_block_details_link_label', t('Privacy policy'));
+  $link_url = variable_get('subscribe_block_details_link_url', OSHA_PRIVACY_PAGE_URL);
+  $form['details_link'] = array(
+    '#markup' => '<a class="privacy-policy-oshmail" href='.url($link_url).'>'.$link_label.'</a><br/>',
+  );
+
   return $form;
 }
 

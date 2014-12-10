@@ -584,6 +584,28 @@ padding: 0em 0em 0em 1.8em;;
  vertical-align:middle;
 }
 
+#footer div.block {
+    display: inline-block;
+    vertical-align:middle;
+    margin-bottom: 0;
+}
+
+#footer div#block-menu-block-5 {
+    float:right;
+}
+
+#footer * li.menu__item {
+    display: inline;
+    list-style-type: none;
+    font-size: 0.813em;
+    margin: 5px 1.5em 0 0;
+}
+
+#footer * li.menu__item a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
 /*PUBLICATIONS*/
 
 span.date-display-single{
