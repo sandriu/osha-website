@@ -7,6 +7,11 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* menu_item_visibility
+  * Avoid db hit on menu links without menu_item_visibility enabled
+  * https://www.drupal.org/node/1848724
+  * https://www.drupal.org/files/issues/menu_item_visibility-performance-issues-1848724-1_0.patch
+
 * tmgmt
   * Menu link source search is not case sensitive
   * patches/tmgmt/i18n_string-search-case-insensitive.patch
