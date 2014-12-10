@@ -391,6 +391,7 @@ function osha_alert_service_render_alert($entity) {
   if (!empty($entity->last_alert)) {
     $view->filter['created']->value['value'] = date('Y-m-d H:i:s', $entity->last_alert);
   }
+  $view->alert_lang = $settings->languages;
   $view->pre_execute();
   $view->execute();
   $view->osha_hide_exposed_filters = TRUE;
@@ -420,6 +421,61 @@ function osha_alert_service_send_alert($item_id) {
     drupal_mail('osha_alert_service', 'alert', $entity->email, 'en', $params);
     $entity->last_alert = time();
     entity_save('osha_alert_service', $entity);
+  }
+}
+
+/**
+ * Implements hook__views_pre_render().
+ */
+function osha_alert_service_views_pre_render(&$view) {
+  if ($view->name != 'alert_service_subscription') {
+    return;
+  }
+  if (empty($view->result)) {
+    return;
+  }
+  // Empty second title (used by this module).
+  foreach ($view->result as &$result) {
+    $result->field_title_field_1[0]['rendered']['#markup'] = '';
+  }
+  if (empty($view->alert_lang)) {
+    return;
+  }
+  $languages = language_list();
+
+  // Get the results nids.
+  $nids = array();
+  foreach ($view->result as $result) {
+    $nids[] = $result->nid;
+  }
+  // Get all translations needed for the result.
+  $query = db_select('entity_translation', 'et')
+    ->fields('et')
+    ->condition('entity_type', 'node')
+    ->condition('language', $view->alert_lang, 'IN')
+    ->condition('status', 1)
+    ->condition('entity_id', $nids, 'IN')
+    ->execute();
+  $entries = $query->fetchAll();
+  $entities = array();
+  foreach ($entries as $entry) {
+    $entities[$entry->entity_id][$entry->language] = $entry->language;
+  }
+  // Append the extra links to results, where needed.
+  foreach ($view->result as &$result) {
+    $extra_links = array();
+    if (!empty($entities[$result->nid])) {
+      foreach ($entities[$result->nid] as $lang) {
+        $extra_links[] = l(strtoupper($lang), 'node/' . $result->nid,
+          array(
+            'language' => $languages[$lang],
+            'absolute' => TRUE,
+          )
+        );
+      }
+      $extra_text = t('See it also in your selected languages') . ' ' . implode(' | ', $extra_links);
+      $result->field_title_field_1[0]['rendered']['#markup'] = $extra_text;
+    }
   }
 }
 

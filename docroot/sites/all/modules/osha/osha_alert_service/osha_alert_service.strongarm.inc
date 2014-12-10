@@ -14,7 +14,10 @@ function osha_alert_service_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'osha_alert_service_alert_body';
-  $strongarm->value = '[osha_alert_service:alert_content]
+  $strongarm->value = '<p>Hello [osha_alert_service:email],</p>
+<p></p>
+<p>This is the content for the alert that you\'ve created:</p>
+[osha_alert_service:alert_content]
 <p><span style="font-size:11px"><span style="color:#A9A9A9">If you don&#39;t want to receive this alert, you can&nbsp;</span><strong><a href="[osha_alert_service:unsubscribe_link]"><span style="color:#A9A9A9">usubscribe</span></a><span style="color:#A9A9A9">.</span></strong></span></p>';
   $export['osha_alert_service_alert_body'] = $strongarm;
 

@@ -76,6 +76,12 @@ EOT
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
+  $form['test']['osha_alert_service_test_reset_months'] = array(
+    '#title' => 'Months to reset',
+    '#type' => 'textfield',
+    '#description' => 'Number of months to reset back your last sent alert date.',
+    '#default_value' => variable_get('osha_alert_service_test_reset_months', 1),
+  );
   $form['test']['test_submit'] = array(
     '#value' => 'Test your alerts',
     '#type' => 'submit',
@@ -91,15 +97,14 @@ EOT
  */
 function osha_alert_service_test_my_email_submit($form, &$form_state) {
   global $user;
-  $month_ago = strtotime("-3 month");
-  $entity = entity_load_single('osha_alert_service', 27);
+  $months = $form_state['values']['osha_alert_service_test_reset_months'];
+  $month_ago = strtotime("-" . $months . " month");
   db_update('osha_alert_service')
     ->fields(array(
       'last_alert' => $month_ago,
     ))
     ->condition('email', $user->mail)
     ->execute();
-  osha_alert_service_render_alert($entity);
   drupal_cron_run();
-  drupal_set_message('Your subscription last sent was reseted 1 month ago!', 'warning');
+  drupal_set_message('Your subscription last sent was reseted ' . $months . ' months ago!', 'warning');
 }
